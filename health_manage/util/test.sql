@@ -1,0 +1,149 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50726 (5.7.26)
+ Source Host           : localhost:3306
+ Source Schema         : test
+
+ Target Server Type    : MySQL
+ Target Server Version : 50726 (5.7.26)
+ File Encoding         : 65001
+
+ Date: 21/02/2023 17:09:52
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_data
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_data`;
+CREATE TABLE `tb_data`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '数据id',
+  `data_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据路径',
+  `upload_user_id` int(11) NOT NULL COMMENT '上传用户id 0是普通用户 1是管理员',
+  `upload_time` datetime NULL DEFAULT NULL COMMENT '上传时间',
+  `flag` tinyint(4) NULL DEFAULT NULL COMMENT '训练数据是0，评估数据是1',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_data
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_log`;
+CREATE TABLE `tb_log`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志号',
+  `operation_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
+  `user_id` int(10) NULL DEFAULT NULL COMMENT '操作人id',
+  `behavior_code` int(10) NULL DEFAULT NULL COMMENT '操作行为码',
+  `behavior_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作行为名称',
+  `operate_parameters` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作的参数',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_operationcode
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_operationcode`;
+CREATE TABLE `tb_operationcode`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `behavior_code` int(10) NULL DEFAULT NULL COMMENT '操作行为码',
+  `behavior_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作行为名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_operationcode
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_parameters
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_parameters`;
+CREATE TABLE `tb_parameters`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '参数id',
+  `freq` int(10) NULL DEFAULT NULL COMMENT '采样频率',
+  `evaluation_gap` int(10) NULL DEFAULT NULL COMMENT '评估间隔',
+  `timing_evaluate` int(11) NULL DEFAULT NULL COMMENT '定时评估',
+  `flag` tinyint(4) NULL DEFAULT NULL COMMENT '采取评估间隔或者定时评估模式',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_parameters
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_result
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_result`;
+CREATE TABLE `tb_result`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '结果id',
+  `result_time` datetime NULL DEFAULT NULL COMMENT '结果计算时间',
+  `model_id` int(10) NULL DEFAULT NULL COMMENT '模型id',
+  `remaining_time` int(11) NULL DEFAULT NULL COMMENT '剩余时间（需要计算）',
+  `health_status` int(10) NULL DEFAULT NULL COMMENT '健康状态',
+  `data_id` int(10) NULL DEFAULT NULL COMMENT '评估使用的数据id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_result
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_train
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_train`;
+CREATE TABLE `tb_train`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `model_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '模型名称',
+  `model_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '模型路径',
+  `lr` float NULL DEFAULT NULL COMMENT '学习率',
+  `epoch` int(10) NULL DEFAULT NULL COMMENT '训练次数',
+  `cross_validation` int(10) NULL DEFAULT NULL COMMENT '交叉验证次数',
+  `result_img_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结果图片路径',
+  `cv_acc` float NULL DEFAULT NULL COMMENT '交叉验证准确率',
+  `test_acc` float NULL DEFAULT NULL COMMENT '测试准确率',
+  `test_time` datetime NULL DEFAULT NULL COMMENT '模型训练时间',
+  `import_time` datetime NULL DEFAULT NULL COMMENT '模型导入时间',
+  `user_id` int(10) NULL DEFAULT NULL COMMENT '导入模型用户id',
+  `use` tinyint(4) NULL DEFAULT NULL COMMENT '是否使用模型',
+  `data_id` int(11) NULL DEFAULT NULL COMMENT '训练数据的id号，关联data表',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_train
+-- ----------------------------
+INSERT INTO `tb_train` VALUES (1, 'cnn_2023_02_21_14_13.pt', './../result/model/cnn_2023_02_21_14_13.pt', NULL, 5, NULL, NULL, NULL, NULL, '2023-02-21 14:12:00', '2023-02-21 14:12:11', 1, 1, 1);
+
+-- ----------------------------
+-- Table structure for tb_user
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理员密码',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户类型（名称）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_user
+-- ----------------------------
+INSERT INTO `tb_user` VALUES (1, NULL, '普通用户');
+INSERT INTO `tb_user` VALUES (2, '21232f297a57a5a743894a0e4a801fc3', '管理员');
+
+SET FOREIGN_KEY_CHECKS = 1;

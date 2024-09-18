@@ -1,0 +1,567 @@
+2024-08-27 20:19:13,009 - INFO - Administrator - Log file cleared by user.
+2024-08-27 20:19:14,800 - INFO - Administrator - checkbutton was clicked.
+2024-08-27 20:19:20,390 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-08-27 20:19:21,428 - INFO - Administrator - Opening password change page.
+2024-08-27 20:19:52,078 - INFO - Administrator - User type: Administrator. Returning to admin homepage.
+2024-09-03 15:59:06,199 - INFO - Administrator - Opening health evaluation page.
+2024-09-03 15:59:09,150 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-09-03 15:59:09,154 - INFO - Administrator - Data path retrieved for ID 1: ../data/000001_a
+2024-09-03 15:59:09,156 - INFO - Administrator - Results retrieved for ID 1: result_1=1, result_2=1, result_3=1
+2024-09-03 15:59:09,156 - INFO - Administrator - Health LED label set to RED
+2024-09-03 15:59:09,156 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-03 15:59:09,156 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-03 15:59:09,156 - INFO - Administrator - Initializing current image index to 0
+2024-09-03 15:59:09,156 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-03 15:59:09,156 - INFO - Administrator - Attempting to load image from path: ../data/000001_a/differential_entropy.png
+2024-09-03 15:59:09,170 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-03 15:59:09,170 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-03 15:59:10,173 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-03 15:59:12,956 - INFO - Administrator - Opening data view page.
+2024-09-03 15:59:20,728 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-03 15:59:20,732 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-03 15:59:20,734 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-03 15:59:20,739 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-03 15:59:20,740 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-03 15:59:20,741 - INFO - Administrator - Removed row 2 from table.
+2024-09-03 15:59:21,472 - INFO - Administrator - Deleting record with ID 4 from the table.
+2024-09-03 15:59:21,473 - INFO - Administrator - Data path for ID 4: ../data/000006_pro
+2024-09-03 15:59:21,476 - INFO - Administrator - Deleted folder at path: ../data/000006_pro
+2024-09-03 15:59:21,478 - INFO - Administrator - Deleted record with ID 4 from tb_data.
+2024-09-03 15:59:21,478 - INFO - Administrator - Deleted record with ID 4 from result table.
+2024-09-03 15:59:21,478 - INFO - Administrator - Removed row 2 from table.
+2024-09-03 15:59:28,559 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-03 15:59:28,644 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-03 15:59:28,670 - INFO - Administrator - Added new data record with ID 3.
+2024-09-03 15:59:59,732 - INFO - Administrator - Upload button called to refresh table.
+2024-09-04 10:38:15,721 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 10:38:17,670 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-04 10:38:18,742 - INFO - Administrator - Opening results view page.
+2024-09-04 10:38:20,781 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-09-04 10:38:20,783 - INFO - Administrator - Data path retrieved for ID 1: ../data/000001_a
+2024-09-04 10:38:20,785 - INFO - Administrator - Results retrieved for ID 1: result_1=1, result_2=1, result_3=1
+2024-09-04 10:38:20,785 - INFO - Administrator - Health LED label set to RED
+2024-09-04 10:38:20,786 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-04 10:38:20,786 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-04 10:38:20,786 - INFO - Administrator - Initializing current image index to 0
+2024-09-04 10:38:20,786 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 10:38:20,786 - INFO - Administrator - Attempting to load image from path: ../data/000001_a/differential_entropy.png
+2024-09-04 10:38:20,799 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-04 10:38:20,799 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-04 10:38:21,931 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 10:38:21,931 - INFO - Administrator - Attempting to load image from path: ../data/000001_a/frequency_domain_features.png
+2024-09-04 10:38:21,947 - INFO - Administrator - Image successfully displayed: frequency_domain_features.png
+2024-09-04 10:38:21,947 - INFO - Administrator - Label updated to display: EEG特征图: frequency_domain_features.png
+2024-09-04 10:38:22,292 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 10:38:22,293 - INFO - Administrator - Attempting to load image from path: ../data/000001_a/theta_alpha_beta_gamma_powers.png
+2024-09-04 10:38:22,307 - INFO - Administrator - Image successfully displayed: theta_alpha_beta_gamma_powers.png
+2024-09-04 10:38:22,307 - INFO - Administrator - Label updated to display: EEG特征图: theta_alpha_beta_gamma_powers.png
+2024-09-04 10:38:23,383 - INFO - Administrator - Returned to user homepage.
+2024-09-04 10:38:24,162 - INFO - Administrator - Opening data view page.
+2024-09-04 10:38:26,173 - INFO - Administrator - Returned to user homepage.
+2024-09-04 10:38:27,333 - INFO - Administrator - Opening admin login page.
+2024-09-04 10:38:31,386 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-04 10:38:31,433 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-04 10:38:34,015 - INFO - Administrator - Opening model control page.
+2024-09-04 10:38:47,853 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-09-04 10:38:59,676 - INFO - Administrator - Selected model file path: ..\model\subject-1.keras
+2024-09-04 10:38:59,678 - INFO - Administrator - Added new model record for type 普通应激评估模型. Path: ..\model\subject-1.keras
+2024-09-04 10:38:59,684 - INFO - Administrator - Model upload and database update completed successfully.
+2024-09-04 10:39:05,059 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 10:39:13,201 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-09-04 10:39:13,202 - INFO - Administrator - Data path retrieved for ID 3: ../data/000005_ord
+2024-09-04 10:39:13,204 - WARNING - Administrator - No evaluation results found for ID 3
+2024-09-04 10:39:15,022 - INFO - Administrator - Initializing current image index to 0
+2024-09-04 10:39:15,022 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 10:39:15,022 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/differential_entropy.png
+2024-09-04 10:39:15,033 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-04 10:39:15,033 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-04 10:39:48,371 - INFO - Administrator - Opening model control view.
+2024-09-04 10:39:48,411 - INFO - Administrator - Model control view opened successfully.
+2024-09-04 10:39:54,723 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
+2024-09-04 10:40:00,015 - INFO - Administrator - Selected model file path: ..\model\subject-1.keras
+2024-09-04 10:40:00,018 - INFO - Administrator - Added new model record for type 抑郁评估模型. Path: ..\model\subject-1.keras
+2024-09-04 10:40:00,020 - INFO - Administrator - Model upload and database update completed successfully.
+2024-09-04 10:40:05,183 - INFO - Administrator - Selected model type: 焦虑评估模型 (Index: 2)
+2024-09-04 10:40:09,050 - INFO - Administrator - Selected model file path: ..\model\subject-1.keras
+2024-09-04 10:40:09,052 - INFO - Administrator - Added new model record for type 焦虑评估模型. Path: ..\model\subject-1.keras
+2024-09-04 10:40:09,054 - INFO - Administrator - Model upload and database update completed successfully.
+2024-09-04 10:40:12,897 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 21:50:40,291 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 21:50:42,312 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-04 21:50:43,621 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:11:54,375 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:13:29,730 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:21:46,621 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:32:07,867 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:34:35,693 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:41:58,627 - INFO - Administrator - Opening health evaluation page.
+2024-09-04 22:42:24,277 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-09-04 22:42:24,279 - INFO - Administrator - Data path retrieved for ID 3: ../data/000005_ord
+2024-09-04 22:42:24,280 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=1
+2024-09-04 22:42:24,281 - INFO - Administrator - Health LED label set to RED
+2024-09-04 22:42:24,281 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-04 22:42:24,281 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-04 22:42:24,281 - INFO - Administrator - Initializing current image index to 0
+2024-09-04 22:42:24,281 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 22:42:24,281 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/differential_entropy.png
+2024-09-04 22:42:24,300 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-04 22:42:24,301 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-04 22:43:31,440 - INFO - Administrator - Button clicked in row 1, ID: 2
+2024-09-04 22:43:31,441 - INFO - Administrator - Data path retrieved for ID 2: ../data/000004_test
+2024-09-04 22:43:31,442 - WARNING - Administrator - No evaluation results found for ID 2
+2024-09-04 22:43:32,326 - INFO - Administrator - Initializing current image index to 0
+2024-09-04 22:43:32,326 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-04 22:43:32,326 - INFO - Administrator - Attempting to load image from path: ../data/000004_test/differential_entropy.png
+2024-09-04 22:43:32,337 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-04 22:43:32,337 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-05 09:05:47,308 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:08:51,847 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:18:10,559 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:21:16,887 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:22:22,881 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-05 09:22:24,873 - INFO - Administrator - Opening admin login page.
+2024-09-05 09:22:29,893 - INFO - Administrator - Opening data view page.
+2024-09-05 09:22:31,924 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:22:31,926 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 09:22:31,965 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 09:22:31,979 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 09:22:31,982 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 09:22:31,985 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:22:48,585 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 09:22:48,704 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 09:22:48,743 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 09:25:21,375 - INFO - Administrator - Opening data view page.
+2024-09-05 09:25:22,976 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:25:22,979 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 09:25:22,999 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 09:25:23,009 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 09:25:23,013 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 09:25:23,013 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:25:32,535 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 09:25:32,641 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 09:25:32,654 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 09:30:34,282 - INFO - Administrator - Opening data view page.
+2024-09-05 09:30:35,892 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:30:35,895 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 09:30:35,915 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 09:30:35,918 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 09:30:35,920 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 09:30:35,921 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:30:41,698 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 09:30:41,807 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 09:30:41,846 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 09:31:23,971 - INFO - Administrator - Upload button called to refresh table.
+2024-09-05 09:32:48,656 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:32:48,659 - ERROR - Administrator - Error occurred while deleting record with ID 3: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([WinError 10053] 你的主机中的软件中止了一个已建立的连接。)')
+[SQL: SELECT tb_data.id AS tb_data_id, tb_data.personnel_id AS tb_data_personnel_id, tb_data.data_path AS tb_data_data_path, tb_data.upload_user AS tb_data_upload_user, tb_data.personnel_name AS tb_data_personnel_name 
+FROM tb_data 
+WHERE tb_data.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': '3', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-09-05 09:32:53,192 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:33:49,594 - INFO - Administrator - Opening data view page.
+2024-09-05 09:33:51,476 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:33:51,479 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 09:33:51,500 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 09:33:51,510 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 09:33:51,514 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 09:33:51,514 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:33:58,283 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 09:33:58,393 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 09:33:58,412 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 09:35:06,207 - INFO - Administrator - Upload button called to refresh table.
+2024-09-05 09:37:12,085 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:37:12,087 - ERROR - Administrator - Error occurred while deleting record with ID 3: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([WinError 10053] 你的主机中的软件中止了一个已建立的连接。)')
+[SQL: SELECT tb_data.id AS tb_data_id, tb_data.personnel_id AS tb_data_personnel_id, tb_data.data_path AS tb_data_data_path, tb_data.upload_user AS tb_data_upload_user, tb_data.personnel_name AS tb_data_personnel_name 
+FROM tb_data 
+WHERE tb_data.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': '3', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-09-05 09:37:13,820 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:39:17,976 - INFO - Administrator - Opening data view page.
+2024-09-05 09:39:19,781 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 09:39:19,785 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 09:39:19,813 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 09:39:19,824 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 09:39:19,827 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 09:39:19,827 - INFO - Administrator - Removed row 2 from table.
+2024-09-05 09:39:25,695 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 09:39:25,812 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 09:39:25,820 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 09:40:49,588 - INFO - Administrator - Upload button called to refresh table.
+2024-09-05 09:41:31,054 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-09-05 09:41:31,056 - ERROR - Administrator - An error occurred in checkbutton: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([WinError 10053] 你的主机中的软件中止了一个已建立的连接。)')
+[SQL: SELECT tb_data.id AS tb_data_id, tb_data.personnel_id AS tb_data_personnel_id, tb_data.data_path AS tb_data_data_path, tb_data.upload_user AS tb_data_upload_user, tb_data.personnel_name AS tb_data_personnel_name 
+FROM tb_data 
+WHERE tb_data.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 3, 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-09-05 09:41:32,473 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-09-05 09:41:32,490 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-05 09:41:32,490 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-05 09:41:32,491 - INFO - Administrator - Calling show_image with channel name.
+2024-09-05 09:41:32,491 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\differential_entropy.png
+2024-09-05 09:41:32,515 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-05 09:41:32,927 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-09-05 09:41:32,932 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-05 09:41:32,932 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-05 09:41:32,932 - INFO - Administrator - Calling show_image with channel name.
+2024-09-05 09:41:32,932 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\differential_entropy.png
+2024-09-05 09:41:32,943 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-05 09:41:41,013 - INFO - Administrator - Returned to user homepage.
+2024-09-05 09:41:42,897 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:42:24,331 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-09-05 09:42:24,338 - INFO - Administrator - Data path retrieved for ID 3: ../data/000005_ord
+2024-09-05 09:42:24,347 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=1
+2024-09-05 09:42:24,348 - INFO - Administrator - Health LED label set to RED
+2024-09-05 09:42:24,349 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-05 09:42:24,349 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-05 09:42:24,349 - INFO - Administrator - Initializing current image index to 0
+2024-09-05 09:42:24,350 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 09:42:24,350 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/differential_entropy.png
+2024-09-05 09:42:24,365 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-05 09:42:24,365 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-05 09:42:28,841 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 09:42:28,841 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/frequency_domain_features.png
+2024-09-05 09:42:28,883 - INFO - Administrator - Image successfully displayed: frequency_domain_features.png
+2024-09-05 09:42:28,883 - INFO - Administrator - Label updated to display: EEG特征图: frequency_domain_features.png
+2024-09-05 09:42:29,508 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 09:42:29,509 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/theta_alpha_beta_gamma_powers.png
+2024-09-05 09:42:29,543 - INFO - Administrator - Image successfully displayed: theta_alpha_beta_gamma_powers.png
+2024-09-05 09:42:29,544 - INFO - Administrator - Label updated to display: EEG特征图: theta_alpha_beta_gamma_powers.png
+2024-09-05 09:42:30,084 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 09:42:30,085 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/time_domain_features.png
+2024-09-05 09:42:30,117 - INFO - Administrator - Image successfully displayed: time_domain_features.png
+2024-09-05 09:42:30,117 - INFO - Administrator - Label updated to display: EEG特征图: time_domain_features.png
+2024-09-05 09:42:36,272 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-05 09:42:38,852 - INFO - Administrator - Opening data view page.
+2024-09-05 09:42:44,809 - INFO - Administrator - Deleting record with ID 1 from the table.
+2024-09-05 09:42:44,812 - INFO - Administrator - Data path for ID 1: ../data/000001_a
+2024-09-05 09:42:44,816 - INFO - Administrator - Deleted folder at path: ../data/000001_a
+2024-09-05 09:42:44,820 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-09-05 09:42:44,822 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-09-05 09:42:44,823 - INFO - Administrator - Removed row 0 from table.
+2024-09-05 09:42:57,063 - INFO - Administrator - Returned to user homepage.
+2024-09-05 09:42:58,384 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 09:44:34,821 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-05 09:44:37,990 - INFO - Administrator - Opening admin login page.
+2024-09-05 09:44:41,787 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-05 09:44:41,879 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-05 09:44:44,261 - INFO - Administrator - Opening user management page.
+2024-09-05 09:44:54,272 - INFO - Administrator - User '111' added successfully with ID 3.
+2024-09-05 09:45:30,202 - INFO - Administrator - User '222' added successfully with ID 4.
+2024-09-05 09:45:31,607 - INFO - Administrator - Returned to admin homepage.
+2024-09-05 09:45:35,426 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-05 09:45:36,936 - INFO - Administrator - Opening admin login page.
+2024-09-05 09:46:37,107 - INFO - Administrator - Opening admin login page.
+2024-09-05 09:59:44,692 - INFO - Administrator - Opening admin login page.
+2024-09-05 09:59:50,045 - INFO - Administrator - Admin login successful for username '222'.
+2024-09-05 09:59:50,117 - INFO - Administrator - Username '222' set as current user.
+2024-09-05 09:59:58,175 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-05 12:25:08,147 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 12:25:10,237 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-05 12:25:11,482 - INFO - Administrator - Opening data view page.
+2024-09-05 12:25:15,380 - INFO - Administrator - No folder selected.
+2024-09-05 12:25:16,328 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-05 12:25:16,332 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-05 12:25:16,369 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-05 12:25:16,376 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-05 12:25:16,378 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-05 12:25:16,381 - INFO - Administrator - Removed row 1 from table.
+2024-09-05 12:25:21,515 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-05 12:25:21,666 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-05 12:25:21,701 - INFO - Administrator - Added new data record with ID 3.
+2024-09-05 12:26:07,867 - INFO - Administrator - Upload button called to refresh table.
+2024-09-05 12:26:11,356 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-05 12:26:11,359 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-05 12:26:11,359 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-05 12:26:11,359 - INFO - Administrator - Calling show_image with channel name.
+2024-09-05 12:26:11,359 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\differential_entropy.png
+2024-09-05 12:26:11,381 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-05 12:26:14,714 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-05 12:26:14,716 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-05 12:26:14,716 - INFO - Administrator - Channel selected: 2. Channel name: frequency_domain_features.png
+2024-09-05 12:26:14,716 - INFO - Administrator - Calling show_image with channel name.
+2024-09-05 12:26:14,717 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\frequency_domain_features.png
+2024-09-05 12:26:14,754 - INFO - Administrator - Image successfully displayed for channel: frequency_domain_features.png
+2024-09-05 12:26:16,346 - INFO - Administrator - Returned to user homepage.
+2024-09-05 12:26:17,267 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 12:27:02,067 - INFO - Administrator - Button clicked in row 1, ID: 3
+2024-09-05 12:27:02,069 - INFO - Administrator - Data path retrieved for ID 3: ../data/000005_ord
+2024-09-05 12:27:02,072 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=1
+2024-09-05 12:27:02,072 - INFO - Administrator - Health LED label set to RED
+2024-09-05 12:27:02,072 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-05 12:27:02,073 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-05 12:27:02,073 - INFO - Administrator - Initializing current image index to 0
+2024-09-05 12:27:02,073 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 12:27:02,073 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/differential_entropy.png
+2024-09-05 12:27:02,082 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-05 12:27:02,082 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-05 12:27:04,498 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 12:27:04,498 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/frequency_domain_features.png
+2024-09-05 12:27:04,519 - INFO - Administrator - Image successfully displayed: frequency_domain_features.png
+2024-09-05 12:27:04,519 - INFO - Administrator - Label updated to display: EEG特征图: frequency_domain_features.png
+2024-09-05 12:27:04,913 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 12:27:04,914 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/theta_alpha_beta_gamma_powers.png
+2024-09-05 12:27:04,939 - INFO - Administrator - Image successfully displayed: theta_alpha_beta_gamma_powers.png
+2024-09-05 12:27:04,939 - INFO - Administrator - Label updated to display: EEG特征图: theta_alpha_beta_gamma_powers.png
+2024-09-05 12:27:05,362 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 12:27:05,362 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/time_domain_features.png
+2024-09-05 12:27:05,386 - INFO - Administrator - Image successfully displayed: time_domain_features.png
+2024-09-05 12:27:05,387 - INFO - Administrator - Label updated to display: EEG特征图: time_domain_features.png
+2024-09-05 12:27:15,243 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-05 12:27:16,654 - INFO - Administrator - Opening admin login page.
+2024-09-05 12:27:19,424 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-05 12:27:19,537 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-05 12:27:20,886 - INFO - Administrator - Opening model control page.
+2024-09-05 12:27:27,410 - INFO - Administrator - Opening health evaluation page.
+2024-09-05 12:27:29,314 - INFO - Administrator - Button clicked in row 1, ID: 3
+2024-09-05 12:27:29,316 - INFO - Administrator - Data path retrieved for ID 3: ../data/000005_ord
+2024-09-05 12:27:29,318 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=1
+2024-09-05 12:27:29,318 - INFO - Administrator - Health LED label set to RED
+2024-09-05 12:27:29,318 - INFO - Administrator - Acoustic LED label set to RED
+2024-09-05 12:27:29,319 - INFO - Administrator - Mechanical LED label set to RED
+2024-09-05 12:27:29,319 - INFO - Administrator - Initializing current image index to 0
+2024-09-05 12:27:29,319 - INFO - Administrator - Image list initialized with 5 items.
+2024-09-05 12:27:29,319 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord/differential_entropy.png
+2024-09-05 12:27:29,328 - INFO - Administrator - Image successfully displayed: differential_entropy.png
+2024-09-05 12:27:29,328 - INFO - Administrator - Label updated to display: EEG特征图: differential_entropy.png
+2024-09-05 12:30:12,793 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-09-08 15:28:28,416 - INFO - Administrator - Opening user login page.
+2024-09-08 15:37:36,707 - INFO - Administrator - Opening user login page.
+2024-09-08 15:53:30,291 - INFO - Administrator - Opening user login page.
+2024-09-08 15:53:51,589 - INFO - Administrator - Opening user login page.
+2024-09-08 16:09:47,492 - INFO - Administrator - Opening user login page.
+2024-09-08 16:09:50,637 - WARNING - Administrator - Admin login attempt failed: Incorrect username or password for username 'admin'.
+2024-09-08 16:09:57,461 - WARNING - Administrator - Admin login attempt failed: Incorrect username or password for username 'admin'.
+2024-09-08 16:10:42,115 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:10:42,171 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:10:48,461 - INFO - Administrator - Opening user management page.
+2024-09-08 16:11:59,014 - INFO - Administrator - Returned to admin homepage.
+2024-09-08 16:12:00,146 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-08 16:14:20,324 - INFO - Administrator - Opening admin login page.
+2024-09-08 16:14:22,626 - INFO - Administrator - Opening user login page.
+2024-09-08 16:16:39,340 - INFO - Administrator - Opening user login page.
+2024-09-08 16:16:41,921 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:16:41,977 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:16:44,299 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-08 16:16:46,381 - INFO - Administrator - Opening results view page.
+2024-09-08 16:16:47,301 - INFO - Administrator - Returned to user homepage.
+2024-09-08 16:16:48,030 - INFO - Administrator - Opening data view page.
+2024-09-08 16:16:49,469 - INFO - Administrator - Returned to user homepage.
+2024-09-08 16:17:34,156 - INFO - Administrator - Opening user login page.
+2024-09-08 16:17:36,555 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:17:36,607 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:18:28,851 - INFO - Administrator - Opening user login page.
+2024-09-08 16:18:31,256 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:18:31,316 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:18:31,956 - INFO - Administrator - Opening health evaluation page.
+2024-09-08 16:18:33,186 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-09-08 16:18:36,915 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-08 16:18:50,071 - INFO - Administrator - Opening health evaluation page.
+2024-09-08 16:18:51,307 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-08 16:18:51,931 - INFO - Administrator - Opening admin login page.
+2024-09-08 16:18:54,715 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:18:54,773 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:19:00,298 - INFO - Administrator - Switched to regular user mode. Index page is being opened.
+2024-09-08 16:22:49,179 - INFO - Administrator - Opening user login page.
+2024-09-08 16:22:51,804 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:22:51,858 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:22:52,826 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-09-08 16:22:56,171 - INFO - Administrator - Opening user login page.
+2024-09-08 16:22:58,731 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-08 16:22:58,789 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-08 16:23:01,170 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-09-08 16:23:24,188 - INFO - Administrator - Admin login successful for username 'nor'.
+2024-09-08 16:23:24,245 - INFO - Administrator - Username 'nor' set as current user.
+2024-09-08 16:23:26,484 - INFO - Administrator - Opening health evaluation page.
+2024-09-08 16:23:27,545 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-09-08 16:23:28,151 - INFO - Administrator - Opening results view page.
+2024-09-08 16:23:30,190 - INFO - Administrator - Returned to user homepage.
+2024-09-08 16:23:30,776 - INFO - Administrator - Opening data view page.
+2024-09-08 16:23:31,798 - INFO - Administrator - Returned to user homepage.
+2024-09-08 16:23:32,435 - INFO - Administrator - Opening admin login page.
+2024-09-08 16:23:36,611 - INFO - Administrator - Opening user login page.
+2024-09-10 11:21:05,042 - INFO - Administrator - Opening user login page.
+2024-09-10 11:21:56,576 - INFO - Administrator - Opening user login page.
+2024-09-10 11:22:44,358 - INFO - Administrator - Admin login successful for username '123'.
+2024-09-10 11:22:44,390 - INFO - Administrator - Username '123' set as current user.
+2024-09-10 11:22:45,921 - INFO - Administrator - Opening results view page.
+2024-09-10 11:22:47,031 - INFO - Administrator - Returned to user homepage.
+2024-09-10 11:22:47,975 - INFO - Administrator - Opening data view page.
+2024-09-10 11:22:49,228 - INFO - Administrator - Returned to user homepage.
+2024-09-10 11:22:50,563 - INFO - Administrator - Opening admin login page.
+2024-09-10 11:22:54,282 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-10 11:22:54,316 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-10 11:22:56,975 - INFO - Administrator - Opening user management page.
+2024-09-10 11:40:11,867 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-09-10 11:40:11,870 - INFO - Administrator - Data path retrieved from database: ../data/000004_test
+2024-09-10 11:40:11,870 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:40:11,870 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:40:11,870 - INFO - Administrator - Attempting to load image from path: ../data/000004_test\differential_entropy.png
+2024-09-10 11:40:11,883 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-10 11:40:14,530 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-09-10 11:40:14,532 - INFO - Administrator - Data path retrieved from database: ../data/000004_test
+2024-09-10 11:40:14,532 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:40:14,532 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:40:14,532 - INFO - Administrator - Attempting to load image from path: ../data/000004_test\time_domain_features.png
+2024-09-10 11:40:14,546 - INFO - Administrator - Image successfully displayed for channel: time_domain_features.png
+2024-09-10 11:40:16,995 - INFO - Administrator - Deleting record with ID 3 from the table.
+2024-09-10 11:40:16,998 - INFO - Administrator - Data path for ID 3: ../data/000005_ord
+2024-09-10 11:40:17,015 - INFO - Administrator - Deleted folder at path: ../data/000005_ord
+2024-09-10 11:40:17,020 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-09-10 11:40:17,023 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-09-10 11:40:17,024 - INFO - Administrator - Removed row 1 from table.
+2024-09-10 11:40:51,211 - INFO - Administrator - Selected folder: 000005_ord
+2024-09-10 11:40:51,350 - INFO - Administrator - Folder copied to '../data\000005_ord'.
+2024-09-10 11:40:51,380 - INFO - Administrator - Added new data record with ID 3.
+2024-09-10 11:41:27,137 - INFO - Administrator - Upload button called to refresh table.
+2024-09-10 11:43:09,010 - INFO - Administrator - Selected folder: 000006_pro
+2024-09-10 11:43:09,082 - INFO - Administrator - Folder copied to '../data\000006_pro'.
+2024-09-10 11:43:09,109 - INFO - Administrator - Added new data record with ID 4.
+2024-09-10 11:43:09,111 - INFO - Administrator - Upload button called to refresh table.
+2024-09-10 11:43:10,991 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:43:10,992 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:43:10,993 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:43:10,993 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:43:10,993 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:11,002 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:14,095 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:43:14,097 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:43:14,097 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:43:14,097 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:43:14,097 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:14,099 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:15,013 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:43:15,015 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:43:15,015 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:43:15,015 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:43:15,015 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:15,016 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:16,179 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:43:16,180 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:43:16,180 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:43:16,180 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:43:16,180 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:43:16,181 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:44:04,153 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-10 11:44:04,154 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-10 11:44:04,154 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:04,154 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:04,154 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\time_domain_features.png
+2024-09-10 11:44:04,167 - INFO - Administrator - Image successfully displayed for channel: time_domain_features.png
+2024-09-10 11:44:05,879 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:05,881 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:05,881 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:05,881 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:05,881 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:05,882 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:06,735 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:06,737 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:06,737 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:06,737 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:06,737 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:06,738 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:07,427 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:07,429 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:07,429 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:07,429 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:07,429 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:07,431 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:08,104 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:08,105 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:08,105 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:08,105 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:08,105 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:08,107 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:08,485 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:08,486 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:08,486 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:44:08,486 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:08,486 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:08,488 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:44:11,425 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:11,426 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:11,426 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:44:11,426 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:11,426 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:44:11,429 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:44:11,907 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-10 11:44:11,909 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-10 11:44:11,909 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:44:11,909 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:11,909 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\differential_entropy.png
+2024-09-10 11:44:11,918 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-10 11:44:12,568 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-09-10 11:44:12,569 - INFO - Administrator - Data path retrieved from database: ../data/000004_test
+2024-09-10 11:44:12,569 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:44:12,569 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:12,569 - INFO - Administrator - Attempting to load image from path: ../data/000004_test\differential_entropy.png
+2024-09-10 11:44:12,574 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-10 11:44:13,749 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-10 11:44:13,750 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-10 11:44:13,750 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:44:13,750 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:13,750 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\differential_entropy.png
+2024-09-10 11:44:13,755 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-09-10 11:44:16,096 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-10 11:44:16,097 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-10 11:44:16,097 - INFO - Administrator - Channel selected: 5. Channel name: time_frequency_features.png
+2024-09-10 11:44:16,097 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:16,097 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\time_frequency_features.png
+2024-09-10 11:44:16,111 - INFO - Administrator - Image successfully displayed for channel: time_frequency_features.png
+2024-09-10 11:44:16,589 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-09-10 11:44:16,590 - INFO - Administrator - Data path retrieved from database: ../data/000004_test
+2024-09-10 11:44:16,590 - INFO - Administrator - Channel selected: 5. Channel name: time_frequency_features.png
+2024-09-10 11:44:16,590 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:16,590 - INFO - Administrator - Attempting to load image from path: ../data/000004_test\time_frequency_features.png
+2024-09-10 11:44:16,606 - INFO - Administrator - Image successfully displayed for channel: time_frequency_features.png
+2024-09-10 11:44:17,817 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:44:17,818 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:44:17,818 - INFO - Administrator - Channel selected: 5. Channel name: time_frequency_features.png
+2024-09-10 11:44:17,818 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:44:17,818 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_frequency_features.png
+2024-09-10 11:44:17,819 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_frequency_features.png
+2024-09-10 11:45:08,975 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:45:08,977 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:45:08,978 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:45:08,978 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:45:08,978 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:45:08,996 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:45:11,812 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:45:11,813 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:45:11,813 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:45:11,813 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:45:11,813 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:45:11,814 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:45:31,212 - INFO - Administrator - Returned to admin homepage.
+2024-09-10 11:45:32,313 - INFO - Administrator - Opening log management page.
+2024-09-10 11:45:33,034 - INFO - Administrator - checkbutton was clicked.
+2024-09-10 11:45:48,418 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-09-10 11:47:10,176 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:47:10,179 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:47:10,179 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-09-10 11:47:10,179 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:47:10,179 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:47:21,099 - ERROR - Administrator - Failed to load image: ../data/000006_pro\differential_entropy.png
+2024-09-10 11:47:22,880 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:47:22,882 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:47:22,882 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:47:22,882 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:47:22,882 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:47:23,715 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:47:24,320 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-09-10 11:47:24,321 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord
+2024-09-10 11:47:24,321 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:47:24,321 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:47:24,321 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord\time_domain_features.png
+2024-09-10 11:47:24,330 - INFO - Administrator - Image successfully displayed for channel: time_domain_features.png
+2024-09-10 11:47:25,419 - INFO - Administrator - Button clicked in row 2, corresponding ID: 4
+2024-09-10 11:47:25,421 - INFO - Administrator - Data path retrieved from database: ../data/000006_pro
+2024-09-10 11:47:25,421 - INFO - Administrator - Channel selected: 4. Channel name: time_domain_features.png
+2024-09-10 11:47:25,421 - INFO - Administrator - Calling show_image with channel name.
+2024-09-10 11:47:25,421 - INFO - Administrator - Attempting to load image from path: ../data/000006_pro\time_domain_features.png
+2024-09-10 11:47:26,333 - ERROR - Administrator - Failed to load image: ../data/000006_pro\time_domain_features.png
