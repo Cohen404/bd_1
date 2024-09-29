@@ -1,3 +1,6 @@
+# 文件功能：系统主页面的后端逻辑
+# 该脚本实现了系统主页面的功能，包括界面初始化、用户状态管理、页面跳转等操作
+
 import sys
 sys.path.append('../')
 from datetime import datetime
@@ -18,6 +21,9 @@ from util.db_util import SessionClass
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -29,8 +35,14 @@ class UserFilter(logging.Filter):
 
 # 注意这里定义的第一个界面的后端代码类需要继承两个类
 class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
+    """
+    系统主页面的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化系统主页面
+        """
         super(front_page.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
@@ -42,6 +54,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
 
         # self.show_nav()  # 调用show_nav方法显示header,bottom的内容
 
+        # 连接按钮信号到对应的槽函数
         self.health_assess_Button.clicked.connect(self.open_health_evaluate)  # 健康评估
         self.data_view_Button.clicked.connect(self.open_data_view)  # 数据查看
         self.results_view_Button.clicked.connect(self.open_results_view)  # 结果查看
@@ -65,30 +78,45 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
 
 
     def show_nav(self):
+        """
+        显示导航栏和状态信息（当前未使用）
+        """
         # header
         session = SessionClass()
         result = session.query(Result).order_by(Result.id.desc()).first()
         session.close()
 
     def open_health_evaluate(self):
+        """
+        打开健康评估页面
+        """
         self.health_evaluate = health_evaluate_rear.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
         self.close()  # 关闭当前窗口
         self.health_evaluate.show()  # 显示健康评估窗口
 
     def open_data_view(self):
+        """
+        打开数据查看页面
+        """
         self.data_view = data_view_rear.Data_View_WindowActions()
         logging.info("Opening data view page.")
         self.close()  # 关闭当前窗口
         self.data_view.show()  # 显示数据查看窗口
 
     def open_results_view(self):
+        """
+        打开结果查看页面
+        """
         self.results_view = results_view_rear.Results_View_WindowActions()
         logging.info("Opening results view page.")
         self.close()  # 关闭当前窗口
         self.results_view.show()  # 显示结果查看窗口
 
     def open_admin_login(self):
+        """
+        打开管理员登录页面
+        """
         self.login = login_rear.Login_WindowActions()
         logging.info("Opening admin login page.")
         self.close()  # 关闭当前窗口

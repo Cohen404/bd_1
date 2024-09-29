@@ -15,7 +15,28 @@ from front.component import create_header, create_bottom
 
 
 class Ui_MainWindow(object):
+    """
+    用户管理界面UI类
+    
+    负责创建和设置用户管理界面的所有UI元素
+    """
+
     def setupUi(self, MainWindow):
+        """
+        设置用户管理界面UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置中央窗口部件
+        - 设置布局（垂直布局）
+        - 添加页面头部
+        - 创建并添加用户列表表格
+        - 创建并添加用户添加表单
+        - 设置样式和字体
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 750)
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
@@ -106,6 +127,18 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        """
+        重新翻译UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口标题
+        - 设置各个标签和按钮的文本
+        - 设置字体
+        - 设置样式
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
         self.nameLabel.setText(_translate("MainWindow", "用户名："))

@@ -6,7 +6,16 @@ from PyQt5.QtGui import *
 
 
 class Ui_param_Control(QWidget):
+    """
+    参数控制界面UI类
+    
+    负责创建和设置参数控制界面的所有UI元素
+    """
+
     def __init__(self):
+        """
+        初始化参数控制界面
+        """
         super().__init__()
         self.statu_show = None
         self.time_show = None
@@ -14,6 +23,14 @@ class Ui_param_Control(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        """
+        初始化UI
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置布局
+        - 添加页面头部和参数设置表单
+        """
         # 窗体标题和尺寸
 
         self.setWindowTitle('应激系统')
@@ -42,10 +59,22 @@ class Ui_param_Control(QWidget):
         self.setLayout(layout)
 
     def init_header(self):
+        """
+        初始化页面头部
+        
+        返回:
+        layout: 头部布局
+        """
         layout, _, self.return_btn, self.time_show, self.statu_show = create_header('参数管理')
         return layout
 
     def init_table(self):
+        """
+        初始化参数设置表单
+        
+        返回:
+        param_layout: 参数设置表单布局
+        """
         # param_layout = QHBoxLayout()
         # param_form = QFormLayout()
         # param_form.setLabelAlignment(Qt.AlignRight)

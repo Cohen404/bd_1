@@ -1,3 +1,6 @@
+# 文件功能：日志管理界面的后端逻辑
+# 该脚本实现了日志管理界面的功能，包括显示日志内容、返回首页等操作
+
 import os
 import sys
 
@@ -23,6 +26,9 @@ from rear import index_rear
 from rear import admin_rear
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -32,11 +38,17 @@ class UserFilter(logging.Filter):
         return True
 
 class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
+    """
+    日志管理窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化日志管理窗口
+        """
         super(log_manage.Ui_MainWindow, self).__init__()
         self.setupUi(self)
-        self.show_log_content()  # Call the new method to display log content
+        self.show_log_content()  # 调用方法显示日志内容
 
         # button to connect
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
@@ -58,11 +70,10 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
     def show_log_content(self):
-        # # Replace table with a QTextEdit widget to display log content
-        # self.log_display = QTextEdit(self.centralwidget)
-        # self.log_display.setReadOnly(True)  # Set it as read-only
-        # self.mainVLayout.addWidget(self.log_display)
-
+        """
+        显示日志内容
+        从日志文件中读取最后200行并显示在界面上
+        """
         try:
             # Read the last 100 lines of the log file
             file_path = '../log/log.txt'
@@ -80,6 +91,10 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
 
     # btn_return返回首页
     def return_index(self):
+        """
+        返回首页的回调函数
+        根据用户类型返回相应的首页
+        """
         try:
             path = '../state/user_status.txt'
             user = operate_user.read(path)  # 0表示普通用户，1表示管理员
@@ -100,10 +115,13 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
 
 
 if __name__ == '__main__':
+    # 启用高DPI缩放
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调用show()函数即可
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Log_Manage_WindowActions()
     demo_window.show()
+    
+    # 进入应用的主事件循环
     sys.exit(app.exec_())

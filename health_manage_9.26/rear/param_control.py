@@ -1,3 +1,6 @@
+# 文件功能：参数控制界面的后端逻辑
+# 该脚本实现了参数控制界面的功能，包括参数显示、保存、更新等操作，以及与数据库的交互
+
 import os
 import sys
 import time
@@ -19,6 +22,9 @@ from sql_model.tb_parameters import Parameters
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -26,8 +32,15 @@ class UserFilter(logging.Filter):
     def filter(self, record):
         record.userType = self.userType
         return True
+
 class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
+    """
+    参数控制界面的主要类，继承自前端UI类和QWidget
+    """
     def __init__(self):
+        """
+        初始化参数控制界面
+        """
         super(Ui_param_Control.Ui_param_Control, self).__init__()
         self.init_ui()
         self.SHOWUi()
@@ -51,6 +64,10 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         logger.addFilter(UserFilter(userType))
 
     def returnIndex(self):
+        """
+        返回主页的处理函数
+        根据用户类型返回相应的首页
+        """
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
 
@@ -62,6 +79,9 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         self.index.show()
 
     def savetoDB(self):
+        """
+        保存参数到数据库的处理函数
+        """
         logging.info("Starting database save operation.")
 
         session = SessionClass()
@@ -109,6 +129,9 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         logging.info("SHOWUi method called after database operation.")
 
     def SHOWUi(self):
+        """
+        显示参数控制界面的UI，并从数据库加载最新的参数值
+        """
         session = SessionClass()
         data = session.query(Parameters).first()  # 获取最新的记录
         session.close()

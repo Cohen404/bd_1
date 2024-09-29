@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# login.py
+# 用户登录界面的实现
+# 包含用户名和密码输入功能
+
 # Form implementation generated from reading ui file 'login.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
@@ -14,7 +18,27 @@ from PyQt5.QtWidgets import QLineEdit
 
 
 class Ui_MainWindow(object):
+    """
+    登录界面UI类
+    
+    负责创建和设置登录界面的所有UI元素
+    """
+
     def setupUi(self, MainWindow):
+        """
+        设置登录界面UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置中央窗口部件
+        - 设置布局（垂直布局）
+        - 添加用户名和密码输入框
+        - 添加登录和返回按钮
+        - 设置样式和字体
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
         MainWindow.resize(1000, 750)
@@ -109,6 +133,18 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        """
+        重新翻译UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口标题
+        - 设置标签和按钮文本
+        - 设置字体
+        - 设置样式
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
         self.name_label.setText(_translate("MainWindow", "账号"))

@@ -5,7 +5,17 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import *
 
 
+# 创建头部组件
 def create_header(title):
+    """
+    创建应用程序的头部组件
+    
+    参数:
+    title (str): 要显示在头部的标题
+    
+    返回:
+    tuple: 包含头部布局和各个组件的元组
+    """
     font = QFont()
     font.setFamily('Microsoft YaHei')
 
@@ -38,21 +48,21 @@ def create_header(title):
     return header_layout, None, btn_return, None, None
 
 
-
-
-# def return_main(ui_main,ui_current):
-
-
+# 创建底部组件
 def create_bottom():
+    """
+    创建应用程序的底部组件
+    
+    返回:
+    tuple: 包含底部布局和时间显示标签的元组
+    """
     bottom_layout = QHBoxLayout()
-    # result_time = QTextBrowser()
     evaluate_time = QLabel()
     pass_time = QLabel()
     font = QFont()
     font.setFamily("Microsoft YaHei")
     evaluate_time.setFont(font)
     pass_time.setFont(font)
-    # result_time.setFixedHeight(40)
     bottom_layout.addWidget(evaluate_time)
     bottom_layout.addStretch()
     bottom_layout.addWidget(pass_time)

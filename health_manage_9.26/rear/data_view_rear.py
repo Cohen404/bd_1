@@ -1,3 +1,6 @@
+# 文件功能：数据查看和管理界面的后端逻辑
+# 该脚本实现了数据查看界面的功能，包括显示数据列表、上传数据、查看数据详情、删除数据等操作
+
 import logging
 import os
 import sys
@@ -29,6 +32,9 @@ import data_out
 import data_pretreatment
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -38,8 +44,14 @@ class UserFilter(logging.Filter):
         return True
 
 class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
+    """
+    数据查看窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化数据查看窗口
+        """
         super(data_view.Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self.id = 0
@@ -71,9 +83,14 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
+        """
+        通道选择的回调函数（目前未使用）
+        
+        参数:
+        tag (int): 选择的通道索引
+        """
         if tag == 0:
             print('点到了第1项 ...')
         if tag == 1:
@@ -84,8 +101,6 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             print('点到了第4项 ...')
         if tag == 4:
             print('点到了第5项 ...')
-
-
 
     def show_table(self):
         '''
@@ -128,6 +143,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加入按钮
 
     def openfile(self):
+        """
+        打开文件对话框并处理选择的文件夹
+        """
         folder_path = ''
         hadprocessed = False
         # 获取文件夹路径
@@ -288,6 +306,12 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
+        """
+        为每一行创建操作按钮
+        
+        返回:
+        QtWidgets.QWidget: 包含查看和删除按钮的小部件
+        """
         widget = QtWidgets.QWidget()
         # 查看
         self.check_pushButton = QtWidgets.QPushButton('查看')
@@ -317,6 +341,12 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         return widget
 
     def show_image(self, channel_name):
+        """
+        显示指定通道的图像
+        
+        参数:
+        channel_name (str): 要显示的通道名称
+        """
         try:
             # Construct image path
             image_filename = channel_name
@@ -348,6 +378,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     # 查看按钮功能
     def checkbutton(self):
+        """
+        查看按钮的回调函数
+        """
         button = self.sender()
         channel = self.channel_comboBox.currentIndex()  # 获取当前通道选择的通道数
         if button:
@@ -390,6 +423,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     # 删除功能
     def deletebutton(self):
+        """
+        删除按钮的回调函数
+        """
         button = self.sender()
         if button:
             # 确定位置的时候这里是关键

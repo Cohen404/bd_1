@@ -1,3 +1,6 @@
+# 文件功能：用户管理界面的后端逻辑
+# 该脚本实现了用户管理界面的功能，包括显示用户列表、添加用户、删除用户、修改密码等操作
+
 import os
 import sys
 
@@ -27,6 +30,9 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -36,8 +42,14 @@ class UserFilter(logging.Filter):
         return True
 
 class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
+    """
+    用户管理窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化用户管理窗口
+        """
         super(user_manage.Ui_MainWindow, self).__init__()
         self.id = None
         self.setupUi(self)
@@ -63,9 +75,14 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
+        """
+        通道选择的回调函数（目前未使用）
+        
+        参数:
+        tag (int): 选择的通道索引
+        """
         if tag == 0:
             print('点到了第1项 ...')
         if tag == 1:
@@ -88,6 +105,9 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             print('点到了第10项 ...')
 
     def show_table(self):
+        """
+        从数据库获取用户信息并显示在表格中
+        """
         session = SessionClass()
         kk = session.query(User).filter().all()
         session.close()
@@ -131,6 +151,12 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())
 
     def buttonForRow(self):
+        """
+        为每一行创建操作按钮
+        
+        返回:
+        QtWidgets.QWidget: 包含删除和修改密码按钮的小部件
+        """
         widget = QtWidgets.QWidget()
         # 查看
         self.check_pushButton = QtWidgets.QPushButton('删除')
@@ -160,6 +186,9 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         return widget
 
     def delete_button(self):
+        """
+        删除用户的处理函数
+        """
         button = self.sender()
         if button:
             # 获取按钮所在的行
@@ -192,6 +221,9 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
 
     # 删除功能
     def updatePSWD_button(self):
+        """
+        修改密码的处理函数
+        """
         button = self.sender()  # 获取发出信号的按钮
         if button:
             # 获取按钮所在的行
@@ -232,9 +264,10 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
                     logging.error(f"Failed to update password for user ID {id}: {str(e)}")
 
     # btn_return返回首页
-
-
     def add_user(self):
+        """
+        添加新用户的处理函数
+        """
         # 获取用户输入的信息
         username = self.nameIN.text().strip()
         password = self.pswdIN.text().strip()
@@ -282,6 +315,9 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             self.show_table()
 
     def return_index(self):
+        """
+        返回首页的回调函数
+        """
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
 
@@ -294,7 +330,6 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
 
         self.close()
         self.index.show()
-
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

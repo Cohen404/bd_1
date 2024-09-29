@@ -1,3 +1,6 @@
+# 文件功能：登录界面的后端逻辑
+# 该脚本实现了系统登录界面的功能，包括用户验证、登录处理、页面跳转等操作
+
 import sys
 from datetime import datetime
 sys.path.append('../')
@@ -15,6 +18,9 @@ from rear import index_rear
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -23,11 +29,16 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-
 # 注意这里定义的第一个界面的后端代码类需要继承两个类
 class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
+    """
+    登录窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化登录窗口
+        """
         super(login.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
@@ -51,13 +62,17 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
     # 输入账号密码，登录管理员页面
     def admin_login(self):
+        """
+        处理管理员登录
+        验证用户名和密码，根据验证结果执行相应操作
+        """
         name = self.name_lineEdit.text()
         pwd = self.pwd_lineEdit.text()
         session = SessionClass()
         data = session.query(User).filter(User.name == name, User.pwd == pwd).first()
         session.close()
 
-        # Check for empty name or password
+        # 检查用户名或密码是否为空
         if not name or not pwd:
             logging.warning("Admin login attempt failed: Username or password field is empty.")
             box = QMessageBox(QMessageBox.Information, "提示", "请输入用户名和密码")
@@ -66,7 +81,7 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
             if box.clickedButton() == qyes:
                 return
 
-        # Check if data is None (invalid credentials)
+        # 检查数据是否为None（无效凭据）
         elif data is None:
             logging.warning(f"Admin login attempt failed: Incorrect username or password for username '{name}'.")
             box = QMessageBox(QMessageBox.Information, "提示", "用户名或密码错误")
@@ -75,22 +90,22 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
             if box.clickedButton() == qyes:
                 return
 
-        else:  # Login successful
+        else:  # 登录成功
             logging.info(f"Admin login successful for username '{name}'.")
             path = '../state/user_status.txt'
-            if data.user_type ==1:
-                operate_user.admin_user(path)  # Set flag to 1 for admin access
+            if data.user_type == 1:
+                operate_user.admin_user(path)  # 设置标志为1表示管理员访问
 
-                # Enter admin page
+                # 进入管理员页面
                 self.admin = admin_rear.AdminWindowActions()
                 self.close()
                 self.admin.show()
             else:
-                operate_user.ordinary_user(path)  # Set flag to 0 for regular user access
+                operate_user.ordinary_user(path)  # 设置标志为0表示普通用户访问
                 self.ordinary_user = index_rear.Index_WindowActions()
                 self.close()
                 self.ordinary_user.show()
-                # Write current username to current_user.txt
+                # 将当前用户名写入current_user.txt
             with open('../state/current_user.txt', 'w') as f:
                 f.write(name)
 
@@ -98,10 +113,12 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
     # 返回首页
     def return_index(self):
+        """
+        返回初始登录页面
+        """
         self.index = init_login.Index_WindowActions()
         self.close()
         self.index.show()
-
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

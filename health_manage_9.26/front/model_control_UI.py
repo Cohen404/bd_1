@@ -1,11 +1,22 @@
-import sys
+# model_control_UI.py
+# 模型控制界面的实现
+# 包括模型列表和上传功能
 
+import sys
 from PyQt5.QtWidgets import *
 from front.component import create_header, create_bottom
 
-
 class Ui_model_Control(QWidget):
+    """
+    模型控制界面UI类
+    
+    负责创建和设置模型控制界面的所有UI元素
+    """
+
     def __init__(self):
+        """
+        初始化模型控制界面
+        """
         super().__init__()
         self.pass_time = None
         self.evaluate_time = None
@@ -17,6 +28,14 @@ class Ui_model_Control(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        """
+        初始化UI
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置布局
+        - 添加页面头部、主体和底部
+        """
         # 窗体标题和尺寸
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
         self.setWindowTitle('应激评估系统')
@@ -43,10 +62,22 @@ class Ui_model_Control(QWidget):
         self.setLayout(layout)
 
     def init_header(self):
+        """
+        初始化页面头部
+        
+        返回:
+        layout: 头部布局
+        """
         layout, _, self.return_btn, self.time_show, self.statu_show = create_header('模型管理')
         return layout
 
     def init_table(self):
+        """
+        初始化模型表格
+        
+        返回:
+        table_layout: 表格布局
+        """
         table_layout = QHBoxLayout()
         self.table_widget = QTableWidget(0, 5)
         self.table_widget.setStyleSheet(
@@ -79,6 +110,12 @@ class Ui_model_Control(QWidget):
         return table_layout
 
     def init_footer(self):
+        """
+        初始化页面底部
+        
+        返回:
+        footer_layout: 底部布局
+        """
         footer_layout, self.evaluate_time, self.pass_time = create_bottom()
         return footer_layout
 
