@@ -1,3 +1,7 @@
+# 文件功能：EEG数据预处理
+# 该脚本用于读取EDF格式的脑电图数据，进行预处理，包括删除非EEG通道、设置电极位置、
+# 插值坏道、降采样、滤波、ICA分析、重新参考等步骤，最后保存处理后的数据。
+
 from mne.io import concatenate_raws, read_raw_edf
 import matplotlib.pyplot as plt
 import mne
@@ -5,6 +9,25 @@ import os
 import numpy as np
 
 def treat(data_dir):
+    """
+    对指定目录中的EDF文件进行预处理
+    
+    参数:
+    data_dir (str): 包含EDF文件的目录路径
+
+    功能:
+    1. 读取EDF文件
+    2. 删除非EEG通道
+    3. 设置电极位置
+    4. 创建事件
+    5. 插值坏道
+    6. 降采样
+    7. 滤波处理
+    8. 独立成分分析（ICA）
+    9. 重新参考
+    10. 创建Epochs对象
+    11. 保存处理后的数据
+    """
     # 文件路径
     #     data_dir = 'E:/brain_data/焦虑'
     edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
@@ -23,6 +46,7 @@ def treat(data_dir):
     non_eeg_channel = ['ECG', 'HEOR', 'HEOL', 'VEOU', 'VEOL', 'Status']
     # raw.drop_channels(non_eeg_channel)
 
+    # 检查是否存在非EEG通道，如果存在则删除
     exisiting_non_eeg_channels = [ch for ch in non_eeg_channel if ch in raw.ch_names]
     if not exisiting_non_eeg_channels:
         print("数据已经预处理过，跳过后续处理")
@@ -32,14 +56,17 @@ def treat(data_dir):
         raw.drop_channels(exisiting_non_eeg_channels)
 
     # 设置电极位置
+    # 使用标准的10-05系统设置电极位置
     montage = mne.channels.make_standard_montage("standard_1005")
     raw.set_montage(montage)
     # raw.plot_sensors(show_names=True)
 
     # 创建事件
+    # 从原始数据的注释中创建事件
     events, event_id = mne.events_from_annotations(raw)
     event_id = 1  # 事件ID
     duration = 1  # 事件持续时间/秒
+    # 创建固定长度的事件
     events = mne.make_fixed_length_events(raw, event_id, start=0, duration=duration, overlap=0)
 
     # 插值坏道
@@ -60,6 +87,7 @@ def treat(data_dir):
     # raw_filtered.plot_psd(fmax=250)
 
     # 独立成分分析（ICA）
+    # ICA用于去除眼动和肌电等伪迹
     raw_ica = raw_filtered.copy()
     ica = mne.preprocessing.ICA(n_components=20)
     ica.fit(raw_ica)
@@ -96,3 +124,17 @@ def treat(data_dir):
     # 保存处理后的数据
     save_dir = os.path.join(data_dir, 'fif.fif')
     epochs.save(save_dir, overwrite=True)
+
+# 注释：
+# 1. 该脚本首先读取指定目录中的所有EDF文件
+# 2. 删除非EEG通道，如ECG、HEOR等
+# 3. 设置标准的电极位置
+# 4. 创建固定长度的事件
+# 5. 插值处理坏道
+# 6. 将采样率降至500Hz
+# 7. 应用1-100Hz的带通滤波器
+# 8. 进行独立成分分析（ICA）
+# 9. 使用平均通道重新参考
+# 10. 创建Epochs对象，设置拒绝标准
+# 11. 调整Epochs数据形状，只保留最后108个epochs
+# 12. 最后将处理后的数据保存为fif格式

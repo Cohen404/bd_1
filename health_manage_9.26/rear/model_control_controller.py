@@ -1,3 +1,6 @@
+# 文件功能：模型控制界面的后端逻辑
+# 该脚本实现了模型控制界面的功能，包括模型上传、删除、导出等操作，以及与数据库的交互
+
 import os
 import sys
 import time
@@ -17,6 +20,9 @@ from util.db_util import SessionClass
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -26,7 +32,13 @@ class UserFilter(logging.Filter):
         return True
 
 class model_control_Controller(Ui_model_Control):
+    """
+    模型控制界面的主要类，继承自前端UI类
+    """
     def __init__(self):
+        """
+        初始化模型控制界面
+        """
         super(model_control_Controller, self).__init__()
         self.id = None
         self.export_btn = None
@@ -51,6 +63,9 @@ class model_control_Controller(Ui_model_Control):
         logger.addFilter(UserFilter(userType))
 
     def showUi(self):
+        """
+        显示界面并初始化数据
+        """
         # 页面初始化时，将tb_Model中的数据全部都出来，显示到table中
         session = SessionClass()
         data = session.query(Model).all()
@@ -58,7 +73,7 @@ class model_control_Controller(Ui_model_Control):
         model_list = []
         for item in data:
         #     #model_list.append([item.id, item.test_time, item.test_acc, item.cv_acc, item.model_path, item.use])
-                model_list.append([item.model_type, item.model_path,item.create_time])
+            model_list.append([item.model_type, item.model_path,item.create_time])
 
         # [id,创建时间,测试集准确率,交叉验证准确率,模型路径]
         # model_list = [[1, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), '96.6%', '95.8%',
@@ -71,18 +86,26 @@ class model_control_Controller(Ui_model_Control):
         self.upload_btn.clicked.connect(self.uploadModel)
 
     def show_nav(self):
+        """
+        显示导航栏（当前未实现具体功能）
+        """
         # header
-
         session = SessionClass()
         result = session.query(Result).order_by(Result.id.desc()).first()
         session.close()
         # 获取tb_result表中最新的一条记录，得到result对象
 
     def showTable(self, model_list):
+        """
+        在表格中显示模型列表
+        
+        参数:
+        model_list (list): 包含模型信息的列表
+        """
         model_type_mapping = {
-             '0':"普通应激评估模型",
-                '1':"抑郁评估模型",
-                '2':"焦虑评估模型"
+             '0': "普通应激评估模型",
+             '1': "抑郁评估模型",
+             '2': "焦虑评估模型"
         }
         if model_list is None:
             return
@@ -90,14 +113,14 @@ class model_control_Controller(Ui_model_Control):
         for model in model_list:
             self.table_widget.insertRow(current_row_count)
             for j in range(0, self.table_widget.columnCount() + 1):
-                if j == 0:#模型类别
+                if j == 0:  # 模型类别
                     self.table_widget.setItem(current_row_count, j, QTableWidgetItem(model_type_mapping.get(str(model[0]))))
-                elif j == 1:#模型路径
+                elif j == 1:  # 模型路径
                     self.table_widget.setItem(current_row_count, j, QTableWidgetItem(str(model[1])))
-                elif j == 2:#模型名称
+                elif j == 2:  # 模型名称
                     model_name = os.path.basename(model[1])
                     self.table_widget.setItem(current_row_count, j, QTableWidgetItem(model_name))
-                elif j == 3:#上传时间
+                elif j == 3:  # 上传时间
                     self.table_widget.setItem(current_row_count, j, QTableWidgetItem(str(model[2])))
                 else:
                     self.table_widget.setCellWidget(current_row_count, j, self.buttonForRow())
@@ -105,7 +128,13 @@ class model_control_Controller(Ui_model_Control):
                     self.export_btn.clicked.connect(partial(self.exportModel, model))
             current_row_count += 1
 
-    def delete_keras_files(self,directory):
+    def delete_keras_files(self, directory):
+        """
+        删除指定目录下的所有.keras文件
+        
+        参数:
+        directory (str): 要删除文件的目录路径
+        """
         for filename in os.listdir(directory):
             if filename.endswith('.keras'):
                 file_path = os.path.join(directory, filename)
@@ -113,6 +142,9 @@ class model_control_Controller(Ui_model_Control):
                 print(f"Deleted file: {file_path}")
 
     def uploadModel(self):
+        """
+        上传模型的处理函数
+        """
         model_types = ["普通应激评估模型", "抑郁评估模型", "焦虑评估模型"]
         model_type_name, okPressed = QInputDialog.getItem(self, "上传模型", "模型类型:", model_types, 0, False)
 
@@ -122,7 +154,7 @@ class model_control_Controller(Ui_model_Control):
 
             model_path, _ = QFileDialog.getOpenFileName(self, "选择模型", "", "")
             if model_path:
-                # Copy the model file to the corresponding directory based on its type
+                # 根据模型类型将模型文件复制到相应的目录
                 model_type_dir_mapping = {
                     0: "../model/yingji",
                     1: "../model/yiyu",
@@ -131,28 +163,26 @@ class model_control_Controller(Ui_model_Control):
                 target_dir = model_type_dir_mapping.get(model_type)
                 # print("target_dir:", target_dir)
                 if target_dir:
-
                     self.delete_keras_files(target_dir)
 
                     target_path = os.path.join(target_dir, os.path.basename(model_path))
                     shutil.copy(model_path, target_path)
                     logging.info(f"Copied model file to: {target_path}")
 
-                    # Update model attributes
+                    # 更新模型属性
                     self.updateModelAttributes(model_type, target_path)
 
-                    # Synchronize with database
+                    # 同步数据库
                     session = SessionClass()
                     existing_model = session.query(Model).filter(Model.model_type == model_type).first()
 
                     if existing_model is not None:
-                        # Update existing record
+                        # 更新现有记录
                         existing_model.model_path = target_path
                         existing_model.create_time = datetime.now()
-                        logging.info(
-                            f"Updated existing model record for type {model_type_name}. New path: {target_path}")
+                        logging.info(f"Updated existing model record for type {model_type_name}. New path: {target_path}")
                     else:
-                        # Create new record
+                        # 创建新记录
                         model = Model(model_type=model_type, model_path=target_path, create_time=datetime.now())
                         session.add(model)
                         logging.info(f"Added new model record for type {model_type_name}. Path: {target_path}")
@@ -167,8 +197,14 @@ class model_control_Controller(Ui_model_Control):
         else:
             logging.warning("No model type selected.")
 
-
     def updateModelAttributes(self, model_type, model_path):
+        """
+        更新模型属性并在表格中显示
+        
+        参数:
+        model_type (int): 模型类型
+        model_path (str): 模型文件路径
+        """
         model_type_mapping = {
             '0': "普通应激评估模型",
             '1': "抑郁评估模型",
@@ -186,7 +222,6 @@ class model_control_Controller(Ui_model_Control):
                 self.table_widget.item(i, 1).setText(model_path)
                 self.table_widget.item(i, 2).setText(model_name)
                 self.table_widget.item(i, 3).setText(upload_time)
-
                 break
         else:  # 如果没有找到匹配的模型类型
             # 在表格中添加一行
@@ -202,7 +237,14 @@ class model_control_Controller(Ui_model_Control):
             self.delete_btn.clicked.connect(self.deleteModel)
             self.export_btn.clicked.connect(
                 partial(self.exportModel, [model_type, model_path, model_name, upload_time]))
+
     def buttonForRow(self):
+        """
+        为表格行创建按钮组件
+        
+        返回:
+        QWidget: 包含删除和导出按钮的小部件
+        """
         widget = QWidget()
         self.delete_btn = QPushButton('删除')
         self.delete_btn.setStyleSheet(''' text-align : center;
@@ -228,6 +270,9 @@ class model_control_Controller(Ui_model_Control):
         return widget
 
     def deleteModel(self):
+        """
+        删除模型的处理函数
+        """
         button = self.sender()
         if button:
             row = self.table_widget.indexAt(button.parent().pos()).row()  # 获取按钮所在行
@@ -274,6 +319,12 @@ class model_control_Controller(Ui_model_Control):
                 logging.info("Model deletion canceled by the user.")
 
     def exportModel(self, model):
+        """
+        导出模型的处理函数
+        
+        参数:
+        model (list): 包含模型信息的列表
+        """
         if model:
             model_path = model[1]
             model_name = os.path.basename(model_path)  # 获取模型文件名
@@ -298,11 +349,12 @@ class model_control_Controller(Ui_model_Control):
                     qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
                     box.exec_()
 
-    # def getCurrentModel(self):
-    #     return self.model
-
     # todo 返回主页
     def returnIndex(self):
+        """
+        返回主页的处理函数
+        根据用户类型返回相应的首页
+        """
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
 

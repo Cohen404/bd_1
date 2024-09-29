@@ -14,7 +14,16 @@ from PyQt5.QtGui import QFont
 from front.component import create_header, create_bottom
 
 class Ui_MainWindow(object):
+    """
+    管理员界面的UI类
+    """
     def setupUi(self, MainWindow):
+        """
+        设置UI界面
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
         MainWindow.resize(1000, 750)

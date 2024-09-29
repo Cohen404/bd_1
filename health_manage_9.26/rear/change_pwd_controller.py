@@ -1,3 +1,5 @@
+# 密码修改控制器
+
 from datetime import datetime
 
 from PyQt5.QtCore import Qt
@@ -16,6 +18,9 @@ from util.db_util import SessionClass
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    用户类型日志过滤器
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -26,6 +31,11 @@ class UserFilter(logging.Filter):
 
 
 class change_pwd_Controller(Ui_change_pwd):
+    """
+    密码修改控制器类
+    
+    负责处理密码修改的逻辑
+    """
     def __init__(self):
         super(change_pwd_Controller, self).__init__()
         self.show_nav()
@@ -49,6 +59,9 @@ class change_pwd_Controller(Ui_change_pwd):
         logger.addFilter(UserFilter(userType))
 
     def show_nav(self):
+        """
+        显示导航栏
+        """
         # header
 
         session = SessionClass()
@@ -58,6 +71,9 @@ class change_pwd_Controller(Ui_change_pwd):
 
     # 密码修改
     def checkChange(self):
+        """
+        检查并执行密码修改
+        """
         # 读取当前用户
         with open('../state/current_user.txt', 'r') as f:
             current_user = f.read().strip()
@@ -121,6 +137,9 @@ class change_pwd_Controller(Ui_change_pwd):
 
     # 返回首页
     def returnIndex(self):
+        """
+        返回首页
+        """
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
 

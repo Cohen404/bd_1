@@ -6,7 +6,13 @@ from PyQt5.QtGui import *
 
 
 class Ui_change_pwd(QWidget):
+    """
+    密码修改界面的UI类
+    """
     def __init__(self):
+        """
+        初始化Ui_change_pwd类
+        """
         super().__init__()
         self.pass_time = None
         self.evaluate_time = None
@@ -22,8 +28,10 @@ class Ui_change_pwd(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        """
+        初始化UI界面
+        """
         # 窗体标题和尺寸
-
         self.setWindowTitle('应激评估系统')
         self.resize(1000, 750)
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
@@ -56,10 +64,16 @@ class Ui_change_pwd(QWidget):
         self.setLayout(layout)
 
     def init_header(self):
+        """
+        初始化头部
+        """
         layout, _, self.return_btn, self.time_show, self.statu_show = create_header('密码修改')
         return layout
 
     def init_form(self):
+        """
+        初始化表单
+        """
         pwd_layout = QVBoxLayout()
         font = QFont()
         font.setFamily('Microsoft YaHei')
@@ -95,6 +109,9 @@ class Ui_change_pwd(QWidget):
         return pwd_layout
 
     def init_btn(self):
+        """
+        初始化按钮
+        """
         btn_layout = QHBoxLayout()
         self.change_btn = QPushButton('确认修改')
         self.change_btn.setStyleSheet("background-color:#00BFFF;font:15pt 'Microsoft YaHei'")
@@ -102,16 +119,28 @@ class Ui_change_pwd(QWidget):
         return btn_layout
 
     def init_tips(self):
+        """
+        初始化提示信息
+        """
         tip = QVBoxLayout()
         self.tips = QLabel()
         tip.addWidget(self.tips)
         return tip
 
     def init_footer(self):
+        """
+        初始化底部
+        """
         bottom_layout, self.evaluate_time, self.pass_time = create_bottom()
         return bottom_layout
 
     def resizeEvent(self, evt):
+        """
+        处理窗口大小变化事件
+        
+        参数:
+        evt (QResizeEvent): 窗口大小变化事件
+        """
         w = evt.size().width()
         h = evt.size().height()
         self.old_pwd.setFixedWidth(int(w * 0.3))

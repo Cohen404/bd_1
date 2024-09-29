@@ -1,3 +1,6 @@
+# 文件功能：结果查看界面的后端逻辑
+# 该脚本实现了结果查看界面的功能，包括显示评估结果列表、查看详细结果、删除结果等操作
+
 import os
 import sys
 
@@ -25,6 +28,9 @@ from util.db_util import SessionClass
 
 # import admin_rear
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -34,8 +40,14 @@ class UserFilter(logging.Filter):
         return True
 
 class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
+    """
+    结果查看窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化结果查看窗口
+        """
         super(results_view.Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self.show_table()  # 调用show_table方法显示table的内容
@@ -61,14 +73,15 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
     def show_nav(self):
+        """
+        显示导航栏和状态信息
+        """
         # header
-
         session = SessionClass()
         result = session.query(Result).order_by(Result.id.desc()).first()
         session.close()
         # 获取tb_result表中最新的一条记录，得到result对象
         if result is not None:  # result存在
-
             result_1 = result.result_1  # 应激状态
             result_2 = result.result_2  # 抑郁状态
             result_3 = result.result_3  # 焦虑状态
@@ -101,6 +114,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 )
 
     def show_table(self):
+        """
+        从数据库获取评估结果并显示在表格中
+        """
         session = SessionClass()
 
         # 1. 从 Result 表中获取所有 id
@@ -151,6 +167,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())
 
     def show_image(self):
+        """
+        显示当前选中的图像
+        """
         try:
             self.image_list = [
                 "differential_entropy.png",
@@ -192,8 +211,10 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"An error occurred while showing the image: {e}")
 
-
     def next_image(self):
+        """
+        显示下一张图片
+        """
         # 更新索引到下一张图片
         if self.current_index < len(self.image_list) - 1:
             self.current_index += 1
@@ -202,6 +223,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         self.show_image()
 
     def previous_image(self):
+        """
+        显示上一张图片
+        """
         # 更新索引到上一张图片
         if self.current_index > 0:
             self.current_index -= 1
@@ -209,8 +233,13 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             self.current_index = len(self.image_list) - 1  # 回到最后一张图片
         self.show_image()
 
-
     def buttonForRow(self):
+        """
+        为每一行创建操作按钮
+        
+        返回:
+        QtWidgets.QWidget: 包含查看和删除按钮的小部件
+        """
         widget = QtWidgets.QWidget()
         # 查看
         self.check_pushButton = QtWidgets.QPushButton('查看')
@@ -240,6 +269,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         return widget
 
     def checkbutton(self):
+        """
+        查看按钮的回调函数
+        """
         button = self.sender()
         if button:
             try:

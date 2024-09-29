@@ -13,8 +13,40 @@ from PyQt5.QtGui import QFont
 
 from front.component import create_header, create_bottom
 
+# index.py
+# 主页面的实现
+# 包含应激评估、结果查看、数据查看和切换登录功能
+# 使用PyQt5创建图形用户界面
+
+# 主要功能：
+# 1. 创建主窗口布局
+# 2. 设置应激评估、结果查看、数据查看和管理员登录按钮
+# 3. 设置页面样式和字体
+
 class Ui_MainWindow(object):
+    """
+    主窗口UI类
+    
+    负责创建和设置主窗口的所有UI元素
+    """
+
     def setupUi(self, MainWindow):
+        """
+        设置主窗口UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置中央窗口部件
+        - 设置布局（垂直布局）
+        - 添加页面头部
+        - 创建并添加主体网格布局
+        - 添加各个功能按钮（应激评估、结果查看、数据查看、切换登录）
+        - 添加页面底部
+        - 设置样式和字体
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
         MainWindow.resize(1000, 750)
@@ -118,6 +150,18 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        """
+        重新翻译UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口标题
+        - 设置按钮文本
+        - 设置字体
+        - 设置按钮样式
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激系统"))
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))

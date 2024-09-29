@@ -1,3 +1,7 @@
+# init_login.py
+# 初始登录界面的实现
+# 提供用户登录入口
+
 import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QFont
@@ -5,8 +9,29 @@ from PyQt5.QtWidgets import QApplication, QLabel
 
 from front.component import create_header, create_bottom
 from PyQt5.QtCore import Qt
+
 class Ui_MainWindow(object):
+    """
+    初始登录界面UI类
+    
+    负责创建和设置初始登录界面的所有UI元素
+    """
+
     def setupUi(self, MainWindow):
+        """
+        设置初始登录界面UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口基本属性（标题、大小、样式）
+        - 创建并设置中央窗口部件
+        - 设置布局（垂直布局）
+        - 添加页面头部
+        - 创建并添加用户登录按钮
+        - 设置样式和字体
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
         MainWindow.resize(1000, 750)
@@ -51,6 +76,18 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        """
+        重新翻译UI
+        
+        参数:
+        MainWindow (QMainWindow): 主窗口对象
+        
+        功能:
+        - 设置窗口标题
+        - 设置用户登录按钮文本
+        - 设置字体
+        - 设置按钮样式
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激系统"))
         self.user_login_Button.setText(_translate("MainWindow", "用户\n登录"))

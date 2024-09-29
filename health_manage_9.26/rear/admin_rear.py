@@ -1,3 +1,9 @@
+"""
+管理员界面的后端实现
+
+该模块实现了管理员界面的各项功能,包括界面初始化、页面跳转等。
+"""
+
 import sys
 
 from front import param_control_UI
@@ -23,6 +29,9 @@ from util.db_util import SessionClass
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    用户类型日志过滤器
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -33,14 +42,22 @@ class UserFilter(logging.Filter):
 
 # 注意这里定义的第一个界面的后端代码类需要继承两个类
 class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
+    """
+    管理员窗口操作类
+    
+    实现管理员界面的各项功能
+    """
 
     def __init__(self):
+        """
+        初始化管理员窗口
+        """
         super(admin.Ui_MainWindow, self).__init__()
         # 创建界面
-
         self.setupUi(self)
         self.show_nav()  # 调用show_nav方法显示header,bottom的内容
 
+        # 连接按钮点击事件
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
         self.health_assess_Button.clicked.connect(self.open_health_evaluate)  # 健康评估
         self.data_view_Button.clicked.connect(self.open_data_view)  # 数据查看
@@ -68,13 +85,18 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
     def show_nav(self):
-
-            session = SessionClass()
-            result = session.query(Result).order_by(Result.id.desc()).first()
-            session.close()
+        """
+        显示导航栏
+        """
+        session = SessionClass()
+        result = session.query(Result).order_by(Result.id.desc()).first()
+        session.close()
 
     # btn_return返回首页
     def return_index(self):
+        """
+        返回首页
+        """
         path = '../state/user_status.txt'
         operate_user.ordinary_user(path)  # 将flag改为0，退出管理员操作
         logging.info("Switched to regular user mode. Login page is being opened.")
@@ -84,48 +106,72 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
 
     # 打开健康评估页面
     def open_health_evaluate(self):
+        """
+        打开健康评估页面
+        """
         self.health_evaluate = health_evaluate_rear.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
         self.close()
         self.health_evaluate.show()
 
     def open_log_manage_view(self):
+        """
+        打开日志管理页面
+        """
         self.log_manage = log_manage_rear.Log_Manage_WindowActions()
         logging.info("Opening log management page.")
         self.close()
         self.log_manage.show()
 
     def open_data_view(self):
+        """
+        打开数据查看页面
+        """
         self.data_view = data_view_rear.Data_View_WindowActions()
         logging.info("Opening data view page.")
         self.close()
         self.data_view.show()
 
     def open_results_view(self):
+        """
+        打开结果查看页面
+        """
         self.results_view = results_view_rear.Results_View_WindowActions()
         logging.info("Opening results view page.")
         self.close()
         self.results_view.show()
 
     def open_model_control_view(self):
+        """
+        打开模型控制页面
+        """
         self.model_view = model_control_controller.model_control_Controller()
         logging.info("Opening model control page.")
         self.close()
         self.model_view.show()
 
     def open_change_pwd_view(self):
+        """
+        打开修改密码页面
+        """
         self.change_pwd = change_pwd_controller.change_pwd_Controller()
         logging.info("Opening password change page.")
         self.close()
         self.change_pwd.show()
 
     def open_user_manage_view(self):
+        """
+        打开用户管理页面
+        """
         self.user_manage = user_manage_rear.User_Manage_WindowActions()
         logging.info("Opening user management page.")
         self.close()
         self.user_manage.show()
 
     def open_param_control_view(self):
+        """
+        打开参数控制页面
+        """
         self.param_control = param_control.ParamControl()
         logging.info("Opening parameter control page.")
         self.close()

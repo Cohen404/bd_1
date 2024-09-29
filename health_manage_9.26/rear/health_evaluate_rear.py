@@ -30,6 +30,9 @@ from model.tuili import EegModel
 import logging
 
 class UserFilter(logging.Filter):
+    """
+    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    """
     def __init__(self, userType):
         super().__init__()
         self.userType = userType
@@ -38,10 +41,15 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-
 class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
+    """
+    健康评估窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
+    """
 
     def __init__(self):
+        """
+        初始化健康评估窗口
+        """
         super(health_evaluate.Ui_MainWindow, self).__init__()
         self.test_thread = None
         self.data_path = None
@@ -79,6 +87,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
     def show_nav(self):
+        """
+        显示导航栏和状态信息
+        """
         # 模型状态
         # 判断模型是否空闲，即是否有文件存在
         if not os.path.exists('../state/status.txt'):
@@ -209,6 +220,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.index.show()
 
     def next_image(self):
+        """
+        显示下一张图片
+        """
         # 更新索引到下一张图片
         if self.current_index < len(self.image_list) - 1:
             self.current_index += 1
@@ -217,13 +231,15 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.show_image()
 
     def previous_image(self):
+        """
+        显示上一张图片
+        """
         # 更新索引到上一张图片
         if self.current_index > 0:
             self.current_index -= 1
         else:
             self.current_index = len(self.image_list) - 1  # 回到最后一张图片
         self.show_image()
-
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
