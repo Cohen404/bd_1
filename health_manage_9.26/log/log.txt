@@ -2198,3 +2198,62 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-09-25 11:49:35,285 - INFO - Administrator - Opening password change page.
 2024-09-25 11:49:44,894 - INFO - Administrator - Password changed successfully for user: admin
 2024-09-25 11:49:48,871 - INFO - Administrator - User type: Administrator. Returning to admin homepage.
+2024-09-26 17:27:41,217 - INFO - Administrator - Opening user login page.
+2024-09-26 17:27:43,718 - WARNING - Administrator - Admin login attempt failed: Incorrect username or password for username 'admin'.
+2024-09-26 17:27:47,420 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:27:47,490 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:27:49,534 - INFO - Administrator - Opening health evaluation page.
+2024-09-26 17:27:51,466 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-09-26 17:27:53,343 - INFO - Administrator - Opening data view page.
+2024-09-26 17:27:56,178 - INFO - Administrator - Deleting record with ID 11 from the table.
+2024-09-26 17:27:56,180 - INFO - Administrator - Data path for ID 11: ../data/000015_yingji1
+2024-09-26 17:27:56,185 - INFO - Administrator - Deleted folder at path: ../data/000015_yingji1
+2024-09-26 17:27:56,189 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-09-26 17:27:56,190 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-09-26 17:27:56,191 - INFO - Administrator - Removed row 0 from table.
+2024-09-26 17:28:04,299 - INFO - Administrator - Selected folder: 000015_yingji1
+2024-09-26 17:28:04,385 - INFO - Administrator - Folder copied to '../data\000015_yingji1'.
+2024-09-26 17:28:04,393 - INFO - Administrator - Added new data record with ID 16.
+2024-09-26 17:28:10,791 - INFO - Administrator - Upload button called to refresh table.
+2024-09-26 17:37:46,677 - INFO - Administrator - Opening user login page.
+2024-09-26 17:37:48,904 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:37:48,955 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:37:49,820 - ERROR - Administrator - An error occurred while reading the log file: 'utf-8' codec can't decode byte 0xcc in position 1531: invalid continuation byte
+2024-09-26 17:37:49,821 - INFO - Administrator - Opening log management page.
+2024-09-26 17:39:18,998 - INFO - Administrator - Opening user login page.
+2024-09-26 17:39:21,411 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:39:21,462 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:39:22,501 - INFO - Administrator - Opening log management page.
+2024-09-26 17:39:30,872 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-09-26 17:41:17,438 - INFO - Administrator - Opening user login page.
+2024-09-26 17:41:19,532 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:41:19,579 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:41:20,737 - INFO - Administrator - Opening log management page.
+2024-09-26 17:41:45,352 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-09-26 17:49:51,709 - INFO - Administrator - Opening user login page.
+2024-09-26 17:49:54,677 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:49:54,725 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:49:56,495 - INFO - Administrator - Opening health evaluation page.
+2024-09-26 17:50:49,214 - INFO - Administrator - Opening user login page.
+2024-09-26 17:50:51,602 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:50:51,648 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:50:53,340 - INFO - Administrator - Opening health evaluation page.
+2024-09-26 17:53:14,519 - INFO - Administrator - Opening user login page.
+2024-09-26 17:53:16,795 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-09-26 17:53:16,839 - INFO - Administrator - Username 'admin' set as current user.
+2024-09-26 17:53:19,053 - INFO - Administrator - Opening health evaluation page.
+2024-09-26 17:53:20,019 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-09-26 17:53:20,786 - INFO - Administrator - Opening results view page.
+2024-09-26 17:53:21,986 - INFO - Administrator - Returned to admin homepage.
+2024-09-26 17:53:22,731 - INFO - Administrator - Opening data view page.
+2024-09-26 17:53:23,761 - INFO - Administrator - Returned to admin homepage.
+2024-09-26 17:53:24,639 - INFO - Administrator - Opening model control page.
+2024-09-26 17:53:27,387 - INFO - Administrator - Opening user management page.
+2024-09-26 17:53:28,531 - INFO - Administrator - Returned to admin homepage.
+2024-09-26 17:53:29,314 - INFO - Administrator - Opening parameter control page.
+2024-09-26 17:53:31,462 - INFO - Administrator - Opening log management page.
+2024-09-26 17:53:37,254 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-09-26 17:53:38,024 - INFO - Administrator - Opening log management page.
+2024-09-26 17:53:39,243 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-09-26 17:53:40,024 - INFO - Administrator - Opening password change page.
+2024-09-26 17:53:41,670 - INFO - Administrator - User type: Administrator. Returning to admin homepage.

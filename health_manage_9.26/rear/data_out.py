@@ -6,6 +6,7 @@ from statsmodels.tsa.ar_model import AutoReg   # 导入自回归模型
 import matplotlib.pyplot as plt # 导入matplotlib的pyplot模块用于绘图
 import seaborn as sns           # 导入seaborn库用于数据可视化
 import os
+import pandas as pd
 
 # 设置绘图风格
 sns.set_style("whitegrid")      # 设置seaborn绘图的背景样式
@@ -231,7 +232,54 @@ def print_theta_alpha_beta_gamma_powers(powers):
             print(f"  {band}: {value}")
         print("----------")
 
+def create_feature_dataframe(time_domain_features, frequency_domain_features, time_frequency_features, theta_alpha_beta_gamma_powers):
+    """
+    创建一个包含所有特征的DataFrame
+    """
+    all_features = []
+    feature_names = []
 
+    for channel in range(len(time_domain_features)):
+        channel_features = {}
+        
+        # 时域特征
+        for key, value in time_domain_features[channel].items():
+            if key == 'AR':
+                for i, coef in enumerate(value):
+                    channel_features[f'AR_coef_{i}'] = coef
+                    if channel == 0:
+                        feature_names.append(f'AR_coef_{i}')
+            else:
+                channel_features[key] = value
+                if channel == 0:
+                    feature_names.append(key)
+        
+        # 频域特征
+        for i, power in enumerate(frequency_domain_features[channel]['均分频带']):
+            channel_features[f'Band_{i+1}_power'] = power
+            if channel == 0:
+                feature_names.append(f'Band_{i+1}_power')
+        channel_features['微分熵'] = frequency_domain_features[channel]['5频带微分熵']
+        if channel == 0:
+            feature_names.append('微分熵')
+        
+        # 时频域特征
+        for i, energy in enumerate(time_frequency_features[channel]):
+            channel_features[f'Wavelet_energy_{i+1}'] = energy
+            if channel == 0:
+                feature_names.append(f'Wavelet_energy_{i+1}')
+        
+        # Theta/Alpha/Beta/Gamma 功率
+        for band, power in theta_alpha_beta_gamma_powers[channel].items():
+            channel_features[f'{band}_power'] = power
+            if channel == 0:
+                feature_names.append(f'{band}_power')
+        
+        all_features.append(channel_features)
+    
+    df = pd.DataFrame(all_features)
+    df.index.name = 'Channel'
+    return df, feature_names
 
 def analyze_eeg_data(file_path):
     # 加载和预处理数据
@@ -245,18 +293,20 @@ def analyze_eeg_data(file_path):
     time_frequency_features = [extract_time_frequency_features(channel) for channel in eeg_data]
     theta_alpha_beta_gamma_powers = [extract_theta_alpha_beta_gamma_powers(channel, data1.info['sfreq']) for channel in eeg_data]
 
-    # 打印特征
-    print("时域特征:")
-    print_time_domain_features(time_domain_features)
+    # 创建特征DataFrame
+    feature_df, feature_names = create_feature_dataframe(time_domain_features, frequency_domain_features, time_frequency_features, theta_alpha_beta_gamma_powers)
 
-    print("\n频域特征:")
-    print_frequency_domain_features(frequency_domain_features)
+    # 保存DataFrame到CSV文件
+    csv_path = os.path.join(folder_path, 'eeg_features.csv')
+    feature_df.to_csv(csv_path)
+    print(f"特征已保存到: {csv_path}")
 
-    print("\n时频域特征:")
-    print_time_frequency_features(time_frequency_features)
-
-    print("\nTheta/Alpha/Beta/Gamma 功率:")
-    print_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
+    # 保存特征名称到文本文件
+    feature_names_path = os.path.join(folder_path, 'feature_names.txt')
+    with open(feature_names_path, 'w') as f:
+        for name in feature_names:
+            f.write(f"{name}\n")
+    print(f"特征名称已保存到: {feature_names_path}")
 
     # 可视化
     plot_time_domain_features(time_domain_features)
@@ -264,3 +314,8 @@ def analyze_eeg_data(file_path):
     plot_time_frequency_features(time_frequency_features)
     plot_differential_entropy(frequency_domain_features)
     plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
+
+    return feature_df, feature_names
+
+# 如果需要，您可以在这里调用 analyze_eeg_data 函数
+# feature_df, feature_names = analyze_eeg_data('your_eeg_file.edf')

@@ -8,12 +8,15 @@ from PyQt5.QtGui import *
 def create_header(title):
     font = QFont()
     font.setFamily('Microsoft YaHei')
-    header_layout = QHBoxLayout()  # 水平布局 放title,返回按钮，剩余寿命，当前状态
-    not_return_header_layout = QHBoxLayout()  # 水平布局 放title,返回按钮，剩余寿命，当前状态
+
+    # 创建一个网格布局，用来放置返回按钮和标题
+    header_layout = QGridLayout()
+
     btn_return = QPushButton()  # 返回按钮
     btn_return.setFixedWidth(55)
     btn_return.setFixedHeight(58)
     btn_return.setStyleSheet("QPushButton{border-image: url(./../img/return.png)}")
+
     name = QLabel()  # 文本框，放title
     name.setText(title)
     name.setAlignment(Qt.AlignCenter)  # 让文本框中的文本居中显示
@@ -22,58 +25,19 @@ def create_header(title):
 
     font.setPointSize(22)
     name.setFont(font)
-    left_layout = QHBoxLayout()
-    left_layout.addWidget(btn_return)
-    left_layout.addStretch(2)
-    left_layout.addWidget(name)
-    right_layout = QHBoxLayout()
-    right_layout1 = QHBoxLayout()
-    remain_time = QLabel('')
-    # remain_time.setStyleSheet("font-size:15px")
-    time_show = QTextBrowser()
-    font.setPointSize(14)
-    remain_time.setFont(font)
-    time_show.setFont(font)
-    time_show.setFixedHeight(40)
-    time_show.setFixedWidth(200)
-    time_show.setAlignment(Qt.AlignCenter)  # 让文本框中的文本居中显示
-    time_show.setStyleSheet('background-color: white;')
-    # time_show.setAlignment(Qt.AlignCenter)
-    current_state = QLabel('')
-    current_state.setFont(font)
-    # current_state.setStyleSheet("font-size:15px")
-    statu_show = QLabel()
-    right_layout.addStretch()
-    right_layout.addWidget(remain_time)
-    right_layout.addWidget(time_show)
-    right_layout.addWidget(current_state)
-    right_layout.addWidget(statu_show)
 
-    header_layout.addLayout(left_layout)
-    header_layout.addLayout(right_layout)
+    # 将返回按钮放在第一列的左侧，标题放在中间
+    header_layout.addWidget(btn_return, 0, 0, Qt.AlignLeft)  # 左侧返回按钮
+    header_layout.addWidget(name, 0, 1, Qt.AlignCenter)  # 居中的标题
 
-    no_label = QLabel()  # 返回按钮
-    no_label.setFixedWidth(55)
-    no_label.setFixedHeight(58)
-    left_layout1 = QHBoxLayout()
-    left_layout1.addWidget(no_label)
-    left_layout1.addStretch(2)
-    left_layout1.addWidget(name)
+    # 使用弹性空隙确保两边元素不会被挤压
+    header_layout.setColumnStretch(0, 1)  # 左侧返回按钮所在的列
+    header_layout.setColumnStretch(1, 2)  # 中间标题所在的列
+    header_layout.setColumnStretch(2, 1)  # 右侧空列，保持平衡
 
-    right_layout1.addStretch()
-    right_layout1.addWidget(remain_time)
-    right_layout1.addWidget(time_show)
-    right_layout1.addWidget(current_state)
-    right_layout1.addWidget(statu_show)
-    not_return_header_layout.addLayout(left_layout1)
-    not_return_header_layout.addLayout(right_layout1)
-    # # not_return_header_layout.addStretch(4)
-    # not_return_header_layout.addStretch(1)
-    # not_return_header_layout.addWidget(name)
+    return header_layout, None, btn_return, None, None
 
-    return header_layout, not_return_header_layout, btn_return, time_show, statu_show
 
-    # return header_layout, btn_return, time_show, statu_show
 
 
 # def return_main(ui_main,ui_current):

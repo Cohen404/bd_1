@@ -30,10 +30,6 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         super(front_page.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
-
-        # self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-
-
         self.user_login_Button.clicked.connect(self.open_user_login)  # 用户登录
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
