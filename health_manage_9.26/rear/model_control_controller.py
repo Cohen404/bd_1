@@ -154,20 +154,35 @@ class model_control_Controller(Ui_model_Control):
 
             model_path, _ = QFileDialog.getOpenFileName(self, "选择模型", "", "")
             if model_path:
-                # 根据模型类型将模型文件复制到相应的目录
+                # 创建临时文件夹
+                tmp_dir = "../tmp"
+                os.makedirs(tmp_dir, exist_ok=True)
+
+                # 复制文件到临时文件夹
+                tmp_file = os.path.join(tmp_dir, os.path.basename(model_path))
+                shutil.copy(model_path, tmp_file)
+                logging.info(f"Copied model file to temporary directory: {tmp_file}")
+
+                # 根据模型类型选择目标目录
                 model_type_dir_mapping = {
                     0: "../model/yingji",
                     1: "../model/yiyu",
                     2: "../model/jiaolv"
                 }
                 target_dir = model_type_dir_mapping.get(model_type)
-                # print("target_dir:", target_dir)
-                if target_dir:
-                    self.delete_keras_files(target_dir)
 
-                    target_path = os.path.join(target_dir, os.path.basename(model_path))
-                    shutil.copy(model_path, target_path)
-                    logging.info(f"Copied model file to: {target_path}")
+                if target_dir:
+                    # 删除目标目录中的所有.keras文件
+                    for filename in os.listdir(target_dir):
+                        if filename.endswith('.keras'):
+                            file_path = os.path.join(target_dir, filename)
+                            os.remove(file_path)
+                            logging.info(f"Deleted existing model file: {file_path}")
+
+                    # 将临时文件移动到目标目录
+                    target_path = os.path.join(target_dir, os.path.basename(tmp_file))
+                    shutil.move(tmp_file, target_path)
+                    logging.info(f"Moved model file to: {target_path}")
 
                     # 更新模型属性
                     self.updateModelAttributes(model_type, target_path)
@@ -190,8 +205,15 @@ class model_control_Controller(Ui_model_Control):
                     session.commit()
                     session.close()
                     logging.info(f"Model upload and database update completed successfully.")
+
+                    # 清理临时文件夹
+                    shutil.rmtree(tmp_dir)
+                    logging.info("Temporary directory cleaned up.")
+
+                    QMessageBox.information(self, "上传成功", f"{model_type_name}上传成功！")
                 else:
                     logging.warning(f"No target directory found for model type: {model_type_name}")
+                    QMessageBox.warning(self, "上传失败", "未找到目标目录，请检查配置。")
             else:
                 logging.warning("Model upload canceled by the user.")
         else:

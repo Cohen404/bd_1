@@ -2257,3 +2257,123 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-09-26 17:53:39,243 - INFO - Administrator - Administrator returned to the admin homepage.
 2024-09-26 17:53:40,024 - INFO - Administrator - Opening password change page.
 2024-09-26 17:53:41,670 - INFO - Administrator - User type: Administrator. Returning to admin homepage.
+2024-10-06 23:01:04,867 - INFO - Administrator - Opening user login page.
+2024-10-06 23:01:06,448 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 23:01:06,592 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 23:01:07,190 - INFO - Administrator - Opening model control page.
+2024-10-06 23:01:10,180 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 23:01:20,700 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-10-06 23:01:20,701 - INFO - Administrator - Deleted existing model file: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:01:20,703 - INFO - Administrator - Moved model file to: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:01:20,707 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:01:20,712 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 23:01:20,713 - INFO - Administrator - Temporary directory cleaned up.
+2024-10-06 23:01:25,889 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
+2024-10-06 23:01:31,651 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yiyu.keras
+2024-10-06 23:01:31,653 - INFO - Administrator - Deleted existing model file: ../model/yiyu\subject-1 yiyu.keras
+2024-10-06 23:01:31,654 - INFO - Administrator - Moved model file to: ../model/yiyu\subject-1 yiyu.keras
+2024-10-06 23:01:31,655 - INFO - Administrator - Updated existing model record for type 抑郁评估模型. New path: ../model/yiyu\subject-1 yiyu.keras
+2024-10-06 23:01:31,659 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 23:01:31,659 - INFO - Administrator - Temporary directory cleaned up.
+2024-10-06 23:01:34,414 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 23:01:41,016 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1jiaolv.keras
+2024-10-06 23:01:41,016 - INFO - Administrator - Deleted existing model file: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:01:41,016 - INFO - Administrator - Moved model file to: ../model/yingji\subject-1jiaolv.keras
+2024-10-06 23:01:41,020 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ../model/yingji\subject-1jiaolv.keras
+2024-10-06 23:01:41,022 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 23:01:41,023 - INFO - Administrator - Temporary directory cleaned up.
+2024-10-06 23:01:55,349 - INFO - Administrator - Selected model type: 焦虑评估模型 (Index: 2)
+2024-10-06 23:01:58,447 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1jiaolv.keras
+2024-10-06 23:01:58,447 - INFO - Administrator - Deleted existing model file: ../model/jiaolv\subject-1jiaolv.keras
+2024-10-06 23:01:58,448 - INFO - Administrator - Moved model file to: ../model/jiaolv\subject-1jiaolv.keras
+2024-10-06 23:01:58,449 - INFO - Administrator - Updated existing model record for type 焦虑评估模型. New path: ../model/jiaolv\subject-1jiaolv.keras
+2024-10-06 23:01:58,453 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 23:01:58,453 - INFO - Administrator - Temporary directory cleaned up.
+2024-10-06 23:02:06,093 - INFO - Administrator - Opening health evaluation page.
+2024-10-06 23:03:05,492 - INFO - Administrator - Opening user login page.
+2024-10-06 23:03:12,594 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 23:03:12,661 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 23:03:45,482 - INFO - Administrator - Opening model control page.
+2024-10-06 23:03:51,234 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 23:03:59,814 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-10-06 23:03:59,814 - INFO - Administrator - Deleted existing model file: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:03:59,814 - INFO - Administrator - Moved model file to: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:03:59,817 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ../model/yingji\subject-1 yingji.keras
+2024-10-06 23:03:59,822 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 23:03:59,823 - INFO - Administrator - Temporary directory cleaned up.
+2024-10-06 23:04:05,704 - INFO - Administrator - Opening health evaluation page.
+2024-10-06 23:04:20,147 - INFO - Administrator - Button clicked in row 3, ID: 5
+2024-10-06 23:04:20,149 - INFO - Administrator - Data path retrieved for ID 5: ../data/000011_yiyu4
+2024-10-06 23:04:20,151 - INFO - Administrator - Results retrieved for ID 5: result_1=1, result_2=1, result_3=0
+2024-10-06 23:04:20,151 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:04:20,151 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:04:20,152 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 23:04:20,152 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:04:20,152 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:04:20,152 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 23:04:20,154 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 23:08:59,897 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:08:59,897 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/frequency_domain_features.png
+2024-10-06 23:08:59,899 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/frequency_domain_features.png
+2024-10-06 23:09:00,226 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:09:00,226 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 23:09:00,227 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 23:09:00,482 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:09:00,483 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/time_frequency_features.png
+2024-10-06 23:09:00,483 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/time_frequency_features.png
+2024-10-06 23:10:45,813 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-10-06 23:10:47,719 - INFO - Administrator - Opening results view page.
+2024-10-06 23:10:50,142 - INFO - Administrator - Button clicked in row 0, ID: 3
+2024-10-06 23:10:50,142 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 23:10:50,142 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 23:10:50,142 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:10:50,142 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:10:50,142 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 23:10:50,142 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:10:50,146 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:10:50,146 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 23:10:50,146 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 23:10:52,269 - INFO - Administrator - Button clicked in row 3, ID: 6
+2024-10-06 23:10:52,269 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 23:10:52,271 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 23:10:52,271 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:10:52,271 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:10:52,271 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 23:10:52,271 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:10:52,273 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:10:52,273 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 23:10:52,273 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 23:10:54,709 - INFO - Administrator - Button clicked in row 7, ID: 10
+2024-10-06 23:10:54,710 - INFO - Administrator - Data path retrieved for ID 10: ../data/000008_jiaolv1
+2024-10-06 23:10:54,711 - INFO - Administrator - Results retrieved for ID 10: result_1=1, result_2=1, result_3=1
+2024-10-06 23:10:54,711 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:10:54,713 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:10:54,713 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 23:10:54,713 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:10:54,713 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:10:54,713 - INFO - Administrator - Attempting to load image from path: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 23:10:54,713 - ERROR - Administrator - Failed to load image: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 23:10:57,022 - INFO - Administrator - Button clicked in row 5, ID: 8
+2024-10-06 23:10:57,022 - INFO - Administrator - Data path retrieved for ID 8: ../data/000014_jiaolv2
+2024-10-06 23:10:57,022 - INFO - Administrator - Results retrieved for ID 8: result_1=1, result_2=1, result_3=1
+2024-10-06 23:10:57,022 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:10:57,022 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:10:57,022 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 23:10:57,022 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:10:57,022 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:10:57,022 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 23:10:57,026 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 23:11:05,834 - INFO - Administrator - Returned to admin homepage.
+2024-10-06 23:11:10,810 - INFO - Administrator - Opening data view page.
+2024-10-06 23:11:31,828 - INFO - Administrator - Selected folder: 000005_ord
+2024-10-06 23:11:31,834 - ERROR - Administrator - Failed to copy folder 'D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/health_manage_9.26/data/000005_ord' to '../data\000005_ord'. Error: [WinError 183] 当文件已存在时，无法创建该文件。: '../data\\000005_ord'
+2024-10-06 23:12:17,449 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-06 23:12:17,654 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-06 23:12:17,669 - INFO - Administrator - Added new data record with ID 12.
+2024-10-06 23:12:17,673 - INFO - Administrator - Upload button called to refresh table.
+2024-10-06 23:12:30,575 - INFO - Administrator - Button clicked in row 10, corresponding ID: 12
+2024-10-06 23:12:30,577 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-06 23:12:30,577 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 23:12:30,577 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 23:12:30,577 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord2\differential_entropy.png
+2024-10-06 23:12:30,606 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png

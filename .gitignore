@@ -3,6 +3,14 @@
 
 # 忽略 __pycache__ 目录
 __pycache__/
+health_manage_9.26/front/__pycache__
+health_manage_9.26/model/__pycache__
+health_manage_9.26/sql_model/__pycache__
+health_manage_9.26/state/__pycache__
+health_manage_9.26/util/__pycache__
+
+health_manage_9.26/tmp/
+health_manage_9.26/.idea/
 
 # 忽略 .idea 目录（如果您使用 PyCharm）
 .idea/
