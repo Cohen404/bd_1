@@ -2257,3 +2257,424 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-09-26 17:53:39,243 - INFO - Administrator - Administrator returned to the admin homepage.
 2024-09-26 17:53:40,024 - INFO - Administrator - Opening password change page.
 2024-09-26 17:53:41,670 - INFO - Administrator - User type: Administrator. Returning to admin homepage.
+2024-10-06 01:32:17,140 - INFO - Administrator - Opening user login page.
+2024-10-06 01:32:37,216 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 01:32:37,376 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 01:32:38,572 - INFO - Administrator - Opening health evaluation page.
+2024-10-06 01:32:42,078 - INFO - Administrator - Button clicked in row 0, ID: 2
+2024-10-06 01:32:42,083 - INFO - Administrator - Data path retrieved for ID 2: ../data/000004_test
+2024-10-06 01:32:42,085 - WARNING - Administrator - No evaluation results found for ID 2
+2024-10-06 01:32:43,051 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:43,051 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:43,051 - INFO - Administrator - Attempting to load image from path: ../data/000004_test/differential_entropy.png
+2024-10-06 01:32:43,053 - ERROR - Administrator - Failed to load image: ../data/000004_test/differential_entropy.png
+2024-10-06 01:32:43,446 - INFO - Administrator - Button clicked in row 1, ID: 3
+2024-10-06 01:32:43,447 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 01:32:43,448 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:43,449 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:43,449 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:43,449 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:43,449 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:43,449 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:43,449 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 01:32:43,450 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 01:32:44,535 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 01:32:44,537 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 01:32:44,538 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:44,539 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:44,539 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:44,539 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:44,539 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:44,539 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:44,539 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 01:32:44,540 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 01:32:45,175 - INFO - Administrator - Button clicked in row 3, ID: 5
+2024-10-06 01:32:45,176 - INFO - Administrator - Data path retrieved for ID 5: ../data/000011_yiyu4
+2024-10-06 01:32:45,177 - INFO - Administrator - Results retrieved for ID 5: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:45,177 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:45,177 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:45,177 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:45,177 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:45,177 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:45,177 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:45,179 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:45,710 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 01:32:45,712 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 01:32:45,713 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:45,713 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:45,713 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:45,713 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:45,713 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:45,713 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:45,713 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:45,714 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:46,486 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 01:32:46,488 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 01:32:46,489 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:46,489 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:46,489 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:46,489 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:46,489 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:46,489 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:46,489 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:46,490 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:46,991 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 01:32:46,992 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 01:32:46,994 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:46,995 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:46,995 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:46,995 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:46,995 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:46,995 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:46,995 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:46,996 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:47,407 - INFO - Administrator - Button clicked in row 4, ID: 6
+2024-10-06 01:32:47,409 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 01:32:47,410 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:47,410 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:47,410 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:47,410 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:47,410 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:47,410 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:47,410 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 01:32:47,411 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 01:32:47,782 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 01:32:47,784 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 01:32:47,785 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:47,785 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:47,786 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:47,786 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:47,786 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:47,786 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:47,786 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:47,786 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 01:32:48,126 - INFO - Administrator - Button clicked in row 6, ID: 8
+2024-10-06 01:32:48,127 - INFO - Administrator - Data path retrieved for ID 8: ../data/000014_jiaolv2
+2024-10-06 01:32:48,129 - INFO - Administrator - Results retrieved for ID 8: result_1=1, result_2=1, result_3=1
+2024-10-06 01:32:48,129 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:48,129 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:48,129 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 01:32:48,129 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:48,129 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:48,129 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:32:48,130 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:32:48,543 - INFO - Administrator - Button clicked in row 7, ID: 9
+2024-10-06 01:32:48,544 - INFO - Administrator - Data path retrieved for ID 9: ../data/000007_yiyu1
+2024-10-06 01:32:48,545 - INFO - Administrator - Results retrieved for ID 9: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:48,545 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:48,546 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:48,546 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:48,546 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:48,546 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:48,546 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 01:32:48,546 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 01:32:49,223 - INFO - Administrator - Button clicked in row 8, ID: 10
+2024-10-06 01:32:49,224 - INFO - Administrator - Data path retrieved for ID 10: ../data/000008_jiaolv1
+2024-10-06 01:32:49,225 - INFO - Administrator - Results retrieved for ID 10: result_1=1, result_2=1, result_3=1
+2024-10-06 01:32:49,225 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:49,225 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:49,225 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 01:32:49,225 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:49,225 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:49,225 - INFO - Administrator - Attempting to load image from path: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 01:32:49,227 - ERROR - Administrator - Failed to load image: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 01:32:49,653 - INFO - Administrator - Button clicked in row 7, ID: 9
+2024-10-06 01:32:49,655 - INFO - Administrator - Data path retrieved for ID 9: ../data/000007_yiyu1
+2024-10-06 01:32:49,656 - INFO - Administrator - Results retrieved for ID 9: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:49,656 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:49,656 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:49,657 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:49,657 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:49,657 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:49,657 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 01:32:49,657 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 01:32:50,110 - INFO - Administrator - Button clicked in row 6, ID: 8
+2024-10-06 01:32:50,112 - INFO - Administrator - Data path retrieved for ID 8: ../data/000014_jiaolv2
+2024-10-06 01:32:50,113 - INFO - Administrator - Results retrieved for ID 8: result_1=1, result_2=1, result_3=1
+2024-10-06 01:32:50,113 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:50,113 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:50,113 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 01:32:50,113 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:50,113 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:50,113 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:32:50,114 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:32:50,839 - INFO - Administrator - Button clicked in row 3, ID: 5
+2024-10-06 01:32:50,840 - INFO - Administrator - Data path retrieved for ID 5: ../data/000011_yiyu4
+2024-10-06 01:32:50,841 - INFO - Administrator - Results retrieved for ID 5: result_1=1, result_2=1, result_3=0
+2024-10-06 01:32:50,842 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:32:50,842 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:32:50,842 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:32:50,842 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:32:50,842 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:50,842 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:50,842 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:53,061 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:53,062 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4/frequency_domain_features.png
+2024-10-06 01:32:53,063 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4/frequency_domain_features.png
+2024-10-06 01:32:54,094 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:32:54,094 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:54,094 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4/differential_entropy.png
+2024-10-06 01:32:57,470 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-10-06 01:32:58,491 - INFO - Administrator - Opening results view page.
+2024-10-06 01:33:00,119 - INFO - Administrator - Button clicked in row 0, ID: 3
+2024-10-06 01:33:00,120 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 01:33:00,121 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 01:33:00,121 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:33:00,122 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:33:00,122 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:33:00,122 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:33:00,122 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:33:00,122 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 01:33:00,123 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 01:33:02,086 - INFO - Administrator - Button clicked in row 1, ID: 4
+2024-10-06 01:33:02,087 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 01:33:02,088 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 01:33:02,089 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:33:02,089 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:33:02,089 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:33:02,089 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:33:02,089 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:33:02,089 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 01:33:02,090 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 01:33:03,901 - INFO - Administrator - Button clicked in row 3, ID: 6
+2024-10-06 01:33:03,903 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 01:33:03,904 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 01:33:03,905 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:33:03,905 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:33:03,905 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 01:33:03,905 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:33:03,905 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:33:03,905 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 01:33:03,906 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 01:33:05,710 - INFO - Administrator - Button clicked in row 5, ID: 8
+2024-10-06 01:33:05,712 - INFO - Administrator - Data path retrieved for ID 8: ../data/000014_jiaolv2
+2024-10-06 01:33:05,713 - INFO - Administrator - Results retrieved for ID 8: result_1=1, result_2=1, result_3=1
+2024-10-06 01:33:05,713 - INFO - Administrator - Health LED label set to RED
+2024-10-06 01:33:05,714 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 01:33:05,714 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 01:33:05,714 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 01:33:05,714 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:33:05,714 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:33:05,714 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 01:33:07,421 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 01:33:07,422 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/time_frequency_features.png
+2024-10-06 01:33:07,422 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/time_frequency_features.png
+2024-10-06 01:33:12,210 - INFO - Administrator - Returned to admin homepage.
+2024-10-06 01:33:13,163 - INFO - Administrator - Opening data view page.
+2024-10-06 01:33:14,824 - INFO - Administrator - Button clicked in row 1, corresponding ID: 3
+2024-10-06 01:33:14,826 - INFO - Administrator - Data path retrieved from database: ../data/000009_yiyu6
+2024-10-06 01:33:14,826 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 01:33:14,826 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 01:33:14,826 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6\differential_entropy.png
+2024-10-06 01:33:15,912 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6\differential_entropy.png
+2024-10-06 01:33:17,014 - INFO - Administrator - Button clicked in row 6, corresponding ID: 8
+2024-10-06 01:33:17,016 - INFO - Administrator - Data path retrieved from database: ../data/000014_jiaolv2
+2024-10-06 01:33:17,016 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 01:33:17,016 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 01:33:17,016 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2\differential_entropy.png
+2024-10-06 01:33:17,895 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2\differential_entropy.png
+2024-10-06 01:33:30,190 - INFO - Administrator - Button clicked in row 3, corresponding ID: 5
+2024-10-06 01:33:30,192 - INFO - Administrator - Data path retrieved from database: ../data/000011_yiyu4
+2024-10-06 01:33:30,192 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 01:33:30,192 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 01:33:30,192 - INFO - Administrator - Attempting to load image from path: ../data/000011_yiyu4\differential_entropy.png
+2024-10-06 01:33:31,271 - ERROR - Administrator - Failed to load image: ../data/000011_yiyu4\differential_entropy.png
+2024-10-06 01:33:34,723 - INFO - Administrator - Returned to admin homepage.
+2024-10-06 01:33:36,678 - INFO - Administrator - Opening model control page.
+2024-10-06 01:33:42,712 - WARNING - Administrator - No model type selected.
+2024-10-06 01:33:45,403 - INFO - Administrator - Opening user management page.
+2024-10-06 01:33:49,115 - INFO - Administrator - Returned to admin homepage.
+2024-10-06 01:33:49,905 - INFO - Administrator - Opening parameter control page.
+2024-10-06 01:33:58,997 - INFO - Administrator - Opening log management page.
+2024-10-06 01:34:09,436 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-10-06 01:34:10,568 - INFO - Administrator - Opening log management page.
+2024-10-06 01:34:12,429 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-10-06 01:34:13,796 - INFO - Administrator - Opening password change page.
+2024-10-06 01:34:15,120 - INFO - Administrator - User type: Administrator. Returning to admin homepage.
+2024-10-06 01:34:16,592 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-10-06 22:22:55,452 - INFO - Administrator - Opening user login page.
+2024-10-06 22:23:00,015 - WARNING - Administrator - Admin login attempt failed: Incorrect username or password for username '123'.
+2024-10-06 22:23:11,197 - INFO - Administrator - Admin login successful for username '123'.
+2024-10-06 22:23:11,334 - INFO - Administrator - Username '123' set as current user.
+2024-10-06 22:23:12,436 - INFO - Administrator - Opening health evaluation page.
+2024-10-06 22:23:15,587 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-10-06 22:23:16,255 - INFO - Administrator - Opening results view page.
+2024-10-06 22:23:21,709 - INFO - Administrator - Returned to user homepage.
+2024-10-06 22:23:22,526 - INFO - Administrator - Opening health evaluation page.
+2024-10-06 22:23:42,510 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 22:23:42,512 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 22:23:42,513 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:42,513 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:42,514 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:42,514 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:42,514 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:42,514 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:42,514 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:42,516 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:43,612 - INFO - Administrator - Button clicked in row 1, ID: 3
+2024-10-06 22:23:43,614 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 22:23:43,615 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:43,615 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:43,616 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:43,616 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:43,616 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:43,616 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:43,616 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 22:23:43,616 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 22:23:43,980 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 22:23:43,981 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 22:23:43,983 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:43,983 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:43,984 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:43,984 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:43,984 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:43,984 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:43,984 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:43,984 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:44,316 - INFO - Administrator - Button clicked in row 4, ID: 6
+2024-10-06 22:23:44,318 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 22:23:44,319 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:44,319 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:44,319 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:44,320 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:44,320 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:44,320 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:44,320 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:44,320 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:44,741 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 22:23:44,742 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 22:23:44,743 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:44,743 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:44,743 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:44,743 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:44,744 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:44,744 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:44,744 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 22:23:44,744 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 22:23:45,500 - INFO - Administrator - Button clicked in row 4, ID: 6
+2024-10-06 22:23:45,502 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 22:23:45,503 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:45,504 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:45,504 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:45,504 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:45,504 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:45,504 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:45,504 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:45,505 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:45,748 - INFO - Administrator - Button clicked in row 4, ID: 6
+2024-10-06 22:23:45,749 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 22:23:45,750 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:45,750 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:45,751 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:45,751 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:45,751 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:45,751 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:45,751 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:45,751 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:45,948 - INFO - Administrator - Button clicked in row 4, ID: 6
+2024-10-06 22:23:45,950 - INFO - Administrator - Data path retrieved for ID 6: ../data/000012_yiyu3
+2024-10-06 22:23:45,951 - INFO - Administrator - Results retrieved for ID 6: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:45,951 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:45,952 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:45,952 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:45,952 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:45,952 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:45,952 - INFO - Administrator - Attempting to load image from path: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:45,953 - ERROR - Administrator - Failed to load image: ../data/000012_yiyu3/differential_entropy.png
+2024-10-06 22:23:46,965 - INFO - Administrator - Button clicked in row 6, ID: 8
+2024-10-06 22:23:46,966 - INFO - Administrator - Data path retrieved for ID 8: ../data/000014_jiaolv2
+2024-10-06 22:23:46,968 - INFO - Administrator - Results retrieved for ID 8: result_1=1, result_2=1, result_3=1
+2024-10-06 22:23:46,968 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:46,968 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:46,968 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 22:23:46,968 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:46,968 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:46,968 - INFO - Administrator - Attempting to load image from path: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 22:23:46,969 - ERROR - Administrator - Failed to load image: ../data/000014_jiaolv2/differential_entropy.png
+2024-10-06 22:23:47,740 - INFO - Administrator - Button clicked in row 7, ID: 9
+2024-10-06 22:23:47,742 - INFO - Administrator - Data path retrieved for ID 9: ../data/000007_yiyu1
+2024-10-06 22:23:47,743 - INFO - Administrator - Results retrieved for ID 9: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:47,744 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:47,744 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:47,744 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:47,744 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:47,744 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:47,744 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 22:23:47,745 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/differential_entropy.png
+2024-10-06 22:23:49,787 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:49,787 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/time_frequency_features.png
+2024-10-06 22:23:49,788 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/time_frequency_features.png
+2024-10-06 22:23:50,244 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:50,244 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/time_domain_features.png
+2024-10-06 22:23:50,244 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/time_domain_features.png
+2024-10-06 22:23:50,733 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:50,733 - INFO - Administrator - Attempting to load image from path: ../data/000007_yiyu1/time_frequency_features.png
+2024-10-06 22:23:50,734 - ERROR - Administrator - Failed to load image: ../data/000007_yiyu1/time_frequency_features.png
+2024-10-06 22:23:51,556 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 22:23:51,558 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 22:23:51,559 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:51,559 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:51,559 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:51,560 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:51,560 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:51,560 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:51,560 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:51,560 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:51,908 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 22:23:51,910 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 22:23:51,911 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:51,911 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:51,911 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:51,911 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:51,911 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:51,911 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:51,911 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:51,912 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:52,413 - INFO - Administrator - Button clicked in row 1, ID: 3
+2024-10-06 22:23:52,414 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 22:23:52,416 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:52,416 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:52,416 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:52,416 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:52,417 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:52,417 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:52,417 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 22:23:52,417 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 22:23:53,228 - INFO - Administrator - Button clicked in row 2, ID: 4
+2024-10-06 22:23:53,230 - INFO - Administrator - Data path retrieved for ID 4: ../data/000010_yiyu5
+2024-10-06 22:23:53,231 - INFO - Administrator - Results retrieved for ID 4: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:53,231 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:53,231 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:53,232 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:53,232 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:53,232 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:53,232 - INFO - Administrator - Attempting to load image from path: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:53,232 - ERROR - Administrator - Failed to load image: ../data/000010_yiyu5/differential_entropy.png
+2024-10-06 22:23:53,493 - INFO - Administrator - Button clicked in row 5, ID: 7
+2024-10-06 22:23:53,494 - INFO - Administrator - Data path retrieved for ID 7: ../data/000013_yiyu2
+2024-10-06 22:23:53,495 - INFO - Administrator - Results retrieved for ID 7: result_1=1, result_2=1, result_3=0
+2024-10-06 22:23:53,495 - INFO - Administrator - Health LED label set to RED
+2024-10-06 22:23:53,495 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 22:23:53,495 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 22:23:53,496 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 22:23:53,496 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 22:23:53,496 - INFO - Administrator - Attempting to load image from path: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 22:23:53,496 - ERROR - Administrator - Failed to load image: ../data/000013_yiyu2/differential_entropy.png
+2024-10-06 22:23:59,588 - INFO - Administrator - Opening model control view.
+2024-10-06 22:23:59,751 - INFO - Administrator - Model control view opened successfully.
+2024-10-06 22:24:08,382 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 22:29:45,317 - INFO - Administrator - Opening user login page.
+2024-10-06 22:29:49,900 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 22:29:49,990 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 22:29:51,153 - INFO - Administrator - Opening model control page.
+2024-10-06 22:29:54,451 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 22:30:07,348 - INFO - Administrator - Copied model file to: ../model/yingji\subject-1 yiyu.keras
+2024-10-06 22:30:07,352 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ../model/yingji\subject-1 yiyu.keras
+2024-10-06 22:30:07,366 - INFO - Administrator - Model upload and database update completed successfully.
+2024-10-06 22:30:24,030 - WARNING - Administrator - No model type selected.
+2024-10-06 22:30:26,333 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-10-06 22:30:50,545 - INFO - Administrator - Opening user login page.
+2024-10-06 22:30:54,729 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 22:30:54,876 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 22:30:55,609 - INFO - Administrator - Opening model control page.
+2024-10-06 22:31:01,590 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
