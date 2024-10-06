@@ -431,7 +431,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             # 确定位置的时候这里是关键
             row = self.tableWidget.indexAt(button.parent().pos()).row()
             id = self.tableWidget.item(row, 0).text()  # 获取当前行数据的ID值
-            logging.info(f"Deleting record with ID {id} from the table.")
+            logging.info(f"Attempting to delete record with ID {id} from the table.")
 
             if id == self.id:  # 删除的数据为当前查看的数据
                 self.id = 0
@@ -447,9 +447,13 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     path = data.data_path
                     logging.info(f"Data path for ID {id}: {path}")
 
-                    # 删除'../data/'下对应的文件夹
-                    shutil.rmtree(path)
-                    logging.info(f"Deleted folder at path: {path}")
+                    # 检查数据路径是否存在
+                    if os.path.exists(path):
+                        # 删除'../data/'下对应的文件夹
+                        shutil.rmtree(path)
+                        logging.info(f"Deleted folder at path: {path}")
+                    else:
+                        logging.warning(f"Data path does not exist: {path}")
 
                     # 从tb_data中删除对应记录
                     session.query(Data).filter(Data.id == id).delete()

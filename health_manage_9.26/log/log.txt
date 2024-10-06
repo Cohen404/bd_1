@@ -2377,3 +2377,63 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-10-06 23:12:30,577 - INFO - Administrator - Calling show_image with channel name.
 2024-10-06 23:12:30,577 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord2\differential_entropy.png
 2024-10-06 23:12:30,606 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-10-06 23:34:15,661 - INFO - Administrator - Opening user login page.
+2024-10-06 23:34:17,380 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-06 23:34:17,525 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-06 23:34:18,591 - INFO - Administrator - Opening results view page.
+2024-10-06 23:34:21,386 - INFO - Administrator - Button clicked in row 0, ID: 3
+2024-10-06 23:34:21,388 - INFO - Administrator - Data path retrieved for ID 3: ../data/000009_yiyu6
+2024-10-06 23:34:21,390 - INFO - Administrator - Results retrieved for ID 3: result_1=1, result_2=1, result_3=0
+2024-10-06 23:34:21,390 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:34:21,390 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:34:21,390 - INFO - Administrator - Mechanical LED label set to GREEN
+2024-10-06 23:34:21,391 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:34:21,391 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:34:21,391 - INFO - Administrator - Attempting to load image from path: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 23:34:21,391 - ERROR - Administrator - Failed to load image: ../data/000009_yiyu6/differential_entropy.png
+2024-10-06 23:34:24,186 - INFO - Administrator - Button clicked in row 7, ID: 10
+2024-10-06 23:34:24,188 - INFO - Administrator - Data path retrieved for ID 10: ../data/000008_jiaolv1
+2024-10-06 23:34:24,189 - INFO - Administrator - Results retrieved for ID 10: result_1=1, result_2=1, result_3=1
+2024-10-06 23:34:24,189 - INFO - Administrator - Health LED label set to RED
+2024-10-06 23:34:24,190 - INFO - Administrator - Acoustic LED label set to RED
+2024-10-06 23:34:24,190 - INFO - Administrator - Mechanical LED label set to RED
+2024-10-06 23:34:24,190 - INFO - Administrator - Initializing current image index to 0
+2024-10-06 23:34:24,190 - INFO - Administrator - Image list initialized with 5 items.
+2024-10-06 23:34:24,190 - INFO - Administrator - Attempting to load image from path: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 23:34:24,190 - ERROR - Administrator - Failed to load image: ../data/000008_jiaolv1/differential_entropy.png
+2024-10-06 23:34:26,438 - INFO - Administrator - Returned to admin homepage.
+2024-10-06 23:34:27,263 - INFO - Administrator - Opening data view page.
+2024-10-06 23:34:29,889 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-10-06 23:34:29,891 - INFO - Administrator - Data path retrieved from database: ../data/000004_test
+2024-10-06 23:34:29,891 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 23:34:29,891 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 23:34:29,891 - INFO - Administrator - Attempting to load image from path: ../data/000004_test\differential_entropy.png
+2024-10-06 23:34:30,874 - ERROR - Administrator - Failed to load image: ../data/000004_test\differential_entropy.png
+2024-10-06 23:34:32,146 - INFO - Administrator - Button clicked in row 10, corresponding ID: 12
+2024-10-06 23:34:32,148 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-06 23:34:32,148 - INFO - Administrator - Channel selected: 1. Channel name: differential_entropy.png
+2024-10-06 23:34:32,148 - INFO - Administrator - Calling show_image with channel name.
+2024-10-06 23:34:32,148 - INFO - Administrator - Attempting to load image from path: ../data/000005_ord2\differential_entropy.png
+2024-10-06 23:34:32,159 - INFO - Administrator - Image successfully displayed for channel: differential_entropy.png
+2024-10-07 00:06:26,806 - INFO - Administrator - Opening user login page.
+2024-10-07 00:06:29,200 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:06:29,338 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:06:31,020 - INFO - Administrator - Opening data view page.
+2024-10-07 00:06:51,359 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:06:52,718 - WARNING - Administrator - Folder name '000005_ord2' already exists.
+2024-10-07 00:06:55,764 - INFO - Administrator - Deleting record with ID 12 from the table.
+2024-10-07 00:06:55,767 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:06:55,767 - ERROR - Administrator - Error occurred while deleting record with ID 12: [WinError 3] 系统找不到指定的路径。: '../data/000005_ord2'
+2024-10-07 00:06:57,272 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:07:02,433 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:07:03,404 - WARNING - Administrator - Folder name '000005_ord2' already exists.
+2024-10-07 00:08:09,986 - INFO - Administrator - Selected folder: 000005_ord
+2024-10-07 00:08:12,117 - WARNING - Administrator - Folder name '000005_ord' already exists.
+2024-10-07 00:08:15,467 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:08:16,596 - INFO - Administrator - Opening data view page.
+2024-10-07 00:08:19,095 - INFO - Administrator - Deleting record with ID 12 from the table.
+2024-10-07 00:08:19,097 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:08:19,097 - ERROR - Administrator - Error occurred while deleting record with ID 12: [WinError 3] 系统找不到指定的路径。: '../data/000005_ord2'
+2024-10-07 00:08:19,997 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:08:22,011 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:08:23,078 - INFO - Administrator - Opening data view page.
