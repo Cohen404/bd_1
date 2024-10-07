@@ -24,7 +24,9 @@ from rear import index_rear
 from rear import admin_rear
 from sql_model.tb_data import Data
 from sql_model.tb_result import Result
+from sql_model.tb_user import User
 from util.db_util import SessionClass
+from sql_model.tb_user import User
 
 # import admin_rear
 class UserFilter(logging.Filter):
@@ -50,16 +52,20 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         """
         super(results_view.Ui_MainWindow, self).__init__()
         self.setupUi(self)
-        self.show_table()  # 调用show_table方法显示table的内容
+        
+        # 从文件中读取用户类型并设置userType
+        path = '../state/user_status.txt'
+        user = operate_user.read(path)
+        self.user_id = int(user)
+        self.user_type = self.get_user_type(self.user_id)
+        
+        # ... (其他初始化代码)
+        
+        self.show_table()
 
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
         self.pushButton_2.clicked.connect(self.next_image)  # 连接next_button的点击事件到next_button函数
         self.pushButton.clicked.connect(self.previous_image)  # 连接previous_button的点击事件到previous_button函数
-
-        # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-        userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
@@ -70,7 +76,13 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
         # 添加过滤器
         logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
+        logger.addFilter(UserFilter(self.user_type))
+
+    def get_user_type(self, user_id):
+        session = SessionClass()
+        user = session.query(User).filter(User.id == user_id).first()
+        session.close()
+        return user.user_type if user else 0
 
     def show_nav(self):
         """
@@ -118,53 +130,31 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         从数据库获取评估结果并显示在表格中
         """
         session = SessionClass()
-
-        # 1. 从 Result 表中获取所有 id
-        result_ids = session.query(Result.id).all()
-
-        # 2. 如果没有找到任何结果，则退出该函数
-        if not result_ids:
-            session.close()
-            QMessageBox.information(self, "提示", "没有找到任何评估结果。")
-            return
-
-        # 提取出所有的id
-        result_ids = [r.id for r in result_ids]
-
-        # 3. 在 Data 表中查找与这些 id 对应的记录
-        kk = session.query(Data).filter(Data.id.in_(result_ids)).all()
+        if self.user_type == 1:  # 管理员
+            results = session.query(Result).all()
+        else:  # 普通用户
+            results = session.query(Result).filter(Result.user_id == self.user_id).all()
         session.close()
 
-        # 4. 准备信息
-        info = []
-        for item in kk:
-            info.append([item.id, item.personnel_name, item.upload_user])
-
-        # 5. 在表格中显示这些信息
-        self.tableWidget.setRowCount(0)  # 清空表格内容
-        for data in info:
-            row = self.tableWidget.rowCount()  # 当前表格有多少行，最后一行是第 row-1 行
-            self.tableWidget.insertRow(row)  # 创建新的一行
-
-            # 设置用户名称
-            user_name = '普通用户' if data[2] == 0 else '管理员'
-
-            # 填充表格内容
-            for i in range(len(self.lst) - 1):
-                item = QTableWidgetItem()
-                content = ''
-                if i == 0:
-                    content = data[0]  # data[0] 对应 data.id
-                elif i == 1:
-                    content = data[1]  # data[1] 对应 data.personnel_name
-                elif i == 2:
-                    content = user_name  # 用户类型
-
-                item.setText(str(content))  # 将 content 转为字符串类型才能存入单元格
-                self.tableWidget.setItem(row, i, item)
-
-            # 在最后一个单元格中加入按钮
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())
+        for result in results:
+            row = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(row)
+            
+            # 获取对应的数据记录
+            data_session = SessionClass()
+            data = data_session.query(Data).filter(Data.id == result.id).first()
+            data_session.close()
+            
+            if data:
+                self.tableWidget.setItem(row, 0, QTableWidgetItem(str(result.id)))
+                self.tableWidget.setItem(row, 1, QTableWidgetItem(data.personnel_name))
+                self.tableWidget.setItem(row, 2, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
+            else:
+                self.tableWidget.setItem(row, 0, QTableWidgetItem(str(result.id)))
+                self.tableWidget.setItem(row, 1, QTableWidgetItem("未知"))
+                self.tableWidget.setItem(row, 2, QTableWidgetItem("未知"))
+            
+            self.tableWidget.setCellWidget(row, 3, self.buttonForRow())
 
     def show_image(self):
         """

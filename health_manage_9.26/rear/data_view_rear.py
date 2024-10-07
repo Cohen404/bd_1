@@ -30,6 +30,7 @@ from sqlalchemy import func
 # 导入绘图部分
 import data_out
 import data_pretreatment
+from sql_model.tb_user import User
 
 class UserFilter(logging.Filter):
     """
@@ -57,7 +58,15 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.id = 0
         self.data_path = ''
         # self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-        self.show_table()  # 调用show_table方法显示table的内容
+        # 从文件中读取用户类型并设置userType
+        path = '../state/user_status.txt'
+        user = operate_user.read(path)
+        self.user_id = int(user)
+        self.user_type = self.get_user_type(self.user_id)
+        
+        # ... (其他初始化代码)
+        
+        self.show_table()
 
         # button to connect
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
@@ -99,6 +108,32 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.image_name_label.setStyleSheet("font-size: 14px; color: #333;")
         self.verticalLayout.addWidget(self.image_name_label)
 
+    def get_user_type(self, user_id):
+        session = SessionClass()
+        user = session.query(User).filter(User.id == user_id).first()
+        session.close()
+        return user.user_type if user else 0
+
+    def show_table(self):
+        session = SessionClass()
+        if self.user_type == 1:  # 管理员
+            data_list = session.query(Data).all()
+        else:  # 普通用户
+            data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
+        session.close()
+
+        for data in data_list:
+            row = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(row)
+            
+            self.tableWidget.setItem(row, 0, QTableWidgetItem(str(data.id)))
+            self.tableWidget.setItem(row, 1, QTableWidgetItem(str(data.personnel_id)))
+            self.tableWidget.setItem(row, 2, QTableWidgetItem(data.personnel_name))
+            self.tableWidget.setItem(row, 3, QTableWidgetItem(data.data_path))
+            self.tableWidget.setItem(row, 4, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
+            
+            self.tableWidget.setCellWidget(row, 5, self.buttonForRow())
+
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
         """
@@ -117,46 +152,6 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             print('点到了第4项 ...')
         if tag == 4:
             print('点到了第5项 ...')
-
-    def show_table(self):
-        '''
-        从数据库tb_data获取 flag==1 的所有data对象，即评估数据
-        遍历每个data对象，将每个data对象的data.id，data.upload_user_id，data.upload_time添加到table中
-
-        '''
-
-        session = SessionClass()
-        kk = session.query(Data).filter().all()
-        session.close()
-        info = []
-        for item in kk:
-            info.append([item.id, item.personnel_id, item.data_path, item.upload_user, item.personnel_name])
-
-        for data in info:
-            row = self.tableWidget.rowCount()  # 当前form有多少行，最后一行是第row-1行
-            self.tableWidget.insertRow(row)  # 创建新的行
-
-            if data[3] == 0:  # info[2]等价于data.upload_user_id
-                user_name = '普通用户'
-            else:
-                user_name = '管理员'
-            for i in range(len(self.lst) - 1):
-                item = QTableWidgetItem()
-                # 获得上传数据信息，将其添加到form中
-                content = ''
-                if i == 0:
-                    content = data[0]  # data[0]对应data.id
-                elif i == 1:
-                    content = data[1]
-                elif i == 2:
-                    content = data[4]
-                elif i == 3:
-                    content = data[2]
-                elif i == 4:
-                    content = user_name  # user_name上边已经处理过
-                item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
-                self.tableWidget.setItem(row, i, item)
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加入按钮
 
     def openfile(self):
         """
@@ -246,7 +241,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
                     session = SessionClass()
                     data = Data(id=max_id, personnel_id=folder_name_personnel_id, data_path=data_path, upload_user=user,
-                                personnel_name=folder_name_personnel_name)
+                                personnel_name=folder_name_personnel_name, user_id=self.user_id)
                     session.add(data)
                     session.commit()
                     session.close()

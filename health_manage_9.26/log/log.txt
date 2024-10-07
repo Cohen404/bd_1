@@ -3190,3 +3190,66 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-10-07 11:46:17,789 - INFO - Administrator - Anxiety LED set to RED
 2024-10-07 11:46:17,800 - INFO - Administrator - Opening health evaluation page.
 2024-10-07 11:46:20,748 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-10-07 11:47:04,777 - INFO - Administrator - Opening user login page.
+2024-10-07 11:47:09,774 - INFO - Administrator - Admin login successful for username '123'.
+2024-10-07 11:47:09,978 - INFO - Administrator - Username '123' set as current user.
+2024-10-07 11:47:12,002 - INFO - Administrator - Opening results view page.
+2024-10-07 11:47:15,345 - INFO - Administrator - Returned to user homepage.
+2024-10-07 11:47:16,852 - INFO - Administrator - Opening results view page.
+2024-10-07 12:06:27,424 - INFO - Administrator - Opening user login page.
+2024-10-07 12:06:29,846 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:06:30,036 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:06:31,518 - INFO - Administrator - Opening results view page.
+2024-10-07 12:06:33,449 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 12:06:34,289 - INFO - Administrator - Opening model control page.
+2024-10-07 12:06:36,801 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:08:53,051 - INFO - Administrator - Opening user login page.
+2024-10-07 12:08:55,179 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:08:55,378 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:08:55,985 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:09:36,405 - INFO - Administrator - Opening user login page.
+2024-10-07 12:09:38,516 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:09:38,688 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:11:03,216 - INFO - Administrator - Opening user login page.
+2024-10-07 12:11:05,079 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:11:05,260 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:11:39,208 - INFO - Administrator - Opening user login page.
+2024-10-07 12:11:41,502 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:11:41,672 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:11:42,204 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:11:42,218 - INFO - Administrator - Opening health evaluation page.
+2024-10-07 12:11:48,837 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-10-07 12:11:51,565 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-10-07 12:11:54,807 - INFO - Administrator - Admin login successful for username '123'.
+2024-10-07 12:11:55,029 - INFO - Administrator - Username '123' set as current user.
+2024-10-07 12:11:55,788 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:11:55,791 - INFO - Administrator - Opening health evaluation page.
+2024-10-07 12:11:57,533 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-10-07 12:11:58,306 - INFO - Administrator - Opening results view page.
+2024-10-07 12:11:59,640 - INFO - Administrator - Returned to user homepage.
+2024-10-07 12:12:00,455 - INFO - Administrator - Opening data view page.
+2024-10-07 12:12:02,327 - INFO - Administrator - Returned to user homepage.
+2024-10-07 12:19:24,772 - INFO - Administrator - Opening user login page.
+2024-10-07 12:19:28,060 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 12:19:28,175 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 12:19:29,130 - INFO - 1 - Opening results view page.
+2024-10-07 12:19:31,733 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 12:19:32,517 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:19:32,525 - INFO - Administrator - Opening health evaluation page.
+2024-10-07 12:19:34,305 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-10-07 12:19:35,152 - INFO - Administrator - Opening data view page.
+2024-10-07 12:19:36,476 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 12:19:39,702 - INFO - Administrator - Opening user management page.
+2024-10-07 12:19:40,839 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 12:19:42,057 - INFO - Administrator - Opening parameter control page.
+2024-10-07 12:19:43,467 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-10-07 12:19:48,220 - INFO - Administrator - Admin login successful for username '123'.
+2024-10-07 12:19:48,435 - INFO - Administrator - Username '123' set as current user.
+2024-10-07 12:19:49,645 - INFO - Administrator - Ordinary stress LED set to RED
+2024-10-07 12:19:49,648 - INFO - Administrator - Opening health evaluation page.
+2024-10-07 12:19:50,890 - INFO - Administrator - User type: Regular user. Preparing to return to user homepage.
+2024-10-07 12:19:51,529 - INFO - 0 - Opening results view page.
+2024-10-07 12:19:52,821 - INFO - Administrator - Returned to user homepage.
+2024-10-07 12:19:53,542 - INFO - Administrator - Opening data view page.
+2024-10-07 12:19:55,356 - INFO - Administrator - Returned to user homepage.
+2024-10-07 12:19:58,705 - INFO - Administrator - Opening admin login page.

@@ -28,6 +28,7 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from model.tuili import EegModel
 import logging
+from sql_model.tb_user import User
 
 class UserFilter(logging.Filter):
     """
@@ -52,29 +53,14 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         初始化健康评估窗口
         """
         super(health_evaluate.Ui_MainWindow, self).__init__()
-        self.test_thread = None
-        self.data_path = None
-        self.model_list = []
-        self.lock = threading.Lock()
-        self.result_time = None
         self.setupUi(self)  # 初始化health_evaluate方法
-        self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-        self.show_table()  # 调用show_table方法显示table的内容
-        # button to connect
-        self.btn_return.clicked.connect(self.return_index)  # 返回首页
-        self.data_id = 0
-        self.completed_models = 0
-
-        self.current_image_index = 0  # 当前显示的图片索引
-        self.current_model_index=0
-        self.pushButton_2.clicked.connect(self.next_image)  # 连接next_button的点击事件到next_button函数
-        self.pushButton.clicked.connect(self.previous_image)  # 连接previous_button的点击事件到previous_button函数
-
-        self.result_list=[]
+        
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-        userType = "Regular user" if user == '0' else "Administrator"
+        self.user_id = int(user)
+        self.user_type = self.get_user_type(self.user_id)
+        userType = "Regular user" if self.user_type == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
@@ -87,6 +73,18 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
+        # 初始化其他属性
+        self.test_thread = None
+        self.data_path = None
+        self.model_list = []
+        self.lock = threading.Lock()
+        self.result_time = None
+        self.data_id = 0
+        self.completed_models = 0
+        self.current_image_index = 0
+        self.current_model_index = 0
+        self.result_list = []
+
         # 设置默认灯的颜色为灰色
         self.set_default_led_colors()
 
@@ -96,10 +94,31 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
         # 修改曲线标签的字体大小
         font = self.curve_label.font()
-        font.setPointSize(10)  # 将字体大小设置为10点
+        font.setPointSize(10)
         self.curve_label.setFont(font)
-        self.curve_label.setWordWrap(True)  # 允许文本换行
-        self.curve_label.setAlignment(Qt.AlignCenter)  # 文本居中对齐
+        self.curve_label.setWordWrap(True)
+        self.curve_label.setAlignment(Qt.AlignCenter)
+
+        # 调用其他初始化方法
+        self.show_nav()
+        self.show_table()
+
+        # 连接按钮信号
+        self.btn_return.clicked.connect(self.return_index)
+        self.pushButton_2.clicked.connect(self.next_image)
+        self.pushButton.clicked.connect(self.previous_image)
+
+    def get_user_type(self, user_id):
+        session = SessionClass()
+        user = session.query(User).filter(User.id == user_id).first()
+        session.close()
+        return user.user_type if user else 0
+
+    def get_current_user_id(self):
+        # 从用户状态文件或会话中获取当前用户ID
+        path = '../state/user_status.txt'
+        user_id = operate_user.read(path)
+        return int(user_id)
 
     def set_default_led_colors(self):
         """设置所有LED为默认的灰色"""
@@ -156,7 +175,10 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         遍历每个data对象，将每个data对象的data.id，personal_id、data_path、upload_user添加到table中
         '''
         session = SessionClass()
-        kk = session.query(Data).all()
+        if self.user_type == 1:  # 管理员
+            kk = session.query(Data).all()
+        else:  # 普通用户
+            kk = session.query(Data).filter(Data.user_id == self.user_id).all()
         session.close()
         info = []
         for item in kk:
@@ -434,7 +456,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 else:
                     # 如果数据库中不存在具有当前ID的数据，直接添加新的数据
                     uploadresult = Result(id=self.data_id, result_1=self.result_list[0], result_2=self.result_list[1],
-                                          result_3=self.result_list[2], result_time=self.result_time)
+                                          result_3=self.result_list[2], result_time=self.result_time, user_id=self.user_id)
                     session.add(uploadresult)
 
                 session.commit()
