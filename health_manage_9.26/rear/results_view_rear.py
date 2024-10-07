@@ -172,11 +172,10 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         """
         try:
             self.image_list = [
-                "differential_entropy.png",
-                "frequency_domain_features.png",
-                "theta_alpha_beta_gamma_powers.png",
-                "time_domain_features.png",
-                "time_frequency_features.png"
+                "Theta.png", "Alpha.png", "Beta.png", "Gamma.png",
+                "frequency_band_1.png", "frequency_band_2.png", "frequency_band_3.png", "frequency_band_4.png", "frequency_band_5.png",
+                "time_过零率.png", "time_方差.png", "time_能量.png", "time_差分.png",
+                "frequency_wavelet.png"
             ]  # 图片列表
 
             logging.info("Image list initialized with {} items.".format(len(self.image_list)))
@@ -188,10 +187,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             frame = QImage(image_path)
             if frame.isNull():
                 logging.error(f"Failed to load image: {image_path}")
-                box = QMessageBox(QMessageBox.Warning, "加载图片失败",
-                                  "可能由于上传的数据已预处理完毕或者可视化失败。")
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
+                QMessageBox.warning(self, "加载图片失败", "无法加载所选特征的图片。")
                 return
 
             pix = QPixmap.fromImage(frame)

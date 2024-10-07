@@ -13,7 +13,7 @@ import scipy.io as scio
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog, QMessageBox, QTableWidgetItem, \
-    QGraphicsPixmapItem, QGraphicsScene
+    QGraphicsPixmapItem, QGraphicsScene, QInputDialog
 from PyQt5 import QtWidgets
 from datetime import datetime
 import state.operate_user as operate_user
@@ -67,6 +67,16 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.channel_comboBox.currentIndexChanged.connect(
             lambda: self.WrittingNotOfOther(self.channel_comboBox.currentIndex()))  # 点击下拉列表，触发对应事件
 
+        # 更新下拉菜单选项
+        self.channel_comboBox.clear()
+        self.channel_comboBox.addItems([
+            "Theta/Alpha/Beta/Gamma功率",
+            "均分频带",
+            "时域特征",
+            "时频域特征",
+            "微分熵"
+        ])
+
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
@@ -82,6 +92,12 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         # 添加过滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
+
+        # 添加一个新的标签来显示图像名称
+        self.image_name_label = QtWidgets.QLabel(self.centralwidget)
+        self.image_name_label.setAlignment(Qt.AlignCenter)
+        self.image_name_label.setStyleSheet("font-size: 14px; color: #333;")
+        self.verticalLayout.addWidget(self.image_name_label)
 
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
@@ -243,22 +259,28 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                         file_path = data_path + '/EEG.edf'
                         box = QMessageBox(QMessageBox.Information, "信息", "正在进行可视化，请稍候。")
                         qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                        data_out.analyze_eeg_data(file_path)
-                        box = QMessageBox(QMessageBox.Information, "信息", "可视化成功完成")
-                        qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
                         box.exec_()
                         if box.clickedButton() == qyes:
-                            pass
+                            try:
+                                data_out.analyze_eeg_data(file_path)
+                                logging.info(f"Visualization completed for file: {file_path}")
+                                QMessageBox.information(self, "信息", "可视化成功完成")
+                            except Exception as e:
+                                logging.error(f"Error during visualization: {str(e)}")
+                                QMessageBox.warning(self, "警告", f"可视化过程中出现错误: {str(e)}")
 
                         # 预处理
                         box = QMessageBox(QMessageBox.Information, "信息", "正在进行数据预处理，请稍候。")
                         qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                        data_pretreatment.treat(data_path)
-                        box = QMessageBox(QMessageBox.Information, "信息", "预处理成功完成")
-                        qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
                         box.exec_()
                         if box.clickedButton() == qyes:
-                            pass
+                            try:
+                                data_pretreatment.treat(data_path)
+                                logging.info(f"Preprocessing completed for data: {data_path}")
+                                QMessageBox.information(self, "信息", "预处理成功完成")
+                            except Exception as e:
+                                logging.error(f"Error during preprocessing: {str(e)}")
+                                QMessageBox.warning(self, "警告", f"预处理过程中出现错误: {str(e)}")
 
                     self.upload_button()  # (不可删)upload_button方法，将刚上传到tb_data表中的记录（即tb_data表最后一条记录）显示到table中
                     logging.info("Upload button called to refresh table.")
@@ -340,41 +362,68 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         widget.setLayout(hLayout)
         return widget
 
-    def show_image(self, channel_name):
-        """
-        显示指定通道的图像
+    def show_image(self):
+        feature_type = self.channel_comboBox.currentText()
         
-        参数:
-        channel_name (str): 要显示的通道名称
-        """
-        try:
-            # Construct image path
-            image_filename = channel_name
-            image_path = os.path.join(self.data_path, image_filename)
-
-            logging.info(f"Attempting to load image from path: {image_path}")
-
-            # Load and display the image
-            frame = QImage(image_path)
-            if frame.isNull():
-                box = QMessageBox(QMessageBox.Warning, "加载图片失败",
-                                  "可能由于上传的数据已预处理完毕或者可视化失败。")
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
-                logging.error(f"Failed to load image: {image_path}")
+        if feature_type == "Theta/Alpha/Beta/Gamma功率":
+            wave_choice, ok = QInputDialog.getItem(self, "选择波段", "请选择要查看的波段：", 
+                                                   ["Theta", "Alpha", "Beta", "Gamma"], 0, False)
+            if ok and wave_choice:
+                image_path = os.path.join(self.data_path, f'{wave_choice}.png')
+                image_name = f"{wave_choice}波段功率"
+            else:
                 return
+        elif feature_type == "均分频带":
+            band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
+                                                   ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
+            if ok and band_choice:
+                band_number = int(band_choice.split()[-1])
+                image_path = os.path.join(self.data_path, f'frequency_band_{band_number}.png')
+                image_name = f"均分频带 {band_number}"
+            else:
+                return
+        elif feature_type == "时域特征":
+            time_feature_choice, ok = QInputDialog.getItem(self, "选择时域特征", "请选择要查看的时域特征：", 
+                                                           ["过零率", "方差", "能量", "差分"], 0, False)
+            if ok and time_feature_choice:
+                image_path = os.path.join(self.data_path, f'time_{time_feature_choice}.png')
+                image_name = f"时域特征 - {time_feature_choice}"
+            else:
+                return
+        elif feature_type == "时频域特征":
+            image_path = os.path.join(self.data_path, 'frequency_wavelet.png')
+            image_name = "时频域特征 - 小波变换"
+        elif feature_type == "微分熵":
+            image_path = os.path.join(self.data_path, 'differential_entropy.png')
+            image_name = "微分熵"
+        else:
+            logging.warning(f"Unknown feature type selected: {feature_type}")
+            return
 
-            pix = QPixmap.fromImage(frame)
-            item = QGraphicsPixmapItem(pix)
-            scene = QGraphicsScene()
-            scene.addItem(item)
+        if os.path.exists(image_path):
+            self.pixmap = QPixmap(image_path)
+            if not self.pixmap.isNull():
+                self.scene = QGraphicsScene()
+                self.pixmap_item = QGraphicsPixmapItem(self.pixmap)
+                self.scene.addItem(self.pixmap_item)
+                self.graphicsView.setScene(self.scene)
+                self.fit_image_in_view()
+                self.image_name_label.setText(image_name)  # 更新图像名称标签
+                logging.info(f"Successfully displayed image: {image_path}")
+            else:
+                logging.error(f"Failed to load image: {image_path}")
+                QMessageBox.warning(self, "加载图片失败", "无法加载所选特征的图片。")
+        else:
+            logging.error(f"Image file does not exist: {image_path}")
+            QMessageBox.warning(self, "图片不存在", "所选特征的图片文件不存在。可能是因为数据还未进行可视化处理。")
 
-            self.graphicsView.setScene(scene)
-            self.graphicsView.fitInView(QGraphicsPixmapItem(QPixmap(pix)))
+    def fit_image_in_view(self):
+        if hasattr(self, 'scene') and self.scene:
+            self.graphicsView.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)
 
-            logging.info(f"Image successfully displayed for channel: {channel_name}")
-        except Exception as e:
-            logging.error(f"An error occurred while displaying the image for channel: {channel_name}. Error: {e}")
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.fit_image_in_view()
 
     # 查看按钮功能
     def checkbutton(self):
@@ -382,44 +431,28 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         查看按钮的回调函数
         """
         button = self.sender()
-        channel = self.channel_comboBox.currentIndex()  # 获取当前通道选择的通道数
         if button:
-            # Determine the row of the button's parent
             row = self.tableWidget.indexAt(button.parent().pos()).row()
-            id = self.tableWidget.item(row, 0).text()  # 获取当前行数据的ID值
-            self.id = int(id)  # 全局使用
+            id = self.tableWidget.item(row, 0).text()
+            self.id = int(id)
             logging.info(f"Button clicked in row {row}, corresponding ID: {self.id}")
 
             try:
-                # Fetch the data path from the database using the ID
                 session = SessionClass()
                 data = session.query(Data).filter(Data.id == self.id).first()
                 session.close()
-                self.data_path = data.data_path
-                logging.info(f"Data path retrieved from database: {self.data_path}")
-
-                # Update the channel based on the comboBox selection
-                channel = channel + 1
-                channel_name = ''
-                if channel == 1:
-                    channel_name = 'differential_entropy.png'
-                elif channel == 2:
-                    channel_name = 'frequency_domain_features.png'
-                elif channel == 3:
-                    channel_name = 'theta_alpha_beta_gamma_powers.png'
-                elif channel == 4:
-                    channel_name = 'time_domain_features.png'
-                elif channel == 5:
-                    channel_name = 'time_frequency_features.png'
-
-                logging.info(f"Channel selected: {channel}. Channel name: {channel_name}")
-
-                # Call the function to show the image
-                logging.info("Calling show_image with channel name.")
-                self.show_image(channel_name)
-
+                if data:
+                    self.data_path = data.data_path
+                    logging.info(f"Data path retrieved from database: {self.data_path}")
+                    
+                    # 调用show_image方法来显示图片
+                    self.show_image()
+                else:
+                    logging.warning(f"No data found for ID: {self.id}")
+                    QMessageBox.warning(self, "数据不存在", f"ID为{self.id}的数据不存在。")
             except Exception as e:
                 logging.error(f"An error occurred in checkbutton: {e}")
+                QMessageBox.critical(self, "错误", f"查看数据时发生错误: {str(e)}")
 
     # 删除功能
     def deletebutton(self):

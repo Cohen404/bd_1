@@ -138,33 +138,28 @@ def save_plot(fig, plot_name):
 
 def plot_time_domain_features(features):
     channel_indices = range(len(features))
-    plt.figure(figsize=(15, 8))
     titles = ['过零率', '方差', '能量', '差分']
-    for idx, title in enumerate(titles, 1):
-        plt.subplot(2, 2, idx)
+    for title in titles:
+        plt.figure(figsize=(15, 5))
         plt.bar(channel_indices, [feature[title] for feature in features])
         plt.title(title)
         plt.xlabel('通道')
         plt.ylabel(f'{title}值')
-    plt.tight_layout()
-    save_plot(plt.gcf(), 'time_domain_features.png')
-    # plt.show()
+        save_plot(plt.gcf(), f'time_{title}.png')
+        plt.close()
 
 def plot_frequency_domain_features(features):
     channel_indices = range(len(features))
-    plt.figure(figsize=(15, 10))
     band_names = ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"]
     for idx, band_name in enumerate(band_names):
-        plt.subplot(3, 2, idx+1)
+        plt.figure(figsize=(15, 5))
         avg_powers = [feature["均分频带"][idx] for feature in features]
-        # ptl todo
         plt.bar(channel_indices, avg_powers)
         plt.title(f'均分频带: {band_name}')
         plt.xlabel('通道')
         plt.ylabel('功率')
-    plt.tight_layout()
-    save_plot(plt.gcf(), 'frequency_domain_features.png')
-    # plt.show()
+        save_plot(plt.gcf(), f'frequency_band_{idx+1}.png')
+        plt.close()
 
 def plot_time_frequency_features(features):
     channel_indices = range(len(features))
@@ -177,8 +172,8 @@ def plot_time_frequency_features(features):
         plt.xlabel('通道')
         plt.ylabel('能量')
     plt.tight_layout()
-    save_plot(plt.gcf(), 'time_frequency_features.png')
-    # plt.show()
+    save_plot(plt.gcf(), 'frequency_wavelet.png')
+    plt.close()
 
 def plot_differential_entropy(features):
     channel_indices = range(len(features))
@@ -189,21 +184,20 @@ def plot_differential_entropy(features):
     plt.xlabel('通道')
     plt.ylabel('微分熵值')
     save_plot(plt.gcf(), 'differential_entropy.png')
-    # plt.show()
+    plt.close()
 
 def plot_theta_alpha_beta_gamma_powers(band_powers):
     bands = ["Theta", "Alpha", "Beta", "Gamma"]
-    plt.figure(figsize=(15, 8))
-    for idx, band in enumerate(bands):
-        plt.subplot(2, 2, idx+1)
+    for band in bands:
+        plt.figure(figsize=(15, 5))
         powers = [channel[band] for channel in band_powers]
         plt.bar(range(len(powers)), powers)
         plt.title(f'{band} 功率')
         plt.xlabel('通道')
         plt.ylabel('功率')
-    plt.tight_layout()
-    save_plot(plt.gcf(), 'theta_alpha_beta_gamma_powers.png')
-    # plt.show()
+        save_plot(plt.gcf(), f'{band}.png')
+        plt.close()
+
 def print_time_domain_features(features):#打印时域特征
     for idx, feature in enumerate(features):
         print(f"通道 {idx + 1}:")#通道数
@@ -314,7 +308,6 @@ def analyze_eeg_data(file_path):
     plot_time_frequency_features(time_frequency_features)
     plot_differential_entropy(frequency_domain_features)
     plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
-
     return feature_df, feature_names
 
 # 如果需要，您可以在这里调用 analyze_eeg_data 函数

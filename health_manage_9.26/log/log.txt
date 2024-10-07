@@ -2437,3 +2437,246 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-10-07 00:08:19,997 - INFO - Administrator - Removed row 10 from table.
 2024-10-07 00:08:22,011 - INFO - Administrator - Returned to admin homepage.
 2024-10-07 00:08:23,078 - INFO - Administrator - Opening data view page.
+2024-10-07 00:12:25,984 - INFO - Administrator - Opening user login page.
+2024-10-07 00:12:27,880 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:12:28,020 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:12:29,293 - INFO - Administrator - Opening model control page.
+2024-10-07 00:12:32,256 - INFO - Administrator - Opening data view page.
+2024-10-07 00:12:34,589 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-10-07 00:12:34,592 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:12:34,592 - WARNING - Administrator - Data path does not exist: ../data/000005_ord2
+2024-10-07 00:12:34,596 - INFO - Administrator - Deleted record with ID 12 from tb_data.
+2024-10-07 00:12:34,598 - INFO - Administrator - Deleted record with ID 12 from result table.
+2024-10-07 00:12:34,598 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:12:42,106 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:12:42,482 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:12:42,495 - INFO - Administrator - Added new data record with ID 12.
+2024-10-07 00:12:42,498 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:21:35,051 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:21:36,562 - INFO - Administrator - Opening data view page.
+2024-10-07 00:33:56,185 - INFO - Administrator - Opening user login page.
+2024-10-07 00:34:01,503 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:34:01,598 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:34:02,463 - INFO - Administrator - Opening data view page.
+2024-10-07 00:34:04,400 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-10-07 00:34:04,402 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:34:04,405 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:34:04,411 - INFO - Administrator - Deleted record with ID 12 from tb_data.
+2024-10-07 00:34:04,413 - INFO - Administrator - Deleted record with ID 12 from result table.
+2024-10-07 00:34:04,414 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:34:15,878 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:34:16,466 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:34:16,479 - INFO - Administrator - Added new data record with ID 12.
+2024-10-07 00:34:16,482 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:34:20,510 - INFO - Administrator - Button clicked in row 10, corresponding ID: 12
+2024-10-07 00:34:20,514 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 00:34:45,479 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:35:26,523 - INFO - Administrator - Opening user login page.
+2024-10-07 00:35:28,475 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:35:28,665 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:35:29,460 - INFO - Administrator - Opening data view page.
+2024-10-07 00:35:30,721 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-10-07 00:35:30,724 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:35:30,756 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:35:30,760 - INFO - Administrator - Deleted record with ID 12 from tb_data.
+2024-10-07 00:35:30,762 - INFO - Administrator - Deleted record with ID 12 from result table.
+2024-10-07 00:35:30,762 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:35:38,593 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:35:39,061 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:35:39,073 - INFO - Administrator - Added new data record with ID 12.
+2024-10-07 00:35:39,077 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:35:41,649 - INFO - Administrator - Button clicked in row 10, corresponding ID: 12
+2024-10-07 00:35:41,652 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 00:39:09,285 - INFO - Administrator - Opening user login page.
+2024-10-07 00:39:11,019 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:39:11,138 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:39:12,036 - INFO - Administrator - Opening model control page.
+2024-10-07 00:39:13,593 - INFO - Administrator - Opening data view page.
+2024-10-07 00:39:15,160 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-10-07 00:39:15,162 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:39:15,178 - ERROR - Administrator - Error occurred while deleting record with ID 12: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: '../data/000005_ord2\\fif.fif'
+2024-10-07 00:39:19,199 - INFO - Administrator - Removed row 10 from table.
+2024-10-07 00:39:21,328 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:39:21,329 - INFO - Administrator - Data path for ID 11: ../data/000015_yingji1
+2024-10-07 00:39:21,332 - INFO - Administrator - Deleted folder at path: ../data/000015_yingji1
+2024-10-07 00:39:21,336 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:39:21,338 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:39:21,338 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:39:31,580 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:39:32,520 - WARNING - Administrator - Folder name '000005_ord2' already exists.
+2024-10-07 00:39:34,268 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:39:35,152 - INFO - Administrator - Opening data view page.
+2024-10-07 00:39:36,615 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-10-07 00:39:36,617 - INFO - Administrator - Data path for ID 12: ../data/000005_ord2
+2024-10-07 00:39:36,630 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:39:36,633 - INFO - Administrator - Deleted record with ID 12 from tb_data.
+2024-10-07 00:39:36,635 - INFO - Administrator - Deleted record with ID 12 from result table.
+2024-10-07 00:39:36,636 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:39:38,275 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:39:39,098 - INFO - Administrator - Opening data view page.
+2024-10-07 00:39:43,378 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:39:43,857 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:39:43,869 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:39:43,873 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:40:54,378 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 00:40:54,382 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 00:42:31,648 - INFO - Administrator - Opening user login page.
+2024-10-07 00:42:34,079 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:42:34,254 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:42:35,060 - INFO - Administrator - Opening data view page.
+2024-10-07 00:42:37,028 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:42:37,030 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:42:37,051 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:42:37,055 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:42:37,057 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:42:37,057 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:42:46,437 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:42:46,956 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:42:46,971 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:42:46,974 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:43:20,935 - INFO - Administrator - Opening user login page.
+2024-10-07 00:43:22,820 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:43:22,988 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:43:23,608 - INFO - Administrator - Opening data view page.
+2024-10-07 00:43:25,557 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:43:25,559 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:43:25,587 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:43:25,592 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:43:25,593 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:43:25,593 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:43:36,551 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:43:37,064 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:43:37,076 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:43:37,080 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:43:41,478 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 00:43:41,481 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 00:43:45,986 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:48:06,971 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:48:07,111 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:48:07,856 - INFO - Administrator - Opening data view page.
+2024-10-07 00:48:09,967 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:48:09,970 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:48:09,975 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:48:09,980 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:48:09,982 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:48:09,984 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:48:16,762 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:48:17,219 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:48:17,231 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:48:17,237 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 00:48:38,261 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:48:38,267 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:48:38,272 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:48:38,277 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:48:38,280 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:48:38,280 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:48:53,284 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:49:41,039 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:50:12,865 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:52:32,064 - INFO - Administrator - Opening user login page.
+2024-10-07 00:52:34,828 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 00:52:34,988 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 00:52:35,976 - INFO - Administrator - Opening data view page.
+2024-10-07 00:52:37,830 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:52:37,834 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:52:37,852 - ERROR - Administrator - Error occurred while deleting record with ID 11: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: '../data/000005_ord2\\fmri.nii'
+2024-10-07 00:52:38,923 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:52:40,136 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 00:52:41,013 - INFO - Administrator - Opening data view page.
+2024-10-07 00:52:42,100 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-10-07 00:52:42,102 - INFO - Administrator - Data path for ID 11: ../data/000005_ord2
+2024-10-07 00:52:42,110 - INFO - Administrator - Deleted folder at path: ../data/000005_ord2
+2024-10-07 00:52:42,114 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-10-07 00:52:42,116 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-10-07 00:52:42,116 - INFO - Administrator - Removed row 9 from table.
+2024-10-07 00:52:51,767 - INFO - Administrator - Selected folder: 000005_ord2
+2024-10-07 00:52:52,199 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-10-07 00:52:52,208 - INFO - Administrator - Added new data record with ID 11.
+2024-10-07 00:53:20,358 - INFO - Administrator - Visualization completed for file: ../data/000005_ord2/EEG.edf
+2024-10-07 00:53:46,110 - INFO - Administrator - Preprocessing completed for data: ../data/000005_ord2
+2024-10-07 00:53:47,200 - INFO - Administrator - Upload button called to refresh table.
+2024-10-07 11:02:27,103 - INFO - Administrator - Opening user login page.
+2024-10-07 11:02:30,134 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 11:02:30,303 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 11:02:31,112 - INFO - Administrator - Opening data view page.
+2024-10-07 11:02:34,091 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:02:34,094 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:02:35,738 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:02:38,800 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:02:38,804 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:02:41,155 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Alpha.png
+2024-10-07 11:02:42,544 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:02:42,546 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:02:44,891 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Beta.png
+2024-10-07 11:02:50,505 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:02:50,508 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:02:51,818 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\time_过零率.png
+2024-10-07 11:02:54,144 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:02:54,147 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:02:55,021 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\frequency_band_1.png
+2024-10-07 11:03:00,497 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:03:00,499 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:03:00,525 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\frequency_wavelet.png
+2024-10-07 11:03:04,161 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:03:04,163 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:03:04,176 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\differential_entropy.png
+2024-10-07 11:05:47,328 - INFO - Administrator - Opening user login page.
+2024-10-07 11:05:50,580 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 11:05:50,730 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 11:05:51,700 - INFO - Administrator - Opening data view page.
+2024-10-07 11:05:54,188 - ERROR - Administrator - Image file does not exist: Theta.png
+2024-10-07 11:05:57,326 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:05:57,331 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:05:58,301 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:06:01,405 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:06:03,301 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:03,303 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:04,165 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:06:06,757 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:06,759 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:08,413 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:06:14,493 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:14,497 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:15,423 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:06:16,886 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:16,888 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:19,838 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:19,840 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:23,138 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Beta.png
+2024-10-07 11:06:37,506 - INFO - Administrator - Opening user login page.
+2024-10-07 11:06:40,618 - WARNING - Administrator - Admin login attempt failed: Incorrect username or password for username 'admin'.
+2024-10-07 11:06:44,346 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 11:06:44,500 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 11:06:45,323 - INFO - Administrator - Opening data view page.
+2024-10-07 11:06:48,847 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:48,850 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:49,747 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\frequency_band_1.png
+2024-10-07 11:06:52,870 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:06:52,873 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:06:55,083 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\time_能量.png
+2024-10-07 11:08:33,605 - INFO - Administrator - Opening user login page.
+2024-10-07 11:08:35,491 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 11:08:35,659 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 11:08:36,389 - INFO - Administrator - Opening data view page.
+2024-10-07 11:08:38,642 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:08:38,644 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:08:39,456 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:08:45,106 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:08:45,108 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:08:46,044 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\frequency_band_1.png
+2024-10-07 11:08:55,407 - INFO - Administrator - Returned to admin homepage.
+2024-10-07 11:08:56,984 - INFO - Administrator - Opening data view page.
+2024-10-07 11:09:00,378 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:09:00,380 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:09:01,259 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:11:38,746 - INFO - Administrator - Opening user login page.
+2024-10-07 11:11:41,241 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 11:11:41,412 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 11:11:42,161 - INFO - Administrator - Opening data view page.
+2024-10-07 11:11:44,486 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 11:11:44,489 - INFO - Administrator - Data path retrieved from database: ../data/000005_ord2
+2024-10-07 11:11:45,185 - INFO - Administrator - Successfully displayed image: ../data/000005_ord2\Theta.png
+2024-10-07 11:11:53,255 - INFO - Administrator - Button clicked in row 8, corresponding ID: 10
+2024-10-07 11:11:53,257 - INFO - Administrator - Data path retrieved from database: ../data/000008_jiaolv1
+2024-10-07 11:11:54,173 - ERROR - Administrator - Image file does not exist: ../data/000008_jiaolv1\Theta.png
+2024-10-07 11:11:56,956 - INFO - Administrator - Returned to admin homepage.
