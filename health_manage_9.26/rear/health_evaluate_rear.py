@@ -38,7 +38,8 @@ class UserFilter(logging.Filter):
         self.userType = userType
 
     def filter(self, record):
-        record.userType = self.userType
+        if not hasattr(record, 'userType'):
+            record.userType = self.userType
         return True
 
 class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
@@ -73,7 +74,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-        userType = "Regular user" if user == 0 else "Administrator"
+        userType = "Regular user" if user == '0' else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
@@ -86,6 +87,49 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
+        # 设置默认灯的颜色为灰色
+        self.set_default_led_colors()
+
+        # 修改按钮文本
+        self.pushButton.setText("上一张")
+        self.pushButton_2.setText("下一张")
+
+        # 修改曲线标签的字体大小
+        font = self.curve_label.font()
+        font.setPointSize(10)  # 将字体大小设置为10点
+        self.curve_label.setFont(font)
+        self.curve_label.setWordWrap(True)  # 允许文本换行
+        self.curve_label.setAlignment(Qt.AlignCenter)  # 文本居中对齐
+
+    def set_default_led_colors(self):
+        """设置所有LED为默认的灰色"""
+        default_style = (
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: gray"
+        )
+        self.ordinarystress_led_label.setStyleSheet(default_style)
+        self.depression_led_label.setStyleSheet(default_style)
+        self.anxiety_led_label.setStyleSheet(default_style)
+
+    def update_led_colors(self, result):
+        """根据结果更新LED颜色"""
+        red_style = (
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: red"
+        )
+        
+        if result.result_1:
+            self.ordinarystress_led_label.setStyleSheet(red_style)
+            logging.info("Ordinary stress LED set to RED")
+        
+        if result.result_2:
+            self.depression_led_label.setStyleSheet(red_style)
+            logging.info("Depression LED set to RED")
+        
+        if result.result_3:
+            self.anxiety_led_label.setStyleSheet(red_style)
+            logging.info("Anxiety LED set to RED")
+
     def show_nav(self):
         """
         显示导航栏和状态信息
@@ -94,36 +138,17 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 判断模型是否空闲，即是否有文件存在
         if not os.path.exists('../state/status.txt'):
             self.status_label.setText("模型空闲")
-        # header
+        
+        # 设置所有LED为默认的灰色
+        self.set_default_led_colors()
+
+        # 如果有最新的评估结果，更新LED颜色
         session = SessionClass()
         result = session.query(Result).order_by(Result.id.desc()).first()
         session.close()
-        # 获取tb_result表中最新的一条记录，得到result对象
-        if result is not None:  # result
-            #statu_content = result.health_status  # 健康状态
-            ordinarystress_content = result.result_1
-            depression_content = result.result_2
-            anxiety_content = result.result_3
-            if ordinarystress_content == 1:
-                self.ordinarystress_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:red")
-            else:
-                self.ordinarystress_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:green")
 
-            if depression_content == 1:
-                self.depression_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:red")
-            else:
-                self.depression_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:green")
-
-            if anxiety_content == 1:
-                self.anxiety_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:red")
-            else:
-                self.anxiety_led_label.setStyleSheet(
-                    "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:green")
+        if result is not None:
+            self.update_led_colors(result)
 
     def show_table(self):
         '''
@@ -164,41 +189,63 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
     def show_image(self):
         try:
             self.image_list = [
-                "differential_entropy.png",
-                "frequency_domain_features.png",
-                "theta_alpha_beta_gamma_powers.png",
-                "time_domain_features.png",
-                "time_frequency_features.png"
-            ]  # 图片列表
+                "Theta.png", "Alpha.png", "Beta.png", "Gamma.png",
+                "frequency_band_1.png", "frequency_band_2.png", "frequency_band_3.png", "frequency_band_4.png", "frequency_band_5.png",
+                "time_过零率.png", "time_方差.png", "time_能量.png", "time_差分.png",
+                "frequency_wavelet.png", "differential_entropy.png"
+            ]
 
-            logging.info("Image list initialized with {} items.".format(len(self.image_list)))
+            image_names = [
+                "Theta波段功率", "Alpha波段功率", "Beta波段功率", "Gamma波段功率",
+                "均分频带1", "均分频带2", "均分频带3", "均分频带4", "均分频带5",
+                "时域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
+                "时频域特征 - 小波变换", "微分熵"
+            ]
 
-            # 获取当前索引对应的图片路径
-            image_path = f"{self.data_path}/{self.image_list[self.current_index]}"
+            logging.info(f"Image list initialized with {len(self.image_list)} items.")
+
+            image_path = os.path.join(self.data_path, self.image_list[self.current_index])
             logging.info(f"Attempting to load image from path: {image_path}")
 
-            frame = QImage(image_path)
-            if frame.isNull():
-                logging.error(f"Failed to load image: {image_path}")
-                return
-
-            pix = QPixmap.fromImage(frame)
-            item = QGraphicsPixmapItem(pix)
-            scene = QGraphicsScene()
-            scene.addItem(item)
-
-            self.curve_graphicsView.setScene(scene)
-            self.curve_graphicsView.fitInView(QGraphicsPixmapItem(QPixmap(pix)))
-
-            logging.info(f"Image successfully displayed: {self.image_list[self.current_index]}")
-
-            _translate = QtCore.QCoreApplication.translate
-            self.curve_label.setText(
-                _translate("MainWindow", "EEG特征图: {}".format(self.image_list[self.current_index])))
-            logging.info(f"Label updated to display: EEG特征图: {self.image_list[self.current_index]}")
+            if os.path.exists(image_path):
+                pixmap = QPixmap(image_path)
+                if not pixmap.isNull():
+                    scene = QGraphicsScene()
+                    pixmap_item = QGraphicsPixmapItem(pixmap)
+                    scene.addItem(pixmap_item)
+                    self.curve_graphicsView.setScene(scene)
+                    self.curve_graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
+                    
+                    # 更新图像标题，限制文本长度
+                    title = f"EEG特征图: {image_names[self.current_index]}"
+                    if len(title) > 30:  # 如果标题超过30个字符
+                        title = title[:27] + "..."  # 截断并添加省略号
+                    self.curve_label.setText(title)
+                    logging.info(f"Successfully displayed image: {image_names[self.current_index]}")
+                else:
+                    logging.error(f"Failed to load image: {image_path}")
+                    self.curve_label.setText("无法加载图片")
+            else:
+                logging.error(f"Image file does not exist: {image_path}")
+                self.curve_label.setText("图片文件不存在")
 
         except Exception as e:
             logging.error(f"An error occurred while showing the image: {e}")
+            self.curve_label.setText("显示图片时发生错误")
+
+    def next_image(self):
+        if self.current_index < len(self.image_list) - 1:
+            self.current_index += 1
+        else:
+            self.current_index = 0
+        self.show_image()
+
+    def previous_image(self):
+        if self.current_index > 0:
+            self.current_index -= 1
+        else:
+            self.current_index = len(self.image_list) - 1
+        self.show_image()
 
     # btn_return返回首页
     def return_index(self):
@@ -218,28 +265,6 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 隐藏当前窗口并显示新的首页
         self.hide()
         self.index.show()
-
-    def next_image(self):
-        """
-        显示下一张图片
-        """
-        # 更新索引到下一张图片
-        if self.current_index < len(self.image_list) - 1:
-            self.current_index += 1
-        else:
-            self.current_index = 0  # 回到第一张图片
-        self.show_image()
-
-    def previous_image(self):
-        """
-        显示上一张图片
-        """
-        # 更新索引到上一张图片
-        if self.current_index > 0:
-            self.current_index -= 1
-        else:
-            self.current_index = len(self.image_list) - 1  # 回到最后一张图片
-        self.show_image()
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
@@ -276,13 +301,11 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         button = self.sender()
         if button:
             try:
-                # 确定位置并获取当前行数据的ID值
                 row = self.tableWidget.indexAt(button.parent().pos()).row()
                 id = self.tableWidget.item(row, 0).text()
-                self.id = int(id)  # 全局使用
+                self.id = int(id)
                 logging.info(f"Button clicked in row {row}, ID: {self.id}")
 
-                # 通过self.id获取到tb_data表中对应数据的路径
                 session = SessionClass()
                 data = session.query(Data).filter(Data.id == self.id).first()
                 if data:
@@ -293,45 +316,14 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     result = session.query(Result).filter(Result.id == self.id).first()
                     session.close()
                     if result:
-                        logging.info(
-                            f"Results retrieved for ID {self.id}: result_1={result.result_1}, result_2={result.result_2}, result_3={result.result_3}")
+                        # 重置所有LED为灰色
+                        self.set_default_led_colors()
+                        # 根据结果更新LED颜色
+                        self.update_led_colors(result)
 
-                        # 根据result_1设置health_led_label
-                        if result.result_1:
-                            self.ordinarystress_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: red"
-                            )
-                            logging.info("Health LED label set to RED")
-                        else:
-                            self.ordinarystress_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: green"
-                            )
-                            logging.info("Health LED label set to GREEN")
-
-                        # 根据result_2设置acoustic_led_label
-                        if result.result_2:
-                            self.depression_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: red"
-                            )
-                            logging.info("Acoustic LED label set to RED")
-                        else:
-                            self.depression_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: green"
-                            )
-                            logging.info("Acoustic LED label set to GREEN")
-
-                        # 根据result_3设置mechanical_led_label
-                        if result.result_3:
-                            self.anxiety_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: red"
-                            )
-                            logging.info("Mechanical LED label set to RED")
-                        else:
-                            self.anxiety_led_label.setStyleSheet(
-                                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; border-radius: 16px; border: 2px solid white; background: green"
-                            )
-                            logging.info("Mechanical LED label set to GREEN")
-
+                        self.current_index = 0  # 重置当前显示的图片索引
+                        logging.info("Initializing current image index to 0")
+                        self.show_image()
                     else:
                         logging.warning(f"No evaluation results found for ID {self.id}")
                         QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.id} 的评估结果")
@@ -340,12 +332,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     logging.warning(f"No data record found for ID {self.id}")
                     QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.id} 的数据记录")
 
-                self.current_index = 0  # 当前显示的图片索引
-                logging.info("Initializing current image index to 0")
-                self.show_image()
-
             except Exception as e:
-                logging.error(f"An error occurred in checkbutton: {e}")
+                logging.error(f"An error occurred in checkButton: {e}")
+                QMessageBox.critical(self, "错误", f"查看数据时发生错误: {str(e)}")
 
     # 调用模型
     def status_model(self, data_path):  # 需要修改 暂未修改 todo
@@ -412,7 +401,6 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
     def waitTestRes(self, result):
         with open('../state/status.txt', mode='r', encoding='utf-8') as f:
             contents = f.readlines()  # 获取模型开始运行的时间
-            f.close()
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         self.result_list.append(result)  # 将评估结果添加到结果列表中
         self.completed_models += 1  # 增加已完成的模型数量
@@ -424,33 +412,47 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:
                 self.status_label.setText("模型空闲")
+            
             session = SessionClass()
-            existing_result = session.query(Result).filter(Result.id == self.data_id).first()
-            if existing_result is not None:
-                # 如果数据库中已经存在具有当前ID的数据，显示一个提示框询问用户是否要覆盖现有的数据
-                box = QMessageBox(QMessageBox.Question, "提示", "数据库中已经存在当前ID的数据，是否覆盖？")
-                yes_button = box.addButton(self.tr("是"), QMessageBox.YesRole)
-                no_button = box.addButton(self.tr("否"), QMessageBox.NoRole)
-                box.exec_()
-                if box.clickedButton() == yes_button:
-                    # 如果用户选择"是"，则覆盖现有的数据
-                    existing_result.result_1 = self.result_list[0]
-                    existing_result.result_2 = self.result_list[1]
-                    existing_result.result_3 = self.result_list[2]
-                    existing_result.result_time = self.result_time
-                elif box.clickedButton() == no_button:
-                    # 如果用户选择"否"，则不做任何处理
-                    pass
-            else:
-                # 如果数据库中不存在具有当前ID的数据，直接添加新的数据
-                uploadresult = Result(id=self.data_id, result_1=self.result_list[0], result_2=self.result_list[1],
-                                      result_3=self.result_list[2], result_time=self.result_time)
-                session.add(uploadresult)
+            try:
+                existing_result = session.query(Result).filter(Result.id == self.data_id).first()
+                if existing_result is not None:
+                    # 如果数据库中已经存在具有当前ID的数据，显示一个提示框询问用户是否要覆盖现有的数据
+                    box = QMessageBox(QMessageBox.Question, "提示", "数据库中已经存在当前ID的数据，是否覆盖？")
+                    yes_button = box.addButton(self.tr("是"), QMessageBox.YesRole)
+                    no_button = box.addButton(self.tr("否"), QMessageBox.NoRole)
+                    box.exec_()
+                    if box.clickedButton() == yes_button:
+                        # 如果用户选择"是"，则覆盖现有的数据
+                        existing_result.result_1 = self.result_list[0]
+                        existing_result.result_2 = self.result_list[1]
+                        existing_result.result_3 = self.result_list[2]
+                        existing_result.result_time = self.result_time
+                    elif box.clickedButton() == no_button:
+                        # 如果用户选择"否"，则不做任何处理
+                        pass
+                else:
+                    # 如果数据库中不存在具有当前ID的数据，直接添加新的数据
+                    uploadresult = Result(id=self.data_id, result_1=self.result_list[0], result_2=self.result_list[1],
+                                          result_3=self.result_list[2], result_time=self.result_time)
+                    session.add(uploadresult)
 
-            session.commit()
-            session.close()
-            self.result_list=[]
-            self.show_nav()
+                session.commit()
+                
+                # 重新查询结果以确保它与会话关联
+                result_to_update = session.query(Result).filter(Result.id == self.data_id).first()
+                
+                # 重置所有LED为灰色
+                self.set_default_led_colors()
+                # 根据结果更新LED颜色
+                if result_to_update:
+                    self.update_led_colors(result_to_update)
+                
+                self.show_nav()
+            finally:
+                session.close()
+            
+            self.result_list = []
 
         # 评估按钮功能
 
@@ -460,55 +462,67 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.current_model_index = 0
         self.completed_models = 0
         if button:
-            row = self.tableWidget.indexAt(button.parent().pos()).row()  # 当前按钮所在行
-            id = self.tableWidget.item(row, 0).text()
-            self.data_id = id
-            '''
-            根据id获取数据路径
-            data_path = 
-            获取tb_train中当前使用的模型路径以及模型id
-            self.model_id =    # 模型id设为全局变量，后续保存结果到数据库时使用（**重要**）
-            model_path = 
-            '''
-            session = SessionClass()
-            data1 = session.query(Data).filter(Data.id == id).first()
-            self.data_path = data1.data_path
-            model_0 = session.query(Model).filter(Model.model_type == 0).first()
-            model_1 = session.query(Model).filter(Model.model_type == 1).first()
-            model_2 = session.query(Model).filter(Model.model_type == 2).first()
-            session.close()
+            try:
+                row = self.tableWidget.indexAt(button.parent().pos()).row()  # 当前按钮所在行
+                id = self.tableWidget.item(row, 0).text()
+                self.data_id = id
 
-            missing_models = []
-            if model_0 is None:
-                missing_models.append("普通应激模型")
-            if model_1 is None:
-                missing_models.append("抑郁模型")
-            if model_2 is None:
-                missing_models.append("焦虑模型")
+                session = SessionClass()
+                try:
+                    data1 = session.query(Data).filter(Data.id == id).first()
+                    if data1 is None:
+                        QMessageBox.warning(self, "警告", "数据不存在，无法进行评估。")
+                        return  # 如果数据不存在，直接返回，不进入评估状态
+                    self.data_path = data1.data_path
+                    
+                    if not os.path.exists(self.data_path):
+                        QMessageBox.warning(self, "警告", f"数据路径不存在: {self.data_path}")
+                        return  # 如果数据路径不存在，直接返回
 
-            if missing_models:
-                box = QMessageBox(QMessageBox.Information, "提示",
-                                  "当前没有以下模型，请先上传模型：\n" + "\n".join(missing_models))
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
-                if box.clickedButton() == qyes:
-                    self.open_model_control_view()
-            else:
-                self.model_list = [(model_0.model_type, model_0.model_path),
-                                   (model_1.model_type, model_1.model_path),
-                                   (model_2.model_type, model_2.model_path)]
-                # 检查每个模型路径是否真的存在文件
-                for model_type, model_path in self.model_list:
-                    if not os.path.exists(model_path):
+                    model_0 = session.query(Model).filter(Model.model_type == 0).first()
+                    model_1 = session.query(Model).filter(Model.model_type == 1).first()
+                    model_2 = session.query(Model).filter(Model.model_type == 2).first()
+                finally:
+                    session.close()
+
+                missing_models = []
+                if model_0 is None:
+                    missing_models.append("普通应激模型")
+                if model_1 is None:
+                    missing_models.append("抑郁模型")
+                if model_2 is None:
+                    missing_models.append("焦虑模型")
+
+                if missing_models:
+                    box = QMessageBox(QMessageBox.Information, "提示",
+                                      "当前没有以下模型，请先上传模型：\n" + "\n".join(missing_models))
+                    qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                    box.exec_()
+                    if box.clickedButton() == qyes:
+                        self.open_model_control_view()
+                else:
+                    self.model_list = [(model_0.model_type, model_0.model_path),
+                                       (model_1.model_type, model_1.model_path),
+                                       (model_2.model_type, model_2.model_path)]
+                    # 检查每个模型路径是否真的存在文件
+                    missing_model_files = []
+                    for model_type, model_path in self.model_list:
+                        if not os.path.exists(model_path):
+                            missing_model_files.append(model_path)
+
+                    if missing_model_files:
                         box = QMessageBox(QMessageBox.Information, "提示",
-                                          "模型文件不存在，请重新上传模型：\n" + model_path)
+                                          "以下模型文件不存在，请重新上传模型：\n" + "\n".join(missing_model_files))
                         qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
                         box.exec_()
                         if box.clickedButton() == qyes:
                             self.open_model_control_view()
-                        return  # 如果文件不存在，直接返回，不执行后续的self.status_model(self.data_path)
+                        return  # 如果有文件不存在，直接返回
 
-                self.status_model(self.data_path)
+                    self.status_model(self.data_path)
+            except Exception as e:
+                logging.error(f"An error occurred in EvaluateButton: {str(e)}")
+                QMessageBox.critical(self, "错误", f"评估过程中发生错误: {str(e)}")
 
     def open_model_control_view(self):
         logging.info("Opening model control view.")
