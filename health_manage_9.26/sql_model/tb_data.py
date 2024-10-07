@@ -12,3 +12,4 @@ class Data(declarative_base()):
     upload_user = Column(Integer, nullable=False, comment='0/1,0是普通用户，1是管理员')
     personnel_name = Column(String(255), comment='人员姓名')
     user_id = Column(Integer, nullable=False)
+    upload_time = Column(DateTime)  # 添加这一行

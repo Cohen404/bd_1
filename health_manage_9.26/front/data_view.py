@@ -58,7 +58,7 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
         # 表格
-        self.lst = ['ID', '人员id', '姓名', '文件路径', '上传用户', '操作']
+        self.lst = ['ID', '人员id', '姓名', '文件路径', '上传用户', '上传时间', '操作']
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(9)
@@ -77,6 +77,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnWidth(0, 50)  # 第一列（ID）
         self.tableWidget.setColumnWidth(1, 50)  # 第二列（人员id）
         self.tableWidget.setColumnWidth(3, 200)  # 第四列（文件路径）
+        self.tableWidget.setColumnWidth(5, 150)  # 为上传时间列设置合适的宽度
 
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 2)
         # 上传按钮

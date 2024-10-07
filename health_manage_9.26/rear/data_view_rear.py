@@ -131,8 +131,12 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             self.tableWidget.setItem(row, 2, QTableWidgetItem(data.personnel_name))
             self.tableWidget.setItem(row, 3, QTableWidgetItem(data.data_path))
             self.tableWidget.setItem(row, 4, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
+            if data.upload_time:
+                self.tableWidget.setItem(row, 5, QTableWidgetItem(data.upload_time.strftime("%Y-%m-%d %H:%M:%S")))
+            else:
+                self.tableWidget.setItem(row, 5, QTableWidgetItem("N/A"))
             
-            self.tableWidget.setCellWidget(row, 5, self.buttonForRow())
+            self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
 
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
@@ -238,15 +242,16 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     if max_id is None:
                         max_id = 0
                     max_id = max_id + 1
+                    current_time = datetime.now()
 
                     session = SessionClass()
                     data = Data(id=max_id, personnel_id=folder_name_personnel_id, data_path=data_path, upload_user=user,
-                                personnel_name=folder_name_personnel_name, user_id=self.user_id)
+                                personnel_name=folder_name_personnel_name, user_id=self.user_id, upload_time=current_time)
                     session.add(data)
                     session.commit()
                     session.close()
 
-                    logging.info(f"Added new data record with ID {max_id}.")
+                    logging.info(f"Added new data record with ID {max_id} at {current_time}.")
                     if hadprocessed:
                         pass
                     else:
@@ -293,7 +298,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         session.close()
         info = []
         if kk is not None:
-            info.append([kk.id, kk.personnel_id, kk.data_path, kk.upload_user, kk.personnel_name])
+            info.append([kk.id, kk.personnel_id, kk.data_path, kk.upload_user, kk.personnel_name, kk.upload_time])
 
         for data in info:
             row = self.tableWidget.rowCount()  # 当前form有多少行，最后一行是第row-1行
@@ -317,6 +322,8 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     content = data[2]
                 elif i == 4:
                     content = user_name  # user_name上边已经处理过
+                elif i == 5:
+                    content = data[5].strftime("%Y-%m-%d %H:%M:%S") if data[5] else "N/A"
                 item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
                 self.tableWidget.setItem(row, i, item)
             self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加入按钮

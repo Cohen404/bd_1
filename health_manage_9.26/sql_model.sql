@@ -29,23 +29,22 @@ CREATE TABLE `tb_data` (
   `upload_user` int(11) NOT NULL COMMENT '0/1,0是普通用户，1是管理员',
   `personnel_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `upload_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of tb_data
--- ----------------------------
-INSERT INTO `tb_data` (`id`, `personnel_id`, `data_path`, `upload_user`, `personnel_name`, `user_id`) VALUES 
-(2, 4, '../data/000004_test', 0, 'test', 1),
-(3, 9, '../data/000009_yiyu6', 1, 'yiyu6', 1),
-(4, 10, '../data/000010_yiyu5', 1, 'yiyu5', 1),
-(5, 11, '../data/000011_yiyu4', 1, 'yiyu4', 1),
-(6, 12, '../data/000012_yiyu3', 1, 'yiyu3', 1),
-(7, 13, '../data/000013_yiyu2', 1, 'yiyu2', 1),
-(8, 14, '../data/000014_jiaolv2', 1, 'jiaolv2', 1),
-(9, 7, '../data/000007_yiyu1', 1, 'yiyu1', 1),
-(10, 8, '../data/000008_jiaolv1', 1, 'jiaolv1', 1),
-(11, 15, '../data/000015_yingji1', 1, 'yingji1', 1);
+-- 修改初始化数据，添加上传时间
+INSERT INTO `tb_data` (`id`, `personnel_id`, `data_path`, `upload_user`, `personnel_name`, `user_id`, `upload_time`) VALUES 
+(2, 4, '../data/000004_test', 0, 'test', 1, '2024-09-14 13:20:32'),
+(3, 9, '../data/000009_yiyu6', 1, 'yiyu6', 1, '2024-09-14 13:20:41'),
+(4, 10, '../data/000010_yiyu5', 1, 'yiyu5', 1, '2024-09-14 13:20:47'),
+(5, 11, '../data/000011_yiyu4', 1, 'yiyu4', 1, '2024-09-14 13:21:02'),
+(6, 12, '../data/000012_yiyu3', 1, 'yiyu3', 1, '2024-09-14 13:21:25'),
+(7, 13, '../data/000013_yiyu2', 1, 'yiyu2', 1, '2024-09-14 13:21:57'),
+(8, 14, '../data/000014_jiaolv2', 1, 'jiaolv2', 1, '2024-09-14 13:22:16'),
+(9, 7, '../data/000007_yiyu1', 1, 'yiyu1', 1, '2024-09-14 13:22:53'),
+(10, 8, '../data/000008_jiaolv1', 1, 'jiaolv1', 1, '2024-09-14 13:23:45'),
+(11, 15, '../data/000015_yingji1', 1, 'yingji1', 1, '2024-09-14 13:26:55');
 
 -- ----------------------------
 -- Table structure for tb_model

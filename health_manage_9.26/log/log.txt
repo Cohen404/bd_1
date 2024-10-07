@@ -3253,3 +3253,16 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-10-07 12:19:53,542 - INFO - Administrator - Opening data view page.
 2024-10-07 12:19:55,356 - INFO - Administrator - Returned to user homepage.
 2024-10-07 12:19:58,705 - INFO - Administrator - Opening admin login page.
+2024-10-07 20:29:39,134 - INFO - Administrator - Opening user login page.
+2024-10-07 20:29:43,122 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 20:29:43,311 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 20:39:53,354 - INFO - Administrator - Opening user login page.
+2024-10-07 20:39:55,243 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 20:39:55,467 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 20:41:19,827 - INFO - Administrator - Opening user login page.
+2024-10-07 20:41:22,513 - INFO - Administrator - Admin login successful for username 'admin'.
+2024-10-07 20:41:22,770 - INFO - Administrator - Username 'admin' set as current user.
+2024-10-07 20:41:23,470 - INFO - Administrator - Opening data view page.
+2024-10-07 20:41:32,114 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
+2024-10-07 20:41:32,117 - INFO - Administrator - Data path retrieved from database: ../data/000015_yingji1
+2024-10-07 20:41:32,980 - ERROR - Administrator - Image file does not exist: ../data/000015_yingji1\Theta.png
