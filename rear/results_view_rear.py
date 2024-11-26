@@ -77,7 +77,6 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
         # 连接按钮事件
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
-        self.btn_delete.clicked.connect(self.delete_result)  # 删除结果
 
     def get_user_type(self, user_id):
         """
@@ -215,56 +214,6 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"Error displaying results table: {str(e)}")
             QMessageBox.critical(self, "错误", f"显示结果表格失败：{str(e)}")
-        finally:
-            session.close()
-
-    def delete_result(self):
-        """
-        删除选中的结果
-        """
-        # 获取选中的行
-        selected_items = self.tableWidget.selectedItems()
-        if not selected_items:
-            QMessageBox.warning(self, "警告", "请先选择要删除的结果")
-            return
-
-        # 确认删除
-        reply = QMessageBox.question(self, '确认', '确定要删除选中的结果吗？',
-                                   QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        if reply == QMessageBox.No:
-            return
-
-        # 获取结果ID
-        row = selected_items[0].row()
-        result_id = int(self.tableWidget.item(row, 0).text())
-
-        session = SessionClass()
-        try:
-            # 查找结果
-            result = session.query(Result).filter(Result.id == result_id).first()
-            if not result:
-                QMessageBox.warning(self, "错误", "找不到要删除的结果")
-                return
-
-            # 检查权限
-            if not self.user_type and result.user_id != self.user_id:
-                QMessageBox.warning(self, "错误", "您没有权限删除其他用户的结果")
-                return
-
-            # 删除结果
-            session.delete(result)
-            session.commit()
-            
-            # 刷新表格
-            self.show_table()
-            
-            QMessageBox.information(self, "成功", "结果删除成功")
-            logging.info(f"Result {result_id} deleted successfully")
-
-        except Exception as e:
-            session.rollback()
-            logging.error(f"Error deleting result {result_id}: {str(e)}")
-            QMessageBox.critical(self, "错误", f"删除结果失败：{str(e)}")
         finally:
             session.close()
 

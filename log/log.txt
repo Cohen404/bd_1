@@ -3337,3 +3337,16 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 16:56:09,283 - INFO - Administrator - Results table refreshed successfully
 2024-11-26 16:56:09,285 - INFO - Administrator - Opening results view page.
 2024-11-26 16:56:13,365 - INFO - Administrator - Returned to admin homepage
+2024-11-26 17:01:53,238 - INFO - Administrator - Opening user login page.
+2024-11-26 17:01:58,299 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:01:58,422 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:02:00,139 - INFO - Administrator - Successfully retrieved current user: admin
+2024-11-26 17:02:00,143 - INFO - Administrator - Results table refreshed successfully
+2024-11-26 17:02:00,144 - INFO - Administrator - Opening results view page.
+2024-11-26 17:02:03,217 - INFO - Administrator - Returned to admin homepage
+2024-11-26 17:02:04,345 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 17:02:04,349 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 17:02:05,388 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 17:02:07,006 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 17:02:07,009 - INFO - Administrator - Opening data view page.
+2024-11-26 17:02:10,952 - INFO - Administrator - Returned to admin homepage.

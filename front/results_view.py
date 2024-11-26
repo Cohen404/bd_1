@@ -245,17 +245,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderLabels(self.lst)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.verticalLayout.addWidget(self.tableWidget)
-
-        # 添加删除按钮
-        self.btn_delete = QtWidgets.QPushButton(self.widget1)
-        self.btn_delete.setObjectName("btn_delete")
-        self.btn_delete.setText("删除选中结果")
-        self.btn_delete.setStyleSheet("background-color: white; padding: 5px;")
-        self.verticalLayout.addWidget(self.btn_delete)
 
         self.gridLayout.addWidget(self.widget1, 1, 0, 2, 2)
 

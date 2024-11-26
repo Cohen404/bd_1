@@ -101,3 +101,11 @@ AttributeError: 'Results_View_WindowActions' object has no attribute 'btn_delete
 
 
 点击结果查看，提示显示表格失败: foreign key associated with colum ' tb_result.user_id' could not find table 'tb_user' with which to generatea foreighn key to target column 'user_id'
+
+
+
+
+
+
+
+去除结果查看中的删除结果按钮，现在结果不允许删除。
