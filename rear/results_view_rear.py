@@ -254,20 +254,37 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
     def return_index(self):
         """
-        返回首页
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
         """
         path = '../state/user_status.txt'
-        user = operate_user.read(path)
-
-        if user == '0':  # 返回系统首页
-            self.index = index_rear.Index_WindowActions()
-            logging.info("Returned to user homepage")
-        elif user == '1':  # 返回管理员首页
-            self.index = admin_rear.AdminWindowActions()
-            logging.info("Returned to admin homepage")
-
-        self.close()
-        self.index.show()
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+            else:
+                index_window = index_rear.Index_WindowActions()
+            
+            self.close()
+            index_window.show()
+            
+        except Exception as e:
+            logging.error(f"Error in return_index: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

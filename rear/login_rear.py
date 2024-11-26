@@ -105,34 +105,25 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
                 # 保存用户状态
                 print(f"保存用户登录状态: ID={user.user_id}, 用户名={user.username}, 类型={user.user_type}")
                 
-                # 保存用户类型到user_status.txt
+                # 保存用户名到user_status.txt
                 path = '../state/user_status.txt'
+                operate_user.save_user(path, user.username)
+                
+                # 根据用户类型跳转到相应页面
                 if user.user_type == 'admin':
-                    operate_user.admin_user(path)  # 设置标志为1表示管理员访问
-                    # 进入管理员页面
                     self.admin = admin_rear.AdminWindowActions()
                     self.close()
                     self.admin.show()
                 else:
-                    operate_user.ordinary_user(path)  # 设置标志为0表示普通用户访问
                     self.ordinary_user = index_rear.Index_WindowActions()
                     self.close()
                     self.ordinary_user.show()
-                
-                # 保存用户ID到current_user.txt
-                try:
-                    with open('../state/current_user.txt', 'w') as f:
-                        f.write(user.user_id)
-                    print(f"用户ID已保存到current_user.txt: {user.user_id}")
-                except Exception as e:
-                    print(f"保存用户ID时出错: {str(e)}")
-                    logging.error(f"Error saving user ID: {str(e)}")
 
                 # 更新最后登录时间
                 user.last_login = datetime.now()
                 session.commit()
                 
-                logging.info(f"User ID '{user.user_id}' set as current user")
+                logging.info(f"User '{user.username}' logged in successfully")
                 
         except Exception as e:
             logging.error(f"Login error: {str(e)}")

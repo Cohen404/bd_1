@@ -1,30 +1,20 @@
 # 文件功能：日志管理界面的后端逻辑
 # 该脚本实现了日志管理界面的功能，包括显示日志内容、返回首页等操作
 
-import os
 import sys
-
-import logging
 sys.path.append('../')
-import time
-
-import numpy as np
-import scipy.io as scio
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog, QMessageBox, QTableWidgetItem, \
-    QGraphicsPixmapItem, QGraphicsScene, QInputDialog, QLineEdit, QTextEdit
-from PyQt5 import QtWidgets
+import os
 from datetime import datetime
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem, QWidget, QPushButton, QHBoxLayout
 import state.operate_user as operate_user
-
 # 导入本页面的前端部分
 import front.log_manage as log_manage
-
 # 导入跳转页面的后端部分
-from rear import index_rear
-from rear import admin_rear
-
+from rear import index_rear, admin_rear
+from sql_model.tb_user import User
+from util.db_util import SessionClass
+import logging
 from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
@@ -98,26 +88,39 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
     # btn_return返回首页
     def return_index(self):
         """
-        返回首页的回调函数
-        根据用户类型返回相应的首页
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
         """
+        path = '../state/user_status.txt'
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
         try:
-            path = '../state/user_status.txt'
-            user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-
-            if user == '0':  # 返回系统首页
-                self.index = index_rear.Index_WindowActions()
-                logging.info("Regular user returned to the system homepage.")
-            elif user == '1':  # 返回管理员首页
-                self.index = admin_rear.AdminWindowActions()
-                logging.info("Administrator returned to the admin homepage.")
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+                logging.info("Returning to admin homepage")
             else:
-                logging.warning(f"Unexpected user status found in {path}: {user}")
-
+                index_window = index_rear.Index_WindowActions()
+                logging.info("Returning to user homepage")
+            
             self.close()
-            self.index.show()
+            index_window.show()
+            
         except Exception as e:
-            logging.error(f"Error while returning to index: {str(e)}")
+            logging.error(f"Error in return_index: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
 
 if __name__ == '__main__':

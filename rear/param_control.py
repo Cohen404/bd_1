@@ -18,6 +18,7 @@ from rear import index_rear, admin_rear
 from state import operate_user
 from util.db_util import SessionClass
 from sql_model.tb_parameters import Parameters
+from sql_model.tb_user import User
 
 import logging
 
@@ -59,24 +60,43 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
 
-        # 添加过滤器
+        # 添加��滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
     def returnIndex(self):
         """
-        返回主页的处理函数
-        根据用户类型返回相应的首页
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
         """
         path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-
-        if user == '0':  # 返回系统首页
-            self.index = index_rear.Index_WindowActions()
-        elif user == '1':  # 返回管理员首页
-            self.index = admin_rear.AdminWindowActions()
-        self.close()
-        self.index.show()
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+            else:
+                index_window = index_rear.Index_WindowActions()
+            
+            self.close()
+            index_window.show()
+            
+        except Exception as e:
+            logging.error(f"Error in returnIndex: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
     def savetoDB(self):
         """

@@ -134,6 +134,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.ordinarystress_led_label, 0, 0, 1, 1)
         self.ordinarystress_label = QtWidgets.QLabel(self.classifer)
         self.ordinarystress_label.setObjectName("ordinarystress_label")
+        self.ordinarystress_label.setText("普通应激 (0.0%)")
+        self.ordinarystress_label.setStyleSheet("color: white; font-size: 14px;")
         self.gridLayout.addWidget(self.ordinarystress_label, 0, 1, 1, 1)
         # 抑郁
         self.depression_led_label = QtWidgets.QLabel(self.classifer)
@@ -144,17 +146,20 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.depression_led_label, 1, 0, 1, 1)
         self.depression_label = QtWidgets.QLabel(self.classifer)
         self.depression_label.setObjectName("depression_label")
+        self.depression_label.setText("抑郁 (0.0%)")
+        self.depression_label.setStyleSheet("color: white; font-size: 14px;")
         self.gridLayout.addWidget(self.depression_label, 1, 1, 1, 1)
         # 焦虑
         self.anxiety_led_label = QtWidgets.QLabel(self.classifer)
         self.anxiety_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:white")
-
         self.anxiety_led_label.setText("")
         self.anxiety_led_label.setObjectName("anxiety_led_label")
         self.gridLayout.addWidget(self.anxiety_led_label, 2, 0, 1, 1)
         self.anxiety_label = QtWidgets.QLabel(self.classifer)
         self.anxiety_label.setObjectName("anxiety_label")
+        self.anxiety_label.setText("焦虑 (0.0%)")
+        self.anxiety_label.setStyleSheet("color: white; font-size: 14px;")
         self.gridLayout.addWidget(self.anxiety_label, 2, 1, 1, 1)
 
         self.verticalLayout.addWidget(self.classifer)

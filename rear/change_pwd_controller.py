@@ -76,7 +76,7 @@ class change_pwd_Controller(QWidget):
         form_layout = QGridLayout()
         form_layout.setSpacing(20)
 
-        # 创建标签和输入框
+        # 创建标签和输入��
         labels = ['原密码:', '新密码:', '确认新密码:']
         self.old_pwd = QLineEdit()
         self.new_pwd = QLineEdit()
@@ -193,7 +193,7 @@ class change_pwd_Controller(QWidget):
                 logging.warning(f"Password change failed for user '{current_user_id}': incorrect old password")
                 return
 
-            print(f"验证用户信息: ID={user.user_id}, 用户名={user.username}")
+            print(f"验证用户���息: ID={user.user_id}, 用户名={user.username}")
 
             # 更新密码
             user.password = new_pwd
@@ -218,27 +218,37 @@ class change_pwd_Controller(QWidget):
 
     def returnIndex(self):
         """
-        返回首页
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
         """
         path = '../state/user_status.txt'
-        user = operate_user.read(path)
-        window_manager = WindowManager()
-
-        if user == '0':  # 普通用户
-            logging.info("Returning to user homepage")
-            self.index = index_rear.Index_WindowActions()
-            window_manager.register_window('index', self.index)
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+            else:
+                index_window = index_rear.Index_WindowActions()
+            
             self.close()
-            window_manager.show_window('index')
-        elif user == '1':  # 管理员
-            logging.info("Returning to admin homepage")
-            self.index = admin_rear.AdminWindowActions()
-            window_manager.register_window('admin', self.index)
-            self.close()
-            window_manager.show_window('admin')
-        else:
-            logging.warning("Unknown user type found in user status file")
-            return
+            index_window.show()
+            
+        except Exception as e:
+            logging.error(f"Error in returnIndex: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

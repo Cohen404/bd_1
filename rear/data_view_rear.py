@@ -201,7 +201,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         finally:
             session.close()
 
-    # 定义通道选择对应的事件（没用但不能删）
+    # 定义通道选���对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
         """
         通道选择的回调函数（目前未使用）
@@ -389,7 +389,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     content = data[5].strftime("%Y-%m-%d %H:%M:%S") if data[5] else "N/A"
                 item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
                 self.tableWidget.setItem(row, i, item)
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加���按钮
+            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加按钮
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
@@ -558,7 +558,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from tb_data.")
 
-                    # 删除result表中对应的数据
+                    # 删除result表中对应��数据
                     session.query(Result).filter(Result.id == id).delete()
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from result table.")
@@ -575,18 +575,38 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     # btn_return返回首页
     def return_index(self):
+        """
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
+        """
         path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-
-        if user == '0':  # 返回系统首页
-            self.index = index_rear.Index_WindowActions()
-            logging.info("Returned to user homepage.")
-        elif user == '1':  # 返回管理员首页
-            self.index = admin_rear.AdminWindowActions()
-            logging.info("Returned to admin homepage.")
-
-        self.close()
-        self.index.show()
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+            else:
+                index_window = index_rear.Index_WindowActions()
+            
+            self.close()
+            index_window.show()
+            
+        except Exception as e:
+            logging.error(f"Error in return_index: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
     def get_current_user(self):
         """

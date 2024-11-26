@@ -56,12 +56,39 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         super(health_evaluate.Ui_MainWindow, self).__init__()
         self.setupUi(self)  # 初始化health_evaluate方法
         
-        # 从文件中读取用户类型并设置userType
+        # 从文件中读取用户ID
         path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-        self.user_id = int(user)
-        self.user_type = self.get_user_type(self.user_id)
-        userType = "Regular user" if self.user_type == 0 else "Administrator"
+        user_status = operate_user.read(path)
+        print(f"Read user_status from file: {user_status}")  # 调试日志
+        
+        # 获取用户类型
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    print(f"Invalid user status: {user_status}")
+                    user = None
+
+            if user:
+                self.user_type = user.user_type == 'admin'
+                self.user_id = user.user_id
+                self.username = user.username
+                userType = "Administrator" if self.user_type else "Regular user"
+                print(f"Found user: {user.username}, type: {user.user_type}, id: {user.user_id}")
+            else:
+                self.user_type = False
+                self.user_id = None
+                self.username = None
+                userType = "Unknown user"
+                print(f"User not found in database: {user_status}")
+        finally:
+            session.close()
 
         # 配置 logging 模块
         logging.basicConfig(
@@ -188,7 +215,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         if not os.path.exists('../state/status.txt'):
             self.status_label.setText("模型空闲")
         
-        # 设置所有LED为默认的灰色
+        # 设置所有LED为默认灰色
         self.set_default_led_colors()
 
         # 如果有最新的评估结果，更新LED颜色
@@ -203,40 +230,56 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         '''
         从数据库tb_data获取data对象list
         遍历每个data对象，将每个data对象的data.id，personal_id、data_path、upload_user添加到table中
+        管理员可以查看所有数据，普通用户只能查看自己上传的数据
         '''
         session = SessionClass()
-        if self.user_type == 1:  # 管理员
-            kk = session.query(Data).all()
-        else:  # 普通用户
-            kk = session.query(Data).filter(Data.user_id == self.user_id).all()
-        session.close()
-        info = []
-        for item in kk:
-            info.append([item.id, item.personnel_id, item.data_path,item.upload_user])
-        for data in info:
-            row = self.tableWidget.rowCount()  # 当前form有多少行，最后一行是第row-1行
-            self.tableWidget.insertRow(row)  # 创建新的行
+        try:
+            print(f"show_table - user_type: {self.user_type}, user_id: {self.user_id}")  # 调试日志
+            
+            # 根据用户类型获取数据
+            if self.user_type:  # 管理员
+                data_list = session.query(Data).all()
+                print(f"Administrator query - found {len(data_list)} records")  # 调试日志
+                logging.info(f"Administrator {self.user_id}: fetching all data records")
+            else:  # 普通用户
+                data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
+                print(f"Regular user query - found {len(data_list)} records")  # 调试日志
+                logging.info(f"Regular user {self.user_id}: fetching own data records")
 
-            #if data[2] == 0:  # info[2]等价于data.upload_user_id
-            if data[3] == 0:
-                user_name = '普通用户'
-            else:
-                user_name = '管理员'
-            for i in range(len(self.lst) - 1):
-                item = QTableWidgetItem()
-                # 获得上传数据信息，将其添加到form中
-                content = ''
-                if i == 0:
-                    content = data[0]  # 对应data.id
-                elif i==1:
-                   content = data[1]
-                elif i==2:
-                    content = data[2]
-                elif i == 3:
-                    content = user_name
-                item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
-                self.tableWidget.setItem(row, i, item)
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加入按钮
+            # 清空现有表格内容
+            self.tableWidget.setRowCount(0)
+
+            # 遍历数据并添加到表格
+            for data in data_list:
+                row = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(row)
+
+                # 获取上传用户的用户名
+                uploader = session.query(User).filter(User.user_id == data.user_id).first()
+                uploader_name = uploader.username if uploader else "未知用户"
+
+                # 设置表格内容
+                items = [
+                    str(data.id),
+                    str(data.personnel_id),
+                    str(data.data_path),
+                    uploader_name
+                ]
+
+                for col, item_text in enumerate(items):
+                    item = QTableWidgetItem(item_text)
+                    self.tableWidget.setItem(row, col, item)
+
+                # 添加操作按钮
+                self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())
+
+            logging.info(f"Successfully displayed {self.tableWidget.rowCount()} data records")
+
+        except Exception as e:
+            logging.error(f"Error in show_table: {str(e)}")
+            QMessageBox.critical(self, "错误", f"加载数据时发生错误: {str(e)}")
+        finally:
+            session.close()
 
     def show_image(self):
         try:
@@ -250,7 +293,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             image_names = [
                 "Theta波段功率", "Alpha波段功率", "Beta波段功率", "Gamma波段功率",
                 "均分频带1", "均分频带2", "均分频带3", "均分频带4", "均分频带5",
-                "时域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
+                "域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
                 "时频域特征 - 小波变换", "微分熵"
             ]
 
@@ -271,7 +314,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     # 更新图像标题，限制文本长度
                     title = f"EEG特征图: {image_names[self.current_index]}"
                     if len(title) > 30:  # 如果标题超过30个字符
-                        title = title[:27] + "..."  # 截断并添加省略号
+                        title = title[:27] + "..."  # 截断并添加略号
                     self.curve_label.setText(title)
                     logging.info(f"Successfully displayed image: {image_names[self.current_index]}")
                 else:
@@ -301,22 +344,40 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
     # btn_return返回首页
     def return_index(self):
+        """
+        返回到相应的主页面
+        根据用户类型返回到管理员或普通用户页面
+        """
         path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-
-        if user == '0':  # 普通用户
-            logging.info("User type: Regular user. Preparing to return to user homepage.")
-            self.index = index_rear.Index_WindowActions()
-        elif user == '1':  # 管理员
-            logging.info("User type: Administrator. Preparing to return to admin homepage.")
-            self.index = admin_rear.AdminWindowActions()
-        else:
-            logging.warning("Unknown user type found in user status file: %s", user)
-            return  # 退出函数，防止程序继续执行
-
-        # 隐藏当前窗口并显示新的首页
-        self.hide()
-        self.index.show()
+        user_status = operate_user.read(path)
+        
+        session = SessionClass()
+        try:
+            # 先尝试直接用用户名查询
+            user = session.query(User).filter(User.username == user_status).first()
+            if not user:
+                # 如果找不到，尝试将user_status转换为整数作为user_id查询
+                try:
+                    user_id = int(user_status)
+                    user = session.query(User).filter(User.user_id == user_id).first()
+                except ValueError:
+                    user = None
+            
+            if user and user.user_type == 'admin':
+                index_window = admin_rear.AdminWindowActions()
+                logging.info("Returning to admin homepage")
+            else:
+                index_window = index_rear.Index_WindowActions()
+                logging.info("Returning to user homepage")
+            
+            self.close()
+            index_window.show()
+            
+        except Exception as e:
+            logging.error(f"Error in return_index: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+        finally:
+            session.close()
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
@@ -401,7 +462,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             span_time = (data_time - begin_time).seconds
             minute = int(span_time / 60)
             second = span_time % 60
-            self.status_label.setText("评估中\n" + "(" + str(minute) + "分钟" + str(second) + "秒" + ")")
+            self.status_label.setText("评中\n" + "(" + str(minute) + "分钟" + str(second) + "秒" + ")")
             finish_box = QMessageBox(QMessageBox.Information, "提示", "模型评估中是否终止")
             qyes = finish_box.addButton(self.tr("是"), QMessageBox.YesRole)
             finish_box.exec_()
@@ -454,12 +515,25 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         with open('../state/status.txt', mode='r', encoding='utf-8') as f:
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
-        self.result_list.append(result)  # 将评估结果添加到结果列表中
+        
+        # 将预测结果转换为0-100的概率分数
+        probability_score = float(result) * 100
+        probability_score = max(0, min(100, probability_score))  # 确保数在0-100之间
+        
+        self.result_list.append(probability_score)  # 将评估结果添加到结果列表中
         self.completed_models += 1  # 增加已完成的模型数量
+
+        # 更新对应类型的标签显示概率分数
+        if self.completed_models == 1:
+            self.ordinarystress_label.setText(f"普通应激 ({probability_score:.1f}%)")
+        elif self.completed_models == 2:
+            self.depression_label.setText(f"抑郁 ({probability_score:.1f}%)")
+        elif self.completed_models == 3:
+            self.anxiety_label.setText(f"焦虑 ({probability_score:.1f}%)")
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
             os.remove('../state/status.txt')  # 删除status.txt文件
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估成。")
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:
