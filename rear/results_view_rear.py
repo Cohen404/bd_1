@@ -110,11 +110,18 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             # 读取用户ID
             with open('../state/current_user.txt', 'r') as f:
                 user_id = f.read().strip()
+            print(f"从current_user.txt读取到用户ID: {user_id}")
 
             if not user_id:
                 logging.error("Current user ID is empty")
                 QMessageBox.warning(self, "错误", "当前用户ID为空")
                 return None, False
+            
+            # 读取用户类型
+            path = '../state/user_status.txt'
+            user_type = operate_user.read(path)
+            print(f"从user_status.txt读取到用户类型: {user_type}")
+            is_admin = (user_type == '1')
             
             # 查询用户信息
             session = SessionClass()
@@ -122,8 +129,12 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             session.close()
             
             if user:
-                logging.info(f"Successfully retrieved current user: {user.username}")
-                return user.user_id, user.user_type == 'admin'
+                print(f"从数据库查询到用户信息: ID={user.user_id}, 用户名={user.username}, 类型={user.user_type}")
+                # 验证用户类型是否匹配
+                db_is_admin = (user.user_type == 'admin')
+                if db_is_admin != is_admin:
+                    print(f"警告：文件中的用户类型({is_admin})与数据库中的用户类型({db_is_admin})不匹配")
+                return user.user_id, db_is_admin
             else:
                 logging.error(f"User not found for ID: {user_id}")
                 QMessageBox.warning(self, "错误", "在数据库中未找到当前用户")
@@ -131,6 +142,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
         except Exception as e:
             logging.error(f"Error getting current user: {str(e)}")
+            print(f"获取用户信息时出错: {str(e)}")
             QMessageBox.critical(self, "错误", f"获取当前用户信息失败：{str(e)}")
             return None, False
 
@@ -187,19 +199,32 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 QMessageBox.warning(self, "错误", "无法获取当前用户信息")
                 return
 
-            # 查询结果
+            print(f"当前用户ID: {user_id}, 是否管理员: {self.user_type}")
+
+            # 直接查询结果表
             if self.user_type:  # 管理员可以看到所有结果
-                results = session.query(Result, User).join(User).all()
+                print("管理员查询所有结果")
+                results = session.query(Result).all()
             else:  # 普通用户只能看到自己的结果
-                results = session.query(Result, User).join(User).filter(Result.user_id == user_id).all()
+                print(f"普通用户查询自己的结果: {user_id}")
+                results = session.query(Result).filter(Result.user_id == user_id).all()
+
+            print(f"查询到 {len(results)} 条结果")
 
             # 显示结果
             self.tableWidget.setRowCount(len(results))
-            for i, (result, user) in enumerate(results):
+            for i, result in enumerate(results):
+                print(f"处理第 {i+1} 条结果: ID={result.id}, 用户ID={result.user_id}, 时间={result.result_time}")
+                
+                # 获取用户信息
+                user = session.query(User).filter(User.user_id == result.user_id).first()
+                username = user.username if user else "未知用户"
+                print(f"用户信息: {username}")
+
                 # 结果ID
                 self.tableWidget.setItem(i, 0, QTableWidgetItem(str(result.id)))
                 # 用户名
-                self.tableWidget.setItem(i, 1, QTableWidgetItem(user.username))
+                self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
                 # 计算时间
                 time_str = result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''
                 self.tableWidget.setItem(i, 2, QTableWidgetItem(time_str))
@@ -210,9 +235,15 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 # 结果3（焦虑）
                 self.tableWidget.setItem(i, 5, QTableWidgetItem('是' if result.result_3 == 1 else '否'))
 
-            logging.info("Results table refreshed successfully")
+            logging.info(f"Results table refreshed successfully with {len(results)} rows")
+            
+            # 如果没有数据，显示提示
+            if len(results) == 0:
+                QMessageBox.information(self, "提示", "暂无评估结果数据")
+                
         except Exception as e:
             logging.error(f"Error displaying results table: {str(e)}")
+            print(f"错误详情: {str(e)}")  # 打印详细错误信息
             QMessageBox.critical(self, "错误", f"显示结果表格失败：{str(e)}")
         finally:
             session.close()

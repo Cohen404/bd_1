@@ -57,15 +57,38 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.id = 0
         self.data_path = ''
-        # self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-        # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)
-        self.user_id = int(user)
-        self.user_type = self.get_user_type(self.user_id)
-        
-        # ... (其他初始化代码)
-        
+
+        # 获取当前用户信息
+        try:
+            # 从current_user.txt获取用户ID
+            with open('../state/current_user.txt', 'r') as f:
+                self.user_id = f.read().strip()
+            print(f"当前用户ID: {self.user_id}")
+
+            # 从user_status.txt获取用户类型
+            path = '../state/user_status.txt'
+            user_type = operate_user.read(path)
+            self.user_type = (user_type == '1')  # 1表示管理员
+            print(f"用户类型: {'管理员' if self.user_type else '普通用户'}")
+
+            # 验证用户信息
+            session = SessionClass()
+            user = session.query(User).filter(User.user_id == self.user_id).first()
+            session.close()
+
+            if user:
+                print(f"数据库中的用户信息: ID={user.user_id}, 用户名={user.username}, 类型={user.user_type}")
+            else:
+                print("警告：在数据库中未找到用户信息")
+                QMessageBox.warning(self, "警告", "无法获取用户信息")
+                return
+
+        except Exception as e:
+            print(f"获取用户信息时出错: {str(e)}")
+            QMessageBox.critical(self, "错误", f"获取用户信息失败：{str(e)}")
+            return
+
+        # 显示表格
         self.show_table()
 
         # button to connect
@@ -130,15 +153,23 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         """
         session = SessionClass()
         try:
-            if self.user_type == 1:  # 管理员
+            print(f"\n开始查询数据表...")
+            print(f"当前用户ID: {self.user_id}, 是否管理员: {self.user_type}")
+
+            if self.user_type:  # 管理员
+                print("管理员查询所有数据")
                 data_list = session.query(Data).all()
             else:  # 普通用户
+                print(f"普通用户查询自己的数据: user_id = {self.user_id}")
                 data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
+
+            print(f"查询到 {len(data_list)} 条数据")
 
             # 清空表格
             self.tableWidget.setRowCount(0)
 
             for data in data_list:
+                print(f"处理数据: ID={data.id}, 用户ID={data.user_id}, 路径={data.data_path}")
                 row = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row)
                 
@@ -154,8 +185,13 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                 
                 self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
 
-            logging.info("Data table refreshed successfully")
+            if len(data_list) == 0:
+                print("没有找到任何数据")
+                QMessageBox.information(self, "提示", "暂无数据")
+
+            logging.info(f"Data table refreshed successfully with {len(data_list)} records")
         except Exception as e:
+            print(f"显示数据表格时出错: {str(e)}")
             logging.error(f"Error displaying data table: {str(e)}")
             QMessageBox.critical(self, "错误", f"显示数据表格失败：{str(e)}")
         finally:

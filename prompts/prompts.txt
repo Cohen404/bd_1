@@ -109,3 +109,23 @@ AttributeError: 'Results_View_WindowActions' object has no attribute 'btn_delete
 
 
 去除结果查看中的删除结果按钮，现在结果不允许删除。
+
+
+
+
+在数据查看页面，我登录的用户id是admin001，但是并没有看到表格中admin001所上传的数据。
+还是没有看到对应用户所上传的数据。
+
+
+
+
+
+
+
+
+用户登陆时，登录的session保存在'../state/user_status.txt'中。这个有没有适应新的tb_user表结构？并且保存的user_id是否正确？我现在登录admin用户（user_id=admin001)还是看不到上传的数据。
+
+
+
+
+数据查看页面还是没有找到正确的登录用户id，并显示已上传的数据。并且如果是管理员用户登录的话我希望能够看到所有结果和数据。data_view_rear.py中读取'../state/user_status.txt'获得当前登录用户id可能有问题，当前登录用户id保存在current_user.txt中

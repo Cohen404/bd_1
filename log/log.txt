@@ -3350,3 +3350,43 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 17:02:07,006 - INFO - Administrator - Data table refreshed successfully
 2024-11-26 17:02:07,009 - INFO - Administrator - Opening data view page.
 2024-11-26 17:02:10,952 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 17:05:37,365 - INFO - Administrator - Opening user login page.
+2024-11-26 17:05:41,825 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:05:42,033 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:05:42,735 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 17:05:42,736 - INFO - Administrator - Opening data view page.
+2024-11-26 17:05:51,478 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 17:05:52,749 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 17:05:52,751 - INFO - Administrator - Opening data view page.
+2024-11-26 17:05:54,255 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 17:10:01,684 - INFO - Administrator - Opening user login page.
+2024-11-26 17:10:06,393 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:10:06,508 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:10:07,739 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 17:10:07,740 - INFO - Administrator - Opening data view page.
+2024-11-26 17:10:23,633 - INFO - Administrator - Selected folder: 000005_ord2
+2024-11-26 17:10:23,637 - ERROR - Administrator - Failed to copy folder 'D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/data/000005_ord2' to '../data\000005_ord2'. Error: [WinError 183] 当文件已存在时，无法创建该文件。: '../data\\000005_ord2'
+2024-11-26 17:10:33,718 - INFO - Administrator - Selected folder: 000005_ord2
+2024-11-26 17:10:33,720 - ERROR - Administrator - Failed to copy folder 'D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2' to '../data\000005_ord2'. Error: [WinError 183] 当文件已存在时，无法创建该文件。: '../data\\000005_ord2'
+2024-11-26 17:16:07,231 - INFO - Administrator - Opening user login page.
+2024-11-26 17:16:11,684 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:16:11,919 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:16:36,472 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 17:16:36,475 - INFO - Administrator - Opening data view page.
+2024-11-26 17:16:52,492 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 17:16:53,398 - INFO - Administrator - Results table refreshed successfully with 9 rows
+2024-11-26 17:16:53,398 - INFO - Administrator - Opening results view page.
+2024-11-26 17:16:54,698 - INFO - Administrator - Returned to admin homepage
+2024-11-26 17:16:56,750 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-11-26 17:21:09,120 - INFO - Administrator - Opening user login page.
+2024-11-26 17:21:13,908 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:21:14,103 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:21:15,607 - INFO - Administrator - Data table refreshed successfully with 10 records
+2024-11-26 17:21:15,608 - INFO - Administrator - Opening data view page.
+2024-11-26 17:21:18,227 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 17:21:19,060 - INFO - Administrator - Results table refreshed successfully with 9 rows
+2024-11-26 17:21:19,061 - INFO - Administrator - Opening results view page.
+2024-11-26 17:21:21,291 - INFO - Administrator - Returned to admin homepage
+2024-11-26 17:21:22,479 - INFO - Administrator - Opening parameter control page.
+2024-11-26 17:21:24,120 - INFO - Administrator - Opening log management page.
+2024-11-26 17:21:29,803 - INFO - Administrator - Administrator returned to the admin homepage.
