@@ -13,6 +13,7 @@ from sql_model.tb_user import User
 from state import operate_user
 from util.db_util import SessionClass
 import logging
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -30,6 +31,9 @@ class change_pwd_Controller(QWidget):
     def __init__(self):
         super(change_pwd_Controller, self).__init__()
         self.init_ui()
+        # 初始化窗口管理器
+        window_manager = WindowManager()
+        window_manager.register_window('change_pwd', self)
 
     def init_ui(self):
         """
@@ -218,23 +222,29 @@ class change_pwd_Controller(QWidget):
         """
         path = '../state/user_status.txt'
         user = operate_user.read(path)
+        window_manager = WindowManager()
 
         if user == '0':  # 普通用户
             logging.info("Returning to user homepage")
             self.index = index_rear.Index_WindowActions()
+            window_manager.register_window('index', self.index)
+            self.close()
+            window_manager.show_window('index')
         elif user == '1':  # 管理员
             logging.info("Returning to admin homepage")
             self.index = admin_rear.AdminWindowActions()
+            window_manager.register_window('admin', self.index)
+            self.close()
+            window_manager.show_window('admin')
         else:
             logging.warning("Unknown user type found in user status file")
             return
-
-        self.close()
-        self.index.show()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     window = change_pwd_Controller()
-    window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('change_pwd', window)
+    window_manager.show_window('change_pwd')
     sys.exit(app.exec_())

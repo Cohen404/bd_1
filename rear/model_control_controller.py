@@ -18,6 +18,7 @@ from sql_model.tb_model import Model
 from state import operate_user
 from util.db_util import SessionClass
 import logging
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -46,21 +47,10 @@ class model_control_Controller(Ui_model_Control):
         self.model = None
         self.showUi()
         self.return_btn.clicked.connect(self.returnIndex)
-        # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
-        userType = "Regular user" if user == 0 else "Administrator"
-
-        # 配置 logging 模块
-        logging.basicConfig(
-            filename='../log/log.txt',
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        )
-
-        # 添加过滤器
-        logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
+        
+        # 初始化窗口管理器
+        window_manager = WindowManager()
+        window_manager.register_window('model_control', self)
 
     def showUi(self):
         """
@@ -391,7 +381,8 @@ class model_control_Controller(Ui_model_Control):
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
-    w = model_control_Controller()
-    w.show()
-    w.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
-    app.exec()
+    window = model_control_Controller()
+    window_manager = WindowManager()
+    window_manager.register_window('model_control', window)
+    window_manager.show_window('model_control')
+    sys.exit(app.exec_())

@@ -27,6 +27,7 @@ from sql_model.tb_result import Result
 from sql_model.tb_user import User
 from util.db_util import SessionClass
 from sql_model.tb_user import User
+from util.window_manager import WindowManager
 
 # import admin_rear
 class UserFilter(logging.Filter):
@@ -77,6 +78,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
         # 连接按钮事件
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
+
+        window_manager = WindowManager()
+        window_manager.register_window('results_view', self)
 
     def get_user_type(self, user_id):
         """

@@ -14,6 +14,7 @@ import front.init_login as front_page
 # 导入跳转页面的后端部分
 from rear import login_rear
 import logging
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """

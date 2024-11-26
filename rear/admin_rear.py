@@ -27,6 +27,7 @@ from rear import log_manage_rear
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -83,6 +84,9 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         # 添加过滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
+
+        window_manager = WindowManager()
+        window_manager.register_window('admin', self)
 
     def show_nav(self):
         """

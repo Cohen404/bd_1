@@ -29,6 +29,7 @@ from util.db_util import SessionClass
 from model.tuili import EegModel
 import logging
 from sql_model.tb_user import User
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -107,6 +108,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.btn_return.clicked.connect(self.return_index)
         self.pushButton_2.clicked.connect(self.next_image)
         self.pushButton.clicked.connect(self.previous_image)
+
+        window_manager = WindowManager()
+        window_manager.register_window('health_evaluate', self)
 
     def get_user_type(self, user_id):
         """
@@ -455,7 +459,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
             os.remove('../state/status.txt')  # 删除status.txt文件
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估��成。")
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:

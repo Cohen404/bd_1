@@ -25,6 +25,8 @@ import front.log_manage as log_manage
 from rear import index_rear
 from rear import admin_rear
 
+from util.window_manager import WindowManager
+
 class UserFilter(logging.Filter):
     """
     自定义日志过滤器，用于添加用户类型信息到日志记录中
@@ -68,6 +70,10 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         # 添加过滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
+
+        # 初始化窗口管理器
+        window_manager = WindowManager()
+        window_manager.register_window('log_manage', self)
 
     def show_log_content(self):
         """

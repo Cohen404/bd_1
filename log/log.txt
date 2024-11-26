@@ -3407,3 +3407,68 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 17:31:01,529 - WARNING - Administrator - Login attempt failed: Incorrect username or password for username 'admin'
 2024-11-26 17:31:03,064 - INFO - Administrator - Login successful for username 'admin'
 2024-11-26 17:31:03,274 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 18:34:38,002 - INFO - Administrator - Opening user login page.
+2024-11-26 18:34:43,008 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 18:34:43,255 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 18:34:44,107 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 18:34:44,129 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 18:34:45,169 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 18:34:46,212 - INFO - Administrator - Results table refreshed successfully with 9 rows
+2024-11-26 18:34:46,220 - INFO - Administrator - Opening results view page.
+2024-11-26 18:34:47,207 - INFO - Administrator - Returned to admin homepage
+2024-11-26 18:34:48,188 - INFO - Administrator - Data table refreshed successfully with 10 records
+2024-11-26 18:34:48,201 - INFO - Administrator - Opening data view page.
+2024-11-26 18:34:49,207 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 18:34:49,973 - INFO - Administrator - Opening model control page.
+2024-11-26 18:34:51,873 - INFO - Administrator - User table refreshed successfully
+2024-11-26 18:34:51,874 - INFO - Administrator - Opening user management page.
+2024-11-26 18:34:52,703 - INFO - Administrator - Returned to admin homepage
+2024-11-26 18:34:53,440 - INFO - Administrator - Opening parameter control page.
+2024-11-26 18:34:55,082 - INFO - Administrator - Opening log management page.
+2024-11-26 18:34:56,031 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 18:34:56,756 - INFO - Administrator - Opening password change page.
+2024-11-26 18:34:58,321 - INFO - Administrator - Returning to admin homepage
+2024-11-26 18:35:00,427 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-11-26 18:37:02,033 - INFO - Administrator - Opening user login page.
+2024-11-26 18:37:09,582 - INFO - Administrator - Opening user login page.
+2024-11-26 18:37:29,953 - INFO - Administrator - Opening user login page.
+2024-11-26 18:49:20,133 - INFO - Administrator - Opening user login page.
+2024-11-26 18:49:26,754 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 18:49:26,950 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 18:49:27,644 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 18:49:27,655 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 18:49:28,595 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 18:49:29,394 - INFO - Administrator - Opening parameter control page.
+2024-11-26 18:49:55,559 - INFO - Administrator - Opening log management page.
+2024-11-26 18:49:56,639 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 18:49:57,446 - INFO - Administrator - Opening password change page.
+2024-11-26 18:49:59,404 - INFO - Administrator - Returning to admin homepage
+2024-11-26 18:50:20,506 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 18:50:20,510 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 18:50:22,573 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 18:50:23,474 - INFO - Administrator - Results table refreshed successfully with 9 rows
+2024-11-26 18:50:23,483 - INFO - Administrator - Opening results view page.
+2024-11-26 18:50:24,660 - INFO - Administrator - Returned to admin homepage
+2024-11-26 18:50:25,435 - INFO - Administrator - Data table refreshed successfully with 10 records
+2024-11-26 18:50:25,449 - INFO - Administrator - Opening data view page.
+2024-11-26 18:50:26,962 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 18:50:27,723 - INFO - Administrator - Opening model control page.
+2024-11-26 18:50:29,968 - INFO - Administrator - User table refreshed successfully
+2024-11-26 18:50:29,969 - INFO - Administrator - Opening user management page.
+2024-11-26 18:50:31,067 - INFO - Administrator - Returned to admin homepage
+2024-11-26 18:50:31,884 - INFO - Administrator - Opening parameter control page.
+2024-11-26 18:50:33,585 - INFO - Administrator - Opening log management page.
+2024-11-26 18:50:34,708 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 18:50:35,422 - INFO - Administrator - Opening password change page.
+2024-11-26 18:50:36,454 - INFO - Administrator - Returning to admin homepage
+2024-11-26 18:52:51,996 - INFO - Administrator - Opening user login page.
+2024-11-26 18:52:57,666 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 18:52:57,877 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 18:52:59,172 - INFO - Administrator - Opening password change page.
+2024-11-26 18:53:00,889 - INFO - Administrator - Returning to admin homepage
+2024-11-26 18:53:02,195 - INFO - Administrator - Opening log management page.
+2024-11-26 18:53:03,646 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 18:53:04,459 - INFO - Administrator - Data table refreshed successfully with 10 records
+2024-11-26 18:53:04,471 - INFO - Administrator - Opening data view page.
+2024-11-26 18:53:05,423 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 18:53:06,959 - INFO - Administrator - Opening model control page.

@@ -18,6 +18,7 @@ from rear import init_login
 from rear import admin_rear
 from rear import index_rear
 import logging
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -43,6 +44,10 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         super(login.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
+        # 初始化窗口管理器
+        self.window_manager = WindowManager()
+        self.window_manager.register_window('login', self)
+        
         self.login_pushButton.clicked.connect(self.admin_login)  # 登录
         self.return_pushButton.clicked.connect(self.return_index)  # 返回首页
         
@@ -147,5 +152,7 @@ if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     demo_window = Login_WindowActions()
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('login', demo_window)
+    window_manager.show_window('login')
     sys.exit(app.exec_())

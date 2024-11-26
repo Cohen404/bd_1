@@ -31,6 +31,7 @@ from sqlalchemy import func
 import data_out
 import data_pretreatment
 from sql_model.tb_user import User
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -130,6 +131,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.image_name_label.setAlignment(Qt.AlignCenter)
         self.image_name_label.setStyleSheet("font-size: 14px; color: #333;")
         self.verticalLayout.addWidget(self.image_name_label)
+
+        window_manager = WindowManager()
+        window_manager.register_window('data_view', self)
 
     def get_user_type(self, user_id):
         """
@@ -385,7 +389,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     content = data[5].strftime("%Y-%m-%d %H:%M:%S") if data[5] else "N/A"
                 item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
                 self.tableWidget.setItem(row, i, item)
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加入按钮
+            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加���按钮
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):

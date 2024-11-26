@@ -20,6 +20,7 @@ from rear import index_rear
 from rear import admin_rear
 from sql_model.tb_user import User
 from util.db_util import SessionClass
+from util.window_manager import WindowManager
 
 class UserFilter(logging.Filter):
     """
@@ -44,6 +45,8 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         """
         super(user_manage.Ui_MainWindow, self).__init__()
         self.setupUi(self)
+        window_manager = WindowManager()
+        window_manager.register_window('user_manage', self)
         self.show_table()  # 显示用户表格
 
         # 连接按钮事件
