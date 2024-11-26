@@ -203,3 +203,8 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 现在我用admin001用户登录（user_id=admin001，并且是管理员），还是看不到任何数据。
+
+
+
+
+

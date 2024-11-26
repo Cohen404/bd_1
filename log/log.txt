@@ -3632,3 +3632,210 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 19:16:31,632 - INFO - Administrator - Successfully displayed 10 data records
 2024-11-26 19:16:31,643 - INFO - Administrator - Opening health evaluation page.
 2024-11-26 19:16:32,448 - INFO - Administrator - Returning to admin homepage
+2024-11-26 19:17:17,791 - INFO - Administrator - Opening user login page.
+2024-11-26 19:17:22,348 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 19:17:22,511 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 19:17:23,431 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 19:17:23,434 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 19:17:23,462 - INFO - Administrator - Successfully displayed 10 data records
+2024-11-26 19:17:23,471 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 19:18:08,599 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 19:18:08,600 - INFO - Administrator - Depression LED set to RED
+2024-11-26 19:18:08,600 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 19:18:08,602 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 19:18:11,400 - INFO - Administrator - Returning to admin homepage
+2024-11-26 20:06:20,493 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 20:06:20,495 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 20:06:20,515 - INFO - Administrator - Successfully displayed 10 data records
+2024-11-26 20:06:20,523 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 20:06:29,511 - INFO - Administrator - Returning to admin homepage
+2024-11-26 20:06:38,934 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 20:06:38,936 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 20:06:38,952 - INFO - Administrator - Successfully displayed 10 data records
+2024-11-26 20:06:38,964 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 20:06:40,020 - INFO - Administrator - Returning to admin homepage
+2024-11-26 20:06:40,791 - INFO - Administrator - Data table refreshed successfully with 10 records
+2024-11-26 20:06:40,803 - INFO - Administrator - Opening data view page.
+2024-11-26 20:06:42,876 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2024-11-26 20:06:42,878 - INFO - Administrator - Data path for ID 2: ../data/000004_test
+2024-11-26 20:06:42,879 - WARNING - Administrator - Data path does not exist: ../data/000004_test
+2024-11-26 20:06:42,882 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2024-11-26 20:06:42,883 - INFO - Administrator - Deleted record with ID 2 from result table.
+2024-11-26 20:06:42,885 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:43,300 - INFO - Administrator - Attempting to delete record with ID 3 from the table.
+2024-11-26 20:06:43,303 - INFO - Administrator - Data path for ID 3: ../data/000009_yiyu6
+2024-11-26 20:06:43,303 - WARNING - Administrator - Data path does not exist: ../data/000009_yiyu6
+2024-11-26 20:06:43,306 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-11-26 20:06:43,309 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-11-26 20:06:43,309 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:43,444 - INFO - Administrator - Attempting to delete record with ID 4 from the table.
+2024-11-26 20:06:43,446 - INFO - Administrator - Data path for ID 4: ../data/000010_yiyu5
+2024-11-26 20:06:43,446 - WARNING - Administrator - Data path does not exist: ../data/000010_yiyu5
+2024-11-26 20:06:43,449 - INFO - Administrator - Deleted record with ID 4 from tb_data.
+2024-11-26 20:06:43,450 - INFO - Administrator - Deleted record with ID 4 from result table.
+2024-11-26 20:06:43,451 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:43,596 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-11-26 20:06:43,598 - INFO - Administrator - Data path for ID 5: ../data/000011_yiyu4
+2024-11-26 20:06:43,600 - INFO - Administrator - Deleted folder at path: ../data/000011_yiyu4
+2024-11-26 20:06:43,603 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-11-26 20:06:43,605 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-11-26 20:06:43,605 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:43,724 - INFO - Administrator - Attempting to delete record with ID 6 from the table.
+2024-11-26 20:06:43,727 - INFO - Administrator - Data path for ID 6: ../data/000012_yiyu3
+2024-11-26 20:06:43,727 - WARNING - Administrator - Data path does not exist: ../data/000012_yiyu3
+2024-11-26 20:06:43,730 - INFO - Administrator - Deleted record with ID 6 from tb_data.
+2024-11-26 20:06:43,732 - INFO - Administrator - Deleted record with ID 6 from result table.
+2024-11-26 20:06:43,732 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:43,853 - INFO - Administrator - Attempting to delete record with ID 7 from the table.
+2024-11-26 20:06:43,855 - INFO - Administrator - Data path for ID 7: ../data/000013_yiyu2
+2024-11-26 20:06:43,855 - WARNING - Administrator - Data path does not exist: ../data/000013_yiyu2
+2024-11-26 20:06:43,857 - INFO - Administrator - Deleted record with ID 7 from tb_data.
+2024-11-26 20:06:43,859 - INFO - Administrator - Deleted record with ID 7 from result table.
+2024-11-26 20:06:43,859 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:44,084 - INFO - Administrator - Attempting to delete record with ID 8 from the table.
+2024-11-26 20:06:44,086 - INFO - Administrator - Data path for ID 8: ../data/000014_jiaolv2
+2024-11-26 20:06:44,095 - INFO - Administrator - Deleted folder at path: ../data/000014_jiaolv2
+2024-11-26 20:06:44,097 - INFO - Administrator - Deleted record with ID 8 from tb_data.
+2024-11-26 20:06:44,099 - INFO - Administrator - Deleted record with ID 8 from result table.
+2024-11-26 20:06:44,099 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:44,229 - INFO - Administrator - Attempting to delete record with ID 9 from the table.
+2024-11-26 20:06:44,231 - INFO - Administrator - Data path for ID 9: ../data/000007_yiyu1
+2024-11-26 20:06:44,231 - WARNING - Administrator - Data path does not exist: ../data/000007_yiyu1
+2024-11-26 20:06:44,233 - INFO - Administrator - Deleted record with ID 9 from tb_data.
+2024-11-26 20:06:44,235 - INFO - Administrator - Deleted record with ID 9 from result table.
+2024-11-26 20:06:44,236 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:44,477 - INFO - Administrator - Attempting to delete record with ID 10 from the table.
+2024-11-26 20:06:44,479 - INFO - Administrator - Data path for ID 10: ../data/000008_jiaolv1
+2024-11-26 20:06:44,479 - WARNING - Administrator - Data path does not exist: ../data/000008_jiaolv1
+2024-11-26 20:06:44,482 - INFO - Administrator - Deleted record with ID 10 from tb_data.
+2024-11-26 20:06:44,483 - INFO - Administrator - Deleted record with ID 10 from result table.
+2024-11-26 20:06:44,483 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:06:44,621 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-11-26 20:06:44,623 - INFO - Administrator - Data path for ID 11: ../data/000015_yingji1
+2024-11-26 20:06:44,623 - WARNING - Administrator - Data path does not exist: ../data/000015_yingji1
+2024-11-26 20:06:44,625 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-11-26 20:06:44,627 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-11-26 20:06:44,627 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:07:33,156 - INFO - Administrator - Selected folder: 000005_ord2
+2024-11-26 20:07:33,660 - INFO - Administrator - Folder copied to '../data\000005_ord2'.
+2024-11-26 20:09:53,589 - INFO - Administrator - Opening user login page.
+2024-11-26 20:09:58,761 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:09:58,970 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:10:02,016 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-11-26 20:10:02,019 - INFO - Administrator - Opening data view page.
+2024-11-26 20:10:18,290 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-26 20:10:51,947 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-26 20:14:49,478 - INFO - Administrator - Opening user login page.
+2024-11-26 20:14:53,793 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:14:53,996 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:14:57,987 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-11-26 20:14:57,990 - INFO - Administrator - Opening data view page.
+2024-11-26 20:15:18,834 - WARNING - Administrator - Personnel ID input cancelled or empty
+2024-11-26 20:21:52,595 - INFO - Administrator - Opening user login page.
+2024-11-26 20:21:57,924 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:21:58,126 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:22:01,591 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-11-26 20:22:01,593 - INFO - Administrator - Opening data view page.
+2024-11-26 20:22:17,868 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-26 20:30:37,084 - INFO - Administrator - Opening user login page.
+2024-11-26 20:30:41,655 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:30:41,880 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:30:42,904 - INFO - Administrator - Opening data view page.
+2024-11-26 20:30:55,143 - ERROR - Administrator - Error in openfile: (pymysql.err.DataError) (1366, "Incorrect integer value: 'admin001' for column 'personnel_id' at row 1")
+[SQL: INSERT INTO tb_data (id, personnel_id, data_path, upload_user, personnel_name, user_id, upload_time) VALUES (%(id)s, %(personnel_id)s, %(data_path)s, %(upload_user)s, %(personnel_name)s, %(user_id)s, %(upload_time)s)]
+[parameters: {'id': 1, 'personnel_id': 'admin001', 'data_path': 'D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2', 'upload_user': 1, 'personnel_name': '管理员', 'user_id': 'admin001', 'upload_time': datetime.datetime(2024, 11, 26, 20, 30, 55, 141696)}]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+2024-11-26 20:40:48,596 - INFO - Administrator - Opening user login page.
+2024-11-26 20:40:54,153 - WARNING - Administrator - Login attempt failed: Incorrect username or password for username 'admin'
+2024-11-26 20:40:57,235 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:40:57,477 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:40:58,445 - INFO - Administrator - Opening data view page.
+2024-11-26 20:41:10,441 - INFO - Administrator - Data uploaded successfully. Path: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2, Username: admin
+2024-11-26 20:41:13,379 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:13,383 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:14,660 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\Theta.png
+2024-11-26 20:41:19,242 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:19,244 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:20,951 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\Alpha.png
+2024-11-26 20:41:23,410 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:23,413 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:24,260 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\frequency_band_1.png
+2024-11-26 20:41:25,249 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:25,252 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:27,053 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\frequency_band_2.png
+2024-11-26 20:41:29,857 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:29,860 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:30,885 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\time_过零率.png
+2024-11-26 20:41:34,002 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:34,005 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:34,030 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\frequency_wavelet.png
+2024-11-26 20:41:37,155 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:41:37,157 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:37,170 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\differential_entropy.png
+2024-11-26 20:41:39,283 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 20:41:39,286 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 20:41:39,295 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 20:41:41,163 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-11-26 20:41:41,165 - INFO - Administrator - Data path retrieved for ID 1: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:41,166 - WARNING - Administrator - No evaluation results found for ID 1
+2024-11-26 20:41:43,154 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-11-26 20:41:43,156 - INFO - Administrator - Data path retrieved for ID 1: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:41:43,157 - WARNING - Administrator - No evaluation results found for ID 1
+2024-11-26 20:41:47,316 - INFO - Administrator - Opening model control view.
+2024-11-26 20:41:47,592 - INFO - Administrator - Model control view opened successfully.
+2024-11-26 20:41:54,994 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-11-26 20:42:04,584 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-11-26 20:42:04,584 - INFO - Administrator - Deleted existing model file: ../model/yingji\subject-1 yingji.keras
+2024-11-26 20:42:04,585 - INFO - Administrator - Moved model file to: ../model/yingji\subject-1 yingji.keras
+2024-11-26 20:42:04,587 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ../model/yingji\subject-1 yingji.keras
+2024-11-26 20:42:04,592 - INFO - Administrator - Model upload and database update completed successfully.
+2024-11-26 20:42:04,610 - INFO - Administrator - Temporary directory cleaned up.
+2024-11-26 20:42:15,219 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
+2024-11-26 20:42:19,902 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yiyu.keras
+2024-11-26 20:42:19,903 - INFO - Administrator - Deleted existing model file: ../model/yiyu\subject-1 yiyu.keras
+2024-11-26 20:42:19,905 - INFO - Administrator - Moved model file to: ../model/yiyu\subject-1 yiyu.keras
+2024-11-26 20:42:19,906 - INFO - Administrator - Updated existing model record for type 抑郁评估模型. New path: ../model/yiyu\subject-1 yiyu.keras
+2024-11-26 20:42:19,908 - INFO - Administrator - Model upload and database update completed successfully.
+2024-11-26 20:42:19,909 - INFO - Administrator - Temporary directory cleaned up.
+2024-11-26 20:42:24,122 - INFO - Administrator - Selected model type: 焦虑评估模型 (Index: 2)
+2024-11-26 20:42:29,334 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1jiaolv.keras
+2024-11-26 20:42:29,336 - INFO - Administrator - Deleted existing model file: ../model/jiaolv\subject-1jiaolv.keras
+2024-11-26 20:42:29,337 - INFO - Administrator - Moved model file to: ../model/jiaolv\subject-1jiaolv.keras
+2024-11-26 20:42:29,338 - INFO - Administrator - Updated existing model record for type 焦虑评估模型. New path: ../model/jiaolv\subject-1jiaolv.keras
+2024-11-26 20:42:29,342 - INFO - Administrator - Model upload and database update completed successfully.
+2024-11-26 20:42:29,344 - INFO - Administrator - Temporary directory cleaned up.
+2024-11-26 20:42:43,558 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 20:42:43,560 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 20:42:43,569 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 20:42:56,549 - INFO - Administrator - Returning to admin homepage
+2024-11-26 20:42:57,769 - INFO - Administrator - Opening data view page.
+2024-11-26 20:55:13,638 - INFO - Administrator - Opening user login page.
+2024-11-26 20:55:18,258 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 20:55:18,475 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 20:55:21,214 - INFO - Administrator - Opening data view page.
+2024-11-26 20:55:23,219 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-11-26 20:55:23,223 - INFO - Administrator - Data path for ID 1: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:55:23,231 - INFO - Administrator - Deleted folder at path: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:55:23,236 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-11-26 20:55:23,237 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-11-26 20:55:23,238 - INFO - Administrator - Removed row 0 from table.
+2024-11-26 20:55:33,476 - INFO - Administrator - File selection cancelled
+2024-11-26 20:55:58,634 - INFO - Administrator - Data uploaded successfully. Path: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2, Username: admin
+2024-11-26 20:56:01,453 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-26 20:56:01,455 - INFO - Administrator - Data path retrieved from database: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:56:02,445 - INFO - Administrator - Successfully displayed image: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\Theta.png
+2024-11-26 20:56:05,798 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 20:56:05,801 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 20:56:05,807 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 20:56:07,740 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-11-26 20:56:07,742 - INFO - Administrator - Data path retrieved for ID 1: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-26 20:56:07,743 - WARNING - Administrator - No evaluation results found for ID 1
+2024-11-26 20:56:43,150 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 20:56:43,151 - INFO - Administrator - Depression LED set to RED
+2024-11-26 20:56:43,151 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 20:56:43,155 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 20:56:43,155 - INFO - Administrator - Depression LED set to RED
+2024-11-26 20:56:43,155 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 20:56:56,275 - INFO - Administrator - Returning to admin homepage
+2024-11-26 20:56:56,902 - INFO - Administrator - Results table refreshed successfully with 1 rows
+2024-11-26 20:56:56,908 - INFO - Administrator - Opening results view page.

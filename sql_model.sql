@@ -61,19 +61,6 @@ CREATE TABLE `tb_result` (
   CONSTRAINT `fk_result_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of tb_result
--- ----------------------------
-INSERT INTO `tb_result` (`id`, `result_time`, `result_1`, `result_2`, `result_3`, `user_id`) VALUES 
-(3, '2024-09-14 13:21:25', 1, 1, 0, 'admin001'),
-(4, '2024-09-14 13:21:57', 1, 1, 0, 'admin001'),
-(5, '2024-09-14 13:21:02', 1, 1, 0, 'admin001'),
-(6, '2024-09-14 13:22:16', 1, 1, 0, 'admin001'),
-(7, '2024-09-14 13:22:53', 1, 1, 0, 'admin001'),
-(8, '2024-09-14 13:26:55', 1, 1, 1, 'admin001'),
-(9, '2024-09-14 13:23:45', 1, 1, 0, 'admin001'),
-(10, '2024-09-14 13:29:43', 1, 1, 1, 'admin001'),
-(11, '2024-09-14 13:59:22', 1, 0, 0, 'admin001');
 
 -- ----------------------------
 -- Table structure for tb_data
@@ -81,7 +68,7 @@ INSERT INTO `tb_result` (`id`, `result_time`, `result_1`, `result_2`, `result_3`
 DROP TABLE IF EXISTS `tb_data`;
 CREATE TABLE `tb_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `personnel_id` int(11) NOT NULL COMMENT '人员id',
+  `personnel_id` varchar(64) NOT NULL COMMENT '人员id',
   `data_path` varchar(255) DEFAULT NULL COMMENT '文件路径',
   `upload_user` int(11) NOT NULL COMMENT '0/1,0是普通用户，1是管理员',
   `personnel_name` varchar(255) NOT NULL,
@@ -92,20 +79,6 @@ CREATE TABLE `tb_data` (
   CONSTRAINT `fk_data_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of tb_data
--- ----------------------------
-INSERT INTO `tb_data` (`id`, `personnel_id`, `data_path`, `upload_user`, `personnel_name`, `user_id`, `upload_time`) VALUES 
-(2, 4, '../data/000004_test', 0, 'test', 'admin001', '2024-09-14 13:20:32'),
-(3, 9, '../data/000009_yiyu6', 1, 'yiyu6', 'admin001', '2024-09-14 13:20:41'),
-(4, 10, '../data/000010_yiyu5', 1, 'yiyu5', 'admin001', '2024-09-14 13:20:47'),
-(5, 11, '../data/000011_yiyu4', 1, 'yiyu4', 'admin001', '2024-09-14 13:21:02'),
-(6, 12, '../data/000012_yiyu3', 1, 'yiyu3', 'admin001', '2024-09-14 13:21:25'),
-(7, 13, '../data/000013_yiyu2', 1, 'yiyu2', 'admin001', '2024-09-14 13:21:57'),
-(8, 14, '../data/000014_jiaolv2', 1, 'jiaolv2', 'admin001', '2024-09-14 13:22:16'),
-(9, 7, '../data/000007_yiyu1', 1, 'yiyu1', 'admin001', '2024-09-14 13:22:53'),
-(10, 8, '../data/000008_jiaolv1', 1, 'jiaolv1', 'admin001', '2024-09-14 13:23:45'),
-(11, 15, '../data/000015_yingji1', 1, 'yingji1', 'admin001', '2024-09-14 13:26:55');
 
 -- ----------------------------
 -- Table structure for tb_model
@@ -123,9 +96,9 @@ CREATE TABLE `tb_model` (
 -- Records of tb_model
 -- ----------------------------
 INSERT INTO `tb_model` (`id`, `model_type`, `model_path`, `create_time`) VALUES 
-(1, 0, '..\\..\\..\\..\\..\\subject-1 yingji.keras', '2024-09-14 13:20:32'),
-(2, 1, '..\\..\\..\\..\\..\\subject-1 yiyu.keras', '2024-09-14 13:20:41'),
-(3, 2, '..\\..\\..\\..\\..\\subject-1 jiaolv.keras', '2024-09-14 13:20:47');
+(1, 0, '../model/yingji/subject-1 yingji.keras', '2024-09-14 13:20:32'),
+(2, 1, '../model/yiyu/subject-1 yiyu.keras', '2024-09-14 13:20:41'),
+(3, 2, '../model/jiaolv/subject-1jiaolv.keras', '2024-09-14 13:20:47');
 
 -- ----------------------------
 -- Table structure for tb_parameters

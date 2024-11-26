@@ -201,7 +201,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         finally:
             session.close()
 
-    # 定义通道选���对应的事件（没用但不能删）
+    # 定义通道选���应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
         """
         通道选择的回调函数（目前未使用）
@@ -222,131 +222,111 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     def openfile(self):
         """
-        打开文件对话框并处理选择的文件夹
+        打开文件对话框，选择要上传的数据文件
         """
-        folder_path = ''
-        hadprocessed = False
-        # 获取文件夹路径
-        folder_path = QFileDialog.getExistingDirectory(self, '选择文件夹')
+        try:
+            # 获取当前用户信息
+            path = '../state/user_status.txt'
+            user_status = operate_user.read(path)
+            
+            # 先打开文件选择对话框
+            source_dir = QFileDialog.getExistingDirectory(self, "选择文件夹", os.getcwd())
+            if not source_dir:
+                logging.info("File selection cancelled")
+                return
+                
+            # 检查是否选择了文件
+            if not os.path.exists(source_dir):
+                QMessageBox.warning(self, "警告", "选择的文件夹不存在")
+                return
 
-        if folder_path == '':
-            logging.info("No folder selected.")
-            return
-        else:
-            # 获取文件夹名称
-            folder_name = os.path.basename(folder_path)
-            logging.info(f"Selected folder: {folder_name}")
-
-            # 检查文件夹名称是否重复
+            # 获取源文件夹名称
+            source_dir_name = os.path.basename(source_dir)
+            
+            # 构建目标目录路径
+            target_base_dir = '../data'
+            target_dir = os.path.join(target_base_dir, source_dir_name)
+            
+            # 如果目标目录已存在，则添加后缀
+            suffix = 1
+            while os.path.exists(target_dir):
+                new_name = f"{source_dir_name}_{suffix}"
+                target_dir = os.path.join(target_base_dir, new_name)
+                suffix += 1
+            
+            # 确保目标基础目录存在
+            os.makedirs(target_base_dir, exist_ok=True)
+            
+            # 复制文件夹
+            try:
+                shutil.copytree(source_dir, target_dir)
+                logging.info(f"Directory copied from {source_dir} to {target_dir}")
+            except Exception as e:
+                logging.error(f"Failed to copy directory: {str(e)}")
+                QMessageBox.critical(self, "错误", f"复制文件夹时发生错误：{str(e)}")
+                return
+                
             session = SessionClass()
-            data_folder = session.query(Data).filter(Data.data_path.like(f'../data/{folder_name}%')).first()
-            session.close()
-
-            if data_folder is not None:
-                box = QMessageBox(QMessageBox.Information, "提示", "当前文件夹名称已存在!!!")
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
-                if box.clickedButton() == qyes:
-                    logging.warning(f"Folder name '{folder_name}' already exists.")
+            try:
+                # 获取用户名
+                username, ok = QInputDialog.getText(self, "输入", "请输入用户名：")
+                if not ok or not username:
+                    logging.warning("Username input cancelled or empty")
+                    # 删除已复制的文件夹
+                    if os.path.exists(target_dir):
+                        shutil.rmtree(target_dir)
                     return
-            else:
-                # 初始化标志变量
-                has_csv = False
-                has_edf_or_fif = False
-                has_nii = False
 
-                # 遍历文件夹中的所有文件
-                for file_name in os.listdir(folder_path):
-                    file_path = os.path.join(folder_path, file_name)
-                    if file_name.endswith('.csv'):
-                        has_csv = True
-                    elif file_name.endswith('.edf'):
-                        has_edf_or_fif = True
-                    elif file_name.endswith('.nii'):
-                        has_nii = True
-                    elif file_name.endswith('.fif'):
-                        has_edf_or_fif = True
-                        hadprocessed = True
+                # 根据用户名查询用户信息
+                user = session.query(User).filter(User.username == username).first()
+                if not user:
+                    QMessageBox.warning(self, "警告", f"用户名 {username} 不存在")
+                    # 删除已复制的文件夹
+                    if os.path.exists(target_dir):
+                        shutil.rmtree(target_dir)
+                    return
 
-                # 检查是否包含所需的文件类型
-                if not (has_csv and has_edf_or_fif and has_nii):
-                    box = QMessageBox(QMessageBox.Warning, "缺少文件",
-                                      "所选文件夹必须包含一个CSV文件，一个EDF或FIF文件和一个NII文件！")
-                    qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                    box.exec_()
-                    if box.clickedButton() == qyes:
-                        logging.warning("Selected folder is missing required files.")
-                        return
-                else:
-                    # 复制文件夹到程序的data目录
-                    destination_folder = os.path.join('../data', folder_name)
-                    try:
-                        shutil.copytree(folder_path, destination_folder)
-                        logging.info(f"Folder copied to '{destination_folder}'.")
-                    except Exception as e:
-                        logging.error(
-                            f"Failed to copy folder '{folder_path}' to '{destination_folder}'. Error: {str(e)}")
-                        QMessageBox.critical(self, "错误", f"复制文件夹时发生错误: {str(e)}")
-                        return
+                # 从数据库中取最大的id
+                max_id = session.query(func.max(Data.id)).scalar()
+                if max_id is None:
+                    max_id = 0
+                max_id = max_id + 1
 
-                    # 读取用户状态文件，获取上传用户ID
-                    path = '../state/user_status.txt'
-                    str_user = operate_user.read(path)
-                    user = int(str_user)
-                    # 使用切片获取前六位数字
-                    number_str = folder_name[:6]
-                    # 将字符串转换为整数
-                    folder_name_personnel_id = int(number_str)
-                    folder_name_personnel_name = folder_name[7:]
-                    data_path = '../data/' + folder_name
-                    # 从数据库中取最大的id，新插入的数据是这个id+1
-                    session = SessionClass()
-                    max_id = session.query(func.max(Data.id)).scalar()
-                    if max_id is None:
-                        max_id = 0
-                    max_id = max_id + 1
-                    current_time = datetime.now()
-
-                    session = SessionClass()
-                    data = Data(id=max_id, personnel_id=folder_name_personnel_id, data_path=data_path, upload_user=user,
-                                personnel_name=folder_name_personnel_name, user_id=self.user_id, upload_time=current_time)
-                    session.add(data)
-                    session.commit()
-                    session.close()
-
-                    logging.info(f"Added new data record with ID {max_id} at {current_time}.")
-                    if hadprocessed:
-                        pass
-                    else:
-                        # 可视化
-                        file_path = data_path + '/EEG.edf'
-                        box = QMessageBox(QMessageBox.Information, "信息", "正在进行可视化，请稍候。")
-                        qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                        box.exec_()
-                        if box.clickedButton() == qyes:
-                            try:
-                                data_out.analyze_eeg_data(file_path)
-                                logging.info(f"Visualization completed for file: {file_path}")
-                                QMessageBox.information(self, "信息", "可视化成功完成")
-                            except Exception as e:
-                                logging.error(f"Error during visualization: {str(e)}")
-                                QMessageBox.warning(self, "警告", f"可视化过程中出现错误: {str(e)}")
-
-                        # 预处理
-                        box = QMessageBox(QMessageBox.Information, "信息", "正在进行数据预处理，请稍候。")
-                        qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                        box.exec_()
-                        if box.clickedButton() == qyes:
-                            try:
-                                data_pretreatment.treat(data_path)
-                                logging.info(f"Preprocessing completed for data: {data_path}")
-                                QMessageBox.information(self, "信息", "预处理成功完成")
-                            except Exception as e:
-                                logging.error(f"Error during preprocessing: {str(e)}")
-                                QMessageBox.warning(self, "警告", f"预处理过程中出现错误: {str(e)}")
-
-                    self.upload_button()  # (不可删)upload_button方法，将刚上传到tb_data表中的记录（即tb_data表最后一条记录）显示到table中
-                    logging.info("Upload button called to refresh table.")
+                # 创建新的数据记录，确保personnel_id是字符串类型
+                new_data = Data(
+                    id=max_id,
+                    personnel_id=str(user.user_id),  # 确保是字符串类型
+                    data_path=target_dir,  # 使用新的目标路径
+                    upload_time=datetime.now(),
+                    user_id=str(user.user_id),  # 确保是字符串类型
+                    personnel_name=user.full_name,
+                    upload_user=1 if user.user_type == 'admin' else 0
+                )
+                
+                session.add(new_data)
+                session.commit()
+                
+                logging.info(f"Data uploaded successfully. Path: {target_dir}, Username: {username}")
+                QMessageBox.information(self, "提示", "数据上传成功！")
+                
+                # 刷新表格显示
+                self.show_table()
+                
+            except Exception as e:
+                # 发生错误时删除已复制的文件夹
+                if os.path.exists(target_dir):
+                    shutil.rmtree(target_dir)
+                raise e
+            finally:
+                session.close()
+                
+        except Exception as e:
+            logging.error(f"Error in openfile: {str(e)}")
+            QMessageBox.critical(self, "错误", f"上传数据时发生错误：{str(e)}")
+            
+    def show_table(self):
+        """刷新表格显示"""
+        self.upload_button()  # 调用upload_button方法刷新表格
 
     # 将openfile选择的数据存入数据库之后，将刚存入的数据显示到表单中
     def upload_button(self):
@@ -558,7 +538,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from tb_data.")
 
-                    # 删除result表中对应��数据
+                    # 删除result表中对应数据
                     session.query(Result).filter(Result.id == id).delete()
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from result table.")
