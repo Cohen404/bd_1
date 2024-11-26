@@ -1,0 +1,103 @@
+我希望用户管理数据库表字段设计成这样：
+表：tb_user
+字段名	数据类型	长度	是否允许空值	默认值	备注
+user_id	varchar	64	否		用户ID，主键
+username	varchar	50	否		用户名
+password	varchar	64	否		用户密码（加密存储）
+email	varchar	100	否		用户邮箱
+phone	varchar	20	是	NULL	用户电话号码
+full_name	varchar	255	是	NULL	用户全名
+user_type	varchar	10	否	'user'	用户类型 ('admin' 或 'user')
+last_login	datetime		是	NULL	上次登录时间
+created_at	datetime		否	CURRENT_TIMESTAMP	用户创建时间
+updated_at	datetime		是	CURRENT_TIMESTAMP	用户信息更新时间
+
+对应的用户相关的接口功能和展示都要有改动。
+并且修改对应的readme文档。
+数据库初始化插入的数据仍然要保留，增加的字段就给一些默认的测试值就行了。
+说中文
+
+界面功能不要有太多变化。只改动和这个表相关的功能就行。并且一定要保证不出错，仔细检查。
+最后自动帮我进行表的初始化。
+
+tb_user的初始化sql也要有对应的修改。
+
+mysql 用户名root，密码root，端口3306和ip 127.0.0.1
+
+
+
+
+
+
+
+
+
+
+(301) PS D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear> python .\init_login.py
+2024-11-26 15:03:24.865912: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-26 15:03:26.011209: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\admin_rear.py", line 112, in open_health_evaluate
+    self.health_evaluate = health_evaluate_rear.Health_Evaluate_WindowActions()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\health_evaluate_rear.py", line 62, in __init__
+    self.user_type = self.get_user_type(self.user_id)
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\health_evaluate_rear.py", line 113, in get_user_type
+    user = session.query(User).filter(User.id == user_id).first()
+AttributeError: type object 'User' has no attribute 'id'
+
+现在登录正确了。但是与tb_user相关的功能都需要重新查看，因为你现在修改了tb_user的表结构了。
+你已经修改了tb_user的数据库表结构了，看看其他使用了这张表的部分是否要做对应的修改。
+
+
+
+点击结果查看，提示错误：
+(301) PS D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear> python .\init_login.py
+2024-11-26 16:23:11.620584: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-26 16:23:15.126824: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\admin_rear.py", line 139, in open_results_view
+    self.results_view = results_view_rear.Results_View_WindowActions()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\results_view_rear.py", line 60, in __init__
+    self.user_type = self.get_user_type(self.user_id)
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\results_view_rear.py", line 83, in get_user_type
+    user = session.query(User).filter(User.id == user_id).first()
+AttributeError: type object 'User' has no attribute 'id'
+
+
+
+
+
+
+
+
+现在点击结果查看出现错误：
+(301) PS D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear> python .\init_login.py
+>>
+2024-11-26 16:29:30.190346: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-26 16:29:31.385536: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centralwidget", which already has a layout
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\admin_rear.py", line 139, in open_results_view
+    self.results_view = results_view_rear.Results_View_WindowActions()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\results_view_rear.py", line 78, in __init__
+    self.btn_delete.clicked.connect(self.delete_result)  # 删除结果
+AttributeError: 'Results_View_WindowActions' object has no attribute 'btn_delete'
+
+
+
+
+
+
+
+
+
+点击结果查看，提示显示表格失败: foreign key associated with colum ' tb_result.user_id' could not find table 'tb_user' with which to generatea foreighn key to target column 'user_id'

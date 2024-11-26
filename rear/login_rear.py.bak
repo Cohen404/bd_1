@@ -1,0 +1,77 @@
+from PyQt5.QtWidgets import QMessageBox, QMainWindow, QVBoxLayout, QLineEdit, QPushButton, QWidget
+from datetime import datetime
+import logging
+from sql_model.tb_user import User
+from util.db_util import SessionClass
+from rear import index_rear
+
+class Login_Rear(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        """
+        初始化用户界面
+        """
+        self.setWindowTitle("登录")
+        self.setGeometry(300, 300, 400, 300)
+
+        layout = QVBoxLayout()
+
+        self.nameIN = QLineEdit(self)
+        self.nameIN.setPlaceholderText("用户名")
+        layout.addWidget(self.nameIN)
+
+        self.pswdIN = QLineEdit(self)
+        self.pswdIN.setPlaceholderText("密码")
+        self.pswdIN.setEchoMode(QLineEdit.Password)
+        layout.addWidget(self.pswdIN)
+
+        self.loginBtn = QPushButton("登录", self)
+        self.loginBtn.clicked.connect(self.login)
+        layout.addWidget(self.loginBtn)
+
+        centralWidget = QWidget()
+        centralWidget.setLayout(layout)
+        self.setCentralWidget(centralWidget)
+
+    def login(self):
+        """
+        处理用户登录
+        """
+        username = self.nameIN.text().strip()
+        password = self.pswdIN.text().strip()
+
+        if not username or not password:
+            QMessageBox.warning(self, "错误", "用户名和密码不能为空！")
+            return
+
+        session = SessionClass()
+        try:
+            user = session.query(User).filter(User.username == username).first()
+            
+            if user and user.password == password:  # 在实际应用中应该使用加密密码
+                # 更新最后登录时间
+                user.last_login = datetime.now()
+                session.commit()
+                
+                # 写入用户状态
+                with open('../state/user_status.txt', 'w') as f:
+                    f.write('1' if user.user_type == 'admin' else '0')
+                
+                # 记录登录日志
+                logging.info(f"User '{username}' logged in successfully")
+                
+                # 跳转到主页
+                self.close()
+                self.index = index_rear.Index_WindowActions()
+                self.index.show()
+            else:
+                QMessageBox.warning(self, "错误", "用户名或密码错误！")
+                logging.warning(f"Failed login attempt for username: {username}")
+        except Exception as e:
+            logging.error(f"Login error for user '{username}': {str(e)}")
+            QMessageBox.critical(self, "错误", f"登录失败：{str(e)}")
+        finally:
+            session.close() 

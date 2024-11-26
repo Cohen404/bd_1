@@ -237,7 +237,7 @@ class Ui_MainWindow(object):
         # self.verticalLayout.addWidget(self.curve_graphicsView)
 
         # 改为表格
-        self.lst = ['ID', '数据名称','上传用户', '操作']
+        self.lst = ['ID', '用户名', '评估时间', '普通应激', '抑郁', '焦虑']
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setStyleSheet("margin-right:15px")
         self.tableWidget.setObjectName("tableWidget")
@@ -245,9 +245,18 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderLabels(self.lst)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.tableWidget.resizeColumnsToContents()
         self.verticalLayout.addWidget(self.tableWidget)
+
+        # 添加删除按钮
+        self.btn_delete = QtWidgets.QPushButton(self.widget1)
+        self.btn_delete.setObjectName("btn_delete")
+        self.btn_delete.setText("删除选中结果")
+        self.btn_delete.setStyleSheet("background-color: white; padding: 5px;")
+        self.verticalLayout.addWidget(self.btn_delete)
+
         self.gridLayout.addWidget(self.widget1, 1, 0, 2, 2)
 
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()

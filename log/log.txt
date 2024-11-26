@@ -3266,3 +3266,74 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-10-07 20:41:32,114 - INFO - Administrator - Button clicked in row 9, corresponding ID: 11
 2024-10-07 20:41:32,117 - INFO - Administrator - Data path retrieved from database: ../data/000015_yingji1
 2024-10-07 20:41:32,980 - ERROR - Administrator - Image file does not exist: ../data/000015_yingji1\Theta.png
+2024-11-26 14:48:18,371 - INFO - Administrator - Opening user login page.
+2024-11-26 15:02:24,714 - INFO - Administrator - Opening user login page.
+2024-11-26 15:02:31,412 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 15:02:31,617 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 15:03:29,155 - INFO - Administrator - Opening user login page.
+2024-11-26 15:03:33,580 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 15:03:33,730 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:26:01,341 - INFO - Administrator - Opening user login page.
+2024-11-26 16:26:05,617 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:26:05,777 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:26:07,071 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 16:26:07,077 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 16:26:08,340 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 16:26:41,457 - INFO - Administrator - Opening user login page.
+2024-11-26 16:26:45,912 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:26:46,139 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:26:47,335 - INFO - Administrator - User table refreshed successfully
+2024-11-26 16:26:47,336 - INFO - Administrator - Opening user management page.
+2024-11-26 16:26:50,983 - WARNING - Administrator - Attempted to add user but username or password was empty
+2024-11-26 16:26:55,556 - INFO - Administrator - Returned to admin homepage
+2024-11-26 16:26:57,626 - INFO - Administrator - Data table refreshed successfully
+2024-11-26 16:26:57,629 - INFO - Administrator - Opening data view page.
+2024-11-26 16:26:58,762 - INFO - Administrator - Returned to admin homepage.
+2024-11-26 16:26:59,587 - INFO - Administrator - Opening model control page.
+2024-11-26 16:27:01,360 - INFO - Administrator - User table refreshed successfully
+2024-11-26 16:27:01,361 - INFO - Administrator - Opening user management page.
+2024-11-26 16:27:02,332 - INFO - Administrator - Returned to admin homepage
+2024-11-26 16:27:02,995 - INFO - Administrator - Opening parameter control page.
+2024-11-26 16:27:04,924 - INFO - Administrator - Opening log management page.
+2024-11-26 16:27:06,673 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 16:27:08,798 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-11-26 16:29:34,765 - INFO - Administrator - Opening user login page.
+2024-11-26 16:29:41,558 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:29:41,775 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:29:42,676 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 16:29:42,680 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 16:29:43,707 - INFO - Administrator - User type: Administrator. Preparing to return to admin homepage.
+2024-11-26 16:29:44,483 - ERROR - Administrator - Error displaying results table: 'Results_View_WindowActions' object has no attribute 'user_id'
+2024-11-26 16:32:27,725 - INFO - Administrator - Opening user login page.
+2024-11-26 16:32:35,643 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:32:35,774 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:32:54,846 - ERROR - Administrator - Error displaying results table: 'Results_View_WindowActions' object has no attribute 'user_id'
+2024-11-26 16:32:58,717 - INFO - Administrator - Opening results view page.
+2024-11-26 16:34:18,091 - INFO - Administrator - Returned to admin homepage
+2024-11-26 16:34:19,301 - ERROR - Administrator - Error displaying results table: 'Results_View_WindowActions' object has no attribute 'user_id'
+2024-11-26 16:34:21,414 - INFO - Administrator - Opening results view page.
+2024-11-26 16:34:39,437 - INFO - Administrator - Opening user login page.
+2024-11-26 16:34:44,517 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:34:44,688 - INFO - Administrator - Username 'admin' set as current user
+2024-11-26 16:34:46,613 - INFO - Administrator - Opening results view page.
+2024-11-26 16:36:23,033 - INFO - Administrator - Opening user login page.
+2024-11-26 16:36:30,554 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:36:30,660 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 16:36:31,548 - INFO - Administrator - Successfully retrieved current user: admin
+2024-11-26 16:36:31,548 - ERROR - Administrator - Error displaying results table: Foreign key associated with column 'tb_result.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-26 16:37:52,700 - INFO - Administrator - Opening results view page.
+2024-11-26 16:37:56,742 - INFO - Administrator - Returned to admin homepage
+2024-11-26 16:45:06,281 - INFO - Administrator - Opening user login page.
+2024-11-26 16:45:10,847 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:45:11,010 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 16:45:12,004 - INFO - Administrator - Successfully retrieved current user: admin
+2024-11-26 16:45:12,005 - ERROR - Administrator - Error displaying results table: Foreign key associated with column 'tb_result.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-26 16:45:20,559 - INFO - Administrator - Opening results view page.
+2024-11-26 16:45:23,085 - INFO - Administrator - Returned to admin homepage
+2024-11-26 16:56:03,938 - INFO - Administrator - Opening user login page.
+2024-11-26 16:56:08,232 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 16:56:08,378 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 16:56:09,277 - INFO - Administrator - Successfully retrieved current user: admin
+2024-11-26 16:56:09,283 - INFO - Administrator - Results table refreshed successfully
+2024-11-26 16:56:09,285 - INFO - Administrator - Opening results view page.
+2024-11-26 16:56:13,365 - INFO - Administrator - Returned to admin homepage

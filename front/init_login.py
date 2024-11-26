@@ -6,31 +6,16 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication, QLabel
-
-from front.component import create_header, create_bottom
 from PyQt5.QtCore import Qt
 
 class Ui_MainWindow(object):
     """
     初始登录界面UI类
-    
-    负责创建和设置初始登录界面的所有UI元素
     """
 
     def setupUi(self, MainWindow):
         """
         设置初始登录界面UI
-        
-        参数:
-        MainWindow (QMainWindow): 主窗口对象
-        
-        功能:
-        - 设置窗口基本属性（标题、大小、样式）
-        - 创建并设置中央窗口部件
-        - 设置布局（垂直布局）
-        - 添加页面头部
-        - 创建并添加用户登录按钮
-        - 设置样式和字体
         """
         MainWindow.setObjectName("MainWindow")
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
@@ -40,10 +25,18 @@ class Ui_MainWindow(object):
 
         # 垂直方向布局
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
-        _, self.header_layout, _ ,_,_= create_header('首页')
-        self.layout.addLayout(self.header_layout)
+        
+        # 标题
+        self.title_label = QLabel("应激评估系统", self.centralwidget)
+        self.title_label.setAlignment(Qt.AlignCenter)
+        font = QFont()
+        font.setFamily("Microsoft YaHei")
+        font.setPointSize(24)
+        self.title_label.setFont(font)
+        self.layout.addWidget(self.title_label)
+
         # main主体
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
 
@@ -69,8 +62,8 @@ class Ui_MainWindow(object):
         self.user_login_Button.setObjectName("user_login_Button")
         self.gridLayout.addWidget(self.user_login_Button, 1, 1, 1, 1)
 
-        MainWindow.setCentralWidget(self.centralwidget)
         self.layout.addLayout(self.gridLayout)
+        MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -78,30 +71,31 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         """
         重新翻译UI
-        
-        参数:
-        MainWindow (QMainWindow): 主窗口对象
-        
-        功能:
-        - 设置窗口标题
-        - 设置用户登录按钮文本
-        - 设置字体
-        - 设置按钮样式
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
         self.user_login_Button.setText(_translate("MainWindow", "用户\n登录"))
 
-        font = QFont()
-        font.setFamily("Microsoft YaHei")  # 微软雅黑
-        self.user_login_Button.setFont(font)
-
-        # 样式设置
-        self.user_login_Button.setStyleSheet("QPushButton{color:white}"
-                                             "QPushButton:hover{background-color:#94b2da}"
-                                             "QPushButton{background-color:#4379b9}"
-                                             "QPushButton{border:2px}"
-                                             "QPushButton{border-radius:10px}"
-                                             "QPushButton{padding:2px 4px}"
-                                             "QPushButton{font-size:30px}")
+        # 设置字体和样式
+        style_sheet = """
+            QLabel {
+                color: black;
+                font-size: 24px;
+                margin: 20px;
+            }
+            QPushButton {
+                color: white;
+                background-color: #4379b9;
+                border: 2px;
+                border-radius: 10px;
+                padding: 20px;
+                font-size: 30px;
+                font-family: "Microsoft YaHei";
+            }
+            QPushButton:hover {
+                background-color: #94b2da;
+            }
+        """
+        
+        MainWindow.setStyleSheet(style_sheet)
 

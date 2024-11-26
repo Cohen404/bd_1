@@ -109,10 +109,36 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.pushButton.clicked.connect(self.previous_image)
 
     def get_user_type(self, user_id):
+        """
+        获取用户类型
+        """
         session = SessionClass()
-        user = session.query(User).filter(User.id == user_id).first()
-        session.close()
-        return user.user_type if user else 0
+        try:
+            user = session.query(User).filter(User.user_id == user_id).first()
+            if user:
+                return user.user_type == 'admin'  # 返回布尔值：True表示管理员，False表示普通用户
+            return False
+        except Exception as e:
+            logging.error(f"Error getting user type: {str(e)}")
+            return False
+        finally:
+            session.close()
+
+    def get_user_name(self, user_id):
+        """
+        获取用户名
+        """
+        session = SessionClass()
+        try:
+            user = session.query(User).filter(User.user_id == user_id).first()
+            if user:
+                return user.username
+            return None
+        except Exception as e:
+            logging.error(f"Error getting username: {str(e)}")
+            return None
+        finally:
+            session.close()
 
     def get_current_user_id(self):
         # 从用户状态文件或会话中获取当前用户ID
@@ -429,7 +455,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
             os.remove('../state/status.txt')  # 删除status.txt文件
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估��成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:

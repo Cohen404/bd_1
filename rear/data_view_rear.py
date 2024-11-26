@@ -109,34 +109,57 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.verticalLayout.addWidget(self.image_name_label)
 
     def get_user_type(self, user_id):
+        """
+        获取用户类型
+        """
         session = SessionClass()
-        user = session.query(User).filter(User.id == user_id).first()
-        session.close()
-        return user.user_type if user else 0
+        try:
+            user = session.query(User).filter(User.user_id == user_id).first()
+            if user:
+                return 1 if user.user_type == 'admin' else 0
+            return 0
+        except Exception as e:
+            logging.error(f"Error getting user type: {str(e)}")
+            return 0
+        finally:
+            session.close()
 
     def show_table(self):
+        """
+        显示数据表格
+        """
         session = SessionClass()
-        if self.user_type == 1:  # 管理员
-            data_list = session.query(Data).all()
-        else:  # 普通用户
-            data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
-        session.close()
+        try:
+            if self.user_type == 1:  # 管理员
+                data_list = session.query(Data).all()
+            else:  # 普通用户
+                data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
 
-        for data in data_list:
-            row = self.tableWidget.rowCount()
-            self.tableWidget.insertRow(row)
-            
-            self.tableWidget.setItem(row, 0, QTableWidgetItem(str(data.id)))
-            self.tableWidget.setItem(row, 1, QTableWidgetItem(str(data.personnel_id)))
-            self.tableWidget.setItem(row, 2, QTableWidgetItem(data.personnel_name))
-            self.tableWidget.setItem(row, 3, QTableWidgetItem(data.data_path))
-            self.tableWidget.setItem(row, 4, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
-            if data.upload_time:
-                self.tableWidget.setItem(row, 5, QTableWidgetItem(data.upload_time.strftime("%Y-%m-%d %H:%M:%S")))
-            else:
-                self.tableWidget.setItem(row, 5, QTableWidgetItem("N/A"))
-            
-            self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
+            # 清空表格
+            self.tableWidget.setRowCount(0)
+
+            for data in data_list:
+                row = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(row)
+                
+                self.tableWidget.setItem(row, 0, QTableWidgetItem(str(data.id)))
+                self.tableWidget.setItem(row, 1, QTableWidgetItem(str(data.personnel_id)))
+                self.tableWidget.setItem(row, 2, QTableWidgetItem(data.personnel_name))
+                self.tableWidget.setItem(row, 3, QTableWidgetItem(data.data_path))
+                self.tableWidget.setItem(row, 4, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
+                if data.upload_time:
+                    self.tableWidget.setItem(row, 5, QTableWidgetItem(data.upload_time.strftime("%Y-%m-%d %H:%M:%S")))
+                else:
+                    self.tableWidget.setItem(row, 5, QTableWidgetItem("N/A"))
+                
+                self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
+
+            logging.info("Data table refreshed successfully")
+        except Exception as e:
+            logging.error(f"Error displaying data table: {str(e)}")
+            QMessageBox.critical(self, "错误", f"显示数据表格失败：{str(e)}")
+        finally:
+            session.close()
 
     # 定义通道选择对应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
@@ -525,6 +548,24 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.close()
         self.index.show()
 
+    def get_current_user(self):
+        """
+        获取当前用户信息
+        """
+        try:
+            with open('../state/current_user.txt', 'r') as f:
+                username = f.read().strip()
+            
+            session = SessionClass()
+            user = session.query(User).filter(User.username == username).first()
+            session.close()
+            
+            if user:
+                return user.user_id, user.user_type == 'admin'
+            return None, False
+        except Exception as e:
+            logging.error(f"Error getting current user: {str(e)}")
+            return None, False
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

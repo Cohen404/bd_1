@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # 文件功能：登录界面的后端逻辑
 # 该脚本实现了系统登录界面的功能，包括用户验证、登录处理、页面跳转等操作
 
@@ -29,7 +31,6 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-# 注意这里定义的第一个界面的后端代码类需要继承两个类
 class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
     """
     登录窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
@@ -44,77 +45,91 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.login_pushButton.clicked.connect(self.admin_login)  # 登录
         self.return_pushButton.clicked.connect(self.return_index)  # 返回首页
+        
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
-        # 配置 logging 模块
+        # 配置日志
         logging.basicConfig(
             filename='../log/log.txt',
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
-
-        # 添加过滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-    # 输入账号密码，登录管理员页面
     def admin_login(self):
         """
         处理管理员登录
         验证用户名和密码，根据验证结果执行相应操作
         """
-        name = self.name_lineEdit.text()
-        pwd = self.pwd_lineEdit.text()
+        username = self.name_lineEdit.text()
+        password = self.pwd_lineEdit.text()
         session = SessionClass()
-        data = session.query(User).filter(User.name == name, User.pwd == pwd).first()
-        session.close()
+        
+        try:
+            # 检查用户名或密码是否为空
+            if not username or not password:
+                logging.warning("Login attempt failed: Username or password field is empty")
+                box = QMessageBox(QMessageBox.Information, "提示", "请输入用户名和密码")
+                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                box.exec_()
+                if box.clickedButton() == qyes:
+                    return
 
-        # 检查用户名或密码是否为空
-        if not name or not pwd:
-            logging.warning("Admin login attempt failed: Username or password field is empty.")
-            box = QMessageBox(QMessageBox.Information, "提示", "请输入用户名和密码")
-            qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-            box.exec_()
-            if box.clickedButton() == qyes:
-                return
+            # 使用新的字段名查询用户
+            user = session.query(User).filter(
+                User.username == username,
+                User.password == password
+            ).first()
 
-        # 检查数据是否为None（无效凭据）
-        elif data is None:
-            logging.warning(f"Admin login attempt failed: Incorrect username or password for username '{name}'.")
-            box = QMessageBox(QMessageBox.Information, "提示", "用户名或密码错误")
-            qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-            box.exec_()
-            if box.clickedButton() == qyes:
-                return
+            # 检查数据是否为None（无效凭据）
+            if not user:
+                logging.warning(f"Login attempt failed: Incorrect username or password for username '{username}'")
+                box = QMessageBox(QMessageBox.Information, "提示", "用户名或密码错误")
+                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                box.exec_()
+                if box.clickedButton() == qyes:
+                    return
 
-        else:  # 登录成功
-            logging.info(f"Admin login successful for username '{name}'.")
-            path = '../state/user_status.txt'
-            if data.user_type == 1:
-                operate_user.admin_user(path)  # 设置标志为1表示管理员访问
+            else:  # 登录成功
+                logging.info(f"Login successful for username '{username}'")
+                path = '../state/user_status.txt'
+                
+                # 更新最后登录时间
+                user.last_login = datetime.now()
+                session.commit()
+                
+                # 根据用户类型设置状态
+                if user.user_type == 'admin':
+                    operate_user.admin_user(path)  # 设置标志为1表示管理员访问
+                    # 进入管理员页面
+                    self.admin = admin_rear.AdminWindowActions()
+                    self.close()
+                    self.admin.show()
+                else:
+                    operate_user.ordinary_user(path)  # 设置标志为0表示普通用户访问
+                    self.ordinary_user = index_rear.Index_WindowActions()
+                    self.close()
+                    self.ordinary_user.show()
+                
+                # 将当前用户ID写入current_user.txt
+                with open('../state/current_user.txt', 'w') as f:
+                    f.write(user.user_id)
 
-                # 进入管理员页面
-                self.admin = admin_rear.AdminWindowActions()
-                self.close()
-                self.admin.show()
-            else:
-                operate_user.ordinary_user(path)  # 设置标志为0表示普通用户访问
-                self.ordinary_user = index_rear.Index_WindowActions()
-                self.close()
-                self.ordinary_user.show()
-                # 将当前用户名写入current_user.txt
-            with open('../state/current_user.txt', 'w') as f:
-                f.write(name)
+                logging.info(f"User ID '{user.user_id}' set as current user")
+                
+        except Exception as e:
+            logging.error(f"Login error: {str(e)}")
+            QMessageBox.critical(self, "错误", f"登录失败：{str(e)}")
+        finally:
+            session.close()
 
-            logging.info(f"Username '{name}' set as current user.")
-
-    # 返回首页
     def return_index(self):
         """
-        返回初始登录页面
+        返回首页
         """
         self.index = init_login.Index_WindowActions()
         self.close()
@@ -122,9 +137,7 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调用show()函数即可
     app = QApplication(sys.argv)
-    # 显示创建的界面
     demo_window = Login_WindowActions()
     demo_window.show()
     sys.exit(app.exec_())
