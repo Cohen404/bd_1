@@ -129,3 +129,19 @@ AttributeError: 'Results_View_WindowActions' object has no attribute 'btn_delete
 
 
 数据查看页面还是没有找到正确的登录用户id，并显示已上传的数据。并且如果是管理员用户登录的话我希望能够看到所有结果和数据。data_view_rear.py中读取'../state/user_status.txt'获得当前登录用户id可能有问题，当前登录用户id保存在current_user.txt中
+
+
+
+点击修改密码页面，提示错误：
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\admin_rear.py", line 157, in open_change_pwd_view
+    self.change_pwd = change_pwd_controller.change_pwd_Controller()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\rear\change_pwd_controller.py", line 32, in __init__
+    self.setupUi(self)
+AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
+
+
+
+
+
+修改密码页面现在是全空白的。我希望你在这个页面实现修改密码的功能。

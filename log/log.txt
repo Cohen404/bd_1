@@ -3390,3 +3390,20 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 17:21:22,479 - INFO - Administrator - Opening parameter control page.
 2024-11-26 17:21:24,120 - INFO - Administrator - Opening log management page.
 2024-11-26 17:21:29,803 - INFO - Administrator - Administrator returned to the admin homepage.
+2024-11-26 17:25:13,775 - INFO - Administrator - Opening user login page.
+2024-11-26 17:25:18,347 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:25:18,557 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:28:15,828 - INFO - Administrator - Opening user login page.
+2024-11-26 17:28:21,201 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:28:21,412 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:28:22,405 - INFO - Administrator - Opening password change page.
+2024-11-26 17:30:41,842 - INFO - Administrator - Opening user login page.
+2024-11-26 17:30:46,150 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:30:46,356 - INFO - Administrator - User ID 'admin001' set as current user
+2024-11-26 17:30:47,130 - INFO - Administrator - Opening password change page.
+2024-11-26 17:30:55,047 - INFO - Administrator - Password changed successfully for user 'admin'
+2024-11-26 17:30:56,327 - INFO - Administrator - Returning to admin homepage
+2024-11-26 17:30:57,943 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-11-26 17:31:01,529 - WARNING - Administrator - Login attempt failed: Incorrect username or password for username 'admin'
+2024-11-26 17:31:03,064 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 17:31:03,274 - INFO - Administrator - User ID 'admin001' set as current user
