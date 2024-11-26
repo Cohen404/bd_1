@@ -208,3 +208,7 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 
+查看模型结果中的各个应激类型的概率（应激、抑郁、焦虑）分数在0-100之间，不要百分号。并且分数为出来结果列表中1的数量的占比*100。
+
+
+模型结果中各应激类型的概率是num*100,num是 num = (y_pred.argmax(axis=-1).sum())/len(y_pred)，tuili.py中的

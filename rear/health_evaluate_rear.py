@@ -249,7 +249,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             # 清空现有表格内容
             self.tableWidget.setRowCount(0)
 
-            # 遍历数据并添加到表格
+            # 遍历数据并添加到表
             for data in data_list:
                 row = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row)
@@ -511,25 +511,40 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         finally:
             self.lock.release()
 
-    def waitTestRes(self, result):
+    def waitTestRes(self, num):
         with open('../state/status.txt', mode='r', encoding='utf-8') as f:
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         
-        # 将预测结果转换为0-100的概率分数
-        probability_score = float(result) * 100
-        probability_score = max(0, min(100, probability_score))  # 确保数在0-100之间
+        # 将分数转换为0-95的范围
+        probability_score = float(num) * 100  # 将num*100改为num*95，使得最大值为95
+        probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
-        self.result_list.append(probability_score)  # 将评估结果添加到结果列表中
+        self.result_list.append(probability_score)  # 存储转换后的分数
         self.completed_models += 1  # 增加已完成的模型数量
 
-        # 更新对应类型的标签显示概率分数
+        # 更新对应类型的标签显示分数(不带百分号)
         if self.completed_models == 1:
-            self.ordinarystress_label.setText(f"普通应激 ({probability_score:.1f}%)")
+            self.ordinarystress_label.setText(f"普通应激 ({probability_score:.1f})")
+            if num > 0.5:  # 如果num>0.5，设置红色LED
+                self.ordinarystress_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; background: red"
+                )
         elif self.completed_models == 2:
-            self.depression_label.setText(f"抑郁 ({probability_score:.1f}%)")
+            self.depression_label.setText(f"抑郁 ({probability_score:.1f})")
+            if num > 0.5:  # 如果num>0.5，设置红色LED
+                self.depression_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; background: red"
+                )
         elif self.completed_models == 3:
-            self.anxiety_label.setText(f"焦虑 ({probability_score:.1f}%)")
+            self.anxiety_label.setText(f"焦虑 ({probability_score:.1f})")
+            if num > 0.5:  # 如果num>0.5，设置红色LED
+                self.anxiety_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; background: red"
+                )
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
             os.remove('../state/status.txt')  # 删除status.txt文件
@@ -568,19 +583,13 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 # 重新查询结果以确保它与会话关联
                 result_to_update = session.query(Result).filter(Result.id == self.data_id).first()
                 
-                # 重置所有LED为灰色
-                self.set_default_led_colors()
-                # 根据结果更新LED颜色
-                if result_to_update:
-                    self.update_led_colors(result_to_update)
-                
                 self.show_nav()
             finally:
                 session.close()
             
             self.result_list = []
 
-        # 评估按钮功能
+    # 评估按钮功能
 
 
     def EvaluateButton(self):

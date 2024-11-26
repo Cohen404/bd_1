@@ -9,7 +9,7 @@ from PyQt5.QtCore import pyqtSignal, QThread
 
 
 class EegModel(QThread):
-    _rule = pyqtSignal(int)
+    _rule = pyqtSignal(float)
     finished = pyqtSignal()
 
     def __init__(self, data_path, model_path):
@@ -102,14 +102,12 @@ class EegModel(QThread):
         X_test = self.get_data()
         model = self.load_model()
         y_pred = model.predict(X_test)
-        print(y_pred.argmax(axis=-1))
-        num = y_pred.argmax(axis=-1).sum()
-        if num > 54:
-            print(1)
-            return 1
-        else:
-            print(0)
-            return 0
+        print('pred_argmax',y_pred.argmax(axis=-1))
+        print('a',float(y_pred.argmax(axis=-1).sum()))
+        print('b',len(y_pred.argmax(axis=-1)))
+        num = float(y_pred.argmax(axis=-1).sum())/len(y_pred.argmax(axis=-1))
+        print('numorig',num)
+        return num
 
     def run(self):
         result = self.predict()

@@ -3839,3 +3839,206 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 20:56:56,275 - INFO - Administrator - Returning to admin homepage
 2024-11-26 20:56:56,902 - INFO - Administrator - Results table refreshed successfully with 1 rows
 2024-11-26 20:56:56,908 - INFO - Administrator - Opening results view page.
+2024-11-26 21:03:11,125 - INFO - Administrator - Opening user login page.
+2024-11-26 21:03:15,584 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:03:15,736 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:03:17,244 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:03:17,244 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:03:17,244 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:03:17,249 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:03:17,256 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:03:17,266 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:03:50,215 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:03:50,217 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:03:50,217 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:03:50,219 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:03:50,219 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:03:50,219 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:04:02,843 - INFO - Administrator - Returning to admin homepage
+2024-11-26 21:04:03,928 - INFO - Administrator - Opening log management page.
+2024-11-26 21:04:10,100 - INFO - Administrator - Returning to admin homepage
+2024-11-26 21:04:11,489 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:04:11,489 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:04:11,489 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:04:11,491 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:04:11,493 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:04:11,500 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:18:40,583 - INFO - Administrator - Opening user login page.
+2024-11-26 21:18:44,461 - WARNING - Administrator - Login attempt failed: Incorrect username or password for username 'admin'
+2024-11-26 21:18:47,310 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:18:47,534 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:18:48,324 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:18:48,324 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:18:48,324 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:18:48,327 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:18:48,333 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:18:48,342 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:19:22,046 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:19:22,048 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:19:22,048 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:19:22,050 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:19:22,051 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:19:22,051 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:19:23,229 - INFO - Administrator - Returning to admin homepage
+2024-11-26 21:22:13,774 - INFO - Administrator - Opening user login page.
+2024-11-26 21:22:19,290 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:22:19,482 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:22:20,014 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:22:20,014 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:22:20,014 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:22:20,018 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:22:20,023 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:22:20,032 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:22:53,462 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:22:53,462 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:22:53,462 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:22:53,464 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:22:53,466 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:22:53,466 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:26:20,269 - INFO - Administrator - Opening user login page.
+2024-11-26 21:26:25,579 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:26:25,785 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:26:26,459 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:26:26,459 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:26:26,461 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:26:26,465 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:26:26,469 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:26:26,476 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:26:57,399 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:26:57,400 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:26:57,400 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:26:57,402 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:26:57,403 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:26:57,403 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:30:11,380 - INFO - Administrator - Opening user login page.
+2024-11-26 21:30:15,503 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:30:15,644 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:30:16,769 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:30:16,769 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:30:16,769 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:30:16,774 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:30:16,780 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:30:16,790 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:32:16,143 - INFO - Administrator - Opening user login page.
+2024-11-26 21:32:21,035 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:32:21,259 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:32:21,846 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:32:21,846 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:32:21,846 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:32:21,850 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:32:21,855 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:32:21,863 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:45:07,150 - INFO - Administrator - Opening user login page.
+2024-11-26 21:45:12,107 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:45:12,304 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:45:13,540 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:45:13,540 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:45:13,541 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:45:13,543 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:45:13,548 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:45:13,554 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:48:22,133 - INFO - Administrator - Opening user login page.
+2024-11-26 21:48:26,415 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:48:26,590 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:48:27,388 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:48:27,388 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:48:27,388 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 21:48:27,392 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:48:27,395 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:48:27,404 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:48:59,342 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:48:59,344 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:51:25,706 - INFO - Administrator - Opening user login page.
+2024-11-26 21:51:30,589 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:51:30,779 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:51:31,342 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:51:31,342 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:51:31,345 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:51:31,348 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:51:31,356 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:52:04,321 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:52:04,321 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:53:22,383 - INFO - Administrator - Opening user login page.
+2024-11-26 21:53:27,104 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:53:27,313 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:53:28,006 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:53:28,006 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:53:28,010 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:53:28,015 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:53:28,020 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:54:32,613 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:54:32,618 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:54:43,768 - INFO - Administrator - Opening user login page.
+2024-11-26 21:54:49,050 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:54:49,238 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:54:49,774 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:54:49,774 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:54:49,779 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:54:49,782 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:54:49,787 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:55:20,118 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:55:20,118 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:56:15,218 - INFO - Administrator - Opening user login page.
+2024-11-26 21:56:19,158 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:56:19,341 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:56:20,001 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:56:20,001 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:56:20,004 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:56:20,009 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:56:20,016 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:56:48,503 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:56:48,503 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:58:15,213 - INFO - Administrator - Opening user login page.
+2024-11-26 21:58:19,425 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:58:19,590 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:58:20,234 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:58:20,235 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:58:20,236 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:58:20,241 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:58:20,247 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 21:58:50,697 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:58:50,697 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:59:23,874 - INFO - Administrator - Opening user login page.
+2024-11-26 21:59:27,978 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 21:59:28,154 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 21:59:28,742 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 21:59:28,742 - INFO - Administrator - Depression LED set to RED
+2024-11-26 21:59:28,746 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 21:59:28,751 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 21:59:28,758 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 22:01:48,524 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:01:48,527 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:01:59,644 - INFO - Administrator - Opening user login page.
+2024-11-26 22:02:03,688 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 22:02:03,884 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 22:02:04,795 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:02:04,796 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:02:04,801 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 22:02:04,806 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 22:02:04,818 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 22:02:33,180 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:02:33,180 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:04:31,817 - INFO - Administrator - Opening user login page.
+2024-11-26 22:04:36,148 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 22:04:36,322 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 22:04:37,375 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:04:37,375 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:04:37,379 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 22:04:37,384 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 22:04:37,391 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 22:05:07,121 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:05:07,122 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:05:07,122 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 22:06:27,853 - INFO - Administrator - Opening user login page.
+2024-11-26 22:06:31,935 - INFO - Administrator - Login successful for username 'admin'
+2024-11-26 22:06:32,150 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-26 22:06:32,948 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:06:32,948 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:06:32,948 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 22:06:32,952 - INFO - Administrator - Administrator admin001: fetching all data records
+2024-11-26 22:06:32,957 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-26 22:06:32,966 - INFO - Administrator - Opening health evaluation page.
+2024-11-26 22:07:02,924 - INFO - Administrator - Ordinary stress LED set to RED
+2024-11-26 22:07:02,924 - INFO - Administrator - Depression LED set to RED
+2024-11-26 22:07:02,924 - INFO - Administrator - Anxiety LED set to RED
+2024-11-26 22:07:18,789 - INFO - Administrator - Returning to admin homepage
