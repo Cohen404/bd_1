@@ -57,39 +57,43 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.setupUi(self)  # 初始化health_evaluate方法
         self._index_window = None  # 添加这一行，用于保存主页面窗口引用
         
-        # 从文件中读取用户ID
-        path = '../state/user_status.txt'
-        user_status = operate_user.read(path)
-        print(f"Read user_status from file: {user_status}")  # 调试日志
+        # 定义表格列名
+        self.lst = ['ID', '人员ID', '数据路径', '上传用户', '操作']
+        # 设置表格列数和列名
+        self.tableWidget.setColumnCount(len(self.lst))
+        self.tableWidget.setHorizontalHeaderLabels(self.lst)
         
-        # 获取用户类型
-        session = SessionClass()
+        # 从文件中读取用户ID
+        path = '../state/current_user.txt'
         try:
-            # 先尝试直接用用户名查询
-            user = session.query(User).filter(User.username == user_status).first()
-            if not user:
-                # 如果找不到，尝试将user_status转换为整数作为user_id查询
-                try:
-                    user_id = int(user_status)
-                    user = session.query(User).filter(User.user_id == user_id).first()
-                except ValueError:
-                    print(f"Invalid user status: {user_status}")
-                    user = None
-
-            if user:
-                self.user_type = user.user_type == 'admin'
-                self.user_id = user.user_id
-                self.username = user.username
-                userType = "Administrator" if self.user_type else "Regular user"
-                print(f"Found user: {user.username}, type: {user.user_type}, id: {user.user_id}")
-            else:
-                self.user_type = False
-                self.user_id = None
-                self.username = None
-                userType = "Unknown user"
-                print(f"User not found in database: {user_status}")
-        finally:
-            session.close()
+            user_id = operate_user.read(path)
+            print(f"Read user_status from file: {user_id}")  # 调试日志
+            
+            # 获取用户类型
+            session = SessionClass()
+            try:
+                # 直接使用user_id查询
+                user = session.query(User).filter(User.user_id == user_id).first()
+                if user:
+                    self.user_type = user.user_type == 'admin'
+                    self.user_id = user.user_id
+                    self.username = user.username
+                    userType = "Administrator" if self.user_type else "Regular user"
+                    print(f"Found user: {user.username}, type: {user.user_type}, id: {user.user_id}")
+                else:
+                    print(f"User not found with ID: {user_id}")
+                    self.user_type = False
+                    self.user_id = None
+                    self.username = None
+                    userType = "Unknown user"
+            finally:
+                session.close()
+        except Exception as e:
+            print(f"Error reading user status: {e}")
+            self.user_type = False
+            self.user_id = None
+            self.username = None
+            userType = "Unknown user"
 
         # 配置 logging 模块
         logging.basicConfig(
@@ -235,20 +239,32 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         '''
         session = SessionClass()
         try:
-            print(f"show_table - user_type: {self.user_type}, user_id: {self.user_id}")  # 调试日志
+            print(f"show_table - user_type: {self.user_type}, user_id: {self.user_id}, username: {self.username}")  # 调试日志
             
             # 根据用户类型获取数据
             if self.user_type:  # 管理员
                 data_list = session.query(Data).all()
                 print(f"Administrator query - found {len(data_list)} records")  # 调试日志
-                logging.info(f"Administrator {self.user_id}: fetching all data records")
+                logging.info(f"Administrator {self.username}: fetching all data records")
             else:  # 普通用户
-                data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
-                print(f"Regular user query - found {len(data_list)} records")  # 调试日志
-                logging.info(f"Regular user {self.user_id}: fetching own data records")
+                if self.user_id is not None:
+                    data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
+                    print(f"Regular user query - found {len(data_list)} records")  # 调试日志
+                    logging.info(f"Regular user {self.username}: fetching own data records")
+                else:
+                    data_list = []
+                    print("No user ID available, showing no records")
+                    logging.warning("No user ID available, showing no records")
 
             # 清空现有表格内容
             self.tableWidget.setRowCount(0)
+
+            # 设置表格列宽
+            self.tableWidget.setColumnWidth(0, 80)  # ID列
+            self.tableWidget.setColumnWidth(1, 100)  # 人员ID列
+            self.tableWidget.setColumnWidth(2, 300)  # 数据路径列
+            self.tableWidget.setColumnWidth(3, 100)  # 上传用户列
+            self.tableWidget.setColumnWidth(4, 150)  # 操作列
 
             # 遍历数据并添加到表
             for data in data_list:
@@ -259,20 +275,25 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 uploader = session.query(User).filter(User.user_id == data.user_id).first()
                 uploader_name = uploader.username if uploader else "未知用户"
 
+                # 处理数据路径，只显示最后一个斜杠后的文件名
+                full_path = data.data_path
+                # 设置完整路径为工具提示
+                path_item = QTableWidgetItem(os.path.basename(full_path))
+                path_item.setToolTip(full_path)  # 鼠标悬停时显示完整路径
+
                 # 设置表格内容
                 items = [
-                    str(data.id),
-                    str(data.personnel_id),
-                    str(data.data_path),
-                    uploader_name
+                    QTableWidgetItem(str(data.id)),
+                    QTableWidgetItem(str(data.personnel_id)),
+                    path_item,
+                    QTableWidgetItem(uploader_name)
                 ]
 
-                for col, item_text in enumerate(items):
-                    item = QTableWidgetItem(item_text)
+                for col, item in enumerate(items):
                     self.tableWidget.setItem(row, col, item)
 
                 # 添加操作按钮
-                self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())
+                self.tableWidget.setCellWidget(row, 4, self.buttonForRow())  # 直接使用索引4，因为操作列总是最后一列
 
             logging.info(f"Successfully displayed {self.tableWidget.rowCount()} data records")
 
@@ -439,7 +460,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
             except Exception as e:
                 logging.error(f"An error occurred in checkButton: {e}")
-                QMessageBox.critical(self, "错误", f"查看数据时发生错误: {str(e)}")
+                QMessageBox.critical(self, "错误", f"查看数据时发生误: {str(e)}")
 
     # 调用模型
     def status_model(self, data_path):  # 需要修改 暂未修改 todo
@@ -455,7 +476,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             minute = int(span_time / 60)
             second = span_time % 60
             self.status_label.setText("评中\n" + "(" + str(minute) + "分钟" + str(second) + "秒" + ")")
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "模型评估中是否终止")
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "模型评估中否终止")
             qyes = finish_box.addButton(self.tr("是"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:
@@ -598,7 +619,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 try:
                     data1 = session.query(Data).filter(Data.id == id).first()
                     if data1 is None:
-                        QMessageBox.warning(self, "警告", "数据不存在，无法进行评估。")
+                        QMessageBox.warning(self, "警告", "据不存在，无法进行评估。")
                         return  # 如果数据不存在，直接返回，不进入评估状态
                     self.data_path = data1.data_path
                     

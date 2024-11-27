@@ -4326,3 +4326,72 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-27 14:06:19,827 - INFO - Administrator - Started processing data from: ../data\000005_ord2
 2024-11-27 14:06:58,027 - INFO - Administrator - Data processing completed successfully
 2024-11-27 14:07:17,021 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:08:26,488 - INFO - Administrator - Opening user login page.
+2024-11-27 14:08:31,487 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:08:33,190 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:08:33,191 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:08:33,197 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:08:35,042 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:10:34,233 - INFO - Administrator - Opening user login page.
+2024-11-27 14:10:38,459 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:10:39,702 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:10:39,702 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:10:39,707 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:10:42,415 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:10:42,998 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:10:42,998 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:10:43,003 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:10:44,335 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:12:07,164 - INFO - Administrator - Opening user login page.
+2024-11-27 14:12:10,342 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:12:11,582 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:12:11,583 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:12:11,590 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:12:14,482 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:12:15,139 - INFO - Administrator - Opening data view page.
+2024-11-27 14:12:17,332 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 14:12:17,335 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2
+2024-11-27 14:12:18,369 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2\Theta.png
+2024-11-27 14:12:21,734 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:12:22,790 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:12:22,791 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:12:22,796 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:12:24,906 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:14:34,681 - INFO - Administrator - Opening user login page.
+2024-11-27 14:14:37,506 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:14:38,897 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:14:38,898 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:14:38,903 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:16:50,604 - INFO - Administrator - Opening user login page.
+2024-11-27 14:16:54,037 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:16:55,326 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:16:55,326 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:16:55,331 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:19:36,377 - INFO - Administrator - Opening user login page.
+2024-11-27 14:19:39,453 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:19:40,705 - WARNING - Administrator - No user ID available, showing no records
+2024-11-27 14:19:40,705 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:19:40,710 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:22:20,582 - INFO - Administrator - Opening user login page.
+2024-11-27 14:22:23,769 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:22:25,140 - INFO - Administrator - Administrator admin: fetching all data records
+2024-11-27 14:22:25,143 - INFO - Administrator - Successfully displayed 1 data records
+2024-11-27 14:22:25,149 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:23:27,392 - INFO - Administrator - Opening user login page.
+2024-11-27 14:23:30,362 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:23:31,445 - INFO - Administrator - Opening data view page.
+2024-11-27 14:23:34,038 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 14:23:34,040 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2
+2024-11-27 14:23:34,936 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2\Theta.png
+2024-11-27 14:23:47,904 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000006_pro to ../data\000006_pro
+2024-11-27 14:23:47,914 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro, Username: admin
+2024-11-27 14:23:55,380 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:23:55,405 - ERROR - Administrator - Error during processing: local variable 'raw' referenced before assignment
+2024-11-27 14:24:00,407 - INFO - Administrator - Started processing data from: ../data\000005_ord2
+2024-11-27 14:24:06,783 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:24:06,809 - ERROR - Administrator - Error during processing: local variable 'raw' referenced before assignment
+2024-11-27 14:24:11,416 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:24:12,037 - INFO - Administrator - Administrator admin: fetching all data records
+2024-11-27 14:24:12,042 - INFO - Administrator - Successfully displayed 2 data records
+2024-11-27 14:24:12,047 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:24:14,723 - INFO - Administrator - Returned to index page successfully
