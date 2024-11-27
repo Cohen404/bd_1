@@ -31,12 +31,34 @@ def treat(data_dir):
     # 文件路径
     #     data_dir = 'E:/brain_data/焦虑'
     edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
+    fif_files = [f for f in os.listdir(data_dir) if f.endswith('.fif')]
+
+    # 如果有FIF文件，直接处理FIF文件
+    if fif_files:
+        print("发现已预处理的FIF文件，直接进行保存")
+        for fif_file in fif_files:
+            fif_path = os.path.join(data_dir, fif_file)
+            epochs = mne.read_epochs(fif_path)
+            save_dir = os.path.join(data_dir, 'fif.fif')
+            epochs.save(save_dir, overwrite=True)
+        return True  # 添加返回值表示处理成功
+
+    # 如果没有EDF文件，直接返回
+    if not edf_files:
+        print("未找到需要处理的EDF文件")
+        return False  # 添加返回值表示处理失败
 
     # 读取EDF文件
+    raw = None  # 初始化raw变量
     for edf_file in edf_files:
         edf_path = os.path.join(data_dir, edf_file)
         raw = read_raw_edf(edf_path)
         print(f"Loaded data from {edf_path}")
+        break  # 只处理第一个EDF文件
+
+    if raw is None:
+        print("无法读取EDF文件")
+        return False
 
     # 获取采样频率和采样总数
     freq = raw.info['sfreq']

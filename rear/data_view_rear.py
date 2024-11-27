@@ -664,27 +664,24 @@ class ProcessingThread(QThread):
         self.data_path = data_path
 
     def run(self):
-        try:
-            # 数据预处理 - 30%进度
-            self.progress.emit(10)
-            data_pretreatment.treat(self.data_path)
-            self.progress.emit(30)
+        # 数据预处理 - 30%进度
+        self.progress.emit(10)
+        data_pretreatment.treat(self.data_path)
+        self.progress.emit(30)
 
-            # 查找EDF文件 - 40%进度
-            edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.edf')]
-            if not edf_files:
-                raise Exception("未找到EDF文件")
-            self.progress.emit(40)
+        # 查找EDF文件 - 40%进度
+        edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.fif')]
+        if not edf_files:
+            raise Exception("未找到FIF文件")
+        self.progress.emit(40)
 
-            # 特征提取和可视化 - 60-100%进度
-            file_path = os.path.join(self.data_path, edf_files[0])
-            self.progress.emit(60)
-            data_out.analyze_eeg_data(file_path)
-            self.progress.emit(100)
+        # 特征提取和可视化 - 60-100%进度
+        file_path = os.path.join(self.data_path, edf_files[0])
+        self.progress.emit(60)
+        data_out.analyze_eeg_data(file_path)
+        self.progress.emit(100)
 
-            self.finished.emit()
-        except Exception as e:
-            self.error.emit(str(e))
+        self.finished.emit()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

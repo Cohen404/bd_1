@@ -4395,3 +4395,47 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-27 14:24:12,042 - INFO - Administrator - Successfully displayed 2 data records
 2024-11-27 14:24:12,047 - INFO - Administrator - Opening health evaluation page.
 2024-11-27 14:24:14,723 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:31:07,788 - INFO - Administrator - Opening user login page.
+2024-11-27 14:31:11,026 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:31:12,419 - INFO - Administrator - Opening data view page.
+2024-11-27 14:31:16,885 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-11-27 14:31:16,889 - INFO - Administrator - Data path retrieved from database: ../data\000006_pro
+2024-11-27 14:31:18,606 - ERROR - Administrator - Image file does not exist: ../data\000006_pro\Theta.png
+2024-11-27 14:31:20,352 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:31:20,378 - ERROR - Administrator - Error during processing: local variable 'raw' referenced before assignment
+2024-11-27 14:31:37,803 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:36:20,607 - INFO - Administrator - Opening user login page.
+2024-11-27 14:36:23,611 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:36:25,084 - INFO - Administrator - Opening data view page.
+2024-11-27 14:36:26,742 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:36:26,768 - ERROR - Administrator - Error during processing: 未找到EDF文件
+2024-11-27 14:37:27,658 - INFO - Administrator - Opening user login page.
+2024-11-27 14:37:33,108 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:37:35,262 - INFO - Administrator - Opening data view page.
+2024-11-27 14:37:36,544 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:37:37,253 - ERROR - Administrator - Error during processing: 未找到EDF文件
+2024-11-27 14:38:02,184 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:38:02,694 - ERROR - Administrator - Error during processing: 未找到EDF文件
+2024-11-27 14:45:53,784 - INFO - Administrator - Opening user login page.
+2024-11-27 14:45:56,451 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:45:57,859 - INFO - Administrator - Opening data view page.
+2024-11-27 14:45:59,496 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:45:59,522 - ERROR - Administrator - Error during processing: local variable 'raw' referenced before assignment
+2024-11-27 14:46:58,195 - INFO - Administrator - Opening user login page.
+2024-11-27 14:47:01,148 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:47:02,992 - INFO - Administrator - Opening data view page.
+2024-11-27 14:47:04,145 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:49:09,143 - INFO - Administrator - Opening user login page.
+2024-11-27 14:49:11,906 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:49:13,139 - INFO - Administrator - Opening data view page.
+2024-11-27 14:49:14,413 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:54:28,423 - INFO - Administrator - Opening user login page.
+2024-11-27 14:54:30,857 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:54:32,036 - INFO - Administrator - Opening data view page.
+2024-11-27 14:54:33,240 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:56:24,610 - INFO - Administrator - Opening user login page.
+2024-11-27 14:56:27,125 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:56:28,332 - INFO - Administrator - Opening data view page.
+2024-11-27 14:56:29,539 - INFO - Administrator - Started processing data from: ../data\000006_pro
+2024-11-27 14:56:34,538 - INFO - Administrator - Data processing completed successfully
+2024-11-27 14:56:49,442 - INFO - Administrator - Returned to index page successfully

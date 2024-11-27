@@ -63,9 +63,32 @@ def compute_wavelet_energy(data):
 # 数据加载和预处理函数
 def load_preprocess_data(filename):
     """加载和预处理数据。"""
-    data = mne.io.read_raw_edf(filename, preload=True)  # 加载EDF文件
-    data.crop(tmin=10)                                  # 裁剪前10秒数据
-    return data, data.get_data(picks='eeg')             # 返回预处理后的数据和EEG数据
+    # 检查文件扩展名
+    ext = os.path.splitext(filename)[1].lower()
+    
+    if ext == '.edf':
+        data = mne.io.read_raw_edf(filename, preload=True)  # 加载EDF文件
+        data.crop(tmin=10)                                  # 裁剪前10秒数据
+        return data, data.get_data(picks='eeg')             # 返回预处理后的数据和EEG数据
+    elif ext == '.fif':
+        # 读取fif文件
+        try:
+            # 首先尝试作为raw数据读取
+            data = mne.io.read_raw_fif(filename, preload=True)
+            return data, data.get_data(picks='eeg')
+        except:
+            try:
+                # 如果失败，尝试作为epochs数据读取
+                epochs = mne.read_epochs(filename, preload=True)
+                # 获取所有trials的平均数据
+                data = epochs.average()
+                return data, data.data
+            except Exception as e:
+                print(f"无法读取fif文件: {e}")
+                raise
+
+    else:
+        raise NotImplementedError(f"不支持的文件格式: {ext}")
 
 # 特征提取函数
 def extract_time_domain_features(channel_data):
@@ -276,39 +299,61 @@ def create_feature_dataframe(time_domain_features, frequency_domain_features, ti
     return df, feature_names
 
 def analyze_eeg_data(file_path):
-    # 加载和预处理数据
-    data1, eeg_data = load_preprocess_data(file_path)
-    global folder_path  # 声明要修改全局变量
-    folder_path = os.path.dirname(file_path)
+    try:
+        # 加载和预处理数据
+        data1, eeg_data = load_preprocess_data(file_path)
+        global folder_path  # 声明要修改全局变量
+        folder_path = os.path.dirname(file_path)
 
-    # 提取特征
-    time_domain_features = [extract_time_domain_features(channel) for channel in eeg_data]
-    frequency_domain_features = [extract_frequency_domain_features(channel, data1.info['sfreq']) for channel in eeg_data]
-    time_frequency_features = [extract_time_frequency_features(channel) for channel in eeg_data]
-    theta_alpha_beta_gamma_powers = [extract_theta_alpha_beta_gamma_powers(channel, data1.info['sfreq']) for channel in eeg_data]
+        # 如果数据是3D的（epochs数据），取平均值转换为2D
+        if len(eeg_data.shape) == 3:
+            eeg_data = np.mean(eeg_data, axis=0)
 
-    # 创建特征DataFrame
-    feature_df, feature_names = create_feature_dataframe(time_domain_features, frequency_domain_features, time_frequency_features, theta_alpha_beta_gamma_powers)
+        # 提取特征
+        time_domain_features = [extract_time_domain_features(channel) for channel in eeg_data]
+        
+        # 获取采样频率
+        if isinstance(data1, mne.io.Raw):
+            sfreq = data1.info['sfreq']
+        else:  # Epochs或Evoked对象
+            sfreq = data1.info['sfreq']
+            
+        frequency_domain_features = [extract_frequency_domain_features(channel, sfreq) for channel in eeg_data]
+        time_frequency_features = [extract_time_frequency_features(channel) for channel in eeg_data]
+        theta_alpha_beta_gamma_powers = [extract_theta_alpha_beta_gamma_powers(channel, sfreq) for channel in eeg_data]
 
-    # 保存DataFrame到CSV文件
-    csv_path = os.path.join(folder_path, 'eeg_features.csv')
-    feature_df.to_csv(csv_path)
-    print(f"特征已保存到: {csv_path}")
+        # 创建特征DataFrame
+        feature_df, feature_names = create_feature_dataframe(
+            time_domain_features, 
+            frequency_domain_features, 
+            time_frequency_features, 
+            theta_alpha_beta_gamma_powers
+        )
 
-    # 保存特征名称到文本文件
-    feature_names_path = os.path.join(folder_path, 'feature_names.txt')
-    with open(feature_names_path, 'w') as f:
-        for name in feature_names:
-            f.write(f"{name}\n")
-    print(f"特征名称已保存到: {feature_names_path}")
+        # 保存DataFrame到CSV文件
+        csv_path = os.path.join(folder_path, 'eeg_features.csv')
+        feature_df.to_csv(csv_path)
+        print(f"特征已保存到: {csv_path}")
 
-    # 可视化
-    plot_time_domain_features(time_domain_features)
-    plot_frequency_domain_features(frequency_domain_features)
-    plot_time_frequency_features(time_frequency_features)
-    plot_differential_entropy(frequency_domain_features)
-    plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
-    return feature_df, feature_names
+        # 保存特征名称到文本文件
+        feature_names_path = os.path.join(folder_path, 'feature_names.txt')
+        with open(feature_names_path, 'w') as f:
+            for name in feature_names:
+                f.write(f"{name}\n")
+        print(f"特征名称已保存到: {feature_names_path}")
+
+        # 可视化
+        plot_time_domain_features(time_domain_features)
+        plot_frequency_domain_features(frequency_domain_features)
+        plot_time_frequency_features(time_frequency_features)
+        plot_differential_entropy(frequency_domain_features)
+        plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
+        
+        return feature_df, feature_names
+        
+    except Exception as e:
+        print(f"分析过程中出现错误: {str(e)}")
+        raise
 
 # 如果需要，您可以在这里调用 analyze_eeg_data 函数
 # feature_df, feature_names = analyze_eeg_data('your_eeg_file.edf')
