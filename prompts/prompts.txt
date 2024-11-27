@@ -216,3 +216,62 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 我希望登录页面，密码框输入回车，就等于点击登录按钮。现在没有这个操作绑定。
+
+
+
+
+
+
+我希望在数据查看页面，每次上传数据之后，数据那一栏有一个预处理按钮。可以进行数据的预处理（                        data_pretreatment.treat(data_path)
+）
+以及进行数据特征的处理和保存（
+                            try:
+                                data_out.analyze_eeg_data(file_path)
+                                logging.info(f"Visualization completed for file: {file_path}")
+                                QMessageBox.information(self, "信息", "可视化成功完成")
+                            except Exception as e:
+                                logging.error(f"Error during visualization: {str(e)}")
+                                QMessageBox.warning(self, "警告", f"可视化过程中出现错误: {str(e)}")
+
+）
+
+这两个过程要一起进行，通过这一个按钮来控制。
+
+
+
+
+
+
+
+
+
+
+数据预处理和特征提取按钮点击之后前端会等待未响应，并且跳出这个框。要等到处理完成了系统才能用。我希望不要卡死，并且可以出来一个进度条提示用户等待。
+
+
+
+
+
+
+
+我希望上传时不要输入用户名，user_id以及各种信息就绑定当前登录用户的信息。
+并且上传之后的数据目录复制到data目录中去，数据库中保存的路径也要记录data目录中所记录的路径
+并且界面上展示目录路径的时候只展示最后一个目录的名称，前面的完整路径不需要，也就是展示在data目录里的名称。
+
+
+
+
+显示路径里，要显示最后一个\或者/之后的字符串。并且数据路径在显示的时候要完整显示，表格里给的宽度要足够
+
+
+
+
+
+
+结果查看页面点击返回后也会直接退出程序。我希望你帮我再看看其他页面有没有同样的问题
+
+
+
+
+
+现在所有页面点击返回按钮之后系统会直接退出，我希望你解决这个问题，不要出现点击返回闪退的情况。像是在主页点击能够进入的页面，点击返回之后应该进入主页。

@@ -65,8 +65,8 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-        # 修正密码框回车事件绑定
-        self.pwd_lineEdit.returnPressed.connect(self.admin_login)
+        # 添加密码框回车事件绑定
+        self.pwd_lineEdit.returnPressed.connect(self.btn_login_clicked)
 
     def admin_login(self):
         """
@@ -141,6 +141,56 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         self.index = init_login.Index_WindowActions()
         self.close()
         self.index.show()
+
+    def btn_login_clicked(self):
+        """
+        登录按钮点击事件处理函数
+        """
+        try:
+            # 获取用户输入 - 使用正确的输入框名称
+            username = self.name_lineEdit.text().strip()
+            password = self.pwd_lineEdit.text().strip()
+
+            # 验证输入不为空
+            if not username or not password:
+                QMessageBox.warning(self, "警告", "用户名和密码不能为空")
+                return
+
+            # 连接数据库验证用户
+            session = SessionClass()
+            user = session.query(User).filter(User.username == username).first()
+
+            if user and user.password == password:
+                # 保存当前用户信息
+                with open('../state/current_user.txt', 'w') as f:
+                    f.write(str(user.user_id))
+
+                # 保存用户类型
+                with open('../state/user_status.txt', 'w') as f:
+                    f.write('1' if user.user_type == 'admin' else '0')
+
+                logging.info(f"User {username} logged in successfully")
+
+                # 根据用户类型打开相应界面
+                if user.user_type == 'admin':
+                    self.admin = admin_rear.AdminWindowActions()
+                    self.admin.show()
+                else:
+                    self.index = index_rear.Index_WindowActions()
+                    self.index.show()
+
+                self.close()
+
+            else:
+                QMessageBox.warning(self, "警告", "用户名或密码错误")
+                logging.warning(f"Failed login attempt for username: {username}")
+
+        except Exception as e:
+            logging.error(f"Login error: {str(e)}")
+            QMessageBox.critical(self, "错误", f"登录时发生错误：{str(e)}")
+        finally:
+            if 'session' in locals():
+                session.close()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

@@ -10,10 +10,10 @@ import time
 
 import numpy as np
 import scipy.io as scio
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog, QMessageBox, QTableWidgetItem, \
-    QGraphicsPixmapItem, QGraphicsScene, QInputDialog
+    QGraphicsPixmapItem, QGraphicsScene, QInputDialog, QProgressDialog
 from PyQt5 import QtWidgets
 from datetime import datetime
 import state.operate_user as operate_user
@@ -201,7 +201,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         finally:
             session.close()
 
-    # 定义通道选���应的事件（没用但不能删）
+    # 定义通道选应的事件（没用但不能删）
     def WrittingNotOfOther(self, tag):
         """
         通道选择的回调函数（目前未使用）
@@ -394,14 +394,22 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                                                   height : 30px;
                                                   border-style: outset;
                                                   font : 13px  ''')
+        # 预处理
+        self.preprocess_pushButton = QtWidgets.QPushButton('预处理')
+        self.preprocess_pushButton.setStyleSheet(''' text-align : center;
+                                                  background-color : LightGreen;
+                                                  height : 30px;
+                                                  border-style: outset;
+                                                  font : 13px  ''')
 
-        # 查看数据功能
+        # 绑定按钮事件
         self.check_pushButton.clicked.connect(self.checkbutton)
-        # 删除功能
         self.delete_pushButton.clicked.connect(self.deletebutton)
+        self.preprocess_pushButton.clicked.connect(self.preprocessbutton)
 
         hLayout = QtWidgets.QHBoxLayout()
         hLayout.addWidget(self.check_pushButton)
+        hLayout.addWidget(self.preprocess_pushButton)
         hLayout.addWidget(self.delete_pushButton)
         hLayout.setContentsMargins(5, 2, 5, 2)
         widget.setLayout(hLayout)
@@ -606,6 +614,89 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"Error getting current user: {str(e)}")
             return None, False
+
+    # 添加预处理按钮的回调函数
+    def preprocessbutton(self):
+        """
+        预处理按钮的回调函数，执行数据预处理和特征提取
+        """
+        button = self.sender()
+        if button:
+            row = self.tableWidget.indexAt(button.parent().pos()).row()
+            data_path = self.tableWidget.item(row, 3).text()  # 获取数据路径
+
+            try:
+                # 创建进度条对话框
+                progress_dialog = QProgressDialog("正在处理数据...", "取消", 0, 100, self)
+                progress_dialog.setWindowTitle("处理中")
+                progress_dialog.setWindowModality(Qt.WindowModal)
+                progress_dialog.setMinimumDuration(0)
+                progress_dialog.setAutoClose(True)
+                progress_dialog.setAutoReset(True)
+
+                # 创建处理线程
+                self.processing_thread = ProcessingThread(data_path)
+
+                # 连接信号
+                self.processing_thread.progress.connect(progress_dialog.setValue)
+                self.processing_thread.finished.connect(self.processing_completed)
+                self.processing_thread.error.connect(self.processing_error)
+                progress_dialog.canceled.connect(self.processing_thread.terminate)
+
+                # 启动线程
+                self.processing_thread.start()
+
+                logging.info(f"Started processing data from: {data_path}")
+
+            except Exception as e:
+                logging.error(f"Error setting up processing: {str(e)}")
+                QMessageBox.critical(self, "错误", f"设置处理任务时出错：{str(e)}")
+
+    # 添加处理完成的回调函数
+    def processing_completed(self):
+        """处理完成后的回调"""
+        logging.info("Data processing completed successfully")
+        QMessageBox.information(self, "成功", "数据预处理和特征提取已完成")
+
+    # 添加处理错误的回调函数
+    def processing_error(self, error_msg):
+        """处理错误的回调"""
+        logging.error(f"Error during processing: {error_msg}")
+        QMessageBox.critical(self, "错误", f"处理过程中出现错误：{error_msg}")
+
+# 添加一个处理线程类
+class ProcessingThread(QThread):
+    """数据处理线程"""
+    finished = pyqtSignal()  # 处理完成信号
+    error = pyqtSignal(str)  # 错误信号
+    progress = pyqtSignal(int)  # 进度信号
+
+    def __init__(self, data_path):
+        super().__init__()
+        self.data_path = data_path
+
+    def run(self):
+        try:
+            # 数据预处理 - 30%进度
+            self.progress.emit(10)
+            data_pretreatment.treat(self.data_path)
+            self.progress.emit(30)
+
+            # 查找EDF文件 - 40%进度
+            edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.edf')]
+            if not edf_files:
+                raise Exception("未找到EDF文件")
+            self.progress.emit(40)
+
+            # 特征提取和可视化 - 60-100%进度
+            file_path = os.path.join(self.data_path, edf_files[0])
+            self.progress.emit(60)
+            data_out.analyze_eeg_data(file_path)
+            self.progress.emit(100)
+
+            self.finished.emit()
+        except Exception as e:
+            self.error.emit(str(e))
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

@@ -4052,3 +4052,84 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-27 09:48:18,215 - INFO - Administrator - Opening log management page.
 2024-11-27 09:48:18,940 - INFO - Administrator - Returning to admin homepage
 2024-11-27 09:48:19,807 - INFO - Administrator - Opening data view page.
+2024-11-27 12:19:39,236 - INFO - Administrator - Opening user login page.
+2024-11-27 12:19:42,264 - ERROR - Administrator - Login error: 'Login_WindowActions' object has no attribute 'username_lineEdit'
+2024-11-27 12:19:55,438 - INFO - Administrator - Login successful for username 'admin'
+2024-11-27 12:19:55,953 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-27 12:19:57,250 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-11-27 12:20:00,224 - ERROR - Administrator - Login error: 'Login_WindowActions' object has no attribute 'username_lineEdit'
+2024-11-27 12:21:40,912 - INFO - Administrator - Opening user login page.
+2024-11-27 12:21:45,421 - INFO - Administrator - Login successful for username 'admin'
+2024-11-27 12:21:45,611 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-27 12:21:46,857 - INFO - Administrator - Opening data view page.
+2024-11-27 12:22:04,625 - INFO - Administrator - Data preprocessing completed for path: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-27 12:22:28,633 - INFO - Administrator - Feature extraction and visualization completed for file: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2\EEG.edf
+2024-11-27 12:25:27,246 - INFO - Administrator - Opening user login page.
+2024-11-27 12:25:30,138 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:25:31,409 - INFO - Administrator - Opening data view page.
+2024-11-27 12:25:32,866 - INFO - Administrator - Started processing data from: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-27 12:26:08,790 - INFO - Administrator - Data processing completed successfully
+2024-11-27 12:27:47,256 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-11-27 12:27:47,259 - INFO - Administrator - Data path for ID 1: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-27 12:27:47,282 - INFO - Administrator - Deleted folder at path: D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2
+2024-11-27 12:27:47,287 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-11-27 12:27:47,289 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-11-27 12:27:47,290 - INFO - Administrator - Removed row 0 from table.
+2024-11-27 12:28:00,884 - INFO - Administrator - File selection cancelled
+2024-11-27 12:28:53,927 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 12:28:57,666 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 12:32:50,236 - INFO - Administrator - Opening user login page.
+2024-11-27 12:32:53,247 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:32:54,141 - INFO - Administrator - Opening data view page.
+2024-11-27 12:33:02,146 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 12:33:02,174 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 12:35:03,432 - INFO - Administrator - Opening user login page.
+2024-11-27 12:35:07,292 - INFO - Administrator - Login successful for username 'admin'
+2024-11-27 12:35:07,527 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-27 12:35:08,509 - INFO - Administrator - Opening model control page.
+2024-11-27 12:35:10,471 - INFO - Administrator - Opening data view page.
+2024-11-27 12:35:17,742 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 12:35:17,750 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_1
+2024-11-27 12:35:44,240 - INFO - Administrator - Started processing data from: ../data\000005_ord2_1
+2024-11-27 12:36:23,255 - INFO - Administrator - Data processing completed successfully
+2024-11-27 12:37:23,289 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 12:37:23,291 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2_1
+2024-11-27 12:37:25,792 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2_1\Theta.png
+2024-11-27 12:37:31,650 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 12:37:31,653 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2_1
+2024-11-27 12:37:32,796 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2_1\frequency_band_1.png
+2024-11-27 12:37:35,209 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 12:37:35,211 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2_1
+2024-11-27 12:37:35,986 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2_1\time_过零率.png
+2024-11-27 12:41:49,621 - INFO - Administrator - Opening user login page.
+2024-11-27 12:41:51,886 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:41:53,055 - INFO - Administrator - Opening data view page.
+2024-11-27 12:43:35,943 - INFO - Administrator - Opening user login page.
+2024-11-27 12:43:38,816 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:43:39,824 - INFO - Administrator - Opening data view page.
+2024-11-27 12:43:46,639 - INFO - Administrator - Opening data view page.
+2024-11-27 12:43:49,060 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 12:43:49,063 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2_1
+2024-11-27 12:43:49,811 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2_1\Theta.png
+2024-11-27 12:43:51,824 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 12:43:53,056 - INFO - Administrator - Opening results view page.
+2024-11-27 12:47:04,316 - INFO - Administrator - Opening user login page.
+2024-11-27 12:47:07,336 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:47:09,035 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 12:47:10,195 - INFO - Administrator - Opening results view page.
+2024-11-27 12:49:00,512 - INFO - Administrator - Opening user login page.
+2024-11-27 12:49:03,275 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:49:04,772 - INFO - Administrator - Opening data view page.
+2024-11-27 12:49:06,484 - INFO - Administrator - Opening model control page.
+2024-11-27 12:49:07,282 - ERROR - Administrator - Error in returnIndex: name 'WindowManager' is not defined
+2024-11-27 12:51:23,357 - INFO - Administrator - Opening user login page.
+2024-11-27 12:51:26,577 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:51:27,830 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 12:51:27,830 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 12:51:27,837 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 12:51:28,584 - INFO - Administrator - Returning to user homepage
+2024-11-27 12:53:14,360 - INFO - Administrator - Opening user login page.
+2024-11-27 12:53:16,882 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:53:17,919 - INFO - Administrator - Opening data view page.
+2024-11-27 12:56:39,662 - INFO - Administrator - Opening user login page.
+2024-11-27 12:56:42,264 - INFO - Administrator - User admin logged in successfully
