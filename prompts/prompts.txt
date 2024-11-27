@@ -212,3 +212,7 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 模型结果中各应激类型的概率是num*100,num是 num = (y_pred.argmax(axis=-1).sum())/len(y_pred)，tuili.py中的
+
+
+
+我希望登录页面，密码框输入回车，就等于点击登录按钮。现在没有这个操作绑定。

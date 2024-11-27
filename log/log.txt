@@ -4042,3 +4042,13 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-26 22:07:02,924 - INFO - Administrator - Depression LED set to RED
 2024-11-26 22:07:02,924 - INFO - Administrator - Anxiety LED set to RED
 2024-11-26 22:07:18,789 - INFO - Administrator - Returning to admin homepage
+2024-11-27 09:48:07,567 - INFO - Administrator - Opening user login page.
+2024-11-27 09:48:10,471 - INFO - Administrator - Login successful for username 'admin'
+2024-11-27 09:48:11,012 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-27 09:48:12,645 - INFO - Administrator - Opening data view page.
+2024-11-27 09:48:14,623 - INFO - Administrator - Opening model control page.
+2024-11-27 09:48:16,716 - INFO - Administrator - Results table refreshed successfully with 1 rows
+2024-11-27 09:48:16,721 - INFO - Administrator - Opening results view page.
+2024-11-27 09:48:18,215 - INFO - Administrator - Opening log management page.
+2024-11-27 09:48:18,940 - INFO - Administrator - Returning to admin homepage
+2024-11-27 09:48:19,807 - INFO - Administrator - Opening data view page.

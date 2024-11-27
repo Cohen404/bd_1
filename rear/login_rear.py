@@ -65,6 +65,9 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
+        # 修正密码框回车事件绑定
+        self.pwd_lineEdit.returnPressed.connect(self.admin_login)
+
     def admin_login(self):
         """
         处理管理员登录
