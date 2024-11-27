@@ -4201,3 +4201,128 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-27 13:17:20,807 - INFO - Administrator - Successfully displayed 0 data records
 2024-11-27 13:17:20,812 - INFO - Administrator - Opening health evaluation page.
 2024-11-27 13:17:21,746 - INFO - Administrator - Returned to index page
+2024-11-27 13:18:01,299 - INFO - Administrator - Opening user login page.
+2024-11-27 13:18:04,581 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:18:05,799 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 13:18:05,800 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 13:18:05,804 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 13:18:09,608 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:18:10,267 - INFO - Administrator - Opening data view page.
+2024-11-27 13:18:12,463 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-11-27 13:18:12,465 - INFO - Administrator - Data path for ID 1: ../data\000005_ord2_1
+2024-11-27 13:18:12,471 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_1
+2024-11-27 13:18:12,477 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-11-27 13:18:12,478 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-11-27 13:18:12,483 - INFO - Administrator - Removed row 0 from table.
+2024-11-27 13:18:26,339 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:18:30,595 - WARNING - Administrator - Username input cancelled or empty
+2024-11-27 13:20:57,281 - INFO - Administrator - Opening user login page.
+2024-11-27 13:21:00,107 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:21:01,377 - INFO - Administrator - Opening data view page.
+2024-11-27 13:21:08,650 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:21:09,733 - WARNING - Administrator - Username input cancelled or empty
+2024-11-27 13:22:14,572 - INFO - Administrator - Opening user login page.
+2024-11-27 13:22:17,566 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:22:18,599 - INFO - Administrator - Opening data view page.
+2024-11-27 13:22:32,557 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:22:33,423 - WARNING - Administrator - Username input cancelled or empty
+2024-11-27 13:23:36,725 - INFO - Administrator - Opening user login page.
+2024-11-27 13:23:39,631 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:23:40,847 - INFO - Administrator - Opening data view page.
+2024-11-27 13:23:48,411 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:23:48,451 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:24:40,386 - INFO - Administrator - Opening user login page.
+2024-11-27 13:24:43,242 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:24:53,173 - INFO - Administrator - Opening data view page.
+2024-11-27 13:25:57,891 - INFO - Administrator - Opening user login page.
+2024-11-27 13:26:00,915 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:26:03,242 - INFO - Administrator - Opening data view page.
+2024-11-27 13:26:11,517 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000006_pro to ../data\000006_pro
+2024-11-27 13:26:11,536 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:27:56,839 - INFO - Administrator - Opening user login page.
+2024-11-27 13:28:00,288 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:28:01,486 - INFO - Administrator - Opening data view page.
+2024-11-27 13:28:08,779 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:28:13,586 - WARNING - Administrator - Username input cancelled or empty
+2024-11-27 13:28:35,175 - INFO - Administrator - Opening user login page.
+2024-11-27 13:28:38,090 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:28:39,008 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 13:28:39,989 - INFO - Administrator - Opening results view page.
+2024-11-27 13:28:40,923 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:28:41,546 - INFO - Administrator - Opening data view page.
+2024-11-27 13:28:49,528 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:28:49,564 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:29:47,394 - INFO - Administrator - Opening user login page.
+2024-11-27 13:29:50,194 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:29:51,423 - INFO - Administrator - Opening data view page.
+2024-11-27 13:29:59,048 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:29:59,094 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:31:38,541 - INFO - Administrator - Opening user login page.
+2024-11-27 13:31:42,215 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:31:43,402 - INFO - Administrator - Opening data view page.
+2024-11-27 13:31:52,669 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:31:52,698 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:49:09,926 - INFO - Administrator - Opening user login page.
+2024-11-27 13:49:12,654 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:49:13,770 - INFO - Administrator - Opening data view page.
+2024-11-27 13:49:28,302 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-11-27 13:49:28,330 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:49:50,688 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-11-27 13:49:50,715 - ERROR - Administrator - Error in openfile: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:51:25,400 - INFO - Administrator - Opening user login page.
+2024-11-27 13:51:29,842 - INFO - Administrator - Login successful for username 'admin'
+2024-11-27 13:51:29,972 - INFO - Administrator - User 'admin' logged in successfully
+2024-11-27 13:51:32,488 - INFO - Administrator - Opening data view page.
+2024-11-27 13:51:44,442 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-11-27 13:51:46,346 - WARNING - Administrator - Username input cancelled or empty
+2024-11-27 13:54:38,343 - INFO - Administrator - Opening user login page.
+2024-11-27 13:54:41,040 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:54:42,247 - INFO - Administrator - Opening data view page.
+2024-11-27 13:54:50,084 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-11-27 13:54:50,120 - ERROR - Administrator - Error during data upload: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 13:55:18,247 - INFO - Administrator - Opening user login page.
+2024-11-27 13:55:24,120 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:55:25,654 - INFO - Administrator - Opening data view page.
+2024-11-27 13:55:34,871 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-11-27 13:55:34,897 - ERROR - Administrator - Error during data upload: Foreign key associated with column 'tb_data.user_id' could not find table 'tb_user' with which to generate a foreign key to target column 'user_id'
+2024-11-27 14:00:37,631 - INFO - Administrator - Opening user login page.
+2024-11-27 14:00:40,594 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:00:42,015 - INFO - Administrator - Opening data view page.
+2024-11-27 14:00:50,075 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-11-27 14:00:50,084 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2, Username: admin
+2024-11-27 14:01:26,761 - INFO - Administrator - Opening user login page.
+2024-11-27 14:01:29,507 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:01:30,862 - INFO - Administrator - Opening data view page.
+2024-11-27 14:01:49,348 - INFO - Administrator - Opening user login page.
+2024-11-27 14:01:53,726 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:01:55,081 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:01:55,081 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:01:55,089 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:01:55,889 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:01:57,102 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 14:01:58,281 - INFO - Administrator - Opening results view page.
+2024-11-27 14:01:59,033 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:02:49,619 - INFO - Administrator - Opening user login page.
+2024-11-27 14:02:52,215 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:02:53,568 - INFO - Administrator - Opening data view page.
+2024-11-27 14:02:55,141 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:02:56,023 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 14:02:56,023 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 14:02:56,032 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 14:02:58,330 - INFO - Administrator - Returned to index page successfully
+2024-11-27 14:04:44,932 - INFO - Administrator - Opening user login page.
+2024-11-27 14:04:48,610 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:04:49,865 - INFO - Administrator - Opening data view page.
+2024-11-27 14:04:55,685 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-11-27 14:04:55,691 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2
+2024-11-27 14:04:56,952 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2\Theta.png
+2024-11-27 14:04:58,984 - INFO - Administrator - Started processing data from: 000005_ord2
+2024-11-27 14:04:59,009 - ERROR - Administrator - Error during processing: [WinError 3] 系统找不到指定的路径。: '000005_ord2'
+2024-11-27 14:05:08,141 - INFO - Administrator - Started processing data from: 000005_ord2
+2024-11-27 14:05:08,162 - ERROR - Administrator - Error during processing: [WinError 3] 系统找不到指定的路径。: '000005_ord2'
+2024-11-27 14:06:14,138 - INFO - Administrator - Opening user login page.
+2024-11-27 14:06:16,939 - INFO - Administrator - User admin logged in successfully
+2024-11-27 14:06:17,924 - INFO - Administrator - Opening data view page.
+2024-11-27 14:06:19,827 - INFO - Administrator - Started processing data from: ../data\000005_ord2
+2024-11-27 14:06:58,027 - INFO - Administrator - Data processing completed successfully
+2024-11-27 14:07:17,021 - INFO - Administrator - Returned to index page successfully

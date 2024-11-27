@@ -1,78 +1,102 @@
-import sqlparse
-import pymysql
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# MySql配置信息
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
+from sql_model.base import Base
+from sql_model.tb_user import User
+from sql_model.tb_data import Data
+from sql_model.tb_result import Result
+from sql_model.tb_model import Model
+from sql_model.tb_parameters import Parameters
+from datetime import datetime
+
+# MySQL配置信息
 HOST = '127.0.0.1'
 PORT = 3306
 DATABASE = 'sql_model'
 USERNAME = 'root'
 PASSWORD = 'root'
 
-def is_exist_database():
-    db = pymysql.connect(host=HOST, port=int(PORT), user=USERNAME, password=PASSWORD, charset='utf8')
-    cursor1 = db.cursor()
-    sql = "select * from information_schema.SCHEMATA WHERE SCHEMA_NAME = '%s'  ; " % DATABASE
-    res = cursor1.execute(sql)
-    db.close()
-    return res
-
 def init_database():
-    db = pymysql.connect(host=HOST, port=int(PORT), user=USERNAME, password=PASSWORD, charset='utf8')
-    cursor1 = db.cursor()
-    sql = "CREATE DATABASE IF NOT EXISTS %s CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;" % DATABASE
-    res = cursor1.execute(sql)
-    db.close()
-    return res
-
-def execute_fromfile(filename):
-    """
-    从SQL文件执行SQL语句
-    """
+    # 创建数据库连接URL
+    connection_string = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+    
     try:
-        db = pymysql.connect(host=HOST, port=int(PORT), user=USERNAME, password=PASSWORD, database=DATABASE,
-                            charset='utf8mb4')
-        cursor = db.cursor()
+        # 创建引擎
+        engine = create_engine(connection_string)
         
-        # 读取SQL文件
-        print(f"正在读取SQL文件: {filename}")
-        with open(filename, 'r', encoding='utf-8') as fd:
-            sqlfile = fd.read()
-            
-        # 格式化SQL语句
-        print("正在处理SQL语句...")
-        sqlfile = sqlparse.format(sqlfile, strip_comments=True).strip()
+        # 删除所有现有表
+        Base.metadata.drop_all(engine)
+        print("已删除所有现有表")
         
-        # 分割SQL语句
-        sqlcommands = sqlfile.split(';')
-        print(f"找到 {len(sqlcommands)} 条SQL语句")
+        # 创建所有表
+        Base.metadata.create_all(engine)
+        print("已创建新表")
         
-        # 执行每条SQL语句
-        for i, command in enumerate(sqlcommands, 1):
-            try:
-                command = command.strip()
-                if command:
-                    print(f"正在执行第 {i} 条SQL语句...")
-                    cursor.execute(command)
-                    db.commit()
-                    print(f"第 {i} 条SQL语句执行成功")
-            except Exception as msg:
-                print(f"执行第 {i} 条SQL语句时出错:")
-                print(f"SQL语句: {command}")
-                print(f"错误信息: {msg}")
-                db.rollback()
+        # 创建会话
+        Session = sessionmaker(bind=engine)
+        session = Session()
         
-        print("所有SQL语句执行完成")
+        # 插入初始用户数据
+        initial_users = [
+            User(
+                user_id='admin001',
+                username='admin',
+                password='123',
+                email='admin@example.com',
+                phone='13800000001',
+                full_name='管理员',
+                user_type='admin',
+                created_at=datetime.now()
+            ),
+            User(
+                user_id='user001',
+                username='123',
+                password='1234',
+                email='user1@example.com',
+                phone='13800000002',
+                full_name='测试用户1',
+                user_type='user',
+                created_at=datetime.now()
+            ),
+            User(
+                user_id='user002',
+                username='111',
+                password='111',
+                email='user2@example.com',
+                phone='13800000003',
+                full_name='测试用户2',
+                user_type='user',
+                created_at=datetime.now()
+            ),
+            User(
+                user_id='user003',
+                username='222',
+                password='222',
+                email='user3@example.com',
+                phone='13800000004',
+                full_name='测试用户3',
+                user_type='admin',
+                created_at=datetime.now()
+            )
+        ]
+        
+        # 添加用户数据
+        for user in initial_users:
+            session.add(user)
+        
+        # 提交更改
+        session.commit()
+        print("已插入初始用户数据")
+        
+        session.close()
+        print("数据库初始化完成")
         
     except Exception as e:
-        print(f"数据库操作失败: {str(e)}")
-    finally:
-        if 'db' in locals():
-            db.close()
+        print(f"初始化数据库时出错: {str(e)}")
+        raise
 
 if __name__ == '__main__':
-    if is_exist_database():
-        print('数据库已经存在，正在重新初始化...')
-    if init_database():
-        print('数据库创建/更新成功')
-    execute_fromfile('sql_model.sql')
-    print('表创建成功')
+    init_database()

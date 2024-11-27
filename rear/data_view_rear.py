@@ -58,7 +58,27 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.id = 0
         self.data_path = ''
-        self._index_window = None
+        
+        # 设置表格列宽
+        self.tableWidget.setColumnWidth(3, 400)  # 设置路径列的宽度为400像素
+        # 设置表格的选择行为
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        # 设置表格的选择模式
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        # 设置表格的水平表头可见
+        self.tableWidget.horizontalHeader().setVisible(True)
+        # 设置表格的垂直表头可见
+        self.tableWidget.verticalHeader().setVisible(True)
+        # 设置表格的水平表头文字对齐方式
+        self.tableWidget.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
+        # 设置表格的垂直表头文字对齐方式
+        self.tableWidget.verticalHeader().setDefaultAlignment(Qt.AlignCenter)
+        # 设置表格的水平表头的样式
+        self.tableWidget.horizontalHeader().setStyleSheet("QHeaderView::section{background:skyblue;}")
+        # 设置表格的垂直表头的样式
+        self.tableWidget.verticalHeader().setStyleSheet("QHeaderView::section{background:skyblue;}")
+        # 设置表格内容文字对齐方式
+        self.tableWidget.setStyleSheet("QTableWidget::item{padding-left:10px;}")
 
         # 获取当前用户信息
         try:
@@ -178,15 +198,38 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                 row = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row)
                 
-                self.tableWidget.setItem(row, 0, QTableWidgetItem(str(data.id)))
-                self.tableWidget.setItem(row, 1, QTableWidgetItem(str(data.personnel_id)))
-                self.tableWidget.setItem(row, 2, QTableWidgetItem(data.personnel_name))
-                self.tableWidget.setItem(row, 3, QTableWidgetItem(data.data_path))
-                self.tableWidget.setItem(row, 4, QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户'))
+                # 获取路径的最后一个目录名
+                display_path = os.path.basename(data.data_path)
+                
+                # 创建并设置各列的项目
+                id_item = QTableWidgetItem(str(data.id))
+                id_item.setTextAlignment(Qt.AlignCenter)
+                self.tableWidget.setItem(row, 0, id_item)
+                
+                personnel_id_item = QTableWidgetItem(str(data.personnel_id))
+                personnel_id_item.setTextAlignment(Qt.AlignCenter)
+                self.tableWidget.setItem(row, 1, personnel_id_item)
+                
+                name_item = QTableWidgetItem(data.personnel_name)
+                name_item.setTextAlignment(Qt.AlignCenter)
+                self.tableWidget.setItem(row, 2, name_item)
+                
+                # 创建路径项并设置工具提示（鼠标悬停显示完整路径）
+                path_item = QTableWidgetItem(display_path)
+                path_item.setToolTip(data.data_path)  # 设置完整路径为工具提示
+                path_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)  # 左对齐
+                self.tableWidget.setItem(row, 3, path_item)
+                
+                user_type_item = QTableWidgetItem('管理员' if data.upload_user == 1 else '普通用户')
+                user_type_item.setTextAlignment(Qt.AlignCenter)
+                self.tableWidget.setItem(row, 4, user_type_item)
+                
                 if data.upload_time:
-                    self.tableWidget.setItem(row, 5, QTableWidgetItem(data.upload_time.strftime("%Y-%m-%d %H:%M:%S")))
+                    time_item = QTableWidgetItem(data.upload_time.strftime("%Y-%m-%d %H:%M:%S"))
                 else:
-                    self.tableWidget.setItem(row, 5, QTableWidgetItem("N/A"))
+                    time_item = QTableWidgetItem("N/A")
+                time_item.setTextAlignment(Qt.AlignCenter)
+                self.tableWidget.setItem(row, 5, time_item)
                 
                 self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
 
@@ -225,105 +268,89 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         """
         打开文件对话框，选择要上传的数据文件
         """
+        # 先打开文件选择对话框
+        source_dir = QFileDialog.getExistingDirectory(self, "选择文件夹", os.getcwd())
+        if not source_dir:
+            logging.info("File selection cancelled")
+            return
+            
+        # 检查是否选择了文件
+        if not os.path.exists(source_dir):
+            QMessageBox.warning(self, "警告", "选择的文件夹不存在")
+            return
+
+        # 获取源文件夹名称
+        source_dir_name = os.path.basename(source_dir)
+        
+        # 构建目标目录路径
+        target_base_dir = '../data'
+        target_dir = os.path.join(target_base_dir, source_dir_name)
+        
+        # 如果目标目录已存在，则添加后缀
+        suffix = 1
+        while os.path.exists(target_dir):
+            new_name = f"{source_dir_name}_{suffix}"
+            target_dir = os.path.join(target_base_dir, new_name)
+            suffix += 1
+        
+        # 确保目标基础目录存在
+        os.makedirs(target_base_dir, exist_ok=True)
+        
+        # 复制文件夹
+        try:
+            shutil.copytree(source_dir, target_dir)
+            logging.info(f"Directory copied from {source_dir} to {target_dir}")
+        except Exception as e:
+            logging.error(f"Failed to copy directory: {str(e)}")
+            QMessageBox.critical(self, "错误", f"复制文件夹时发生错误：{str(e)}")
+            return
+            
+        session = SessionClass()
         try:
             # 获取当前用户信息
-            path = '../state/user_status.txt'
-            user_status = operate_user.read(path)
-            
-            # 先打开文件选择对话框
-            source_dir = QFileDialog.getExistingDirectory(self, "选择文件夹", os.getcwd())
-            if not source_dir:
-                logging.info("File selection cancelled")
-                return
-                
-            # 检查是否选择了文件
-            if not os.path.exists(source_dir):
-                QMessageBox.warning(self, "警告", "选择的文件夹不存在")
-                return
-
-            # 获取源文件夹名称
-            source_dir_name = os.path.basename(source_dir)
-            
-            # 构建目标目录路径
-            target_base_dir = '../data'
-            target_dir = os.path.join(target_base_dir, source_dir_name)
-            
-            # 如果目标目录已存在，则添加后缀
-            suffix = 1
-            while os.path.exists(target_dir):
-                new_name = f"{source_dir_name}_{suffix}"
-                target_dir = os.path.join(target_base_dir, new_name)
-                suffix += 1
-            
-            # 确保目标基础目录存在
-            os.makedirs(target_base_dir, exist_ok=True)
-            
-            # 复制文件夹
-            try:
-                shutil.copytree(source_dir, target_dir)
-                logging.info(f"Directory copied from {source_dir} to {target_dir}")
-            except Exception as e:
-                logging.error(f"Failed to copy directory: {str(e)}")
-                QMessageBox.critical(self, "错误", f"复制文件夹时发生错误：{str(e)}")
-                return
-                
-            session = SessionClass()
-            try:
-                # 获取用户名
-                username, ok = QInputDialog.getText(self, "输入", "请输入用户名：")
-                if not ok or not username:
-                    logging.warning("Username input cancelled or empty")
-                    # 删除已复制的文件夹
-                    if os.path.exists(target_dir):
-                        shutil.rmtree(target_dir)
-                    return
-
-                # 根据用户名查询用户信息
-                user = session.query(User).filter(User.username == username).first()
-                if not user:
-                    QMessageBox.warning(self, "警告", f"用户名 {username} 不存在")
-                    # 删除已复制的文件夹
-                    if os.path.exists(target_dir):
-                        shutil.rmtree(target_dir)
-                    return
-
-                # 从数据库中取最大的id
-                max_id = session.query(func.max(Data.id)).scalar()
-                if max_id is None:
-                    max_id = 0
-                max_id = max_id + 1
-
-                # 创建新的数据记录，确保personnel_id是字符串类型
-                new_data = Data(
-                    id=max_id,
-                    personnel_id=str(user.user_id),  # 确保是字符串类型
-                    data_path=target_dir,  # 使用新的目标路径
-                    upload_time=datetime.now(),
-                    user_id=str(user.user_id),  # 确保是字符串类型
-                    personnel_name=user.full_name,
-                    upload_user=1 if user.user_type == 'admin' else 0
-                )
-                
-                session.add(new_data)
-                session.commit()
-                
-                logging.info(f"Data uploaded successfully. Path: {target_dir}, Username: {username}")
-                QMessageBox.information(self, "提示", "数据上传成功！")
-                
-                # 刷新表格显示
-                self.show_table()
-                
-            except Exception as e:
-                # 发生错误时删除已复制的文件夹
+            user = session.query(User).filter(User.user_id == self.user_id).first()
+            if not user:
+                QMessageBox.warning(self, "警告", "无法获取当前用户信息")
                 if os.path.exists(target_dir):
                     shutil.rmtree(target_dir)
-                raise e
-            finally:
-                session.close()
-                
+                return
+
+            # 从数据库中取最大的id
+            max_id = session.query(func.max(Data.id)).scalar()
+            if max_id is None:
+                max_id = 0
+            max_id = max_id + 1
+
+            # 创建新的数据记录
+            new_data = Data(
+                id=max_id,
+                personnel_id=str(user.user_id),
+                data_path=target_dir,
+                upload_time=datetime.now(),
+                user_id=str(user.user_id),
+                personnel_name=user.full_name,
+                upload_user=1 if user.user_type == 'admin' else 0
+            )
+            
+            session.add(new_data)
+            session.commit()
+            
+            logging.info(f"Data uploaded successfully. Path: {target_dir}, Username: {user.username}")
+            QMessageBox.information(self, "提示", "数据上传成功！")
+            
+            # 刷新表格显示
+            self.show_table()
+            
         except Exception as e:
-            logging.error(f"Error in openfile: {str(e)}")
-            QMessageBox.critical(self, "错误", f"上传数据时发生错误：{str(e)}")
+            # 发生错误时删除已复制的文件夹
+            if os.path.exists(target_dir):
+                shutil.rmtree(target_dir)
+            session.rollback()
+            logging.error(f"Error during data upload: {str(e)}")
+            QMessageBox.critical(self, "错误", f"数据上传失败：{str(e)}")
+        finally:
+            session.close()
+            
             
     def show_table(self):
         """刷新表格显示"""
@@ -331,46 +358,51 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
     # 将openfile选择的数据存入数据库之后，将刚存入的数据显示到表单中
     def upload_button(self):
-
-        '''
-        将数据库tb_data表中最新的一条记录获取下来，得到一个data对象，要判断flag是否等于1，等于1进行下列操作
-        data.id, data.data_path, data.upload_user_id, data.upload_time, data.flag
-
-        '''
+        """
+        将数据库tb_data表中最新的一条记录获取下来并显示到表格中
+        """
         session = SessionClass()
         kk = session.query(Data).order_by(Data.id.desc()).first()  # 倒序查找最大的id
         session.close()
-        info = []
+        
         if kk is not None:
-            info.append([kk.id, kk.personnel_id, kk.data_path, kk.upload_user, kk.personnel_name, kk.upload_time])
-
-        for data in info:
-            row = self.tableWidget.rowCount()  # 当前form有多少行，最后一行是第row-1行
+            row = self.tableWidget.rowCount()  # 当前form有多少行
             self.tableWidget.insertRow(row)  # 创建新的行
-
-            if data[3] == 0:  # info[2]等价于data.upload_user_id
-                user_name = '普通用户'
+            
+            # 获取路径的最后一个目录名
+            display_path = os.path.basename(kk.data_path)
+            
+            # 创建并设置各列的项目
+            id_item = QTableWidgetItem(str(kk.id))
+            id_item.setTextAlignment(Qt.AlignCenter)
+            self.tableWidget.setItem(row, 0, id_item)
+            
+            personnel_id_item = QTableWidgetItem(str(kk.personnel_id))
+            personnel_id_item.setTextAlignment(Qt.AlignCenter)
+            self.tableWidget.setItem(row, 1, personnel_id_item)
+            
+            name_item = QTableWidgetItem(kk.personnel_name)
+            name_item.setTextAlignment(Qt.AlignCenter)
+            self.tableWidget.setItem(row, 2, name_item)
+            
+            # 创建路径项并设置工具提示
+            path_item = QTableWidgetItem(display_path)
+            path_item.setToolTip(kk.data_path)  # 设置完整路径为工具提示
+            path_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)  # ���对齐
+            self.tableWidget.setItem(row, 3, path_item)
+            
+            user_type_item = QTableWidgetItem('管理员' if kk.upload_user == 1 else '普通用户')
+            user_type_item.setTextAlignment(Qt.AlignCenter)
+            self.tableWidget.setItem(row, 4, user_type_item)
+            
+            if kk.upload_time:
+                time_item = QTableWidgetItem(kk.upload_time.strftime("%Y-%m-%d %H:%M:%S"))
             else:
-                user_name = '管理员'
-            for i in range(len(self.lst) - 1):
-                item = QTableWidgetItem()
-                # 获得上传数据信息，将其添加到form中
-                content = ''
-                if i == 0:
-                    content = data[0]  # data[0]对应data.id
-                elif i == 1:
-                    content = data[1]
-                elif i == 2:
-                    content = data[4]
-                elif i == 3:
-                    content = data[2]
-                elif i == 4:
-                    content = user_name  # user_name上边已经处理过
-                elif i == 5:
-                    content = data[5].strftime("%Y-%m-%d %H:%M:%S") if data[5] else "N/A"
-                item.setText(str(content))  # 将content转为string类型才能存入单元格，否则报错。
-                self.tableWidget.setItem(row, i, item)
-            self.tableWidget.setCellWidget(row, len(self.lst) - 1, self.buttonForRow())  # 在最后一个单元格中加按钮
+                time_item = QTableWidgetItem("N/A")
+            time_item.setTextAlignment(Qt.AlignCenter)
+            self.tableWidget.setItem(row, 5, time_item)
+            
+            self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
@@ -428,7 +460,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             else:
                 return
         elif feature_type == "均分频带":
-            band_choice, ok = QInputDialog.getItem(self, "选择��带", "请选择要查看的频带：", 
+            band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
                                                    ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
             if ok and band_choice:
                 band_number = int(band_choice.split()[-1])
@@ -617,9 +649,19 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         button = self.sender()
         if button:
             row = self.tableWidget.indexAt(button.parent().pos()).row()
-            data_path = self.tableWidget.item(row, 3).text()  # 获取数据路径
-
+            data_id = int(self.tableWidget.item(row, 0).text())  # 获取数据ID
+            
             try:
+                # 从数据库获取完整路径
+                session = SessionClass()
+                data = session.query(Data).filter(Data.id == data_id).first()
+                if not data:
+                    QMessageBox.warning(self, "警告", "找不到对应的数据记录")
+                    return
+                    
+                data_path = data.data_path  # 使用数据库中存储的完整路径
+                session.close()
+
                 # 创建进度条对话框
                 progress_dialog = QProgressDialog("正在处理数据...", "取消", 0, 100, self)
                 progress_dialog.setWindowTitle("处理中")
