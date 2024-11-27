@@ -46,6 +46,7 @@ class model_control_Controller(Ui_model_Control):
         self.export_btn = None
         self.delete_btn = None
         self.model = None
+        self._admin_window = None
         self.showUi()
         self.return_btn.clicked.connect(self.returnIndex)
         
@@ -368,34 +369,21 @@ class model_control_Controller(Ui_model_Control):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
-        user_status = operate_user.read(path)
-        
-        session = SessionClass()
         try:
-            # 先尝试直接用用户名查询
-            user = session.query(User).filter(User.username == user_status).first()
-            if not user:
-                # 如果找不到，尝试将user_status转换为整数作为user_id查询
-                try:
-                    user_id = int(user_status)
-                    user = session.query(User).filter(User.user_id == user_id).first()
-                except ValueError:
-                    user = None
+            # 创建新窗口前先保存引用
+            self._admin_window = admin_rear.AdminWindowActions()
             
-            if user and user.user_type == 'admin':
-                index_window = admin_rear.AdminWindowActions()
-            else:
-                index_window = index_rear.Index_WindowActions()
-            
+            # 先显示新窗口
+            self._admin_window.show()
+            # 再隐藏当前窗口
+            self.hide()
+            # 最后关闭当前窗口
             self.close()
-            index_window.show()
             
+            logging.info("Returned to admin page successfully")
         except Exception as e:
             logging.error(f"Error in returnIndex: {str(e)}")
-            QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
-        finally:
-            session.close()
+            QMessageBox.critical(self, "错误", f"返回管理页面时发生错误：{str(e)}")
 
 
 if __name__ == '__main__':

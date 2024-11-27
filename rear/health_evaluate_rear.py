@@ -55,6 +55,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         """
         super(health_evaluate.Ui_MainWindow, self).__init__()
         self.setupUi(self)  # 初始化health_evaluate方法
+        self._index_window = None  # 添加这一行，用于保存主页面窗口引用
         
         # 从文件中读取用户ID
         path = '../state/user_status.txt'
@@ -351,33 +352,24 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         path = '../state/user_status.txt'
         user_status = operate_user.read(path)
         
-        session = SessionClass()
         try:
-            # 先尝试直接用用户名查询
-            user = session.query(User).filter(User.username == user_status).first()
-            if not user:
-                # 如果找不到，尝试将user_status转换为整数作为user_id查询
-                try:
-                    user_id = int(user_status)
-                    user = session.query(User).filter(User.user_id == user_id).first()
-                except ValueError:
-                    user = None
+            # 创建新窗口前先保存引用
+            if user_status == '1':  # 管理员
+                self._index_window = admin_rear.AdminWindowActions()
+            else:  # 普通用户
+                self._index_window = index_rear.Index_WindowActions()
             
-            if user and user.user_type == 'admin':
-                index_window = admin_rear.AdminWindowActions()
-                logging.info("Returning to admin homepage")
-            else:
-                index_window = index_rear.Index_WindowActions()
-                logging.info("Returning to user homepage")
-            
+            # 先显示新窗口
+            self._index_window.show()
+            # 再隐藏当前窗口
+            self.hide()
+            # 最后关闭当前窗口
             self.close()
-            index_window.show()
             
+            logging.info("Returned to index page successfully")
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
-        finally:
-            session.close()
 
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):

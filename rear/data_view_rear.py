@@ -58,6 +58,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.id = 0
         self.data_path = ''
+        self._index_window = None
 
         # 获取当前用户信息
         try:
@@ -427,7 +428,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             else:
                 return
         elif feature_type == "均分频带":
-            band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
+            band_choice, ok = QInputDialog.getItem(self, "选择��带", "请选择要查看的频带：", 
                                                    ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
             if ok and band_choice:
                 band_number = int(band_choice.split()[-1])
@@ -570,31 +571,24 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         path = '../state/user_status.txt'
         user_status = operate_user.read(path)
         
-        session = SessionClass()
         try:
-            # 先尝试直接用用户名查询
-            user = session.query(User).filter(User.username == user_status).first()
-            if not user:
-                # 如果找不到，尝试将user_status转换为整数作为user_id查询
-                try:
-                    user_id = int(user_status)
-                    user = session.query(User).filter(User.user_id == user_id).first()
-                except ValueError:
-                    user = None
+            # 创建新窗口前先保存引用
+            if user_status == '1':  # 管理员
+                self._index_window = admin_rear.AdminWindowActions()
+            else:  # 普通用户
+                self._index_window = index_rear.Index_WindowActions()
             
-            if user and user.user_type == 'admin':
-                index_window = admin_rear.AdminWindowActions()
-            else:
-                index_window = index_rear.Index_WindowActions()
-            
+            # 先显示新窗口
+            self._index_window.show()
+            # 再隐藏当前窗口
+            self.hide()
+            # 最后关闭当前窗口
             self.close()
-            index_window.show()
             
+            logging.info("Returned to index page successfully")
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
-        finally:
-            session.close()
 
     def get_current_user(self):
         """

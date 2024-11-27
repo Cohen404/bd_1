@@ -4133,3 +4133,71 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-11-27 12:53:17,919 - INFO - Administrator - Opening data view page.
 2024-11-27 12:56:39,662 - INFO - Administrator - Opening user login page.
 2024-11-27 12:56:42,264 - INFO - Administrator - User admin logged in successfully
+2024-11-27 12:59:59,385 - INFO - Administrator - Opening user login page.
+2024-11-27 13:00:02,079 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:00:03,610 - INFO - Administrator - Opening model control page.
+2024-11-27 13:01:55,743 - INFO - Administrator - Opening user login page.
+2024-11-27 13:01:58,821 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:02:00,217 - INFO - Administrator - Opening model control page.
+2024-11-27 13:03:31,434 - INFO - Administrator - Opening user login page.
+2024-11-27 13:03:34,365 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:03:35,733 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 13:03:35,734 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 13:03:35,740 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 13:03:36,743 - INFO - Administrator - Returned to index page
+2024-11-27 13:03:37,800 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 13:03:38,929 - INFO - Administrator - Opening results view page.
+2024-11-27 13:03:39,832 - INFO - Administrator - Returned to index page
+2024-11-27 13:03:40,602 - INFO - Administrator - Opening data view page.
+2024-11-27 13:03:41,601 - INFO - Administrator - Returned to index page
+2024-11-27 13:03:42,431 - INFO - Administrator - Opening model control page.
+2024-11-27 13:07:24,523 - INFO - Administrator - Opening user login page.
+2024-11-27 13:07:27,219 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:07:28,761 - INFO - Administrator - Opening model control page.
+2024-11-27 13:07:29,966 - INFO - Administrator - Returned to admin page successfully
+2024-11-27 13:07:30,796 - INFO - Administrator - User table refreshed successfully
+2024-11-27 13:07:30,797 - INFO - Administrator - Opening user management page.
+2024-11-27 13:07:31,519 - INFO - Administrator - Returning to user homepage
+2024-11-27 13:07:45,681 - INFO - Administrator - Opening user login page.
+2024-11-27 13:07:48,893 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:07:50,018 - INFO - Administrator - Opening parameter control page.
+2024-11-27 13:09:53,974 - INFO - Administrator - Opening user login page.
+2024-11-27 13:10:00,766 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:10:02,230 - INFO - Administrator - User table refreshed successfully
+2024-11-27 13:10:02,231 - INFO - Administrator - Opening user management page.
+2024-11-27 13:10:03,129 - INFO - Administrator - Returning to user homepage
+2024-11-27 13:12:10,178 - INFO - Administrator - Opening user login page.
+2024-11-27 13:12:12,955 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:12:15,294 - INFO - Administrator - Opening data view page.
+2024-11-27 13:12:16,250 - INFO - Administrator - Returned to index page
+2024-11-27 13:12:17,894 - INFO - Administrator - Opening model control page.
+2024-11-27 13:12:18,823 - INFO - Administrator - Returned to admin page successfully
+2024-11-27 13:12:19,588 - INFO - Administrator - User table refreshed successfully
+2024-11-27 13:12:19,589 - INFO - Administrator - Opening user management page.
+2024-11-27 13:12:20,381 - INFO - Administrator - Returning to user homepage
+2024-11-27 13:15:59,465 - INFO - Administrator - Opening user login page.
+2024-11-27 13:16:02,242 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:16:06,510 - INFO - Administrator - User table refreshed successfully
+2024-11-27 13:16:06,512 - INFO - Administrator - Opening user management page.
+2024-11-27 13:16:07,435 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:16:42,969 - INFO - Administrator - Opening user login page.
+2024-11-27 13:16:46,349 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:16:47,664 - INFO - Administrator - Opening parameter control page.
+2024-11-27 13:16:49,099 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:16:50,103 - INFO - Administrator - Opening log management page.
+2024-11-27 13:16:51,058 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:17:08,426 - INFO - Administrator - Opening user login page.
+2024-11-27 13:17:11,480 - INFO - Administrator - User admin logged in successfully
+2024-11-27 13:17:12,929 - INFO - Administrator - Opening password change page.
+2024-11-27 13:17:14,049 - INFO - Administrator - Returned to index page successfully
+2024-11-27 13:17:15,500 - INFO - Administrator - Opening model control page.
+2024-11-27 13:17:16,339 - INFO - Administrator - Returned to admin page successfully
+2024-11-27 13:17:16,882 - INFO - Administrator - Opening data view page.
+2024-11-27 13:17:17,669 - INFO - Administrator - Returned to index page
+2024-11-27 13:17:18,358 - INFO - Administrator - Results table refreshed successfully with 0 rows
+2024-11-27 13:17:19,401 - INFO - Administrator - Opening results view page.
+2024-11-27 13:17:20,345 - INFO - Administrator - Returned to index page
+2024-11-27 13:17:20,807 - INFO - Administrator - Regular user None: fetching own data records
+2024-11-27 13:17:20,807 - INFO - Administrator - Successfully displayed 0 data records
+2024-11-27 13:17:20,812 - INFO - Administrator - Opening health evaluation page.
+2024-11-27 13:17:21,746 - INFO - Administrator - Returned to index page
