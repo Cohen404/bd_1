@@ -305,3 +305,8 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 
+用户管理界面中不应该显示用户密码，并且用户角色没有显示到对应的位置，操作下面也不是正确的内容。邮箱要可以为空的。修改用户信息界面里，需要弹出个框进行修改。创建用户的界面也需要根据数据库里的内容进行增加。
+
+
+
+我需要数据库中重建这张表，帮我修改sql_model.sql以及tb_user.py，并且告诉我用什么命令可以重建这张表，并且进行这张表的初始化。

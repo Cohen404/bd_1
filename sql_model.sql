@@ -23,27 +23,26 @@ SET GLOBAL wait_timeout = 28800;
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
-    `user_id` VARCHAR(64) PRIMARY KEY NOT NULL,
-    `username` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(64) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
-    `phone` VARCHAR(20),
-    `full_name` VARCHAR(255),
-    `user_type` VARCHAR(10) NOT NULL DEFAULT 'user',
-    `last_login` DATETIME,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `user_id` VARCHAR(64) PRIMARY KEY NOT NULL COMMENT '用户ID',
+    `username` VARCHAR(50) NOT NULL COMMENT '用户名',
+    `password` VARCHAR(64) NOT NULL COMMENT '密码',
+    `email` VARCHAR(100) DEFAULT NULL COMMENT '邮箱',
+    `phone` VARCHAR(20) DEFAULT NULL COMMENT '电话',
+    `user_type` VARCHAR(10) NOT NULL DEFAULT 'user' COMMENT '用户类型: admin/user',
+    `last_login` DATETIME DEFAULT NULL COMMENT '最后登录时间',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` (user_id, username, password, email, phone, full_name, user_type, created_at)
+INSERT INTO `tb_user` (user_id, username, password, email, phone, user_type, created_at)
 VALUES 
-('admin001', 'admin', '123', 'admin@example.com', '13800000001', '管理员', 'admin', NOW()),
-('user001', '123', '1234', 'user1@example.com', '13800000002', '测试用户1', 'user', NOW()),
-('user002', '111', '111', 'user2@example.com', '13800000003', '测试用户2', 'user', NOW()),
-('user003', '222', '222', 'user3@example.com', '13800000004', '测试用户3', 'admin', NOW());
+('admin001', 'admin', '123456', 'admin@example.com', '13800000001', 'admin', NOW()),
+('user001', 'user1', '123456', 'user1@example.com', '13800000002', 'user', NOW()),
+('user002', 'user2', '123456', 'user2@example.com', '13800000003', 'user', NOW()),
+('user003', 'user3', '123456', 'user3@example.com', '13800000004', 'admin', NOW());
 
 -- ----------------------------
 -- Table structure for tb_result

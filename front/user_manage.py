@@ -10,6 +10,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import (
+    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
+    QLabel, QLineEdit, QPushButton, QComboBox,
+    QTableWidget, QTableWidgetItem, QHeaderView
+)
 
 from front.component import create_header, create_bottom
 
@@ -54,8 +59,8 @@ class Ui_MainWindow(object):
         self.mainVLayout.setObjectName("mainVLayout")
         self.layout.addLayout(self.mainVLayout)
 
-        # 改为表格
-        self.lst = ['ID', '用户名', '用户密码', '用户角色', '操作']
+        # 修改表格列
+        self.lst = ['ID', '用户名', '角色', '邮箱', '电话', '操作']
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setStyleSheet("margin-right:15px")
         self.tableWidget.setObjectName("tableWidget")
@@ -79,33 +84,38 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.hLayout.addLayout(self.gridLayout)
 
-        self.nameLabel = QtWidgets.QLabel(self.centralwidget)
-        self.gridLayout.addWidget(self.nameLabel, 0, 0, 1, 1)
-
+        # 用户名
+        self.nameLabel = QtWidgets.QLabel("用户名：", self.centralwidget)
         self.nameIN = QtWidgets.QLineEdit(self.centralwidget)
-        self.gridLayout.addWidget(self.nameIN, 0, 1, 1, 1)
-
-        self.pswdLabel = QtWidgets.QLabel(self.centralwidget)
-        self.gridLayout.addWidget(self.pswdLabel, 1, 0, 1, 1)
-
+        self.gridLayout.addWidget(self.nameLabel, 0, 0)
+        self.gridLayout.addWidget(self.nameIN, 0, 1)
+        
+        # 密码
+        self.pswdLabel = QtWidgets.QLabel("密码：", self.centralwidget)
         self.pswdIN = QtWidgets.QLineEdit(self.centralwidget)
-        self.gridLayout.addWidget(self.pswdIN, 1, 1, 1, 1)
-
-        self.characterLabel = QtWidgets.QLabel(self.centralwidget)
-        self.gridLayout.addWidget(self.characterLabel, 0, 2, 1, 1)
-
-        # self.old_pwd.setEchoMode(QLineEdit.Password)
-        # 下拉框
+        self.pswdIN.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.gridLayout.addWidget(self.pswdLabel, 1, 0)
+        self.gridLayout.addWidget(self.pswdIN, 1, 1)
+        
+        # 邮箱
+        self.emailLabel = QtWidgets.QLabel("邮箱：", self.centralwidget)
+        self.emailIN = QtWidgets.QLineEdit(self.centralwidget)
+        self.gridLayout.addWidget(self.emailLabel, 0, 2)
+        self.gridLayout.addWidget(self.emailIN, 0, 3)
+        
+        # 电话
+        self.phoneLabel = QtWidgets.QLabel("电话：", self.centralwidget)
+        self.phoneIN = QtWidgets.QLineEdit(self.centralwidget)
+        self.gridLayout.addWidget(self.phoneLabel, 1, 2)
+        self.gridLayout.addWidget(self.phoneIN, 1, 3)
+        
+        # 角色选择
+        self.characterLabel = QtWidgets.QLabel("角色：", self.centralwidget)
         self.character_comboBox = QtWidgets.QComboBox(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.character_comboBox.sizePolicy().hasHeightForWidth())
-        self.character_comboBox.setSizePolicy(sizePolicy)
-        self.character_comboBox.setObjectName("character_comboBox")
         self.character_comboBox.addItem("普通用户")
         self.character_comboBox.addItem("管理员")
-        self.gridLayout.addWidget(self.character_comboBox, 0, 3, 1, 1)
+        self.gridLayout.addWidget(self.characterLabel, 2, 0)
+        self.gridLayout.addWidget(self.character_comboBox, 2, 1)
 
         # 上传按钮
         self.addButton = QtWidgets.QPushButton(self.centralwidget)

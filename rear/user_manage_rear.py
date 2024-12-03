@@ -9,7 +9,11 @@ import time
 from datetime import datetime
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QMessageBox, QTableWidgetItem,
+    QWidget, QHBoxLayout, QPushButton, QDialog, QFormLayout,
+    QLineEdit, QComboBox, QDialogButtonBox
+)
 import state.operate_user as operate_user
 
 # 导入本页面的前端部分
@@ -68,66 +72,122 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
     def show_table(self):
-        """
-        显示用户表格
-        """
+        """显示用户表格"""
         session = SessionClass()
         try:
             users = session.query(User).all()
             self.tableWidget.setRowCount(len(users))
             
             for i, user in enumerate(users):
-                # 用户ID
+                # 添加用户信息到表格
                 self.tableWidget.setItem(i, 0, QTableWidgetItem(str(user.user_id)))
-                # 用户名
                 self.tableWidget.setItem(i, 1, QTableWidgetItem(user.username))
-                # 用户类型
                 self.tableWidget.setItem(i, 2, QTableWidgetItem('管理员' if user.user_type == 'admin' else '普通用户'))
-                # 邮箱
                 self.tableWidget.setItem(i, 3, QTableWidgetItem(user.email or ''))
-                # 电话
                 self.tableWidget.setItem(i, 4, QTableWidgetItem(user.phone or ''))
-                # 最后登录时间
-                last_login = user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login else ''
-                self.tableWidget.setItem(i, 5, QTableWidgetItem(last_login))
-            
-            logging.info("User table refreshed successfully")
+                
+                # 添加操作按钮
+                btn_widget = QWidget()
+                btn_layout = QHBoxLayout()
+                btn_layout.setContentsMargins(5, 2, 5, 2)
+                
+                edit_btn = QPushButton("编辑")
+                edit_btn.setStyleSheet("background-color: #759dcd; border-radius: 5px; padding: 5px;")
+                edit_btn.clicked.connect(lambda _, uid=user.user_id: self.edit_user(uid))
+                
+                delete_btn = QPushButton("删除")
+                delete_btn.setStyleSheet("background-color: #d9534f; color: white; border-radius: 5px; padding: 5px;")
+                delete_btn.clicked.connect(lambda _, uid=user.user_id: self.delete_user(uid))
+                
+                btn_layout.addWidget(edit_btn)
+                btn_layout.addWidget(delete_btn)
+                btn_widget.setLayout(btn_layout)
+                
+                self.tableWidget.setCellWidget(i, 5, btn_widget)
+                
         except Exception as e:
             logging.error(f"Error displaying user table: {str(e)}")
             QMessageBox.critical(self, "错误", f"显示用户表格失败：{str(e)}")
         finally:
             session.close()
 
+    def edit_user(self, user_id):
+        """编辑用户信息"""
+        session = SessionClass()
+        try:
+            user = session.query(User).filter(User.user_id == user_id).first()
+            if not user:
+                return
+                
+            dialog = QDialog(self)
+            dialog.setWindowTitle("编辑用户信息")
+            layout = QFormLayout()
+            
+            # 创建输入框
+            username_edit = QLineEdit(user.username)
+            email_edit = QLineEdit(user.email or '')
+            phone_edit = QLineEdit(user.phone or '')
+            role_combo = QComboBox()
+            role_combo.addItems(["普通用户", "管理员"])
+            role_combo.setCurrentText("管理员" if user.user_type == "admin" else "普通用户")
+            
+            # 添加到布局
+            layout.addRow("用户名:", username_edit)
+            layout.addRow("邮箱:", email_edit)
+            layout.addRow("电话:", phone_edit)
+            layout.addRow("角色:", role_combo)
+            
+            # 按钮
+            buttons = QDialogButtonBox(
+                QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+            buttons.accepted.connect(dialog.accept)
+            buttons.rejected.connect(dialog.reject)
+            layout.addRow(buttons)
+            
+            dialog.setLayout(layout)
+            
+            if dialog.exec_() == QDialog.Accepted:
+                # 更新用户信息
+                user.username = username_edit.text()
+                user.email = email_edit.text() or None
+                user.phone = phone_edit.text() or None
+                user.user_type = "admin" if role_combo.currentText() == "管理员" else "user"
+                session.commit()
+                self.show_table()
+                logging.info(f"User {user_id} information updated")
+                
+        except Exception as e:
+            session.rollback()
+            logging.error(f"Error updating user {user_id}: {str(e)}")
+            QMessageBox.critical(self, "错误", f"更新用户信息失败：{str(e)}")
+        finally:
+            session.close()
+
     def add_user(self):
-        """
-        添加新用户
-        """
-        # 获取用户输入
+        """添加新用户"""
         username = self.nameIN.text().strip()
         password = self.pswdIN.text().strip()
+        email = self.emailIN.text().strip()
+        phone = self.phoneIN.text().strip()
         user_type = 'admin' if self.character_comboBox.currentText() == "管理员" else 'user'
 
-        # 验证输入
         if not username or not password:
             QMessageBox.warning(self, "输入错误", "用户名和密码不能为空！")
-            logging.warning("Attempted to add user but username or password was empty")
             return
 
         session = SessionClass()
         try:
-            # 检查用户名是否已存在
-            existing_user = session.query(User).filter(User.username == username).first()
-            if existing_user:
+            # 检查用户名是否存在
+            if session.query(User).filter(User.username == username).first():
                 QMessageBox.warning(self, "错误", "用户名已存在！")
-                logging.warning(f"Attempted to add user but username '{username}' already exists")
                 return
 
-            # 创建新用户
             new_user = User(
-                user_id=f"user{int(time.time())}",  # 使用时间戳生成唯一ID
+                user_id=f"user{int(time.time())}",
                 username=username,
                 password=password,
-                email=f"{username}@example.com",  # 默认邮箱
+                email=email or None,
+                phone=phone or None,
                 user_type=user_type,
                 created_at=datetime.now()
             )
@@ -135,19 +195,17 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             session.add(new_user)
             session.commit()
             
-            QMessageBox.information(self, "成功", "用户添加成功！")
-            logging.info(f"New user '{username}' added successfully")
-            
             # 清空输入框
             self.nameIN.clear()
             self.pswdIN.clear()
+            self.emailIN.clear()
+            self.phoneIN.clear()
             
-            # 刷新表格
             self.show_table()
+            QMessageBox.information(self, "成功", "用户添加成功！")
             
         except Exception as e:
             session.rollback()
-            logging.error(f"Error adding new user '{username}': {str(e)}")
             QMessageBox.critical(self, "错误", f"添加用户失败：{str(e)}")
         finally:
             session.close()
