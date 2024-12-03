@@ -300,3 +300,8 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 这个预处理逻辑只考虑了edf数据（未进行预处理），有可能传入的数据已经与处理了（保存成fif.fif），如果没有未预处理的数据，只有已经预处理的数据则直接跳过预处理过程就行，将fif数据保存到fif.fif就行
+
+
+
+
+
