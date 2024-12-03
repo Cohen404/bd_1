@@ -7,6 +7,7 @@ import logging
 sys.path.append('../')
 import time
 from datetime import datetime
+import hashlib
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
@@ -25,6 +26,10 @@ from rear import admin_rear
 from sql_model.tb_user import User
 from util.db_util import SessionClass
 from util.window_manager import WindowManager
+
+def hash_password(password):
+    """使用SHA256加密密码"""
+    return hashlib.sha256(password.encode()).hexdigest()
 
 class UserFilter(logging.Filter):
     """
@@ -203,6 +208,9 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             QMessageBox.warning(self, "输入错误", "用户名和密码不能为空！")
             return
 
+        # 对密码进行SHA256加密
+        hashed_password = hash_password(password)
+
         session = SessionClass()
         try:
             # 检查用户名是否存在
@@ -214,7 +222,7 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             new_user = User(
                 user_id=f"user{int(time.time())}",
                 username=username,
-                password=password,
+                password=hashed_password,  # 存储加密后的密码
                 email=email or None,
                 phone=phone or None,
                 user_type=user_type,

@@ -335,3 +335,15 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 结果查看页面中，点击了表格中的查看之后，右上角的文字要是特征的名称，要随着prev和next按钮有变化。
+
+
+
+
+
+
+
+
+
+用户的密码要进行sha256的加密，注意登录、用户注册、用户修改密码的时候都需要进行加密，登陆时需要加密后验证。
+
+sql初始化时插入的密码也进行sha256加密

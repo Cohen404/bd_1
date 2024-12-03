@@ -19,6 +19,11 @@ from rear import admin_rear
 from rear import index_rear
 import logging
 from util.window_manager import WindowManager
+import hashlib
+
+def hash_password(password):
+    """使用SHA256加密密码"""
+    return hashlib.sha256(password.encode()).hexdigest()
 
 class UserFilter(logging.Filter):
     """
@@ -48,9 +53,13 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         self.window_manager = WindowManager()
         self.window_manager.register_window('login', self)
         
-        self.login_pushButton.clicked.connect(self.admin_login)  # 登录
-        self.return_pushButton.clicked.connect(self.return_index)  # 返回首页
+        # 只绑定一个登录处理函数
+        self.login_pushButton.clicked.connect(self.handle_login)
+        self.return_pushButton.clicked.connect(self.return_index)
         
+        # 添加密码框回车事件绑定
+        self.pwd_lineEdit.returnPressed.connect(self.handle_login)
+
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
@@ -65,89 +74,10 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-        # 添加密码框回车事件绑定
-        self.pwd_lineEdit.returnPressed.connect(self.btn_login_clicked)
-
-    def admin_login(self):
-        """
-        处理管理员登录
-        验证用户名和密码，根据验证结果执行相应操作
-        """
-        username = self.name_lineEdit.text()
-        password = self.pwd_lineEdit.text()
-        session = SessionClass()
-        
+    def handle_login(self):
+        """统一的登录处理函数"""
         try:
-            # 检查用户名或密码是否为空
-            if not username or not password:
-                logging.warning("Login attempt failed: Username or password field is empty")
-                box = QMessageBox(QMessageBox.Information, "提示", "请输入用户名和密码")
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
-                if box.clickedButton() == qyes:
-                    return
-
-            # 使用新的字段名查询用户
-            user = session.query(User).filter(
-                User.username == username,
-                User.password == password
-            ).first()
-
-            # 检查数据是否为None（无效凭据）
-            if not user:
-                logging.warning(f"Login attempt failed: Incorrect username or password for username '{username}'")
-                box = QMessageBox(QMessageBox.Information, "提示", "用户名或密码错误")
-                qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-                box.exec_()
-                if box.clickedButton() == qyes:
-                    return
-
-            else:  # 登录成功
-                logging.info(f"Login successful for username '{username}'")
-                
-                # 保存用户状态
-                print(f"保存用户登录状态: ID={user.user_id}, 用户名={user.username}, 类型={user.user_type}")
-                
-                # 保存用户名到user_status.txt
-                path = '../state/user_status.txt'
-                operate_user.save_user(path, user.username)
-                
-                # 根据用户类型跳转到相应页面
-                if user.user_type == 'admin':
-                    self.admin = admin_rear.AdminWindowActions()
-                    self.close()
-                    self.admin.show()
-                else:
-                    self.ordinary_user = index_rear.Index_WindowActions()
-                    self.close()
-                    self.ordinary_user.show()
-
-                # 更新最后登录时间
-                user.last_login = datetime.now()
-                session.commit()
-                
-                logging.info(f"User '{user.username}' logged in successfully")
-                
-        except Exception as e:
-            logging.error(f"Login error: {str(e)}")
-            QMessageBox.critical(self, "错误", f"登录失败：{str(e)}")
-        finally:
-            session.close()
-
-    def return_index(self):
-        """
-        返回首页
-        """
-        self.index = init_login.Index_WindowActions()
-        self.close()
-        self.index.show()
-
-    def btn_login_clicked(self):
-        """
-        登录按钮点击事件处理函数
-        """
-        try:
-            # 获取用户输入 - 使用正确的输入框名称
+            # 获取用户输入
             username = self.name_lineEdit.text().strip()
             password = self.pwd_lineEdit.text().strip()
 
@@ -156,41 +86,60 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
                 QMessageBox.warning(self, "警告", "用户名和密码不能为空")
                 return
 
+            # 对密码进行SHA256加密
+            hashed_password = hash_password(password)
+
             # 连接数据库验证用户
             session = SessionClass()
-            user = session.query(User).filter(User.username == username).first()
+            try:
+                user = session.query(User).filter(
+                    User.username == username,
+                    User.password == hashed_password
+                ).first()
 
-            if user and user.password == password:
-                # 保存当前用户信息
-                with open('../state/current_user.txt', 'w') as f:
-                    f.write(str(user.user_id))
+                if user:
+                    # 保存当前用户信息
+                    with open('../state/current_user.txt', 'w') as f:
+                        f.write(str(user.user_id))
 
-                # 保存用户类型
-                with open('../state/user_status.txt', 'w') as f:
-                    f.write('1' if user.user_type == 'admin' else '0')
+                    # 保存用户类型
+                    with open('../state/user_status.txt', 'w') as f:
+                        f.write('1' if user.user_type == 'admin' else '0')
 
-                logging.info(f"User {username} logged in successfully")
+                    # 更新最后登录时间
+                    user.last_login = datetime.now()
+                    session.commit()
 
-                # 根据用户类型打开相应界面
-                if user.user_type == 'admin':
-                    self.admin = admin_rear.AdminWindowActions()
-                    self.admin.show()
+                    logging.info(f"User {username} logged in successfully")
+
+                    # 根据用户类型打开相应界面
+                    if user.user_type == 'admin':
+                        self.admin = admin_rear.AdminWindowActions()
+                        self.admin.show()
+                    else:
+                        self.index = index_rear.Index_WindowActions()
+                        self.index.show()
+
+                    self.close()
+
                 else:
-                    self.index = index_rear.Index_WindowActions()
-                    self.index.show()
+                    QMessageBox.warning(self, "警告", "用户名或密码错误")
+                    logging.warning(f"Failed login attempt for username: {username}")
 
-                self.close()
-
-            else:
-                QMessageBox.warning(self, "警告", "用户名或密码错误")
-                logging.warning(f"Failed login attempt for username: {username}")
+            finally:
+                session.close()
 
         except Exception as e:
             logging.error(f"Login error: {str(e)}")
             QMessageBox.critical(self, "错误", f"登录时发生错误：{str(e)}")
-        finally:
-            if 'session' in locals():
-                session.close()
+
+    def return_index(self):
+        """
+        返回首页
+        """
+        self.index = init_login.Index_WindowActions()
+        self.close()
+        self.index.show()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

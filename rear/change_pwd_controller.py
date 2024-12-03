@@ -14,6 +14,11 @@ from state import operate_user
 from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
+import hashlib
+
+def hash_password(password):
+    """使用SHA256加密密码"""
+    return hashlib.sha256(password.encode()).hexdigest()
 
 class UserFilter(logging.Filter):
     """
@@ -76,7 +81,7 @@ class change_pwd_Controller(QWidget):
         form_layout = QGridLayout()
         form_layout.setSpacing(20)
 
-        # 创建标签和输入��
+        # 创建标签和输入
         labels = ['原密码:', '新密码:', '确认新密码:']
         self.old_pwd = QLineEdit()
         self.new_pwd = QLineEdit()
@@ -153,10 +158,7 @@ class change_pwd_Controller(QWidget):
         self.confirm_btn.clicked.connect(self.changePwd)
 
     def changePwd(self):
-        """
-        修改密码
-        """
-        # 获取输入
+        """修改密码"""
         old_pwd = self.old_pwd.text().strip()
         new_pwd = self.new_pwd.text().strip()
         confirm_pwd = self.confirm_pwd.text().strip()
@@ -174,18 +176,20 @@ class change_pwd_Controller(QWidget):
             QMessageBox.warning(self, "错误", "新密码不能与旧密码相同！")
             return
 
+        # 对密码进行SHA256加密
+        hashed_old_pwd = hash_password(old_pwd)
+        hashed_new_pwd = hash_password(new_pwd)
+
         session = SessionClass()
         try:
             # 从文件中读取当前用户ID
             with open('../state/current_user.txt', 'r') as f:
                 current_user_id = f.read().strip()
 
-            print(f"当前用户ID: {current_user_id}")
-
-            # 验证旧密码
+            # 验证旧密码（使用加密后的密码进行验证）
             user = session.query(User).filter(
                 User.user_id == current_user_id,
-                User.password == old_pwd
+                User.password == hashed_old_pwd
             ).first()
 
             if not user:
@@ -193,10 +197,8 @@ class change_pwd_Controller(QWidget):
                 logging.warning(f"Password change failed for user '{current_user_id}': incorrect old password")
                 return
 
-            print(f"验证用户���息: ID={user.user_id}, 用户名={user.username}")
-
-            # 更新密码
-            user.password = new_pwd
+            # 更新密码（存储加密后的新密码）
+            user.password = hashed_new_pwd
             user.updated_at = datetime.now()
             session.commit()
 

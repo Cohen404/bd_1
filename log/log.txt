@@ -4865,3 +4865,39 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 19:27:29,515 - INFO - Administrator - Opening user login page.
 2024-12-03 19:27:34,110 - INFO - Administrator - User admin logged in successfully
 2024-12-03 19:27:37,810 - INFO - Administrator - Opening results view page.
+2024-12-03 20:04:23,485 - INFO - Administrator - Opening user login page.
+2024-12-03 20:04:28,434 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 20:05:15,520 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 20:05:15,880 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 20:05:17,244 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-03 20:05:22,868 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:34,421 - INFO - Administrator - Opening user login page.
+2024-12-03 22:09:37,584 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:38,276 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:38,869 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:40,484 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:41,240 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:41,806 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:44,858 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:45,422 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:09:45,997 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:11:00,004 - INFO - Administrator - Opening user login page.
+2024-12-03 22:11:04,312 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:11:10,364 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 22:11:11,036 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 22:11:18,360 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-03 22:11:33,078 - INFO - Administrator - Opening user login page.
+2024-12-03 22:12:10,562 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-03 22:12:10,983 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 22:12:11,269 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 22:13:40,647 - INFO - Administrator - Opening user login page.
+2024-12-03 22:13:44,525 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:13:46,070 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-03 22:13:55,471 - INFO - Administrator - User user1 logged in successfully
+2024-12-03 22:13:57,470 - INFO - Administrator - Opening results view page.
+2024-12-03 22:13:58,885 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:13:59,705 - INFO - Administrator - Opening data view page.
+2024-12-03 22:14:00,836 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:14:01,408 - INFO - Administrator - Opening admin login page.
+2024-12-03 22:14:04,808 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:14:06,481 - INFO - Administrator - Opening log management page.

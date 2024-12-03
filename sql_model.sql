@@ -39,10 +39,10 @@ CREATE TABLE `tb_user` (
 -- ----------------------------
 INSERT INTO `tb_user` (user_id, username, password, email, phone, user_type, created_at)
 VALUES 
-('admin001', 'admin', '123456', 'admin@example.com', '13800000001', 'admin', NOW()),
-('user001', 'user1', '123456', 'user1@example.com', '13800000002', 'user', NOW()),
-('user002', 'user2', '123456', 'user2@example.com', '13800000003', 'user', NOW()),
-('user003', 'user3', '123456', 'user3@example.com', '13800000004', 'admin', NOW());
+('admin001', 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@example.com', '13800000001', 'admin', NOW()),
+('user001', 'user1', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user1@example.com', '13800000002', 'user', NOW()),
+('user002', 'user2', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user2@example.com', '13800000003', 'user', NOW()),
+('user003', 'user3', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user3@example.com', '13800000004', 'admin', NOW());
 
 -- ----------------------------
 -- Table structure for tb_result
@@ -55,11 +55,8 @@ CREATE TABLE `tb_result` (
   `result_2` int(11) NOT NULL COMMENT '0-100,0不抑郁，100抑郁',
   `result_3` int(11) NOT NULL COMMENT '0-100,0不焦虑，100焦虑',
   `user_id` varchar(64) NOT NULL COMMENT '关联用户ID',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_result_user` (`user_id`),
-  CONSTRAINT `fk_result_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
 
 -- ----------------------------
 -- Table structure for tb_data
@@ -73,11 +70,8 @@ CREATE TABLE `tb_data` (
   `personnel_name` varchar(255) NOT NULL,
   `user_id` varchar(64) NOT NULL COMMENT '关联用户ID',
   `upload_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_data_user` (`user_id`),
-  CONSTRAINT `fk_data_user` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
 
 -- ----------------------------
 -- Table structure for tb_model
