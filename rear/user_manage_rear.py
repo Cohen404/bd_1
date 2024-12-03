@@ -117,6 +117,8 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         try:
             user = session.query(User).filter(User.user_id == user_id).first()
             if not user:
+                logging.warning(f"Attempted to edit non-existent user with ID: {user_id}")
+                QMessageBox.warning(self, "警告", "用户不存在！")
                 return
                 
             dialog = QDialog(self)
@@ -147,14 +149,39 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             dialog.setLayout(layout)
             
             if dialog.exec_() == QDialog.Accepted:
+                # 记录原始值用于日志
+                old_values = {
+                    'username': user.username,
+                    'email': user.email,
+                    'phone': user.phone,
+                    'user_type': user.user_type
+                }
+                
                 # 更新用户信息
                 user.username = username_edit.text()
                 user.email = email_edit.text() or None
                 user.phone = phone_edit.text() or None
                 user.user_type = "admin" if role_combo.currentText() == "管理员" else "user"
+                
+                # 记录变更到日志
+                changes = []
+                if old_values['username'] != user.username:
+                    changes.append(f"username: {old_values['username']} -> {user.username}")
+                if old_values['email'] != user.email:
+                    changes.append(f"email: {old_values['email']} -> {user.email}")
+                if old_values['phone'] != user.phone:
+                    changes.append(f"phone: {old_values['phone']} -> {user.phone}")
+                if old_values['user_type'] != user.user_type:
+                    changes.append(f"role: {old_values['user_type']} -> {user.user_type}")
+                
                 session.commit()
                 self.show_table()
-                logging.info(f"User {user_id} information updated")
+                
+                if changes:
+                    logging.info(f"User {user_id} updated: {', '.join(changes)}")
+                QMessageBox.information(self, "成功", "用户信息更新成功！")
+            else:
+                logging.info(f"User edit cancelled for user ID: {user_id}")
                 
         except Exception as e:
             session.rollback()
@@ -172,6 +199,7 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         user_type = 'admin' if self.character_comboBox.currentText() == "管理员" else 'user'
 
         if not username or not password:
+            logging.warning("Attempted to add user with empty username or password")
             QMessageBox.warning(self, "输入错误", "用户名和密码不能为空！")
             return
 
@@ -179,6 +207,7 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         try:
             # 检查用户名是否存在
             if session.query(User).filter(User.username == username).first():
+                logging.warning(f"Attempted to add user with existing username: {username}")
                 QMessageBox.warning(self, "错误", "用户名已存在！")
                 return
 
@@ -191,7 +220,7 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
                 user_type=user_type,
                 created_at=datetime.now()
             )
-            
+
             session.add(new_user)
             session.commit()
             
@@ -202,31 +231,48 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
             self.phoneIN.clear()
             
             self.show_table()
+            logging.info(f"New user added: {username} (type: {user_type})")
             QMessageBox.information(self, "成功", "用户添加成功！")
             
         except Exception as e:
             session.rollback()
+            logging.error(f"Error adding new user '{username}': {str(e)}")
             QMessageBox.critical(self, "错误", f"添加用户失败：{str(e)}")
         finally:
             session.close()
 
     def delete_user(self, user_id):
-        """
-        删除用户
-        """
+        """删除用户"""
         session = SessionClass()
         try:
             user = session.query(User).filter(User.user_id == user_id).first()
-            if user:
+            if not user:
+                logging.warning(f"Attempted to delete non-existent user with ID: {user_id}")
+                QMessageBox.warning(self, "警告", "用户不存在！")
+                return
+
+            # 显示确认对话框
+            reply = QMessageBox.question(
+                self, 
+                '确认删除', 
+                f'确定要删除用户 "{user.username}" 吗？\n此操作不可恢复！',
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+            )
+
+            if reply == QMessageBox.Yes:
                 session.delete(user)
                 session.commit()
-                logging.info(f"User '{user.username}' deleted successfully")
-                return True
-            return False
+                logging.info(f"User deleted successfully: {user.username} (ID: {user_id})")
+                QMessageBox.information(self, "成功", "用户删除成功！")
+                self.show_table()
+            else:
+                logging.info(f"User deletion cancelled for: {user.username} (ID: {user_id})")
+
         except Exception as e:
             session.rollback()
-            logging.error(f"Error deleting user: {str(e)}")
-            return False
+            logging.error(f"Error deleting user {user_id}: {str(e)}")
+            QMessageBox.critical(self, "错误", f"删除用户失败：{str(e)}")
         finally:
             session.close()
 
