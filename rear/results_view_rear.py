@@ -61,18 +61,30 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         self.user_id, is_admin = self.get_current_user()
         self.user_type = is_admin
 
-        # 添加通道选择下拉框
-        self.channel_comboBox = QtWidgets.QComboBox(self)
-        self.channel_comboBox.setGeometry(QtCore.QRect(10, 10, 200, 30))
-        self.channel_comboBox.addItems([
-            "Theta/Alpha/Beta/Gamma功率",
-            "均分频带",
-            "时域特征",
-            "时频域特征",
-            "微分熵"
-        ])
-        # 将下拉框添加到EEG特征图区域
-        self.verticalLayout_2.insertWidget(1, self.channel_comboBox)  # 插入到标题和图形视图之间
+        # 添加图片切换相关变量
+        self.current_data_path = None
+        self.current_image_index = 0
+        self.image_types = [
+            ("Theta功率特征图", "Theta.png"),
+            ("Alpha功率特征图", "Alpha.png"),
+            ("Beta功率特征图", "Beta.png"),
+            ("Gamma功率特征图", "Gamma.png"),
+            ("均分频带1特征图", "frequency_band_1.png"),
+            ("均分频带2特征图", "frequency_band_2.png"),
+            ("均分频带3特征图", "frequency_band_3.png"),
+            ("均分频带4特征图", "frequency_band_4.png"),
+            ("均分频带5特征图", "frequency_band_5.png"),
+            ("时域特征-过零率", "time_过零率.png"),
+            ("时域特征-方差", "time_方差.png"),
+            ("时域特征-能量", "time_能量.png"),
+            ("时域特征-差分", "time_差分.png"),
+            ("时频域特征图", "frequency_wavelet.png"),
+            ("微分熵特征图", "differential_entropy.png")
+        ]
+
+        # 连接Prev和Next按钮的点击事件
+        self.pushButton.clicked.connect(self.show_previous_image)
+        self.pushButton_2.clicked.connect(self.show_next_image)
 
         # 设置表格列
         self.tableWidget.setColumnCount(7)  # 设置为7列，包括查看按钮列
@@ -95,28 +107,6 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)  # 抑郁列
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
-
-        # 设置下拉框样式
-        self.channel_comboBox.setStyleSheet('''
-            QComboBox {
-                background-color: white;
-                border: 1px solid #5c8ac3;
-                border-radius: 3px;
-                padding: 1px 18px 1px 3px;
-                min-width: 6em;
-            }
-            QComboBox:hover {
-                border: 1px solid #4a7ab3;
-            }
-            QComboBox::drop-down {
-                border: 0px;
-            }
-            QComboBox::down-arrow {
-                image: url(../resources/down_arrow.png);
-                width: 12px;
-                height: 12px;
-            }
-        ''')
 
         # 显示表格内容
         self.show_table()
@@ -353,11 +343,18 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             result = session.query(Result).filter(Result.id == result_id).first()
             
             if result:
+                # 更新左上角状态显示
+                self.update_status_display(result)
+                
                 # 获取关联的数据记录
                 data = session.query(Data).filter(Data.id == result_id).first()
                 if data and data.data_path:
-                    # 显示特征图
-                    self.show_feature_plot(data.data_path)
+                    # 保存当前数据路径
+                    self.current_data_path = data.data_path
+                    # 重置图片索引
+                    self.current_image_index = 0
+                    # 显示第一张图片
+                    self.show_current_image()
                 else:
                     QMessageBox.warning(self, "警告", "未找到相关数据文件")
             else:
@@ -369,55 +366,84 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         finally:
             session.close()
 
-    def show_feature_plot(self, data_path):
-        """显示特征图"""
-        try:
-            feature_type = self.channel_comboBox.currentText()
-            
-            if feature_type == "Theta/Alpha/Beta/Gamma功率":
-                wave_choice, ok = QInputDialog.getItem(self, "选择波段", "请选择要查看的波段：", 
-                                                       ["Theta", "Alpha", "Beta", "Gamma"], 0, False)
-                if ok and wave_choice:
-                    image_path = os.path.join(data_path, f'{wave_choice}.png')
-                    self.display_image(image_path)
-            elif feature_type == "均分频带":
-                band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
-                                                       ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
-                if ok and band_choice:
-                    band_number = int(band_choice.split()[-1])
-                    image_path = os.path.join(data_path, f'frequency_band_{band_number}.png')
-                    self.display_image(image_path)
-            elif feature_type == "时域特征":
-                time_feature_choice, ok = QInputDialog.getItem(self, "选择时域特征", "请选择要查看的时域特征：", 
-                                                               ["过零率", "方差", "能量", "差分"], 0, False)
-                if ok and time_feature_choice:
-                    image_path = os.path.join(data_path, f'time_{time_feature_choice}.png')
-                    self.display_image(image_path)
-            elif feature_type == "时频域特征":
-                image_path = os.path.join(data_path, 'frequency_wavelet.png')
-                self.display_image(image_path)
-            elif feature_type == "微分熵":
-                image_path = os.path.join(data_path, 'differential_entropy.png')
-                self.display_image(image_path)
-                
-        except Exception as e:
-            logging.error(f"Error showing feature plot: {str(e)}")
-            QMessageBox.critical(self, "错误", f"显示特征图失败：{str(e)}")
+    def update_status_display(self, result):
+        """更新状态显示"""
+        # 更新普通应激状态
+        self.health_led_label.setStyleSheet(
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; "
+            f"background: {'red' if result.result_1 >= 50 else 'gray'}"
+        )
+        
+        # 更新抑郁状态
+        self.acoustic_led_label.setStyleSheet(
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; "
+            f"background: {'red' if result.result_2 >= 50 else 'gray'}"
+        )
+        
+        # 更新焦虑状态
+        self.mechanical_led_label.setStyleSheet(
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; "
+            f"background: {'red' if result.result_3 >= 50 else 'gray'}"
+        )
 
-    def display_image(self, image_path):
+    def display_image(self, image_path, title=None):
         """显示图片"""
         if os.path.exists(image_path):
             pixmap = QPixmap(image_path)
             if not pixmap.isNull():
                 scene = QGraphicsScene()
+                
+                # 如果有标题，添加标题文本
+                if title:
+                    title_text = scene.addText(title)
+                    title_text.setDefaultTextColor(Qt.black)
+                    font = title_text.font()
+                    font.setPointSize(12)
+                    font.setBold(True)
+                    title_text.setFont(font)
+                    
+                    # 将标题放在图片上方居中位置
+                    title_text.setPos((pixmap.width() - title_text.boundingRect().width()) / 2, -30)
+                
+                # 添加图片
                 pixmap_item = QGraphicsPixmapItem(pixmap)
                 scene.addItem(pixmap_item)
-                self.graphicsView.setScene(scene)
-                self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
+                
+                # 设置场景并适应视图
+                self.status_graphicsView.setScene(scene)
+                self.status_graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
             else:
                 QMessageBox.warning(self, "警告", "无法加载图片")
         else:
             QMessageBox.warning(self, "警告", "图片文件不存在")
+
+    def show_current_image(self):
+        """显示当前索引的图片"""
+        if self.current_data_path is None:
+            return
+
+        title, filename = self.image_types[self.current_image_index]
+        image_path = os.path.join(self.current_data_path, filename)
+        self.display_image(image_path, title)
+
+        # 更新按钮状态
+        self.pushButton.setEnabled(self.current_image_index > 0)
+        self.pushButton_2.setEnabled(self.current_image_index < len(self.image_types) - 1)
+
+    def show_previous_image(self):
+        """显示上一张图片"""
+        if self.current_image_index > 0:
+            self.current_image_index -= 1
+            self.show_current_image()
+
+    def show_next_image(self):
+        """显示下一张图片"""
+        if self.current_image_index < len(self.image_types) - 1:
+            self.current_image_index += 1
+            self.show_current_image()
 
     def return_index(self):
         """

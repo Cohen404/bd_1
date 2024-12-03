@@ -4796,3 +4796,62 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 15:51:06,548 - INFO - Administrator - User 'admin' logged in successfully
 2024-12-03 15:51:07,403 - INFO - Administrator - Opening results view page.
 2024-12-03 15:51:08,406 - ERROR - Administrator - Error showing feature plot: name 'QInputDialog' is not defined
+2024-12-03 17:15:12,042 - INFO - Administrator - Opening user login page.
+2024-12-03 17:15:14,707 - INFO - Administrator - User admin logged in successfully
+2024-12-03 17:15:15,877 - INFO - Administrator - Opening data view page.
+2024-12-03 17:15:18,184 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-03 17:15:18,188 - INFO - Administrator - Data path for ID 1: ../data\000005_ord2_1
+2024-12-03 17:15:18,195 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_1
+2024-12-03 17:15:18,199 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-03 17:15:18,202 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-03 17:15:18,205 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 17:15:25,545 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-12-03 17:15:25,555 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_1, Username: admin
+2024-12-03 17:15:29,724 - INFO - Administrator - Started processing data from: ../data\000005_ord2_1
+2024-12-03 17:15:35,631 - INFO - Administrator - Data processing completed successfully
+2024-12-03 17:15:42,029 - INFO - Administrator - Returned to index page successfully
+2024-12-03 17:15:42,754 - INFO - Administrator - Opening results view page.
+2024-12-03 17:15:45,430 - INFO - Administrator - Returned to index page successfully
+2024-12-03 17:15:46,189 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-03 17:15:46,192 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-03 17:15:46,198 - INFO - Administrator - Opening health evaluation page.
+2024-12-03 17:16:31,428 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 17:16:31,429 - INFO - Administrator - Depression LED set to RED
+2024-12-03 17:16:31,431 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 17:16:33,034 - INFO - Administrator - Returned to index page successfully
+2024-12-03 17:16:33,738 - INFO - Administrator - Opening results view page.
+2024-12-03 17:16:37,534 - ERROR - Administrator - Error showing feature plot: 'Results_View_WindowActions' object has no attribute 'graphicsView'
+2024-12-03 17:16:41,516 - INFO - Administrator - Returned to index page successfully
+2024-12-03 17:16:42,188 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 17:16:42,189 - INFO - Administrator - Depression LED set to RED
+2024-12-03 17:16:42,189 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 17:16:42,190 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-03 17:16:42,193 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-03 17:16:42,198 - INFO - Administrator - Opening health evaluation page.
+2024-12-03 17:16:44,888 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-03 17:16:44,890 - INFO - Administrator - Data path retrieved for ID 1: ../data\000005_ord2_1
+2024-12-03 17:16:44,891 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 17:16:44,892 - INFO - Administrator - Depression LED set to RED
+2024-12-03 17:16:44,892 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 17:16:44,892 - INFO - Administrator - Initializing current image index to 0
+2024-12-03 17:16:44,892 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 17:16:44,892 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 17:16:44,894 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 17:16:47,853 - INFO - Administrator - Returned to index page successfully
+2024-12-03 17:16:48,583 - INFO - Administrator - Opening results view page.
+2024-12-03 17:16:52,036 - ERROR - Administrator - Error showing feature plot: 'Results_View_WindowActions' object has no attribute 'graphicsView'
+2024-12-03 18:04:20,214 - INFO - Administrator - Opening user login page.
+2024-12-03 18:04:23,871 - INFO - Administrator - User admin logged in successfully
+2024-12-03 18:04:25,069 - INFO - Administrator - Opening results view page.
+2024-12-03 18:04:27,895 - ERROR - Administrator - Error showing feature plot: 'Results_View_WindowActions' object has no attribute 'graphicsView'
+2024-12-03 18:13:38,411 - INFO - Administrator - Opening user login page.
+2024-12-03 18:13:43,818 - INFO - Administrator - User admin logged in successfully
+2024-12-03 18:13:45,132 - INFO - Administrator - Opening results view page.
+2024-12-03 18:13:47,226 - ERROR - Administrator - Error viewing details: 'Results_View_WindowActions' object has no attribute 'graphicsView'
+2024-12-03 18:15:38,294 - INFO - Administrator - Opening user login page.
+2024-12-03 18:15:45,241 - INFO - Administrator - User admin logged in successfully
+2024-12-03 18:15:48,053 - INFO - Administrator - Opening results view page.
+2024-12-03 18:15:49,724 - ERROR - Administrator - Error viewing details: 'Results_View_WindowActions' object has no attribute 'graphicsView'
+2024-12-03 18:18:19,945 - INFO - Administrator - Opening user login page.
+2024-12-03 18:18:24,677 - INFO - Administrator - User admin logged in successfully
+2024-12-03 18:18:26,217 - INFO - Administrator - Opening results view page.

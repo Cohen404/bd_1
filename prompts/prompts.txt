@@ -322,3 +322,12 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 
+
+结果查看中点击表格中的查看，应该左上角的结果显示评估状态：左上角当前评估结果显示三个状态，对应result1-3，>=50圆形变成红色，否则就是灰色。右上角的图片展示默认展示Theta特征图像，图像上面显示标题，可以参考应激评估页面（health_evaluate_rear.py）中的展示方式。
+
+
+右上角的特征图像不要通过下拉菜单选择，要点击prev和next进行切换，上方显示图片标题。
+
+
+
+
