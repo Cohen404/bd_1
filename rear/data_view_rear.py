@@ -135,6 +135,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         window_manager = WindowManager()
         window_manager.register_window('data_view', self)
 
+        # 添加批量上传按钮的信号连接
+        self.batch_upload_pushButton.clicked.connect(self.handle_batch_upload)
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -319,9 +322,6 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
             session.close()
             
             
-    def show_table(self):
-        """刷新表格显示"""
-        self.upload_button()  # 调用upload_button方法刷新表格
 
     # 将openfile选择的数据存入数据库之后，将刚存入的数据显示到表单中
     def upload_button(self):
@@ -606,7 +606,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
     # 添加预处理按钮的回调函数
     def preprocessbutton(self):
         """
-        预处理按钮的回调函数，执行��据预处理和特征提取
+        预处理按钮的回调函数，执行据预处理和特征提取
         """
         button = self.sender()
         if button:
@@ -651,6 +651,116 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         """处理错误的回调"""
         logging.error(f"Error during processing: {error_msg}")
         QMessageBox.critical(self, "错误", f"处理过程中出现错误：{error_msg}")
+
+    def handle_batch_upload(self):
+        """处理批量上传功能"""
+        try:
+            # 选择父目录
+            parent_dir = QFileDialog.getExistingDirectory(self, "选择数据目录")
+            if not parent_dir:
+                return
+            
+            success_count = 0
+            failed_count = 0
+            
+            # 获取父目录下的所有子目录
+            subdirs = [d for d in os.listdir(parent_dir) 
+                      if os.path.isdir(os.path.join(parent_dir, d))]
+            
+            if not subdirs:
+                QMessageBox.warning(self, "警告", "选择的目录下没有子目录")
+                return
+            
+            # 遍历每个子目录
+            for subdir in subdirs:
+                source_dir = os.path.join(parent_dir, subdir)
+                try:
+                    # 构建目标目录路径
+                    target_base_dir = '../data'
+                    target_dir = os.path.join(target_base_dir, subdir)
+                    
+                    # 如果目标目录已存在，则添加后缀
+                    suffix = 1
+                    original_name = subdir
+                    while os.path.exists(target_dir):
+                        new_name = f"{original_name}_{suffix}"
+                        target_dir = os.path.join(target_base_dir, new_name)
+                        suffix += 1
+                    
+                    # 确保目标基础目录存在
+                    os.makedirs(target_base_dir, exist_ok=True)
+                    
+                    # 复制目录
+                    shutil.copytree(source_dir, target_dir)
+                    logging.info(f"Directory copied from {source_dir} to {target_dir}")
+                    
+                    # 获取当前用户信息并保存到数据库
+                    session = SessionClass()
+                    try:
+                        user = session.query(User).filter(User.user_id == self.user_id).first()
+                        if not user:
+                            raise Exception("无法获取当前用户信息")
+
+                        # 从数据库中取最大的id
+                        max_id = session.query(func.max(Data.id)).scalar()
+                        if max_id is None:
+                            max_id = 0
+                        max_id = max_id + 1
+
+                        # 创建新的数据记录
+                        new_data = Data(
+                            id=max_id,
+                            personnel_id=str(user.user_id),
+                            data_path=target_dir,
+                            upload_time=datetime.now(),
+                            user_id=str(user.user_id),
+                            personnel_name=user.username,
+                            upload_user=1 if user.user_type == 'admin' else 0
+                        )
+                        
+                        session.add(new_data)
+                        session.commit()
+                        success_count += 1
+                        logging.info(f"Data uploaded successfully. Path: {target_dir}, Username: {user.username}")
+                        
+                    except Exception as e:
+                        if os.path.exists(target_dir):
+                            shutil.rmtree(target_dir)
+                        session.rollback()
+                        raise e
+                    finally:
+                        session.close()
+                        
+                except Exception as e:
+                    logging.error(f"Failed to upload directory {source_dir}: {str(e)}")
+                    failed_count += 1
+                    if os.path.exists(target_dir):
+                        shutil.rmtree(target_dir)
+            
+            # 刷新表格显示
+            self.show_table()
+            
+            # 显示上传结果
+            QMessageBox.information(self, "上传完成", 
+                f"批量上传完成\n成功：{success_count}个\n失败：{failed_count}个")
+            
+        except Exception as e:
+            logging.error(f"批量上传过程出错: {str(e)}")
+            QMessageBox.critical(self, "错误", f"批量上传过程出错：{str(e)}")
+    
+    def upload_file(self, file_path):
+        """
+        上传单个文件的方法
+        返回：bool，表示是否上传成功
+        """
+        # 把原来上传按钮处理函数的核心逻辑移到这里
+        # 返回True表示上传成功，False表示失败
+        try:
+            # 原有的上传逻辑...
+            return True
+        except Exception as e:
+            logging.error(f"文件上传失败 {file_path}: {str(e)}")
+            return False
 
 # 添加一个处理线程类
 class ProcessingThread(QThread):

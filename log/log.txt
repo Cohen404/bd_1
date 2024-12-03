@@ -4901,3 +4901,331 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 22:14:01,408 - INFO - Administrator - Opening admin login page.
 2024-12-03 22:14:04,808 - INFO - Administrator - User admin logged in successfully
 2024-12-03 22:14:06,481 - INFO - Administrator - Opening log management page.
+2024-12-03 22:20:07,592 - INFO - Administrator - Opening user login page.
+2024-12-03 22:20:11,360 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:20:14,073 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-03 22:20:14,076 - INFO - Administrator - Opening data view page.
+2024-12-03 22:20:21,635 - INFO - Administrator - Batch upload cancelled
+2024-12-03 22:20:24,049 - INFO - Administrator - File selection cancelled
+2024-12-03 22:20:30,982 - WARNING - Administrator - Required file data.mat not found in D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2
+2024-12-03 22:20:30,983 - WARNING - Administrator - Required file data.mat not found in D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro
+2024-12-03 22:20:30,983 - WARNING - Administrator - Required file data.mat not found in D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4
+2024-12-03 22:20:30,983 - WARNING - Administrator - Required file data.mat not found in D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2
+2024-12-03 22:20:30,984 - WARNING - Administrator - Required file data.mat not found in D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1
+2024-12-03 22:20:35,703 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-03 22:20:37,200 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:21:47,147 - INFO - Administrator - Opening user login page.
+2024-12-03 22:21:52,882 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:23:04,422 - INFO - Administrator - Opening user login page.
+2024-12-03 22:23:08,077 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:23:09,473 - INFO - Administrator - Opening data view page.
+2024-12-03 22:23:15,990 - INFO - Administrator - File selection cancelled
+2024-12-03 22:24:43,633 - INFO - Administrator - Opening user login page.
+2024-12-03 22:24:47,158 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:24:48,556 - INFO - Administrator - Opening data view page.
+2024-12-03 22:24:54,057 - INFO - Administrator - File selection cancelled
+2024-12-03 22:25:47,771 - INFO - Administrator - Opening user login page.
+2024-12-03 22:25:52,200 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:25:53,414 - INFO - Administrator - Opening data view page.
+2024-12-03 22:27:03,173 - INFO - Administrator - Opening user login page.
+2024-12-03 22:27:09,537 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:27:10,755 - INFO - Administrator - Opening data view page.
+2024-12-03 22:27:49,468 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_2
+2024-12-03 22:27:49,477 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_2, Username: admin
+2024-12-03 22:27:51,868 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-03 22:27:51,871 - INFO - Administrator - Data path for ID 1: ../data\000005_ord2_2
+2024-12-03 22:27:51,890 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_2
+2024-12-03 22:27:51,894 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-03 22:27:51,896 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-03 22:27:51,897 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:29:48,704 - INFO - Administrator - Opening user login page.
+2024-12-03 22:29:54,377 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:29:55,549 - INFO - Administrator - Opening data view page.
+2024-12-03 22:33:46,385 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_2
+2024-12-03 22:33:46,394 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_2, Username: admin
+2024-12-03 22:33:46,702 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_1
+2024-12-03 22:33:46,708 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_1, Username: admin
+2024-12-03 22:33:46,938 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4
+2024-12-03 22:33:46,943 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4, Username: admin
+2024-12-03 22:33:47,265 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2
+2024-12-03 22:33:47,273 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2, Username: admin
+2024-12-03 22:33:47,644 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:33:47,652 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:33:54,813 - INFO - Administrator - Button clicked in row 0, corresponding ID: 5
+2024-12-03 22:33:54,816 - INFO - Administrator - Data path retrieved from database: ../data\000016_wubing1
+2024-12-03 22:33:56,689 - ERROR - Administrator - Image file does not exist: ../data\000016_wubing1\Theta.png
+2024-12-03 22:34:08,709 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:34:10,033 - INFO - Administrator - Opening data view page.
+2024-12-03 22:34:13,435 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:34:13,437 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1
+2024-12-03 22:34:13,455 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1
+2024-12-03 22:34:13,459 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:34:13,460 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:34:13,463 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:34:50,752 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:34:51,486 - INFO - Administrator - Opening data view page.
+2024-12-03 22:34:52,515 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:37:53,156 - INFO - Administrator - Opening data view page.
+2024-12-03 22:37:54,468 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:38:21,733 - INFO - Administrator - Opening user login page.
+2024-12-03 22:38:26,252 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:38:27,151 - INFO - Administrator - Opening data view page.
+2024-12-03 22:38:39,751 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_3
+2024-12-03 22:38:39,760 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_3, Username: admin
+2024-12-03 22:38:40,064 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_2
+2024-12-03 22:38:40,070 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_2, Username: admin
+2024-12-03 22:38:40,255 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_1
+2024-12-03 22:38:40,261 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_1, Username: admin
+2024-12-03 22:38:40,569 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_1
+2024-12-03 22:38:40,576 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_1, Username: admin
+2024-12-03 22:38:40,927 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:38:40,933 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:38:46,054 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:38:47,065 - INFO - Administrator - Opening data view page.
+2024-12-03 22:39:03,881 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_4
+2024-12-03 22:39:03,888 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_4, Username: admin
+2024-12-03 22:39:09,260 - INFO - Administrator - Attempting to delete record with ID 6 from the table.
+2024-12-03 22:39:09,262 - INFO - Administrator - Data path for ID 6: ../data\000005_ord2_4
+2024-12-03 22:39:09,288 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_4
+2024-12-03 22:39:09,292 - INFO - Administrator - Deleted record with ID 6 from tb_data.
+2024-12-03 22:39:09,294 - INFO - Administrator - Deleted record with ID 6 from result table.
+2024-12-03 22:39:09,295 - INFO - Administrator - Removed row 1 from table.
+2024-12-03 22:39:09,819 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:39:09,821 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1
+2024-12-03 22:39:09,835 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1
+2024-12-03 22:39:09,837 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:39:09,838 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:39:09,838 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:39:20,107 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:40:55,027 - INFO - Administrator - Opening user login page.
+2024-12-03 22:40:58,262 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:40:59,449 - INFO - Administrator - Opening data view page.
+2024-12-03 22:41:06,963 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_4
+2024-12-03 22:41:06,972 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_4, Username: admin
+2024-12-03 22:41:07,190 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_3
+2024-12-03 22:41:07,195 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_3, Username: admin
+2024-12-03 22:41:07,245 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_2
+2024-12-03 22:41:07,252 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_2, Username: admin
+2024-12-03 22:41:07,380 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_2
+2024-12-03 22:41:07,389 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_2, Username: admin
+2024-12-03 22:41:07,504 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:41:07,512 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:41:18,722 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:41:20,065 - INFO - Administrator - Opening data view page.
+2024-12-03 22:41:21,710 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:41:21,713 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1
+2024-12-03 22:41:21,728 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1
+2024-12-03 22:41:21,731 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:41:21,732 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:41:21,735 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:44:03,444 - INFO - Administrator - Opening user login page.
+2024-12-03 22:44:07,450 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:44:08,517 - INFO - Administrator - Opening data view page.
+2024-12-03 22:44:18,272 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_5
+2024-12-03 22:44:18,285 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_5, Username: admin
+2024-12-03 22:44:18,392 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_4
+2024-12-03 22:44:18,402 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_4, Username: admin
+2024-12-03 22:44:18,531 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_3
+2024-12-03 22:44:18,537 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_3, Username: admin
+2024-12-03 22:44:18,781 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_3
+2024-12-03 22:44:18,787 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_3, Username: admin
+2024-12-03 22:44:19,020 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:44:19,027 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:46:12,240 - INFO - Administrator - Opening user login page.
+2024-12-03 22:46:15,526 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:46:16,623 - INFO - Administrator - Opening data view page.
+2024-12-03 22:46:18,690 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:46:18,692 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1
+2024-12-03 22:46:18,707 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1
+2024-12-03 22:46:18,710 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:46:18,711 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:46:18,712 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:46:25,251 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_6
+2024-12-03 22:46:25,266 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_6, Username: admin
+2024-12-03 22:46:25,380 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_5
+2024-12-03 22:46:25,388 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_5, Username: admin
+2024-12-03 22:46:25,438 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_4
+2024-12-03 22:46:25,451 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_4, Username: admin
+2024-12-03 22:46:25,539 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_4
+2024-12-03 22:46:25,545 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_4, Username: admin
+2024-12-03 22:46:25,661 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:46:25,671 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:46:32,491 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:46:33,277 - INFO - Administrator - Opening data view page.
+2024-12-03 22:46:48,477 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000011_yiyu4 to ../data\000011_yiyu4_5
+2024-12-03 22:46:48,482 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_5, Username: admin
+2024-12-03 22:46:50,795 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:46:51,626 - INFO - Administrator - Opening data view page.
+2024-12-03 22:49:17,782 - INFO - Administrator - Opening user login page.
+2024-12-03 22:49:21,346 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:49:22,412 - INFO - Administrator - Opening data view page.
+2024-12-03 22:49:42,108 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:49:42,939 - INFO - Administrator - Opening data view page.
+2024-12-03 22:49:51,965 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2
+2024-12-03 22:49:51,973 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2, Username: admin
+2024-12-03 22:49:52,210 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro
+2024-12-03 22:49:52,216 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro, Username: admin
+2024-12-03 22:49:52,413 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4
+2024-12-03 22:49:52,419 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4, Username: admin
+2024-12-03 22:49:52,678 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2
+2024-12-03 22:49:52,683 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2, Username: admin
+2024-12-03 22:49:52,868 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1
+2024-12-03 22:49:52,874 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1, Username: admin
+2024-12-03 22:49:55,640 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:49:56,456 - INFO - Administrator - Opening data view page.
+2024-12-03 22:50:00,678 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:51:54,521 - INFO - Administrator - Opening data view page.
+2024-12-03 22:51:58,694 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:52:09,226 - INFO - Administrator - Opening user login page.
+2024-12-03 22:52:12,624 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:52:13,720 - INFO - Administrator - Opening data view page.
+2024-12-03 22:52:22,106 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_1
+2024-12-03 22:52:22,117 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_1, Username: admin
+2024-12-03 22:52:22,228 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_1
+2024-12-03 22:52:22,243 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_1, Username: admin
+2024-12-03 22:52:22,307 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_1
+2024-12-03 22:52:22,318 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_1, Username: admin
+2024-12-03 22:52:22,389 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_1
+2024-12-03 22:52:22,400 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_1, Username: admin
+2024-12-03 22:52:22,487 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1_1
+2024-12-03 22:52:22,496 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1_1, Username: admin
+2024-12-03 22:52:26,325 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:52:27,311 - INFO - Administrator - Opening data view page.
+2024-12-03 22:53:01,002 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:53:01,861 - INFO - Administrator - Opening log management page.
+2024-12-03 22:53:42,360 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:57:42,897 - INFO - Administrator - Opening user login page.
+2024-12-03 22:57:46,568 - INFO - Administrator - User admin logged in successfully
+2024-12-03 22:57:47,735 - INFO - Administrator - Data table refreshed successfully with 5 records
+2024-12-03 22:57:47,747 - INFO - Administrator - Opening data view page.
+2024-12-03 22:57:51,453 - INFO - Administrator - Returned to index page successfully
+2024-12-03 22:57:52,330 - INFO - Administrator - Data table refreshed successfully with 5 records
+2024-12-03 22:57:52,340 - INFO - Administrator - Opening data view page.
+2024-12-03 22:57:53,769 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-03 22:57:53,771 - INFO - Administrator - Data path for ID 1: ../data\000005_ord2_1
+2024-12-03 22:57:53,798 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_1
+2024-12-03 22:57:53,802 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-03 22:57:53,804 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-03 22:57:53,805 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:57:54,342 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2024-12-03 22:57:54,344 - INFO - Administrator - Data path for ID 2: ../data\000006_pro_1
+2024-12-03 22:57:54,358 - INFO - Administrator - Deleted folder at path: ../data\000006_pro_1
+2024-12-03 22:57:54,361 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2024-12-03 22:57:54,363 - INFO - Administrator - Deleted record with ID 2 from result table.
+2024-12-03 22:57:54,363 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:57:54,543 - INFO - Administrator - Attempting to delete record with ID 3 from the table.
+2024-12-03 22:57:54,545 - INFO - Administrator - Data path for ID 3: ../data\000011_yiyu4_1
+2024-12-03 22:57:54,551 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4_1
+2024-12-03 22:57:54,554 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-12-03 22:57:54,555 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-12-03 22:57:54,555 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:57:54,703 - INFO - Administrator - Attempting to delete record with ID 4 from the table.
+2024-12-03 22:57:54,705 - INFO - Administrator - Data path for ID 4: ../data\000014_jiaolv2_1
+2024-12-03 22:57:54,715 - INFO - Administrator - Deleted folder at path: ../data\000014_jiaolv2_1
+2024-12-03 22:57:54,717 - INFO - Administrator - Deleted record with ID 4 from tb_data.
+2024-12-03 22:57:54,718 - INFO - Administrator - Deleted record with ID 4 from result table.
+2024-12-03 22:57:54,719 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:57:55,030 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:57:55,033 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1_1
+2024-12-03 22:57:55,050 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1_1
+2024-12-03 22:57:55,052 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:57:55,055 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:57:55,055 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:58:07,260 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000005_ord2 to ../data\000005_ord2_1
+2024-12-03 22:58:07,268 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_1, Username: admin
+2024-12-03 22:58:07,519 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000006_pro to ../data\000006_pro_1
+2024-12-03 22:58:07,525 - INFO - Administrator - Data uploaded successfully. Path: ../data\000006_pro_1, Username: admin
+2024-12-03 22:58:07,676 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000011_yiyu4 to ../data\000011_yiyu4_1
+2024-12-03 22:58:07,683 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_1, Username: admin
+2024-12-03 22:58:07,914 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000014_jiaolv2 to ../data\000014_jiaolv2_1
+2024-12-03 22:58:07,921 - INFO - Administrator - Data uploaded successfully. Path: ../data\000014_jiaolv2_1, Username: admin
+2024-12-03 22:58:08,197 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp\000016_wubing1 to ../data\000016_wubing1_1
+2024-12-03 22:58:08,205 - INFO - Administrator - Data uploaded successfully. Path: ../data\000016_wubing1_1, Username: admin
+2024-12-03 22:58:08,216 - INFO - Administrator - Data table refreshed successfully with 5 records
+2024-12-03 22:58:24,847 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-03 22:58:24,849 - INFO - Administrator - Data path for ID 1: ../data\000005_ord2_1
+2024-12-03 22:58:24,872 - INFO - Administrator - Deleted folder at path: ../data\000005_ord2_1
+2024-12-03 22:58:24,875 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-03 22:58:24,876 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-03 22:58:24,876 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:58:25,056 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2024-12-03 22:58:25,059 - INFO - Administrator - Data path for ID 2: ../data\000006_pro_1
+2024-12-03 22:58:25,065 - INFO - Administrator - Deleted folder at path: ../data\000006_pro_1
+2024-12-03 22:58:25,068 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2024-12-03 22:58:25,069 - INFO - Administrator - Deleted record with ID 2 from result table.
+2024-12-03 22:58:25,069 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:58:25,208 - INFO - Administrator - Attempting to delete record with ID 3 from the table.
+2024-12-03 22:58:25,210 - INFO - Administrator - Data path for ID 3: ../data\000011_yiyu4_1
+2024-12-03 22:58:25,215 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4_1
+2024-12-03 22:58:25,218 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-12-03 22:58:25,218 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-12-03 22:58:25,219 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:58:25,352 - INFO - Administrator - Attempting to delete record with ID 4 from the table.
+2024-12-03 22:58:25,354 - INFO - Administrator - Data path for ID 4: ../data\000014_jiaolv2_1
+2024-12-03 22:58:25,362 - INFO - Administrator - Deleted folder at path: ../data\000014_jiaolv2_1
+2024-12-03 22:58:25,365 - INFO - Administrator - Deleted record with ID 4 from tb_data.
+2024-12-03 22:58:25,367 - INFO - Administrator - Deleted record with ID 4 from result table.
+2024-12-03 22:58:25,367 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:58:25,512 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-03 22:58:25,514 - INFO - Administrator - Data path for ID 5: ../data\000016_wubing1_1
+2024-12-03 22:58:25,525 - INFO - Administrator - Deleted folder at path: ../data\000016_wubing1_1
+2024-12-03 22:58:25,527 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-03 22:58:25,529 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-03 22:58:25,529 - INFO - Administrator - Removed row 0 from table.
+2024-12-03 22:59:52,876 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 to ../data\000011_yiyu4
+2024-12-03 22:59:52,883 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4, Username: admin
+2024-12-03 22:59:52,958 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 to ../data\000011_yiyu4 - 副本
+2024-12-03 22:59:52,965 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本, Username: admin
+2024-12-03 22:59:53,110 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (2) to ../data\000011_yiyu4 - 副本 (2)
+2024-12-03 22:59:53,118 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (2), Username: admin
+2024-12-03 22:59:53,237 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (2) - 副本 to ../data\000011_yiyu4 - 副本 (2) - 副本
+2024-12-03 22:59:53,246 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (2) - 副本, Username: admin
+2024-12-03 22:59:53,343 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (2) - 副本 - 副本 to ../data\000011_yiyu4 - 副本 (2) - 副本 - 副本
+2024-12-03 22:59:53,348 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (2) - 副本 - 副本, Username: admin
+2024-12-03 22:59:53,494 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (3) to ../data\000011_yiyu4 - 副本 (3)
+2024-12-03 22:59:53,501 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (3), Username: admin
+2024-12-03 22:59:53,629 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (3) - 副本 to ../data\000011_yiyu4 - 副本 (3) - 副本
+2024-12-03 22:59:53,634 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (3) - 副本, Username: admin
+2024-12-03 22:59:53,782 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (4) to ../data\000011_yiyu4 - 副本 (4)
+2024-12-03 22:59:53,793 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (4), Username: admin
+2024-12-03 22:59:53,943 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 (4) - 副本 to ../data\000011_yiyu4 - 副本 (4) - 副本
+2024-12-03 22:59:53,948 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 (4) - 副本, Username: admin
+2024-12-03 22:59:54,103 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 to ../data\000011_yiyu4 - 副本 - 副本
+2024-12-03 22:59:54,111 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本, Username: admin
+2024-12-03 22:59:54,226 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (2) to ../data\000011_yiyu4 - 副本 - 副本 (2)
+2024-12-03 22:59:54,235 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (2), Username: admin
+2024-12-03 22:59:54,362 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (2) - 副本 to ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本
+2024-12-03 22:59:54,370 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本, Username: admin
+2024-12-03 22:59:54,485 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (2) - 副本 - 副本 to ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本 - 副本
+2024-12-03 22:59:54,493 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本 - 副本, Username: admin
+2024-12-03 22:59:54,631 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (3) to ../data\000011_yiyu4 - 副本 - 副本 (3)
+2024-12-03 22:59:54,638 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (3), Username: admin
+2024-12-03 22:59:54,795 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (3) - 副本 to ../data\000011_yiyu4 - 副本 - 副本 (3) - 副本
+2024-12-03 22:59:54,801 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (3) - 副本, Username: admin
+2024-12-03 22:59:54,950 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (4) to ../data\000011_yiyu4 - 副本 - 副本 (4)
+2024-12-03 22:59:54,960 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (4), Username: admin
+2024-12-03 22:59:55,121 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 (4) - 副本 to ../data\000011_yiyu4 - 副本 - 副本 (4) - 副本
+2024-12-03 22:59:55,126 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 (4) - 副本, Username: admin
+2024-12-03 22:59:55,271 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 to ../data\000011_yiyu4 - 副本 - 副本 - 副本
+2024-12-03 22:59:55,277 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本, Username: admin
+2024-12-03 22:59:55,431 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 (2) to ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2)
+2024-12-03 22:59:55,435 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2), Username: admin
+2024-12-03 22:59:55,590 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 (2) - 副本 to ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2) - 副本
+2024-12-03 22:59:55,594 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2) - 副本, Username: admin
+2024-12-03 22:59:55,748 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 (3) to ../data\000011_yiyu4 - 副本 - 副本 - 副本 (3)
+2024-12-03 22:59:55,753 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (3), Username: admin
+2024-12-03 22:59:55,894 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 to ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本
+2024-12-03 22:59:55,900 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本, Username: admin
+2024-12-03 22:59:56,036 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 (2) to ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 (2)
+2024-12-03 22:59:56,040 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 (2), Username: admin
+2024-12-03 22:59:56,198 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 - 副本 to ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 - 副本
+2024-12-03 22:59:56,205 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 - 副本, Username: admin
+2024-12-03 22:59:56,250 - INFO - Administrator - Data table refreshed successfully with 24 records
+2024-12-03 23:00:07,498 - INFO - Administrator - Returned to index page successfully
+2024-12-03 23:00:08,887 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-03 23:00:08,926 - INFO - Administrator - Successfully displayed 24 data records
+2024-12-03 23:00:08,936 - INFO - Administrator - Opening health evaluation page.
+2024-12-03 23:00:12,310 - INFO - Administrator - Returned to index page successfully
+2024-12-03 23:00:13,191 - INFO - Administrator - Data table refreshed successfully with 24 records
+2024-12-03 23:00:13,205 - INFO - Administrator - Opening data view page.
+2024-12-03 23:00:16,428 - INFO - Administrator - Returned to index page successfully

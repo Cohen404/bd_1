@@ -82,17 +82,25 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 2)
         # 上传按钮
         self.upload_pushButton = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(2)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.upload_pushButton.sizePolicy().hasHeightForWidth())
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         self.upload_pushButton.setSizePolicy(sizePolicy)
-        self.upload_pushButton.setStyleSheet("margin-top:30px;margin-bottom:30px;margin-left:10px;\n"
-                                             "background-color: #759dcd;font-size: 25px;border-radius:20px")
-        self.upload_pushButton.setIconSize(QtCore.QSize(20, 20))
-        self.upload_pushButton.setCheckable(False)
+        self.upload_pushButton.setMinimumSize(QtCore.QSize(120, 50))
+        self.upload_pushButton.setMaximumSize(QtCore.QSize(120, 50))
+        self.upload_pushButton.setStyleSheet("margin-top:20px;margin-bottom:5px;margin-left:10px;\n"
+                                             "background-color: #759dcd;font-size: 18px;border-radius:12px")
         self.upload_pushButton.setObjectName("load_pushButton")
-        self.gridLayout.addWidget(self.upload_pushButton, 0, 2, 1, 1)
+        self.gridLayout.addWidget(self.upload_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter)
+
+        # 添加批量上传按钮
+        self.batch_upload_pushButton = QtWidgets.QPushButton(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.batch_upload_pushButton.setSizePolicy(sizePolicy)
+        self.batch_upload_pushButton.setMinimumSize(QtCore.QSize(120, 50))
+        self.batch_upload_pushButton.setMaximumSize(QtCore.QSize(120, 50))
+        self.batch_upload_pushButton.setStyleSheet("margin-top:5px;margin-bottom:20px;margin-left:10px;\n"
+                                                 "background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.batch_upload_pushButton.setObjectName("batch_upload_pushButton")
+        self.gridLayout.addWidget(self.batch_upload_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
 
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -191,7 +199,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
 
-        self.upload_pushButton.setText(_translate("MainWindow", "上\n传"))
+        self.upload_pushButton.setText(_translate("MainWindow", "上传"))
         self.channel_choice_label.setText(_translate("MainWindow", "可视化指标选择："))
         self.channel_comboBox.setItemText(0, _translate("MainWindow", "differential_entropy"))
         self.channel_comboBox.setItemText(1, _translate("MainWindow", "frequency_domain_features"))
@@ -203,6 +211,7 @@ class Ui_MainWindow(object):
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑
+        font.setPointSize(10)  # 调整字体大小
         self.tableWidget.setFont(font)
         self.upload_pushButton.setFont(font)
         self.channel_choice_label.setFont(font)
@@ -216,3 +225,6 @@ class Ui_MainWindow(object):
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
+
+        self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
+        self.batch_upload_pushButton.setFont(font)
