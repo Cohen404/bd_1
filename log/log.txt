@@ -4855,3 +4855,7 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 18:18:19,945 - INFO - Administrator - Opening user login page.
 2024-12-03 18:18:24,677 - INFO - Administrator - User admin logged in successfully
 2024-12-03 18:18:26,217 - INFO - Administrator - Opening results view page.
+2024-12-03 18:25:47,901 - INFO - Administrator - Opening user login page.
+2024-12-03 18:25:51,239 - INFO - Administrator - User admin logged in successfully
+2024-12-03 18:25:52,156 - INFO - Administrator - Opening results view page.
+2024-12-03 18:26:03,056 - INFO - Administrator - Returned to index page successfully

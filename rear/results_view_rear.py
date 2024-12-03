@@ -369,6 +369,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
     def update_status_display(self, result):
         """更新状态显示"""
         # 更新普通应激状态
+        self.health_label.setText(f"普通应激 ({result.result_1})")
         self.health_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "
@@ -376,6 +377,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         )
         
         # 更新抑郁状态
+        self.acoustic_label.setText(f"抑郁状态 ({result.result_2})")
         self.acoustic_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "
@@ -383,6 +385,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         )
         
         # 更新焦虑状态
+        self.mechanical_label.setText(f"焦虑状态 ({result.result_3})")
         self.mechanical_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "

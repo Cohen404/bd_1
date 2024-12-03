@@ -330,4 +330,4 @@ AttributeError: 'change_pwd_Controller' object has no attribute 'setupUi'
 
 
 
-
+结果查看页面中，点击了表格中的查看之后，左上角评估状态不仅要变颜色，也要显示result1-3的分数，放到文字后面，括号里。
