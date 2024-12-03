@@ -392,24 +392,12 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             f"background: {'red' if result.result_3 >= 50 else 'gray'}"
         )
 
-    def display_image(self, image_path, title=None):
+    def display_image(self, image_path):
         """显示图片"""
         if os.path.exists(image_path):
             pixmap = QPixmap(image_path)
             if not pixmap.isNull():
                 scene = QGraphicsScene()
-                
-                # 如果有标题，添加标题文本
-                if title:
-                    title_text = scene.addText(title)
-                    title_text.setDefaultTextColor(Qt.black)
-                    font = title_text.font()
-                    font.setPointSize(12)
-                    font.setBold(True)
-                    title_text.setFont(font)
-                    
-                    # 将标题放在图片上方居中位置
-                    title_text.setPos((pixmap.width() - title_text.boundingRect().width()) / 2, -30)
                 
                 # 添加图片
                 pixmap_item = QGraphicsPixmapItem(pixmap)
@@ -428,9 +416,15 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         if self.current_data_path is None:
             return
 
+        # 获取当前图片的标题和文件名
         title, filename = self.image_types[self.current_image_index]
         image_path = os.path.join(self.current_data_path, filename)
-        self.display_image(image_path, title)
+        
+        # 更新EEG特征图标题
+        self.status_label.setText(title)
+        
+        # 显示图片
+        self.display_image(image_path)
 
         # 更新按钮状态
         self.pushButton.setEnabled(self.current_image_index > 0)
