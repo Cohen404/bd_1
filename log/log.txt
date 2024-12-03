@@ -4633,3 +4633,166 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 15:00:42,514 - INFO - Administrator - Returned to index page successfully
 2024-12-03 15:00:43,811 - INFO - Administrator - Opening user management page.
 2024-12-03 15:00:46,439 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:02:04,026 - INFO - Administrator - Opening user login page.
+2024-12-03 15:02:06,970 - INFO - Administrator - User admin logged in successfully
+2024-12-03 15:29:21,336 - INFO - Administrator - Opening data view page.
+2024-12-03 15:29:30,930 - INFO - Administrator - File selection cancelled
+2024-12-03 15:29:39,466 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-12-03 15:29:39,501 - ERROR - Administrator - Error during data upload: 'User' object has no attribute 'full_name'
+2024-12-03 15:32:22,495 - INFO - Administrator - Opening user login page.
+2024-12-03 15:32:26,186 - INFO - Administrator - User admin logged in successfully
+2024-12-03 15:32:30,124 - INFO - Administrator - Opening data view page.
+2024-12-03 15:32:37,706 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2_1
+2024-12-03 15:32:37,716 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2_1, Username: admin
+2024-12-03 15:32:41,320 - INFO - Administrator - Started processing data from: ../data\000005_ord2_1
+2024-12-03 15:32:46,958 - INFO - Administrator - Data processing completed successfully
+2024-12-03 15:32:50,700 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-12-03 15:32:50,703 - INFO - Administrator - Data path retrieved from database: ../data\000005_ord2_1
+2024-12-03 15:32:51,734 - INFO - Administrator - Successfully displayed image: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:32:53,809 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:32:54,741 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-03 15:32:54,745 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-03 15:32:54,752 - INFO - Administrator - Opening health evaluation page.
+2024-12-03 15:32:56,100 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-03 15:32:56,102 - INFO - Administrator - Data path retrieved for ID 1: ../data\000005_ord2_1
+2024-12-03 15:32:56,105 - WARNING - Administrator - No evaluation results found for ID 1
+2024-12-03 15:33:28,337 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 15:33:28,338 - INFO - Administrator - Depression LED set to RED
+2024-12-03 15:33:28,338 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 15:33:29,636 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-03 15:33:29,638 - INFO - Administrator - Data path retrieved for ID 1: ../data\000005_ord2_1
+2024-12-03 15:33:29,640 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 15:33:29,640 - INFO - Administrator - Depression LED set to RED
+2024-12-03 15:33:29,640 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 15:33:29,640 - INFO - Administrator - Initializing current image index to 0
+2024-12-03 15:33:29,640 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:29,640 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:33:29,641 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 15:33:32,516 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:32,516 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Alpha.png
+2024-12-03 15:33:32,539 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-03 15:33:32,900 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:32,901 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Beta.png
+2024-12-03 15:33:32,921 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-03 15:33:33,133 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:33,133 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Gamma.png
+2024-12-03 15:33:33,153 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-03 15:33:33,316 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:33,316 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_band_1.png
+2024-12-03 15:33:33,337 - INFO - Administrator - Successfully displayed image: 均分频带1
+2024-12-03 15:33:33,469 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:33,469 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_band_2.png
+2024-12-03 15:33:33,489 - INFO - Administrator - Successfully displayed image: 均分频带2
+2024-12-03 15:33:33,628 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:33,628 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_band_3.png
+2024-12-03 15:33:33,649 - INFO - Administrator - Successfully displayed image: 均分频带3
+2024-12-03 15:33:33,884 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:33,884 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_band_4.png
+2024-12-03 15:33:33,904 - INFO - Administrator - Successfully displayed image: 均分频带4
+2024-12-03 15:33:34,109 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:34,109 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_band_5.png
+2024-12-03 15:33:34,130 - INFO - Administrator - Successfully displayed image: 均分频带5
+2024-12-03 15:33:34,276 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:34,278 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_过零率.png
+2024-12-03 15:33:34,304 - INFO - Administrator - Successfully displayed image: 域特征 - 过零率
+2024-12-03 15:33:34,628 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:34,628 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_方差.png
+2024-12-03 15:33:34,647 - INFO - Administrator - Successfully displayed image: 时域特征 - 方差
+2024-12-03 15:33:35,005 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:35,005 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_能量.png
+2024-12-03 15:33:35,026 - INFO - Administrator - Successfully displayed image: 时域特征 - 能量
+2024-12-03 15:33:35,229 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:35,229 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_差分.png
+2024-12-03 15:33:35,252 - INFO - Administrator - Successfully displayed image: 时域特征 - 差分
+2024-12-03 15:33:35,444 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:35,444 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_wavelet.png
+2024-12-03 15:33:35,481 - INFO - Administrator - Successfully displayed image: 时频域特征 - 小波变换
+2024-12-03 15:33:35,716 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:35,716 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\differential_entropy.png
+2024-12-03 15:33:35,737 - INFO - Administrator - Successfully displayed image: 微分熵
+2024-12-03 15:33:36,012 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:36,012 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:33:36,025 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 15:33:36,388 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:36,388 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Alpha.png
+2024-12-03 15:33:36,401 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-03 15:33:36,668 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:36,669 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Beta.png
+2024-12-03 15:33:36,681 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-03 15:33:37,325 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:37,326 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Alpha.png
+2024-12-03 15:33:37,327 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-03 15:33:37,468 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:37,468 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:33:37,469 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 15:33:37,604 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:37,604 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\differential_entropy.png
+2024-12-03 15:33:37,617 - INFO - Administrator - Successfully displayed image: 微分熵
+2024-12-03 15:33:37,748 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:37,748 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_wavelet.png
+2024-12-03 15:33:37,775 - INFO - Administrator - Successfully displayed image: 时频域特征 - 小波变换
+2024-12-03 15:33:37,883 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:37,885 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_差分.png
+2024-12-03 15:33:37,897 - INFO - Administrator - Successfully displayed image: 时域特征 - 差分
+2024-12-03 15:33:38,037 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:38,037 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_能量.png
+2024-12-03 15:33:38,050 - INFO - Administrator - Successfully displayed image: 时域特征 - 能量
+2024-12-03 15:33:38,212 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:38,214 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_方差.png
+2024-12-03 15:33:38,225 - INFO - Administrator - Successfully displayed image: 时域特征 - 方差
+2024-12-03 15:33:38,573 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:38,573 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_能量.png
+2024-12-03 15:33:38,575 - INFO - Administrator - Successfully displayed image: 时域特征 - 能量
+2024-12-03 15:33:38,717 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:38,717 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\time_差分.png
+2024-12-03 15:33:38,717 - INFO - Administrator - Successfully displayed image: 时域特征 - 差分
+2024-12-03 15:33:38,860 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:38,860 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\frequency_wavelet.png
+2024-12-03 15:33:38,886 - INFO - Administrator - Successfully displayed image: 时频域特征 - 小波变换
+2024-12-03 15:33:39,013 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:39,013 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\differential_entropy.png
+2024-12-03 15:33:39,025 - INFO - Administrator - Successfully displayed image: 微分熵
+2024-12-03 15:33:39,173 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:39,174 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:33:39,186 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 15:33:40,573 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:33:41,372 - INFO - Administrator - Results table refreshed successfully with 1 rows
+2024-12-03 15:33:41,379 - INFO - Administrator - Opening results view page.
+2024-12-03 15:33:48,103 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:33:48,889 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 15:33:48,889 - INFO - Administrator - Depression LED set to RED
+2024-12-03 15:33:48,889 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 15:33:48,890 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-03 15:33:48,894 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-03 15:33:48,899 - INFO - Administrator - Opening health evaluation page.
+2024-12-03 15:33:51,357 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-03 15:33:51,358 - INFO - Administrator - Data path retrieved for ID 1: ../data\000005_ord2_1
+2024-12-03 15:33:51,360 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-03 15:33:51,360 - INFO - Administrator - Depression LED set to RED
+2024-12-03 15:33:51,360 - INFO - Administrator - Anxiety LED set to RED
+2024-12-03 15:33:51,360 - INFO - Administrator - Initializing current image index to 0
+2024-12-03 15:33:51,360 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-03 15:33:51,360 - INFO - Administrator - Attempting to load image from path: ../data\000005_ord2_1\Theta.png
+2024-12-03 15:33:51,362 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-03 15:33:55,314 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:33:56,133 - INFO - Administrator - Results table refreshed successfully with 1 rows
+2024-12-03 15:33:56,140 - INFO - Administrator - Opening results view page.
+2024-12-03 15:39:45,985 - INFO - Administrator - Opening user login page.
+2024-12-03 15:39:50,719 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 15:39:50,968 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 15:39:52,979 - INFO - Administrator - Results table refreshed successfully with 1 rows
+2024-12-03 15:39:52,989 - INFO - Administrator - Opening results view page.
+2024-12-03 15:39:59,091 - INFO - Administrator - Returned to index page successfully
+2024-12-03 15:43:28,008 - INFO - Administrator - Opening user login page.
+2024-12-03 15:43:31,416 - INFO - Administrator - User admin logged in successfully
+2024-12-03 15:43:45,687 - INFO - Administrator - Opening results view page.
+2024-12-03 15:49:42,648 - INFO - Administrator - Opening user login page.
+2024-12-03 15:49:47,379 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 15:49:47,617 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 15:49:49,138 - INFO - Administrator - Opening results view page.
+2024-12-03 15:49:55,299 - ERROR - Administrator - Error showing feature plot: 'Results_View_WindowActions' object has no attribute 'channel_comboBox'
+2024-12-03 15:51:02,307 - INFO - Administrator - Opening user login page.
+2024-12-03 15:51:06,316 - INFO - Administrator - Login successful for username 'admin'
+2024-12-03 15:51:06,548 - INFO - Administrator - User 'admin' logged in successfully
+2024-12-03 15:51:07,403 - INFO - Administrator - Opening results view page.
+2024-12-03 15:51:08,406 - ERROR - Administrator - Error showing feature plot: name 'QInputDialog' is not defined

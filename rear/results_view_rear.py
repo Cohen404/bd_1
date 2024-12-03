@@ -13,8 +13,10 @@ from datetime import datetime, timedelta
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsPixmapItem, QGraphicsScene, QMessageBox, \
-    QTableWidgetItem
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QGraphicsPixmapItem, QGraphicsScene, QMessageBox, 
+    QTableWidgetItem, QInputDialog
+)
 import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.results_view as results_view
@@ -53,18 +55,75 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         """
         super(results_view.Ui_MainWindow, self).__init__()
         self.setupUi(self)
-        self._index_window = None  # 添加这一行，用于保存主页面窗口引用
+        self._index_window = None
 
         # 获取当前用户信息
         self.user_id, is_admin = self.get_current_user()
         self.user_type = is_admin
+
+        # 添加通道选择下拉框
+        self.channel_comboBox = QtWidgets.QComboBox(self)
+        self.channel_comboBox.setGeometry(QtCore.QRect(10, 10, 200, 30))
+        self.channel_comboBox.addItems([
+            "Theta/Alpha/Beta/Gamma功率",
+            "均分频带",
+            "时域特征",
+            "时频域特征",
+            "微分熵"
+        ])
+        # 将下拉框添加到EEG特征图区域
+        self.verticalLayout_2.insertWidget(1, self.channel_comboBox)  # 插入到标题和图形视图之间
+
+        # 设置表格列
+        self.tableWidget.setColumnCount(7)  # 设置为7列，包括查看按钮列
+        self.tableWidget.setHorizontalHeaderLabels([
+            'ID', '用户名', '评估时间', '普通应激', '抑郁', '焦虑', '操作'
+        ])
+
+        # 设置表格样式
+        self.tableWidget.horizontalHeader().setStyleSheet(
+            "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color:white;}")
+        self.tableWidget.setStyleSheet(
+            "QTableWidget{background-color:#d4e2f4; alternate-background-color:#e8f1ff;}")
+        
+        # 设置列宽
+        header = self.tableWidget.horizontalHeader()
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)  # ID列
+        header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)  # 用户名列
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)          # 评估时间列
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)  # 普通应激列
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)  # 抑郁列
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
+
+        # 设置下拉框样式
+        self.channel_comboBox.setStyleSheet('''
+            QComboBox {
+                background-color: white;
+                border: 1px solid #5c8ac3;
+                border-radius: 3px;
+                padding: 1px 18px 1px 3px;
+                min-width: 6em;
+            }
+            QComboBox:hover {
+                border: 1px solid #4a7ab3;
+            }
+            QComboBox::drop-down {
+                border: 0px;
+            }
+            QComboBox::down-arrow {
+                image: url(../resources/down_arrow.png);
+                width: 12px;
+                height: 12px;
+            }
+        ''')
 
         # 显示表格内容
         self.show_table()
 
         # 从文件中读取用户类型并设置userType
         path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
+        user = operate_user.read(path)
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置日志
@@ -77,8 +136,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         logger.addFilter(UserFilter(userType))
 
         # 连接按钮事件
-        self.btn_return.clicked.connect(self.return_index)  # 返回首页
+        self.btn_return.clicked.connect(self.return_index)
 
+        # 注册窗口
         window_manager = WindowManager()
         window_manager.register_window('results_view', self)
 
@@ -203,54 +263,161 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 QMessageBox.warning(self, "错误", "无法获取当前用户信息")
                 return
 
-            print(f"当前用户ID: {user_id}, 是否管理员: {self.user_type}")
-
-            # 直接查询结果表
+            # 查询结果
             if self.user_type:  # 管理员可以看到所有结果
-                print("管理员查询所有结果")
                 results = session.query(Result).all()
             else:  # 普通用户只能看到自己的结果
-                print(f"普通用户查询自己的结果: {user_id}")
                 results = session.query(Result).filter(Result.user_id == user_id).all()
-
-            print(f"查询到 {len(results)} 条结果")
 
             # 显示结果
             self.tableWidget.setRowCount(len(results))
             for i, result in enumerate(results):
-                print(f"处理第 {i+1} 条结果: ID={result.id}, 用户ID={result.user_id}, 时间={result.result_time}")
-                
                 # 获取用户信息
                 user = session.query(User).filter(User.user_id == result.user_id).first()
                 username = user.username if user else "未知用户"
-                print(f"用户信息: {username}")
 
-                # 结果ID
+                # 设置表格内容
                 self.tableWidget.setItem(i, 0, QTableWidgetItem(str(result.id)))
-                # 用户名
                 self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
-                # 计算时间
-                time_str = result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''
-                self.tableWidget.setItem(i, 2, QTableWidgetItem(time_str))
-                # 结果1（普通应激）
-                self.tableWidget.setItem(i, 3, QTableWidgetItem('是' if result.result_1 == 1 else '否'))
-                # 结果2（抑郁）
-                self.tableWidget.setItem(i, 4, QTableWidgetItem('是' if result.result_2 == 1 else '否'))
-                # 结果3（焦虑）
-                self.tableWidget.setItem(i, 5, QTableWidgetItem('是' if result.result_3 == 1 else '否'))
+                self.tableWidget.setItem(i, 2, QTableWidgetItem(
+                    result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''))
+                self.tableWidget.setItem(i, 3, QTableWidgetItem(str(result.result_1)))  # 显示原始值
+                self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.result_2)))  # 显示原始值
+                self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.result_3)))  # 显示原始值
 
-            logging.info(f"Results table refreshed successfully with {len(results)} rows")
+                # 添加查看按钮
+                view_btn = QtWidgets.QPushButton('查看')
+                view_btn.setStyleSheet('''
+                    QPushButton {
+                        background-color: #5c8ac3;
+                        color: white;
+                        border-radius: 5px;
+                        padding: 5px 15px;
+                        min-width: 60px;
+                        margin: 2px 10px;
+                    }
+                    QPushButton:hover {
+                        background-color: #4a7ab3;
+                    }
+                ''')
+                view_btn.clicked.connect(lambda checked, row=i: self.view_details(row))
+                self.tableWidget.setCellWidget(i, 6, view_btn)
+
+            # 启用表格滚动
+            self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
             
-            # 如果没有数据，显示提示
-            if len(results) == 0:
-                QMessageBox.information(self, "提示", "暂无评估结果数据")
-                
+            # 更新当前评估结果显示
+            self.update_current_status()
+
         except Exception as e:
             logging.error(f"Error displaying results table: {str(e)}")
-            print(f"错误详情: {str(e)}")  # 打印详细错误信息
             QMessageBox.critical(self, "错误", f"显示结果表格失败：{str(e)}")
         finally:
             session.close()
+
+    def update_current_status(self):
+        """更新当前评估结果状态显示"""
+        session = SessionClass()
+        try:
+            # 获取最新评估结果
+            result = session.query(Result).order_by(Result.result_time.desc()).first()
+            if result:
+                # 更新普通应激状态
+                self.health_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; "
+                    f"background: {'red' if result.result_1 >= 50 else 'gray'}"
+                )
+                
+                # 更新抑郁状态
+                self.acoustic_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; "
+                    f"background: {'red' if result.result_2 >= 50 else 'gray'}"
+                )
+                
+                # 更新焦虑状态
+                self.mechanical_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; "
+                    f"background: {'red' if result.result_3 >= 50 else 'gray'}"
+                )
+        finally:
+            session.close()
+
+    def view_details(self, row):
+        """查看详细信息"""
+        try:
+            result_id = int(self.tableWidget.item(row, 0).text())
+            session = SessionClass()
+            result = session.query(Result).filter(Result.id == result_id).first()
+            
+            if result:
+                # 获取关联的数据记录
+                data = session.query(Data).filter(Data.id == result_id).first()
+                if data and data.data_path:
+                    # 显示特征图
+                    self.show_feature_plot(data.data_path)
+                else:
+                    QMessageBox.warning(self, "警告", "未找到相关数据文件")
+            else:
+                QMessageBox.warning(self, "警告", "未找到评估结果")
+                
+        except Exception as e:
+            logging.error(f"Error viewing details: {str(e)}")
+            QMessageBox.critical(self, "错误", f"查看详情失败：{str(e)}")
+        finally:
+            session.close()
+
+    def show_feature_plot(self, data_path):
+        """显示特征图"""
+        try:
+            feature_type = self.channel_comboBox.currentText()
+            
+            if feature_type == "Theta/Alpha/Beta/Gamma功率":
+                wave_choice, ok = QInputDialog.getItem(self, "选择波段", "请选择要查看的波段：", 
+                                                       ["Theta", "Alpha", "Beta", "Gamma"], 0, False)
+                if ok and wave_choice:
+                    image_path = os.path.join(data_path, f'{wave_choice}.png')
+                    self.display_image(image_path)
+            elif feature_type == "均分频带":
+                band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
+                                                       ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
+                if ok and band_choice:
+                    band_number = int(band_choice.split()[-1])
+                    image_path = os.path.join(data_path, f'frequency_band_{band_number}.png')
+                    self.display_image(image_path)
+            elif feature_type == "时域特征":
+                time_feature_choice, ok = QInputDialog.getItem(self, "选择时域特征", "请选择要查看的时域特征：", 
+                                                               ["过零率", "方差", "能量", "差分"], 0, False)
+                if ok and time_feature_choice:
+                    image_path = os.path.join(data_path, f'time_{time_feature_choice}.png')
+                    self.display_image(image_path)
+            elif feature_type == "时频域特征":
+                image_path = os.path.join(data_path, 'frequency_wavelet.png')
+                self.display_image(image_path)
+            elif feature_type == "微分熵":
+                image_path = os.path.join(data_path, 'differential_entropy.png')
+                self.display_image(image_path)
+                
+        except Exception as e:
+            logging.error(f"Error showing feature plot: {str(e)}")
+            QMessageBox.critical(self, "错误", f"显示特征图失败：{str(e)}")
+
+    def display_image(self, image_path):
+        """显示图片"""
+        if os.path.exists(image_path):
+            pixmap = QPixmap(image_path)
+            if not pixmap.isNull():
+                scene = QGraphicsScene()
+                pixmap_item = QGraphicsPixmapItem(pixmap)
+                scene.addItem(pixmap_item)
+                self.graphicsView.setScene(scene)
+                self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
+            else:
+                QMessageBox.warning(self, "警告", "无法加载图片")
+        else:
+            QMessageBox.warning(self, "警告", "图片文件不存在")
 
     def return_index(self):
         """

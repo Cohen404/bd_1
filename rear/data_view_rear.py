@@ -295,7 +295,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                 data_path=target_dir,
                 upload_time=datetime.now(),
                 user_id=str(user.user_id),
-                personnel_name=user.full_name,
+                personnel_name=user.username,
                 upload_user=1 if user.user_type == 'admin' else 0
             )
             
