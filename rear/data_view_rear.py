@@ -205,7 +205,8 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
 
             if len(data_list) == 0:
                 print("没有找到任何数据")
-                QMessageBox.information(self, "提示", "暂无数据")
+                # 移除弹窗提示
+                # QMessageBox.information(self, "提示", "暂无数据")
 
             logging.info(f"Data table refreshed successfully with {len(data_list)} records")
         except Exception as e:

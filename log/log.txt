@@ -5392,3 +5392,16 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-04 09:04:03,578 - INFO - Administrator - Returned to index page successfully
 2024-12-04 09:04:09,400 - INFO - Administrator - Data table refreshed successfully with 0 records
 2024-12-04 09:04:09,403 - INFO - Administrator - Opening data view page.
+2024-12-04 11:45:23,952 - INFO - Administrator - Opening user login page.
+2024-12-04 11:45:27,616 - INFO - Administrator - User admin logged in successfully
+2024-12-04 11:45:38,230 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-04 11:45:38,234 - INFO - Administrator - Opening data view page.
+2024-12-04 11:45:39,577 - INFO - Administrator - Returned to index page successfully
+2024-12-04 11:45:41,126 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-04 11:45:41,128 - INFO - Administrator - Opening data view page.
+2024-12-04 11:45:42,355 - INFO - Administrator - Returned to index page successfully
+2024-12-04 11:48:34,218 - INFO - Administrator - Opening user login page.
+2024-12-04 11:48:37,625 - INFO - Administrator - User admin logged in successfully
+2024-12-04 11:48:38,682 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-04 11:48:38,690 - INFO - Administrator - Opening data view page.
+2024-12-04 11:48:40,248 - INFO - Administrator - Returned to index page successfully
