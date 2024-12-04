@@ -5229,3 +5229,166 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-03 23:00:13,191 - INFO - Administrator - Data table refreshed successfully with 24 records
 2024-12-03 23:00:13,205 - INFO - Administrator - Opening data view page.
 2024-12-03 23:00:16,428 - INFO - Administrator - Returned to index page successfully
+2024-12-04 09:03:19,959 - INFO - Administrator - Opening user login page.
+2024-12-04 09:03:23,199 - INFO - Administrator - User admin logged in successfully
+2024-12-04 09:03:26,202 - INFO - Administrator - Data table refreshed successfully with 24 records
+2024-12-04 09:03:26,218 - INFO - Administrator - Opening data view page.
+2024-12-04 09:03:46,216 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp/000011_yiyu4 to ../data\000011_yiyu4_1
+2024-12-04 09:03:46,226 - INFO - Administrator - Data uploaded successfully. Path: ../data\000011_yiyu4_1, Username: admin
+2024-12-04 09:03:47,210 - INFO - Administrator - Data table refreshed successfully with 25 records
+2024-12-04 09:03:52,771 - INFO - Administrator - Returned to index page successfully
+2024-12-04 09:03:54,122 - INFO - Administrator - Data table refreshed successfully with 25 records
+2024-12-04 09:03:54,137 - INFO - Administrator - Opening data view page.
+2024-12-04 09:03:55,881 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-04 09:03:55,884 - INFO - Administrator - Data path for ID 1: ../data\000011_yiyu4
+2024-12-04 09:03:55,886 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4
+2024-12-04 09:03:55,889 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-04 09:03:55,891 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-04 09:03:55,892 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,031 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2024-12-04 09:03:56,033 - INFO - Administrator - Data path for ID 2: ../data\000011_yiyu4 - 副本
+2024-12-04 09:03:56,035 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本
+2024-12-04 09:03:56,037 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2024-12-04 09:03:56,038 - INFO - Administrator - Deleted record with ID 2 from result table.
+2024-12-04 09:03:56,038 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,189 - INFO - Administrator - Attempting to delete record with ID 3 from the table.
+2024-12-04 09:03:56,192 - INFO - Administrator - Data path for ID 3: ../data\000011_yiyu4 - 副本 (2)
+2024-12-04 09:03:56,194 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (2)
+2024-12-04 09:03:56,197 - INFO - Administrator - Deleted record with ID 3 from tb_data.
+2024-12-04 09:03:56,198 - INFO - Administrator - Deleted record with ID 3 from result table.
+2024-12-04 09:03:56,198 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,326 - INFO - Administrator - Attempting to delete record with ID 4 from the table.
+2024-12-04 09:03:56,328 - INFO - Administrator - Data path for ID 4: ../data\000011_yiyu4 - 副本 (2) - 副本
+2024-12-04 09:03:56,330 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (2) - 副本
+2024-12-04 09:03:56,332 - INFO - Administrator - Deleted record with ID 4 from tb_data.
+2024-12-04 09:03:56,334 - INFO - Administrator - Deleted record with ID 4 from result table.
+2024-12-04 09:03:56,334 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,471 - INFO - Administrator - Attempting to delete record with ID 5 from the table.
+2024-12-04 09:03:56,472 - INFO - Administrator - Data path for ID 5: ../data\000011_yiyu4 - 副本 (2) - 副本 - 副本
+2024-12-04 09:03:56,474 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (2) - 副本 - 副本
+2024-12-04 09:03:56,476 - INFO - Administrator - Deleted record with ID 5 from tb_data.
+2024-12-04 09:03:56,477 - INFO - Administrator - Deleted record with ID 5 from result table.
+2024-12-04 09:03:56,477 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,590 - INFO - Administrator - Attempting to delete record with ID 6 from the table.
+2024-12-04 09:03:56,592 - INFO - Administrator - Data path for ID 6: ../data\000011_yiyu4 - 副本 (3)
+2024-12-04 09:03:56,593 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (3)
+2024-12-04 09:03:56,596 - INFO - Administrator - Deleted record with ID 6 from tb_data.
+2024-12-04 09:03:56,596 - INFO - Administrator - Deleted record with ID 6 from result table.
+2024-12-04 09:03:56,596 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,720 - INFO - Administrator - Attempting to delete record with ID 7 from the table.
+2024-12-04 09:03:56,721 - INFO - Administrator - Data path for ID 7: ../data\000011_yiyu4 - 副本 (3) - 副本
+2024-12-04 09:03:56,723 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (3) - 副本
+2024-12-04 09:03:56,725 - INFO - Administrator - Deleted record with ID 7 from tb_data.
+2024-12-04 09:03:56,727 - INFO - Administrator - Deleted record with ID 7 from result table.
+2024-12-04 09:03:56,727 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,831 - INFO - Administrator - Attempting to delete record with ID 8 from the table.
+2024-12-04 09:03:56,833 - INFO - Administrator - Data path for ID 8: ../data\000011_yiyu4 - 副本 (4)
+2024-12-04 09:03:56,834 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (4)
+2024-12-04 09:03:56,836 - INFO - Administrator - Deleted record with ID 8 from tb_data.
+2024-12-04 09:03:56,837 - INFO - Administrator - Deleted record with ID 8 from result table.
+2024-12-04 09:03:56,837 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:56,959 - INFO - Administrator - Attempting to delete record with ID 9 from the table.
+2024-12-04 09:03:56,961 - INFO - Administrator - Data path for ID 9: ../data\000011_yiyu4 - 副本 (4) - 副本
+2024-12-04 09:03:56,963 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 (4) - 副本
+2024-12-04 09:03:56,965 - INFO - Administrator - Deleted record with ID 9 from tb_data.
+2024-12-04 09:03:56,966 - INFO - Administrator - Deleted record with ID 9 from result table.
+2024-12-04 09:03:56,967 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,175 - INFO - Administrator - Attempting to delete record with ID 10 from the table.
+2024-12-04 09:03:57,177 - INFO - Administrator - Data path for ID 10: ../data\000011_yiyu4 - 副本 - 副本
+2024-12-04 09:03:57,179 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本
+2024-12-04 09:03:57,181 - INFO - Administrator - Deleted record with ID 10 from tb_data.
+2024-12-04 09:03:57,182 - INFO - Administrator - Deleted record with ID 10 from result table.
+2024-12-04 09:03:57,183 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,327 - INFO - Administrator - Attempting to delete record with ID 11 from the table.
+2024-12-04 09:03:57,328 - INFO - Administrator - Data path for ID 11: ../data\000011_yiyu4 - 副本 - 副本 (2)
+2024-12-04 09:03:57,330 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (2)
+2024-12-04 09:03:57,332 - INFO - Administrator - Deleted record with ID 11 from tb_data.
+2024-12-04 09:03:57,333 - INFO - Administrator - Deleted record with ID 11 from result table.
+2024-12-04 09:03:57,333 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,470 - INFO - Administrator - Attempting to delete record with ID 12 from the table.
+2024-12-04 09:03:57,472 - INFO - Administrator - Data path for ID 12: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本
+2024-12-04 09:03:57,473 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本
+2024-12-04 09:03:57,476 - INFO - Administrator - Deleted record with ID 12 from tb_data.
+2024-12-04 09:03:57,477 - INFO - Administrator - Deleted record with ID 12 from result table.
+2024-12-04 09:03:57,478 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,607 - INFO - Administrator - Attempting to delete record with ID 13 from the table.
+2024-12-04 09:03:57,609 - INFO - Administrator - Data path for ID 13: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本 - 副本
+2024-12-04 09:03:57,611 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (2) - 副本 - 副本
+2024-12-04 09:03:57,613 - INFO - Administrator - Deleted record with ID 13 from tb_data.
+2024-12-04 09:03:57,614 - INFO - Administrator - Deleted record with ID 13 from result table.
+2024-12-04 09:03:57,615 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,728 - INFO - Administrator - Attempting to delete record with ID 14 from the table.
+2024-12-04 09:03:57,729 - INFO - Administrator - Data path for ID 14: ../data\000011_yiyu4 - 副本 - 副本 (3)
+2024-12-04 09:03:57,730 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (3)
+2024-12-04 09:03:57,734 - INFO - Administrator - Deleted record with ID 14 from tb_data.
+2024-12-04 09:03:57,735 - INFO - Administrator - Deleted record with ID 14 from result table.
+2024-12-04 09:03:57,735 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:57,870 - INFO - Administrator - Attempting to delete record with ID 15 from the table.
+2024-12-04 09:03:57,871 - INFO - Administrator - Data path for ID 15: ../data\000011_yiyu4 - 副本 - 副本 (3) - 副本
+2024-12-04 09:03:57,873 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (3) - 副本
+2024-12-04 09:03:57,876 - INFO - Administrator - Deleted record with ID 15 from tb_data.
+2024-12-04 09:03:57,877 - INFO - Administrator - Deleted record with ID 15 from result table.
+2024-12-04 09:03:57,877 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:58,902 - INFO - Administrator - Attempting to delete record with ID 16 from the table.
+2024-12-04 09:03:58,905 - INFO - Administrator - Data path for ID 16: ../data\000011_yiyu4 - 副本 - 副本 (4)
+2024-12-04 09:03:58,906 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (4)
+2024-12-04 09:03:58,907 - INFO - Administrator - Deleted record with ID 16 from tb_data.
+2024-12-04 09:03:58,909 - INFO - Administrator - Deleted record with ID 16 from result table.
+2024-12-04 09:03:58,909 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,103 - INFO - Administrator - Attempting to delete record with ID 17 from the table.
+2024-12-04 09:03:59,105 - INFO - Administrator - Data path for ID 17: ../data\000011_yiyu4 - 副本 - 副本 (4) - 副本
+2024-12-04 09:03:59,106 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 (4) - 副本
+2024-12-04 09:03:59,108 - INFO - Administrator - Deleted record with ID 17 from tb_data.
+2024-12-04 09:03:59,109 - INFO - Administrator - Deleted record with ID 17 from result table.
+2024-12-04 09:03:59,109 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,287 - INFO - Administrator - Attempting to delete record with ID 18 from the table.
+2024-12-04 09:03:59,289 - INFO - Administrator - Data path for ID 18: ../data\000011_yiyu4 - 副本 - 副本 - 副本
+2024-12-04 09:03:59,291 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本
+2024-12-04 09:03:59,293 - INFO - Administrator - Deleted record with ID 18 from tb_data.
+2024-12-04 09:03:59,293 - INFO - Administrator - Deleted record with ID 18 from result table.
+2024-12-04 09:03:59,294 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,430 - INFO - Administrator - Attempting to delete record with ID 19 from the table.
+2024-12-04 09:03:59,432 - INFO - Administrator - Data path for ID 19: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2)
+2024-12-04 09:03:59,433 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2)
+2024-12-04 09:03:59,435 - INFO - Administrator - Deleted record with ID 19 from tb_data.
+2024-12-04 09:03:59,436 - INFO - Administrator - Deleted record with ID 19 from result table.
+2024-12-04 09:03:59,436 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,581 - INFO - Administrator - Attempting to delete record with ID 20 from the table.
+2024-12-04 09:03:59,585 - INFO - Administrator - Data path for ID 20: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2) - 副本
+2024-12-04 09:03:59,586 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (2) - 副本
+2024-12-04 09:03:59,588 - INFO - Administrator - Deleted record with ID 20 from tb_data.
+2024-12-04 09:03:59,589 - INFO - Administrator - Deleted record with ID 20 from result table.
+2024-12-04 09:03:59,589 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,743 - INFO - Administrator - Attempting to delete record with ID 21 from the table.
+2024-12-04 09:03:59,744 - INFO - Administrator - Data path for ID 21: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (3)
+2024-12-04 09:03:59,745 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 (3)
+2024-12-04 09:03:59,748 - INFO - Administrator - Deleted record with ID 21 from tb_data.
+2024-12-04 09:03:59,750 - INFO - Administrator - Deleted record with ID 21 from result table.
+2024-12-04 09:03:59,750 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:03:59,927 - INFO - Administrator - Attempting to delete record with ID 22 from the table.
+2024-12-04 09:03:59,929 - INFO - Administrator - Data path for ID 22: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本
+2024-12-04 09:03:59,930 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本
+2024-12-04 09:03:59,932 - INFO - Administrator - Deleted record with ID 22 from tb_data.
+2024-12-04 09:03:59,933 - INFO - Administrator - Deleted record with ID 22 from result table.
+2024-12-04 09:03:59,934 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:04:00,247 - INFO - Administrator - Attempting to delete record with ID 23 from the table.
+2024-12-04 09:04:00,249 - INFO - Administrator - Data path for ID 23: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 (2)
+2024-12-04 09:04:00,250 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 (2)
+2024-12-04 09:04:00,252 - INFO - Administrator - Deleted record with ID 23 from tb_data.
+2024-12-04 09:04:00,253 - INFO - Administrator - Deleted record with ID 23 from result table.
+2024-12-04 09:04:00,253 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:04:00,439 - INFO - Administrator - Attempting to delete record with ID 24 from the table.
+2024-12-04 09:04:00,440 - INFO - Administrator - Data path for ID 24: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 - 副本
+2024-12-04 09:04:00,441 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4 - 副本 - 副本 - 副本 - 副本 - 副本
+2024-12-04 09:04:00,444 - INFO - Administrator - Deleted record with ID 24 from tb_data.
+2024-12-04 09:04:00,445 - INFO - Administrator - Deleted record with ID 24 from result table.
+2024-12-04 09:04:00,445 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:04:02,039 - INFO - Administrator - Attempting to delete record with ID 25 from the table.
+2024-12-04 09:04:02,040 - INFO - Administrator - Data path for ID 25: ../data\000011_yiyu4_1
+2024-12-04 09:04:02,050 - INFO - Administrator - Deleted folder at path: ../data\000011_yiyu4_1
+2024-12-04 09:04:02,053 - INFO - Administrator - Deleted record with ID 25 from tb_data.
+2024-12-04 09:04:02,054 - INFO - Administrator - Deleted record with ID 25 from result table.
+2024-12-04 09:04:02,054 - INFO - Administrator - Removed row 0 from table.
+2024-12-04 09:04:03,578 - INFO - Administrator - Returned to index page successfully
+2024-12-04 09:04:09,400 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-04 09:04:09,403 - INFO - Administrator - Opening data view page.
