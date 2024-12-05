@@ -46,19 +46,19 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         self.user_login_Button.clicked.connect(self.open_user_login)  # 用户登录
         
         # 使用配置文件中的路径
-        user = operate_user.read(USER_STATUS_FILE)  # 0表示普通用户，1表示管理员
-        userType = "Regular user" if user == 0 else "Administrator"
+        # user = operate_user.read(USER_STATUS_FILE)  # 0表示普通用户，1表示管理员
+        # userType = "Regular user" if user == 0 else "Administrator"
 
-        # 配置 logging 模块，使用配置文件中的路径
-        logging.basicConfig(
-            filename=LOG_FILE,
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        )
+        # # 配置 logging 模块，使用配置文件中的路径
+        # logging.basicConfig(
+        #     filename=LOG_FILE,
+        #     level=logging.INFO,
+        #     format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
+        # )
 
-        # 添加过滤器
-        logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
+        # # 添加过滤器
+        # logger = logging.getLogger()
+        # logger.addFilter(UserFilter(userType))
 
     def open_user_login(self):
         """

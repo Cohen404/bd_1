@@ -61,18 +61,12 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         # 添加密码框回车事件绑定
         self.pwd_lineEdit.returnPressed.connect(self.handle_login)
 
-        # 从文件中读取用户类型并设置userType
-        user = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
-        userType = "Regular user" if user == 0 else "Administrator"
-
-        # 配置日志
+        # 配置基本日志格式
         logging.basicConfig(
-            filename=LOG_FILE,  # 使用配置的路径
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
-        logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
 
     def handle_login(self):
         """统一的登录处理函数"""
@@ -99,12 +93,23 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
                 if user:
                     # 保存当前用户信息
-                    with open(CURRENT_USER_FILE, 'w') as f:  # 使用配置的路径
+                    with open(CURRENT_USER_FILE, 'w') as f:
                         f.write(str(user.user_id))
 
                     # 保存用户类型
-                    with open(USER_STATUS_FILE, 'w') as f:  # 使用配置的路径
-                        f.write('1' if user.user_type == 'admin' else '0')
+                    is_admin = '1' if user.user_type == 'admin' else '0'
+                    with open(USER_STATUS_FILE, 'w') as f:
+                        f.write(is_admin)
+
+                    # 设置用户类型并更新日志过滤器
+                    userType = "Administrator" if is_admin == '1' else "Regular user"
+                    logger = logging.getLogger()
+                    # 移除旧的过滤器
+                    for filter in logger.filters:
+                        if isinstance(filter, UserFilter):
+                            logger.removeFilter(filter)
+                    # 添加新的过滤器
+                    logger.addFilter(UserFilter(userType))
 
                     # 更新最后登录时间
                     user.last_login = datetime.now()

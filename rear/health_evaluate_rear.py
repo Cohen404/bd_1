@@ -500,7 +500,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             # 生成status.txt文件
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
             # print(data_time)
-            full_path = USER_STATUS_FILE  # 也可以创建一个.doc的word文档
+            full_path = MODEL_STATUS_FILE  # 也可以创建一个.doc的word文档
             file = open(full_path, 'w')
             file.write(str(data_time))
             file.close()
