@@ -19,7 +19,7 @@ import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.health_evaluate as health_evaluate
 # 导入跳转页面的后端部分
-import index_rear
+import rear.index_rear
 
 from rear import admin_rear, param_control, model_control_controller
 
@@ -30,6 +30,13 @@ from model.tuili import EegModel
 import logging
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
 
 class UserFilter(logging.Filter):
     """
@@ -64,15 +71,14 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.tableWidget.setHorizontalHeaderLabels(self.lst)
         
         # 从文件中读取用户ID
-        path = '../state/current_user.txt'
         try:
-            user_id = operate_user.read(path)
+            user_id = operate_user.read(CURRENT_USER_FILE)  # 使用配置的路径
             print(f"Read user_status from file: {user_id}")  # 调试日志
             
             # 获取用户类型
             session = SessionClass()
             try:
-                # 直接使用user_id查询
+                # 直接使用user_id询
                 user = session.query(User).filter(User.user_id == user_id).first()
                 if user:
                     self.user_type = user.user_type == 'admin'
@@ -97,7 +103,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
         # 配置 logging 模块
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,  # 使用配置的路径
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -178,7 +184,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
     def get_current_user_id(self):
         # 从用户状态文件或会话中获取当前用户ID
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_id = operate_user.read(path)
         return int(user_id)
 
@@ -217,7 +223,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         """
         # 模型状态
         # 判断模型是否空闲，即是否有文件存在
-        if not os.path.exists('../state/status.txt'):
+        if not os.path.exists(MODEL_STATUS_FILE):
             self.status_label.setText("模型空闲")
         
         # 设置所有LED为默认灰色
@@ -271,7 +277,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 row = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row)
 
-                # 获取上传用户的用户名
+                # 获取上传用户的用名
                 uploader = session.query(User).filter(User.user_id == data.user_id).first()
                 uploader_name = uploader.username if uploader else "未知用户"
 
@@ -370,7 +376,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:
@@ -464,11 +470,10 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
     # 调用模型
     def status_model(self, data_path):  # 需要修改 暂未修改 todo
-        if os.path.exists('../state/status.txt'):  # 状态评估中，模型正在使用
-            file = open('../state/status.txt', mode='r')
-            contents = file.readlines()
+        if os.path.exists(MODEL_STATUS_FILE):  # 使用配置的路径
+            with open(MODEL_STATUS_FILE, mode='r') as file:
+                contents = file.readlines()
             print(contents)
-            file.close()
             # 获取当前时间
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
             begin_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")
@@ -482,7 +487,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             if finish_box.clickedButton() == qyes:
 
                 self.status_label.setText("模型空闲")
-                os.remove('../state/status.txt')
+                os.remove(MODEL_STATUS_FILE)
                 pass
 
         else:
@@ -495,8 +500,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             # 生成status.txt文件
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
             # print(data_time)
-            desktop_path = '../state/'  # 新创建的txt文件的存放路径
-            full_path = desktop_path + 'status.txt'  # 也可以创建一个.doc的word文档
+            full_path = USER_STATUS_FILE  # 也可以创建一个.doc的word文档
             file = open(full_path, 'w')
             file.write(str(data_time))
             file.close()
@@ -525,7 +529,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             self.lock.release()
 
     def waitTestRes(self, num):
-        with open('../state/status.txt', mode='r', encoding='utf-8') as f:
+        with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         
@@ -533,34 +537,97 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         probability_score = float(num) * 100  # 将num*100改为num*95，使得最大值为95
         probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
-        self.result_list.append(probability_score)  # 存储转换后的分数
+        # 获取数据文件所在目录
+        data_dir = os.path.dirname(self.data_path)
+        
+        score_lb_1 = 0
+        score_lb_2 = 0
+        score_xq = 0
+
+        try:
+            # 检查并处理量表数据
+            lb_path = os.path.join(data_dir, 'lb.csv')
+            if os.path.exists(lb_path):
+                import pandas as pd
+                df = pd.read_csv(lb_path)
+                if len(df) >= 1:  # 确保有数据行
+                    # 计算前20列总和
+                    first_20_sum = df.iloc[0, :20].sum()
+                    score_lb_1 = (first_20_sum - 48) / 80 * 3
+                    
+                    # 计算后20列总和
+                    last_20_sum = df.iloc[0, 20:40].sum()
+                    score_lb_2 = (last_20_sum - 53) / 80 * 3
+                    
+                    logging.info(f"量表数据处理完成: score_lb_1={score_lb_1}, score_lb_2={score_lb_2}")
+
+            # 检查并处理血清学数据
+            xq_path = os.path.join(data_dir, 'xq.csv')
+            if os.path.exists(xq_path):
+                import pandas as pd
+                df = pd.read_csv(xq_path)
+                if len(df) >= 1:  # 确保有数据行
+                    # 处理所有列的数据
+                    def clean_value(val):
+                        if isinstance(val, str):
+                            val = val.replace('<', '').replace('>', '').replace('≤', '').replace('≥', '')
+                        try:
+                            return float(val)
+                        except:
+                            return 0
+
+                    # 应用清理函数并求和
+                    xq_sum = sum(clean_value(val) for val in df.iloc[0])
+                    score_xq = xq_sum / 5000
+                    logging.info(f"血清学数据处理完成: score_xq={score_xq}")
+
+        except Exception as e:
+            logging.error(f"处理多模态数据时发生错误: {str(e)}")
+            # 发生错误时保持原始分数不变
+            score_lb_1 = 0
+            score_lb_2 = 0
+            score_xq = 0
+
+        # 根据不同类型计算最终分数
+        final_score = probability_score
+        if len(self.result_list) == 0:  # 普通应激
+            final_score = probability_score + score_xq
+        elif len(self.result_list) == 1:  # 抑郁
+            final_score = probability_score + score_lb_1
+        elif len(self.result_list) == 2:  # 焦虑
+            final_score = probability_score + score_lb_2
+        
+        # 确保最终分数不超过100，并转换为整数
+        final_score = int(min(95, max(0, final_score)))
+        
+        self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
 
-        # 更新对应类型的标签显示分数(不带百分号)
+        # 更新对应类型的标签显示分数
         if self.completed_models == 1:
-            self.ordinarystress_label.setText(f"普通应激 ({probability_score:.1f})")
-            if num > 0.5:  # 如果num>0.5，设置红色LED
+            self.ordinarystress_label.setText(f"普通应激 ({final_score:.1f})")
+            if final_score > 50:  # 如果分数>50，设置红色LED
                 self.ordinarystress_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
         elif self.completed_models == 2:
-            self.depression_label.setText(f"抑郁 ({probability_score:.1f})")
-            if num > 0.5:  # 如果num>0.5，设置红色LED
+            self.depression_label.setText(f"抑郁 ({final_score:.1f})")
+            if final_score > 50:
                 self.depression_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
         elif self.completed_models == 3:
-            self.anxiety_label.setText(f"焦虑 ({probability_score:.1f})")
-            if num > 0.5:  # 如果num>0.5，设置红色LED
+            self.anxiety_label.setText(f"焦虑 ({final_score:.1f})")
+            if final_score > 50:
                 self.anxiety_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
-            os.remove('../state/status.txt')  # 删除status.txt文件
+            os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
             finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
             finish_box.exec_()

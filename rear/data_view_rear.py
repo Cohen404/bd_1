@@ -28,10 +28,18 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from sqlalchemy import func
 # 导入绘图部分
-import data_out
-import data_pretreatment
+import rear.data_out as data_out
+import rear.data_pretreatment as data_pretreatment
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
+
+# 在文件开头添加导入
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE,
+    DATA_DIR
+)
 
 class UserFilter(logging.Filter):
     """
@@ -59,16 +67,14 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         self.id = 0
         self.data_path = ''
 
-        # 获取当前用户信息
+        # 从文件中读取当前用户ID
         try:
-            # 从current_user.txt获取用户ID
-            with open('../state/current_user.txt', 'r') as f:
+            with open(CURRENT_USER_FILE, 'r') as f:  # 使用配置的路径
                 self.user_id = f.read().strip()
             print(f"当前用户ID: {self.user_id}")
 
             # 从user_status.txt获取用户类型
-            path = '../state/user_status.txt'
-            user_type = operate_user.read(path)
+            user_type = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
             self.user_type = (user_type == '1')  # 1表示管理员
             print(f"用户类型: {'管理员' if self.user_type else '普通用户'}")
 
@@ -111,13 +117,13 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         ])
 
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,  # 使用配置的路径
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -254,18 +260,16 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         source_dir_name = os.path.basename(source_dir)
         
         # 构建目标目录路径
-        target_base_dir = '../data'
-        target_dir = os.path.join(target_base_dir, source_dir_name)
-        
-        # 如果目标目录已存在，则添加后缀
+        target_dir = os.path.join(DATA_DIR, source_dir_name)
+          # 使用配置的路径
+         # 如果目标目录已存在，则添加后缀
         suffix = 1
         while os.path.exists(target_dir):
             new_name = f"{source_dir_name}_{suffix}"
-            target_dir = os.path.join(target_base_dir, new_name)
+            target_dir = os.path.join(DATA_DIR, new_name)
             suffix += 1
-        
         # 确保目标基础目录存在
-        os.makedirs(target_base_dir, exist_ok=True)
+        os.makedirs(DATA_DIR, exist_ok=True)  # 使用配置的路径
         
         # 复制文件夹
         try:
@@ -563,8 +567,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
-        user_status = operate_user.read(path)
+        user_status = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
         
         try:
             # 创建新窗口前先保存引用
@@ -590,7 +593,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         获取当前用户信息
         """
         try:
-            with open('../state/current_user.txt', 'r') as f:
+            with open(CURRENT_USER_FILE, 'r') as f:
                 username = f.read().strip()
             
             session = SessionClass()
@@ -677,19 +680,18 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                 source_dir = os.path.join(parent_dir, subdir)
                 try:
                     # 构建目标目录路径
-                    target_base_dir = '../data'
-                    target_dir = os.path.join(target_base_dir, subdir)
+                    target_dir = os.path.join(DATA_DIR, subdir)  # 使用配置的路径
                     
                     # 如果目标目录已存在，则添加后缀
                     suffix = 1
                     original_name = subdir
                     while os.path.exists(target_dir):
                         new_name = f"{original_name}_{suffix}"
-                        target_dir = os.path.join(target_base_dir, new_name)
+                        target_dir = os.path.join(DATA_DIR, new_name)  # 使用配置的路径
                         suffix += 1
                     
                     # 确保目标基础目录存在
-                    os.makedirs(target_base_dir, exist_ok=True)
+                    os.makedirs(DATA_DIR, exist_ok=True)  # 使用配置的路径
                     
                     # 复制目录
                     shutil.copytree(source_dir, target_dir)

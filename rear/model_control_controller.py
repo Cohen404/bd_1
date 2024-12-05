@@ -20,6 +20,13 @@ from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
 from sql_model.tb_user import User
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
 
 class UserFilter(logging.Filter):
     """

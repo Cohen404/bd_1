@@ -15,6 +15,7 @@ import front.init_login as front_page
 from rear import login_rear
 import logging
 from util.window_manager import WindowManager
+from config import USER_STATUS_FILE, LOG_FILE
 
 class UserFilter(logging.Filter):
     """
@@ -44,14 +45,13 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         # 连接用户登录按钮到对应的槽函数
         self.user_login_Button.clicked.connect(self.open_user_login)  # 用户登录
         
-        # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
+        # 使用配置文件中的路径
+        user = operate_user.read(USER_STATUS_FILE)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
-        # 配置 logging 模块
+        # 配置 logging 模块，使用配置文件中的路径
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )

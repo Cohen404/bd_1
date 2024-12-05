@@ -373,3 +373,50 @@ sql初始化时插入的密码也进行sha256加密
 
 
 数据上传（不是批量上传）功能是否能够开放一个http的post接口服务，让外部服务可以通过接口上传数据？外部服务上传一个zip文件（二进制文件），参数还有用户id(user_id)，然后系统下载到tmp目录中，解压缩后放到data目录中，接下来的流程就和上传一样了，如果有重名的就加后缀重命名。然后在数据库里记录一下。
+
+
+
+
+
+
+
+在health_evaluate_rear中，在533-534行
+        probability_score = float(num) * 100  # 将num*100改为num*95，使得最大值为95
+        probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
+后，得到了数据之后我希望有多模态数据融合处理的逻辑，对分数进行改动
+首先，检查是否有量表数据存在(lb.csv)，如果有的话使用pandas读取lb.csv(第一行为title，第二行为数据，逗号分隔）
+把前20列的数据加在一起得到数值x, 得到分数1 score_lb_1=(x-48)/80*3
+把后20列的数据加在一起得到数值x, 得到分数2 score_lb_2=(x-53)/80*3
+
+然后检查是否有血清学数据（xq.csv），如果有的话使用pandas读取xq.csv(第一行为title，第二行为数据，逗号分隔）
+把所有列的值（去除"<",">","≤","≥"，转float）求和，结果/5000得到分数3（score_xq）
+
+针对普通应激分数，最终分数为probability_score+score_xq
+针对抑郁分数，最终分数为probability_score+score_lb_1
+针对焦虑分数，最终分数为probability_score+score_lb_2
+
+
+
+
+
+在根目录新建一个python文件，能够代替
+cd rear
+python init_login.py
+
+
+
+
+
+点击应激评估，针对数据如果找不到，或者格式错误的时候会提示：
+['2024-12-04 16:15:06']
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\model\tuili.py", line 113, in run
+    result = self.predict()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\model\tuili.py", line 102, in predict
+    X_test = self.get_data()
+  File "D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\rear\..\model\tuili.py", line 80, in get_data
+    data = exp_data[-(num_of_data)::, ::, ::]
+UnboundLocalError: local variable 'exp_data' referenced before assignment
+
+
+

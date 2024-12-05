@@ -17,6 +17,15 @@ from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
 
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
+
+
 class UserFilter(logging.Filter):
     """
     自定义日志过滤器，用于添加用户类型信息到日志记录中
@@ -46,13 +55,13 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
 
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -72,7 +81,7 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         """
         try:
             # Read the last 100 lines of the log file
-            file_path = '../log/log.txt'
+            file_path = LOG_FILE
             if os.path.exists(file_path):
                 with open(file_path, 'r', encoding='utf-8', errors='ignore') as log_file:
                     lines = log_file.readlines()
@@ -91,7 +100,7 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:

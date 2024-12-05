@@ -27,6 +27,14 @@ from sql_model.tb_user import User
 from util.db_util import SessionClass
 from util.window_manager import WindowManager
 
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
+
 def hash_password(password):
     """使用SHA256加密密码"""
     return hashlib.sha256(password.encode()).hexdigest()
@@ -63,12 +71,12 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         self.addButton.clicked.connect(self.add_user)  # 添加用户
 
         # 设置日志
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)
         userType = "Regular user" if user == 0 else "Administrator"
         
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -311,7 +319,7 @@ class User_Manage_WindowActions(user_manage.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:

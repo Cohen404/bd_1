@@ -21,6 +21,13 @@ from sql_model.tb_parameters import Parameters
 from sql_model.tb_user import User
 
 import logging
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
 
 class UserFilter(logging.Filter):
     """
@@ -49,13 +56,13 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         self.return_btn.clicked.connect(self.returnIndex)
         self.save_button.clicked.connect(self.savetoDB)
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -70,7 +77,7 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:

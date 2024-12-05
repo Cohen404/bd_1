@@ -20,6 +20,7 @@ from rear import index_rear
 import logging
 from util.window_manager import WindowManager
 import hashlib
+from config import USER_STATUS_FILE, CURRENT_USER_FILE, LOG_FILE
 
 def hash_password(password):
     """使用SHA256加密密码"""
@@ -61,13 +62,12 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         self.pwd_lineEdit.returnPressed.connect(self.handle_login)
 
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
+        user = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置日志
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,  # 使用配置的路径
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -99,11 +99,11 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
                 if user:
                     # 保存当前用户信息
-                    with open('../state/current_user.txt', 'w') as f:
+                    with open(CURRENT_USER_FILE, 'w') as f:  # 使用配置的路径
                         f.write(str(user.user_id))
 
                     # 保存用户类型
-                    with open('../state/user_status.txt', 'w') as f:
+                    with open(USER_STATUS_FILE, 'w') as f:  # 使用配置的路径
                         f.write('1' if user.user_type == 'admin' else '0')
 
                     # 更新最后登录时间

@@ -20,6 +20,15 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
 
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
+
+
 class UserFilter(logging.Filter):
     """
     自定义日志过滤器，用于添加用户类型信息到日志记录中
@@ -47,7 +56,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         # 创建界面
         self.setupUi(self)
         # 打开首页将用户状态修改为0（普通用户）,确保首次打开系统为普通用户身份
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)
         if user == '1':
             operate_user.ordinary_user(path)
@@ -61,13 +70,13 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         self.admin_login_Button.clicked.connect(self.open_admin_login)  # 管理员页面
 
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)  # 0表示普通用户，1表示管理员
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置 logging 模块
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )

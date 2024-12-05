@@ -31,6 +31,14 @@ from util.db_util import SessionClass
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
 
+from config import (
+    USER_STATUS_FILE, 
+    CURRENT_USER_FILE, 
+    LOG_FILE, 
+    MODEL_STATUS_FILE,
+    DATA_DIR
+)
+
 # import admin_rear
 class UserFilter(logging.Filter):
     """
@@ -112,13 +120,13 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         self.show_table()
 
         # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user = operate_user.read(path)
         userType = "Regular user" if user == 0 else "Administrator"
 
         # 配置日志
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -156,13 +164,13 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         try:
             # 检查文件是否存在
             import os
-            if not os.path.exists('../state/current_user.txt'):
+            if not os.path.exists(CURRENT_USER_FILE):
                 logging.error("Current user file not found")
                 QMessageBox.warning(self, "错误", "未找到当前用户信息文件")
                 return None, False
 
             # 读取用户ID
-            with open('../state/current_user.txt', 'r') as f:
+            with open(CURRENT_USER_FILE, 'r') as f:
                 user_id = f.read().strip()
             print(f"从current_user.txt读取到用户ID: {user_id}")
 
@@ -172,7 +180,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 return None, False
             
             # 读取用户类型
-            path = '../state/user_status.txt'
+            path = USER_STATUS_FILE
             user_type = operate_user.read(path)
             print(f"从user_status.txt读取到用户类型: {user_type}")
             is_admin = (user_type == '1')
@@ -447,7 +455,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:

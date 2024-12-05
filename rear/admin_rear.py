@@ -28,6 +28,7 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
+from config import USER_STATUS_FILE, LOG_FILE
 
 class UserFilter(logging.Filter):
     """
@@ -69,14 +70,13 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         self.change_pwd_Button.clicked.connect(self.open_change_pwd_view)
         self.log_manage_pushButton.clicked.connect(self.open_log_manage_view)
 
-        # 从文件中读取用户类型并设置userType
-        path = '../state/user_status.txt'
-        user = operate_user.read(path)  # 0表示普通用户，1表示管理员
+        # 使用配置文件中的路径
+        user = operate_user.read(USER_STATUS_FILE)
         userType = "Regular user" if user == 0 else "Administrator"
 
-        # 配置 logging 模块
+        # 配置 logging 模块，使用配置文件中的路径
         logging.basicConfig(
-            filename='../log/log.txt',
+            filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
@@ -101,10 +101,9 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         返回首页
         """
-        path = '../state/user_status.txt'
-        operate_user.ordinary_user(path)  # 将flag改为0，退出管理员操作
+        operate_user.ordinary_user(USER_STATUS_FILE)  # 使用配置文件中的路径
         logging.info("Switched to regular user mode. Login page is being opened.")
-        self.login=login_rear.Login_WindowActions()
+        self.login = login_rear.Login_WindowActions()
         self.close()
         self.login.show()
 

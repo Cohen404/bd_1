@@ -16,3 +16,18 @@
 2024-12-04 13:43:40,598 - INFO - 127.0.0.1 - - [04/Dec/2024 13:43:40] "[31m[1mPOST /api/upload HTTP/1.1[0m" 400 -
 2024-12-04 13:43:42,647 - INFO - 127.0.0.1 - - [04/Dec/2024 13:43:42] "[31m[1mPOST /api/upload HTTP/1.1[0m" 400 -
 2024-12-04 13:43:44,702 - INFO - 127.0.0.1 - - [04/Dec/2024 13:43:44] "[33mPOST /api/upload HTTP/1.1[0m" 404 -
+2024-12-04 13:50:28,740 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.157:5000
+2024-12-04 13:50:28,740 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-04 13:50:36,841 - INFO - 127.0.0.1 - - [04/Dec/2024 13:50:36] "[31m[1mPOST /api/upload HTTP/1.1[0m" 400 -
+2024-12-04 13:50:38,882 - INFO - 127.0.0.1 - - [04/Dec/2024 13:50:38] "[31m[1mPOST /api/upload HTTP/1.1[0m" 400 -
+2024-12-04 13:50:40,938 - INFO - 127.0.0.1 - - [04/Dec/2024 13:50:40] "[31m[1mPOST /api/upload HTTP/1.1[0m" 400 -
+2024-12-04 13:50:42,997 - INFO - Data uploaded successfully via API. Path: ../data\test_data, User: admin
+2024-12-04 13:50:42,999 - INFO - 127.0.0.1 - - [04/Dec/2024 13:50:42] "POST /api/upload HTTP/1.1" 200 -
+2024-12-04 16:13:33,150 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.3.157:5000
+2024-12-04 16:13:33,150 - INFO - [33mPress CTRL+C to quit[0m

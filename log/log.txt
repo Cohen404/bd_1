@@ -5410,3 +5410,112 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-04 13:41:01,479 - INFO - Administrator - Data table refreshed successfully with 0 records
 2024-12-04 13:41:01,486 - INFO - Administrator - Opening data view page.
 2024-12-04 13:41:03,156 - INFO - Administrator - Returned to index page successfully
+2024-12-04 16:14:47,002 - INFO - Administrator - Opening user login page.
+2024-12-04 16:14:51,007 - INFO - Administrator - User admin logged in successfully
+2024-12-04 16:14:52,207 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-04 16:14:52,218 - INFO - Administrator - Opening data view page.
+2024-12-04 16:14:55,410 - INFO - Administrator - Returned to index page successfully
+2024-12-04 16:14:55,889 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-04 16:14:59,757 - INFO - Administrator - User admin logged in successfully
+2024-12-04 16:15:01,123 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-04 16:15:01,125 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-04 16:15:01,131 - INFO - Administrator - Opening health evaluation page.
+2024-12-04 23:22:16,488 - INFO - Administrator - Opening user login page.
+2024-12-04 23:22:19,581 - INFO - Administrator - User admin logged in successfully
+2024-12-04 23:22:22,647 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-04 23:22:22,653 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-04 23:22:22,664 - INFO - Administrator - Opening health evaluation page.
+2024-12-04 23:23:22,584 - INFO - Administrator - Opening user login page.
+2024-12-04 23:23:28,325 - INFO - Administrator - User admin logged in successfully
+2024-12-04 23:23:29,504 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-04 23:23:29,514 - INFO - Administrator - Opening data view page.
+2024-12-04 23:23:38,140 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to ../data\000005_ord2
+2024-12-04 23:23:38,151 - INFO - Administrator - Data uploaded successfully. Path: ../data\000005_ord2, Username: admin
+2024-12-04 23:23:39,001 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-04 23:23:41,647 - INFO - Administrator - Returned to index page successfully
+2024-12-04 23:23:42,303 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-04 23:23:42,307 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-04 23:23:42,313 - INFO - Administrator - Opening health evaluation page.
+2024-12-04 23:24:14,674 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-04 23:24:14,674 - INFO - Administrator - Depression LED set to RED
+2024-12-04 23:24:14,674 - INFO - Administrator - Anxiety LED set to RED
+2024-12-04 23:24:43,817 - INFO - Administrator - Opening user login page.
+2024-12-04 23:24:48,512 - INFO - Administrator - User admin logged in successfully
+2024-12-04 23:24:49,681 - INFO - Administrator - Opening model control page.
+2024-12-04 23:24:52,075 - INFO - Administrator - Returned to admin page successfully
+2024-12-04 23:24:52,520 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-04 23:24:52,521 - INFO - Administrator - Depression LED set to RED
+2024-12-04 23:24:52,521 - INFO - Administrator - Anxiety LED set to RED
+2024-12-04 23:24:52,524 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-04 23:24:52,529 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-04 23:24:52,538 - INFO - Administrator - Opening health evaluation page.
+2024-12-04 23:25:30,503 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-04 23:25:30,503 - INFO - Administrator - Depression LED set to RED
+2024-12-04 23:25:30,504 - INFO - Administrator - Anxiety LED set to RED
+2024-12-04 23:25:31,563 - INFO - Administrator - Returned to index page successfully
+2024-12-04 23:26:37,675 - INFO - Administrator - Opening user login page.
+2024-12-04 23:26:40,939 - INFO - Administrator - User admin logged in successfully
+2024-12-04 23:26:51,545 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-04 23:26:51,545 - INFO - Administrator - Depression LED set to RED
+2024-12-04 23:26:51,545 - INFO - Administrator - Anxiety LED set to RED
+2024-12-04 23:26:51,548 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-04 23:26:51,554 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-04 23:26:51,564 - INFO - Administrator - Opening health evaluation page.
+2024-12-04 23:27:21,600 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-04 23:27:21,600 - INFO - Administrator - Depression LED set to RED
+2024-12-04 23:27:21,601 - INFO - Administrator - Anxiety LED set to RED
+2024-12-04 23:32:33,955 - INFO - Administrator - Opening user login page.
+2024-12-04 23:32:36,999 - ERROR - Administrator - Login error: [Errno 2] No such file or directory: '../state/current_user.txt'
+2024-12-05 11:55:02,652 - INFO - Administrator - Opening user login page.
+2024-12-05 11:55:06,969 - INFO - Administrator - User admin logged in successfully
+2024-12-05 11:55:09,918 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-05 11:55:13,889 - INFO - Administrator - User admin logged in successfully
+2024-12-05 11:55:15,568 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-05 11:55:15,593 - INFO - Administrator - Opening data view page.
+2024-12-05 11:55:17,056 - INFO - Administrator - Returned to index page successfully
+2024-12-05 11:55:17,937 - INFO - Administrator - Opening model control page.
+2024-12-05 11:55:19,072 - INFO - Administrator - Returned to admin page successfully
+2024-12-05 11:55:19,896 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 11:55:19,896 - INFO - Administrator - Depression LED set to RED
+2024-12-05 11:55:19,896 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 11:55:19,898 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 11:55:19,907 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-05 11:55:19,929 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 11:55:20,798 - INFO - Administrator - Returned to index page successfully
+2024-12-05 11:55:21,344 - ERROR - Administrator - User not found for ID: 1
+2024-12-05 11:55:23,745 - INFO - Administrator - Opening results view page.
+2024-12-05 11:55:25,122 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:13:10,434 - INFO - Administrator - Opening user login page.
+2024-12-05 19:13:13,377 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:13:14,624 - INFO - Administrator - Opening user management page.
+2024-12-05 19:13:15,374 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:13:16,551 - INFO - Administrator - Opening parameter control page.
+2024-12-05 19:13:17,456 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:13:18,288 - ERROR - Administrator - An error occurred while reading the log file: name 'LOG_FILE' is not defined
+2024-12-05 19:14:38,335 - INFO - Administrator - Opening user login page.
+2024-12-05 19:14:43,551 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:14:51,112 - INFO - Administrator - Opening log management page.
+2024-12-05 19:14:52,337 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:14:53,000 - INFO - Administrator - Opening password change page.
+2024-12-05 19:14:54,238 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:14:55,047 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-05 19:14:55,058 - INFO - Administrator - Opening data view page.
+2024-12-05 19:14:56,641 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:14:57,125 - ERROR - Administrator - User not found for ID: 1
+2024-12-05 19:14:59,461 - INFO - Administrator - Opening results view page.
+2024-12-05 19:15:47,338 - INFO - Administrator - Opening user login page.
+2024-12-05 19:15:50,479 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:15:51,517 - INFO - Administrator - Opening results view page.
+2024-12-05 19:15:52,701 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:15:53,671 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-05 19:15:53,679 - INFO - Administrator - Opening data view page.
+2024-12-05 19:15:57,903 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:15:58,817 - INFO - Administrator - Opening model control page.
+2024-12-05 19:16:00,259 - INFO - Administrator - Returned to admin page successfully
+2024-12-05 19:16:00,771 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 19:16:00,773 - INFO - Administrator - Depression LED set to RED
+2024-12-05 19:16:00,773 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 19:16:00,774 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 19:16:00,778 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-05 19:16:00,785 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 19:16:02,291 - INFO - Administrator - Returned to index page successfully

@@ -15,6 +15,7 @@ from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
 import hashlib
+from config import USER_STATUS_FILE, CURRENT_USER_FILE, LOG_FILE
 
 def hash_password(password):
     """使用SHA256加密密码"""
@@ -183,7 +184,7 @@ class change_pwd_Controller(QWidget):
         session = SessionClass()
         try:
             # 从文件中读取当前用户ID
-            with open('../state/current_user.txt', 'r') as f:
+            with open(CURRENT_USER_FILE, 'r') as f:  # 使用配置的路径
                 current_user_id = f.read().strip()
 
             # 验证旧密码（使用加密后的密码进行验证）
@@ -218,13 +219,12 @@ class change_pwd_Controller(QWidget):
         finally:
             session.close()
 
-    # btn_return返回首页
     def returnIndex(self):
         """
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        path = '../state/user_status.txt'
+        path = USER_STATUS_FILE  # 使用配置的路径
         user_status = operate_user.read(path)
         
         try:
@@ -245,7 +245,6 @@ class change_pwd_Controller(QWidget):
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
-
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
