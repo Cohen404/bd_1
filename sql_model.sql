@@ -89,9 +89,9 @@ CREATE TABLE `tb_model` (
 -- Records of tb_model
 -- ----------------------------
 INSERT INTO `tb_model` (`id`, `model_type`, `model_path`, `create_time`) VALUES 
-(1, 0, '../model/yingji/subject-1 yingji.keras', '2024-09-14 13:20:32'),
-(2, 1, '../model/yiyu/subject-1 yiyu.keras', '2024-09-14 13:20:41'),
-(3, 2, '../model/jiaolv/subject-1jiaolv.keras', '2024-09-14 13:20:47');
+(1, 0, './model/yingji/subject-1 yingji.keras', '2024-09-14 13:20:32'),
+(2, 1, './model/yiyu/subject-1 yiyu.keras', '2024-09-14 13:20:41'),
+(3, 2, './model/jiaolv/subject-1jiaolv.keras', '2024-09-14 13:20:47');
 
 -- ----------------------------
 -- Table structure for tb_parameters

@@ -21,7 +21,7 @@ import front.health_evaluate as health_evaluate
 # 导入跳转页面的后端部分
 import rear.index_rear
 
-from rear import admin_rear, param_control, model_control_controller
+from rear import admin_rear, param_control, model_control_controller, index_rear
 
 from sql_model.tb_data import Data
 from sql_model.tb_result import Result

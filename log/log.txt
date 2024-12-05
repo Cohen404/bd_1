@@ -5546,3 +5546,69 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-05 19:33:40,394 - INFO - Administrator - Opening user login page.
 2024-12-05 19:33:46,004 - INFO - Administrator - User admin logged in successfully
 2024-12-05 19:33:46,929 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-05 19:41:39,376 - INFO - Administrator - Opening user login page.
+2024-12-05 19:41:43,622 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:41:52,045 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 19:41:52,045 - INFO - Administrator - Depression LED set to RED
+2024-12-05 19:41:52,045 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 19:41:52,052 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 19:41:52,061 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-05 19:41:52,067 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 19:41:57,044 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:41:58,208 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-05 19:41:58,215 - INFO - Administrator - Opening data view page.
+2024-12-05 19:43:02,502 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2024-12-05 19:43:02,505 - INFO - Administrator - Data path for ID 1: ../data\test_data
+2024-12-05 19:43:02,506 - WARNING - Administrator - Data path does not exist: ../data\test_data
+2024-12-05 19:43:02,525 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2024-12-05 19:43:02,528 - INFO - Administrator - Deleted record with ID 1 from result table.
+2024-12-05 19:43:02,530 - INFO - Administrator - Removed row 0 from table.
+2024-12-05 19:43:02,919 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2024-12-05 19:43:02,922 - INFO - Administrator - Data path for ID 2: ../data\000005_ord2
+2024-12-05 19:43:02,922 - WARNING - Administrator - Data path does not exist: ../data\000005_ord2
+2024-12-05 19:43:02,925 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2024-12-05 19:43:02,927 - INFO - Administrator - Deleted record with ID 2 from result table.
+2024-12-05 19:43:02,928 - INFO - Administrator - Removed row 0 from table.
+2024-12-05 19:43:58,893 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-05 19:43:58,911 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2, Username: admin
+2024-12-05 19:44:00,274 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-05 19:44:01,566 - INFO - Administrator - Started processing data from: 000005_ord2
+2024-12-05 19:46:12,063 - INFO - Administrator - Opening user login page.
+2024-12-05 19:46:15,242 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:46:19,529 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-05 19:46:19,539 - INFO - Administrator - Opening data view page.
+2024-12-05 19:46:20,676 - INFO - Administrator - Started processing data from: 000005_ord2
+2024-12-05 19:47:43,856 - INFO - Administrator - Opening user login page.
+2024-12-05 19:47:46,595 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:47:49,157 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-05 19:47:49,165 - INFO - Administrator - Opening data view page.
+2024-12-05 19:47:50,766 - INFO - Administrator - Started processing data from: 000005_ord2
+2024-12-05 19:48:22,202 - INFO - Administrator - Opening user login page.
+2024-12-05 19:48:25,344 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:48:26,466 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 19:48:26,469 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 19:48:26,476 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 19:48:27,609 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:48:28,092 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-05 19:48:28,100 - INFO - Administrator - Opening data view page.
+2024-12-05 19:48:29,087 - INFO - Administrator - Returned to index page successfully
+2024-12-05 20:11:12,003 - INFO - Administrator - Opening user login page.
+2024-12-05 20:11:15,017 - INFO - Administrator - User admin logged in successfully
+2024-12-05 20:11:16,102 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-05 20:11:16,109 - INFO - Administrator - Opening data view page.
+2024-12-05 20:11:17,813 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-05 20:11:23,423 - INFO - Administrator - Data processing completed successfully
+2024-12-05 20:11:28,811 - INFO - Administrator - Returned to index page successfully
+2024-12-05 20:11:29,444 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 20:11:29,448 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 20:11:29,452 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 20:11:34,762 - INFO - Administrator - Opening model control view.
+2024-12-05 20:11:34,875 - INFO - Administrator - Model control view opened successfully.
+2024-12-05 20:11:35,634 - INFO - Administrator - Returned to admin page successfully
+2024-12-05 20:12:42,278 - INFO - Administrator - Opening user login page.
+2024-12-05 20:12:45,551 - INFO - Administrator - User admin logged in successfully
+2024-12-05 20:13:14,228 - INFO - Administrator - Opening model control page.
+2024-12-05 20:13:15,350 - INFO - Administrator - Returned to admin page successfully
+2024-12-05 20:13:15,837 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 20:13:15,839 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 20:13:15,846 - INFO - Administrator - Opening health evaluation page.

@@ -377,7 +377,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         为每一行创建操作按钮
         
         返回:
-        QtWidgets.QWidget: 包含查看和删除按钮的小部件
+        QtWidgets.QWidget: 包含查看和删除按钮的小部���
         """
         widget = QtWidgets.QWidget()
         # 查看
@@ -615,9 +615,18 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         button = self.sender()
         if button:
             row = self.tableWidget.indexAt(button.parent().pos()).row()
-            data_path = self.tableWidget.item(row, 3).text()  # 获取数据路径
-
+            data_id = self.tableWidget.item(row, 0).text()  # 获取数据ID
+            
             try:
+                # 从数据库获取完整路径
+                session = SessionClass()
+                data = session.query(Data).filter(Data.id == data_id).first()
+                
+                if not data:
+                    raise Exception(f"未找到ID为{data_id}的数据记录")
+                    
+                data_path = data.data_path  # 从数据库获取完整路径
+                
                 # 创建进度条对话框
                 progress_dialog = QProgressDialog("正在处理数据...", "取消", 0, 100, self)
                 progress_dialog.setWindowTitle("处理中")
@@ -641,8 +650,10 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                 logging.info(f"Started processing data from: {data_path}")
 
             except Exception as e:
-                logging.error(f"Error setting up processing: {str(e)}")
-                QMessageBox.critical(self, "错误", f"设置处理任务时出错：{str(e)}")
+                logging.error(f"Error in preprocessbutton: {str(e)}")
+                QMessageBox.critical(self, "错误", f"预处理任务设置失败：{str(e)}")
+            finally:
+                session.close()
 
     # 添加处理完成的回调函数
     def processing_completed(self):
@@ -702,7 +713,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
                     try:
                         user = session.query(User).filter(User.user_id == self.user_id).first()
                         if not user:
-                            raise Exception("无法获取当前用户信息")
+                            raise Exception("无法获取当前用户��息")
 
                         # 从数据库中取最大的id
                         max_id = session.query(func.max(Data.id)).scalar()
@@ -779,6 +790,7 @@ class ProcessingThread(QThread):
     def run(self):
         # 数据预处理 - 30%进度
         self.progress.emit(10)
+        print(self.data_path)
         data_pretreatment.treat(self.data_path)
         self.progress.emit(30)
 
