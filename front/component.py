@@ -22,10 +22,24 @@ def create_header(title):
     # 创建一个网格布局，用来放置返回按钮和标题
     header_layout = QGridLayout()
 
-    btn_return = QPushButton()  # 返回按钮
-    btn_return.setFixedWidth(55)
+    btn_return = QPushButton("返回")  # 修改返回按钮，添加文字
+    btn_return.setFixedWidth(100)  # 调整宽度以适应文字
     btn_return.setFixedHeight(58)
-    btn_return.setStyleSheet("QPushButton{border-image: url(./../img/return.png)}")
+    # 修改返回按钮样式
+    btn_return.setStyleSheet("""
+        QPushButton {
+            color: white;
+            background-color: #4379b9;
+            border: 2px;
+            border-radius: 10px;
+            padding: 2px 4px;
+            font-size: 20px;
+        }
+        QPushButton:hover {
+            background-color: #94b2da;
+        }
+    """)
+    btn_return.setFont(font)  # 使用相同的字体
 
     name = QLabel()  # 文本框，放title
     name.setText(title)

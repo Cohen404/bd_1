@@ -5519,3 +5519,30 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-05 19:16:00,778 - INFO - Administrator - Successfully displayed 2 data records
 2024-12-05 19:16:00,785 - INFO - Administrator - Opening health evaluation page.
 2024-12-05 19:16:02,291 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:17,497 - INFO - Administrator - Opening user login page.
+2024-12-05 19:32:20,545 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:32:22,912 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 19:32:22,913 - INFO - Administrator - Depression LED set to RED
+2024-12-05 19:32:22,913 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 19:32:22,916 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 19:32:22,922 - INFO - Administrator - Successfully displayed 2 data records
+2024-12-05 19:32:22,928 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 19:32:24,021 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:24,765 - INFO - Administrator - Opening results view page.
+2024-12-05 19:32:25,449 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:25,958 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-05 19:32:25,966 - INFO - Administrator - Opening data view page.
+2024-12-05 19:32:26,798 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:27,432 - INFO - Administrator - Opening model control page.
+2024-12-05 19:32:28,072 - INFO - Administrator - Returned to admin page successfully
+2024-12-05 19:32:28,687 - INFO - Administrator - Opening user management page.
+2024-12-05 19:32:29,321 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:29,975 - INFO - Administrator - Opening parameter control page.
+2024-12-05 19:32:30,656 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:31,350 - INFO - Administrator - Opening log management page.
+2024-12-05 19:32:32,141 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:32:32,802 - INFO - Administrator - Opening password change page.
+2024-12-05 19:32:34,480 - INFO - Administrator - Returned to index page successfully
+2024-12-05 19:33:40,394 - INFO - Administrator - Opening user login page.
+2024-12-05 19:33:46,004 - INFO - Administrator - User admin logged in successfully
+2024-12-05 19:33:46,929 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
