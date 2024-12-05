@@ -5630,3 +5630,30 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-05 20:39:34,982 - INFO - Administrator - Ordinary stress LED set to RED
 2024-12-05 20:39:34,982 - INFO - Administrator - Depression LED set to RED
 2024-12-05 20:39:34,983 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 20:42:03,558 - INFO - Administrator - User admin logged in successfully
+2024-12-05 20:42:04,614 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 20:42:04,615 - INFO - Administrator - Depression LED set to RED
+2024-12-05 20:42:04,615 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 20:42:04,622 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 20:42:04,630 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 20:42:04,638 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 20:44:37,725 - INFO - Administrator - User admin logged in successfully
+2024-12-05 20:44:38,937 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 20:44:38,937 - INFO - Administrator - Depression LED set to RED
+2024-12-05 20:44:38,938 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 20:44:38,942 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 20:44:38,950 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 20:44:38,956 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 20:53:58,471 - INFO - Administrator - User admin logged in successfully
+2024-12-05 20:54:00,001 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-05 20:54:00,001 - INFO - Administrator - Depression LED set to RED
+2024-12-05 20:54:00,001 - INFO - Administrator - Anxiety LED set to RED
+2024-12-05 20:54:00,008 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-05 20:54:00,014 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-05 20:54:00,021 - INFO - Administrator - Opening health evaluation page.
+2024-12-05 20:54:21,010 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-05 20:54:21,026 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-05 20:54:28,937 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-05 20:54:28,939 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-05 20:54:38,925 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-05 20:54:50,802 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894

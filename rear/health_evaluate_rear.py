@@ -538,7 +538,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
         # 获取数据文件所在目录
-        data_dir = os.path.dirname(self.data_path)
+        data_dir =self.data_path
         
         score_lb_1 = 0
         score_lb_2 = 0
