@@ -35,8 +35,13 @@ from config import (
     CURRENT_USER_FILE, 
     LOG_FILE, 
     MODEL_STATUS_FILE,
-    DATA_DIR
+    DATA_DIR,
+    TEMPLATE_DIR,
+    RESULTS_DIR,
+    TEMPLATE_FILE
 )
+from docx import Document
+from docx.shared import Inches
 
 class UserFilter(logging.Filter):
     """
@@ -73,7 +78,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 从文件中读取用户ID
         try:
             user_id = operate_user.read(CURRENT_USER_FILE)  # 使用配置的路径
-            print(f"Read user_status from file: {user_id}")  # 调试日志
+            print(f"Read user_status from file: {user_id}")  # 调���日志
             
             # 获取用户类型
             session = SessionClass()
@@ -189,7 +194,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         return int(user_id)
 
     def set_default_led_colors(self):
-        """设置所有LED为默认的灰色"""
+        """设置所有LED为默认的��色"""
         default_style = (
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; background: gray"
@@ -421,9 +426,19 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 评估状态功能
         self.evaluate_pushButton.clicked.connect(self.EvaluateButton)
 
+        # 添加生成报告按钮
+        self.report_pushButton = QtWidgets.QPushButton('生成报告')
+        self.report_pushButton.setStyleSheet("text-align : center;"
+                                            "background-color : LightBlue;"
+                                            "height : 30px;"
+                                            "border-style: outset;"
+                                            "font-size:13px")
+        self.report_pushButton.clicked.connect(self.generateReport)
+
         hLayout = QtWidgets.QHBoxLayout()
         hLayout.addWidget(self.check_pushButton)
         hLayout.addWidget(self.evaluate_pushButton)
+        hLayout.addWidget(self.report_pushButton)
         hLayout.setContentsMargins(5, 2, 5, 2)
         widget.setLayout(hLayout)
         return widget
@@ -747,6 +762,109 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.model_view.show()
 
         logging.info("Model control view opened successfully.")
+
+    # 添加生成报告的方法
+    def generateReport(self):
+        """生成评估报告"""
+        try:
+            button = self.sender()
+            if button:
+                row = self.tableWidget.indexAt(button.parent().pos()).row()
+                result_id = int(self.tableWidget.item(row, 0).text())
+                
+                session = SessionClass()
+                try:
+                    # 获取结果数据
+                    result = session.query(Result).filter(Result.id == result_id).first()
+                    if not result:
+                        QMessageBox.warning(self, "警告", "未找到评估结果，请先进行评估。")
+                        return
+
+                    # 获取数据记录
+                    data = session.query(Data).filter(Data.id == result_id).first()
+                    if not data:
+                        QMessageBox.warning(self, "警告", "未找到数据记录。")
+                        return
+
+                    # 获取用户信息
+                    user = session.query(User).filter(User.user_id == data.user_id).first()
+                    if not user:
+                        QMessageBox.warning(self, "警告", "未找到用户信息。")
+                        return
+
+                    # 读取模板文件
+                    template_path = TEMPLATE_FILE  # 使用绝对路径
+                    if not os.path.exists(template_path):
+                        QMessageBox.warning(self, "警告", "未找到报告模板文件。")
+                        return
+
+                    doc = Document(template_path)
+
+                    # 替换用户信息
+                    for paragraph in doc.paragraphs:
+                        text = paragraph.text
+                        text = text.replace('[user.username]', user.username)
+                        text = text.replace('[user.email]', user.email or '未填写')
+                        text = text.replace('[user.phone]', user.phone or '未填写')
+                        text = text.replace('[user.created_at]', str(user.created_at))
+                        
+                        # 替换评估结果
+                        text = text.replace('[normal_yingji.score]', str(result.result_1))
+                        text = text.replace('[normal_yingji.result]', 
+                                          "可能存在应激情况" if result.result_1 >= 50 else "低概率存在应激情况")
+                        
+                        text = text.replace('[depression.score]', str(result.result_2))
+                        text = text.replace('[depression.result]', 
+                                          "可能存在抑郁情况" if result.result_2 >= 50 else "低概率存在抑郁情况")
+                        
+                        text = text.replace('[stress.score]', str(result.result_3))
+                        text = text.replace('[stress.result]', 
+                                          "可能存在焦虑情况" if result.result_3 >= 50 else "低概率存在焦虑情况")
+                        
+                        paragraph.text = text
+
+                    # 添加图片
+                    data_path = data.data_path
+                    image_paths = {
+                        '[signals.eeg]': ['Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'],
+                        '[signals.blood]': ['xq.png'],
+                        '[signals.scale]': ['lb.png']
+                    }
+
+                    for placeholder, images in image_paths.items():
+                        for paragraph in doc.paragraphs:
+                            if placeholder in paragraph.text:
+                                paragraph.text = paragraph.text.replace(placeholder, '')
+                                for img_name in images:
+                                    img_path = os.path.join(data_path, img_name)
+                                    if os.path.exists(img_path):
+                                        try:
+                                            run = paragraph.add_run()
+                                            run.add_picture(img_path, width=Inches(6))
+                                        except Exception as img_error:
+                                            logging.error(f"Error adding image {img_path}: {str(img_error)}")
+                                            continue
+
+                    # 创建results目录（如果不存在）
+                    results_dir = RESULTS_DIR  # 使用绝对路径
+                    os.makedirs(results_dir, exist_ok=True)
+
+                    # 保存报告
+                    report_path = os.path.join(results_dir, f'report_{result_id}.docx')
+                    doc.save(report_path)
+
+                    QMessageBox.information(self, "成功", f"报告已生成，保存在：{report_path}")
+                    logging.info(f"Report generated successfully for result ID {result_id}")
+
+                except Exception as e:
+                    logging.error(f"Error generating report: {str(e)}")
+                    QMessageBox.critical(self, "错误", f"生成报告时发生错误：{str(e)}")
+                finally:
+                    session.close()
+
+        except Exception as e:
+            logging.error(f"Error in generateReport: {str(e)}")
+            QMessageBox.critical(self, "错误", f"生成报告过程中发生错误：{str(e)}")
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

@@ -5657,3 +5657,27 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-05 20:54:28,939 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
 2024-12-05 20:54:38,925 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
 2024-12-05 20:54:50,802 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-06 15:47:32,115 - INFO - Administrator - User admin logged in successfully
+2024-12-06 15:47:33,353 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 15:47:33,353 - INFO - Administrator - Depression LED set to RED
+2024-12-06 15:47:33,353 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 15:47:33,357 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 15:47:33,361 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 15:47:33,371 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 15:47:44,823 - INFO - Administrator - Returned to index page successfully
+2024-12-06 17:48:39,258 - INFO - Administrator - User admin logged in successfully
+2024-12-06 17:48:40,751 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 17:48:40,751 - INFO - Administrator - Depression LED set to RED
+2024-12-06 17:48:40,751 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 17:48:40,755 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 17:48:40,763 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 17:48:40,770 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 17:48:42,338 - ERROR - Administrator - Error generating report: name 'Inches' is not defined
+2024-12-06 17:50:14,498 - INFO - Administrator - User admin logged in successfully
+2024-12-06 17:50:16,145 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 17:50:16,146 - INFO - Administrator - Depression LED set to RED
+2024-12-06 17:50:16,146 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 17:50:16,160 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 17:50:16,200 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 17:50:16,210 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 17:50:17,631 - ERROR - Administrator - Error generating report: name 'ROOT_DIR' is not defined

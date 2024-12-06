@@ -420,3 +420,45 @@ UnboundLocalError: local variable 'exp_data' referenced before assignment
 
 
 
+
+
+
+我现在希望评估结果之后，在应激评估页面增加一个生成报告按钮（每行数据有一个），点击按钮之后生成docx的报告。生成逻辑如下：
+# 1. 读取模板文件template.docx文件
+其中模板文件的内容如下：
+应激评估报告
+1.用户基本信息
+用户名：[user.username]
+邮箱：[user.email]
+手机：[user.phone]
+用户创建时间：[user.created_at]
+
+2.应激评估信息
+普通应激评分：[normal_yingji.score], 评估结果：[normal_yingji.result]
+抑郁评分：[depression.score], 评估结果：[depression.result]
+焦虑评分：[stress.score], 评估结果：[stress.result]
+
+3.评估数据可视化
+3.1 脑电信号
+[signals.eeg]
+3.2 血清数据
+[signals.blood]
+3.3 量表数据
+[signals.scale]
+4.防护建议
+[suggest]
+
+# 2. 对模板中的内容进行替换：
+[user.username] 替换数据上传用户的用户名
+[user.email] 替换数据上传用户的邮箱
+[user.phone] 替换数据上传用户的手机号
+[user.created_at] 替换数据上传用户的用户创建时间
+
+[normal_yingji.score] 替换对应评估结果中的普通应激评分result1
+[normal_yingji.result] 在result1>=50的时候为"可能存在应激情况"，否则为"低概率存在应激情况"
+[depression.score] 替换对应评估结果中的普通应激评分result2
+[normal_yingji.result] 在result1>=50的时候为"可能存在抑郁情况"，否则为"低概率存在抑郁情况"
+[stress.score] 替换对应评估结果中的普通应激评分result3
+[normal_yingji.result] 在result1>=50的时候为"可能存在焦虑情况"，否则为"低概率存在焦虑情况"
+
+生成的报告保存在data/results目录中，用result id命名

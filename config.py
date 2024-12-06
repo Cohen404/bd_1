@@ -17,6 +17,15 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 # 模型目录
 MODEL_DIR = os.path.join(ROOT_DIR, 'model')
 
+# 模板目录
+TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
+
+# 结果目录
+RESULTS_DIR = os.path.join(ROOT_DIR, 'data', 'results')
+
+# 模板文件
+TEMPLATE_FILE = os.path.join(TEMPLATE_DIR, 'template.docx')
+
 # 确保必要的目录存在
 def ensure_directories():
     """确保所有必要的目录都存在"""
@@ -24,7 +33,9 @@ def ensure_directories():
         os.path.dirname(LOG_FILE),
         os.path.dirname(USER_STATUS_FILE),
         DATA_DIR,
-        MODEL_DIR
+        MODEL_DIR,
+        TEMPLATE_DIR,
+        RESULTS_DIR
     ]
     
     for directory in directories:
