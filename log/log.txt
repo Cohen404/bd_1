@@ -5806,3 +5806,11 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-06 23:18:55,492 - INFO - Administrator - Successfully displayed 1 data records
 2024-12-06 23:18:55,498 - INFO - Administrator - Opening health evaluation page.
 2024-12-06 23:18:58,347 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-06 23:44:24,251 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:44:25,388 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:44:25,388 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:44:25,388 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:44:25,390 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:44:25,394 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:44:25,400 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:44:28,003 - INFO - Administrator - Report generated successfully for result ID 1
