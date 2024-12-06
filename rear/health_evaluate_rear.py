@@ -78,7 +78,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         # 从文件中读取用户ID
         try:
             user_id = operate_user.read(CURRENT_USER_FILE)  # 使用配置的路径
-            print(f"Read user_status from file: {user_id}")  # 调���日志
+            print(f"Read user_status from file: {user_id}")  # 调日志
             
             # 获取用户类型
             session = SessionClass()
@@ -194,7 +194,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         return int(user_id)
 
     def set_default_led_colors(self):
-        """设置所有LED为默认的��色"""
+        """设置所有LED为默认的灰色"""
         default_style = (
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; background: gray"
@@ -226,7 +226,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         """
         显示导航栏和状态信息
         """
-        # 模型状态
+        # ���状态
         # 判断模型是否空闲，即是否有文件存在
         if not os.path.exists(MODEL_STATUS_FILE):
             self.status_label.setText("模型空闲")
@@ -271,11 +271,11 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             self.tableWidget.setRowCount(0)
 
             # 设置表格列宽
-            self.tableWidget.setColumnWidth(0, 80)  # ID列
-            self.tableWidget.setColumnWidth(1, 100)  # 人员ID列
-            self.tableWidget.setColumnWidth(2, 300)  # 数据路径列
-            self.tableWidget.setColumnWidth(3, 100)  # 上传用户列
-            self.tableWidget.setColumnWidth(4, 150)  # 操作列
+            self.tableWidget.setColumnWidth(0, 60)   # ID列
+            self.tableWidget.setColumnWidth(1, 80)   # 人员ID列
+            self.tableWidget.setColumnWidth(2, 180)  # 数据路径列
+            self.tableWidget.setColumnWidth(3, 150)  # 上传用户列 - 减少到150px
+            self.tableWidget.setColumnWidth(4, 400)  # 操作列 - 增加到400px
 
             # 遍历数据并添加到表
             for data in data_list:
@@ -395,7 +395,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             self._index_window.show()
             # 再隐藏当前窗口
             self.hide()
-            # 最后关闭当前窗口
+            # 最后关闭前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
@@ -406,40 +406,44 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
     # 将查看、评估按钮封装到widget中
     def buttonForRow(self):
         widget = QtWidgets.QWidget()
-        # 查看
+        
+        # 查看按钮
         self.check_pushButton = QtWidgets.QPushButton('查看')
         self.check_pushButton.setStyleSheet("text-align : center;"
-                                            "background-color : NavajoWhite;"
-                                            "height : 30px;"
-                                            "border-style: outset;"
-                                            "font-size:13px")
-        # 查看数据功能
+                                          "background-color : NavajoWhite;"
+                                          "height : 30px;"
+                                          "width : 60px;"
+                                          "border-style: outset;"
+                                          "font-size:13px")
         self.check_pushButton.clicked.connect(self.checkButton)
 
-        # 评估
+        # 评估按钮
         self.evaluate_pushButton = QtWidgets.QPushButton('评估')
         self.evaluate_pushButton.setStyleSheet("text-align : center;"
-                                               "background-color : LightCoral;"
-                                               "height : 30px;"
-                                               "border-style: outset;"
-                                               "font-size:13px")
-        # 评估状态功能
+                                             "background-color : LightCoral;"
+                                             "height : 30px;"
+                                             "width : 60px;"
+                                             "border-style: outset;"
+                                             "font-size:13px")
         self.evaluate_pushButton.clicked.connect(self.EvaluateButton)
 
-        # 添加生成报告按钮
-        self.report_pushButton = QtWidgets.QPushButton('生成报告')
+        # 生成报告按钮 - 进一步增加宽度
+        self.report_pushButton = QtWidgets.QPushButton('报告')
         self.report_pushButton.setStyleSheet("text-align : center;"
-                                            "background-color : LightBlue;"
-                                            "height : 30px;"
-                                            "border-style: outset;"
-                                            "font-size:13px")
+                                           "background-color : LightBlue;"
+                                           "height : 30px;"
+                                           "width : 180px;"  # 增加到180px
+                                           "border-style: outset;"
+                                           "font-size:13px")
         self.report_pushButton.clicked.connect(self.generateReport)
 
+        # 调整布局间距
         hLayout = QtWidgets.QHBoxLayout()
         hLayout.addWidget(self.check_pushButton)
         hLayout.addWidget(self.evaluate_pushButton)
         hLayout.addWidget(self.report_pushButton)
         hLayout.setContentsMargins(5, 2, 5, 2)
+        hLayout.setSpacing(10)  # 按钮之间的间距
         widget.setLayout(hLayout)
         return widget
 
@@ -522,7 +526,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 
             self.status_label.setText("评估中")
 
-            # 调用模型
+            # 用模型
             self.test_thread = EegModel(data_path, model_path)
             self.test_thread._rule.connect(self.waitTestRes)
             self.test_thread.finished.connect(
@@ -549,7 +553,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         
         # 将分数转换为0-95的范围
-        probability_score = float(num) * 100  # 将num*100改为num*95，使得最大值为95
+        probability_score = float(num) * 100  # 将num*100改num*95，使得最大值为95
         probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
         # 获取数据文件所在目录
@@ -582,7 +586,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 import pandas as pd
                 df = pd.read_csv(xq_path)
                 if len(df) >= 1:  # 确保有数据行
-                    # 处理所有列的数据
+                    # 理所有列的数据
                     def clean_value(val):
                         if isinstance(val, str):
                             val = val.replace('<', '').replace('>', '').replace('≤', '').replace('≥', '')
@@ -612,7 +616,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         elif len(self.result_list) == 2:  # 焦虑
             final_score = probability_score + score_lb_2
         
-        # 确保最终分数不超过100，并转换为整数
+        # 确保最终分数不超过100，并转换为数
         final_score = int(min(95, max(0, final_score)))
         
         self.result_list.append(final_score)  # 存储最终分数
@@ -684,7 +688,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             
             self.result_list = []
 
-    # 评估按钮功能
+    # 评估钮功能
 
 
     def EvaluateButton(self):
@@ -826,7 +830,23 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     # 添加图片
                     data_path = data.data_path
                     image_paths = {
-                        '[signals.eeg]': ['Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'],
+                        '[signals.eeg]': [
+                            ("Theta波段功率", "Theta.png"),
+                            ("Alpha波段功率", "Alpha.png"),
+                            ("Beta波段功率", "Beta.png"),
+                            ("Gamma波段功率", "Gamma.png"),
+                            ("均分频带1", "frequency_band_1.png"),
+                            ("均分频带2", "frequency_band_2.png"),
+                            ("均分频带3", "frequency_band_3.png"),
+                            ("均分频带4", "frequency_band_4.png"),
+                            ("均分频带5", "frequency_band_5.png"),
+                            ("域特征 - 过零率", "time_过零率.png"),
+                            ("时域特征 - 方差", "time_方差.png"),
+                            ("时域特征 - 能量", "time_能量.png"),
+                            ("时域特征 - 差分", "time_差分.png"),
+                            ("时频域特征 - 小波变换", "frequency_wavelet.png"),
+                            ("微分熵", "differential_entropy.png")
+                        ],
                         '[signals.blood]': ['xq.png'],
                         '[signals.scale]': ['lb.png']
                     }
@@ -835,17 +855,39 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                         for paragraph in doc.paragraphs:
                             if placeholder in paragraph.text:
                                 paragraph.text = paragraph.text.replace(placeholder, '')
-                                for img_name in images:
-                                    img_path = os.path.join(data_path, img_name)
-                                    if os.path.exists(img_path):
-                                        try:
-                                            run = paragraph.add_run()
-                                            run.add_picture(img_path, width=Inches(6))
-                                        except Exception as img_error:
-                                            logging.error(f"Error adding image {img_path}: {str(img_error)}")
-                                            continue
+                                
+                                # 对于脑电信号图片，添加标题和图片
+                                if placeholder == '[signals.eeg]':
+                                    for title, img_name in images:
+                                        img_path = os.path.join(data_path, img_name)
+                                        if os.path.exists(img_path):
+                                            try:
+                                                # 添加图片标题
+                                                title_run = paragraph.add_run(f"\n{title}:\n")
+                                                title_run.bold = True  # 标题加粗
+                                                
+                                                # 添加图片
+                                                img_run = paragraph.add_run()
+                                                img_run.add_picture(img_path, width=Inches(6))
+                                                
+                                                # 添加额外的换行
+                                                paragraph.add_run("\n")
+                                            except Exception as img_error:
+                                                logging.error(f"Error adding image {img_path}: {str(img_error)}")
+                                                continue
+                                # 对于其他类型的图片，直接添加
+                                else:
+                                    for img_name in images:
+                                        img_path = os.path.join(data_path, img_name)
+                                        if os.path.exists(img_path):
+                                            try:
+                                                run = paragraph.add_run()
+                                                run.add_picture(img_path, width=Inches(6))
+                                            except Exception as img_error:
+                                                logging.error(f"Error adding image {img_path}: {str(img_error)}")
+                                                continue
 
-                    # 创建results目录（如果不存在）
+                    # 创建results目录（如不存在）
                     results_dir = RESULTS_DIR  # 使用绝对路径
                     os.makedirs(results_dir, exist_ok=True)
 
@@ -869,7 +911,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
 
-    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调用show()函数即可
+    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调���show()函数即可
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Health_Evaluate_WindowActions()

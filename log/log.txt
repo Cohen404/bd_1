@@ -5681,3 +5681,128 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-06 17:50:16,200 - INFO - Administrator - Successfully displayed 1 data records
 2024-12-06 17:50:16,210 - INFO - Administrator - Opening health evaluation page.
 2024-12-06 17:50:17,631 - ERROR - Administrator - Error generating report: name 'ROOT_DIR' is not defined
+2024-12-06 17:52:00,578 - INFO - Administrator - User admin logged in successfully
+2024-12-06 17:52:01,836 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 17:52:01,836 - INFO - Administrator - Depression LED set to RED
+2024-12-06 17:52:01,836 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 17:52:01,838 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 17:52:01,844 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 17:52:01,851 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 17:52:05,479 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-06 18:05:21,644 - INFO - Administrator - Returned to index page successfully
+2024-12-06 18:07:08,866 - INFO - Administrator - User admin logged in successfully
+2024-12-06 18:07:11,007 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 18:07:11,007 - INFO - Administrator - Depression LED set to RED
+2024-12-06 18:07:11,008 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 18:07:11,010 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 18:07:11,016 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 18:07:11,022 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 18:07:14,350 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-06 18:07:15,695 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-06 18:07:15,698 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-06 18:07:15,700 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 18:07:15,700 - INFO - Administrator - Depression LED set to RED
+2024-12-06 18:07:15,700 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 18:07:15,700 - INFO - Administrator - Initializing current image index to 0
+2024-12-06 18:07:15,700 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:15,700 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-06 18:07:16,077 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-06 18:07:17,429 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-06 18:07:17,432 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-06 18:07:17,433 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 18:07:17,434 - INFO - Administrator - Depression LED set to RED
+2024-12-06 18:07:17,434 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 18:07:17,434 - INFO - Administrator - Initializing current image index to 0
+2024-12-06 18:07:17,434 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:17,434 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-06 18:07:17,437 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-06 18:07:18,798 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:18,798 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Alpha.png
+2024-12-06 18:07:18,811 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-06 18:07:18,974 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:18,975 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Beta.png
+2024-12-06 18:07:18,987 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-06 18:07:19,174 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:19,174 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Gamma.png
+2024-12-06 18:07:19,187 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-06 18:07:19,349 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:19,349 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\frequency_band_1.png
+2024-12-06 18:07:19,377 - INFO - Administrator - Successfully displayed image: 均分频带1
+2024-12-06 18:07:19,639 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:19,639 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Gamma.png
+2024-12-06 18:07:19,639 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-06 18:07:19,766 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:19,766 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Beta.png
+2024-12-06 18:07:19,767 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-06 18:07:19,911 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 18:07:19,911 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Alpha.png
+2024-12-06 18:07:19,923 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-06 18:07:23,303 - INFO - Administrator - Returned to index page successfully
+2024-12-06 23:08:19,549 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:08:21,301 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:08:21,301 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:08:21,301 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:08:21,304 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:08:21,308 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:08:21,313 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:08:28,942 - INFO - Administrator - Returned to index page successfully
+2024-12-06 23:08:45,671 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:08:46,873 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:08:46,873 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:08:46,873 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:08:46,876 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:08:46,879 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:08:46,885 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:11:55,146 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:11:56,501 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:11:56,501 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:11:56,501 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:11:56,505 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:11:56,509 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:11:56,514 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:13:01,086 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:13:02,341 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:13:02,341 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:13:02,341 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:13:02,344 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:13:02,347 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:13:02,355 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:14:55,880 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:14:57,275 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:14:57,275 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:14:57,275 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:14:57,277 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:14:57,280 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:14:57,285 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:14:59,754 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-06 23:14:59,757 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-06 23:14:59,762 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:14:59,762 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:14:59,762 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:14:59,762 - INFO - Administrator - Initializing current image index to 0
+2024-12-06 23:14:59,762 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-06 23:14:59,762 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-06 23:15:00,265 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-06 23:15:20,423 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:15:21,579 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:15:21,579 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:15:21,579 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:15:21,582 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:15:21,586 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:15:21,593 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:15:24,502 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-06 23:15:52,890 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:15:54,041 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:15:54,041 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:15:54,042 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:15:54,044 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:15:54,048 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:15:54,053 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:18:54,300 - INFO - Administrator - User admin logged in successfully
+2024-12-06 23:18:55,486 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-06 23:18:55,486 - INFO - Administrator - Depression LED set to RED
+2024-12-06 23:18:55,486 - INFO - Administrator - Anxiety LED set to RED
+2024-12-06 23:18:55,489 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-06 23:18:55,492 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-06 23:18:55,498 - INFO - Administrator - Opening health evaluation page.
+2024-12-06 23:18:58,347 - INFO - Administrator - Report generated successfully for result ID 1

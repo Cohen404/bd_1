@@ -462,3 +462,23 @@ UnboundLocalError: local variable 'exp_data' referenced before assignment
 [normal_yingji.result] 在result1>=50的时候为"可能存在焦虑情况"，否则为"低概率存在焦虑情况"
 
 生成的报告保存在data/results目录中，用result id命名
+
+
+
+
+在生成的报告的[signals.eeg]替换图，图文件对应：
+            self.image_list = [
+                "Theta.png", "Alpha.png", "Beta.png", "Gamma.png",
+                "frequency_band_1.png", "frequency_band_2.png", "frequency_band_3.png", "frequency_band_4.png", "frequency_band_5.png",
+                "time_过零率.png", "time_方差.png", "time_能量.png", "time_差分.png",
+                "frequency_wavelet.png", "differential_entropy.png"
+            ]
+
+每个图的名称对应：
+            image_names = [
+                "Theta波段功率", "Alpha波段功率", "Beta波段功率", "Gamma波段功率",
+                "均分频带1", "均分频带2", "均分频带3", "均分频带4", "均分频带5",
+                "域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
+                "时频域特征 - 小波变换", "微分熵"
+            ]
+名称+：要显示在图的上一行。
