@@ -507,3 +507,11 @@ tb_result结果表中，result1改成stress_score，类型为float，代表普�
 
 
 result_view_rear.py中新增加的buttonForRow的查看功能，并在line 286-line 302行已经定义过了，新的"查看报告"按钮在这里定义就行了，不要重新再构建一个buttonForRow函数。或者把一行中所有的button都放到这个函数里，并且查看按钮在301行调用了self.view_details函数，这个功能不能缺少，最好要保持原状。
+
+
+
+result_view_rear.py中的result1-3都在数据库表的列都变成了stress_score,depression_score,anxiety_score
+
+
+
+能否在result_view_rear.py页面中点击row的查看报告的时候，将pdf报告转换成图像然后展示在弹出的窗口中展示图像（可放大缩小），点击弹出窗口下方的下载报告按钮，将pdf报告下载到指定目录中。

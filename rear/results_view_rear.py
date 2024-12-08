@@ -3,19 +3,23 @@
 
 import os
 import sys
+import fitz  # PyMuPDF
 
 import logging
 from pyqt5_plugins.examplebutton import QtWidgets
+from pdf2image import convert_from_path
+from PyQt5.QtGui import QPainter
 
 sys.path.append('../')
 import time
 from datetime import datetime, timedelta
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QRectF
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QGraphicsPixmapItem, QGraphicsScene, QMessageBox, 
-    QTableWidgetItem, QInputDialog, QPushButton, QFileDialog
+    QTableWidgetItem, QInputDialog, QPushButton, QFileDialog, QWidget, QVBoxLayout,
+    QHBoxLayout, QLabel, QGraphicsView, QScrollArea
 )
 import state.operate_user as operate_user
 # 导入本页面的前端部分
@@ -555,27 +559,198 @@ class ReportViewer(QMainWindow):
     def __init__(self, pdf_path):
         super().__init__()
         self.pdf_path = pdf_path
+        self.current_page = 0
+        self.scale_factor = 1.0
+        self.images = []
+        
+        # 检查 PDF 文件是否存在
+        if not os.path.exists(pdf_path):
+            QMessageBox.critical(self, "错误", "PDF文件不存在")
+            self.close()
+            return
+            
         self.initUI()
+        
+        try:
+            self.loadPDF()
+        except Exception as e:
+            QMessageBox.critical(self, "错误", f"加载PDF时发生错误：{str(e)}")
+            self.close()
 
     def initUI(self):
         self.setWindowTitle('报告查看')
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 800, 900)
 
         # 创建中央部件
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
 
-        # 添加 WebEngineView 用于显示 PDF
-        from PyQt5.QtWebEngineWidgets import QWebEngineView
-        self.web_view = QWebEngineView()
-        self.web_view.setUrl(QtCore.QUrl.fromLocalFile(self.pdf_path))
-        layout.addWidget(self.web_view)
+        # 创建图片显示区域
+        self.scene = QGraphicsScene()
+        self.view = QGraphicsView(self.scene)
+        self.view.setRenderHint(QPainter.SmoothPixmapTransform)
+        self.view.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        layout.addWidget(self.view)
 
-        # 添加下载按钮
-        download_btn = QPushButton('下载报告')
-        download_btn.clicked.connect(self.downloadReport)
-        layout.addWidget(download_btn)
+        # 创建控制按钮布局
+        button_layout = QHBoxLayout()
+        
+        # 上一页按钮
+        self.prev_btn = QPushButton('上一页')
+        self.prev_btn.clicked.connect(self.previousPage)
+        button_layout.addWidget(self.prev_btn)
+        
+        # 页码显示
+        self.page_label = QLabel('第 1 页')
+        button_layout.addWidget(self.page_label)
+        
+        # 下一页按钮
+        self.next_btn = QPushButton('下一页')
+        self.next_btn.clicked.connect(self.nextPage)
+        button_layout.addWidget(self.next_btn)
+        
+        # 缩放按钮
+        self.zoom_in_btn = QPushButton('放大')
+        self.zoom_in_btn.clicked.connect(self.zoomIn)
+        self.zoom_in_btn.setStyleSheet("""
+            QPushButton {
+                padding: 5px 15px;
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+        """)
+        button_layout.addWidget(self.zoom_in_btn)
+        
+        self.zoom_out_btn = QPushButton('缩小')
+        self.zoom_out_btn.clicked.connect(self.zoomOut)
+        self.zoom_out_btn.setStyleSheet("""
+            QPushButton {
+                padding: 5px 15px;
+                background-color: #f44336;
+                color: white;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #da190b;
+            }
+        """)
+        button_layout.addWidget(self.zoom_out_btn)
+        
+        # 下载按钮
+        self.download_btn = QPushButton('下载报告')
+        self.download_btn.clicked.connect(self.downloadReport)
+        button_layout.addWidget(self.download_btn)
+        
+        layout.addLayout(button_layout)
+
+    def loadPDF(self):
+        """加载PDF并转换为图像"""
+        try:
+            # 使用 PyMuPDF 打开 PDF
+            try:
+                pdf_document = fitz.open(self.pdf_path)
+                
+                # 转换每一页为图像
+                for page in pdf_document:
+                    # 设置更高的缩放因子以获得更好的图像质量
+                    zoom = 2.0
+                    matrix = fitz.Matrix(zoom, zoom)
+                    
+                    # 获取页面的 pixmap
+                    pixmap = page.get_pixmap(matrix=matrix)
+                    
+                    # 转换为 QImage
+                    img_data = pixmap.samples
+                    qimage = QImage(img_data, pixmap.width, pixmap.height,
+                                  pixmap.stride, QImage.Format_RGB888)
+                    
+                    # 将 QImage 添加到图片列表
+                    self.images.append(qimage)
+                    
+                pdf_document.close()
+                
+                if self.images:
+                    self.updatePageDisplay()
+                    self.updateNavigationButtons()
+                else:
+                    raise Exception("PDF文件为空或转换后没有图像")
+                    
+            except Exception as e:
+                raise Exception(f"PDF转换失败: {str(e)}")
+            
+        except Exception as e:
+            QMessageBox.critical(self, "错误", f"加载PDF时发生错误：{str(e)}")
+            self.close()
+
+    def updatePageDisplay(self):
+        """更新当前页面显示"""
+        if not self.images or self.current_page >= len(self.images):
+            return
+        
+        try:
+            self.scene.clear()
+            qimage = self.images[self.current_page]
+            pixmap = QPixmap.fromImage(qimage)
+            
+            # 应用缩放
+            scaled_width = int(pixmap.width() * self.scale_factor)
+            scaled_height = int(pixmap.height() * self.scale_factor)
+            
+            scaled_pixmap = pixmap.scaled(
+                scaled_width,
+                scaled_height,
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
+            )
+            
+            pixmap_item = self.scene.addPixmap(scaled_pixmap)
+            self.scene.setSceneRect(pixmap_item.boundingRect())
+            
+            # 更新页码显示
+            self.page_label.setText(f'第 {self.current_page + 1} 页 / 共 {len(self.images)} 页')
+            
+            # 调整视图，但不自动适应大小
+            self.view.setScene(self.scene)
+            
+        except Exception as e:
+            QMessageBox.critical(self, "错误", f"更新显示时发生错误：{str(e)}")
+
+    def updateNavigationButtons(self):
+        """更新导航按钮状态"""
+        self.prev_btn.setEnabled(self.current_page > 0)
+        self.next_btn.setEnabled(self.current_page < len(self.images) - 1)
+
+    def previousPage(self):
+        """显示上一页"""
+        if self.current_page > 0:
+            self.current_page -= 1
+            self.updatePageDisplay()
+            self.updateNavigationButtons()
+
+    def nextPage(self):
+        """显示下一页"""
+        if self.current_page < len(self.images) - 1:
+            self.current_page += 1
+            self.updatePageDisplay()
+            self.updateNavigationButtons()
+
+    def zoomIn(self):
+        """放大"""
+        self.scale_factor *= 1.2  # 放大20%
+        self.updatePageDisplay()
+        self.view.centerOn(self.scene.items()[0])  # 保持居中
+
+    def zoomOut(self):
+        """缩小"""
+        self.scale_factor /= 1.2  # 缩小20%
+        self.updatePageDisplay()
+        self.view.centerOn(self.scene.items()[0])  # 保持居中
 
     def downloadReport(self):
         """下载报告"""

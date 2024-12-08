@@ -5864,3 +5864,30 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-08 17:37:47,369 - ERROR - Administrator - Error viewing report: name 'QWidget' is not defined
 2024-12-08 17:44:57,887 - INFO - Administrator - User admin logged in successfully
 2024-12-08 17:44:58,784 - INFO - Administrator - Opening results view page.
+2024-12-08 18:19:55,808 - INFO - Administrator - User admin logged in successfully
+2024-12-08 18:19:57,008 - INFO - Administrator - Opening results view page.
+2024-12-08 18:19:59,103 - ERROR - Administrator - Error viewing report: QtWebEngineWidgets must be imported or Qt.AA_ShareOpenGLContexts must be set before a QCoreApplication instance is created
+2024-12-08 18:21:32,131 - INFO - Administrator - User admin logged in successfully
+2024-12-08 18:21:33,589 - INFO - Administrator - Opening results view page.
+2024-12-08 18:21:34,743 - ERROR - Administrator - Error viewing report: QtWebEngineWidgets must be imported or Qt.AA_ShareOpenGLContexts must be set before a QCoreApplication instance is created
+2024-12-08 18:23:40,504 - INFO - Administrator - User admin logged in successfully
+2024-12-08 18:23:43,631 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-08 18:23:43,642 - INFO - Administrator - Opening data view page.
+2024-12-08 18:23:44,825 - INFO - Administrator - Returned to index page successfully
+2024-12-08 18:23:45,726 - INFO - Administrator - Opening results view page.
+2024-12-08 18:24:00,583 - INFO - Administrator - Returned to index page successfully
+2024-12-08 18:24:01,772 - INFO - Administrator - Opening results view page.
+2024-12-08 18:26:20,795 - INFO - Administrator - User admin logged in successfully
+2024-12-08 18:26:21,976 - INFO - Administrator - Opening results view page.
+2024-12-08 18:27:08,743 - INFO - Administrator - User admin logged in successfully
+2024-12-08 18:27:10,006 - INFO - Administrator - Opening results view page.
+2024-12-08 20:09:55,072 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:09:56,685 - INFO - Administrator - Opening results view page.
+2024-12-08 20:17:34,746 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:17:36,203 - INFO - Administrator - Opening results view page.
+2024-12-08 20:17:37,444 - ERROR - Administrator - Error viewing report: name 'QWidget' is not defined
+2024-12-08 20:23:15,441 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:23:16,638 - INFO - Administrator - Opening results view page.
+2024-12-08 20:25:51,145 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:25:52,431 - INFO - Administrator - Opening results view page.
+2024-12-08 20:26:22,910 - INFO - Administrator - Returned to index page successfully
