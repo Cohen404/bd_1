@@ -15,7 +15,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QGraphicsPixmapItem, QGraphicsScene, QMessageBox, 
-    QTableWidgetItem, QInputDialog
+    QTableWidgetItem, QInputDialog, QPushButton, QFileDialog
 )
 import state.operate_user as operate_user
 # 导入本页面的前端部分
@@ -199,7 +199,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 return user.user_id, db_is_admin
             else:
                 logging.error(f"User not found for ID: {user_id}")
-                QMessageBox.warning(self, "错误", "在数据库中未找到当前用户")
+                QMessageBox.warning(self, "错误", "数据库中未找到当前用户")
                 return None, False
 
         except Exception as e:
@@ -279,27 +279,12 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
                 self.tableWidget.setItem(i, 2, QTableWidgetItem(
                     result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''))
-                self.tableWidget.setItem(i, 3, QTableWidgetItem(str(result.result_1)))  # 显示原始值
-                self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.result_2)))  # 显示原始值
-                self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.result_3)))  # 显示原始值
+                self.tableWidget.setItem(i, 3, QTableWidgetItem(str(result.stress_score)))  # 普通应激分数
+                self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.depression_score)))  # 抑郁分数
+                self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.anxiety_score)))  # 焦虑分数
 
-                # 添加查看按钮
-                view_btn = QtWidgets.QPushButton('查看')
-                view_btn.setStyleSheet('''
-                    QPushButton {
-                        background-color: #5c8ac3;
-                        color: white;
-                        border-radius: 5px;
-                        padding: 5px 15px;
-                        min-width: 60px;
-                        margin: 2px 10px;
-                    }
-                    QPushButton:hover {
-                        background-color: #4a7ab3;
-                    }
-                ''')
-                view_btn.clicked.connect(lambda checked, row=i: self.view_details(row))
-                self.tableWidget.setCellWidget(i, 6, view_btn)
+                # 添加操作按钮
+                self.tableWidget.setCellWidget(i, 6, self.buttonForRow(i))
 
             # 启用表格滚动
             self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
@@ -324,80 +309,58 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 self.health_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; "
-                    f"background: {'red' if result.result_1 >= 50 else 'gray'}"
+                    f"background: {'red' if result.stress_score >= 50 else 'gray'}"
                 )
                 
                 # 更新抑郁状态
                 self.acoustic_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; "
-                    f"background: {'red' if result.result_2 >= 50 else 'gray'}"
+                    f"background: {'red' if result.depression_score >= 50 else 'gray'}"
                 )
                 
                 # 更新焦虑状态
                 self.mechanical_led_label.setStyleSheet(
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; "
-                    f"background: {'red' if result.result_3 >= 50 else 'gray'}"
+                    f"background: {'red' if result.anxiety_score >= 50 else 'gray'}"
                 )
-        finally:
-            session.close()
-
-    def view_details(self, row):
-        """查看详细信息"""
-        try:
-            result_id = int(self.tableWidget.item(row, 0).text())
-            session = SessionClass()
-            result = session.query(Result).filter(Result.id == result_id).first()
-            
-            if result:
-                # 更新左上角状态显示
-                self.update_status_display(result)
-                
-                # 获取关联的数据记录
-                data = session.query(Data).filter(Data.id == result_id).first()
-                if data and data.data_path:
-                    # 保存当前数据路径
-                    self.current_data_path = data.data_path
-                    # 重置图片索引
-                    self.current_image_index = 0
-                    # 显示第一张图片
-                    self.show_current_image()
-                else:
-                    QMessageBox.warning(self, "警告", "未找到相关数据文件")
-            else:
-                QMessageBox.warning(self, "警告", "未找到评估结果")
-                
-        except Exception as e:
-            logging.error(f"Error viewing details: {str(e)}")
-            QMessageBox.critical(self, "错误", f"查看详情失败：{str(e)}")
         finally:
             session.close()
 
     def update_status_display(self, result):
         """更新状态显示"""
         # 更新普通应激状态
-        self.health_label.setText(f"普通应激 ({result.result_1})")
+        self.health_label.setText(f"普通应激 ({result.stress_score})")
+        self.health_label.setAlignment(Qt.AlignLeft)  # 左对齐
+        self.health_led_label.setAlignment(Qt.AlignLeft)  # LED指示灯左对齐
         self.health_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "
-            f"background: {'red' if result.result_1 >= 50 else 'gray'}"
+            f"background: {'red' if result.stress_score >= 50 else 'gray'}; "
+            "margin-left: 0px;"  # 移除左边距
         )
         
         # 更新抑郁状态
-        self.acoustic_label.setText(f"抑郁状态 ({result.result_2})")
+        self.acoustic_label.setText(f"抑郁状态 ({result.depression_score})")
+        self.acoustic_label.setAlignment(Qt.AlignLeft)  # 左对齐
+        self.acoustic_led_label.setAlignment(Qt.AlignLeft)  # LED指示灯左对齐
         self.acoustic_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "
-            f"background: {'red' if result.result_2 >= 50 else 'gray'}"
+            f"background: {'red' if result.depression_score >= 50 else 'gray'}; "
+            "margin-left: 0px;"  # 移除左边距
         )
         
         # 更新焦虑状态
-        self.mechanical_label.setText(f"焦虑状态 ({result.result_3})")
+        self.mechanical_label.setText(f"焦虑状态 ({result.anxiety_score})")
+        self.mechanical_label.setAlignment(Qt.AlignLeft)  # 左对齐
+        self.mechanical_led_label.setAlignment(Qt.AlignLeft)  # LED指示灯左对齐
         self.mechanical_led_label.setStyleSheet(
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; "
-            f"background: {'red' if result.result_3 >= 50 else 'gray'}"
+            f"background: {'red' if result.anxiety_score >= 50 else 'gray'}; "
+            "margin-left: 0px;"  # 移除左边距
         )
 
     def display_image(self, image_path):
@@ -476,6 +439,159 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+
+    def buttonForRow(self, row):
+        """为每一行创建操作按钮"""
+        widget = QtWidgets.QWidget()
+        
+        # 查看按钮
+        view_btn = QtWidgets.QPushButton('查看')
+        view_btn.setStyleSheet('''
+            QPushButton {
+                background-color: #5c8ac3;
+                color: white;
+                border-radius: 5px;
+                padding: 5px 15px;
+                min-width: 60px;
+                min-height: 25px;  /* 增加按钮高度 */
+                margin: 2px 10px;
+            }
+            QPushButton:hover {
+                background-color: #4a7ab3;
+            }
+        ''')
+        view_btn.clicked.connect(lambda checked, row=row: self.view_details(row))
+
+        # 查看报告按钮
+        report_btn = QtWidgets.QPushButton('查看报告')
+        report_btn.setStyleSheet('''
+            QPushButton {
+                background-color: #5cb85c;
+                color: white;
+                border-radius: 5px;
+                padding: 5px 15px;
+                min-width: 80px;
+                min-height: 25px;  /* 增加按钮高度 */
+                margin: 2px 10px;
+            }
+            QPushButton:hover {
+                background-color: #4cae4c;
+            }
+        ''')
+        report_btn.clicked.connect(self.viewReport)
+
+        # 创建水平布局并添加按钮
+        hLayout = QtWidgets.QHBoxLayout()
+        hLayout.addWidget(view_btn)
+        hLayout.addWidget(report_btn)
+        hLayout.setContentsMargins(5, 5, 5, 5)  # 增加边距
+        hLayout.setSpacing(10)
+        widget.setLayout(hLayout)
+        return widget
+
+    def viewReport(self):
+        """查看报告"""
+        try:
+            button = self.sender()
+            if button:
+                row = self.tableWidget.indexAt(button.parent().pos()).row()
+                result_id = int(self.tableWidget.item(row, 0).text())
+                
+                session = SessionClass()
+                try:
+                    result = session.query(Result).filter(Result.id == result_id).first()
+                    if not result or not result.report_path:
+                        QMessageBox.warning(self, "警告", "未找到报告文件")
+                        return
+                    
+                    if not os.path.exists(result.report_path):
+                        QMessageBox.warning(self, "警告", "报告文件不存在")
+                        return
+
+                    # 创建报告查看窗口
+                    self.report_viewer = ReportViewer(result.report_path)
+                    self.report_viewer.show()
+
+                finally:
+                    session.close()
+
+        except Exception as e:
+            logging.error(f"Error viewing report: {str(e)}")
+            QMessageBox.critical(self, "错误", f"查看报告时发生错误：{str(e)}")
+
+    def view_details(self, row):
+        """查看详细信息"""
+        try:
+            result_id = int(self.tableWidget.item(row, 0).text())
+            session = SessionClass()
+            result = session.query(Result).filter(Result.id == result_id).first()
+            
+            if result:
+                # 更新左上角状态显示
+                self.update_status_display(result)
+                
+                # 获取关联的数据记录
+                data = session.query(Data).filter(Data.id == result_id).first()
+                if data and data.data_path:
+                    # 保存当前数据路径
+                    self.current_data_path = data.data_path
+                    # 重置图片索引
+                    self.current_image_index = 0
+                    # 显示第一张图片
+                    self.show_current_image()
+                else:
+                    QMessageBox.warning(self, "警告", "未找到相关数据文件")
+            else:
+                QMessageBox.warning(self, "警告", "未找到评估结果")
+                
+        except Exception as e:
+            logging.error(f"Error viewing details: {str(e)}")
+            QMessageBox.critical(self, "错误", f"查看详情失败：{str(e)}")
+        finally:
+            session.close()
+
+class ReportViewer(QMainWindow):
+    """报告查看窗口"""
+    def __init__(self, pdf_path):
+        super().__init__()
+        self.pdf_path = pdf_path
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('报告查看')
+        self.setGeometry(100, 100, 800, 600)
+
+        # 创建中央部件
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        layout = QVBoxLayout(central_widget)
+
+        # 添加 WebEngineView 用于显示 PDF
+        from PyQt5.QtWebEngineWidgets import QWebEngineView
+        self.web_view = QWebEngineView()
+        self.web_view.setUrl(QtCore.QUrl.fromLocalFile(self.pdf_path))
+        layout.addWidget(self.web_view)
+
+        # 添加下载按钮
+        download_btn = QPushButton('下载报告')
+        download_btn.clicked.connect(self.downloadReport)
+        layout.addWidget(download_btn)
+
+    def downloadReport(self):
+        """下载报告"""
+        try:
+            file_name = os.path.basename(self.pdf_path)
+            save_path, _ = QFileDialog.getSaveFileName(
+                self, '保存报告', file_name, 'PDF文件 (*.pdf)'
+            )
+            
+            if save_path:
+                import shutil
+                shutil.copy2(self.pdf_path, save_path)
+                QMessageBox.information(self, "成功", f"报告已保存到：{save_path}")
+                
+        except Exception as e:
+            QMessageBox.critical(self, "错误", f"保存报告时发生错误：{str(e)}")
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

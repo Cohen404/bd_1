@@ -5814,3 +5814,53 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-06 23:44:25,394 - INFO - Administrator - Successfully displayed 1 data records
 2024-12-06 23:44:25,400 - INFO - Administrator - Opening health evaluation page.
 2024-12-06 23:44:28,003 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-08 17:03:58,554 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:03:59,953 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-08 17:03:59,958 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 17:03:59,966 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 17:04:17,261 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:04:17,279 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:04:25,985 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:04:25,988 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:04:34,393 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:04:34,395 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:08:49,711 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:08:51,121 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-08 17:08:51,125 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 17:08:51,129 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 17:09:03,517 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:09:03,519 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:09:05,308 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-08 17:09:05,314 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-08 17:09:05,318 - WARNING - Administrator - No evaluation results found for ID 1
+2024-12-08 17:09:12,004 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:09:12,006 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:09:20,322 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-08 17:09:20,323 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-08 17:09:51,300 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:26:29,747 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:26:31,688 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 17:26:31,689 - INFO - Administrator - Depression LED set to RED
+2024-12-08 17:26:31,689 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 17:26:31,692 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-08 17:26:31,698 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 17:26:31,703 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 17:26:34,531 - ERROR - Administrator - Error generating report: 'Health_Evaluate_WindowActions' object has no attribute 'email'
+2024-12-08 17:28:31,116 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:28:32,125 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 17:28:32,125 - INFO - Administrator - Depression LED set to RED
+2024-12-08 17:28:32,126 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 17:28:32,129 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-08 17:28:32,135 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 17:28:32,140 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 17:28:57,002 - INFO - Administrator - Report generated successfully for result ID 1
+2024-12-08 17:29:13,081 - INFO - Administrator - Returned to index page successfully
+2024-12-08 17:29:14,794 - INFO - Administrator - Opening results view page.
+2024-12-08 17:29:20,951 - ERROR - Administrator - Error viewing report: name 'QWidget' is not defined
+2024-12-08 17:29:24,929 - INFO - Administrator - Returned to index page successfully
+2024-12-08 17:29:26,006 - INFO - Administrator - Opening results view page.
+2024-12-08 17:35:19,741 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:37:22,996 - INFO - Administrator - Opening results view page.
+2024-12-08 17:37:47,369 - ERROR - Administrator - Error viewing report: name 'QWidget' is not defined
+2024-12-08 17:44:57,887 - INFO - Administrator - User admin logged in successfully
+2024-12-08 17:44:58,784 - INFO - Administrator - Opening results view page.

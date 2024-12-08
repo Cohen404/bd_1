@@ -51,9 +51,10 @@ DROP TABLE IF EXISTS `tb_result`;
 CREATE TABLE `tb_result` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `result_time` datetime DEFAULT NULL COMMENT '结果计算时间',
-  `result_1` int(11) NOT NULL COMMENT '0-100,0不普通应激，100普通应激',
-  `result_2` int(11) NOT NULL COMMENT '0-100,0不抑郁，100抑郁',
-  `result_3` int(11) NOT NULL COMMENT '0-100,0不焦虑，100焦虑',
+  `stress_score` float NOT NULL COMMENT '0-100,0不普通应激，100普通应激',
+  `depression_score` float NOT NULL COMMENT '0-100,0不抑郁，100抑郁',
+  `anxiety_score` float NOT NULL COMMENT '0-100,0不焦虑，100焦虑',
+  `report_path` varchar(255) DEFAULT NULL COMMENT '报告路径',
   `user_id` varchar(64) NOT NULL COMMENT '关联用户ID',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;

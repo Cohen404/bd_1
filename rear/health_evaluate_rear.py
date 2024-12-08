@@ -80,15 +80,17 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             user_id = operate_user.read(CURRENT_USER_FILE)  # 使用配置的路径
             print(f"Read user_status from file: {user_id}")  # 调日志
             
-            # 获取用户类型
+            # 获取用户信息
             session = SessionClass()
             try:
-                # 直接使用user_id询
+                # 直接使用user_id查询
                 user = session.query(User).filter(User.user_id == user_id).first()
                 if user:
                     self.user_type = user.user_type == 'admin'
                     self.user_id = user.user_id
                     self.username = user.username
+                    self.email = user.email  # 添加email属性
+                    self.phone = user.phone  # 添加phone属性
                     userType = "Administrator" if self.user_type else "Regular user"
                     print(f"Found user: {user.username}, type: {user.user_type}, id: {user.user_id}")
                 else:
@@ -96,6 +98,8 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     self.user_type = False
                     self.user_id = None
                     self.username = None
+                    self.email = None  # 添加email属性
+                    self.phone = None  # 添加phone属性
                     userType = "Unknown user"
             finally:
                 session.close()
@@ -104,6 +108,8 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             self.user_type = False
             self.user_id = None
             self.username = None
+            self.email = None  # 添加email属性
+            self.phone = None  # 添加phone属性
             userType = "Unknown user"
 
         # 配置 logging 模块
@@ -210,15 +216,15 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
             "border-radius: 16px; border: 2px solid white; background: red"
         )
         
-        if result.result_1:
+        if result.stress_score >= 50:  # 改用 stress_score 并检查是否大于等于50
             self.ordinarystress_led_label.setStyleSheet(red_style)
             logging.info("Ordinary stress LED set to RED")
         
-        if result.result_2:
+        if result.depression_score >= 50:  # 改用 depression_score 并检查是否大于等于50
             self.depression_led_label.setStyleSheet(red_style)
             logging.info("Depression LED set to RED")
         
-        if result.result_3:
+        if result.anxiety_score >= 50:  # 改用 anxiety_score 并检查是否大于等于50
             self.anxiety_led_label.setStyleSheet(red_style)
             logging.info("Anxiety LED set to RED")
 
@@ -226,7 +232,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         """
         显示导航栏和状态信息
         """
-        # ���状态
+        # 状态
         # 判断模型是否空闲，即是否有文件存在
         if not os.path.exists(MODEL_STATUS_FILE):
             self.status_label.setText("模型空闲")
@@ -557,7 +563,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
         # 获取数据文件所在目录
-        data_dir =self.data_path
+        data_dir = self.data_path
         
         score_lb_1 = 0
         score_lb_2 = 0
@@ -586,7 +592,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 import pandas as pd
                 df = pd.read_csv(xq_path)
                 if len(df) >= 1:  # 确保有数据行
-                    # 理所有列的数据
+                    # 处理所有列的数据
                     def clean_value(val):
                         if isinstance(val, str):
                             val = val.replace('<', '').replace('>', '').replace('≤', '').replace('≥', '')
@@ -616,8 +622,8 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         elif len(self.result_list) == 2:  # 焦虑
             final_score = probability_score + score_lb_2
         
-        # 确保最终分数不超过100，并转换为数
-        final_score = int(min(95, max(0, final_score)))
+        # 确保最终分数不超过100，并转换为数字
+        final_score = float(min(95, max(0, final_score)))
         
         self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
@@ -664,17 +670,23 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     box.exec_()
                     if box.clickedButton() == yes_button:
                         # 如果用户选择"是"，则覆盖现有的数据
-                        existing_result.result_1 = self.result_list[0]
-                        existing_result.result_2 = self.result_list[1]
-                        existing_result.result_3 = self.result_list[2]
+                        existing_result.stress_score = self.result_list[0]
+                        existing_result.depression_score = self.result_list[1]
+                        existing_result.anxiety_score = self.result_list[2]
                         existing_result.result_time = self.result_time
                     elif box.clickedButton() == no_button:
                         # 如果用户选择"否"，则不做任何处理
                         pass
                 else:
                     # 如果数据库中不存在具有当前ID的数据，直接添加新的数据
-                    uploadresult = Result(id=self.data_id, result_1=self.result_list[0], result_2=self.result_list[1],
-                                          result_3=self.result_list[2], result_time=self.result_time, user_id=self.user_id)
+                    uploadresult = Result(
+                        id=self.data_id, 
+                        stress_score=self.result_list[0],
+                        depression_score=self.result_list[1],
+                        anxiety_score=self.result_list[2],
+                        result_time=self.result_time,
+                        user_id=self.user_id
+                    )
                     session.add(uploadresult)
 
                 session.commit()
@@ -784,16 +796,15 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                         QMessageBox.warning(self, "警告", "未找到评估结果，请先进行评估。")
                         return
 
-                    # 获取数据记录
+                    # 获取数据记录以获取数据路径
                     data = session.query(Data).filter(Data.id == result_id).first()
                     if not data:
                         QMessageBox.warning(self, "警告", "未找到数据记录。")
                         return
 
-                    # 获取用户信息
-                    user = session.query(User).filter(User.user_id == data.user_id).first()
-                    if not user:
-                        QMessageBox.warning(self, "警告", "未找到用户信息。")
+                    # 检查是否有完整的评估分数
+                    if result.stress_score is None or result.depression_score is None or result.anxiety_score is None:
+                        QMessageBox.warning(self, "警告", "评估结果不完整，请确保完成所有评估项目。")
                         return
 
                     # 读取模板文件
@@ -807,23 +818,23 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     # 替换用户信息
                     for paragraph in doc.paragraphs:
                         text = paragraph.text
-                        text = text.replace('[user.username]', user.username)
-                        text = text.replace('[user.email]', user.email or '未填写')
-                        text = text.replace('[user.phone]', user.phone or '未填写')
-                        text = text.replace('[user.created_at]', str(user.created_at))
+                        text = text.replace('[user.username]', self.username)
+                        text = text.replace('[user.email]', self.email or '未填写')
+                        text = text.replace('[user.phone]', self.phone or '未填写')
+                        text = text.replace('[user.created_at]', str(datetime.now()))
                         
                         # 替换评估结果
-                        text = text.replace('[normal_yingji.score]', str(result.result_1))
+                        text = text.replace('[normal_yingji.score]', str(result.stress_score))
                         text = text.replace('[normal_yingji.result]', 
-                                          "可能存在应激情况" if result.result_1 >= 50 else "低概率存在应激情况")
+                                          "可能存在应激情况" if result.stress_score >= 50 else "低概率存在应激情况")
                         
-                        text = text.replace('[depression.score]', str(result.result_2))
+                        text = text.replace('[depression.score]', str(result.depression_score))
                         text = text.replace('[depression.result]', 
-                                          "可能存在抑郁情况" if result.result_2 >= 50 else "低概率存在抑郁情况")
+                                          "可能存在抑郁情况" if result.depression_score >= 50 else "低概率存在抑郁情况")
                         
-                        text = text.replace('[stress.score]', str(result.result_3))
+                        text = text.replace('[stress.score]', str(result.anxiety_score))
                         text = text.replace('[stress.result]', 
-                                          "可能存在焦虑情况" if result.result_3 >= 50 else "低概率存在焦虑情况")
+                                          "可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况")
                         
                         paragraph.text = text
 
@@ -891,12 +902,25 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                     results_dir = RESULTS_DIR  # 使用绝对路径
                     os.makedirs(results_dir, exist_ok=True)
 
-                    # 保存报告
-                    report_path = os.path.join(results_dir, f'report_{result_id}.docx')
-                    doc.save(report_path)
+                    # 保存 docx 报告
+                    docx_path = os.path.join(results_dir, f'report_{result_id}.docx')
+                    doc.save(docx_path)
 
-                    QMessageBox.information(self, "成功", f"报告已生成，保存在：{report_path}")
-                    logging.info(f"Report generated successfully for result ID {result_id}")
+                    # 转换为 PDF
+                    try:
+                        from docx2pdf import convert
+                        pdf_path = os.path.join(results_dir, f'report_{result_id}.pdf')
+                        convert(docx_path, pdf_path)
+                        
+                        # 更新数据库中的报告路径
+                        result.report_path = pdf_path
+                        session.commit()
+                        
+                        QMessageBox.information(self, "成功", f"报告已生成，保存在：\nWord格式：{docx_path}\nPDF格式：{pdf_path}")
+                        logging.info(f"Report generated successfully for result ID {result_id}")
+                    except Exception as pdf_error:
+                        logging.error(f"Error converting to PDF: {str(pdf_error)}")
+                        QMessageBox.warning(self, "警告", f"PDF转换失败，但Word报告已保存：{docx_path}")
 
                 except Exception as e:
                     logging.error(f"Error generating report: {str(e)}")
@@ -911,7 +935,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
 
-    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调���show()函数即可
+    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调show()函数即可
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Health_Evaluate_WindowActions()
