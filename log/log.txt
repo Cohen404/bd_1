@@ -5891,3 +5891,95 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-08 20:25:51,145 - INFO - Administrator - User admin logged in successfully
 2024-12-08 20:25:52,431 - INFO - Administrator - Opening results view page.
 2024-12-08 20:26:22,910 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:30:53,019 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:30:54,159 - INFO - Administrator - Opening results view page.
+2024-12-08 20:31:26,293 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:27,493 - INFO - Administrator - Opening model control page.
+2024-12-08 20:31:29,270 - INFO - Administrator - Returned to admin page successfully
+2024-12-08 20:31:29,854 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-08 20:31:29,863 - INFO - Administrator - Opening data view page.
+2024-12-08 20:31:31,024 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:31,651 - INFO - Administrator - Opening user management page.
+2024-12-08 20:31:32,892 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:34,333 - INFO - Administrator - Opening parameter control page.
+2024-12-08 20:31:36,852 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:37,660 - INFO - Administrator - Opening log management page.
+2024-12-08 20:31:38,791 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:39,575 - INFO - Administrator - Opening password change page.
+2024-12-08 20:31:40,689 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:41,542 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-08 20:31:46,682 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:31:48,067 - INFO - Administrator - Opening parameter control page.
+2024-12-08 20:31:49,193 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:49,800 - INFO - Administrator - Opening results view page.
+2024-12-08 20:31:50,957 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:51,455 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 20:31:51,455 - INFO - Administrator - Depression LED set to RED
+2024-12-08 20:31:51,455 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 20:31:51,457 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-08 20:31:51,461 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 20:31:51,468 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 20:31:52,350 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:31:53,006 - INFO - Administrator - Opening user management page.
+2024-12-08 20:32:11,482 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:32:12,928 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-08 20:32:17,832 - WARNING - Administrator - Failed login attempt for username: user
+2024-12-08 20:32:18,811 - INFO - Regular user - User user1 logged in successfully
+2024-12-08 20:32:20,137 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 20:32:20,137 - INFO - Administrator - Depression LED set to RED
+2024-12-08 20:32:20,137 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 20:32:20,138 - INFO - Administrator - Regular user user1: fetching own data records
+2024-12-08 20:32:20,138 - INFO - Administrator - Successfully displayed 0 data records
+2024-12-08 20:32:20,146 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 20:32:21,189 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:32:21,704 - INFO - Administrator - Opening results view page.
+2024-12-08 20:32:22,565 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:32:23,130 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-08 20:32:23,135 - INFO - Administrator - Opening data view page.
+2024-12-08 20:32:24,857 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:32:25,449 - INFO - Administrator - Opening admin login page.
+2024-12-08 20:32:32,806 - INFO - Regular user - User user1 logged in successfully
+2024-12-08 20:32:33,716 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-08 20:32:33,722 - INFO - Administrator - Opening data view page.
+2024-12-08 20:32:45,846 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-08 20:32:45,855 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1, Username: user1
+2024-12-08 20:32:47,190 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-08 20:32:48,637 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-08 20:32:53,949 - INFO - Administrator - Data processing completed successfully
+2024-12-08 20:32:56,260 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:33:03,341 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 20:33:03,341 - INFO - Administrator - Depression LED set to RED
+2024-12-08 20:33:03,341 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 20:33:03,344 - INFO - Administrator - Regular user user1: fetching own data records
+2024-12-08 20:33:03,345 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 20:33:03,354 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 20:33:32,367 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 20:33:32,367 - INFO - Administrator - Depression LED set to RED
+2024-12-08 20:33:32,368 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 20:33:51,464 - INFO - Administrator - Report generated successfully for result ID 2
+2024-12-08 20:33:52,518 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:35:44,951 - INFO - Regular user - User user1 logged in successfully
+2024-12-08 20:35:46,016 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-08 20:35:46,016 - INFO - Administrator - Depression LED set to RED
+2024-12-08 20:35:46,016 - INFO - Administrator - Anxiety LED set to RED
+2024-12-08 20:35:46,020 - INFO - Administrator - Regular user user1: fetching own data records
+2024-12-08 20:35:46,024 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-08 20:35:46,029 - INFO - Administrator - Opening health evaluation page.
+2024-12-08 20:36:02,091 - INFO - Administrator - Report generated successfully for result ID 2
+2024-12-08 20:36:02,792 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:03,826 - INFO - Administrator - Opening results view page.
+2024-12-08 20:36:13,589 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:14,555 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-08 20:36:14,563 - INFO - Administrator - Opening data view page.
+2024-12-08 20:36:17,047 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:18,286 - INFO - Administrator - Opening admin login page.
+2024-12-08 20:36:22,590 - INFO - Administrator - User admin logged in successfully
+2024-12-08 20:36:23,989 - INFO - Administrator - Opening results view page.
+2024-12-08 20:36:33,106 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:34,384 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-08 20:36:34,391 - INFO - Administrator - Opening data view page.
+2024-12-08 20:36:40,139 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:41,750 - INFO - Administrator - Opening password change page.
+2024-12-08 20:36:43,645 - INFO - Administrator - Returned to index page successfully
+2024-12-08 20:36:44,716 - INFO - Administrator - Opening log management page.
+2024-12-08 20:37:17,789 - INFO - Administrator - Returned to index page successfully

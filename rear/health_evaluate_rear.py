@@ -12,7 +12,7 @@ from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtGui import *
 # from PyQt5.uic.properties import QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem, \
-    QGraphicsScene, QGraphicsPixmapItem
+    QGraphicsScene, QGraphicsPixmapItem, QProgressDialog
 from PyQt5 import QtWidgets
 from datetime import datetime
 import state.operate_user as operate_user
@@ -788,19 +788,35 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                 row = self.tableWidget.indexAt(button.parent().pos()).row()
                 result_id = int(self.tableWidget.item(row, 0).text())
                 
+                # 创建进度条对话框
+                progress = QProgressDialog("正在生成报告...", None, 0, 100, self)
+                progress.setWindowTitle("请稍候")
+                progress.setWindowModality(Qt.WindowModal)
+                progress.setMinimumDuration(0)  # 立即显示进度条
+                progress.setValue(0)
+                
                 session = SessionClass()
                 try:
+                    # 更新进度 - 10%
+                    progress.setValue(10)
+                    
                     # 获取结果数据
                     result = session.query(Result).filter(Result.id == result_id).first()
                     if not result:
                         QMessageBox.warning(self, "警告", "未找到评估结果，请先进行评估。")
                         return
 
+                    # 更新进度 - 20%
+                    progress.setValue(20)
+                    
                     # 获取数据记录以获取数据路径
                     data = session.query(Data).filter(Data.id == result_id).first()
                     if not data:
                         QMessageBox.warning(self, "警告", "未找到数据记录。")
                         return
+
+                    # 更新进度 - 30%
+                    progress.setValue(30)
 
                     # 检查是否有完整的评估分数
                     if result.stress_score is None or result.depression_score is None or result.anxiety_score is None:
@@ -808,14 +824,17 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                         return
 
                     # 读取模板文件
-                    template_path = TEMPLATE_FILE  # 使用绝对路径
+                    template_path = TEMPLATE_FILE
                     if not os.path.exists(template_path):
                         QMessageBox.warning(self, "警告", "未找到报告模板文件。")
                         return
 
+                    # 更新进度 - 40%
+                    progress.setValue(40)
+
                     doc = Document(template_path)
 
-                    # 替换用户信息
+                    # 替换用户信息和评估结果
                     for paragraph in doc.paragraphs:
                         text = paragraph.text
                         text = text.replace('[user.username]', self.username)
@@ -837,6 +856,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                                           "可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况")
                         
                         paragraph.text = text
+
+                    # 更新进度 - 60%
+                    progress.setValue(60)
 
                     # 添加图片
                     data_path = data.data_path
@@ -898,13 +920,19 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                                                 logging.error(f"Error adding image {img_path}: {str(img_error)}")
                                                 continue
 
+                    # 更新进度 - 80%
+                    progress.setValue(80)
+
                     # 创建results目录（如不存在）
-                    results_dir = RESULTS_DIR  # 使用绝对路径
+                    results_dir = RESULTS_DIR
                     os.makedirs(results_dir, exist_ok=True)
 
                     # 保存 docx 报告
                     docx_path = os.path.join(results_dir, f'report_{result_id}.docx')
                     doc.save(docx_path)
+
+                    # 更新进度 - 90%
+                    progress.setValue(90)
 
                     # 转换为 PDF
                     try:
@@ -916,21 +944,28 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
                         result.report_path = pdf_path
                         session.commit()
                         
-                        QMessageBox.information(self, "成功", f"报告已生成，保存在：\nWord格式：{docx_path}\nPDF格式：{pdf_path}")
+                        # 更新进度 - 100%
+                        progress.setValue(100)
+                        
+                        # 显示完成提示
+                        QMessageBox.information(self, "成功", "报告生成完毕，可以在结果管理中查看。")
                         logging.info(f"Report generated successfully for result ID {result_id}")
+                        
                     except Exception as pdf_error:
                         logging.error(f"Error converting to PDF: {str(pdf_error)}")
-                        QMessageBox.warning(self, "警告", f"PDF转换失败，但Word报告已保存：{docx_path}")
+                        QMessageBox.warning(self, "警告", "报告生成失败，请重试。")
 
                 except Exception as e:
                     logging.error(f"Error generating report: {str(e)}")
-                    QMessageBox.critical(self, "错误", f"生成报告时发生错误：{str(e)}")
+                    QMessageBox.critical(self, "错误", "生成报告时发生错误，请重试。")
                 finally:
                     session.close()
+                    # 确保进度条被关闭
+                    progress.close()
 
         except Exception as e:
             logging.error(f"Error in generateReport: {str(e)}")
-            QMessageBox.critical(self, "错误", f"生成报告过程中发生错误：{str(e)}")
+            QMessageBox.critical(self, "错误", "生成报告过程中发生错误，请重试。")
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

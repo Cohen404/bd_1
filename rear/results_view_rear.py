@@ -254,9 +254,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
                 )
 
     def show_table(self):
-        """
-        显示结果表格
-        """
+        """显示结果表格"""
         session = SessionClass()
         try:
             # 获取当前用户ID
@@ -273,6 +271,11 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
 
             # 显示结果
             self.tableWidget.setRowCount(len(results))
+            
+            # 设置行高
+            for i in range(len(results)):
+                self.tableWidget.setRowHeight(i, 50)  # 设置每行高度为50像素
+            
             for i, result in enumerate(results):
                 # 获取用户信息
                 user = session.query(User).filter(User.user_id == result.user_id).first()
@@ -454,11 +457,12 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             QPushButton {
                 background-color: #5c8ac3;
                 color: white;
-                border-radius: 5px;
-                padding: 5px 15px;
+                border-radius: 3px;
+                padding: 3px 10px;
                 min-width: 60px;
-                min-height: 25px;  /* 增加按钮高度 */
-                margin: 2px 10px;
+                max-height: 24px;  /* 减小按钮高度 */
+                margin: 2px 5px;
+                font-size: 12px;
             }
             QPushButton:hover {
                 background-color: #4a7ab3;
@@ -472,11 +476,12 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             QPushButton {
                 background-color: #5cb85c;
                 color: white;
-                border-radius: 5px;
-                padding: 5px 15px;
+                border-radius: 3px;
+                padding: 3px 10px;
                 min-width: 80px;
-                min-height: 25px;  /* 增加按钮高度 */
-                margin: 2px 10px;
+                max-height: 24px;  /* 减小按钮高度 */
+                margin: 2px 5px;
+                font-size: 12px;
             }
             QPushButton:hover {
                 background-color: #4cae4c;
@@ -488,8 +493,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         hLayout = QtWidgets.QHBoxLayout()
         hLayout.addWidget(view_btn)
         hLayout.addWidget(report_btn)
-        hLayout.setContentsMargins(5, 5, 5, 5)  # 增加边距
-        hLayout.setSpacing(10)
+        hLayout.setContentsMargins(2, 2, 2, 2)  # 减小边距
         widget.setLayout(hLayout)
         return widget
 
