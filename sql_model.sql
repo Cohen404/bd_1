@@ -95,14 +95,58 @@ INSERT INTO `tb_model` (`id`, `model_type`, `model_path`, `create_time`) VALUES
 (3, 2, './model/jiaolv/subject-1jiaolv.keras', '2024-09-14 13:20:47');
 
 -- ----------------------------
--- Table structure for tb_parameters
+-- Table structure for tb_role
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_parameters`;
-CREATE TABLE `tb_parameters` (
-  `eeg_location` varchar(255) DEFAULT NULL COMMENT '脑电采集指标位置',
-  `frequency` int(11) DEFAULT NULL COMMENT '频率',
-  `electrode_count` int(11) DEFAULT NULL COMMENT '电极数',
-  `data_format` int(11) DEFAULT NULL COMMENT '数据采集格式',
-  `id` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+DROP TABLE IF EXISTS `tb_role`;
+CREATE TABLE `tb_role` (
+    `role_id` VARCHAR(64) PRIMARY KEY NOT NULL COMMENT '角色ID，主键',
+    `role_name` VARCHAR(50) NOT NULL COMMENT '角色名称',
+    `description` VARCHAR(255) DEFAULT NULL COMMENT '角色描述',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '角色创建时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色信息表';
+
+-- ----------------------------
+-- Table structure for tb_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_user_role`;
+CREATE TABLE `tb_user_role` (
+    `user_id` VARCHAR(64) NOT NULL COMMENT '用户ID',
+    `role_id` VARCHAR(64) NOT NULL COMMENT '角色ID',
+    PRIMARY KEY (`user_id`, `role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户角色关联表';
+
+-- ----------------------------
+-- Table structure for tb_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_permission`;
+CREATE TABLE `tb_permission` (
+    `permission_id` VARCHAR(64) PRIMARY KEY NOT NULL COMMENT '权限ID，主键',
+    `permission_name` VARCHAR(100) NOT NULL COMMENT '权限名称',
+    `page_url` VARCHAR(255) NOT NULL COMMENT '访问的页面URL',
+    `description` VARCHAR(255) DEFAULT NULL COMMENT '权限描述',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '权限创建时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限表';
+
+-- ----------------------------
+-- Table structure for tb_role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_role_permission`;
+CREATE TABLE `tb_role_permission` (
+    `role_id` VARCHAR(64) NOT NULL COMMENT '角色ID',
+    `permission_id` VARCHAR(64) NOT NULL COMMENT '权限ID',
+    PRIMARY KEY (`role_id`, `permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色权限关联表';
+
+-- ----------------------------
+-- Table structure for tb_system_params
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_system_params`;
+CREATE TABLE `tb_system_params` (
+    `param_id` VARCHAR(64) PRIMARY KEY NOT NULL COMMENT '参数ID，主键',
+    `eeg_frequency` FLOAT DEFAULT NULL COMMENT '脑电数据采样频率 (Hz)',
+    `electrode_count` INT(11) DEFAULT NULL COMMENT '电极数量',
+    `scale_question_num` INT(11) DEFAULT NULL COMMENT '量表问题数量',
+    `model_num` INT(11) DEFAULT NULL COMMENT '系统中可用的模型数量',
+    `id` int(11) NOT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统参数表';

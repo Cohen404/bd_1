@@ -523,3 +523,47 @@ result_view_rear.py中的result1-3都在数据库表的列都变成了stress_sco
 
 
 点击"报告按钮"生成报告的时候，显示进度条，完成后不要提示具体报告保存路径，提示：报告生成完毕，可以在结果管理中查看。
+
+
+
+
+
+
+sql_model.sql中增加这几张表，不过不要有功能
+(2)tb_role（角色信息表）
+字段名	数据类型	长度	是否允许空值	默认值	备注
+role_id	varchar	64	否		角色ID，主键
+role_name	varchar	50	否		角色名称
+description	varchar	255	是	NULL	角色描述
+created_at	datetime		否	CURRENT_TIMESTAMP	角色创建时间
+
+
+(3)tb_user_role（用户角色关联表）
+字段名	数据类型	长度	是否允许空值	默认值	备注
+user_id	varchar	64	否		用户ID
+role_id	varchar	64	否		角色ID
+
+
+
+(1)tb_permission（权限表）
+字段名	数据类型	长度	是否允许空值	默认值	备注
+permission_id	varchar	64	否		权限ID，主键
+permission_name	varchar	100	否		权限名称
+page_url	varchar	255	否		访问的页面URL
+description	varchar	255	是	NULL	权限描述
+created_at	datetime		否	CURRENT_TIMESTAMP	权限创建时间
+
+
+tb_role_permission（角色权限关联表）
+字段名	数据类型	长度	是否允许空值	默认值	备注
+role_id	varchar	64	否		角色ID
+permission_id	varchar	64	否		权限ID
+
+
+(1)tb_system_params（系统参数表）
+字段名	数据类型	长度	是否允许空值	默认值	备注
+param_id	varchar	64	否		参数ID，主键
+eeg_frequency	float		是	NULL	脑电数据采样频率 (Hz)
+electrode_count	int	11	是	NULL	电极数量
+scale_question_num	int	11	是	NULL	量表问题数量
+model_num	int	11	是	NULL	系统中可用的模型数量
