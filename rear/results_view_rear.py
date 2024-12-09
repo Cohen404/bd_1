@@ -144,6 +144,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         window_manager = WindowManager()
         window_manager.register_window('results_view', self)
 
+        # 添加导出按钮事件连接
+        self.export_btn.clicked.connect(self.export_results)
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -557,6 +560,54 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
             QMessageBox.critical(self, "错误", f"查看详情失败：{str(e)}")
         finally:
             session.close()
+
+    def export_results(self):
+        """导出结果到Excel文件"""
+        try:
+            # 获取保存路径
+            file_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "导出结果",
+                "评估结果.xlsx",
+                "Excel Files (*.xlsx)"
+            )
+            
+            if not file_path:
+                return
+            
+            # 确保文件扩展名正确
+            if not file_path.endswith('.xlsx'):
+                file_path += '.xlsx'
+            
+            # 创建pandas DataFrame
+            import pandas as pd
+            
+            # 获取表格数据
+            rows = self.tableWidget.rowCount()
+            cols = self.tableWidget.columnCount()
+            headers = []
+            for col in range(cols-1):  # 不包括最后一列的"操作"
+                headers.append(self.tableWidget.horizontalHeaderItem(col).text())
+            
+            data = []
+            for row in range(rows):
+                row_data = []
+                for col in range(cols-1):  # 不包括最后一列的"操作"
+                    item = self.tableWidget.item(row, col)
+                    row_data.append(item.text() if item else "")
+                data.append(row_data)
+            
+            # 创建DataFrame并导出
+            df = pd.DataFrame(data, columns=headers)
+            df.to_excel(file_path, index=False, engine='openpyxl')
+            
+            QMessageBox.information(self, "成功", "结果已成功导出到Excel文件！")
+            logging.info(f"Results exported to Excel: {file_path}")
+            
+        except Exception as e:
+            error_msg = f"导出结果时发生错误：{str(e)}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
 
 class ReportViewer(QMainWindow):
     """报告查看窗口"""

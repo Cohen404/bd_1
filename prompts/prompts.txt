@@ -567,3 +567,10 @@ eeg_frequency	float		是	NULL	脑电数据采样频率 (Hz)
 electrode_count	int	11	是	NULL	电极数量
 scale_question_num	int	11	是	NULL	量表问题数量
 model_num	int	11	是	NULL	系统中可用的模型数量
+
+
+
+
+
+
+结果查看页面需要增加一个按钮，能够导出所有结果（表格中的内容）到excel，前端页面为result_view.py

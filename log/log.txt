@@ -5983,3 +5983,8 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-08 20:36:43,645 - INFO - Administrator - Returned to index page successfully
 2024-12-08 20:36:44,716 - INFO - Administrator - Opening log management page.
 2024-12-08 20:37:17,789 - INFO - Administrator - Returned to index page successfully
+2024-12-09 21:26:51,863 - INFO - Administrator - User admin logged in successfully
+2024-12-09 21:28:45,249 - INFO - Administrator - User admin logged in successfully
+2024-12-09 21:28:46,157 - INFO - Administrator - Opening results view page.
+2024-12-09 21:29:00,840 - INFO - Administrator - Results exported to Excel: C:/Users/WangZ/Desktop/评估结果.xlsx
+2024-12-09 21:29:19,004 - INFO - Administrator - Returned to index page successfully

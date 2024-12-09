@@ -318,6 +318,30 @@ class Ui_MainWindow(object):
         spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem4)
         self.gridLayout.addLayout(self.verticalLayout_4, 2, 0, 1, 1)
+
+        # 在 verticalLayout 中添加一个水平布局用于放置导出按钮
+        self.export_layout = QtWidgets.QHBoxLayout()
+        self.verticalLayout.addLayout(self.export_layout)
+
+        # 添加导出按钮
+        self.export_btn = QtWidgets.QPushButton(self.widget1)
+        self.export_btn.setObjectName("export_btn")
+        self.export_btn.setStyleSheet("""
+            QPushButton {
+                background-color: white;
+                border-radius: 4px;
+                padding: 6px 12px;
+                color: #5c8ac3;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #f0f0f0;
+            }
+        """)
+        self.export_layout.addStretch()  # 添加弹簧
+        self.export_layout.addWidget(self.export_btn)
+        self.export_layout.addStretch()  # 添加弹簧
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.layout.addLayout(self.gridLayout)  # 把主体部分加入垂直布局
@@ -391,4 +415,7 @@ class Ui_MainWindow(object):
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
+
+        self.export_btn.setText(_translate("MainWindow", "导出结果"))
+        self.export_btn.setFont(font)
 
