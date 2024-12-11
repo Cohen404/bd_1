@@ -19,6 +19,7 @@ from state import operate_user
 from util.db_util import SessionClass
 from sql_model.tb_parameters import Parameters
 from sql_model.tb_user import User
+from sql_model.system_params import SystemParams
 
 import logging
 from config import (
@@ -67,7 +68,7 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
 
-        # 添加��滤器
+        # 添加滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
@@ -75,7 +76,7 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
     def returnIndex(self):
         """
         返回到相应的主页面
-        根据用户类型返回到管理员或普通用户页面
+        根据��类型返回到管理员或普通用户页面
         """
         path = USER_STATUS_FILE
         user_status = operate_user.read(path)
@@ -105,63 +106,66 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         保存参数到数据库的处理函数
         """
         logging.info("Starting database save operation.")
-
         session = SessionClass()
 
-        # 查找现有记录
-        existing_data = session.query(Parameters).filter(Parameters.id == 0).first()
-
-        if existing_data is not None:
-            # 更新现有记录
-            logging.info("Updating existing Parameters record.")
-            existing_data.frequency = int(self.sample_freq.text())
-            existing_data.electrode_count = int(self.electrode_numbers.text())
-            existing_data.eeg_location = str(self.eeg_location.text())
-            existing_data.data_format = 1  # 或者 self.data_format.currentText()
-            logging.info(
-                f"Updated frequency to {existing_data.frequency}, electrode_count to {existing_data.electrode_count}, "
-                f"eeg_location to {existing_data.eeg_location}, data_format to {existing_data.data_format}.")
-        else:
-            # 创建新记录
-            logging.info("Creating new Parameters record.")
-            new_data = Parameters(
-                eeg_location=str(self.eeg_location.text()),
-                frequency=int(self.sample_freq.text()),
-                electrode_count=int(self.electrode_numbers.text()),
-                data_format=1  # 或者 self.data_format.currentText()
-            )
-            session.add(new_data)
-            logging.info(f"Added new Parameters record with frequency {new_data.frequency}, "
-                         f"electrode_count {new_data.electrode_count}, eeg_location {new_data.eeg_location}, "
-                         f"data_format {new_data.data_format}.")
-
         try:
+            # 查找现有记录
+            existing_data = session.query(SystemParams).filter(SystemParams.id == 1).first()
+
+            if existing_data is not None:
+                # 更新现有记录
+                logging.info("Updating existing SystemParams record.")
+                existing_data.eeg_frequency = float(self.sample_freq.text())
+                existing_data.electrode_count = int(self.electrode_numbers.text())
+                existing_data.scale_question_num = int(self.question_num.text())
+                existing_data.model_num = int(self.model_num.text())
+            else:
+                # 创建新记录
+                logging.info("Creating new SystemParams record.")
+                new_data = SystemParams(
+                    param_id='PARAM_001',  # 设置一个固定的param_id
+                    eeg_frequency=float(self.sample_freq.text()),
+                    electrode_count=int(self.electrode_numbers.text()),
+                    scale_question_num=int(self.question_num.text()),
+                    model_num=int(self.model_num.text()),
+                    id=1  # 设置固定的id
+                )
+                session.add(new_data)
+
             session.commit()
             logging.info("Database transaction committed successfully.")
+            QMessageBox.information(self, "成功", "参数保存成功！")
+
         except Exception as e:
             session.rollback()
-            logging.error(f"Failed to commit database transaction: {e}")
-            raise  # Re-raise the exception after logging
-
+            logging.error(f"Failed to save parameters: {e}")
+            QMessageBox.critical(self, "错误", f"保存参数时发生错误：{str(e)}")
         finally:
             session.close()
             logging.info("Database session closed.")
 
         self.SHOWUi()
-        logging.info("SHOWUi method called after database operation.")
 
     def SHOWUi(self):
         """
         显示参数控制界面的UI，并从数据库加载最新的参数值
         """
         session = SessionClass()
-        data = session.query(Parameters).first()  # 获取最新的记录
-        session.close()
-        if data is not None:
-            # 将数据库中的值设置到相应的输入框中
-            self.eeg_location.setText(str(data.eeg_location))
-            self.sample_freq.setText(str(data.frequency))
-            self.electrode_numbers.setText(str(data.electrode_count))
-            # index = self.data_format.findText(str(data.data_format), QtCore.Qt.MatchFixedString)
-            # if index >= 0:
-            #     self.data_format.setCurrentIndex(index)
+        try:
+            data = session.query(SystemParams).filter(SystemParams.id == 1).first()
+            if data is not None:
+                self.sample_freq.setText(str(data.eeg_frequency))
+                self.electrode_numbers.setText(str(data.electrode_count))
+                self.question_num.setText(str(data.scale_question_num))
+                self.model_num.setText(str(data.model_num))
+            else:
+                # 如果没有数据，设置默认值
+                self.sample_freq.setText("")
+                self.electrode_numbers.setText("")
+                self.question_num.setText("")
+                self.model_num.setText("")
+        except Exception as e:
+            logging.error(f"Error loading parameters: {e}")
+            QMessageBox.critical(self, "错误", f"加载参数时发生错误：{str(e)}")
+        finally:
+            session.close()

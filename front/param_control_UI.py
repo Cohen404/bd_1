@@ -75,79 +75,43 @@ class Ui_param_Control(QWidget):
         返回:
         param_layout: 参数设置表单布局
         """
-        # param_layout = QHBoxLayout()
-        # param_form = QFormLayout()
-        # param_form.setLabelAlignment(Qt.AlignRight)
-        # sample_freq = QComboBox()
-        # sample_freq.setFixedHeight(40)
-        # sample_freq.setFixedWidth(120)
-        # sample_freq.addItems(['5', '10', '20'])  # todo 换成数据库读取数据
-        # electrode_numbers = QComboBox()
-        # electrode_numbers.setFixedHeight(40)
-        # electrode_numbers.setFixedWidth(120)
-        # electrode_numbers.addItems(['5', '10', '20'])
-        # choose_time_interval = QCheckBox()
-        #
-        # data_format = QComboBox()
-        # data_format.setFixedWidth(120)
-        # data_format.setFixedHeight(40)
-        # data_format.addItems(['EEG'])
-        # choose_timed_evaluation = QCheckBox()
-        # check = QVBoxLayout()
-        # check.addStretch(3)
-        # check.addWidget(choose_time_interval)
-        # check.addStretch(1)
-        # check.addWidget(choose_timed_evaluation)
-        # check.addStretch(1)
-        #
-        # param_form.addRow("采样频率:", sample_freq)
-        # param_form.addRow("电极数量:", electrode_numbers)
-        # param_form.addRow("采集格式:", data_format)
-        # param_layout.addStretch()
-        # param_layout.addLayout(param_form)
-        # param_layout.addLayout(check)
-        # param_layout.addStretch()
-        # self.save_button = QPushButton('底部按钮')
-        # param_layout.addWidget(self.save_button)
         self.param_layout = QHBoxLayout()
         self.param_form = QFormLayout()
         self.param_form.setLabelAlignment(Qt.AlignRight)
-
-        self.eeg_location_label=QLabel("采集位置:")
-        self.eeg_location_label.setStyleSheet("font-size: 30px;")
-        self.eeg_location = QLineEdit()
-        self.eeg_location.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
 
         self.sample_freq_label = QLabel("采样频率:")
         self.sample_freq_label.setStyleSheet("font-size: 30px;")
         self.sample_freq = QLineEdit()
         self.sample_freq.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
 
-
         self.electrode_numbers_label = QLabel("电极数量:")
         self.electrode_numbers_label.setStyleSheet("font-size: 30px;")
-        self.electrode_numbers =QLineEdit()
+        self.electrode_numbers = QLineEdit()
         self.electrode_numbers.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
 
+        self.question_num_label = QLabel("量表问题数量:")
+        self.question_num_label.setStyleSheet("font-size: 30px;")
+        self.question_num = QLineEdit()
+        self.question_num.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
 
-        self.data_format_label = QLabel("采集格式:")
-        self.data_format_label.setStyleSheet("font-size: 30px;")
-        self.data_format = QComboBox()
-        self.data_format.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
-        self.data_format.addItems(['EEG'])
+        self.model_num_label = QLabel("模型数量:")
+        self.model_num_label.setStyleSheet("font-size: 30px;")
+        self.model_num = QLineEdit()
+        self.model_num.setStyleSheet("font-size: 30px; height: 60px; width: 180px;")
 
-        self.param_form.addRow(self.eeg_location_label, self.eeg_location)
         self.param_form.addRow(self.sample_freq_label, self.sample_freq)
         self.param_form.addRow(self.electrode_numbers_label, self.electrode_numbers)
-        self.param_form.addRow(self.data_format_label, self.data_format)
+        self.param_form.addRow(self.question_num_label, self.question_num)
+        self.param_form.addRow(self.model_num_label, self.model_num)
+        
         self.param_layout.addStretch()
         self.param_layout.addLayout(self.param_form)
-
         self.param_layout.addStretch()
 
         self.save_button = QPushButton('保存')
         self.save_button.setStyleSheet("font-size: 20px; height: 60px; width: 180px;color: white;background-color:rgb(0, 120, 215);border-radius: 10px;")
         self.param_layout.addWidget(self.save_button)
+        
         return self.param_layout
 
 

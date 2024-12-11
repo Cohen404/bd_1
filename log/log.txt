@@ -5988,3 +5988,216 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-09 21:28:46,157 - INFO - Administrator - Opening results view page.
 2024-12-09 21:29:00,840 - INFO - Administrator - Results exported to Excel: C:/Users/WangZ/Desktop/评估结果.xlsx
 2024-12-09 21:29:19,004 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:48:51,603 - INFO - Administrator - User admin logged in successfully
+2024-12-11 15:48:53,347 - INFO - Administrator - Data table refreshed successfully with 2 records
+2024-12-11 15:48:53,359 - INFO - Administrator - Opening data view page.
+2024-12-11 15:49:05,447 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/tmp/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:05,483 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2, Username: admin
+2024-12-11 15:49:06,485 - INFO - Administrator - Data table refreshed successfully with 3 records
+2024-12-11 15:49:08,826 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:15,151 - INFO - Administrator - Data processing completed successfully
+2024-12-11 15:49:18,160 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-12-11 15:49:18,164 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:19,509 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-11 15:49:23,360 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-12-11 15:49:23,364 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:25,674 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_2.png
+2024-12-11 15:49:26,704 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-12-11 15:49:26,708 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:28,783 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_4.png
+2024-12-11 15:49:31,418 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-12-11 15:49:31,420 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:31,453 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_wavelet.png
+2024-12-11 15:49:34,480 - INFO - Administrator - Button clicked in row 2, corresponding ID: 3
+2024-12-11 15:49:34,482 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:49:34,503 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\differential_entropy.png
+2024-12-11 15:49:49,945 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:49:51,432 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-11 15:49:51,432 - INFO - Administrator - Depression LED set to RED
+2024-12-11 15:49:51,432 - INFO - Administrator - Anxiety LED set to RED
+2024-12-11 15:49:51,433 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-11 15:49:51,442 - INFO - Administrator - Successfully displayed 3 data records
+2024-12-11 15:49:51,448 - INFO - Administrator - Opening health evaluation page.
+2024-12-11 15:50:28,344 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-11 15:50:28,345 - INFO - Administrator - Depression LED set to RED
+2024-12-11 15:50:28,345 - INFO - Administrator - Anxiety LED set to RED
+2024-12-11 15:50:30,644 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-12-11 15:50:30,646 - INFO - Administrator - Data path retrieved for ID 3: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-11 15:50:30,648 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-11 15:50:30,648 - INFO - Administrator - Depression LED set to RED
+2024-12-11 15:50:30,648 - INFO - Administrator - Anxiety LED set to RED
+2024-12-11 15:50:30,648 - INFO - Administrator - Initializing current image index to 0
+2024-12-11 15:50:30,648 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:30,648 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-11 15:50:30,673 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-11 15:50:31,899 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:31,899 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Alpha.png
+2024-12-11 15:50:31,921 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-11 15:50:32,411 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:32,411 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Beta.png
+2024-12-11 15:50:32,433 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-11 15:50:32,907 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:32,907 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Gamma.png
+2024-12-11 15:50:32,928 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-11 15:50:33,450 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:33,450 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_1.png
+2024-12-11 15:50:33,471 - INFO - Administrator - Successfully displayed image: 均分频带1
+2024-12-11 15:50:33,810 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:33,811 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_2.png
+2024-12-11 15:50:33,824 - INFO - Administrator - Successfully displayed image: 均分频带2
+2024-12-11 15:50:34,250 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:34,250 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_3.png
+2024-12-11 15:50:34,276 - INFO - Administrator - Successfully displayed image: 均分频带3
+2024-12-11 15:50:34,458 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:34,458 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_4.png
+2024-12-11 15:50:34,472 - INFO - Administrator - Successfully displayed image: 均分频带4
+2024-12-11 15:50:34,626 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:34,627 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_5.png
+2024-12-11 15:50:34,650 - INFO - Administrator - Successfully displayed image: 均分频带5
+2024-12-11 15:50:34,906 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:34,906 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\time_过零率.png
+2024-12-11 15:50:34,931 - INFO - Administrator - Successfully displayed image: 域特征 - 过零率
+2024-12-11 15:50:35,202 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:35,203 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\time_方差.png
+2024-12-11 15:50:35,225 - INFO - Administrator - Successfully displayed image: 时域特征 - 方差
+2024-12-11 15:50:35,378 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:35,378 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\time_能量.png
+2024-12-11 15:50:35,402 - INFO - Administrator - Successfully displayed image: 时域特征 - 能量
+2024-12-11 15:50:35,883 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:35,883 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\time_差分.png
+2024-12-11 15:50:35,904 - INFO - Administrator - Successfully displayed image: 时域特征 - 差分
+2024-12-11 15:50:36,275 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:36,275 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_wavelet.png
+2024-12-11 15:50:36,302 - INFO - Administrator - Successfully displayed image: 时频域特征 - 小波变换
+2024-12-11 15:50:36,635 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:36,635 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\differential_entropy.png
+2024-12-11 15:50:36,647 - INFO - Administrator - Successfully displayed image: 微分熵
+2024-12-11 15:50:37,027 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:37,027 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-11 15:50:37,040 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-11 15:50:37,322 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:37,322 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Alpha.png
+2024-12-11 15:50:37,335 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-11 15:50:37,619 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:37,619 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Beta.png
+2024-12-11 15:50:37,631 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-11 15:50:37,842 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:37,842 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Gamma.png
+2024-12-11 15:50:37,854 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-11 15:50:38,067 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-11 15:50:38,067 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\frequency_band_1.png
+2024-12-11 15:50:38,079 - INFO - Administrator - Successfully displayed image: 均分频带1
+2024-12-11 15:50:39,338 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:50:40,585 - INFO - Administrator - Opening results view page.
+2024-12-11 15:50:51,192 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:50:52,038 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-11 15:50:52,038 - INFO - Administrator - Depression LED set to RED
+2024-12-11 15:50:52,038 - INFO - Administrator - Anxiety LED set to RED
+2024-12-11 15:50:52,040 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-11 15:50:52,049 - INFO - Administrator - Successfully displayed 3 data records
+2024-12-11 15:50:52,058 - INFO - Administrator - Opening health evaluation page.
+2024-12-11 15:51:41,151 - INFO - Administrator - Report generated successfully for result ID 3
+2024-12-11 15:51:42,848 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:51:43,905 - INFO - Administrator - Opening results view page.
+2024-12-11 15:52:22,906 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:52:24,906 - INFO - Administrator - Opening model control page.
+2024-12-11 15:52:28,201 - INFO - Administrator - Attempting to delete model of type: 普通应激评估模型 (Mapped to: 0)
+2024-12-11 15:52:30,392 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-11 15:52:34,368 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-11 15:52:55,790 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-12-11 15:54:46,611 - INFO - Administrator - User admin logged in successfully
+2024-12-11 15:54:47,941 - INFO - Administrator - Opening model control page.
+2024-12-11 15:54:51,026 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-11 15:54:58,043 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-12-11 15:54:58,045 - INFO - Administrator - Deleted existing model file: ./model/yingji\subject-1 yingji.keras
+2024-12-11 15:54:58,046 - INFO - Administrator - Moved model file to: ./model/yingji\subject-1 yingji.keras
+2024-12-11 15:54:58,049 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ./model/yingji\subject-1 yingji.keras
+2024-12-11 15:54:58,053 - INFO - Administrator - Model upload and database update completed successfully.
+2024-12-11 15:54:58,103 - INFO - Administrator - Temporary directory cleaned up.
+2024-12-11 15:55:01,825 - INFO - Administrator - Exporting model with path: ./model/yingji/subject-1 yingji.keras
+2024-12-11 15:55:05,943 - INFO - Administrator - Saving model to: C:/subject-1 yingji.keras
+2024-12-11 15:55:05,966 - ERROR - Administrator - Error exporting model: [Errno 13] Permission denied: 'C:/subject-1 yingji.keras'
+2024-12-11 15:55:09,186 - INFO - Administrator - Exporting model with path: ./model/yingji/subject-1 yingji.keras
+2024-12-11 15:55:12,905 - INFO - Administrator - Saving model to: C:/Users/WangZ/Desktop\subject-1 yingji.keras
+2024-12-11 15:55:12,909 - INFO - Administrator - Model copied successfully from ./model/yingji/subject-1 yingji.keras to C:/Users/WangZ/Desktop\subject-1 yingji.keras
+2024-12-11 15:55:29,065 - INFO - Administrator - Returned to admin page successfully
+2024-12-11 15:55:30,385 - INFO - Administrator - Opening user management page.
+2024-12-11 15:55:49,506 - INFO - Administrator - New user added: abc (type: user)
+2024-12-11 15:55:58,515 - INFO - Administrator - User user1733903749 updated: username: abc -> abc2
+2024-12-11 15:56:03,302 - INFO - Administrator - User deletion cancelled for: abc2 (ID: user1733903749)
+2024-12-11 15:56:04,456 - INFO - Administrator - Returned to index page successfully
+2024-12-11 15:56:08,776 - INFO - Administrator - Opening parameter control page.
+2024-12-11 15:56:14,643 - INFO - Administrator - Starting database save operation.
+2024-12-11 15:56:14,649 - INFO - Administrator - Creating new Parameters record.
+2024-12-11 15:56:14,649 - INFO - Administrator - Added new Parameters record with frequency 3, electrode_count 4, eeg_location 2, data_format 1.
+2024-12-11 15:56:14,651 - ERROR - Administrator - Failed to commit database transaction: (pymysql.err.OperationalError) (1364, "Field 'id' doesn't have a default value")
+[SQL: INSERT INTO tb_parameters (eeg_location, frequency, electrode_count, data_format) VALUES (%(eeg_location)s, %(frequency)s, %(electrode_count)s, %(data_format)s)]
+[parameters: {'eeg_location': '2', 'frequency': 3, 'electrode_count': 4, 'data_format': 1}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-12-11 15:56:14,651 - INFO - Administrator - Database session closed.
+2024-12-11 16:09:32,193 - INFO - Administrator - User admin logged in successfully
+2024-12-11 16:09:33,206 - ERROR - Administrator - Error loading parameters: 'SystemParams' object has no attribute 'eeg_location'
+2024-12-11 16:09:39,554 - INFO - Administrator - Opening parameter control page.
+2024-12-11 16:11:42,059 - INFO - Administrator - User admin logged in successfully
+2024-12-11 16:11:43,150 - INFO - Administrator - Opening parameter control page.
+2024-12-11 16:11:50,173 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:12:08,190 - INFO - Administrator - Opening parameter control page.
+2024-12-11 16:14:10,264 - INFO - Administrator - User admin logged in successfully
+2024-12-11 16:14:11,272 - INFO - Administrator - Opening parameter control page.
+2024-12-11 16:14:15,125 - INFO - Administrator - Starting database save operation.
+2024-12-11 16:14:15,128 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-11 16:14:15,129 - INFO - Administrator - Database transaction committed successfully.
+2024-12-11 16:14:16,034 - INFO - Administrator - Database session closed.
+2024-12-11 16:14:16,828 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:14:17,810 - INFO - Administrator - Opening log management page.
+2024-12-11 16:14:19,634 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:14:20,378 - INFO - Administrator - Opening password change page.
+2024-12-11 16:14:26,045 - INFO - Administrator - Password changed successfully for user 'admin'
+2024-12-11 16:14:26,885 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:14:27,551 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-11 16:15:02,893 - INFO - Administrator - User admin logged in successfully
+2024-12-11 16:15:04,176 - INFO - Administrator - Opening model control page.
+2024-12-11 16:15:07,143 - INFO - Administrator - Attempting to delete model of type: 普通应激评估模型 (Mapped to: 0)
+2024-12-11 16:15:08,599 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-11 16:15:11,491 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-11 16:15:18,466 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-12-11 16:15:18,467 - INFO - Administrator - Deleted existing model file: ./model/yingji\subject-1 yingji.keras
+2024-12-11 16:15:18,467 - INFO - Administrator - Moved model file to: ./model/yingji\subject-1 yingji.keras
+2024-12-11 16:15:18,471 - INFO - Administrator - Updated existing model record for type 普通应激评估模型. New path: ./model/yingji\subject-1 yingji.keras
+2024-12-11 16:15:18,477 - INFO - Administrator - Model upload and database update completed successfully.
+2024-12-11 16:15:18,478 - INFO - Administrator - Temporary directory cleaned up.
+2024-12-11 16:15:23,912 - INFO - Administrator - Exporting model with path: ./model/yingji\subject-1 yingji.keras
+2024-12-11 16:15:28,014 - INFO - Administrator - Saving model to: C:/Users/WangZ/Desktop\subject-1 yingji.keras
+2024-12-11 16:15:28,048 - INFO - Administrator - Model copied successfully from ./model/yingji\subject-1 yingji.keras to C:/Users/WangZ/Desktop\subject-1 yingji.keras
+2024-12-11 16:15:33,427 - INFO - Administrator - Returned to admin page successfully
+2024-12-11 16:15:36,723 - INFO - Administrator - Opening user management page.
+2024-12-11 16:15:51,616 - INFO - Administrator - New user added: test1 (type: user)
+2024-12-11 16:15:57,999 - INFO - Administrator - User user1733904951 updated: phone: 11111111111 -> 111111111112
+2024-12-11 16:16:02,494 - INFO - Administrator - User deleted successfully: test1 (ID: user1733904951)
+2024-12-11 16:16:05,535 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:08,299 - INFO - Administrator - Opening parameter control page.
+2024-12-11 16:16:10,810 - INFO - Administrator - Starting database save operation.
+2024-12-11 16:16:10,813 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-11 16:16:10,814 - INFO - Administrator - Database transaction committed successfully.
+2024-12-11 16:16:11,881 - INFO - Administrator - Database session closed.
+2024-12-11 16:16:13,036 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:14,017 - INFO - Administrator - Opening log management page.
+2024-12-11 16:16:19,172 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:20,739 - INFO - Administrator - Opening password change page.
+2024-12-11 16:16:29,830 - INFO - Administrator - Password changed successfully for user 'admin'
+2024-12-11 16:16:35,208 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:39,994 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-11 16:16:45,392 - INFO - Regular user - User abc2 logged in successfully
+2024-12-11 16:16:48,927 - INFO - Administrator - Data table refreshed successfully with 0 records
+2024-12-11 16:16:48,935 - INFO - Administrator - Opening data view page.
+2024-12-11 16:16:53,231 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:53,909 - INFO - Administrator - Opening results view page.
+2024-12-11 16:16:55,645 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:56,289 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-11 16:16:56,289 - INFO - Administrator - Depression LED set to RED
+2024-12-11 16:16:56,289 - INFO - Administrator - Anxiety LED set to RED
+2024-12-11 16:16:56,291 - INFO - Administrator - Regular user abc2: fetching own data records
+2024-12-11 16:16:56,291 - INFO - Administrator - Successfully displayed 0 data records
+2024-12-11 16:16:56,297 - INFO - Administrator - Opening health evaluation page.
+2024-12-11 16:16:57,727 - INFO - Administrator - Returned to index page successfully
+2024-12-11 16:16:58,532 - INFO - Administrator - Opening admin login page.

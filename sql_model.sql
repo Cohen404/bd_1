@@ -147,6 +147,24 @@ CREATE TABLE `tb_system_params` (
     `electrode_count` INT(11) DEFAULT NULL COMMENT '电极数量',
     `scale_question_num` INT(11) DEFAULT NULL COMMENT '量表问题数量',
     `model_num` INT(11) DEFAULT NULL COMMENT '系统中可用的模型数量',
-    `id` int(11) NOT NULL,
-    PRIMARY KEY (`id`) USING BTREE
+    `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统参数表';
+
+-- ----------------------------
+-- Records of tb_system_params
+-- ----------------------------
+INSERT INTO `tb_system_params` (
+    `param_id`,
+    `eeg_frequency`,
+    `electrode_count`,
+    `scale_question_num`,
+    `model_num`,
+    `id`
+) VALUES (
+    'PARAM_001',
+    500,
+    64,
+    40,
+    3,
+    1
+);

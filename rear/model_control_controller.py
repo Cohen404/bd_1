@@ -164,9 +164,9 @@ class model_control_Controller(Ui_model_Control):
 
                 # 根据模型类型选择目标目录
                 model_type_dir_mapping = {
-                    0: "../model/yingji",
-                    1: "../model/yiyu",
-                    2: "../model/jiaolv"
+                    0: "./model/yingji",
+                    1: "./model/yiyu",
+                    2: "./model/jiaolv"
                 }
                 target_dir = model_type_dir_mapping.get(model_type)
 
