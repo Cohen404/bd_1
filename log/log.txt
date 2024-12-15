@@ -6201,3 +6201,201 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-11 16:16:56,297 - INFO - Administrator - Opening health evaluation page.
 2024-12-11 16:16:57,727 - INFO - Administrator - Returned to index page successfully
 2024-12-11 16:16:58,532 - INFO - Administrator - Opening admin login page.
+2024-12-13 11:54:20,683 - INFO - Administrator - User admin logged in successfully
+2024-12-13 11:54:25,701 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:54:25,701 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:54:25,701 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:54:25,704 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-13 11:54:25,720 - INFO - Administrator - Successfully displayed 3 data records
+2024-12-13 11:54:25,741 - INFO - Administrator - Opening health evaluation page.
+2024-12-13 11:54:27,306 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-13 11:54:27,311 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-13 11:54:27,314 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:54:27,314 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:54:27,314 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:54:27,314 - INFO - Administrator - Initializing current image index to 0
+2024-12-13 11:54:27,314 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:27,314 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-13 11:54:27,354 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-13 11:54:31,100 - INFO - Administrator - Button clicked in row 1, ID: 2
+2024-12-13 11:54:31,102 - INFO - Administrator - Data path retrieved for ID 2: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-13 11:54:31,103 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:54:31,105 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:54:31,105 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:54:31,105 - INFO - Administrator - Initializing current image index to 0
+2024-12-13 11:54:31,105 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:31,105 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-13 11:54:31,118 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-13 11:54:32,850 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-12-13 11:54:32,852 - INFO - Administrator - Data path retrieved for ID 3: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-13 11:54:32,855 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:54:32,855 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:54:32,855 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:54:32,855 - INFO - Administrator - Initializing current image index to 0
+2024-12-13 11:54:32,855 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:32,855 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-13 11:54:32,869 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-13 11:54:33,532 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:33,532 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Alpha.png
+2024-12-13 11:54:33,543 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-13 11:54:33,857 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:33,858 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Beta.png
+2024-12-13 11:54:33,870 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-13 11:54:34,041 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-13 11:54:34,042 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Gamma.png
+2024-12-13 11:54:34,054 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-13 11:55:05,185 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:55:05,185 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:55:05,186 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:55:06,271 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:55:07,139 - INFO - Administrator - Opening results view page.
+2024-12-13 11:55:19,277 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:55:19,825 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:55:19,825 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:55:19,825 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:55:19,827 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-13 11:55:19,843 - INFO - Administrator - Successfully displayed 3 data records
+2024-12-13 11:55:19,862 - INFO - Administrator - Opening health evaluation page.
+2024-12-13 11:55:30,800 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 11:55:30,803 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 11:55:38,786 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 11:55:38,788 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 11:55:46,528 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 11:55:46,530 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 11:56:20,974 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:56:20,978 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:56:20,983 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:56:23,349 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:56:24,331 - INFO - Administrator - Opening results view page.
+2024-12-13 11:56:30,361 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:56:31,801 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 11:56:31,802 - INFO - Administrator - Depression LED set to RED
+2024-12-13 11:56:31,802 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 11:56:31,803 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-13 11:56:31,815 - INFO - Administrator - Successfully displayed 3 data records
+2024-12-13 11:56:31,836 - INFO - Administrator - Opening health evaluation page.
+2024-12-13 11:56:33,328 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:56:33,956 - INFO - Administrator - Data table refreshed successfully with 3 records
+2024-12-13 11:56:33,982 - INFO - Administrator - Opening data view page.
+2024-12-13 11:56:37,341 - INFO - Administrator - Button clicked in row 1, corresponding ID: 2
+2024-12-13 11:56:37,343 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-13 11:56:38,441 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-13 11:56:40,110 - INFO - Administrator - Button clicked in row 1, corresponding ID: 2
+2024-12-13 11:56:40,112 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-13 11:56:42,303 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Alpha.png
+2024-12-13 11:56:44,622 - INFO - Administrator - Button clicked in row 1, corresponding ID: 2
+2024-12-13 11:56:44,624 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-13 11:56:45,541 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\time_过零率.png
+2024-12-13 11:56:48,774 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:56:49,756 - INFO - Administrator - Data table refreshed successfully with 3 records
+2024-12-13 11:56:49,779 - INFO - Administrator - Opening data view page.
+2024-12-13 11:56:51,389 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:56:52,067 - INFO - Administrator - Opening results view page.
+2024-12-13 11:57:11,670 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:57:12,651 - INFO - Administrator - Opening model control page.
+2024-12-13 11:57:15,109 - INFO - Administrator - Attempting to delete model of type: 普通应激评估模型 (Mapped to: 0)
+2024-12-13 11:57:15,938 - INFO - Administrator - Deleting model file at path: ./model/yingji\subject-1 yingji.keras
+2024-12-13 11:57:15,939 - INFO - Administrator - Deleted model file: ./model/yingji\subject-1 yingji.keras
+2024-12-13 11:57:15,945 - INFO - Administrator - Deleted model record from database for type: 普通应激评估模型
+2024-12-13 11:57:19,746 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-13 11:57:32,243 - WARNING - Administrator - Model upload canceled by the user.
+2024-12-13 11:58:25,071 - INFO - Administrator - User admin logged in successfully
+2024-12-13 11:58:26,611 - INFO - Administrator - Opening model control page.
+2024-12-13 11:58:29,780 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-13 11:58:36,893 - INFO - Administrator - Copied model file to temporary directory: ../tmp\subject-1 yingji.keras
+2024-12-13 11:58:36,893 - INFO - Administrator - Deleted existing model file: ./model/yingji\subject-1 yingji.keras
+2024-12-13 11:58:36,894 - INFO - Administrator - Moved model file to: ./model/yingji\subject-1 yingji.keras
+2024-12-13 11:58:36,902 - INFO - Administrator - Added new model record for type 普通应激评估模型. Path: ./model/yingji\subject-1 yingji.keras
+2024-12-13 11:58:36,906 - INFO - Administrator - Model upload and database update completed successfully.
+2024-12-13 11:58:36,906 - INFO - Administrator - Temporary directory cleaned up.
+2024-12-13 11:58:39,446 - INFO - Administrator - Returned to admin page successfully
+2024-12-13 11:58:40,727 - INFO - Administrator - Opening user management page.
+2024-12-13 11:58:46,050 - WARNING - Administrator - Attempted to add user with empty username or password
+2024-12-13 11:58:49,146 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:58:50,011 - INFO - Administrator - Opening parameter control page.
+2024-12-13 11:58:53,353 - INFO - Administrator - Starting database save operation.
+2024-12-13 11:58:53,355 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-13 11:58:53,356 - INFO - Administrator - Database transaction committed successfully.
+2024-12-13 11:58:54,245 - INFO - Administrator - Database session closed.
+2024-12-13 11:58:55,424 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:58:56,201 - INFO - Administrator - Opening log management page.
+2024-12-13 11:59:03,102 - INFO - Administrator - Returned to index page successfully
+2024-12-13 11:59:03,864 - INFO - Administrator - Opening password change page.
+2024-12-13 11:59:05,677 - INFO - Administrator - Returned to index page successfully
+2024-12-13 12:39:37,843 - INFO - Administrator - User admin logged in successfully
+2024-12-13 12:39:39,222 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-13 12:39:41,769 - INFO - Administrator - Opening user login page.
+2024-12-13 12:39:45,009 - INFO - Administrator - Opening user login page.
+2024-12-13 12:39:52,487 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-13 12:39:55,277 - INFO - Administrator - User admin logged in successfully
+2024-12-13 12:39:56,306 - INFO - Administrator - Opening model control page.
+2024-12-13 12:39:58,969 - INFO - Administrator - Returned to admin page successfully
+2024-12-13 12:39:59,607 - INFO - Administrator - Opening results view page.
+2024-12-13 12:40:09,520 - INFO - Administrator - Results exported to Excel: C:/Users/WangZ/Desktop/评估结果.xlsx
+2024-12-13 12:40:25,753 - INFO - Administrator - Returned to index page successfully
+2024-12-13 12:40:26,272 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-13 14:15:08,006 - INFO - Administrator - User admin logged in successfully
+2024-12-13 14:15:27,046 - INFO - Administrator - Opening model control page.
+2024-12-13 14:15:39,094 - INFO - Administrator - Exporting model with path: ./model/yiyu/subject-1 yiyu.keras
+2024-12-13 14:15:46,577 - INFO - Administrator - Saving model to: D:/subject-1 yiyu.keras
+2024-12-13 14:15:46,580 - INFO - Administrator - Model copied successfully from ./model/yiyu/subject-1 yiyu.keras to D:/subject-1 yiyu.keras
+2024-12-13 14:16:00,048 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
+2024-12-13 14:16:09,626 - WARNING - Administrator - Model upload canceled by the user.
+2024-12-13 14:16:14,564 - INFO - Administrator - Returned to admin page successfully
+2024-12-13 14:16:16,727 - INFO - Administrator - Data table refreshed successfully with 3 records
+2024-12-13 14:16:16,758 - INFO - Administrator - Opening data view page.
+2024-12-13 14:16:46,392 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage/tmp/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3
+2024-12-13 14:16:46,406 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3, Username: admin
+2024-12-13 14:16:48,232 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-13 14:16:54,508 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3
+2024-12-13 14:17:03,457 - INFO - Administrator - Data processing completed successfully
+2024-12-13 14:17:09,080 - INFO - Administrator - Button clicked in row 3, corresponding ID: 4
+2024-12-13 14:17:09,086 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3
+2024-12-13 14:17:11,275 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3\Theta.png
+2024-12-13 14:17:14,905 - INFO - Administrator - Button clicked in row 3, corresponding ID: 4
+2024-12-13 14:17:14,908 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3
+2024-12-13 14:17:17,730 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3\Beta.png
+2024-12-13 14:17:21,618 - INFO - Administrator - Button clicked in row 3, corresponding ID: 4
+2024-12-13 14:17:21,621 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3
+2024-12-13 14:17:25,014 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_3\frequency_band_3.png
+2024-12-13 14:17:28,957 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:17:30,811 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 14:17:30,811 - INFO - Administrator - Depression LED set to RED
+2024-12-13 14:17:30,811 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 14:17:30,815 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-13 14:17:30,844 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-13 14:17:30,870 - INFO - Administrator - Opening health evaluation page.
+2024-12-13 14:17:58,432 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 14:17:58,439 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 14:18:09,826 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 14:18:09,829 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 14:18:20,577 - INFO - Administrator - 量表数据处理完成: score_lb_1=-0.375, score_lb_2=-0.6375
+2024-12-13 14:18:20,579 - INFO - Administrator - 血清学数据处理完成: score_xq=0.834894
+2024-12-13 14:18:27,119 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-13 14:18:27,119 - INFO - Administrator - Depression LED set to RED
+2024-12-13 14:18:27,119 - INFO - Administrator - Anxiety LED set to RED
+2024-12-13 14:18:53,401 - INFO - Administrator - Report generated successfully for result ID 4
+2024-12-13 14:18:54,948 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:18:56,533 - INFO - Administrator - Opening results view page.
+2024-12-13 14:20:19,121 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:20:21,975 - INFO - Administrator - Opening user management page.
+2024-12-13 14:20:26,940 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:20:28,574 - INFO - Administrator - Opening parameter control page.
+2024-12-13 14:20:36,937 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:20:38,233 - INFO - Administrator - Opening log management page.
+2024-12-13 14:20:55,929 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:20:57,582 - INFO - Administrator - Opening password change page.
+2024-12-13 14:21:00,260 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:21:02,078 - INFO - Administrator - Opening user management page.
+2024-12-13 14:21:04,964 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:21:05,790 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-13 14:21:12,626 - INFO - Regular user - User user1 logged in successfully
+2024-12-13 14:21:17,504 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-13 14:21:17,525 - INFO - Administrator - Opening data view page.
+2024-12-13 14:21:21,793 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2024-12-13 14:21:21,796 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-13 14:21:23,195 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-13 14:21:24,506 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:21:25,664 - INFO - Administrator - Opening results view page.
+2024-12-13 14:21:32,787 - INFO - Administrator - Returned to index page successfully
+2024-12-13 14:21:34,322 - INFO - Administrator - Opening admin login page.
