@@ -4,7 +4,7 @@
 import os
 import sys
 import time
-import front.param_control_UI as Ui_param_Control
+import front.param_manage_UI as Ui_param_Control
 from PyQt5 import QtCore
 sys.path.append('../')
 from datetime import datetime
@@ -13,8 +13,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QRadioButton, QTableWidgetItem, QWidget, QPushButton, QHBoxLayout, \
     QMessageBox, QFileDialog, QInputDialog
 import shutil
-from front.model_control_UI import Ui_model_Control
-from rear import index_rear, admin_rear
+from front.model_manage_UI import Ui_model_Control
+from backend import admin_index_backend, index_backend
 from state import operate_user
 from util.db_util import SessionClass
 from sql_model.tb_parameters import Parameters
@@ -84,9 +84,9 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()

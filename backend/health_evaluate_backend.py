@@ -17,11 +17,11 @@ from PyQt5 import QtWidgets
 from datetime import datetime
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.health_evaluate as health_evaluate
+import front.health_evaluate_UI as health_evaluate_UI
 # 导入跳转页面的后端部分
-import rear.index_rear
+import backend.index_backend
 
-from rear import admin_rear, param_control, model_control_controller, index_rear
+from backend import admin_index_backend, index_backend, model_manage_backend, param_manage_backend
 
 from sql_model.tb_data import Data
 from sql_model.tb_result import Result
@@ -56,7 +56,7 @@ class UserFilter(logging.Filter):
             record.userType = self.userType
         return True
 
-class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
+class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindow):
     """
     健康评估窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
     """
@@ -65,7 +65,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         """
         初始化健康评估窗口
         """
-        super(health_evaluate.Ui_MainWindow, self).__init__()
+        super(health_evaluate_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)  # 初始化health_evaluate方法
         self._index_window = None  # 添加这一行，用于保存主页面窗口引用
         
@@ -393,9 +393,9 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()
@@ -773,7 +773,7 @@ class Health_Evaluate_WindowActions(health_evaluate.Ui_MainWindow, QMainWindow):
     def open_model_control_view(self):
         logging.info("Opening model control view.")
 
-        self.model_view = model_control_controller.model_control_Controller()
+        self.model_view = model_manage_backend.model_control_Controller()
         self.close()
         self.model_view.show()
 

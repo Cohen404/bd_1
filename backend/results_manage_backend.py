@@ -23,11 +23,11 @@ from PyQt5.QtWidgets import (
 )
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.results_view as results_view
+import front.results_manage_UI as results_manage_UI
 
 # 导入跳转页面的后端部分
-from rear import index_rear
-from rear import admin_rear
+from backend import index_backend
+from backend import admin_index_backend
 from sql_model.tb_data import Data
 from sql_model.tb_result import Result
 from sql_model.tb_user import User
@@ -56,7 +56,7 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
+class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
     """
     结果查看窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
     """
@@ -65,7 +65,7 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         """
         初始化结果查看窗口
         """
-        super(results_view.Ui_MainWindow, self).__init__()
+        super(results_manage_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self._index_window = None
 
@@ -434,9 +434,9 @@ class Results_View_WindowActions(results_view.Ui_MainWindow, QMainWindow):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()

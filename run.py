@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
-from rear.init_login import Index_WindowActions
+from backend.init_login_backend import Index_WindowActions
 
 def main():
     # 启用高DPI缩放

@@ -9,9 +9,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem, QWidget, QPushButton, QHBoxLayout
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.log_manage as log_manage
+import front.log_manage_UI as log_manage_UI
 # 导入跳转页面的后端部分
-from rear import index_rear, admin_rear
+from backend import admin_index_backend, index_backend
 from sql_model.tb_user import User
 from util.db_util import SessionClass
 import logging
@@ -38,7 +38,7 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
+class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
     """
     日志管理窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
     """
@@ -47,7 +47,7 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         """
         初始化日志管理窗口
         """
-        super(log_manage.Ui_MainWindow, self).__init__()
+        super(log_manage_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self.show_log_content()  # 调用方法显示日志内容
 
@@ -106,9 +106,9 @@ class Log_Manage_WindowActions(log_manage.Ui_MainWindow, QMainWindow):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()

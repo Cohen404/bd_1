@@ -18,18 +18,18 @@ from PyQt5 import QtWidgets
 from datetime import datetime
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.data_view as data_view
+import front.data_manage_UI as data_manage_UI
 
 # 导入跳转页面的后端部分
-from rear import index_rear
-from rear import admin_rear
+from backend import index_backend
+from backend import admin_index_backend
 from sql_model.tb_data import Data
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from sqlalchemy import func
 # 导入绘图部分
-import rear.data_out as data_out
-import rear.data_pretreatment as data_pretreatment
+import backend.data_feature_calculation as data_feature_calculation
+import backend.data_preprocess as data_preprocess
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
 
@@ -53,7 +53,7 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
+class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     """
     数据查看窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
     """
@@ -62,7 +62,7 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         """
         初始化数据查看窗口
         """
-        super(data_view.Ui_MainWindow, self).__init__()
+        super(data_manage_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)
         self.id = 0
         self.data_path = ''
@@ -572,9 +572,9 @@ class Data_View_WindowActions(data_view.Ui_MainWindow, QMainWindow):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()
@@ -791,7 +791,7 @@ class ProcessingThread(QThread):
         # 数据预处理 - 30%进度
         self.progress.emit(10)
         print(self.data_path)
-        data_pretreatment.treat(self.data_path)
+        data_preprocess.treat(self.data_path)
         self.progress.emit(30)
 
         # 查找EDF文件 - 40%进度
@@ -803,7 +803,7 @@ class ProcessingThread(QThread):
         # 特征提取和可视化 - 60-100%进度
         file_path = os.path.join(self.data_path, edf_files[0])
         self.progress.emit(60)
-        data_out.analyze_eeg_data(file_path)
+        data_feature_calculation.analyze_eeg_data(file_path)
         self.progress.emit(100)
 
         self.finished.emit()

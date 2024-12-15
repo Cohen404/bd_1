@@ -9,10 +9,10 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from state import operate_user as operate_user
 # 导入本页面的前端部分
-import front.init_login as front_page
+import front.init_login_UI as front_page
 
 # 导入跳转页面的后端部分
-from rear import login_rear
+from backend import login_backend
 import logging
 from util.window_manager import WindowManager
 from config import USER_STATUS_FILE, LOG_FILE
@@ -64,7 +64,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开用户登录页面
         """
-        self.login = login_rear.Login_WindowActions()
+        self.login = login_backend.Login_WindowActions()
         logging.info("Opening user login page.")
         self.close()  # 关闭当前窗口
         self.login.show()  # 显示登录窗口

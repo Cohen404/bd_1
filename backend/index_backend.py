@@ -9,13 +9,13 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from state import operate_user as operate_user
 # 导入本页面的前端部分
-import front.index as front_page
+import front.index_UI as front_page
 
 # 导入跳转页面的后端部分
-from rear import data_view_rear
-from rear import health_evaluate_rear
-from rear import results_view_rear
-from rear import login_rear
+from backend import data_manage_backend
+from backend import health_evaluate_backend
+from backend import results_manage_backend
+from backend import login_backend
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
@@ -99,7 +99,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开健康评估页面
         """
-        self.health_evaluate = health_evaluate_rear.Health_Evaluate_WindowActions()
+        self.health_evaluate = health_evaluate_backend.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
         self.close()  # 关闭当前窗口
         self.health_evaluate.show()  # 显示健康评估窗口
@@ -108,7 +108,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开数据查看页面
         """
-        self.data_view = data_view_rear.Data_View_WindowActions()
+        self.data_view = data_manage_backend.Data_View_WindowActions()
         logging.info("Opening data view page.")
         self.close()  # 关闭当前窗口
         self.data_view.show()  # 显示数据查看窗口
@@ -117,7 +117,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开结果查看页面
         """
-        self.results_view = results_view_rear.Results_View_WindowActions()
+        self.results_view = results_manage_backend.Results_View_WindowActions()
         logging.info("Opening results view page.")
         self.close()  # 关闭当前窗口
         self.results_view.show()  # 显示结果查看窗口
@@ -126,7 +126,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开管理员登录页面
         """
-        self.login = login_rear.Login_WindowActions()
+        self.login = login_backend.Login_WindowActions()
         logging.info("Opening admin login page.")
         self.close()  # 关闭当前窗口
         self.login.show()  # 显示登录窗口

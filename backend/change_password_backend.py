@@ -3,12 +3,12 @@
 from datetime import datetime
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from front.change_pwd_UI import Ui_change_pwd
+from front.change_password_UI import Ui_change_pwd
 import sys
 sys.path.append('../')
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout, QLineEdit, QPushButton, QLabel
 
-from rear import index_rear, admin_rear
+from backend import admin_index_backend, index_backend
 from sql_model.tb_user import User
 from state import operate_user
 from util.db_util import SessionClass
@@ -230,9 +230,9 @@ class change_pwd_Controller(QWidget):
         try:
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
-                self._index_window = admin_rear.AdminWindowActions()
+                self._index_window = admin_index_backend.AdminWindowActions()
             else:  # 普通用户
-                self._index_window = index_rear.Index_WindowActions()
+                self._index_window = index_backend.Index_WindowActions()
             
             # 先显示新窗口
             self._index_window.show()

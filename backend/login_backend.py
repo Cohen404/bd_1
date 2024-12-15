@@ -10,13 +10,13 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.login as login
+import front.login_UI as login_UI
 from sql_model.tb_user import User
 from util.db_util import SessionClass
-from rear import init_login
+from backend import init_login_backend
 # 导入跳转页面的后端部分
-from rear import admin_rear
-from rear import index_rear
+from backend import admin_index_backend
+from backend import index_backend
 import logging
 from util.window_manager import WindowManager
 import hashlib
@@ -38,7 +38,7 @@ class UserFilter(logging.Filter):
         record.userType = self.userType
         return True
 
-class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
+class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
     """
     登录窗口的主要类，继承自PyQt5的QMainWindow和前端UI类
     """
@@ -47,7 +47,7 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         """
         初始化登录窗口
         """
-        super(login.Ui_MainWindow, self).__init__()
+        super(login_UI.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
         # 初始化窗口管理器
@@ -119,10 +119,10 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
 
                     # 根据用户类型打开相应界面
                     if user.user_type == 'admin':
-                        self.admin = admin_rear.AdminWindowActions()
+                        self.admin = admin_index_backend.AdminWindowActions()
                         self.admin.show()
                     else:
-                        self.index = index_rear.Index_WindowActions()
+                        self.index = index_backend.Index_WindowActions()
                         self.index.show()
 
                     self.close()
@@ -142,7 +142,7 @@ class Login_WindowActions(login.Ui_MainWindow, QMainWindow):
         """
         返回首页
         """
-        self.index = init_login.Index_WindowActions()
+        self.index = init_login_backend.Index_WindowActions()
         self.close()
         self.index.show()
 

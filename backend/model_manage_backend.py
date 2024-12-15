@@ -11,8 +11,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QRadioButton, QTableWidgetItem, QWidget, QPushButton, QHBoxLayout, \
     QMessageBox, QFileDialog, QInputDialog
 import shutil
-from front.model_control_UI import Ui_model_Control
-from rear import index_rear, admin_rear
+from front.model_manage_UI import Ui_model_Control
+from backend import admin_index_backend, index_backend
 from sql_model.tb_result import Result
 from sql_model.tb_model import Model
 from state import operate_user
@@ -378,7 +378,7 @@ class model_control_Controller(Ui_model_Control):
         """
         try:
             # 创建新窗口前先保存引用
-            self._admin_window = admin_rear.AdminWindowActions()
+            self._admin_window = admin_index_backend.AdminWindowActions()
             
             # 先显示新窗口
             self._admin_window.show()

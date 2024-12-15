@@ -6,7 +6,7 @@
 
 import sys
 
-from front import param_control_UI
+from front import param_manage_UI
 
 sys.path.append('../')
 from datetime import datetime
@@ -15,15 +15,14 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import state.operate_user as operate_user
 # 导入本页面的前端部分
-import front.admin as admin
-from rear import login_rear
+import front.admin_index_UI as admin_index_UI
+from backend import change_password_backend, index_backend, login_backend, model_manage_backend, param_manage_backend
 # 导入跳转页面的后端部分
-from rear import index_rear, change_pwd_controller, model_control_controller,  param_control, \
-    user_manage_rear
-from rear import data_view_rear
-from rear import health_evaluate_rear
-from rear import results_view_rear
-from rear import log_manage_rear
+from backend import user_manage_backend
+from backend import data_manage_backend
+from backend import health_evaluate_backend
+from backend import results_manage_backend
+from backend import log_manage_backend
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
@@ -43,7 +42,7 @@ class UserFilter(logging.Filter):
         return True
 
 # 注意这里定义的第一个界面的后端代码类需要继承两个类
-class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
+class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
     """
     管理员窗口操作类
     
@@ -54,7 +53,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         初始化管理员窗口
         """
-        super(admin.Ui_MainWindow, self).__init__()
+        super(admin_index_UI.Ui_MainWindow, self).__init__()
         # 创建界面
         self.setupUi(self)
         self.show_nav()  # 调用show_nav方法显示header,bottom的内容
@@ -103,7 +102,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         operate_user.ordinary_user(USER_STATUS_FILE)  # 使用配置文件中的路径
         logging.info("Switched to regular user mode. Login page is being opened.")
-        self.login = login_rear.Login_WindowActions()
+        self.login = login_backend.Login_WindowActions()
         self.close()
         self.login.show()
 
@@ -112,7 +111,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开健康评估页面
         """
-        self.health_evaluate = health_evaluate_rear.Health_Evaluate_WindowActions()
+        self.health_evaluate = health_evaluate_backend.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
         self.close()
         self.health_evaluate.show()
@@ -121,7 +120,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开日志管理页面
         """
-        self.log_manage = log_manage_rear.Log_Manage_WindowActions()
+        self.log_manage = log_manage_backend.Log_Manage_WindowActions()
         logging.info("Opening log management page.")
         self.close()
         self.log_manage.show()
@@ -130,7 +129,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开数据查看页面
         """
-        self.data_view = data_view_rear.Data_View_WindowActions()
+        self.data_view = data_manage_backend.Data_View_WindowActions()
         logging.info("Opening data view page.")
         self.close()
         self.data_view.show()
@@ -139,7 +138,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开结果查看页面
         """
-        self.results_view = results_view_rear.Results_View_WindowActions()
+        self.results_view = results_manage_backend.Results_View_WindowActions()
         logging.info("Opening results view page.")
         self.close()
         self.results_view.show()
@@ -148,7 +147,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开模型控制页面
         """
-        self.model_view = model_control_controller.model_control_Controller()
+        self.model_view = model_manage_backend.model_control_Controller()
         logging.info("Opening model control page.")
         self.close()
         self.model_view.show()
@@ -157,7 +156,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开修改密码页面
         """
-        self.change_pwd = change_pwd_controller.change_pwd_Controller()
+        self.change_pwd = change_password_backend.change_pwd_Controller()
         logging.info("Opening password change page.")
         self.close()
         self.change_pwd.show()
@@ -166,7 +165,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开用户管理页面
         """
-        self.user_manage = user_manage_rear.User_Manage_WindowActions()
+        self.user_manage = user_manage_backend.User_Manage_WindowActions()
         logging.info("Opening user management page.")
         self.close()
         self.user_manage.show()
@@ -175,7 +174,7 @@ class AdminWindowActions(admin.Ui_MainWindow, QMainWindow):
         """
         打开参数控制页面
         """
-        self.param_control = param_control.ParamControl()
+        self.param_control = param_manage_backend.ParamControl()
         logging.info("Opening parameter control page.")
         self.close()
         self.param_control.show()
