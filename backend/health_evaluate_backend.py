@@ -238,15 +238,13 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.status_label.setText("模型空闲")
         
         # 设置所有LED为默认灰色
-        self.set_default_led_colors()
-
-        # 如果有最新的评估结果，更新LED颜色
-        session = SessionClass()
-        result = session.query(Result).order_by(Result.id.desc()).first()
-        session.close()
-
-        if result is not None:
-            self.update_led_colors(result)
+        default_style = (
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: gray"
+        )
+        self.ordinarystress_led_label.setStyleSheet(default_style)
+        self.depression_led_label.setStyleSheet(default_style)
+        self.anxiety_led_label.setStyleSheet(default_style)
 
     def show_table(self):
         '''
@@ -564,7 +562,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         probability_score = float(num) * 100  # 将num*100改num*95，使得最大值为95
         probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
         
-        # 获取数据文件所在目录
+        # 取数据文件所在目录
         data_dir = self.data_path
         
         score_lb_1 = 0

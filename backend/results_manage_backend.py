@@ -123,6 +123,15 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
 
+        # 设置所有LED为默认灰色
+        default_style = (
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: gray"
+        )
+        self.health_led_label.setStyleSheet(default_style)
+        self.acoustic_led_label.setStyleSheet(default_style)
+        self.mechanical_led_label.setStyleSheet(default_style)
+
         # 显示表格内容
         self.show_table()
 
@@ -721,7 +730,7 @@ class ReportViewer(QMainWindow):
                 
                 # 转换每一页为图像
                 for page in pdf_document:
-                    # 设置更高的缩放因子以获得更���的图像质量
+                    # 设置更高的缩放因子以获得更好的图像质量
                     zoom = 2.0
                     matrix = fitz.Matrix(zoom, zoom)
                     
