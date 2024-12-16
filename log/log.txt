@@ -6669,3 +6669,91 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-16 11:39:53,291 - INFO - Administrator - Returned to index page successfully
 2024-12-16 11:39:54,250 - INFO - Administrator - Opening admin login page.
 2024-12-16 11:39:58,817 - INFO - Administrator - Opening user login page.
+2024-12-16 11:47:11,938 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:47:13,234 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-16 11:47:16,646 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:49:19,280 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:49:21,341 - ERROR - Administrator - An error occurred while reading the log file: name 'QtGui' is not defined
+2024-12-16 11:49:21,343 - INFO - Administrator - Opening log management page.
+2024-12-16 11:49:27,583 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:51:54,862 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:51:56,299 - INFO - Administrator - Opening log management page.
+2024-12-16 11:54:07,578 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:54:12,906 - INFO - Administrator - Opening log management page.
+2024-12-16 11:54:28,935 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:54:29,649 - INFO - Administrator - Opening password change page.
+2024-12-16 11:54:31,409 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:54:31,986 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:54:35,598 - INFO - Administrator - Starting database save operation.
+2024-12-16 11:54:35,600 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-16 11:54:35,603 - INFO - Administrator - Database transaction committed successfully.
+2024-12-16 11:54:36,549 - INFO - Administrator - Database session closed.
+2024-12-16 11:54:37,223 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:54:37,711 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:54:40,295 - INFO - Administrator - Starting database save operation.
+2024-12-16 11:54:40,296 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-16 11:54:40,299 - INFO - Administrator - Database transaction committed successfully.
+2024-12-16 11:54:41,135 - INFO - Administrator - Database session closed.
+2024-12-16 11:54:41,817 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:54:42,472 - INFO - Administrator - Opening log management page.
+2024-12-16 11:54:51,606 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:54:52,235 - INFO - Administrator - Opening user management page.
+2024-12-16 11:55:03,692 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:55:17,570 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 11:55:17,571 - INFO - Administrator - Opening data view page.
+2024-12-16 11:55:19,471 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:55:20,036 - INFO - Administrator - Opening model control page.
+2024-12-16 11:55:21,635 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:55:22,190 - INFO - Administrator - Opening results view page.
+2024-12-16 11:55:24,280 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:55:25,334 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-16 11:55:25,334 - INFO - Administrator - Depression LED set to RED
+2024-12-16 11:55:25,334 - INFO - Administrator - Anxiety LED set to RED
+2024-12-16 11:55:25,336 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-16 11:55:25,347 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-16 11:55:25,357 - INFO - Administrator - Opening health evaluation page.
+2024-12-16 11:55:26,845 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:56:26,784 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:56:27,710 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:56:28,270 - INFO - Administrator - Opening user management page.
+2024-12-16 11:56:31,325 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:57:04,415 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:57:05,703 - INFO - Administrator - Opening user management page.
+2024-12-16 11:57:11,050 - INFO - Administrator - User edit cancelled for user ID: admin001
+2024-12-16 11:58:15,667 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:58:17,030 - INFO - Administrator - Opening user management page.
+2024-12-16 11:58:20,006 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:58:21,002 - INFO - Administrator - Opening results view page.
+2024-12-16 11:58:30,665 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:58:31,289 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 11:58:31,291 - INFO - Administrator - Opening data view page.
+2024-12-16 11:58:32,526 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:58:33,320 - INFO - Administrator - Opening model control page.
+2024-12-16 11:58:34,411 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:58:34,988 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-16 11:58:34,988 - INFO - Administrator - Depression LED set to RED
+2024-12-16 11:58:34,989 - INFO - Administrator - Anxiety LED set to RED
+2024-12-16 11:58:34,991 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-16 11:58:35,005 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-16 11:58:35,013 - INFO - Administrator - Opening health evaluation page.
+2024-12-16 11:58:36,031 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:00:06,979 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:00:08,967 - INFO - Administrator - Opening results view page.
+2024-12-16 12:00:31,077 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:00:31,785 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 12:00:31,786 - INFO - Administrator - Opening data view page.
+2024-12-16 12:00:33,811 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:00:59,816 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:01:03,578 - INFO - Administrator - Opening results view page.
+2024-12-16 12:04:33,071 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:04:34,046 - INFO - Administrator - Opening results view page.
+2024-12-16 12:04:42,631 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:04:43,548 - INFO - Administrator - Opening log management page.
+2024-12-16 12:04:44,928 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:06:10,841 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:06:12,089 - INFO - Administrator - Opening log management page.
+2024-12-16 12:08:10,410 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:08:11,831 - INFO - Administrator - Opening log management page.
+2024-12-16 12:08:31,819 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:08:32,664 - INFO - Administrator - Opening log management page.
+2024-12-16 12:08:57,068 - INFO - Administrator - Returned to index page successfully

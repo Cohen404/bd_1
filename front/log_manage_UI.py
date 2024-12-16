@@ -48,7 +48,30 @@ class Ui_MainWindow(object):
 
         # 改为显示框 (QTextEdit)
         self.displayBox = QtWidgets.QTextEdit(self.centralwidget)
-        self.displayBox.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3; margin-right:15px;")
+        self.displayBox.setStyleSheet("""
+            QTextEdit {
+                background-color: #d4e2f4;
+                color: black;
+                border: 1px solid #5c8ac3;
+            }
+            QScrollBar:vertical {
+                border: none;
+                background: #d4e2f4;
+                width: 14px;
+                margin: 0px 0px 0px 0px;
+            }
+            QScrollBar::handle:vertical {
+                background: #5c8ac3;
+                min-height: 30px;
+                border-radius: 7px;
+            }
+            QScrollBar::add-line:vertical {
+                height: 0px;
+            }
+            QScrollBar::sub-line:vertical {
+                height: 0px;
+            }
+        """)
         self.displayBox.setReadOnly(True)
         self.mainVLayout.addWidget(self.displayBox)
 

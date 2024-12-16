@@ -102,14 +102,44 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 # 添加操作按钮
                 btn_widget = QWidget()
                 btn_layout = QHBoxLayout()
-                btn_layout.setContentsMargins(5, 2, 5, 2)
+                btn_layout.setContentsMargins(2, 0, 2, 0)  # 减小上下边距
+                btn_layout.setSpacing(4)  # 设置按钮之间的间距
                 
                 edit_btn = QPushButton("编辑")
-                edit_btn.setStyleSheet("background-color: #759dcd; border-radius: 5px; padding: 5px;")
+                edit_btn.setStyleSheet("""
+                    QPushButton {
+                        background-color: #759dcd;
+                        border-radius: 4px;
+                        padding: 2px;
+                        font-family: 'Microsoft YaHei';
+                        font-size: 12px;
+                        min-width: 50px;
+                        min-height: 20px;
+                        max-height: 20px;
+                    }
+                    QPushButton:hover {
+                        background-color: #5c8ac3;
+                    }
+                """)
                 edit_btn.clicked.connect(lambda _, uid=user.user_id: self.edit_user(uid))
                 
                 delete_btn = QPushButton("删除")
-                delete_btn.setStyleSheet("background-color: #d9534f; color: white; border-radius: 5px; padding: 5px;")
+                delete_btn.setStyleSheet("""
+                    QPushButton {
+                        background-color: #d9534f;
+                        color: white;
+                        border-radius: 4px;
+                        padding: 2px;
+                        font-family: 'Microsoft YaHei';
+                        font-size: 12px;
+                        min-width: 50px;
+                        min-height: 20px;
+                        max-height: 20px;
+                    }
+                    QPushButton:hover {
+                        background-color: #c9302c;
+                    }
+                """)
                 delete_btn.clicked.connect(lambda _, uid=user.user_id: self.delete_user(uid))
                 
                 btn_layout.addWidget(edit_btn)

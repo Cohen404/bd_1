@@ -351,7 +351,7 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         )
         
         # 更新抑郁状态
-        self.acoustic_label.setText(f"抑郁状态 ({result.depression_score})")
+        self.acoustic_label.setText(f"抑郁状�� ({result.depression_score})")
         self.acoustic_label.setAlignment(Qt.AlignLeft)  # 左对齐
         self.acoustic_led_label.setAlignment(Qt.AlignLeft)  # LED指示灯左对齐
         self.acoustic_led_label.setStyleSheet(
@@ -459,22 +459,23 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
     def buttonForRow(self, row):
         """为每一行创建操作按钮"""
         widget = QtWidgets.QWidget()
+        widget.setStyleSheet("background: transparent;")  # 设置背景透明
         
         # 查看按钮
         view_btn = QtWidgets.QPushButton('查看')
         view_btn.setStyleSheet('''
             QPushButton {
-                background-color: #5c8ac3;
-                color: white;
+                color: #2196F3;
+                border: 1px solid #2196F3;
                 border-radius: 3px;
                 padding: 3px 10px;
                 min-width: 60px;
-                max-height: 24px;  /* 减小按钮高度 */
-                margin: 2px 5px;
+                max-height: 24px;
                 font-size: 12px;
+                background-color: white;
             }
             QPushButton:hover {
-                background-color: #4a7ab3;
+                background-color: #E3F2FD;
             }
         ''')
         view_btn.clicked.connect(lambda checked, row=row: self.view_details(row))
@@ -483,17 +484,17 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         report_btn = QtWidgets.QPushButton('查看报告')
         report_btn.setStyleSheet('''
             QPushButton {
-                background-color: #5cb85c;
-                color: white;
+                color: #4CAF50;
+                border: 1px solid #4CAF50;
                 border-radius: 3px;
                 padding: 3px 10px;
                 min-width: 80px;
-                max-height: 24px;  /* 减小按钮高度 */
-                margin: 2px 5px;
+                max-height: 24px;
                 font-size: 12px;
+                background-color: white;
             }
             QPushButton:hover {
-                background-color: #4cae4c;
+                background-color: #E8F5E9;
             }
         ''')
         report_btn.clicked.connect(self.viewReport)
@@ -502,7 +503,8 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         hLayout = QtWidgets.QHBoxLayout()
         hLayout.addWidget(view_btn)
         hLayout.addWidget(report_btn)
-        hLayout.setContentsMargins(2, 2, 2, 2)  # 减小边距
+        hLayout.setContentsMargins(0, 0, 0, 0)  # 移除所有边距
+        hLayout.setSpacing(4)  # 设置按钮之间的间距
         widget.setLayout(hLayout)
         return widget
 
@@ -719,7 +721,7 @@ class ReportViewer(QMainWindow):
                 
                 # 转换每一页为图像
                 for page in pdf_document:
-                    # 设置更高的缩放因子以获得更好的图像质量
+                    # 设置更高的缩放因子以获得更���的图像质量
                     zoom = 2.0
                     matrix = fitz.Matrix(zoom, zoom)
                     
@@ -831,7 +833,7 @@ class ReportViewer(QMainWindow):
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调用show()函数即可
+    # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转不用再重新定义，只需要调用show()函数即可
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Results_View_WindowActions()
