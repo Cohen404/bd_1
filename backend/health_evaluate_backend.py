@@ -211,22 +211,35 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
 
     def update_led_colors(self, result):
         """根据结果更新LED颜色"""
+        gray_style = (
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: gray"
+        )
         red_style = (
             "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
             "border-radius: 16px; border: 2px solid white; background: red"
         )
         
-        if result.stress_score >= 50:  # 改用 stress_score 并检查是否大于等于50
+        # 普通应激
+        if result.stress_score >= 50:
             self.ordinarystress_led_label.setStyleSheet(red_style)
-            logging.info("Ordinary stress LED set to RED")
+        else:
+            self.ordinarystress_led_label.setStyleSheet(gray_style)
         
-        if result.depression_score >= 50:  # 改用 depression_score 并检查是否大于等于50
+        # 抑郁
+        if result.depression_score >= 50:
             self.depression_led_label.setStyleSheet(red_style)
-            logging.info("Depression LED set to RED")
+        else:
+            self.depression_led_label.setStyleSheet(gray_style)
         
-        if result.anxiety_score >= 50:  # 改用 anxiety_score 并检查是否大于等于50
+        # 焦虑
+        if result.anxiety_score >= 50:
             self.anxiety_led_label.setStyleSheet(red_style)
-            logging.info("Anxiety LED set to RED")
+        else:
+            self.anxiety_led_label.setStyleSheet(gray_style)
+        
+        logging.info(f"Updated LED colors based on scores: stress={result.stress_score}, "
+                    f"depression={result.depression_score}, anxiety={result.anxiety_score}")
 
     def show_nav(self):
         """
@@ -237,14 +250,25 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         if not os.path.exists(MODEL_STATUS_FILE):
             self.status_label.setText("模型空闲")
         
-        # 设置所有LED为默认灰色
-        default_style = (
-            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
-            "border-radius: 16px; border: 2px solid white; background: gray"
-        )
-        self.ordinarystress_led_label.setStyleSheet(default_style)
-        self.depression_led_label.setStyleSheet(default_style)
-        self.anxiety_led_label.setStyleSheet(default_style)
+        # 如果有当前选中的数据ID，根据其评估结果设置LED颜色
+        if hasattr(self, 'data_id') and self.data_id:
+            session = SessionClass()
+            try:
+                result = session.query(Result).filter(Result.id == self.data_id).first()
+                if result:
+                    # 使用已有的update_led_colors方法更新LED颜色
+                    self.update_led_colors(result)
+                else:
+                    # 如果没有评估结果，则设置为默认灰色
+                    self.set_default_led_colors()
+            except Exception as e:
+                logging.error(f"Error updating LED colors in show_nav: {str(e)}")
+                self.set_default_led_colors()
+            finally:
+                session.close()
+        else:
+            # 如果没有选中的数据，设置为默认灰色
+            self.set_default_led_colors()
 
     def show_table(self):
         '''
@@ -460,34 +484,34 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             try:
                 row = self.tableWidget.indexAt(button.parent().pos()).row()
                 id = self.tableWidget.item(row, 0).text()
-                self.id = int(id)
-                logging.info(f"Button clicked in row {row}, ID: {self.id}")
+                self.data_id = int(id)  # 保存当前选中的数据ID
+                logging.info(f"Button clicked in row {row}, ID: {self.data_id}")
 
                 session = SessionClass()
-                data = session.query(Data).filter(Data.id == self.id).first()
+                data = session.query(Data).filter(Data.id == self.data_id).first()
                 if data:
                     self.data_path = data.data_path
-                    logging.info(f"Data path retrieved for ID {self.id}: {self.data_path}")
+                    logging.info(f"Data path retrieved for ID {self.data_id}: {self.data_path}")
 
                     # 获取 tb_result 表中与当前数据 ID 相关的结果
-                    result = session.query(Result).filter(Result.id == self.id).first()
-                    session.close()
+                    result = session.query(Result).filter(Result.id == self.data_id).first()
                     if result:
-                        # 重置所有LED为灰色
-                        self.set_default_led_colors()
-                        # 根据结果更新LED颜色
+                        # 更新LED颜色
                         self.update_led_colors(result)
-
+                        
                         self.current_index = 0  # 重置当前显示的图片索引
                         logging.info("Initializing current image index to 0")
                         self.show_image()
                     else:
-                        logging.warning(f"No evaluation results found for ID {self.id}")
-                        QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.id} 的评估结果")
+                        logging.warning(f"No evaluation results found for ID {self.data_id}")
+                        self.set_default_led_colors()  # 如果没有评估结果，设置为默认灰色
+                        QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的评估结果")
                 else:
-                    session.close()
-                    logging.warning(f"No data record found for ID {self.id}")
-                    QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.id} 的数据记录")
+                    logging.warning(f"No data record found for ID {self.data_id}")
+                    self.set_default_led_colors()  # 如果没有数据记录，设置为默认灰色
+                    QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的数据记录")
+                
+                session.close()
 
             except Exception as e:
                 logging.error(f"An error occurred in checkButton: {e}")
@@ -651,7 +675,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
 
-        if self.completed_models == 3:  # 如果所有模型都已评估成
+        if self.completed_models == 3:  # 如果所有模型都已评估完成
             os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
             finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
@@ -674,6 +698,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         existing_result.depression_score = self.result_list[1]
                         existing_result.anxiety_score = self.result_list[2]
                         existing_result.result_time = self.result_time
+                        # 更新LED颜色
+                        self.update_led_colors(existing_result)
                     elif box.clickedButton() == no_button:
                         # 如果用户选择"否"，则不做任何处理
                         pass
@@ -688,12 +714,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         user_id=self.user_id
                     )
                     session.add(uploadresult)
+                    # 更新LED颜色
+                    self.update_led_colors(uploadresult)
 
                 session.commit()
-                
-                # 重新查询结果以确保它与会话关联
-                result_to_update = session.query(Result).filter(Result.id == self.data_id).first()
-                
                 self.show_nav()
             finally:
                 session.close()

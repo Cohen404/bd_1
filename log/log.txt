@@ -7524,3 +7524,34 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-17 01:45:57,088 - INFO - Administrator - Opening data view page.
 2024-12-17 01:46:00,252 - INFO - Administrator - User cancelled deletion of record with ID 7
 2024-12-17 01:46:01,222 - INFO - Administrator - Returned to index page successfully
+2024-12-17 01:47:01,340 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:47:06,453 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:47:06,455 - INFO - Administrator - Opening data view page.
+2024-12-17 01:47:16,107 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/000014_jiaolv2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 01:47:16,114 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2, Username: admin
+2024-12-17 01:47:17,074 - INFO - Administrator - Data table refreshed successfully with 8 records
+2024-12-17 01:47:17,925 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 01:47:22,483 - INFO - Administrator - Data processing completed successfully
+2024-12-17 01:47:25,234 - INFO - Administrator - Button clicked in row 7, corresponding ID: 8
+2024-12-17 01:47:25,236 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 01:47:26,286 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2\Theta.png
+2024-12-17 01:47:27,464 - INFO - Administrator - Returned to index page successfully
+2024-12-17 01:47:28,124 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 01:47:28,160 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 01:47:28,186 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 01:52:33,046 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:52:35,087 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 01:52:35,125 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 01:52:35,150 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 01:53:03,900 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 01:54:51,903 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:54:53,139 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 01:54:53,176 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 01:54:53,199 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 01:55:22,064 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 01:55:22,070 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 01:55:25,343 - INFO - Administrator - Returned to index page successfully
+2024-12-17 01:55:25,991 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 01:55:26,032 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 01:55:26,064 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 01:55:27,663 - INFO - Administrator - Returned to index page successfully
