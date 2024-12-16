@@ -18,6 +18,7 @@ from backend import results_manage_backend
 from backend import login_backend
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
+from util.window_manager import WindowManager
 import logging
 
 from config import (
