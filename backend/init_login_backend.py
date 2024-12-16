@@ -45,20 +45,9 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         # 连接用户登录按钮到对应的槽函数
         self.user_login_Button.clicked.connect(self.open_user_login)  # 用户登录
         
-        # 使用配置文件中的路径
-        # user = operate_user.read(USER_STATUS_FILE)  # 0表示普通用户，1表示管理员
-        # userType = "Regular user" if user == 0 else "Administrator"
-
-        # # 配置 logging 模块，使用配置文件中的路径
-        # logging.basicConfig(
-        #     filename=LOG_FILE,
-        #     level=logging.INFO,
-        #     format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        # )
-
-        # # 添加过滤器
-        # logger = logging.getLogger()
-        # logger.addFilter(UserFilter(userType))
+        # 注册窗口到WindowManager
+        window_manager = WindowManager()
+        window_manager.register_window('init_login', self)
 
     def open_user_login(self):
         """
@@ -66,8 +55,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         self.login = login_backend.Login_WindowActions()
         logging.info("Opening user login page.")
-        self.close()  # 关闭当前窗口
-        self.login.show()  # 显示登录窗口
+        window_manager = WindowManager()
+        window_manager.register_window('login', self.login)
+        window_manager.show_window('login')
+        self.close()
 
 if __name__ == '__main__':
     # 启用高DPI缩放
@@ -78,8 +69,9 @@ if __name__ == '__main__':
     
     # 显示创建的界面
     demo_window = Index_WindowActions()
-    # demo_window.setStyleSheet("QMainWindow{background-color:#d4e2f4}")  # 设置主窗口背景颜色（当前被注释）
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('init_login', demo_window)
+    window_manager.show_window('init_login')
     
     # 进入应用的主事件循环
     sys.exit(app.exec_())

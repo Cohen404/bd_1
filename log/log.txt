@@ -6438,3 +6438,147 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-15 22:33:45,767 - INFO - Administrator - Returned to index page successfully
 2024-12-15 22:33:46,666 - INFO - Administrator - Opening log management page.
 2024-12-15 22:33:52,863 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:01:21,764 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:01:23,540 - INFO - Administrator - Opening results view page.
+2024-12-15 23:01:25,603 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:01:26,198 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-15 23:01:26,198 - INFO - Administrator - Depression LED set to RED
+2024-12-15 23:01:26,198 - INFO - Administrator - Anxiety LED set to RED
+2024-12-15 23:01:26,202 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-15 23:01:26,213 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-15 23:01:26,219 - INFO - Administrator - Opening health evaluation page.
+2024-12-15 23:01:27,109 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:01:28,618 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:01:28,627 - INFO - Administrator - Opening data view page.
+2024-12-15 23:01:29,687 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:01:30,767 - INFO - Administrator - Opening model control page.
+2024-12-15 23:01:31,769 - INFO - Administrator - Returned to admin page successfully
+2024-12-15 23:04:59,167 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:05:01,999 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-15 23:05:01,999 - INFO - Administrator - Depression LED set to RED
+2024-12-15 23:05:01,999 - INFO - Administrator - Anxiety LED set to RED
+2024-12-15 23:05:02,002 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-15 23:05:02,013 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-15 23:05:02,022 - INFO - Administrator - Opening health evaluation page.
+2024-12-15 23:05:04,414 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:05:06,135 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:05:06,142 - INFO - Administrator - Opening data view page.
+2024-12-15 23:05:08,048 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:05:09,804 - INFO - Administrator - Opening results view page.
+2024-12-15 23:05:11,688 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:05:12,531 - INFO - Administrator - Opening model control page.
+2024-12-15 23:05:13,288 - INFO - Administrator - Returned to admin page successfully
+2024-12-15 23:05:14,668 - INFO - Administrator - Opening user management page.
+2024-12-15 23:05:18,631 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:05:19,438 - INFO - Administrator - Opening parameter control page.
+2024-12-15 23:05:20,613 - ERROR - Administrator - Error in return_index: name 'WindowManager' is not defined
+2024-12-15 23:05:23,787 - ERROR - Administrator - Error in return_index: name 'WindowManager' is not defined
+2024-12-15 23:11:53,644 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:11:55,290 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-15 23:11:55,291 - INFO - Administrator - Depression LED set to RED
+2024-12-15 23:11:55,291 - INFO - Administrator - Anxiety LED set to RED
+2024-12-15 23:11:55,295 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-15 23:11:55,306 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-15 23:11:55,312 - INFO - Administrator - Opening health evaluation page.
+2024-12-15 23:11:56,277 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:11:57,277 - INFO - Administrator - Opening results view page.
+2024-12-15 23:11:58,222 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:11:59,147 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:11:59,157 - INFO - Administrator - Opening data view page.
+2024-12-15 23:12:00,443 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:12:01,836 - INFO - Administrator - Opening model control page.
+2024-12-15 23:12:02,804 - INFO - Administrator - Returned to admin page successfully
+2024-12-15 23:12:09,548 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-15 23:12:13,141 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:17:53,102 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:17:55,281 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-15 23:17:55,281 - INFO - Administrator - Depression LED set to RED
+2024-12-15 23:17:55,281 - INFO - Administrator - Anxiety LED set to RED
+2024-12-15 23:17:55,286 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-15 23:17:55,295 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-15 23:17:55,302 - INFO - Administrator - Opening health evaluation page.
+2024-12-15 23:17:56,527 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:17:57,276 - INFO - Administrator - Opening results view page.
+2024-12-15 23:17:58,526 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:00,053 - INFO - Administrator - Opening results view page.
+2024-12-15 23:18:01,010 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:01,949 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:18:01,956 - INFO - Administrator - Opening data view page.
+2024-12-15 23:18:03,022 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:04,348 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:18:04,355 - INFO - Administrator - Opening data view page.
+2024-12-15 23:18:05,564 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:07,882 - INFO - Administrator - Opening results view page.
+2024-12-15 23:18:08,894 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:10,483 - INFO - Administrator - Opening model control page.
+2024-12-15 23:18:11,451 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:12,454 - INFO - Administrator - Opening user management page.
+2024-12-15 23:18:14,112 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:18:14,707 - INFO - Administrator - Opening parameter control page.
+2024-12-15 23:18:15,596 - ERROR - Administrator - Error in return_index: name 'WindowManager' is not defined
+2024-12-15 23:25:01,044 - INFO - Administrator - User admin logged in successfully
+2024-12-15 23:25:02,764 - INFO - Administrator - Opening results view page.
+2024-12-15 23:25:03,846 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:25:05,054 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-15 23:25:05,055 - INFO - Administrator - Opening data view page.
+2024-12-15 23:25:05,962 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:25:06,801 - INFO - Administrator - Opening model control page.
+2024-12-15 23:25:07,932 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:25:09,052 - INFO - Administrator - Opening user management page.
+2024-12-15 23:25:10,007 - INFO - Administrator - Returned to index page successfully
+2024-12-15 23:25:10,722 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-15 23:25:10,722 - INFO - Administrator - Depression LED set to RED
+2024-12-15 23:25:10,722 - INFO - Administrator - Anxiety LED set to RED
+2024-12-15 23:25:10,725 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-15 23:25:10,734 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-15 23:25:10,743 - INFO - Administrator - Opening health evaluation page.
+2024-12-15 23:25:11,885 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:10,137 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:02:11,418 - INFO - Administrator - Opening results view page.
+2024-12-16 11:02:12,323 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:14,215 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 11:02:14,217 - INFO - Administrator - Opening data view page.
+2024-12-16 11:02:16,567 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:17,585 - INFO - Administrator - Opening model control page.
+2024-12-16 11:02:18,323 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:19,270 - INFO - Administrator - Opening user management page.
+2024-12-16 11:02:20,131 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:20,712 - INFO - Administrator - Opening log management page.
+2024-12-16 11:02:21,522 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:22,305 - INFO - Administrator - Opening password change page.
+2024-12-16 11:02:23,125 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:23,998 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-16 11:02:23,998 - INFO - Administrator - Depression LED set to RED
+2024-12-16 11:02:23,999 - INFO - Administrator - Anxiety LED set to RED
+2024-12-16 11:02:24,001 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-16 11:02:24,009 - INFO - Administrator - Successfully displayed 4 data records
+2024-12-16 11:02:24,016 - INFO - Administrator - Opening health evaluation page.
+2024-12-16 11:02:24,716 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:02:25,616 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:02:26,415 - ERROR - Administrator - Error in return_index: name 'WindowManager' is not defined
+2024-12-16 11:04:55,485 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:04:57,623 - INFO - Administrator - Opening results view page.
+2024-12-16 11:04:58,554 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:04:59,452 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 11:04:59,455 - INFO - Administrator - Opening data view page.
+2024-12-16 11:05:00,316 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:05:00,957 - INFO - Administrator - Opening model control page.
+2024-12-16 11:05:01,799 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:05:02,379 - INFO - Administrator - Opening user management page.
+2024-12-16 11:05:03,266 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:05:04,848 - INFO - Administrator - Opening log management page.
+2024-12-16 11:05:05,493 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:05:30,309 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:05:31,532 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:05:32,868 - ERROR - Administrator - Error in return_index: name 'WindowManager' is not defined
+2024-12-16 11:09:43,715 - INFO - Administrator - User admin logged in successfully
+2024-12-16 11:09:44,891 - INFO - Administrator - Opening parameter control page.
+2024-12-16 11:09:45,755 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:09:46,999 - INFO - Administrator - Opening log management page.
+2024-12-16 11:09:47,812 - INFO - Administrator - Returned to index page successfully
+2024-12-16 11:09:48,401 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 11:09:48,402 - INFO - Administrator - Opening data view page.
+2024-12-16 11:09:49,773 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2024-12-16 11:09:49,776 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-16 11:09:50,950 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-16 11:09:52,215 - INFO - Administrator - Returned to index page successfully

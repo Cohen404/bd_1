@@ -118,12 +118,15 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
                     logging.info(f"User {username} logged in successfully")
 
                     # 根据用户类型打开相应界面
+                    window_manager = WindowManager()
                     if user.user_type == 'admin':
                         self.admin = admin_index_backend.AdminWindowActions()
-                        self.admin.show()
+                        window_manager.register_window('admin', self.admin)
+                        window_manager.show_window('admin')
                     else:
                         self.index = index_backend.Index_WindowActions()
-                        self.index.show()
+                        window_manager.register_window('index', self.index)
+                        window_manager.show_window('index')
 
                     self.close()
 
@@ -143,8 +146,10 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
         返回首页
         """
         self.index = init_login_backend.Index_WindowActions()
+        window_manager = WindowManager()
+        window_manager.register_window('init_login', self.index)
+        window_manager.show_window('init_login')
         self.close()
-        self.index.show()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

@@ -103,8 +103,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         operate_user.ordinary_user(USER_STATUS_FILE)  # 使用配置文件中的路径
         logging.info("Switched to regular user mode. Login page is being opened.")
         self.login = login_backend.Login_WindowActions()
+        window_manager = WindowManager()
+        window_manager.register_window('login', self.login)
+        window_manager.show_window('login')
         self.close()
-        self.login.show()
 
     # 打开健康评估页面
     def open_health_evaluate(self):
@@ -113,8 +115,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.health_evaluate = health_evaluate_backend.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
+        window_manager = WindowManager()
+        window_manager.register_window('health_evaluate', self.health_evaluate)
+        window_manager.show_window('health_evaluate')
         self.close()
-        self.health_evaluate.show()
 
     def open_log_manage_view(self):
         """
@@ -122,8 +126,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.log_manage = log_manage_backend.Log_Manage_WindowActions()
         logging.info("Opening log management page.")
+        window_manager = WindowManager()
+        window_manager.register_window('log_manage', self.log_manage)
+        window_manager.show_window('log_manage')
         self.close()
-        self.log_manage.show()
 
     def open_data_view(self):
         """
@@ -131,8 +137,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.data_view = data_manage_backend.Data_View_WindowActions()
         logging.info("Opening data view page.")
+        window_manager = WindowManager()
+        window_manager.register_window('data_view', self.data_view)
+        window_manager.show_window('data_view')
         self.close()
-        self.data_view.show()
 
     def open_results_view(self):
         """
@@ -140,8 +148,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.results_view = results_manage_backend.Results_View_WindowActions()
         logging.info("Opening results view page.")
+        window_manager = WindowManager()
+        window_manager.register_window('results_view', self.results_view)
+        window_manager.show_window('results_view')
         self.close()
-        self.results_view.show()
 
     def open_model_control_view(self):
         """
@@ -149,8 +159,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.model_view = model_manage_backend.model_control_Controller()
         logging.info("Opening model control page.")
+        window_manager = WindowManager()
+        window_manager.register_window('model_control', self.model_view)
+        window_manager.show_window('model_control')
         self.close()
-        self.model_view.show()
 
     def open_change_pwd_view(self):
         """
@@ -158,8 +170,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.change_pwd = change_password_backend.change_pwd_Controller()
         logging.info("Opening password change page.")
+        window_manager = WindowManager()
+        window_manager.register_window('change_pwd', self.change_pwd)
+        window_manager.show_window('change_pwd')
         self.close()
-        self.change_pwd.show()
 
     def open_user_manage_view(self):
         """
@@ -167,8 +181,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.user_manage = user_manage_backend.User_Manage_WindowActions()
         logging.info("Opening user management page.")
+        window_manager = WindowManager()
+        window_manager.register_window('user_manage', self.user_manage)
+        window_manager.show_window('user_manage')
         self.close()
-        self.user_manage.show()
 
     def open_param_control_view(self):
         """
@@ -176,8 +192,10 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         self.param_control = param_manage_backend.ParamControl()
         logging.info("Opening parameter control page.")
+        window_manager = WindowManager()
+        window_manager.register_window('param_control', self.param_control)
+        window_manager.show_window('param_control')
         self.close()
-        self.param_control.show()
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
@@ -185,5 +203,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = AdminWindowActions()
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('admin', demo_window)
+    window_manager.show_window('admin')
     sys.exit(app.exec_())

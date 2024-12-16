@@ -77,7 +77,7 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
     def show_log_content(self):
         """
         显示日志内容
-        从日志文件中读取最后200行并显示在界面上
+        ���日志文件中读取最后200行并显示在界面上
         """
         try:
             # Read the last 100 lines of the log file
@@ -104,17 +104,19 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
         user_status = operate_user.read(path)
         
         try:
+            window_manager = WindowManager()
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
                 self._index_window = admin_index_backend.AdminWindowActions()
+                window_manager.register_window('admin', self._index_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
                 self._index_window = index_backend.Index_WindowActions()
+                window_manager.register_window('index', self._index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭当前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
@@ -131,7 +133,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Log_Manage_WindowActions()
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('log_manage', demo_window)
+    window_manager.show_window('log_manage')
     
     # 进入应用的主事件循环
     sys.exit(app.exec_())

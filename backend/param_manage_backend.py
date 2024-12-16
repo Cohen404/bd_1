@@ -20,6 +20,7 @@ from util.db_util import SessionClass
 from sql_model.tb_parameters import Parameters
 from sql_model.tb_user import User
 from sql_model.system_params import SystemParams
+from util.window_manager import WindowManager
 
 import logging
 from config import (
@@ -72,34 +73,43 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
-    # btn_return返回首页
+        # 注册窗口到WindowManager
+        window_manager = WindowManager()
+        window_manager.register_window('param_control', self)
+
     def returnIndex(self):
         """
         返回到相应的主页面
-        根据��类型返回到管理员或普通用户页面
+        根据用户类型返回到管理员或普通用户页面
         """
         path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
         try:
-            # 创建新窗口前先保存引用
+            window_manager = WindowManager()
             if user_status == '1':  # 管理员
-                self._index_window = admin_index_backend.AdminWindowActions()
+                # 检查是否已存在admin窗口
+                admin_window = window_manager.get_window('admin')
+                if not admin_window:
+                    admin_window = admin_index_backend.AdminWindowActions()
+                    window_manager.register_window('admin', admin_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
-                self._index_window = index_backend.Index_WindowActions()
+                # 检查是否已存在index窗口
+                index_window = window_manager.get_window('index')
+                if not index_window:
+                    index_window = index_backend.Index_WindowActions()
+                    window_manager.register_window('index', index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭当前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
-
 
     def savetoDB(self):
         """

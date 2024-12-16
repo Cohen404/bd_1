@@ -67,7 +67,10 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         """
         super(results_manage_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)
-        self._index_window = None
+        
+        # 初始化窗口管理器并注册窗口
+        window_manager = WindowManager()
+        window_manager.register_window('results_view', self)
 
         # 获取当前用户信息
         self.user_id, is_admin = self.get_current_user()
@@ -139,10 +142,6 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
 
         # 连接按钮事件
         self.btn_return.clicked.connect(self.return_index)
-
-        # 注册窗口
-        window_manager = WindowManager()
-        window_manager.register_window('results_view', self)
 
         # 添加导出按钮事件连接
         self.export_btn.clicked.connect(self.export_results)
@@ -432,17 +431,24 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         user_status = operate_user.read(path)
         
         try:
-            # 创建新窗口前先保存引用
+            window_manager = WindowManager()
             if user_status == '1':  # 管理员
-                self._index_window = admin_index_backend.AdminWindowActions()
+                # 检查是否已存在admin窗口
+                admin_window = window_manager.get_window('admin')
+                if not admin_window:
+                    admin_window = admin_index_backend.AdminWindowActions()
+                    window_manager.register_window('admin', admin_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
-                self._index_window = index_backend.Index_WindowActions()
+                # 检查是否已存在index窗口
+                index_window = window_manager.get_window('index')
+                if not index_window:
+                    index_window = index_backend.Index_WindowActions()
+                    window_manager.register_window('index', index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭当前窗口
             self.close()
             
             logging.info("Returned to index page successfully")

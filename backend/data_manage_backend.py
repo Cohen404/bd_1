@@ -64,6 +64,11 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         """
         super(data_manage_UI.Ui_MainWindow, self).__init__()
         self.setupUi(self)
+        
+        # 初始化窗口管理器并注册窗口
+        window_manager = WindowManager()
+        window_manager.register_window('data_view', self)
+
         self.id = 0
         self.data_path = ''
 
@@ -138,9 +143,6 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         self.image_name_label.setStyleSheet("font-size: 14px; color: #333;")
         self.verticalLayout.addWidget(self.image_name_label)
 
-        window_manager = WindowManager()
-        window_manager.register_window('data_view', self)
-
         # 添加批量上传按钮的信号连接
         self.batch_upload_pushButton.clicked.connect(self.handle_batch_upload)
 
@@ -170,7 +172,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             print(f"当前用户ID: {self.user_id}, 是否管理员: {self.user_type}")
 
             if self.user_type:  # 管理员
-                print("管理员查询所有数据")
+                print("管��员查询所有数据")
                 data_list = session.query(Data).all()
             else:  # 普通用户
                 print(f"普通用户查询自己的数据: user_id = {self.user_id}")
@@ -296,7 +298,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 max_id = 0
             max_id = max_id + 1
 
-            # 创建新的数据记录
+            # 创建新的数据��录
             new_data = Data(
                 id=max_id,
                 personnel_id=str(user.user_id),
@@ -332,7 +334,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     def upload_button(self):
 
         '''
-        将数据库tb_data表中最新的一条记录获取下来，得到一个data对象，要判断flag是否等于1，等于1进行下列操作
+        将数据库tb_data表中最新的一条��录获取下来，得到一个data对象，要判断flag是否等于1，等于1进行下列操作
         data.id, data.data_path, data.upload_user_id, data.upload_time, data.flag
 
         '''
@@ -377,7 +379,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         为每一行创建操作按钮
         
         返回:
-        QtWidgets.QWidget: 包含查看和删除按钮的小部���
+        QtWidgets.QWidget: 包含查看和删除按钮的小部
         """
         widget = QtWidgets.QWidget()
         # 查看
@@ -567,20 +569,28 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
-        user_status = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
+        path = USER_STATUS_FILE
+        user_status = operate_user.read(path)
         
         try:
-            # 创建新窗口前先保存引用
+            window_manager = WindowManager()
             if user_status == '1':  # 管理员
-                self._index_window = admin_index_backend.AdminWindowActions()
+                # 检查是否已存在admin窗口
+                admin_window = window_manager.get_window('admin')
+                if not admin_window:
+                    admin_window = admin_index_backend.AdminWindowActions()
+                    window_manager.register_window('admin', admin_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
-                self._index_window = index_backend.Index_WindowActions()
+                # 检查是否已存在index窗口
+                index_window = window_manager.get_window('index')
+                if not index_window:
+                    index_window = index_backend.Index_WindowActions()
+                    window_manager.register_window('index', index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭当前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
@@ -713,7 +723,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     try:
                         user = session.query(User).filter(User.user_id == self.user_id).first()
                         if not user:
-                            raise Exception("无法获取当前用户��息")
+                            raise Exception("无法获取当前用户信息")
 
                         # 从数据库中取最大的id
                         max_id = session.query(func.max(Data.id)).scalar()
@@ -765,7 +775,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     def upload_file(self, file_path):
         """
         上传单个文件的方法
-        返回：bool，表示是否上传成功
+        ��回：bool，表示是否上传成功
         """
         # 把原来上传按钮处理函数的核心逻辑移到这里
         # 返回True表示上传成功，False表示失败
@@ -812,7 +822,7 @@ if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调用show()函数即可
     app = QApplication(sys.argv)
-    # 显示创建的界面
+    # 示创建的界面
     demo_window = Data_View_WindowActions()
     demo_window.show()
     sys.exit(app.exec_())

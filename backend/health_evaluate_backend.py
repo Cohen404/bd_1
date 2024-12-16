@@ -252,7 +252,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         '''
         从数据库tb_data获取data对象list
         遍历每个data对象，将每个data对象的data.id，personal_id、data_path、upload_user添加到table中
-        管理员可以查看所有数据，普通用户只能查看自己上传的数据
+        管���员可以查看所有数据，普通用户只能查看自己上传的数据
         '''
         session = SessionClass()
         try:
@@ -391,17 +391,19 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         user_status = operate_user.read(path)
         
         try:
+            window_manager = WindowManager()
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
                 self._index_window = admin_index_backend.AdminWindowActions()
+                window_manager.register_window('admin', self._index_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
                 self._index_window = index_backend.Index_WindowActions()
+                window_manager.register_window('index', self._index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
@@ -628,7 +630,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
 
-        # 更新对应类型的标签显示分数
+        # 更新对应类��的标签显示分数
         if self.completed_models == 1:
             self.ordinarystress_label.setText(f"普通应激 ({final_score:.1f})")
             if final_score > 50:  # 如果分数>50，设置红色LED
@@ -651,7 +653,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
 
-        if self.completed_models == 3:  # 如果所有模型都已评估完成
+        if self.completed_models == 3:  # 如果所有模型都已评估���成
             os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
             finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
@@ -771,13 +773,15 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 QMessageBox.critical(self, "错误", f"评估过程中发生错误: {str(e)}")
 
     def open_model_control_view(self):
-        logging.info("Opening model control view.")
-
+        """
+        打开模型控制页面
+        """
         self.model_view = model_manage_backend.model_control_Controller()
+        logging.info("Opening model control page.")
+        window_manager = WindowManager()
+        window_manager.register_window('model_control', self.model_view)
+        window_manager.show_window('model_control')
         self.close()
-        self.model_view.show()
-
-        logging.info("Model control view opened successfully.")
 
     # 添加生成报告的方法
     def generateReport(self):
@@ -969,10 +973,11 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-
     # 这里是界面的入口，在这里需要定义QApplication对象，之后界面跳转时不用再重新定义，只需要调show()函数即可
     app = QApplication(sys.argv)
     # 显示创建的界面
     demo_window = Health_Evaluate_WindowActions()
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('health_evaluate', demo_window)
+    window_manager.show_window('health_evaluate')
     sys.exit(app.exec_())

@@ -45,11 +45,15 @@ class WindowManager:
         """
         window = self._windows.get(name)
         if window:
-            # 隐藏当前窗口
-            if self.current_window and self.current_window != window:
+            # 获取当前窗口的位置
+            current_pos = None
+            if self.current_window:
+                current_pos = self.current_window.pos()
                 self.current_window.hide()
             
-            # 显示新窗口
+            # 先设置位置再显示新窗口
+            if current_pos:
+                window.move(current_pos)
             window.show()
             self.current_window = window
         else:

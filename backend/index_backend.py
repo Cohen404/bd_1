@@ -85,6 +85,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
+        # 注册窗口到WindowManager
+        window_manager = WindowManager()
+        window_manager.register_window('index', self)
+
 
     def show_nav(self):
         """
@@ -101,8 +105,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         self.health_evaluate = health_evaluate_backend.Health_Evaluate_WindowActions()
         logging.info("Opening health evaluation page.")
-        self.close()  # 关闭当前窗口
-        self.health_evaluate.show()  # 显示健康评估窗口
+        window_manager = WindowManager()
+        window_manager.register_window('health_evaluate', self.health_evaluate)
+        window_manager.show_window('health_evaluate')
+        self.close()
 
     def open_data_view(self):
         """
@@ -110,8 +116,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         self.data_view = data_manage_backend.Data_View_WindowActions()
         logging.info("Opening data view page.")
-        self.close()  # 关闭当前窗口
-        self.data_view.show()  # 显示数据查看窗口
+        window_manager = WindowManager()
+        window_manager.register_window('data_view', self.data_view)
+        window_manager.show_window('data_view')
+        self.close()
 
     def open_results_view(self):
         """
@@ -119,8 +127,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         self.results_view = results_manage_backend.Results_View_WindowActions()
         logging.info("Opening results view page.")
-        self.close()  # 关闭当前窗口
-        self.results_view.show()  # 显示结果查看窗口
+        window_manager = WindowManager()
+        window_manager.register_window('results_view', self.results_view)
+        window_manager.show_window('results_view')
+        self.close()
 
     def open_admin_login(self):
         """
@@ -128,8 +138,10 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         self.login = login_backend.Login_WindowActions()
         logging.info("Opening admin login page.")
-        self.close()  # 关闭当前窗口
-        self.login.show()  # 显示登录窗口
+        window_manager = WindowManager()
+        window_manager.register_window('login', self.login)
+        window_manager.show_window('login')
+        self.close()
 
 
 if __name__ == '__main__':

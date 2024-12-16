@@ -323,17 +323,19 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
         user_status = operate_user.read(path)
         
         try:
+            window_manager = WindowManager()
             # 创建新窗口前先保存引用
             if user_status == '1':  # 管理员
                 self._index_window = admin_index_backend.AdminWindowActions()
+                window_manager.register_window('admin', self._index_window)
+                window_manager.show_window('admin')
             else:  # 普通用户
                 self._index_window = index_backend.Index_WindowActions()
+                window_manager.register_window('index', self._index_window)
+                window_manager.show_window('index')
             
-            # 先显示新窗口
-            self._index_window.show()
-            # 再隐藏当前窗口
+            # 隐藏并关闭当前窗口
             self.hide()
-            # 最后关闭当前窗口
             self.close()
             
             logging.info("Returned to index page successfully")
@@ -346,5 +348,7 @@ if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     demo_window = User_Manage_WindowActions()
-    demo_window.show()
+    window_manager = WindowManager()
+    window_manager.register_window('user_manage', demo_window)
+    window_manager.show_window('user_manage')
     sys.exit(app.exec_())
