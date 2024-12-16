@@ -7127,3 +7127,237 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-17 00:19:50,431 - INFO - Administrator - Data table refreshed successfully with 5 records
 2024-12-17 00:19:50,434 - INFO - Administrator - Opening data view page.
 2024-12-17 00:19:51,420 - INFO - Administrator - Returned to index page successfully
+2024-12-17 00:20:58,199 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:20:59,069 - INFO - Administrator - Data table refreshed successfully with 5 records
+2024-12-17 00:20:59,070 - INFO - Administrator - Opening data view page.
+2024-12-17 00:21:08,524 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/000016_wubing_mat to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:21:08,532 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat, Username: admin
+2024-12-17 00:21:09,307 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:21:10,648 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:24:09,917 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:24:11,022 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:24:11,025 - INFO - Administrator - Opening data view page.
+2024-12-17 00:24:12,412 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:26:21,337 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:26:22,799 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:26:22,801 - INFO - Administrator - Opening data view page.
+2024-12-17 00:26:23,905 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:29:15,040 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:29:16,360 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:29:16,363 - INFO - Administrator - Opening data view page.
+2024-12-17 00:29:17,413 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:33:13,000 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:33:14,349 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:33:14,351 - INFO - Administrator - Opening data view page.
+2024-12-17 00:33:16,344 - INFO - Administrator - Attempting to delete record with ID 6 from the table.
+2024-12-17 00:33:17,928 - INFO - Administrator - Data path for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:33:17,940 - INFO - Administrator - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing_mat
+2024-12-17 00:33:17,943 - INFO - Administrator - Deleted record with ID 6 from tb_data.
+2024-12-17 00:33:17,945 - INFO - Administrator - Deleted record with ID 6 from result table.
+2024-12-17 00:33:17,945 - INFO - Administrator - Removed row 5 from table.
+2024-12-17 00:33:27,993 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/control_2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:33:28,003 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2, Username: admin
+2024-12-17 00:33:29,007 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:33:29,714 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:34:59,939 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:35:01,240 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:35:01,243 - INFO - Administrator - Opening data view page.
+2024-12-17 00:35:02,439 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:35:29,093 - INFO - Administrator - Data processing completed successfully
+2024-12-17 00:35:33,435 - INFO - Administrator - Button clicked in row 5, corresponding ID: 6
+2024-12-17 00:35:33,438 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:35:34,723 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 00:35:35,933 - INFO - Administrator - Returned to index page successfully
+2024-12-17 00:35:36,519 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 00:35:36,519 - INFO - Administrator - Depression LED set to RED
+2024-12-17 00:35:36,522 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 00:35:36,549 - INFO - Administrator - Successfully displayed 6 data records
+2024-12-17 00:35:36,574 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 00:36:04,712 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 00:36:33,343 - INFO - Administrator - Returned to index page successfully
+2024-12-17 00:36:34,200 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:36:34,203 - INFO - Administrator - Opening data view page.
+2024-12-17 00:36:41,664 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-17 00:36:51,495 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing1
+2024-12-17 00:36:56,058 - INFO - Administrator - Data processing completed successfully
+2024-12-17 00:36:59,705 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 00:37:04,302 - INFO - Administrator - Data processing completed successfully
+2024-12-17 00:37:28,327 - INFO - Administrator - Attempting to delete record with ID 6 from the table.
+2024-12-17 00:37:28,328 - INFO - Administrator - Data path for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:37:28,357 - INFO - Administrator - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:37:28,361 - INFO - Administrator - Deleted record with ID 6 from tb_data.
+2024-12-17 00:37:28,362 - INFO - Administrator - Deleted record with ID 6 from result table.
+2024-12-17 00:37:28,363 - INFO - Administrator - Removed row 5 from table.
+2024-12-17 00:37:35,845 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/control_2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:37:35,853 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2, Username: admin
+2024-12-17 00:37:36,757 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:37:39,825 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 00:37:57,676 - INFO - Administrator - Data processing completed successfully
+2024-12-17 00:38:10,844 - INFO - Administrator - Returned to index page successfully
+2024-12-17 00:38:12,135 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 00:38:12,135 - INFO - Administrator - Depression LED set to RED
+2024-12-17 00:38:12,136 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 00:38:12,163 - INFO - Administrator - Successfully displayed 6 data records
+2024-12-17 00:38:12,186 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 00:38:35,318 - INFO - Administrator - Returned to index page successfully
+2024-12-17 00:39:01,495 - INFO - Administrator - Data table refreshed successfully with 6 records
+2024-12-17 00:39:01,496 - INFO - Administrator - Opening data view page.
+2024-12-17 00:39:08,842 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/yingji to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:39:08,847 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji, Username: admin
+2024-12-17 00:39:09,701 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:39:10,324 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:40:32,040 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:40:36,040 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:40:36,042 - INFO - Administrator - Opening data view page.
+2024-12-17 00:40:37,536 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:43:04,311 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:43:05,330 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:43:05,332 - INFO - Administrator - Opening data view page.
+2024-12-17 00:43:06,300 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:46:16,397 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:46:17,750 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:46:17,751 - INFO - Administrator - Opening data view page.
+2024-12-17 00:46:21,020 - INFO - Administrator - Attempting to delete record with ID 7 from the table.
+2024-12-17 00:46:21,024 - INFO - Administrator - Data path for ID 7: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:46:21,040 - INFO - Administrator - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:46:21,044 - INFO - Administrator - Deleted record with ID 7 from tb_data.
+2024-12-17 00:46:21,045 - INFO - Administrator - Deleted record with ID 7 from result table.
+2024-12-17 00:46:21,045 - INFO - Administrator - Removed row 6 from table.
+2024-12-17 00:46:28,449 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/yingji to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:46:28,457 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji, Username: admin
+2024-12-17 00:46:29,528 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:46:30,535 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:53:05,806 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:53:06,985 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:53:06,987 - INFO - Administrator - Opening data view page.
+2024-12-17 00:53:08,444 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 00:54:19,051 - INFO - Administrator - User admin logged in successfully
+2024-12-17 00:54:20,090 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 00:54:20,091 - INFO - Administrator - Opening data view page.
+2024-12-17 00:54:21,205 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:02:48,610 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:02:49,606 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:02:49,607 - INFO - Administrator - Opening data view page.
+2024-12-17 01:02:50,638 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:09:10,714 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:09:11,709 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:09:11,710 - INFO - Administrator - Opening data view page.
+2024-12-17 01:09:13,894 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:14:53,872 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:14:55,570 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:14:55,573 - INFO - Administrator - Opening data view page.
+2024-12-17 01:14:56,683 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:15:42,902 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:15:43,981 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:15:43,984 - INFO - Administrator - Opening data view page.
+2024-12-17 01:15:45,994 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:17:41,743 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:17:43,248 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:17:43,250 - INFO - Administrator - Opening data view page.
+2024-12-17 01:17:44,383 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:18:19,433 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:18:20,712 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:18:20,715 - INFO - Administrator - Opening data view page.
+2024-12-17 01:18:21,966 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:28:09,722 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:28:10,967 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:28:10,969 - INFO - Administrator - Opening data view page.
+2024-12-17 01:28:31,039 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:29:05,815 - INFO - Administrator - Data processing completed successfully
+2024-12-17 01:30:13,704 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:30:14,861 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:30:14,862 - INFO - Administrator - Opening data view page.
+2024-12-17 01:30:16,874 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:30:53,954 - INFO - Administrator - Data processing completed successfully
+2024-12-17 01:30:59,057 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:31:16,672 - INFO - Administrator - Data processing completed successfully
+2024-12-17 01:31:19,201 - INFO - Administrator - Button clicked in row 6, corresponding ID: 7
+2024-12-17 01:31:19,204 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:31:20,108 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji\Theta.png
+2024-12-17 01:31:21,463 - INFO - Administrator - Returned to index page successfully
+2024-12-17 01:31:22,230 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 01:31:22,262 - INFO - Administrator - Successfully displayed 7 data records
+2024-12-17 01:31:22,286 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 01:31:24,895 - INFO - Administrator - Button clicked in row 6, ID: 7
+2024-12-17 01:31:24,897 - INFO - Administrator - Data path retrieved for ID 7: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 01:31:24,899 - WARNING - Administrator - No evaluation results found for ID 7
+2024-12-17 01:31:54,395 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:31:58,671 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:31:58,673 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:31:58,675 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:31:58,676 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:31:58,676 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:31:58,694 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:00,016 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 01:32:00,017 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 01:32:00,020 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:32:00,020 - INFO - Administrator - Depression LED set to RED
+2024-12-17 01:32:00,020 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:00,020 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:00,021 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 01:32:00,033 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:02,696 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:32:02,698 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:32:02,701 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:02,702 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:02,702 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:32:02,702 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:03,512 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 01:32:03,514 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 01:32:03,516 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:32:03,516 - INFO - Administrator - Depression LED set to RED
+2024-12-17 01:32:03,517 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:03,517 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:03,517 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 01:32:03,517 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:04,377 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:32:04,378 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:32:04,380 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:04,380 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:04,380 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:32:04,381 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:05,088 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 01:32:05,090 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 01:32:05,092 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:32:05,092 - INFO - Administrator - Depression LED set to RED
+2024-12-17 01:32:05,092 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:05,092 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:05,092 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 01:32:05,093 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:05,528 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:32:05,530 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:32:05,531 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:05,533 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:05,533 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:32:05,533 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:05,969 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 01:32:05,971 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 01:32:05,972 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:32:05,973 - INFO - Administrator - Depression LED set to RED
+2024-12-17 01:32:05,973 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:05,973 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:05,973 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 01:32:05,974 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:06,456 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:32:06,457 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:32:06,459 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:06,459 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:06,459 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:32:06,459 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:06,809 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 01:32:06,812 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 01:32:06,815 - INFO - Administrator - Ordinary stress LED set to RED
+2024-12-17 01:32:06,815 - INFO - Administrator - Depression LED set to RED
+2024-12-17 01:32:06,816 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:06,816 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:06,816 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 01:32:06,816 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:07,079 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 01:32:07,081 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 01:32:07,084 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 01:32:07,084 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 01:32:07,084 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 01:32:07,084 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 01:32:08,340 - INFO - Administrator - Returned to index page successfully
+2024-12-17 01:32:09,624 - INFO - Administrator - Opening results view page.
+2024-12-17 01:32:16,359 - INFO - Administrator - Returned to index page successfully

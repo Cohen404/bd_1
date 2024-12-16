@@ -8,35 +8,8 @@ import mne
 import os
 import numpy as np
 import scipy.io as sio
+import traceback
 
-def read_eeglab_mat(file_path):
-    """
-    读取EEGLAB生成的.mat格式文件
-    
-    参数:
-    file_path (str): .mat文件的路径
-    
-    返回:
-    mne.io.Raw: MNE Raw对象
-    """
-    # 读取.mat文件
-    mat_data = sio.loadmat(file_path)
-    
-    # 获取EEG数据和相关信息
-    if 'EEG' in mat_data:
-        eeg = mat_data['EEG']
-        data = eeg['data'][0][0].T  # 转置以匹配MNE格式
-        sfreq = float(eeg['srate'][0][0][0][0])
-        ch_names = [str(name[0]) for name in eeg['chanlocs'][0][0]['labels'][0]]
-        
-        # 创建MNE Info对象
-        info = mne.create_info(ch_names=ch_names, sfreq=sfreq, ch_types='eeg')
-        
-        # 创建Raw对象
-        raw = mne.io.RawArray(data.T, info)
-        return raw
-    else:
-        raise ValueError("无法从.mat文件中读取EEG数据")
 
 def treat(data_dir):
     """
@@ -74,7 +47,6 @@ def treat(data_dir):
     # 按优先级查找不同格式的脑电数据文件
     edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
     set_files = [f for f in os.listdir(data_dir) if f.endswith('.set')]
-    mat_files = [f for f in os.listdir(data_dir) if f.endswith('.mat')]
 
     raw = None
     
@@ -87,42 +59,63 @@ def treat(data_dir):
     elif set_files:
         print("找到SET/FDT文件，开始处理...")
         set_path = os.path.join(data_dir, set_files[0])
+        
+        # 尝试不同方式读取SET文件
         try:
-            # 首先尝试作为原始数据读取
-            raw = read_raw_eeglab(set_path)
-            print(f"已加载SET文件作为原始数据: {set_path}")
-        except TypeError as e:
-            if "number of trials" in str(e):
-                # 如果是epochs数据，直接读取为epochs
-                print("检测到SET文件包含epochs数据，改用epochs读取方式")
-                epochs = mne.io.read_epochs_eeglab(set_path)
-                # 将epochs数据转换为连续数据
-                data = epochs.get_data()
-                # 创建info对象
-                info = mne.create_info(
-                    ch_names=epochs.ch_names,
-                    sfreq=epochs.info['sfreq'],
-                    ch_types='eeg'
-                )
-                # 重塑数据形状 (trials x channels x time) -> (channels x time)
-                # 首先将所有trials连接在时间维度上
-                data_reshaped = np.concatenate(data, axis=1)  # 现在形状是 (channels x (trials*time))
-                # 创建Raw对象
-                raw = mne.io.RawArray(data_reshaped, info)
-                print(f"已将epochs数据转换为连续数据，形状: {data_reshaped.shape}")
-            else:
-                raise
-        except Exception as e:
-            print(f"读取SET文件失败: {str(e)}")
-            return False
-    elif mat_files:
-        print("找到EEGLAB MAT文件，开始处理...")
-        mat_path = os.path.join(data_dir, mat_files[0])
-        try:
-            raw = read_eeglab_mat(mat_path)
-            print(f"已加载MAT文件: {mat_path}")
-        except Exception as e:
-            print(f"读取MAT文件失败: {str(e)}")
+            # 1. 首先尝试默认参数读取
+            print("尝试默认参数读取SET文件...")
+            raw = read_raw_eeglab(set_path, preload=False)
+            print("成功读取SET文件作为原始数据")
+        except (TypeError, ValueError, RuntimeError) as e1:
+            print(f"默认参数读取失败: {str(e1)}")
+            try:
+                # 2. 尝试使用ascii编码读取
+                print("尝试使用ascii编码读取SET文件...")
+                raw = read_raw_eeglab(set_path, preload=False, uint16_codec='latin1')
+                print("使用ascii编码成功读取SET文件")
+            except (TypeError, ValueError, RuntimeError) as e2:
+                print(f"ascii编码读取失败: {str(e2)}")
+                try:
+                    # 3. 尝试作为epochs数据读取
+                    print("尝试作为epochs数据读取...")
+                    epochs = mne.io.read_epochs_eeglab(set_path)
+                    print("成功读取SET文件作为epochs数据")
+                    
+                    # 将epochs数据转换为连续数据
+                    data = epochs.get_data()
+                    info = mne.create_info(
+                        ch_names=epochs.ch_names,
+                        sfreq=epochs.info['sfreq'],
+                        ch_types='eeg'
+                    )
+                    # 重塑数据形状 (trials x channels x time) -> (channels x time)
+                    data_reshaped = np.concatenate(data, axis=1)
+                    raw = mne.io.RawArray(data_reshaped, info)
+                    print(f"已将epochs数据转换为连续数据，形状: {data_reshaped.shape}")
+                except Exception as e3:
+                    # 4. 最后尝试使用ascii编码读取epochs
+                    try:
+                        print("尝试使用ascii编码读取epochs数据...")
+                        epochs = mne.io.read_epochs_eeglab(set_path, uint16_codec='latin1')
+                        print("使用ascii编码成功读取epochs数据")
+                        
+                        # 将epochs数据转换为连续数据
+                        data = epochs.get_data()
+                        info = mne.create_info(
+                            ch_names=epochs.ch_names,
+                            sfreq=epochs.info['sfreq'],
+                            ch_types='eeg'
+                        )
+                        data_reshaped = np.concatenate(data, axis=1)
+                        raw = mne.io.RawArray(data_reshaped, info)
+                        print(f"已将epochs数据转换为连续数据，形状: {data_reshaped.shape}")
+                    except Exception as e4:
+                        print("所有读取方式都失败了")
+                        print(f"最后尝试失败: {str(e4)}")
+                        return False
+
+        if raw is None:
+            print("SET文件读取失败")
             return False
 
     if raw is None:
@@ -135,17 +128,47 @@ def treat(data_dir):
     freq = raw.info['sfreq']
     n_samples = raw.n_times / freq
 
-    # 删除非EEG通道
-    non_eeg_channel = ['ECG', 'HEOR', 'HEOL', 'VEOU', 'VEOL', 'Status']
-    exisiting_non_eeg_channels = [ch for ch in non_eeg_channel if ch in raw.ch_names]
-    # if exisiting_non_eeg_channels:
-    #     print(f"删除非EEG通道: {exisiting_non_eeg_channels}")
-    #     raw.drop_channels(exisiting_non_eeg_channels)
+    # 定义要保留的59个通道
+    channels_to_keep = ['Fpz', 'Fp1', 'Fp2', 'AF3', 'AF4', 'AF7', 'AF8', 'Fz', 'F1', 'F2', 
+                       'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'FCz', 'FC1', 'FC2', 'FC3', 'FC4', 
+                       'FC5', 'FC6', 'FT7', 'FT8', 'Cz', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 
+                       'T7', 'T8', 'CP1', 'CP2', 'CP3', 'CP4', 'CP5', 'CP6', 'TP7', 'TP8', 
+                       'Pz', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'POz', 'PO3', 'PO4', 'PO5', 
+                       'PO6', 'PO7', 'PO8', 'Oz', 'O1', 'O2']
+
+    # 检查当前数据中的通道
+    current_channels = raw.ch_names
+    print(f"原始通道 ({len(current_channels)}个): {current_channels}")
+
+    # 找出需要删除的通道
+    channels_to_drop = [ch for ch in current_channels if ch not in channels_to_keep]
+    
+    # 删除不需要的通道
+    if channels_to_drop:
+        print(f"删除的通道: {channels_to_drop}")
+        raw.drop_channels(channels_to_drop)
+    
+    # 输出保留的通道
+    remaining_channels = raw.ch_names
+    print(f"保留的通道 ({len(remaining_channels)}个): {remaining_channels}")
 
     # 设置电极位置
-    # 使用标准的10-05系统设置电极位置
-    montage = mne.channels.make_standard_montage("standard_1005")
-    raw.set_montage(montage)
+    try:
+        montage = mne.channels.make_standard_montage("standard_1005")
+        raw.set_montage(montage, match_case=False)  # 添加match_case=False以忽略大小写
+    except ValueError as e:
+        print(f"设置电极位置时出错: {str(e)}")
+        print("尝试使用其他montage模板...")
+        # 尝试其他常用的montage模板
+        montage_names = ["standard_1020", "standard_1010", "biosemi64"]
+        for name in montage_names:
+            try:
+                montage = mne.channels.make_standard_montage(name)
+                raw.set_montage(montage, match_case=False)
+                print(f"成功使用 {name} montage")
+                break
+            except ValueError:
+                continue
 
     # 创建事件
     # 从原始数据的注释中创建事件

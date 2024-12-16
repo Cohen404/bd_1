@@ -608,3 +608,26 @@ templates/anxiety.txt中的内容
 如果官兵应激、抑郁、焦虑的分数都比较低（<50）则防护建议内容为：
 templates/normal.txt中的内容
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+我找到问题了，
+首先针对read_raw_eeglab读取的情况：
+先尝试默认参数读取，如果raw = read_raw_eeglab(set_path, preload=False)出错的话，尝试加入参数uint16_codec='ascii'参数。这是eeglab编码问题导致的
+
+如果还是有问题，那应该 说明SET文件包含epochs数据，改用epochs读取方式
+先尝试epochs = mne.io.read_epochs_eeglab(set_path)
+如果出错尝试增加uint16_codec='ascii'参数
