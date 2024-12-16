@@ -165,8 +165,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激系统"))
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))
-        self.results_view_Button.setText(_translate("MainWindow", "结果\n查看"))
-        self.data_view_Button.setText(_translate("MainWindow", "数据\n查看"))
+        self.results_view_Button.setText(_translate("MainWindow", "结果\n管理"))
+        self.data_view_Button.setText(_translate("MainWindow", "数据\n管理"))
         self.admin_login_Button.setText(_translate("MainWindow", "切换\n登录"))
 
         font = QFont()

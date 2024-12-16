@@ -187,10 +187,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
-        self.data_view_Button.setText(_translate("MainWindow", "数据\n查看"))
+        self.data_view_Button.setText(_translate("MainWindow", "数据\n管理"))
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))
         self.parameter_pushButton.setText(_translate("MainWindow", "系统\n参数"))
-        self.results_view_Button.setText(_translate("MainWindow", "结果\n查看"))
+        self.results_view_Button.setText(_translate("MainWindow", "结果\n管理"))
         self.change_pwd_Button.setText(_translate("MainWindow", "密码\n修改"))
         self.model_manage_pushButton.setText(_translate("MainWindow", "模型\n管理"))
         self.user_manage_pushButton.setText(_translate("MainWindow", "用户\n管理"))

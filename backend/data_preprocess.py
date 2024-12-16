@@ -1,22 +1,52 @@
 # 文件功能：EEG数据预处理
-# 该脚本用于读取EDF格式的脑电图数据，进行预处理，包括删除非EEG通道、设置电极位置、
+# 该脚本用于读取多种格式的脑电图数据，进行预处理，包括删除非EEG通道、设置电极位置、
 # 插值坏道、降采样、滤波、ICA分析、重新参考等步骤，最后保存处理后的数据。
 
-from mne.io import concatenate_raws, read_raw_edf
+from mne.io import concatenate_raws, read_raw_edf, read_raw_eeglab
 import matplotlib.pyplot as plt
 import mne
 import os
 import numpy as np
+import scipy.io as sio
+
+def read_eeglab_mat(file_path):
+    """
+    读取EEGLAB生成的.mat格式文件
+    
+    参数:
+    file_path (str): .mat文件的路径
+    
+    返回:
+    mne.io.Raw: MNE Raw对象
+    """
+    # 读取.mat文件
+    mat_data = sio.loadmat(file_path)
+    
+    # 获取EEG数据和相关信息
+    if 'EEG' in mat_data:
+        eeg = mat_data['EEG']
+        data = eeg['data'][0][0].T  # 转置以匹配MNE格式
+        sfreq = float(eeg['srate'][0][0][0][0])
+        ch_names = [str(name[0]) for name in eeg['chanlocs'][0][0]['labels'][0]]
+        
+        # 创建MNE Info对象
+        info = mne.create_info(ch_names=ch_names, sfreq=sfreq, ch_types='eeg')
+        
+        # 创建Raw对象
+        raw = mne.io.RawArray(data.T, info)
+        return raw
+    else:
+        raise ValueError("无法从.mat文件中读取EEG数据")
 
 def treat(data_dir):
     """
-    对指定目录中的EDF文件进行预处理
+    对指定目录中的脑电数据文件进行预处理
     
     参数:
-    data_dir (str): 包含EDF文件的目录路径
+    data_dir (str): 包含脑电数据文件的目录路径
 
     功能:
-    1. 读取EDF文件
+    1. 读取多种格式的脑电数据文件（.fif, .edf, .set/.fdt, .mat）
     2. 删除非EEG通道
     3. 设置电极位置
     4. 创建事件
@@ -28,12 +58,8 @@ def treat(data_dir):
     10. 创建Epochs对象
     11. 保存处理后的数据
     """
-    # 文件路径
-    #     data_dir = 'E:/brain_data/焦虑'
-    edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
+    # 检查是否已有处理好的FIF文件
     fif_files = [f for f in os.listdir(data_dir) if f.endswith('.fif')]
-
-    # 如果有FIF文件，直接处理FIF文件
     if fif_files:
         print("发现已预处理的FIF文件，直接进行保存")
         for fif_file in fif_files:
@@ -41,47 +67,85 @@ def treat(data_dir):
             epochs = mne.read_epochs(fif_path)
             save_dir = os.path.join(data_dir, 'fif.fif')
             epochs.save(save_dir, overwrite=True)
-        return True  # 添加返回值表示处理成功
+        return True
 
-    # 如果没有EDF文件，直接返回
-    if not edf_files:
-        print("未找到需要处理的EDF文件")
-        return False  # 添加返回值表示处理失败
+    print("未发现FIF文件，开始预处理流程...")
+    
+    # 按优先级查找不同格式的脑电数据文件
+    edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
+    set_files = [f for f in os.listdir(data_dir) if f.endswith('.set')]
+    mat_files = [f for f in os.listdir(data_dir) if f.endswith('.mat')]
 
-    # 读取EDF文件
-    raw = None  # 初始化raw变量
-    for edf_file in edf_files:
-        edf_path = os.path.join(data_dir, edf_file)
+    raw = None
+    
+    # 尝试按优先级读取不同格式的文件
+    if edf_files:
+        print("找到EDF文件，开始处理...")
+        edf_path = os.path.join(data_dir, edf_files[0])
         raw = read_raw_edf(edf_path)
-        print(f"Loaded data from {edf_path}")
-        break  # 只处理第一个EDF文件
+        print(f"已加载EDF文件: {edf_path}")
+    elif set_files:
+        print("找到SET/FDT文件，开始处理...")
+        set_path = os.path.join(data_dir, set_files[0])
+        try:
+            # 首先尝试作为原始数据读取
+            raw = read_raw_eeglab(set_path)
+            print(f"已加载SET文件作为原始数据: {set_path}")
+        except TypeError as e:
+            if "number of trials" in str(e):
+                # 如果是epochs数据，直接读取为epochs
+                print("检测到SET文件包含epochs数据，改用epochs读取方式")
+                epochs = mne.io.read_epochs_eeglab(set_path)
+                # 将epochs数据转换为连续数据
+                data = epochs.get_data()
+                # 创建info对象
+                info = mne.create_info(
+                    ch_names=epochs.ch_names,
+                    sfreq=epochs.info['sfreq'],
+                    ch_types='eeg'
+                )
+                # 重塑数据形状 (trials x channels x time) -> (channels x time)
+                # 首先将所有trials连接在时间维度上
+                data_reshaped = np.concatenate(data, axis=1)  # 现在形状是 (channels x (trials*time))
+                # 创建Raw对象
+                raw = mne.io.RawArray(data_reshaped, info)
+                print(f"已将epochs数据转换为连续数据，形状: {data_reshaped.shape}")
+            else:
+                raise
+        except Exception as e:
+            print(f"读取SET文件失败: {str(e)}")
+            return False
+    elif mat_files:
+        print("找到EEGLAB MAT文件，开始处理...")
+        mat_path = os.path.join(data_dir, mat_files[0])
+        try:
+            raw = read_eeglab_mat(mat_path)
+            print(f"已加载MAT文件: {mat_path}")
+        except Exception as e:
+            print(f"读取MAT文件失败: {str(e)}")
+            return False
 
     if raw is None:
-        print("无法读取EDF文件")
+        print("未找到支持的脑电数据文件（.edf, .set/.fdt, .mat）")
         return False
 
+    print("开始进行预处理...")
+    
     # 获取采样频率和采样总数
     freq = raw.info['sfreq']
     n_samples = raw.n_times / freq
 
     # 删除非EEG通道
     non_eeg_channel = ['ECG', 'HEOR', 'HEOL', 'VEOU', 'VEOL', 'Status']
-    # raw.drop_channels(non_eeg_channel)
-
-    # 检查是否存在非EEG通道，如果存在则删除
     exisiting_non_eeg_channels = [ch for ch in non_eeg_channel if ch in raw.ch_names]
-    if not exisiting_non_eeg_channels:
-        print("数据已经预处理过，跳过后续处理")
-        return
-    else:
-        print(f"删除非EEG通道: {exisiting_non_eeg_channels}")
-        raw.drop_channels(exisiting_non_eeg_channels)
+    # if exisiting_non_eeg_channels:
+    #     print(f"删除非EEG通道: {exisiting_non_eeg_channels}")
+    #     raw.drop_channels(exisiting_non_eeg_channels)
 
     # 设置电极位置
     # 使用标准的10-05系统设置电极位置
     montage = mne.channels.make_standard_montage("standard_1005")
     raw.set_montage(montage)
-    # raw.plot_sensors(show_names=True)
 
     # 创建事件
     # 从原始数据的注释中创建事件
@@ -96,26 +160,18 @@ def treat(data_dir):
     raw.load_data()
     raw.interpolate_bads()
 
-    #raw.plot(title="after")
-
     # 降采样到500Hz
     target_sfreq = 500
     raw_resampled = raw.copy().resample(sfreq=target_sfreq)
-    # raw_resampled.plot()
 
     # 滤波处理，设置1-100Hz频段
     raw_filtered = raw_resampled.copy().filter(l_freq=1, h_freq=100)
-    # raw_filtered.plot()
-    # raw_filtered.plot_psd(fmax=250)
 
     # 独立成分分析（ICA）
-    # ICA用于去除眼动和肌电等伪迹
     raw_ica = raw_filtered.copy()
     ica = mne.preprocessing.ICA(n_components=20)
     ica.fit(raw_ica)
     raw_ica.load_data()
-    # ica.plot_sources(raw_ica)
-    # ica.plot_components()
 
     # 基于平均通道重新参考
     raw_ref = raw_filtered.copy()
@@ -138,14 +194,10 @@ def treat(data_dir):
     data = epochs_data[-108::, :, :]
     print(data.shape)
 
-    # 绘制数据
-    # raw_ref.plot()
-    # epochs.plot()
-    # raw_ref.plot_psd()
-
     # 保存处理后的数据
     save_dir = os.path.join(data_dir, 'fif.fif')
     epochs.save(save_dir, overwrite=True)
+    return True
 
 # 注释：
 # 1. 该脚本首先读取指定目录中的所有EDF文件
