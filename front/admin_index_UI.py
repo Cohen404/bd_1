@@ -43,7 +43,7 @@ class Ui_MainWindow(object):
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
         # 返回header组件
-        self.header_layout, _, self.btn_return, self.time_show, self.statu_show = create_header('管理员')
+        self.header_layout, _, self.btn_return, _, self.btn_help = create_header('管理员', show_help=True)
         self.layout.addLayout(self.header_layout)
 
         # main主体
@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
         # self.hlayout2.addWidget(self.admin_login_Button)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        # self.layout.addLayout(self.hlayout1)  # 将主体加入布局
+        # self.layout.addLayout(self.hlayout1)  # 将主��加入布局
         # self.layout.addLayout(self.hlayout2)  # 将主体加入布局
         self.layout.addLayout(self.gridLayout)
         # self.layout.addStretch(1)

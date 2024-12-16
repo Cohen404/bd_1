@@ -17,6 +17,7 @@ import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.admin_index_UI as admin_index_UI
 from backend import change_password_backend, index_backend, login_backend, model_manage_backend, param_manage_backend
+from backend.help_window_backend import HelpWindow
 # 导入跳转页面的后端部分
 from backend import user_manage_backend
 from backend import data_manage_backend
@@ -68,6 +69,7 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         self.parameter_pushButton.clicked.connect(self.open_param_control_view)
         self.change_pwd_Button.clicked.connect(self.open_change_pwd_view)
         self.log_manage_pushButton.clicked.connect(self.open_log_manage_view)
+        self.btn_help.clicked.connect(self.open_help)  # 帮助按钮
 
         # 使用配置文件中的路径
         user = operate_user.read(USER_STATUS_FILE)
@@ -196,6 +198,16 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         window_manager.register_window('param_control', self.param_control)
         window_manager.show_window('param_control')
         self.close()
+
+    def open_help(self):
+        """
+        打开帮助窗口
+        """
+        self.help_window = HelpWindow()
+        logging.info("Opening help window.")
+        # 不需要使用 WindowManager，因为帮助窗口是独立的
+        # 不需要关闭当前窗口
+        # 帮助窗口会在 HelpWindow 类的 __init__ 中自动显示
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

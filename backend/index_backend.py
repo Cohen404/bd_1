@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from state import operate_user as operate_user
 # 导入本页面的前端部分
 import front.index_UI as front_page
+from backend.help_window_backend import HelpWindow
 
 # 导入跳转页面的后端部分
 from backend import data_manage_backend
@@ -69,6 +70,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         self.data_view_Button.clicked.connect(self.open_data_view)  # 数据查看
         self.results_view_Button.clicked.connect(self.open_results_view)  # 结果查看
         self.admin_login_Button.clicked.connect(self.open_admin_login)  # 管理员页面
+        self.btn_help.clicked.connect(self.open_help)  # 帮助按钮
 
         # 从文件中读取用户类型并设置userType
         path = USER_STATUS_FILE
@@ -143,6 +145,16 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         window_manager.register_window('login', self.login)
         window_manager.show_window('login')
         self.close()
+
+    def open_help(self):
+        """
+        打开帮助��口
+        """
+        self.help_window = HelpWindow()
+        logging.info("Opening help window.")
+        # 不需要使用 WindowManager，因为帮助窗口是独立的
+        # 不需要关闭当前窗口
+        # 帮助窗口会在 HelpWindow 类的 __init__ 中自动显示
 
 
 if __name__ == '__main__':

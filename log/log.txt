@@ -6757,3 +6757,54 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-16 12:08:31,819 - INFO - Administrator - Returned to index page successfully
 2024-12-16 12:08:32,664 - INFO - Administrator - Opening log management page.
 2024-12-16 12:08:57,068 - INFO - Administrator - Returned to index page successfully
+2024-12-16 12:57:48,314 - INFO - Administrator - User admin logged in successfully
+2024-12-16 12:58:41,378 - INFO - Administrator - Opening model control page.
+2024-12-16 12:58:45,153 - INFO - Administrator - Returned to index page successfully
+2024-12-16 13:52:14,833 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:44:43,094 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:46:45,689 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:48:11,355 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:55:21,431 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:55:21,462 - ERROR - Administrator - Login error: 'AdminWindowActions' object has no attribute 'btn_help'
+2024-12-16 14:55:26,199 - INFO - Administrator - Opening user login page.
+2024-12-16 14:55:29,106 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:55:29,111 - ERROR - Administrator - Login error: 'AdminWindowActions' object has no attribute 'btn_help'
+2024-12-16 14:56:36,883 - INFO - Administrator - User admin logged in successfully
+2024-12-16 14:56:39,205 - INFO - Administrator - Opening help window.
+2024-12-16 15:04:48,070 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:04:49,789 - INFO - Administrator - Opening help window.
+2024-12-16 15:08:19,068 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:10:17,067 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:11:21,351 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:12:26,760 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:13:34,177 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:13:35,796 - INFO - Administrator - Opening help window.
+2024-12-16 15:15:25,811 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:15:27,526 - INFO - Administrator - Opening help window.
+2024-12-16 15:15:39,814 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 15:15:39,817 - INFO - Administrator - Opening data view page.
+2024-12-16 15:15:40,583 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:15:45,920 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 15:15:45,922 - INFO - Administrator - Opening data view page.
+2024-12-16 15:15:48,180 - INFO - Administrator - Button clicked in row 1, corresponding ID: 2
+2024-12-16 15:15:48,185 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-16 15:15:49,048 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-16 15:16:00,025 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:16:01,081 - INFO - Administrator - Opening model control page.
+2024-12-16 15:16:03,135 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:16:03,972 - INFO - Administrator - Opening model control page.
+2024-12-16 15:16:04,921 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:16:05,626 - INFO - Administrator - Opening help window.
+2024-12-16 15:16:05,966 - INFO - Administrator - Opening help window.
+2024-12-16 15:16:06,234 - INFO - Administrator - Opening help window.
+2024-12-16 15:16:07,939 - INFO - Administrator - Opening model control page.
+2024-12-16 15:16:10,626 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:18:24,144 - INFO - Administrator - User admin logged in successfully
+2024-12-16 15:18:26,003 - INFO - Administrator - Opening help window.
+2024-12-16 15:18:28,306 - INFO - Administrator - Data table refreshed successfully with 4 records
+2024-12-16 15:18:28,308 - INFO - Administrator - Opening data view page.
+2024-12-16 15:18:30,191 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:18:31,116 - INFO - Administrator - Opening results view page.
+2024-12-16 15:19:09,327 - INFO - Administrator - Returned to index page successfully
+2024-12-16 15:19:11,014 - INFO - Administrator - Opening help window.
+2024-12-16 15:19:26,288 - INFO - Administrator - Opening help window.

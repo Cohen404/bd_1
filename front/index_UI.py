@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
         # 返回header组件
-        _,self.header_layout , _, _ ,_= create_header('普通用户')
+        _, self.header_layout, _, _, self.btn_help = create_header('普通用户', show_help=True)
         self.layout.addLayout(self.header_layout)
 
         # main主体

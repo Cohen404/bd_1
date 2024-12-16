@@ -6,12 +6,13 @@ from PyQt5.QtGui import *
 
 
 # 创建头部组件
-def create_header(title):
+def create_header(title, show_help=False):
     """
     创建应用程序的头部组件
     
     参数:
     title (str): 要显示在头部的标题
+    show_help (bool): 是否显示帮助按钮，默认为False
     
     返回:
     tuple: 包含头部布局和各个组件的元组
@@ -47,19 +48,42 @@ def create_header(title):
     name.setFixedHeight(40)
     name.setFixedWidth(200)
 
+    btn_help = None
+    if show_help:
+        # 添加帮助按钮
+        btn_help = QPushButton("帮助")
+        btn_help.setFixedWidth(100)
+        btn_help.setFixedHeight(58)
+        btn_help.setStyleSheet("""
+            QPushButton {
+                color: white;
+                background-color: #4379b9;
+                border: 2px;
+                border-radius: 10px;
+                padding: 2px 4px;
+                font-size: 20px;
+            }
+            QPushButton:hover {
+                background-color: #94b2da;
+            }
+        """)
+        btn_help.setFont(font)
+
     font.setPointSize(22)
     name.setFont(font)
 
-    # 将返回按钮放在第一列的左侧，标题放在中间
+    # 将返回按钮放在第一列的左侧，标题放在中间，帮助按钮放在右侧
     header_layout.addWidget(btn_return, 0, 0, Qt.AlignLeft)  # 左侧返回按钮
     header_layout.addWidget(name, 0, 1, Qt.AlignCenter)  # 居中的标题
+    if btn_help:
+        header_layout.addWidget(btn_help, 0, 2, Qt.AlignRight)  # 右侧帮助按钮
 
     # 使用弹性空隙确保两边元素不会被挤压
     header_layout.setColumnStretch(0, 1)  # 左侧返回按钮所在的列
     header_layout.setColumnStretch(1, 2)  # 中间标题所在的列
-    header_layout.setColumnStretch(2, 1)  # 右侧空列，保持平衡
+    header_layout.setColumnStretch(2, 1)  # 右侧帮助按钮所在的列
 
-    return header_layout, None, btn_return, None, None
+    return header_layout, None, btn_return, None, btn_help
 
 
 # 创建底部组件

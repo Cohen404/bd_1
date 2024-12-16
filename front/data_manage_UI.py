@@ -225,6 +225,6 @@ class Ui_MainWindow(object):
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
-
         self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
         self.batch_upload_pushButton.setFont(font)
+

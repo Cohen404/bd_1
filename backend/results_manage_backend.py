@@ -351,7 +351,7 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         )
         
         # 更新抑郁状态
-        self.acoustic_label.setText(f"抑郁状�� ({result.depression_score})")
+        self.acoustic_label.setText(f"抑郁状态 ({result.depression_score})")
         self.acoustic_label.setAlignment(Qt.AlignLeft)  # 左对齐
         self.acoustic_led_label.setAlignment(Qt.AlignLeft)  # LED指示灯左对齐
         self.acoustic_led_label.setStyleSheet(
