@@ -172,7 +172,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             print(f"当前用户ID: {self.user_id}, 是否管理员: {self.user_type}")
 
             if self.user_type:  # 管理员
-                print("管��员查询所有数据")
+                print("管理员查询所有数据")
                 data_list = session.query(Data).all()
             else:  # 普通用户
                 print(f"普通用户查询自己的数据: user_id = {self.user_id}")
@@ -298,7 +298,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 max_id = 0
             max_id = max_id + 1
 
-            # 创建新的数据��录
+            # 创建新的数据记录
             new_data = Data(
                 id=max_id,
                 personnel_id=str(user.user_id),
@@ -334,7 +334,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     def upload_button(self):
 
         '''
-        将数据库tb_data表中最新的一条��录获取下来，得到一个data对象，要判断flag是否等于1，等于1进行下列操作
+        将数据库tb_data表中最新的一条记录获取下来，得到一个data对象，要判断flag是否等于1，等于1进行下列操作
         data.id, data.data_path, data.upload_user_id, data.upload_time, data.flag
 
         '''
@@ -519,6 +519,17 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             # 确定位置的时候这里是关键
             row = self.tableWidget.indexAt(button.parent().pos()).row()
             id = self.tableWidget.item(row, 0).text()  # 获取当前行数据的ID值
+            
+            # 添加确认对话框
+            reply = QMessageBox.question(self, '确认删除', 
+                                       '确定要删除这条数据吗？此操作不可恢复。',
+                                       QMessageBox.Yes | QMessageBox.No,
+                                       QMessageBox.No)
+            
+            if reply == QMessageBox.No:
+                logging.info(f"User cancelled deletion of record with ID {id}")
+                return
+            
             logging.info(f"Attempting to delete record with ID {id} from the table.")
 
             if id == self.id:  # 删除的数据为当前查看的数据
@@ -552,6 +563,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     session.query(Result).filter(Result.id == id).delete()
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from result table.")
+                    
+                    # 显示删除成功提示
+                    QMessageBox.information(self, "成功", "数据已成功删除")
                 else:
                     logging.warning(f"No data found with ID {id}.")
             except Exception as e:
@@ -775,7 +789,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     def upload_file(self, file_path):
         """
         上传单个文件的方法
-        ��回：bool，表示是否上传成功
+        返回：bool，表示是否上传成功
         """
         # 把原来上传按钮处理函数的核心逻辑移到这里
         # 返回True表示上传成功，False表示失败

@@ -7519,3 +7519,8 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-17 01:42:10,953 - INFO - Administrator - Deleted record with ID 8 from tb_data.
 2024-12-17 01:42:10,954 - INFO - Administrator - Deleted record with ID 8 from result table.
 2024-12-17 01:42:10,956 - INFO - Administrator - Removed row 7 from table.
+2024-12-17 01:45:55,531 - INFO - Administrator - User admin logged in successfully
+2024-12-17 01:45:57,087 - INFO - Administrator - Data table refreshed successfully with 7 records
+2024-12-17 01:45:57,088 - INFO - Administrator - Opening data view page.
+2024-12-17 01:46:00,252 - INFO - Administrator - User cancelled deletion of record with ID 7
+2024-12-17 01:46:01,222 - INFO - Administrator - Returned to index page successfully
