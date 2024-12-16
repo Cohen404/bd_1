@@ -589,3 +589,22 @@ model_num	int	11	是	NULL	系统中可用的模型数量
 
 
 你需要查看backend中的所有python文件，_backend结尾的python文件，看一下是否所有的窗口都继承了WindowManage类，如果没有继承的话，直接修改原代码中的文件位置配置。
+
+
+
+
+
+
+生成报告时，针对应激、抑郁、焦虑三个状态情况（是否大于等于50%）来生成防护建议，并替换模板中的[suggest]
+如果有应激可能（大于等于50%），则防护建议中增加：
+templates/stress.txt中的内容
+
+如果有抑郁可能（大于等于50%），则防护建议中增加：
+templates/depression.txt中的内容
+
+如果有焦虑可能（大于等于50%），则防护建议中增加：
+templates/anxiety.txt中的内容
+
+如果官兵应激、抑郁、焦虑的分数都比较低（<50）则防护建议内容为：
+templates/normal.txt中的内容
+

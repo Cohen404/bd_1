@@ -252,7 +252,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         '''
         从数据库tb_data获取data对象list
         遍历每个data对象，将每个data对象的data.id，personal_id、data_path、upload_user添加到table中
-        管���员可以查看所有数据，普通用户只能查看自己上传的数据
+        管理员可以查看所有数据，普通用户只能查看自己上传的数据
         '''
         session = SessionClass()
         try:
@@ -630,7 +630,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
 
-        # 更新对应类��的标签显示分数
+        # 更新对应类的标签显示分数
         if self.completed_models == 1:
             self.ordinarystress_label.setText(f"普通应激 ({final_score:.1f})")
             if final_score > 50:  # 如果分数>50，设置红色LED
@@ -653,7 +653,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
 
-        if self.completed_models == 3:  # 如果所有模型都已评估���成
+        if self.completed_models == 3:  # 如果所有模型都已评估成
             os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
             finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
@@ -858,6 +858,39 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         text = text.replace('[stress.score]', str(result.anxiety_score))
                         text = text.replace('[stress.result]', 
                                           "可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况")
+                        
+                        # 根据分数生成防护建议
+                        if '[suggest]' in text:
+                            suggestions = []
+                            
+                            # 如果所有分数都低于50%，使用normal.txt的内容
+                            if result.stress_score < 50 and result.depression_score < 50 and result.anxiety_score < 50:
+                                normal_path = os.path.join('templates', 'normal.txt')
+                                if os.path.exists(normal_path):
+                                    with open(normal_path, 'r', encoding='utf-8') as f:
+                                        suggestions.append(f.read())
+                            else:
+                                # 检查各个状态并添加相应建议
+                                if result.stress_score >= 50:
+                                    stress_path = os.path.join('templates', 'stress.txt')
+                                    if os.path.exists(stress_path):
+                                        with open(stress_path, 'r', encoding='utf-8') as f:
+                                            suggestions.append(f.read())
+                                
+                                if result.depression_score >= 50:
+                                    depression_path = os.path.join('templates', 'depression.txt')
+                                    if os.path.exists(depression_path):
+                                        with open(depression_path, 'r', encoding='utf-8') as f:
+                                            suggestions.append(f.read())
+                                
+                                if result.anxiety_score >= 50:
+                                    anxiety_path = os.path.join('templates', 'anxiety.txt')
+                                    if os.path.exists(anxiety_path):
+                                        with open(anxiety_path, 'r', encoding='utf-8') as f:
+                                            suggestions.append(f.read())
+                            
+                            # 将所有建议组合起来，用换行符分隔
+                            text = text.replace('[suggest]', '\n'.join(suggestions))
                         
                         paragraph.text = text
 
