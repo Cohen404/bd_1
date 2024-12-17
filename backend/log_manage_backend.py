@@ -203,11 +203,11 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
             if filter_option == "今天":
                 start_time = current_time.replace(hour=0, minute=0, second=0, microsecond=0)
             elif filter_option == "最近3天":
-                start_time = current_time - timedelta(days=3)
+                start_time = (current_time - timedelta(days=3)).replace(hour=0, minute=0, second=0, microsecond=0)
             elif filter_option == "最近7天":
-                start_time = current_time - timedelta(days=7)
+                start_time = (current_time - timedelta(days=7)).replace(hour=0, minute=0, second=0, microsecond=0)
             elif filter_option == "最近30天":
-                start_time = current_time - timedelta(days=30)
+                start_time = (current_time - timedelta(days=30)).replace(hour=0, minute=0, second=0, microsecond=0)
             else:  # "全部"
                 start_time = None
 
@@ -219,20 +219,26 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
                 for line in lines:
                     try:
                         # 解析日志时间
-                        log_time_str = line.split(' - ')[0]
+                        log_time_str = line.split(' - ')[0].strip()
                         log_time = datetime.strptime(log_time_str, '%Y-%m-%d %H:%M:%S,%f')
                         
                         # 根据时间过滤
-                        if start_time is None or log_time >= start_time:
+                        if start_time is None or log_time.date() >= start_time.date():
                             filtered_lines.append(line)
                     except (ValueError, IndexError):
                         continue  # 跳过无法解析时间的行
 
-                # 只显示最后200行
-                filtered_lines = filtered_lines[-200:]
+                total_lines = len(filtered_lines)
+                # 只显示最后1000行
+                if total_lines > 1000:
+                    filtered_lines = filtered_lines[-1000:]
+                    self.displayBox.clear()
+                    self.displayBox.setTextColor(QColor("blue"))
+                    self.displayBox.append(f"注意：共有 {total_lines} 条日志记录，仅显示最新的1000条。\n")
                 
-                # 清空现有内容
-                self.displayBox.clear()
+                # 清空现有内容（如果之前没有清空的话）
+                if total_lines <= 1000:
+                    self.displayBox.clear()
                 
                 # 显示过滤后的内容
                 for line in filtered_lines:

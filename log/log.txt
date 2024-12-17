@@ -7555,3 +7555,185 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-17 01:55:26,032 - INFO - Administrator - Successfully displayed 8 data records
 2024-12-17 01:55:26,064 - INFO - Administrator - Opening health evaluation page.
 2024-12-17 01:55:27,663 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:35:53,648 - INFO - Administrator - User admin logged in successfully
+2024-12-17 09:35:57,286 - INFO - Administrator - Data table refreshed successfully with 8 records
+2024-12-17 09:35:57,288 - INFO - Administrator - Opening data view page.
+2024-12-17 09:36:01,646 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:36:02,363 - INFO - Administrator - Opening results view page.
+2024-12-17 09:36:11,882 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:36:12,505 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 09:36:12,554 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 09:36:12,601 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 09:36:59,545 - INFO - Administrator - Report generated successfully for result ID 8
+2024-12-17 09:37:02,560 - INFO - Administrator - Button clicked in row 7, ID: 8
+2024-12-17 09:37:02,562 - INFO - Administrator - Data path retrieved for ID 8: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 09:37:02,563 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 09:37:02,563 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:02,563 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:02,563 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2\Theta.png
+2024-12-17 09:37:02,564 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:04,152 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 09:37:04,155 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 09:37:04,157 - INFO - Administrator - Updated LED colors based on scores: stress=31.8182, depression=0.0, anxiety=0.0
+2024-12-17 09:37:04,157 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:04,157 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:04,157 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 09:37:04,180 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:05,583 - INFO - Administrator - Button clicked in row 6, ID: 7
+2024-12-17 09:37:05,585 - INFO - Administrator - Data path retrieved for ID 7: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 09:37:05,587 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2024-12-17 09:37:05,587 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:05,587 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:05,588 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji\Theta.png
+2024-12-17 09:37:05,608 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:07,215 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 09:37:07,219 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 09:37:07,220 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=32.4074
+2024-12-17 09:37:07,220 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:07,220 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:07,220 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 09:37:07,243 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:08,296 - INFO - Administrator - Button clicked in row 3, ID: 4
+2024-12-17 09:37:08,298 - INFO - Administrator - Data path retrieved for ID 4: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing1
+2024-12-17 09:37:08,299 - INFO - Administrator - Updated LED colors based on scores: stress=0.0, depression=3.7037, anxiety=0.0
+2024-12-17 09:37:08,299 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:08,299 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:08,299 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing1\Theta.png
+2024-12-17 09:37:08,320 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:09,681 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-12-17 09:37:09,683 - INFO - Administrator - Data path retrieved for ID 3: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro
+2024-12-17 09:37:09,685 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=94.625, anxiety=60.4736
+2024-12-17 09:37:09,685 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:09,685 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:09,685 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\Theta.png
+2024-12-17 09:37:09,711 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:13,503 - INFO - Administrator - Button clicked in row 1, ID: 2
+2024-12-17 09:37:13,505 - INFO - Administrator - Data path retrieved for ID 2: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-17 09:37:13,508 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 09:37:13,508 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:13,508 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:13,508 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-17 09:37:13,534 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:14,784 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-17 09:37:14,785 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-17 09:37:14,787 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=94.625, anxiety=60.4736
+2024-12-17 09:37:14,787 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:14,787 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:14,787 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-17 09:37:14,811 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:15,152 - INFO - Administrator - Button clicked in row 1, ID: 2
+2024-12-17 09:37:15,154 - INFO - Administrator - Data path retrieved for ID 2: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-17 09:37:15,156 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 09:37:15,156 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:15,156 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:15,156 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-17 09:37:15,157 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:15,480 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-12-17 09:37:15,481 - INFO - Administrator - Data path retrieved for ID 3: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro
+2024-12-17 09:37:15,483 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=94.625, anxiety=60.4736
+2024-12-17 09:37:15,483 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:15,483 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:15,483 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\Theta.png
+2024-12-17 09:37:15,483 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:15,879 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 09:37:15,881 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 09:37:15,883 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=32.4074
+2024-12-17 09:37:15,883 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:15,883 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:15,883 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 09:37:15,895 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:16,170 - INFO - Administrator - Button clicked in row 2, ID: 3
+2024-12-17 09:37:16,171 - INFO - Administrator - Data path retrieved for ID 3: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro
+2024-12-17 09:37:16,172 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=94.625, anxiety=60.4736
+2024-12-17 09:37:16,172 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:16,172 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:16,174 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\Theta.png
+2024-12-17 09:37:16,174 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:16,472 - INFO - Administrator - Button clicked in row 1, ID: 2
+2024-12-17 09:37:16,474 - INFO - Administrator - Data path retrieved for ID 2: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1
+2024-12-17 09:37:16,476 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 09:37:16,476 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:16,476 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:16,476 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\Theta.png
+2024-12-17 09:37:16,476 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:16,927 - INFO - Administrator - Button clicked in row 0, ID: 1
+2024-12-17 09:37:16,930 - INFO - Administrator - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2
+2024-12-17 09:37:16,931 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=94.625, anxiety=60.4736
+2024-12-17 09:37:16,931 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:16,931 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:16,931 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\Theta.png
+2024-12-17 09:37:16,943 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:17,240 - INFO - Administrator - Button clicked in row 4, ID: 5
+2024-12-17 09:37:17,241 - INFO - Administrator - Data path retrieved for ID 5: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4
+2024-12-17 09:37:17,243 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=32.4074
+2024-12-17 09:37:17,243 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:17,243 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:17,243 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\Theta.png
+2024-12-17 09:37:17,256 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:17,569 - INFO - Administrator - Button clicked in row 5, ID: 6
+2024-12-17 09:37:17,570 - INFO - Administrator - Data path retrieved for ID 6: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2
+2024-12-17 09:37:17,572 - INFO - Administrator - Updated LED colors based on scores: stress=31.8182, depression=0.0, anxiety=0.0
+2024-12-17 09:37:17,572 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:17,572 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:17,572 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\Theta.png
+2024-12-17 09:37:17,585 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:17,952 - INFO - Administrator - Button clicked in row 6, ID: 7
+2024-12-17 09:37:17,954 - INFO - Administrator - Data path retrieved for ID 7: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji
+2024-12-17 09:37:17,955 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2024-12-17 09:37:17,956 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:17,956 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:17,956 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji\Theta.png
+2024-12-17 09:37:17,968 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:18,305 - INFO - Administrator - Button clicked in row 7, ID: 8
+2024-12-17 09:37:18,307 - INFO - Administrator - Data path retrieved for ID 8: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 09:37:18,308 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 09:37:18,308 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:18,309 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:18,309 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2\Theta.png
+2024-12-17 09:37:18,321 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:19,600 - INFO - Administrator - Button clicked in row 7, ID: 8
+2024-12-17 09:37:19,602 - INFO - Administrator - Data path retrieved for ID 8: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 09:37:19,604 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2024-12-17 09:37:19,604 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 09:37:19,604 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 09:37:19,604 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2\Theta.png
+2024-12-17 09:37:19,605 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 09:37:20,685 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:37:26,656 - INFO - Administrator - Opening results view page.
+2024-12-17 09:37:35,914 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:37:36,720 - INFO - Administrator - Data table refreshed successfully with 8 records
+2024-12-17 09:37:36,721 - INFO - Administrator - Opening data view page.
+2024-12-17 09:37:55,312 - INFO - Administrator - Attempting to delete record with ID 8 from the table.
+2024-12-17 09:37:55,314 - INFO - Administrator - Data path for ID 8: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 09:37:55,320 - INFO - Administrator - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000014_jiaolv2
+2024-12-17 09:37:55,324 - INFO - Administrator - Deleted record with ID 8 from tb_data.
+2024-12-17 09:37:55,326 - INFO - Administrator - Deleted record with ID 8 from result table.
+2024-12-17 09:37:56,140 - INFO - Administrator - Removed row 7 from table.
+2024-12-17 09:38:21,847 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/000011_yiyu4 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4_1
+2024-12-17 09:38:21,857 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4_1, Username: admin
+2024-12-17 09:38:22,896 - INFO - Administrator - Data table refreshed successfully with 8 records
+2024-12-17 09:38:24,454 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4_1
+2024-12-17 09:38:29,696 - INFO - Administrator - Data processing completed successfully
+2024-12-17 09:38:33,210 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:38:34,420 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 09:38:34,452 - INFO - Administrator - Successfully displayed 8 data records
+2024-12-17 09:38:34,474 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 09:39:05,887 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=32.407407407407405
+2024-12-17 09:39:05,893 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=32.4074
+2024-12-17 09:39:07,377 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:39:08,862 - INFO - Administrator - Opening results view page.
+2024-12-17 09:39:12,734 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:39:13,653 - INFO - Administrator - Opening model control page.
+2024-12-17 09:39:16,235 - INFO - Administrator - Exporting model with path: ./model/yiyu/subject-1 yiyu.keras
+2024-12-17 09:39:22,484 - INFO - Administrator - Attempting to delete model of type: 抑郁评估模型 (Mapped to: 1)
+2024-12-17 09:39:23,671 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-17 09:39:24,846 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:39:25,904 - INFO - Administrator - Opening user management page.
+2024-12-17 09:39:30,959 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:39:32,063 - INFO - Administrator - Opening parameter control page.
+2024-12-17 09:39:34,171 - INFO - Administrator - Returned to index page successfully
+2024-12-17 09:39:36,124 - INFO - Administrator - Opening log management page.
+2024-12-17 09:43:37,828 - INFO - Administrator - User admin logged in successfully
+2024-12-17 09:43:39,273 - INFO - Administrator - Opening log management page.
+2024-12-17 09:45:36,028 - INFO - Administrator - User admin logged in successfully
+2024-12-17 09:45:37,968 - INFO - Administrator - Opening log management page.
