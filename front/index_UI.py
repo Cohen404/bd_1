@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
         - 设置按钮样式
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))
         self.results_view_Button.setText(_translate("MainWindow", "结果\n管理"))
         self.data_view_Button.setText(_translate("MainWindow", "数据\n管理"))

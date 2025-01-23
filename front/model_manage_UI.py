@@ -38,7 +38,7 @@ class Ui_model_Control(QWidget):
         """
         # 窗体标题和尺寸
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
-        self.setWindowTitle('应激评估系统')
+        self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
         self.resize(1000, 750)
 
         # 窗体位置

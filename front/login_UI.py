@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         重新翻译UI
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
         self.name_label.setText(_translate("MainWindow", "账号"))
         self.pwd_label.setText(_translate("MainWindow", "密码"))
         self.return_pushButton.setText(_translate("MainWindow", "返回"))

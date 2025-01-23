@@ -186,7 +186,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
         self.data_view_Button.setText(_translate("MainWindow", "数据\n管理"))
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))
         self.parameter_pushButton.setText(_translate("MainWindow", "系统\n参数"))

@@ -207,7 +207,7 @@ class Ui_MainWindow(object):
         - 设置样式
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
         MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
 
         self.ordinarystress_label.setText(_translate("MainWindow", "普通应激"))

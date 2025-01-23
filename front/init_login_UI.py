@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
         
         # 标题
-        self.title_label = QLabel("应激评估系统", self.centralwidget)
+        self.title_label = QLabel("长远航作业应激神经系统功能预警评估系统", self.centralwidget)
         self.title_label.setAlignment(Qt.AlignCenter)
         font = QFont()
         font.setFamily("Microsoft YaHei")
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         重新翻译UI
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
         self.user_login_Button.setText(_translate("MainWindow", "用户\n登录"))
 
         # 设置字体和样式

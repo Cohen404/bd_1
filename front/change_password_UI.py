@@ -32,7 +32,7 @@ class Ui_change_pwd(QWidget):
         初始化UI界面
         """
         # 窗体标题和尺寸
-        self.setWindowTitle('应激评估系统')
+        self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
         self.resize(1000, 750)
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
 
@@ -67,7 +67,7 @@ class Ui_change_pwd(QWidget):
         """
         初始化头部
         """
-        layout, _, self.return_btn, self.time_show, self.statu_show = create_header('密码修改')
+        layout, _, self.return_btn, self.time_show, self.statu_show = create_header('长远航作业应激神经系统功能预警评估系统')
         return layout
 
     def init_form(self):

@@ -7737,3 +7737,237 @@ FROM tb_result ORDER BY tb_result.id DESC
 2024-12-17 09:43:39,273 - INFO - Administrator - Opening log management page.
 2024-12-17 09:45:36,028 - INFO - Administrator - User admin logged in successfully
 2024-12-17 09:45:37,968 - INFO - Administrator - Opening log management page.
+2024-12-17 12:03:44,128 - INFO - Administrator - User admin logged in successfully
+2024-12-17 12:03:45,938 - INFO - Administrator - Opening model control page.
+2024-12-17 12:03:49,796 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-17 12:03:53,417 - WARNING - Administrator - Model upload canceled by the user.
+2024-12-17 12:03:54,704 - INFO - Administrator - Attempting to delete model of type: 抑郁评估模型 (Mapped to: 1)
+2024-12-17 12:03:55,974 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-17 12:03:56,659 - INFO - Administrator - Exporting model with path: ./model/yiyu/subject-1 yiyu.keras
+2024-12-17 12:04:01,152 - INFO - Administrator - Saving model to: C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:04:01,155 - INFO - Administrator - Model copied successfully from ./model/yiyu/subject-1 yiyu.keras to C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:04:04,025 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:04:05,841 - INFO - Administrator - Opening user management page.
+2024-12-17 12:04:23,154 - INFO - Administrator - New user added: user4 (type: user)
+2024-12-17 12:04:26,230 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:04:30,220 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 12:04:44,112 - INFO - Administrator - Opening user login page.
+2024-12-17 12:04:48,858 - INFO - Administrator - User admin logged in successfully
+2024-12-17 12:04:50,685 - INFO - Administrator - Opening model control page.
+2024-12-17 12:04:52,636 - INFO - Administrator - Attempting to delete model of type: 抑郁评估模型 (Mapped to: 1)
+2024-12-17 12:04:53,991 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-17 12:04:54,636 - INFO - Administrator - Exporting model with path: ./model/yiyu/subject-1 yiyu.keras
+2024-12-17 12:04:58,426 - INFO - Administrator - Saving model to: C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:04:58,429 - INFO - Administrator - Model copied successfully from ./model/yiyu/subject-1 yiyu.keras to C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:05:03,181 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2024-12-17 12:05:06,909 - WARNING - Administrator - Model upload canceled by the user.
+2024-12-17 12:05:08,278 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:05:09,176 - INFO - Administrator - Data table refreshed successfully with 8 records
+2024-12-17 12:05:09,178 - INFO - Administrator - Opening data view page.
+2024-12-17 12:05:19,486 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:05:19,496 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2, Username: admin
+2024-12-17 12:05:20,710 - INFO - Administrator - Data table refreshed successfully with 9 records
+2024-12-17 12:05:22,614 - INFO - Administrator - Button clicked in row 8, corresponding ID: 9
+2024-12-17 12:05:22,616 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:05:23,896 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-17 12:05:25,782 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:05:31,262 - INFO - Administrator - Data processing completed successfully
+2024-12-17 12:05:33,110 - INFO - Administrator - Button clicked in row 8, corresponding ID: 9
+2024-12-17 12:05:33,113 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:05:34,827 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Beta.png
+2024-12-17 12:05:38,822 - INFO - Administrator - User cancelled deletion of record with ID 9
+2024-12-17 12:05:39,647 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:05:40,874 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 12:05:40,907 - INFO - Administrator - Successfully displayed 9 data records
+2024-12-17 12:05:40,933 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 12:06:15,078 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.111111111111114
+2024-12-17 12:06:15,084 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 12:06:18,391 - INFO - Administrator - Button clicked in row 8, ID: 9
+2024-12-17 12:06:18,393 - INFO - Administrator - Data path retrieved for ID 9: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:06:18,396 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 12:06:18,396 - INFO - Administrator - Initializing current image index to 0
+2024-12-17 12:06:18,396 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 12:06:18,396 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-17 12:06:18,416 - INFO - Administrator - Successfully displayed image: Theta波段功率
+2024-12-17 12:06:19,520 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 12:06:19,521 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Alpha.png
+2024-12-17 12:06:19,545 - INFO - Administrator - Successfully displayed image: Alpha波段功率
+2024-12-17 12:06:19,702 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 12:06:19,703 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Beta.png
+2024-12-17 12:06:19,704 - INFO - Administrator - Successfully displayed image: Beta波段功率
+2024-12-17 12:06:19,942 - INFO - Administrator - Image list initialized with 15 items.
+2024-12-17 12:06:19,943 - INFO - Administrator - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Gamma.png
+2024-12-17 12:06:19,964 - INFO - Administrator - Successfully displayed image: Gamma波段功率
+2024-12-17 12:06:21,061 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:06:22,058 - INFO - Administrator - Opening results view page.
+2024-12-17 12:06:27,678 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:06:28,265 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 12:06:28,302 - INFO - Administrator - Successfully displayed 9 data records
+2024-12-17 12:06:28,331 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 12:07:13,992 - INFO - Administrator - Report generated successfully for result ID 9
+2024-12-17 12:07:15,006 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:07:15,863 - INFO - Administrator - Opening results view page.
+2024-12-17 12:07:44,130 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:07:46,765 - INFO - Administrator - Opening user management page.
+2024-12-17 12:08:00,468 - INFO - Administrator - New user added: user5 (type: user)
+2024-12-17 12:08:05,714 - INFO - Administrator - User user1734408480 updated: username: user5 -> user55
+2024-12-17 12:08:09,779 - INFO - Administrator - User deletion cancelled for: user55 (ID: user1734408480)
+2024-12-17 12:08:10,900 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:08:12,273 - INFO - Administrator - Opening parameter control page.
+2024-12-17 12:08:13,882 - INFO - Administrator - Starting database save operation.
+2024-12-17 12:08:13,885 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-17 12:08:13,885 - INFO - Administrator - Database transaction committed successfully.
+2024-12-17 12:08:14,925 - INFO - Administrator - Database session closed.
+2024-12-17 12:08:15,993 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:08:17,271 - INFO - Administrator - Opening log management page.
+2024-12-17 12:08:30,594 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:08:32,201 - INFO - Administrator - Opening password change page.
+2024-12-17 12:08:44,294 - INFO - Administrator - Password changed successfully for user 'admin'
+2024-12-17 12:08:45,886 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:08:47,117 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 12:08:52,991 - WARNING - Administrator - Failed login attempt for username: user2
+2024-12-17 12:08:57,550 - WARNING - Administrator - Failed login attempt for username: user2
+2024-12-17 12:09:05,982 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-17 12:09:07,060 - INFO - Administrator - User admin logged in successfully
+2024-12-17 12:09:08,341 - INFO - Administrator - Opening user management page.
+2024-12-17 12:09:12,360 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:09:13,260 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 12:09:16,413 - INFO - Regular user - User user1 logged in successfully
+2024-12-17 12:12:12,894 - INFO - Administrator - Opening admin login page.
+2024-12-17 12:12:18,254 - INFO - Administrator - Opening user login page.
+2024-12-17 12:12:20,976 - ERROR - Administrator - Login error: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query ([WinError 10053] 你的主机中的软件中止了一个已建立的连接。)')
+[SQL: SELECT tb_user.user_id AS tb_user_user_id, tb_user.username AS tb_user_username, tb_user.password AS tb_user_password, tb_user.email AS tb_user_email, tb_user.phone AS tb_user_phone, tb_user.user_type AS tb_user_user_type, tb_user.last_login AS tb_user_last_login, tb_user.created_at AS tb_user_created_at, tb_user.updated_at AS tb_user_updated_at 
+FROM tb_user 
+WHERE tb_user.username = %(username_1)s AND tb_user.password = %(password_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'username_1': 'admin', 'password_1': '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+2024-12-17 12:12:34,931 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-17 12:12:36,380 - WARNING - Administrator - Failed login attempt for username: admin
+2024-12-17 12:12:38,960 - INFO - Administrator - User admin logged in successfully
+2024-12-17 12:12:40,377 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 12:12:49,383 - INFO - Administrator - User admin logged in successfully
+2024-12-17 12:12:51,287 - INFO - Administrator - Opening model control page.
+2024-12-17 12:12:52,762 - INFO - Administrator - Attempting to delete model of type: 抑郁评估模型 (Mapped to: 1)
+2024-12-17 12:12:54,433 - INFO - Administrator - Model deletion canceled by the user.
+2024-12-17 12:12:55,089 - INFO - Administrator - Exporting model with path: ./model/yiyu/subject-1 yiyu.keras
+2024-12-17 12:12:59,225 - INFO - Administrator - Saving model to: C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:12:59,228 - INFO - Administrator - Model copied successfully from ./model/yiyu/subject-1 yiyu.keras to C:/Users/WangZ/Desktop\subject-1 yiyu.keras
+2024-12-17 12:13:04,733 - INFO - Administrator - Selected model type: 抑郁评估模型 (Index: 1)
+2024-12-17 12:13:07,247 - WARNING - Administrator - Model upload canceled by the user.
+2024-12-17 12:13:08,359 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:13:09,198 - INFO - Administrator - Data table refreshed successfully with 9 records
+2024-12-17 12:13:09,199 - INFO - Administrator - Opening data view page.
+2024-12-17 12:13:12,779 - INFO - Administrator - Attempting to delete record with ID 9 from the table.
+2024-12-17 12:13:12,782 - INFO - Administrator - Data path for ID 9: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:12,812 - INFO - Administrator - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:12,816 - INFO - Administrator - Deleted record with ID 9 from tb_data.
+2024-12-17 12:13:12,818 - INFO - Administrator - Deleted record with ID 9 from result table.
+2024-12-17 12:13:13,615 - INFO - Administrator - Removed row 8 from table.
+2024-12-17 12:13:22,372 - INFO - Administrator - Directory copied from D:/work/东华/项目/2023/301/changhang/start/bj_health_manage-master-data/data/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:22,380 - INFO - Administrator - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2, Username: admin
+2024-12-17 12:13:23,238 - INFO - Administrator - Data table refreshed successfully with 9 records
+2024-12-17 12:13:24,375 - INFO - Administrator - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:29,679 - INFO - Administrator - Data processing completed successfully
+2024-12-17 12:13:32,172 - INFO - Administrator - Button clicked in row 8, corresponding ID: 9
+2024-12-17 12:13:32,174 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:33,066 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Theta.png
+2024-12-17 12:13:34,155 - INFO - Administrator - Button clicked in row 8, corresponding ID: 9
+2024-12-17 12:13:34,158 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:35,740 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\Alpha.png
+2024-12-17 12:13:38,238 - INFO - Administrator - Button clicked in row 8, corresponding ID: 9
+2024-12-17 12:13:38,241 - INFO - Administrator - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2
+2024-12-17 12:13:39,054 - INFO - Administrator - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\time_过零率.png
+2024-12-17 12:13:41,028 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:13:41,764 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 12:13:41,798 - INFO - Administrator - Successfully displayed 9 data records
+2024-12-17 12:13:41,823 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 12:14:12,068 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.111111111111114
+2024-12-17 12:14:12,073 - INFO - Administrator - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=61.1111
+2024-12-17 12:14:56,601 - INFO - Administrator - Report generated successfully for result ID 9
+2024-12-17 12:14:57,726 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:14:58,855 - INFO - Administrator - Opening results view page.
+2024-12-17 12:15:33,439 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:15:35,387 - INFO - Administrator - Opening user management page.
+2024-12-17 12:15:50,117 - INFO - Administrator - New user added: user6 (type: user)
+2024-12-17 12:15:54,532 - INFO - Administrator - User user1734408950 updated: username: user6 -> user66
+2024-12-17 12:15:56,710 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:15:57,737 - INFO - Administrator - Opening parameter control page.
+2024-12-17 12:15:59,214 - INFO - Administrator - Starting database save operation.
+2024-12-17 12:15:59,216 - INFO - Administrator - Updating existing SystemParams record.
+2024-12-17 12:15:59,218 - INFO - Administrator - Database transaction committed successfully.
+2024-12-17 12:16:00,349 - INFO - Administrator - Database session closed.
+2024-12-17 12:16:01,353 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:02,679 - INFO - Administrator - Opening log management page.
+2024-12-17 12:16:17,071 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:18,739 - INFO - Administrator - Opening log management page.
+2024-12-17 12:16:19,729 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:20,463 - INFO - Administrator - Opening password change page.
+2024-12-17 12:16:29,150 - INFO - Administrator - Password changed successfully for user 'admin'
+2024-12-17 12:16:30,368 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:32,264 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 12:16:37,284 - INFO - Regular user - User user1 logged in successfully
+2024-12-17 12:16:39,596 - INFO - Administrator - Data table refreshed successfully with 1 records
+2024-12-17 12:16:39,598 - INFO - Administrator - Opening data view page.
+2024-12-17 12:16:41,451 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:42,116 - INFO - Administrator - Opening results view page.
+2024-12-17 12:16:43,152 - INFO - Administrator - Returned to index page successfully
+2024-12-17 12:16:43,738 - INFO - Administrator - Regular user user1: fetching own data records
+2024-12-17 12:16:43,741 - INFO - Administrator - Successfully displayed 1 data records
+2024-12-17 12:16:43,756 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 12:16:45,620 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:00:52,270 - INFO - Administrator - User admin logged in successfully
+2024-12-17 14:00:53,900 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2024-12-17 14:00:59,091 - INFO - Administrator - User admin logged in successfully
+2024-12-17 14:01:02,079 - INFO - Administrator - Administrator admin: fetching all data records
+2024-12-17 14:01:02,135 - INFO - Administrator - Successfully displayed 9 data records
+2024-12-17 14:01:02,166 - INFO - Administrator - Opening health evaluation page.
+2024-12-17 14:01:03,322 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:01:04,327 - INFO - Administrator - Data table refreshed successfully with 9 records
+2024-12-17 14:01:04,329 - INFO - Administrator - Opening data view page.
+2024-12-17 14:01:05,942 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:01:07,059 - INFO - Administrator - Opening model control page.
+2024-12-17 14:01:08,486 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:01:10,607 - INFO - Administrator - Opening user management page.
+2024-12-17 14:01:13,284 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:01:14,717 - INFO - Administrator - Opening parameter control page.
+2024-12-17 14:01:16,361 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:01:17,420 - INFO - Administrator - Opening results view page.
+2024-12-17 14:01:32,485 - INFO - Administrator - Returned to index page successfully
+2024-12-17 14:03:53,930 - INFO - Administrator - Opening help window.
+2024-12-17 16:14:02,967 - INFO - Administrator - Opening help window.
+2024-12-17 16:17:13,022 - INFO - Administrator - Opening data view page.
+2024-12-17 16:18:41,479 - INFO - Administrator - User admin logged in successfully
+2024-12-17 16:18:43,656 - INFO - Administrator - Opening help window.
+2025-01-16 20:04:40,853 - INFO - Regular user - User user1 logged in successfully
+2025-01-16 20:19:30,645 - WARNING - Administrator - No user ID available, showing no records
+2025-01-16 20:19:30,645 - INFO - Administrator - Successfully displayed 0 data records
+2025-01-16 20:19:30,651 - INFO - Administrator - Opening health evaluation page.
+2025-01-16 20:19:31,918 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:47:53,689 - INFO - Administrator - Opening admin login page.
+2025-01-16 22:47:57,136 - INFO - Administrator - User admin logged in successfully
+2025-01-16 22:48:08,992 - INFO - Administrator - Administrator admin: fetching all data records
+2025-01-16 22:48:09,081 - INFO - Administrator - Successfully displayed 9 data records
+2025-01-16 22:48:09,092 - INFO - Administrator - Opening health evaluation page.
+2025-01-16 22:48:23,190 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:48:23,991 - INFO - Administrator - Opening results view page.
+2025-01-16 22:48:37,889 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:48:38,644 - INFO - Administrator - Data table refreshed successfully with 9 records
+2025-01-16 22:48:38,649 - INFO - Administrator - Opening data view page.
+2025-01-16 22:48:50,931 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:48:51,568 - INFO - Administrator - Opening model control page.
+2025-01-16 22:49:03,297 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:49:04,147 - INFO - Administrator - Opening user management page.
+2025-01-16 22:49:17,208 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:49:18,114 - INFO - Administrator - Opening parameter control page.
+2025-01-16 22:49:29,422 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:49:30,591 - INFO - Administrator - Opening log management page.
+2025-01-16 22:49:42,221 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:49:42,898 - INFO - Administrator - Opening password change page.
+2025-01-16 22:51:07,598 - INFO - Administrator - User admin logged in successfully
+2025-01-16 22:51:08,858 - INFO - Administrator - Opening password change page.
+2025-01-16 22:51:11,755 - INFO - Administrator - Returned to index page successfully
+2025-01-16 22:52:23,116 - INFO - Administrator - User admin logged in successfully
+2025-01-16 22:52:24,373 - INFO - Administrator - Opening password change page.
+2025-01-16 22:53:03,239 - INFO - Administrator - User admin logged in successfully
+2025-01-16 22:53:04,614 - INFO - Administrator - Opening password change page.

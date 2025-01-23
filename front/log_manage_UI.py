@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         - 设置日志显示框初始文本
         """
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "应激评估系统"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑

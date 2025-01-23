@@ -1,0 +1,145 @@
+Date : 2024-12-31 11:39:00
+Directory : d:\work\东华\项目\2023\301\changhang\start\bj_health_manage
+Total : 89 files,  10933 codes, 1074 comments, 1546 blanks, all 13553 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |         50 |      6,550 |        967 |      1,309 |      8,826 |
+| JSON             |          3 |      2,749 |          0 |          3 |      2,752 |
+| CSV              |         29 |      1,050 |          0 |         29 |      1,079 |
+| Markdown         |          3 |        358 |          0 |        173 |        531 |
+| SQLite           |          2 |        183 |        107 |         31 |        321 |
+| Log              |          1 |         33 |          0 |          1 |         34 |
+| pip requirements |          1 |         10 |          0 |          0 |         10 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |         89 |     10,933 |      1,074 |      1,546 |     13,553 |
+| . (Files)                                                                                    |          7 |        303 |         74 |         73 |        450 |
+| backend                                                                                      |         17 |      4,321 |        571 |        829 |      5,721 |
+| data                                                                                         |         21 |        786 |          0 |         21 |        807 |
+| data\000005_ord2                                                                             |          4 |        103 |          0 |          4 |        107 |
+| data\000005_ord2_1                                                                           |          2 |         99 |          0 |          2 |        101 |
+| data\000005_ord2_2                                                                           |          2 |         99 |          0 |          2 |        101 |
+| data\000006_pro                                                                              |          3 |         64 |          0 |          3 |         67 |
+| data\000011_yiyu4                                                                            |          2 |         99 |          0 |          2 |        101 |
+| data\000011_yiyu4_1                                                                          |          2 |         99 |          0 |          2 |        101 |
+| data\000016_wubing1                                                                          |          2 |         99 |          0 |          2 |        101 |
+| data\control_2                                                                               |          3 |         64 |          0 |          3 |         67 |
+| data\yingji                                                                                  |          1 |         60 |          0 |          1 |         61 |
+| docs                                                                                         |          2 |        274 |          0 |        144 |        418 |
+| front                                                                                        |         14 |      1,771 |        350 |        376 |      2,497 |
+| log                                                                                          |          1 |         33 |          0 |          1 |         34 |
+| model                                                                                        |          1 |        104 |          2 |         20 |        126 |
+| sql_model                                                                                    |          9 |         78 |          1 |         19 |         98 |
+| state                                                                                        |          2 |         33 |          2 |          8 |         43 |
+| tmp                                                                                          |         11 |      3,013 |          0 |         11 |      3,024 |
+| tmp (Files)                                                                                  |          3 |      2,749 |          0 |          3 |      2,752 |
+| tmp\000005_ord2                                                                              |          4 |        108 |          0 |          4 |        112 |
+| tmp\000006_pro                                                                               |          1 |         39 |          0 |          1 |         40 |
+| tmp\000011_yiyu4                                                                             |          1 |         39 |          0 |          1 |         40 |
+| tmp\000014_jiaolv2                                                                           |          1 |         39 |          0 |          1 |         40 |
+| tmp\000016_wubing1                                                                           |          1 |         39 |          0 |          1 |         40 |
+| util                                                                                         |          4 |        217 |         74 |         44 |        335 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                     | language         | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\__init__.py                  | Python           |          0 |          0 |          1 |          1 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\admin_index_backend.py       | Python           |        179 |         15 |         27 |        221 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\change_password_backend.py   | Python           |        197 |         24 |         38 |        259 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\data_feature_calculation.py  | Python           |        282 |         26 |         51 |        359 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\data_manage_backend.py       | Python           |        625 |         92 |        125 |        842 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\data_preprocess.py           | Python           |        156 |         47 |         34 |        237 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\health_evaluate_backend.py   | Python           |        791 |        106 |        141 |      1,038 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\help_window_backend.py       | Python           |         19 |          6 |          7 |         32 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\index_backend.py             | Python           |        123 |         20 |         26 |        169 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\init_login_backend.py        | Python           |         52 |         12 |         14 |         78 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\log_manage_backend.py        | Python           |        244 |         34 |         52 |        330 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\login_backend.py             | Python           |        114 |         21 |         27 |        162 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\model_manage_backend.py      | Python           |        324 |         34 |         53 |        411 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\param_manage_backend.py      | Python           |        148 |         13 |         21 |        182 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\results_manage_backend.py    | Python           |        638 |         84 |        128 |        850 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\upload_service.py            | Python           |        120 |         16 |         30 |        166 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\backend\user_manage_backend.py       | Python           |        309 |         21 |         54 |        384 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\check_data.py                        | Python           |         21 |          2 |          4 |         27 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\config.py                            | Python           |         25 |         10 |         11 |         46 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\ACC_sub_L.csv       | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\eeg_features.csv    | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\lb.csv              | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2\xq.csv              | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\ACC_sub_L.csv     | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_1\eeg_features.csv  | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\ACC_sub_L.csv     | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000005_ord2_2\eeg_features.csv  | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\eeg_features.csv     | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\lb.csv               | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000006_pro\xq.csv               | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\ACC_sub_L.csv      | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4\eeg_features.csv   | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4_1\ACC_sub_L.csv    | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000011_yiyu4_1\eeg_features.csv | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing1\ACC_sub_L.csv    | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\000016_wubing1\eeg_features.csv | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\eeg_features.csv      | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\lb.csv                | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\control_2\xq.csv                | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\data\yingji\eeg_features.csv         | CSV              |         60 |          0 |          1 |         61 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\docs\requirement_design.md           | Markdown         |        150 |          0 |         82 |        232 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\docs\system_design.md                | Markdown         |        124 |          0 |         62 |        186 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\admin_index_UI.py              | Python           |        199 |         44 |         25 |        268 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\change_password_UI.py          | Python           |        125 |         14 |         19 |        158 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\component.py                   | Python           |         90 |          8 |         17 |        115 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\data_manage_UI.py              | Python           |        171 |         25 |         35 |        231 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\health_evaluate_UI.py          | Python           |        169 |         40 |         37 |        246 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\help_window_UI.py              | Python           |         22 |          3 |          8 |         33 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\index_UI.py                    | Python           |        138 |         53 |         27 |        218 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\init_login_UI.py               | Python           |         76 |         10 |         16 |        102 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\log_manage_UI.py               | Python           |         77 |          7 |         18 |        102 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\login_UI.py                    | Python           |        147 |          7 |         14 |        168 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\model_manage_UI.py             | Python           |         86 |         20 |         22 |        128 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\param_manage_UI.py             | Python           |         88 |          6 |         31 |        125 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\results_manage_UI.py           | Python           |        255 |         95 |         72 |        422 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\front\user_manage_UI.py              | Python           |        128 |         18 |         35 |        181 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\log\upload_service.log               | Log              |         33 |          0 |          1 |         34 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\model\tuili.py                       | Python           |        104 |          2 |         20 |        126 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\readme.md                            | Markdown         |         84 |          0 |         29 |        113 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\requirements.txt                     | pip requirements |         10 |          0 |          0 |         10 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\run.py                               | Python           |         12 |          4 |          5 |         21 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model.sql                        | SQLite           |        107 |         50 |         14 |        171 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\__init__.py                | Python           |          0 |          1 |          0 |          1 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\base.py                    | Python           |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\system_params.py           | Python           |         10 |          0 |          2 |         12 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\tb_data.py                 | Python           |         12 |          0 |          2 |         14 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\tb_model.py                | Python           |          9 |          0 |          3 |         12 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\tb_parameters.py           | Python           |          9 |          0 |          2 |         11 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\tb_result.py               | Python           |         12 |          0 |          3 |         15 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\tb_user.py                 | Python           |         15 |          0 |          4 |         19 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\sql_model\testsql.py                 | Python           |          9 |          0 |          2 |         11 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\state\__init__.py                    | Python           |          0 |          0 |          1 |          1 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\state\operate_user.py                | Python           |         33 |          2 |          7 |         42 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\test_upload_service.py               | Python           |         44 |          8 |         10 |         62 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000005_ord2\ACC_sub_L.csv        | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000005_ord2\eeg_features.csv     | CSV              |         65 |          0 |          1 |         66 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000005_ord2\lb.csv               | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000005_ord2\xq.csv               | CSV              |          2 |          0 |          1 |          3 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000006_pro\ACC_sub_L.csv         | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000011_yiyu4\ACC_sub_L.csv       | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000014_jiaolv2\ACC_sub_L.csv     | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\000016_wubing1\ACC_sub_L.csv     | CSV              |         39 |          0 |          1 |         40 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\CONTROL-preprocessing.ipynb      | JSON             |        525 |          0 |          1 |        526 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\EXP-1ST-preprocessing.ipynb      | JSON             |        911 |          0 |          1 |        912 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\tmp\EXP-2ND-preprocessing.ipynb      | JSON             |      1,313 |          0 |          1 |      1,314 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\util\db_util.py                      | Python           |         14 |          3 |          5 |         22 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\util\init_db.py                      | Python           |         80 |          9 |         14 |        103 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\util\test.sql                        | SQLite           |         76 |         57 |         17 |        150 |
+| d:\work\东华\项目\2023\301\changhang\start\bj_health_manage\util\window_manager.py               | Python           |         47 |          5 |          8 |         60 |
+| Total                                                                                        |                  |     10,933 |      1,074 |      1,546 |     13,553 |
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

@@ -46,7 +46,7 @@ class change_pwd_Controller(QWidget):
         初始化UI界面
         """
         # 设置窗口标题和大小
-        self.setWindowTitle('修改密码')
+        self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
         self.resize(1000, 750)
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
 

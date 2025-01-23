@@ -33,7 +33,7 @@ class Ui_param_Control(QWidget):
         """
         # 窗体标题和尺寸
 
-        self.setWindowTitle('应激系统')
+        self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
         self.setFixedSize(1000, 750)
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
 

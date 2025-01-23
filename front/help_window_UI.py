@@ -30,4 +30,4 @@ class Ui_HelpWindow(object):
 
     def retranslateUi(self, HelpWindow):
         _translate = QtCore.QCoreApplication.translate
-        HelpWindow.setWindowTitle(_translate("HelpWindow", "帮助文档"))
+        HelpWindow.setWindowTitle(_translate("HelpWindow", "长远航作业应激神经系统功能预警评估系统"))
