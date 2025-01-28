@@ -74,3 +74,10 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# 忽略临时的git仓库
+bj_health_manage.git/
+
+# BFG相关文件
+*.jar
+bfg-rules.txt
