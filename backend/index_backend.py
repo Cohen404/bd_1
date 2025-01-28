@@ -17,6 +17,7 @@ from backend import data_manage_backend
 from backend import health_evaluate_backend
 from backend import results_manage_backend
 from backend import login_backend
+from backend import change_password_backend
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from util.window_manager import WindowManager
@@ -63,14 +64,13 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         if user == '1':
             operate_user.ordinary_user(path)
 
-        # self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-
         # 连接按钮信号到对应的槽函数
         self.health_assess_Button.clicked.connect(self.open_health_evaluate)  # 健康评估
         self.data_view_Button.clicked.connect(self.open_data_view)  # 数据查看
         self.results_view_Button.clicked.connect(self.open_results_view)  # 结果查看
-        self.admin_login_Button.clicked.connect(self.open_admin_login)  # 管理员页面
         self.btn_help.clicked.connect(self.open_help)  # 帮助按钮
+        self.btn_return.clicked.connect(self.return_login)  # 返回按钮
+        self.change_pwd_Button.clicked.connect(self.open_change_pwd)  # 密码修改按钮
 
         # 从文件中读取用户类型并设置userType
         path = USER_STATUS_FILE
@@ -91,7 +91,6 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         # 注册窗口到WindowManager
         window_manager = WindowManager()
         window_manager.register_window('index', self)
-
 
     def show_nav(self):
         """
@@ -135,12 +134,23 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         window_manager.show_window('results_view')
         self.close()
 
-    def open_admin_login(self):
+    def open_change_pwd(self):
         """
-        打开管理员登录页面
+        打开密码修改页面
+        """
+        self.change_pwd = change_password_backend.change_pwd_Controller()
+        logging.info("Opening password change page.")
+        window_manager = WindowManager()
+        window_manager.register_window('change_pwd', self.change_pwd)
+        window_manager.show_window('change_pwd')
+        self.close()
+
+    def return_login(self):
+        """
+        返回登录页面
         """
         self.login = login_backend.Login_WindowActions()
-        logging.info("Opening admin login page.")
+        logging.info("Returning to login page.")
         window_manager = WindowManager()
         window_manager.register_window('login', self.login)
         window_manager.show_window('login')
@@ -148,7 +158,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
 
     def open_help(self):
         """
-        打开帮助��口
+        打开帮助窗口
         """
         self.help_window = HelpWindow()
         logging.info("Opening help window.")

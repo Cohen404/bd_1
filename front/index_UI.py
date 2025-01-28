@@ -15,12 +15,12 @@ from front.component import create_header, create_bottom
 
 # index.py
 # 主页面的实现
-# 包含应激评估、结果查看、数据查看和切换登录功能
+# 包含应激评估、结果查看、数据查看功能
 # 使用PyQt5创建图形用户界面
 
 # 主要功能：
 # 1. 创建主窗口布局
-# 2. 设置应激评估、结果查看、数据查看和管理员登录按钮
+# 2. 设置应激评估、结果查看、数据查看按钮
 # 3. 设置页面样式和字体
 
 class Ui_MainWindow(object):
@@ -43,7 +43,7 @@ class Ui_MainWindow(object):
         - 设置布局（垂直布局）
         - 添加页面头部
         - 创建并添加主体网格布局
-        - 添加各个功能按钮（应激评估、结果查看、数据查看、切换登录）
+        - 添加各个功能按钮（应激评估、结果查看、数据查看、密码修改）
         - 添加页面底部
         - 设置样式和字体
         """
@@ -52,22 +52,18 @@ class Ui_MainWindow(object):
         MainWindow.resize(1000, 750)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        # self.widget = QtWidgets.QWidget(self.centralwidget)
-        # self.widget.setGeometry(QtCore.QRect(0, 0, 1000, 750))
-        # self.widget.setObjectName("widget")
 
         # 垂直方向布局
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
         # 返回header组件
-        _, self.header_layout, _, _, self.btn_help = create_header('普通用户', show_help=True)
+        self.header_layout, _, self.btn_return, _, self.btn_help = create_header('普通用户', show_help=True)
         self.layout.addLayout(self.header_layout)
 
         # main主体
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        # self.hlayout1 = QtWidgets.QHBoxLayout(self.centralwidget)
         # 垂直弹簧
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
@@ -93,9 +89,7 @@ class Ui_MainWindow(object):
         self.health_assess_Button.setSizePolicy(sizePolicy)
         self.health_assess_Button.setObjectName("health_assess_Button")
         self.gridLayout.addWidget(self.health_assess_Button, 1, 1, 1, 1)
-        # self.health_assess_Button.setFixedWidth(200)
-        # self.health_assess_Button.setFixedHeight(200)
-        # self.hlayout1.addWidget(self.health_assess_Button)
+
         # 结果查看按钮
         self.results_view_Button = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -105,11 +99,7 @@ class Ui_MainWindow(object):
         self.results_view_Button.setSizePolicy(sizePolicy)
         self.results_view_Button.setObjectName("results_view_Button")
         self.gridLayout.addWidget(self.results_view_Button, 1, 4, 1, 1)
-        # self.results_view_Button.setFixedWidth(200)
-        # self.results_view_Button.setFixedHeight(200)
-        # self.hlayout1.addWidget(self.results_view_Button)
 
-        # self.hlayout2 = QtWidgets.QHBoxLayout(self.centralwidget)
         # 数据查看按钮
         self.data_view_Button = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -119,28 +109,20 @@ class Ui_MainWindow(object):
         self.data_view_Button.setSizePolicy(sizePolicy)
         self.data_view_Button.setObjectName("data_view_Button")
         self.gridLayout.addWidget(self.data_view_Button, 3, 1, 1, 1)
-        # self.data_view_Button.setFixedWidth(200)
-        # self.data_view_Button.setFixedHeight(200)
-        # self.hlayout2.addWidget(self.data_view_Button)
 
-        # 管理员登录按钮
-        self.admin_login_Button = QtWidgets.QPushButton(self.centralwidget)
+        # 密码修改按钮
+        self.change_pwd_Button = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.admin_login_Button.sizePolicy().hasHeightForWidth())
-        self.admin_login_Button.setSizePolicy(sizePolicy)
-        self.admin_login_Button.setObjectName("admin_login_Button")
-        self.gridLayout.addWidget(self.admin_login_Button, 3, 4, 1, 1)
-        # self.admin_login_Button.setFixedWidth(200)
-        # self.admin_login_Button.setFixedHeight(200)
-        # self.hlayout2.addWidget(self.admin_login_Button)
+        sizePolicy.setHeightForWidth(self.change_pwd_Button.sizePolicy().hasHeightForWidth())
+        self.change_pwd_Button.setSizePolicy(sizePolicy)
+        self.change_pwd_Button.setObjectName("change_pwd_Button")
+        self.gridLayout.addWidget(self.change_pwd_Button, 3, 4, 1, 1)
+
         MainWindow.setCentralWidget(self.centralwidget)
 
-        # self.layout.addLayout(self.hlayout1)  # 将主体加入布局
-        # self.layout.addLayout(self.hlayout2)  # 将主体加入布局
         self.layout.addLayout(self.gridLayout)
-        # self.layout.addStretch(1)
 
         # 返回footer组件
         self.bottom_layout, self.evaluate_time, self.pass_time = create_bottom()
@@ -167,51 +149,27 @@ class Ui_MainWindow(object):
         self.health_assess_Button.setText(_translate("MainWindow", "应激\n评估"))
         self.results_view_Button.setText(_translate("MainWindow", "结果\n管理"))
         self.data_view_Button.setText(_translate("MainWindow", "数据\n管理"))
-        self.admin_login_Button.setText(_translate("MainWindow", "切换\n登录"))
+        self.change_pwd_Button.setText(_translate("MainWindow", "密码\n修改"))
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑
         self.health_assess_Button.setFont(font)
         self.results_view_Button.setFont(font)
         self.data_view_Button.setFont(font)
-        self.admin_login_Button.setFont(font)
+        self.change_pwd_Button.setFont(font)
 
         # 样式设置      "QPushButton{font-weight:bold}"字体加粗
-        self.health_assess_Button.setStyleSheet("QPushButton{color:white}"
-                                                "QPushButton:hover{background-color:#94b2da}"
-                                                "QPushButton{background-color:#4379b9}"
-                                                "QPushButton{border:2px}"
-                                                "QPushButton{border-radius:10px}"
-                                                "QPushButton{padding:2px 4px}"
-                                                "QPushButton{font-size:30px}")
-        self.results_view_Button.setStyleSheet("QPushButton{color:white}"
-                                               "QPushButton:hover{background-color:#94b2da}"
-                                               "QPushButton{background-color:#4379b9}"
-                                               "QPushButton{border:2px}"
-                                               "QPushButton{border-radius:10px}"
-                                               "QPushButton{padding:2px 4px}"
-                                               "QPushButton{font-size:30px}")
-        self.data_view_Button.setStyleSheet("QPushButton{color:white}"
-                                            "QPushButton:hover{background-color:#94b2da}"
-                                            "QPushButton{background-color:#4379b9}"
-                                            "QPushButton{border:2px}"
-                                            "QPushButton{border-radius:10px}"
-                                            "QPushButton{padding:2px 4px}"
-                                            "QPushButton{font-size:30px}")
-        self.admin_login_Button.setStyleSheet("QPushButton{color:white}"
-                                              "QPushButton:hover{background-color:#94b2da}"
-                                              "QPushButton{background-color:#4379b9}"
-                                              "QPushButton{border:2px}"
-                                              "QPushButton{border-radius:10px}"
-                                              "QPushButton{padding:2px 4px}"
-                                              "QPushButton{font-size:30px}")
+        button_style = ("QPushButton{color:white}"
+                       "QPushButton:hover{background-color:#94b2da}"
+                       "QPushButton{background-color:#4379b9}"
+                       "QPushButton{border:2px}"
+                       "QPushButton{border-radius:10px}"
+                       "QPushButton{padding:2px 4px}"
+                       "QPushButton{font-size:30px}")
 
-        # # bottom样式设计
-        # self.evaluate_time.setStyleSheet("QLabel{font-size:30px}"
-        #                                  "QLabel{color:black}"
-        #                                  "QLabel{padding:0px 0px 2px 4px}")
-        # self.pass_time.setStyleSheet("QLabel{font-size:30px}"
-        #                              "QLabel{color:black}"
-        #                              "QLabel{padding:0px 4px 2px 0px}")
+        self.health_assess_Button.setStyleSheet(button_style)
+        self.results_view_Button.setStyleSheet(button_style)
+        self.data_view_Button.setStyleSheet(button_style)
+        self.change_pwd_Button.setStyleSheet(button_style)
 
 
