@@ -7971,3 +7971,5 @@ WHERE tb_user.username = %(username_1)s AND tb_user.password = %(password_1)s
 2025-01-16 22:52:24,373 - INFO - Administrator - Opening password change page.
 2025-01-16 22:53:03,239 - INFO - Administrator - User admin logged in successfully
 2025-01-16 22:53:04,614 - INFO - Administrator - Opening password change page.
+2025-01-25 17:19:53,327 - INFO - Administrator - User admin logged in successfully
+2025-01-25 17:19:54,632 - INFO - Administrator - Switched to regular user mode. Login page is being opened.

@@ -1,5 +1,6 @@
 import os
 import sys
+import hashlib
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sqlalchemy import create_engine, text
@@ -10,18 +11,27 @@ from sql_model.tb_data import Data
 from sql_model.tb_result import Result
 from sql_model.tb_model import Model
 from sql_model.tb_parameters import Parameters
+from sql_model.system_params import SystemParams
+from sql_model.tb_role import Role
+from sql_model.tb_permission import Permission
+from sql_model.tb_user_role import UserRole
+from sql_model.tb_role_permission import RolePermission
 from datetime import datetime
 
-# MySQL配置信息
+# PostgreSQL配置信息
 HOST = '127.0.0.1'
-PORT = 3306
-DATABASE = 'sql_model'
-USERNAME = 'root'
-PASSWORD = 'root'
+PORT = 5432
+DATABASE = 'bj_health_manage'
+USERNAME = 'postgres'
+PASSWORD = 'postgres'
+
+def hash_password(password):
+    """使用SHA-256对密码进行哈希"""
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def init_database():
     # 创建数据库连接URL
-    connection_string = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+    connection_string = f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
     
     try:
         # 创建引擎
@@ -44,40 +54,36 @@ def init_database():
             User(
                 user_id='admin001',
                 username='admin',
-                password='123',
+                password=hash_password('123456'),
                 email='admin@example.com',
                 phone='13800000001',
-                full_name='管理员',
                 user_type='admin',
                 created_at=datetime.now()
             ),
             User(
                 user_id='user001',
-                username='123',
-                password='1234',
+                username='user1',
+                password=hash_password('123456'),
                 email='user1@example.com',
                 phone='13800000002',
-                full_name='测试用户1',
                 user_type='user',
                 created_at=datetime.now()
             ),
             User(
                 user_id='user002',
-                username='111',
-                password='111',
+                username='user2',
+                password=hash_password('123456'),
                 email='user2@example.com',
                 phone='13800000003',
-                full_name='测试用户2',
                 user_type='user',
                 created_at=datetime.now()
             ),
             User(
                 user_id='user003',
-                username='222',
-                password='222',
+                username='user3',
+                password=hash_password('123456'),
                 email='user3@example.com',
                 phone='13800000004',
-                full_name='测试用户3',
                 user_type='admin',
                 created_at=datetime.now()
             )
@@ -86,10 +92,110 @@ def init_database():
         # 添加用户数据
         for user in initial_users:
             session.add(user)
+            
+        # 添加系统参数
+        initial_params = SystemParams(
+            param_id='PARAM_001',
+            eeg_frequency=500.0,
+            electrode_count=64,
+            scale_question_num=40,
+            model_num=3,
+            id=1
+        )
+        session.add(initial_params)
+        
+        # 添加初始模型数据
+        initial_models = [
+            Model(
+                id=1,
+                model_type=0,
+                model_path='./model/yingji/subject-1 yingji.keras',
+                create_time=datetime.now()
+            ),
+            Model(
+                id=2,
+                model_type=1,
+                model_path='./model/yiyu/subject-1 yiyu.keras',
+                create_time=datetime.now()
+            ),
+            Model(
+                id=3,
+                model_type=2,
+                model_path='./model/jiaolv/subject-1jiaolv.keras',
+                create_time=datetime.now()
+            )
+        ]
+        for model in initial_models:
+            session.add(model)
+
+        # 添加角色数据
+        initial_roles = [
+            Role(
+                role_id='ROLE_ADMIN',
+                role_name='管理员',
+                description='系统管理员，拥有所有权限',
+                created_at=datetime.now()
+            ),
+            Role(
+                role_id='ROLE_USER',
+                role_name='普通用户',
+                description='普通用户，拥有基本操作权限',
+                created_at=datetime.now()
+            )
+        ]
+        for role in initial_roles:
+            session.add(role)
+
+        # 添加权限数据
+        initial_permissions = [
+            Permission(
+                permission_id='PERM_USER_MANAGE',
+                permission_name='用户管理',
+                page_url='/user/*',
+                description='用户管理相关权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_DATA_MANAGE',
+                permission_name='数据管理',
+                page_url='/data/*',
+                description='数据管理相关权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_MODEL_MANAGE',
+                permission_name='模型管理',
+                page_url='/model/*',
+                description='模型管理相关权限',
+                created_at=datetime.now()
+            )
+        ]
+        for permission in initial_permissions:
+            session.add(permission)
+
+        # 添加用户角色关联
+        initial_user_roles = [
+            UserRole(user_id='admin001', role_id='ROLE_ADMIN'),
+            UserRole(user_id='user001', role_id='ROLE_USER'),
+            UserRole(user_id='user002', role_id='ROLE_USER'),
+            UserRole(user_id='user003', role_id='ROLE_ADMIN')
+        ]
+        for user_role in initial_user_roles:
+            session.add(user_role)
+
+        # 添加角色权限关联
+        initial_role_permissions = [
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_USER_MANAGE'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_MANAGE'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_MODEL_MANAGE'),
+            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_MANAGE')
+        ]
+        for role_permission in initial_role_permissions:
+            session.add(role_permission)
         
         # 提交更改
         session.commit()
-        print("已插入初始用户数据")
+        print("已插入初始数据")
         
         session.close()
         print("数据库初始化完成")

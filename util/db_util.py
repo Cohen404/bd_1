@@ -3,16 +3,22 @@ from sqlalchemy.orm import sessionmaker
 from sql_model.base import Base
 from sql_model.tb_user import User
 from sql_model.tb_result import Result
+import os
+from dotenv import load_dotenv
 
-# MySql配置信息
-HOST = '127.0.0.1'
-PORT = 3306
-DATABASE = 'sql_model'
-USERNAME = 'root'
-PASSWORD = 'root'
+# 加载环境变量
+load_dotenv()
 
-connection_string = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
-engine = create_engine(connection_string, encoding='utf8')
+# PostgreSQL配置信息
+HOST = os.getenv('DB_HOST', '127.0.0.1')
+PORT = os.getenv('DB_PORT', 5432)
+DATABASE = os.getenv('DB_DATABASE', 'bj_health_manage')
+USERNAME = os.getenv('DB_USERNAME', 'postgres')
+PASSWORD = os.getenv('DB_PASSWORD', 'postgres')
+
+# 创建数据库连接
+connection_string = f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+engine = create_engine(connection_string)
 
 # 创建所有表
 Base.metadata.create_all(engine)

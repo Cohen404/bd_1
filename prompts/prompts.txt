@@ -22,7 +22,7 @@ updated_at	datetime		是	CURRENT_TIMESTAMP	用户信息更新时间
 
 tb_user的初始化sql也要有对应的修改。
 
-mysql 用户名root，密码root，端口3306和ip 127.0.0.1
+postgresql 用户名postgres，密码postgres，端口5432和ip 127.0.0.1
 
 
 
