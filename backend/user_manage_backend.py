@@ -23,6 +23,7 @@ import front.user_manage_UI as user_manage_UI
 # 导入跳转页面的后端部分
 from backend import index_backend
 from backend import admin_index_backend
+from backend import role_manage_backend
 from sql_model.tb_user import User
 from util.db_util import SessionClass
 from util.window_manager import WindowManager
@@ -69,6 +70,7 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
         # 连接按钮事件
         self.btn_return.clicked.connect(self.return_index)  # 返回首页
         self.addButton.clicked.connect(self.add_user)  # 添加用户
+        self.roleManageBtn.clicked.connect(self.open_role_manage)  # 打开角色管理
 
         # 设置日志
         path = USER_STATUS_FILE
@@ -372,6 +374,23 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"Error in return_index: {str(e)}")
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
+
+    def open_role_manage(self):
+        """打开角色管理界面"""
+        try:
+            window_manager = WindowManager()
+            self._role_manage_window = role_manage_backend.RoleManageWindowActions()
+            window_manager.register_window('role_manage', self._role_manage_window)
+            window_manager.show_window('role_manage')
+            
+            # 隐藏并关闭当前窗口
+            self.hide()
+            self.close()
+            
+            logging.info("Role management window opened")
+        except Exception as e:
+            logging.error(f"Error opening role management window: {str(e)}")
+            QMessageBox.critical(self, "错误", f"打开角色管理界面失败：{str(e)}")
 
 
 if __name__ == '__main__':

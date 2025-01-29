@@ -55,6 +55,26 @@ class Ui_MainWindow(object):
         self.header_layout, _, self.btn_return, self.time_show, self.statu_show = create_header('用户管理界面')
         self.layout.addLayout(self.header_layout)
 
+        # 添加角色管理按钮
+        self.roleManageLayout = QtWidgets.QHBoxLayout()
+        self.roleManageBtn = QtWidgets.QPushButton("角色管理")
+        self.roleManageBtn.setStyleSheet("""
+            QPushButton {
+                background-color: #759dcd;
+                font-size: 14px;
+                border-radius: 5px;
+                padding: 5px 15px;
+                color: white;
+                margin-right: 15px;
+            }
+            QPushButton:hover {
+                background-color: #5c8ac3;
+            }
+        """)
+        self.roleManageLayout.addStretch()
+        self.roleManageLayout.addWidget(self.roleManageBtn)
+        self.layout.addLayout(self.roleManageLayout)
+
         self.mainVLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.mainVLayout.setObjectName("mainVLayout")
         self.layout.addLayout(self.mainVLayout)

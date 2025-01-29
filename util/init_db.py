@@ -151,22 +151,50 @@ def init_database():
             Permission(
                 permission_id='PERM_USER_MANAGE',
                 permission_name='用户管理',
-                page_url='/user/*',
-                description='用户管理相关权限',
+                page_url='/user_manage',
+                description='用户管理页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_ROLE_MANAGE',
+                permission_name='角色管理',
+                page_url='/role_manage',
+                description='角色管理页面访问权限',
                 created_at=datetime.now()
             ),
             Permission(
                 permission_id='PERM_DATA_MANAGE',
                 permission_name='数据管理',
-                page_url='/data/*',
-                description='数据管理相关权限',
+                page_url='/data_manage',
+                description='数据管理页面访问权限',
                 created_at=datetime.now()
             ),
             Permission(
                 permission_id='PERM_MODEL_MANAGE',
                 permission_name='模型管理',
-                page_url='/model/*',
-                description='模型管理相关权限',
+                page_url='/model_manage',
+                description='模型管理页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_DATA_ANALYSIS',
+                permission_name='数据分析',
+                page_url='/data_analysis',
+                description='数据分析页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_DATA_COLLECTION',
+                permission_name='数据采集',
+                page_url='/data_collection',
+                description='数据采集页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_RESULT_VIEW',
+                permission_name='结果查看',
+                page_url='/result_view',
+                description='结果查看页面访问权限',
                 created_at=datetime.now()
             )
         ]
@@ -185,9 +213,19 @@ def init_database():
 
         # 添加角色权限关联
         initial_role_permissions = [
+            # 管理员拥有所有权限
             RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_USER_MANAGE'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_ROLE_MANAGE'),
             RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_MANAGE'),
             RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_MODEL_MANAGE'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_RESULT_VIEW'),
+            
+            # 普通用户只有基本权限
+            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='ROLE_USER', permission_id='PERM_RESULT_VIEW'),
             RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_MANAGE')
         ]
         for role_permission in initial_role_permissions:

@@ -8054,3 +8054,42 @@ WHERE tb_user.username = %(username_1)s AND tb_user.password = %(password_1)s
 2025-01-28 23:50:40,639 - INFO - Administrator - Successfully displayed 0 data records
 2025-01-28 23:50:40,641 - INFO - Administrator - Opening health evaluation page.
 2025-01-28 23:50:41,579 - INFO - Administrator - Returned to index page successfully
+2025-01-28 23:54:40,252 - INFO - Administrator - User admin logged in successfully
+2025-01-29 13:52:09,904 - INFO - Administrator - User admin logged in successfully with permissions: PERM_DATA_MANAGE, PERM_MODEL_MANAGE, PERM_USER_MANAGE
+2025-01-29 13:52:11,931 - INFO - Administrator - Opened user management page
+2025-01-29 13:52:15,223 - ERROR - Administrator - Error opening role management window: cannot import name 'DATABASE_URL' from 'config' (/home/jupiter/bj_health_manage/config.py)
+2025-01-29 13:52:17,033 - INFO - Administrator - Returned to index page successfully
+2025-01-29 14:37:37,821 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:37:39,097 - INFO - Administrator - Opening user management page.
+2025-01-29 14:37:50,994 - INFO - Administrator - Returned to index page successfully
+2025-01-29 14:37:53,398 - INFO - Administrator - Opening user management page.
+2025-01-29 14:39:42,181 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:48:05,550 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:48:07,573 - INFO - Administrator - Opening parameter control page.
+2025-01-29 14:48:09,459 - INFO - Administrator - Returned to index page successfully
+2025-01-29 14:48:10,104 - INFO - Administrator - Opening user management page.
+2025-01-29 14:48:37,738 - INFO - Administrator - Returned to index page successfully
+2025-01-29 14:48:38,890 - INFO - Administrator - Opening user management page.
+2025-01-29 14:51:37,642 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:51:40,910 - INFO - Administrator - Opening user management page.
+2025-01-29 14:56:52,881 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:56:56,750 - INFO - Administrator - Opening user management page.
+2025-01-29 14:59:10,227 - INFO - Administrator - User admin logged in successfully
+2025-01-29 14:59:13,041 - INFO - Administrator - Opening user management page.
+2025-01-29 14:59:16,780 - INFO - Administrator - Returned to index page successfully
+2025-01-29 15:19:53,044 - INFO - Administrator - User admin logged in successfully
+2025-01-29 15:19:54,456 - INFO - Administrator - Opening user management page.
+2025-01-29 15:19:55,544 - ERROR - Administrator - Error opening role management window: module 'backend.role_manage_backend' has no attribute 'RoleManageWindowActions'
+2025-01-29 15:24:21,985 - INFO - Administrator - User admin logged in successfully
+2025-01-29 15:24:23,229 - INFO - Administrator - Opening user management page.
+2025-01-29 15:24:24,774 - INFO - Administrator - Role management window opened
+2025-01-29 15:24:41,215 - INFO - Administrator - Permissions saved for role ROLE_USER
+2025-01-29 15:24:42,673 - INFO - Administrator - Returned to user management page
+2025-01-29 15:24:43,335 - INFO - Administrator - Returned to index page successfully
+2025-01-29 15:24:44,486 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2025-01-29 15:24:47,341 - INFO - Regular user - User user1 logged in successfully
+2025-01-29 15:24:49,951 - INFO - Administrator - Returning to login page.
+2025-01-29 15:24:53,669 - INFO - Administrator - User admin logged in successfully
+2025-01-29 15:24:56,164 - INFO - Administrator - Opening user management page.
+2025-01-29 15:24:57,424 - INFO - Administrator - Role management window opened
+2025-01-29 15:25:05,622 - INFO - Administrator - Permissions saved for role ROLE_USER
