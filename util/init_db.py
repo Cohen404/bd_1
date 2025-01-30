@@ -131,13 +131,13 @@ def init_database():
         # 添加角色数据
         initial_roles = [
             Role(
-                role_id='ROLE_ADMIN',
+                role_id='admin',
                 role_name='管理员',
                 description='系统管理员，拥有所有权限',
                 created_at=datetime.now()
             ),
             Role(
-                role_id='ROLE_USER',
+                role_id='user',
                 role_name='普通用户',
                 description='普通用户，拥有基本操作权限',
                 created_at=datetime.now()
@@ -203,10 +203,10 @@ def init_database():
 
         # 添加用户角色关联
         initial_user_roles = [
-            UserRole(user_id='admin001', role_id='ROLE_ADMIN'),
-            UserRole(user_id='user001', role_id='ROLE_USER'),
-            UserRole(user_id='user002', role_id='ROLE_USER'),
-            UserRole(user_id='user003', role_id='ROLE_ADMIN')
+            UserRole(user_id='admin001', role_id='admin'),
+            UserRole(user_id='user001', role_id='user'),
+            UserRole(user_id='user002', role_id='user'),
+            UserRole(user_id='user003', role_id='admin')
         ]
         for user_role in initial_user_roles:
             session.add(user_role)
@@ -214,19 +214,19 @@ def init_database():
         # 添加角色权限关联
         initial_role_permissions = [
             # 管理员拥有所有权限
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_USER_MANAGE'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_ROLE_MANAGE'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_MANAGE'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_MODEL_MANAGE'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_ANALYSIS'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_DATA_COLLECTION'),
-            RolePermission(role_id='ROLE_ADMIN', permission_id='PERM_RESULT_VIEW'),
+            RolePermission(role_id='admin', permission_id='PERM_USER_MANAGE'),
+            RolePermission(role_id='admin', permission_id='PERM_ROLE_MANAGE'),
+            RolePermission(role_id='admin', permission_id='PERM_DATA_MANAGE'),
+            RolePermission(role_id='admin', permission_id='PERM_MODEL_MANAGE'),
+            RolePermission(role_id='admin', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='admin', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='admin', permission_id='PERM_RESULT_VIEW'),
             
             # 普通用户只有基本权限
-            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_COLLECTION'),
-            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_ANALYSIS'),
-            RolePermission(role_id='ROLE_USER', permission_id='PERM_RESULT_VIEW'),
-            RolePermission(role_id='ROLE_USER', permission_id='PERM_DATA_MANAGE')
+            RolePermission(role_id='user', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='user', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='user', permission_id='PERM_RESULT_VIEW'),
+            RolePermission(role_id='user', permission_id='PERM_DATA_MANAGE')
         ]
         for role_permission in initial_role_permissions:
             session.add(role_permission)

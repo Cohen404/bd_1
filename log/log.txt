@@ -8093,3 +8093,65 @@ WHERE tb_user.username = %(username_1)s AND tb_user.password = %(password_1)s
 2025-01-29 15:24:56,164 - INFO - Administrator - Opening user management page.
 2025-01-29 15:24:57,424 - INFO - Administrator - Role management window opened
 2025-01-29 15:25:05,622 - INFO - Administrator - Permissions saved for role ROLE_USER
+2025-01-29 21:22:52,990 - INFO - Administrator - User admin logged in successfully
+2025-01-29 21:22:54,296 - INFO - Administrator - Opening user management page.
+2025-01-29 21:22:55,385 - INFO - Administrator - Returned to index page successfully
+2025-01-29 21:22:56,481 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2025-01-29 21:41:31,179 - INFO - Administrator - User admin logged in successfully
+2025-01-29 21:41:31,180 - ERROR - Administrator - Login error: module 'backend.admin_index_backend' has no attribute 'AdminWindowActions'
+2025-01-29 21:41:37,546 - INFO - Regular user - User user1 logged in successfully
+2025-01-29 21:41:37,547 - ERROR - Regular user - Login error: module 'backend.index_backend' has no attribute 'Index_WindowActions'
+2025-01-29 21:41:52,265 - INFO - Administrator - User admin logged in successfully
+2025-01-29 21:41:52,265 - ERROR - Administrator - Login error: module 'backend.admin_index_backend' has no attribute 'AdminWindowActions'
+2025-01-29 22:12:10,724 - ERROR - 登录错误: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/login_backend.py", line 108, in login
+    self.admin_window = admin_index_backend.AdminIndexWindowActions()
+  File "/home/jupiter/bj_health_manage/backend/admin_index_backend.py", line 53, in __init__
+    self.setupUi(self)
+  File "/home/jupiter/bj_health_manage/front/admin_index_UI.py", line 38, in setupUi
+    self.verticalLayout.addWidget(self.header)
+TypeError: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+
+2025-01-29 22:12:58,521 - ERROR - 登录错误: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/login_backend.py", line 108, in login
+    self.admin_window = admin_index_backend.AdminIndexWindowActions()
+  File "/home/jupiter/bj_health_manage/backend/admin_index_backend.py", line 53, in __init__
+    self.setupUi(self)
+  File "/home/jupiter/bj_health_manage/front/admin_index_UI.py", line 38, in setupUi
+    self.verticalLayout.addWidget(self.header)
+TypeError: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+
+2025-01-29 22:13:22,618 - ERROR - 登录错误: create_header() missing 1 required positional argument: 'title'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/login_backend.py", line 111, in login
+    self.index_window = index_backend.IndexWindowActions()
+  File "/home/jupiter/bj_health_manage/backend/index_backend.py", line 56, in __init__
+    self.setupUi(self)
+  File "/home/jupiter/bj_health_manage/front/index_UI.py", line 50, in setupUi
+    self.header = create_header()
+TypeError: create_header() missing 1 required positional argument: 'title'
+
+2025-01-29 22:15:32,285 - INFO - 用户 admin 是管理员，准备跳转到管理员界面
+2025-01-29 22:15:32,285 - ERROR - 界面跳转失败: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/login_backend.py", line 128, in login
+    self.admin_window = admin_index_backend.AdminIndexWindowActions()
+  File "/home/jupiter/bj_health_manage/backend/admin_index_backend.py", line 53, in __init__
+    self.setupUi(self)
+  File "/home/jupiter/bj_health_manage/front/admin_index_UI.py", line 38, in setupUi
+    self.verticalLayout.addWidget(self.header)
+TypeError: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+
+2025-01-29 22:16:32,090 - INFO - 用户 admin 是管理员，准备跳转到管理员界面
+2025-01-29 22:16:32,090 - ERROR - 界面跳转失败: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/login_backend.py", line 128, in login
+    self.admin_window = admin_index_backend.AdminIndexWindowActions()
+  File "/home/jupiter/bj_health_manage/backend/admin_index_backend.py", line 53, in __init__
+    self.setupUi(self)
+  File "/home/jupiter/bj_health_manage/front/admin_index_UI.py", line 38, in setupUi
+    self.verticalLayout.addWidget(self.header)
+TypeError: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Alignment, Qt.AlignmentFlag] = Qt.Alignment()): argument 1 has unexpected type 'tuple'
+

@@ -11,15 +11,24 @@
 ## 数据库配置
 1. 安装PostgreSQL数据库
 2. 创建数据库：
-```sql
-CREATE DATABASE health_manage;
+```bash
+# 使用PostgreSQL命令行创建数据库
+sudo -u postgres psql -c "CREATE DATABASE bj_health_manage;"
+
+# 或者在psql命令行中执行：
+CREATE DATABASE bj_health_manage;
 ```
 3. 配置数据库连接：
    - 主机：127.0.0.1
    - 端口：5432
-   - 数据库：health_manage
+   - 数据库：bj_health_manage
    - 用户名：postgres
    - 密码：postgres
+
+4. 初始化数据库：
+```bash
+python util/init_db.py
+```
 
 ## 安装步骤
 1. 克隆项目到本地
