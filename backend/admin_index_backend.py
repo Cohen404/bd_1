@@ -28,7 +28,12 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
-from config import USER_STATUS_FILE, LOG_FILE
+from config import USER_STATUS_FILE, LOG_FILE, CURRENT_USER_FILE
+from sql_model.tb_user import User
+from sql_model.tb_role import Role
+from sql_model.tb_permission import Permission
+from sql_model.tb_user_role import UserRole
+from sql_model.tb_role_permission import RolePermission
 
 class UserFilter(logging.Filter):
     """
@@ -55,39 +60,117 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         初始化管理员窗口
         """
         super(admin_index_UI.Ui_MainWindow, self).__init__()
-        # 创建界面
         self.setupUi(self)
-        self.show_nav()  # 调用show_nav方法显示header,bottom的内容
-
-        # 连接按钮点击事件
-        self.btn_return.clicked.connect(self.return_index)  # 返回首页
-        self.health_assess_Button.clicked.connect(self.open_health_evaluate)  # 健康评估
-        self.data_view_Button.clicked.connect(self.open_data_view)  # 数据查看
-        self.results_view_Button.clicked.connect(self.open_results_view)  # 结果查看
+        
+        # 获取当前用户ID
+        with open(CURRENT_USER_FILE, 'r') as f:
+            self.user_id = f.read().strip()
+            
+        # 获取用户权限并显示对应按钮
+        self.show_buttons_by_permission()
+        
+        # 连接按钮信号
+        self.btn_return.clicked.connect(self.return_index)
+        self.health_assess_Button.clicked.connect(self.open_health_evaluate)
+        self.data_view_Button.clicked.connect(self.open_data_view)
+        self.results_view_Button.clicked.connect(self.open_results_view)
         self.model_manage_pushButton.clicked.connect(self.open_model_control_view)
         self.user_manage_pushButton.clicked.connect(self.open_user_manage_view)
         self.parameter_pushButton.clicked.connect(self.open_param_control_view)
         self.change_pwd_Button.clicked.connect(self.open_change_pwd_view)
         self.log_manage_pushButton.clicked.connect(self.open_log_manage_view)
-        self.btn_help.clicked.connect(self.open_help)  # 帮助按钮
+        self.btn_help.clicked.connect(self.open_help)
 
-        # 使用配置文件中的路径
+        # 配置日志
         user = operate_user.read(USER_STATUS_FILE)
         userType = "Regular user" if user == 0 else "Administrator"
-
-        # 配置 logging 模块，使用配置文件中的路径
         logging.basicConfig(
             filename=LOG_FILE,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
         )
-
-        # 添加过滤器
         logger = logging.getLogger()
         logger.addFilter(UserFilter(userType))
 
         window_manager = WindowManager()
         window_manager.register_window('admin', self)
+
+    def get_user_permissions(self, user_id):
+        """
+        获取用户的权限列表
+        
+        参数:
+        user_id (str): 用户ID
+        
+        返回:
+        list: 权限ID列表
+        """
+        session = SessionClass()
+        try:
+            # 获取用户角色
+            user_role = session.query(UserRole).filter(UserRole.user_id == user_id).first()
+            if not user_role:
+                return []
+                
+            # 获取角色的所有权限
+            role_permissions = session.query(RolePermission).filter(
+                RolePermission.role_id == user_role.role_id
+            ).all()
+            
+            # 返回权限ID列表
+            return [rp.permission_id for rp in role_permissions]
+        except Exception as e:
+            logging.error(f"Error getting user permissions: {str(e)}")
+            return []
+        finally:
+            session.close()
+            
+    def show_buttons_by_permission(self):
+        """
+        根据用户权限显示对应的功能按钮,并实现紧凑排列
+        """
+        # 获取用户权限列表
+        permissions = self.get_user_permissions(self.user_id)
+        
+        # 默认隐藏所有按钮
+        self.health_assess_Button.hide()
+        self.data_view_Button.hide()
+        self.results_view_Button.hide()
+        self.model_manage_pushButton.hide()
+        self.user_manage_pushButton.hide()
+        self.parameter_pushButton.hide()
+        self.log_manage_pushButton.hide()
+        self.change_pwd_Button.hide()
+        
+        # 获取所有可见按钮
+        visible_buttons = []
+        if 'PERM_DATA_COLLECTION' in permissions:
+            visible_buttons.append(self.health_assess_Button)
+        if 'PERM_DATA_MANAGE' in permissions:
+            visible_buttons.append(self.data_view_Button)
+        if 'PERM_RESULT_VIEW' in permissions:
+            visible_buttons.append(self.results_view_Button)
+        if 'PERM_MODEL_MANAGE' in permissions:
+            visible_buttons.append(self.model_manage_pushButton)
+        if 'PERM_USER_MANAGE' in permissions:
+            visible_buttons.append(self.user_manage_pushButton)
+        if 'PERM_PARAM_MANAGE' in permissions:
+            visible_buttons.append(self.parameter_pushButton)
+        if 'PERM_LOG_MANAGE' in permissions:
+            visible_buttons.append(self.log_manage_pushButton)
+        if 'PERM_CHANGE_PWD' in permissions:
+            visible_buttons.append(self.change_pwd_Button)
+        
+        # 计算每行显示的按钮数量
+        total_buttons = len(visible_buttons)
+        buttons_per_row = (total_buttons + 1) // 2  # 向上取整,确保第一行更多
+        
+        # 重新排列按钮位置
+        for i, button in enumerate(visible_buttons):
+            row = 1 if i < buttons_per_row else 3  # 使用1和3行,保持间距
+            col = (i % buttons_per_row) * 2 + 1    # 使用奇数列,保持间距
+            self.gridLayout.addWidget(button, row, col, 1, 1)
+            button.show()
 
     def show_nav(self):
         """

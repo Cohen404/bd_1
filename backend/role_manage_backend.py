@@ -68,6 +68,9 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
         self.load_roles()
         self.load_permissions()
         
+        # 触发一次角色选择事件，显示当前选中角色的权限
+        self.on_role_selected()
+        
         # 设置日志
         path = USER_STATUS_FILE
         user = operate_user.read(path)
@@ -128,7 +131,7 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
                         background-color: #5c8ac3;
                     }
                 """)
-                edit_btn.clicked.connect(lambda checked, r=role: self.edit_role_permissions(r))
+                edit_btn.clicked.connect(self.create_edit_handler(role))
                 self.tableWidget.setCellWidget(row, 3, edit_btn)
                 
             # 更新角色下拉框
@@ -141,6 +144,20 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             logging.error(f"Error loading roles: {str(e)}\n{error_stack}")
             QMessageBox.critical(self, "错误", f"加载角色列表失败：\n{str(e)}\n\n详细错误：\n{error_stack}")
             
+    def create_edit_handler(self, role):
+        """
+        创建编辑按钮的事件处理函数
+        
+        参数:
+        role (Role): 角色对象
+        
+        返回:
+        function: 事件处理函数
+        """
+        def handler():
+            self.edit_role_permissions(role)
+        return handler
+
     def load_permissions(self):
         """加载所有权限"""
         try:
@@ -148,14 +165,31 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             for i in reversed(range(self.checkboxLayout.count())): 
                 self.checkboxLayout.itemAt(i).widget().setParent(None)
                 
-            # 查询所有权限
-            permissions = self.session.query(Permission).all()
+            # 查询所有权限，排除角色管理权限
+            permissions = self.session.query(Permission).filter(
+                Permission.permission_id != 'PERM_ROLE_MANAGE'
+            ).all()
+            
+            # 管理类权限ID列表 - 这些权限对普通用户禁用
+            admin_permissions = [
+                'PERM_USER_MANAGE',
+                'PERM_MODEL_MANAGE',
+                'PERM_PARAM_MANAGE',
+                'PERM_LOG_MANAGE'
+            ]
             
             # 创建权限复选框
             for i, permission in enumerate(permissions):
                 checkbox = QCheckBox(permission.permission_name)
                 checkbox.setProperty('permission_id', permission.permission_id)
                 checkbox.setStyleSheet("font-size: 14px;")
+                
+                # 如果是普通用户角色且是管理类权限，则设置为禁用状态
+                role_id = self.roleComboBox.currentData()
+                if role_id == 'user' and permission.permission_id in admin_permissions:
+                    checkbox.setEnabled(False)
+                    checkbox.setStyleSheet("font-size: 14px; color: gray;")
+                
                 self.checkboxLayout.addWidget(checkbox, i // 2, i % 2)
                 
         except Exception as e:
@@ -191,12 +225,28 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             role_permissions = self.session.query(RolePermission).filter_by(role_id=role_id).all()
             permission_ids = {rp.permission_id for rp in role_permissions}
             
+            # 管理类权限ID列表 - 这些权限对普通用户禁用
+            admin_permissions = [
+                'PERM_USER_MANAGE',
+                'PERM_MODEL_MANAGE',
+                'PERM_PARAM_MANAGE',
+                'PERM_LOG_MANAGE'
+            ]
+            
             # 更新复选框状态
             for i in range(self.checkboxLayout.count()):
                 checkbox = self.checkboxLayout.itemAt(i).widget()
                 if checkbox:
                     permission_id = checkbox.property('permission_id')
                     checkbox.setChecked(permission_id in permission_ids)
+                    
+                    # 如果是普通用户角色且是管理类权限，则设置为禁用状态
+                    if role_id == 'user' and permission_id in admin_permissions:
+                        checkbox.setEnabled(False)
+                        checkbox.setStyleSheet("font-size: 14px; color: gray;")
+                    else:
+                        checkbox.setEnabled(True)
+                        checkbox.setStyleSheet("font-size: 14px;")
                     
         except Exception as e:
             error_stack = traceback.format_exc()

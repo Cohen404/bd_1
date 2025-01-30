@@ -158,12 +158,20 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
     def get_user_type(self, user_id):
         """
         获取用户类型
+        
+        参数:
+        user_id (str): 用户ID
+        
+        返回:
+        bool: True表示管理员，False表示普通用户
         """
         session = SessionClass()
         try:
+            # 查询用户-角色关联表
             user = session.query(User).filter(User.user_id == user_id).first()
             if user:
-                return user.user_type == 'admin'  # 返回布尔值：True表示管理员，False表示普通用户
+                # 使用user_type字段判断角色
+                return user.user_type == 'admin'
             return False
         except Exception as e:
             logging.error(f"Error getting user type: {str(e)}")

@@ -57,7 +57,7 @@ def init_database():
                 password=hash_password('123456'),
                 email='admin@example.com',
                 phone='13800000001',
-                user_type='admin',
+                user_type='admin',  # 管理员角色ID
                 created_at=datetime.now()
             ),
             User(
@@ -66,7 +66,7 @@ def init_database():
                 password=hash_password('123456'),
                 email='user1@example.com',
                 phone='13800000002',
-                user_type='user',
+                user_type='user',  # 普通用户角色ID
                 created_at=datetime.now()
             ),
             User(
@@ -75,7 +75,7 @@ def init_database():
                 password=hash_password('123456'),
                 email='user2@example.com',
                 phone='13800000003',
-                user_type='user',
+                user_type='user',  # 普通用户角色ID
                 created_at=datetime.now()
             ),
             User(
@@ -84,7 +84,7 @@ def init_database():
                 password=hash_password('123456'),
                 email='user3@example.com',
                 phone='13800000004',
-                user_type='admin',
+                user_type='admin',  # 管理员角色ID
                 created_at=datetime.now()
             )
         ]
@@ -177,10 +177,10 @@ def init_database():
                 created_at=datetime.now()
             ),
             Permission(
-                permission_id='PERM_DATA_ANALYSIS',
-                permission_name='数据分析',
-                page_url='/data_analysis',
-                description='数据分析页面访问权限',
+                permission_id='PERM_CHANGE_PWD',
+                permission_name='修改密码',
+                page_url='/change_pwd',
+                description='修改密码页面访问权限',
                 created_at=datetime.now()
             ),
             Permission(
@@ -195,6 +195,20 @@ def init_database():
                 permission_name='结果查看',
                 page_url='/result_view',
                 description='结果查看页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_PARAM_MANAGE',
+                permission_name='参数管理',
+                page_url='/param_manage',
+                description='参数管理页面访问权限',
+                created_at=datetime.now()
+            ),
+            Permission(
+                permission_id='PERM_LOG_MANAGE',
+                permission_name='日志管理',
+                page_url='/log_manage',
+                description='日志管理页面访问权限',
                 created_at=datetime.now()
             )
         ]
@@ -218,13 +232,15 @@ def init_database():
             RolePermission(role_id='admin', permission_id='PERM_ROLE_MANAGE'),
             RolePermission(role_id='admin', permission_id='PERM_DATA_MANAGE'),
             RolePermission(role_id='admin', permission_id='PERM_MODEL_MANAGE'),
-            RolePermission(role_id='admin', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='admin', permission_id='PERM_CHANGE_PWD'),
             RolePermission(role_id='admin', permission_id='PERM_DATA_COLLECTION'),
             RolePermission(role_id='admin', permission_id='PERM_RESULT_VIEW'),
+            RolePermission(role_id='admin', permission_id='PERM_PARAM_MANAGE'),
+            RolePermission(role_id='admin', permission_id='PERM_LOG_MANAGE'),
             
             # 普通用户只有基本权限
             RolePermission(role_id='user', permission_id='PERM_DATA_COLLECTION'),
-            RolePermission(role_id='user', permission_id='PERM_DATA_ANALYSIS'),
+            RolePermission(role_id='user', permission_id='PERM_CHANGE_PWD'),
             RolePermission(role_id='user', permission_id='PERM_RESULT_VIEW'),
             RolePermission(role_id='user', permission_id='PERM_DATA_MANAGE')
         ]
