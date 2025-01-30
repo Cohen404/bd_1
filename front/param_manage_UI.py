@@ -9,7 +9,9 @@ class Ui_param_Control(QWidget):
     """
     参数控制界面UI类
     
-    负责创建和设置参数控制界面的所有UI元素
+    负责创建和设置参数控制界面的所有UI元素，包括：
+    - 参数设置
+    - 系统备份和恢复
     """
 
     def __init__(self):
@@ -30,9 +32,9 @@ class Ui_param_Control(QWidget):
         - 设置窗口基本属性（标题、大小、样式）
         - 创建并设置布局
         - 添加页面头部和参数设置表单
+        - 添加系统备份和恢复功能
         """
         # 窗体标题和尺寸
-
         self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
         self.setFixedSize(1000, 750)
         self.setStyleSheet('''QWidget{background-color:rgb(212, 226, 244);}''')
@@ -53,7 +55,9 @@ class Ui_param_Control(QWidget):
         layout.addLayout(self.init_table())
         layout.addStretch()
 
-
+        # 3.创建备份恢复功能
+        layout.addLayout(self.init_backup_restore())
+        layout.addStretch()
 
         # 给窗体设置元素的排列方式
         self.setLayout(layout)
@@ -114,7 +118,54 @@ class Ui_param_Control(QWidget):
         
         return self.param_layout
 
-
+    def init_backup_restore(self):
+        """
+        初始化备份和恢复功能布局
+        
+        返回:
+        backup_restore_layout: 备份恢复功能布局
+        """
+        backup_restore_layout = QHBoxLayout()
+        
+        # 创建备份按钮
+        self.backup_button = QPushButton('系统备份')
+        self.backup_button.setStyleSheet("""
+            QPushButton {
+                font-size: 20px;
+                height: 60px;
+                width: 180px;
+                color: white;
+                background-color: rgb(0, 120, 215);
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(0, 100, 195);
+            }
+        """)
+        
+        # 创建恢复按钮
+        self.restore_button = QPushButton('系统恢复')
+        self.restore_button.setStyleSheet("""
+            QPushButton {
+                font-size: 20px;
+                height: 60px;
+                width: 180px;
+                color: white;
+                background-color: rgb(215, 120, 0);
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(195, 100, 0);
+            }
+        """)
+        
+        backup_restore_layout.addStretch()
+        backup_restore_layout.addWidget(self.backup_button)
+        backup_restore_layout.addSpacing(20)  # 添加按钮之间的间距
+        backup_restore_layout.addWidget(self.restore_button)
+        backup_restore_layout.addStretch()
+        
+        return backup_restore_layout
 
 
 if __name__ == '__main__':

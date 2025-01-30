@@ -8249,3 +8249,85 @@ TypeError: addWidget(self, a0: QWidget, stretch: int = 0, alignment: Union[Qt.Al
 2025-01-30 22:41:37,434 - INFO - Administrator - User admin logged in successfully
 2025-01-30 22:41:38,727 - INFO - Administrator - Opening user management page.
 2025-01-30 22:41:39,424 - INFO - Administrator - Role management window opened
+2025-01-30 23:16:42,416 - INFO - Administrator - User admin logged in successfully
+2025-01-30 23:16:44,070 - INFO - Administrator - Opening parameter control page.
+2025-01-30 23:17:29,731 - INFO - Administrator - System backup created successfully: system_backup_20250130_231646.zip
+2025-01-30 23:17:38,497 - INFO - Administrator - Starting database save operation.
+2025-01-30 23:17:38,498 - INFO - Administrator - Updating existing SystemParams record.
+2025-01-30 23:17:38,505 - INFO - Administrator - Database transaction committed successfully.
+2025-01-30 23:17:39,410 - INFO - Administrator - Database session closed.
+2025-01-30 23:17:52,169 - INFO - Administrator - System restored successfully
+2025-01-30 23:21:20,232 - INFO - Administrator - Returned to index page successfully
+2025-01-30 23:21:20,939 - INFO - Administrator - Opening parameter control page.
+2025-01-30 23:21:22,680 - INFO - Administrator - Returned to index page successfully
+2025-01-30 23:21:23,416 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2025-01-30 23:21:26,504 - INFO - Administrator - User admin logged in successfully
+2025-01-30 23:21:27,859 - INFO - Administrator - Opening parameter control page.
+2025-01-30 23:21:30,720 - INFO - Administrator - Returned to index page successfully
+2025-01-30 23:21:32,803 - INFO - Administrator - Opening parameter control page.
+2025-01-30 23:25:24,009 - INFO - Administrator - Returned to index page successfully
+2025-01-30 23:25:24,945 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2025-01-30 23:25:37,117 - INFO - Administrator - User admin logged in successfully
+2025-01-30 23:25:38,396 - INFO - Administrator - Opening parameter control page.
+2025-01-30 23:26:22,514 - INFO - Administrator - System backup created successfully: system_backup_20250130_232539.zip
+2025-01-31 00:56:08,654 - INFO - Administrator - User admin logged in successfully
+2025-01-31 00:56:10,027 - INFO - Administrator - Opening parameter control page.
+2025-01-31 00:56:50,979 - INFO - Administrator - System backup created successfully: system_backup_20250131_005611.zip
+2025-01-31 01:01:53,206 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:01:54,734 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:02:35,058 - INFO - Administrator - System backup created successfully: system_backup_20250131_010155.zip
+2025-01-31 01:02:53,494 - INFO - Administrator - Starting database save operation.
+2025-01-31 01:02:53,495 - INFO - Administrator - Updating existing SystemParams record.
+2025-01-31 01:02:53,503 - INFO - Administrator - Database transaction committed successfully.
+2025-01-31 01:02:54,258 - INFO - Administrator - Database session closed.
+2025-01-31 01:03:06,541 - INFO - Administrator - System restored successfully
+2025-01-31 01:03:09,774 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:03:10,487 - ERROR - Administrator - Error loading parameters: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+
+[SQL: SELECT tb_system_params.param_id AS tb_system_params_param_id, tb_system_params.eeg_frequency AS tb_system_params_eeg_frequency, tb_system_params.electrode_count AS tb_system_params_electrode_count, tb_system_params.scale_question_num AS tb_system_params_scale_question_num, tb_system_params.model_num AS tb_system_params_model_num, tb_system_params.id AS tb_system_params_id 
+FROM tb_system_params 
+WHERE tb_system_params.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-01-31 01:03:11,528 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:03:12,519 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:03:13,118 - INFO - Administrator - Switched to regular user mode. Login page is being opened.
+2025-01-31 01:03:17,593 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:03:18,752 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:06:24,165 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:06:27,974 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:07:11,130 - INFO - Administrator - System backup created successfully: system_backup_20250131_010631.zip
+2025-01-31 01:07:47,836 - INFO - Administrator - System restored successfully
+2025-01-31 01:07:54,010 - ERROR - Administrator - Error in logout: 'WindowManager' object has no attribute 'close_all_windows'
+2025-01-31 01:09:41,476 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:09:43,409 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:09:54,287 - INFO - Administrator - System restored successfully
+2025-01-31 01:09:55,543 - ERROR - Administrator - Error in logout: 'WindowManager' object has no attribute 'close_all_windows'
+2025-01-31 01:12:15,049 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:12:16,223 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:12:27,322 - INFO - Administrator - System restored successfully
+2025-01-31 01:12:42,239 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:12:43,441 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:12:54,437 - INFO - Administrator - Starting database save operation.
+2025-01-31 01:12:54,441 - INFO - Administrator - Updating existing SystemParams record.
+2025-01-31 01:12:54,443 - INFO - Administrator - Database transaction committed successfully.
+2025-01-31 01:12:55,448 - INFO - Administrator - Database session closed.
+2025-01-31 01:13:06,002 - INFO - Administrator - System restored successfully
+2025-01-31 01:13:21,654 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:13:22,699 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:15:24,865 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:15:26,394 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:15:32,246 - INFO - Administrator - Starting database save operation.
+2025-01-31 01:15:32,247 - INFO - Administrator - Updating existing SystemParams record.
+2025-01-31 01:15:32,255 - INFO - Administrator - Database transaction committed successfully.
+2025-01-31 01:15:33,088 - INFO - Administrator - Database session closed.
+2025-01-31 01:16:13,831 - INFO - Administrator - System backup created successfully: system_backup_20250131_011534.zip
+2025-01-31 01:16:20,848 - INFO - Administrator - Starting database save operation.
+2025-01-31 01:16:20,849 - INFO - Administrator - Updating existing SystemParams record.
+2025-01-31 01:16:20,851 - INFO - Administrator - Database transaction committed successfully.
+2025-01-31 01:16:21,626 - INFO - Administrator - Database session closed.
+2025-01-31 01:16:33,779 - INFO - Administrator - System restored successfully
+2025-01-31 01:16:43,541 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:16:44,620 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:16:46,026 - INFO - Administrator - Returned to index page successfully

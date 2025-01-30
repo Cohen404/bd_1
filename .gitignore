@@ -81,3 +81,5 @@ bj_health_manage.git/
 # BFG相关文件
 *.jar
 bfg-rules.txt
+
+.backup/
