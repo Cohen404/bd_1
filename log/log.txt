@@ -8331,3 +8331,16 @@ WHERE tb_system_params.id = %(id_1)s
 2025-01-31 01:16:43,541 - INFO - Administrator - User admin logged in successfully
 2025-01-31 01:16:44,620 - INFO - Administrator - Opening parameter control page.
 2025-01-31 01:16:46,026 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:24:22,898 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:24:25,759 - INFO - Administrator - Opening model control page.
+2025-01-31 01:24:27,719 - INFO - Administrator - Attempting to delete model of type: 普通应激评估模型 (Mapped to: 0)
+2025-01-31 01:24:28,548 - INFO - Administrator - Deleting model file at path: ./model/yingji/subject-1 yingji.keras
+2025-01-31 01:24:28,548 - INFO - Administrator - Deleted model file: ./model/yingji/subject-1 yingji.keras
+2025-01-31 01:24:28,557 - INFO - Administrator - Deleted model record from database for type: 普通应激评估模型
+2025-01-31 01:24:31,163 - INFO - Administrator - Selected model type: 普通应激评估模型 (Index: 0)
+2025-01-31 01:24:47,971 - WARNING - Administrator - Model upload canceled by the user.
+2025-01-31 01:24:48,640 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:24:49,699 - INFO - Administrator - Opening parameter control page.
+2025-01-31 01:25:00,587 - INFO - Administrator - System restored successfully
+2025-01-31 01:25:11,196 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:25:12,361 - INFO - Administrator - Opening model control page.

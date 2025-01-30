@@ -700,7 +700,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         QMessageBox.critical(self, "错误", f"处理过程中出现错误：{error_msg}")
 
     def handle_batch_upload(self):
-        """处理批量上传功能"""
+        """处理批量上传功能，通过移动文件夹来提升处理速度"""
         try:
             # 选择父目录
             parent_dir = QFileDialog.getExistingDirectory(self, "选择数据目录")
@@ -736,9 +736,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     # 确保目标基础目录存在
                     os.makedirs(DATA_DIR, exist_ok=True)  # 使用配置的路径
                     
-                    # 复制目录
-                    shutil.copytree(source_dir, target_dir)
-                    logging.info(f"Directory copied from {source_dir} to {target_dir}")
+                    # 移动目录而不是复制
+                    shutil.move(source_dir, target_dir)
+                    logging.info(f"Directory moved from {source_dir} to {target_dir}")
                     
                     # 获取当前用户信息并保存到数据库
                     session = SessionClass()
