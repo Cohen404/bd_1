@@ -1,7 +1,7 @@
-¹ıÁãÂÊ
-·½²î
-ÄÜÁ¿
-²î·Ö
+è¿‡é›¶ç‡
+æ–¹å·®
+èƒ½é‡
+å·®åˆ†
 AR_coef_0
 AR_coef_1
 AR_coef_2
@@ -12,7 +12,7 @@ Band_2_power
 Band_3_power
 Band_4_power
 Band_5_power
-Î¢·ÖìØ
+å¾®åˆ†ç†µ
 Wavelet_energy_1
 Wavelet_energy_2
 Wavelet_energy_3

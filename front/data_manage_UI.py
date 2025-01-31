@@ -102,6 +102,23 @@ class Ui_MainWindow(object):
         self.batch_upload_pushButton.setObjectName("batch_upload_pushButton")
         self.gridLayout.addWidget(self.batch_upload_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
 
+        # 添加批量预处理按钮
+        self.batch_preprocess_pushButton = QtWidgets.QPushButton(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.batch_preprocess_pushButton.setSizePolicy(sizePolicy)
+        self.batch_preprocess_pushButton.setMinimumSize(QtCore.QSize(120, 50))
+        self.batch_preprocess_pushButton.setMaximumSize(QtCore.QSize(120, 50))
+        self.batch_preprocess_pushButton.setStyleSheet("margin-top:5px;margin-bottom:20px;margin-left:10px;\n"
+                                                 "background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.batch_preprocess_pushButton.setObjectName("batch_preprocess_pushButton")
+        self.gridLayout.addWidget(self.batch_preprocess_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignCenter)
+
+        # 添加选择数量显示标签
+        self.selection_count_label = QtWidgets.QLabel(self.centralwidget)
+        self.selection_count_label.setStyleSheet("font-size: 14px; color: #333; margin-left: 10px;")
+        self.selection_count_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.gridLayout.addWidget(self.selection_count_label, 0, 2, 1, 1, QtCore.Qt.AlignTop)
+
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
 
@@ -227,4 +244,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
         self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
         self.batch_upload_pushButton.setFont(font)
+        self.batch_preprocess_pushButton.setText(_translate("MainWindow", "批量预处理"))
+        self.batch_preprocess_pushButton.setFont(font)
+        self.selection_count_label.setText(_translate("MainWindow", "已选择: 0/200"))
 

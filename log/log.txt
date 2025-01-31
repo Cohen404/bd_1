@@ -8344,3 +8344,196 @@ WHERE tb_system_params.id = %(id_1)s
 2025-01-31 01:25:00,587 - INFO - Administrator - System restored successfully
 2025-01-31 01:25:11,196 - INFO - Administrator - User admin logged in successfully
 2025-01-31 01:25:12,361 - INFO - Administrator - Opening model control page.
+2025-01-31 01:47:19,568 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:47:21,343 - INFO - Administrator - Data table refreshed successfully with 0 records
+2025-01-31 01:47:21,343 - INFO - Administrator - Opening data view page.
+2025-01-31 01:47:26,524 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:47:27,289 - INFO - Administrator - Data table refreshed successfully with 0 records
+2025-01-31 01:47:27,289 - INFO - Administrator - Opening data view page.
+2025-01-31 01:47:28,204 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:47:28,697 - INFO - Administrator - Administrator admin: fetching all data records
+2025-01-31 01:47:28,697 - INFO - Administrator - Successfully displayed 0 data records
+2025-01-31 01:47:28,699 - INFO - Administrator - Opening health evaluation page.
+2025-01-31 01:47:29,338 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:47:30,499 - INFO - Administrator - Data table refreshed successfully with 0 records
+2025-01-31 01:47:30,499 - INFO - Administrator - Opening data view page.
+2025-01-31 01:47:36,339 - INFO - Administrator - Directory copied from /home/jupiter/bj_health_manage/tmp/000005_ord2 to /home/jupiter/bj_health_manage/data/000005_ord2_3
+2025-01-31 01:47:36,344 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_3, Username: admin
+2025-01-31 01:47:37,345 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 01:47:53,988 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2025-01-31 01:47:53,990 - INFO - Administrator - Data path retrieved from database: /home/jupiter/bj_health_manage/data/000005_ord2_3
+2025-01-31 01:47:55,018 - INFO - Administrator - Successfully displayed image: /home/jupiter/bj_health_manage/data/000005_ord2_3/Theta.png
+2025-01-31 01:48:00,605 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:52:38,639 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:52:39,686 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 01:52:39,686 - ERROR - Administrator - Error displaying data table: 'Data_View_WindowActions' object has no attribute 'max_selections'
+2025-01-31 01:52:46,908 - INFO - Administrator - Opening data view page.
+2025-01-31 01:55:47,445 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:55:49,156 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 01:55:49,156 - ERROR - Administrator - Error displaying data table: 'Data_View_WindowActions' object has no attribute 'max_selections'
+2025-01-31 01:55:56,802 - INFO - Administrator - Opening data view page.
+2025-01-31 01:56:00,938 - INFO - Administrator - Returned to index page successfully
+2025-01-31 01:58:07,330 - INFO - Administrator - User admin logged in successfully
+2025-01-31 01:58:08,535 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 01:58:08,535 - ERROR - Administrator - Error displaying data table: 'Data_View_WindowActions' object has no attribute 'max_selections'
+2025-01-31 01:58:12,186 - INFO - Administrator - Opening data view page.
+2025-01-31 02:00:21,464 - INFO - Administrator - User admin logged in successfully
+2025-01-31 02:00:23,240 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 02:01:29,182 - INFO - Administrator - User admin logged in successfully
+2025-01-31 02:01:30,445 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 02:01:30,445 - INFO - Administrator - Opening data view page.
+2025-01-31 02:01:43,165 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 02:03:46,963 - INFO - Administrator - Directory copied from /home/jupiter/bj_health_manage/data/000005_ord2_2 to /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 02:03:46,968 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2_1, Username: admin
+2025-01-31 02:03:47,827 - INFO - Administrator - Data table refreshed successfully with 2 records
+2025-01-31 02:04:21,851 - INFO - Administrator - Data table refreshed successfully with 2 records
+2025-01-31 11:44:17,796 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2025-01-31 11:44:17,799 - INFO - Administrator - Data path for ID 1: /home/jupiter/bj_health_manage/data/000005_ord2_3
+2025-01-31 11:44:17,802 - INFO - Administrator - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_3
+2025-01-31 11:44:17,804 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2025-01-31 11:44:17,805 - INFO - Administrator - Deleted record with ID 1 from result table.
+2025-01-31 11:44:18,497 - INFO - Administrator - Removed row 0 from table.
+2025-01-31 11:56:00,087 - INFO - Administrator - User admin logged in successfully
+2025-01-31 11:56:01,687 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 11:56:01,688 - INFO - Administrator - Opening data view page.
+2025-01-31 11:56:05,085 - ERROR - Administrator - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-01-31 11:56:05,086 - ERROR - Administrator - 处理文件 /home/jupiter/bj_health_manage/data/000005_ord2_2_1 失败: 预处理失败: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_manage_backend.py", line 948, in process_single_file
+    raise Exception(f"预处理失败: {data_path}")
+Exception: 预处理失败: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+
+2025-01-31 11:56:29,301 - INFO - Administrator - Button clicked in row 0, corresponding ID: 2
+2025-01-31 11:56:29,303 - INFO - Administrator - Data path retrieved from database: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 11:56:30,366 - INFO - Administrator - Successfully displayed image: /home/jupiter/bj_health_manage/data/000005_ord2_2_1/Theta.png
+2025-01-31 11:56:31,254 - INFO - Administrator - Started processing data from: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 11:56:31,259 - ERROR - Administrator - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-01-31 11:59:55,079 - INFO - Administrator - User admin logged in successfully
+2025-01-31 11:59:56,464 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 11:59:56,464 - INFO - Administrator - Opening data view page.
+2025-01-31 11:59:58,652 - INFO - Administrator - Attempting to delete record with ID 2 from the table.
+2025-01-31 11:59:58,653 - INFO - Administrator - Data path for ID 2: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 11:59:58,653 - WARNING - Administrator - Data path does not exist: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 11:59:58,661 - INFO - Administrator - Deleted record with ID 2 from tb_data.
+2025-01-31 11:59:58,662 - INFO - Administrator - Deleted record with ID 2 from result table.
+2025-01-31 11:59:59,764 - INFO - Administrator - Removed row 0 from table.
+2025-01-31 12:01:01,119 - INFO - Administrator - Directory copied from /home/jupiter/bj_health_manage/tmp/ord2_edf to /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:01:01,123 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf, Username: admin
+2025-01-31 12:01:01,928 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 12:01:03,127 - INFO - Administrator - Started processing data from: /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:01:09,476 - INFO - Administrator - Data processing completed successfully
+2025-01-31 12:01:12,470 - INFO - Administrator - Button clicked in row 0, corresponding ID: 1
+2025-01-31 12:01:12,472 - INFO - Administrator - Data path retrieved from database: /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:01:13,468 - INFO - Administrator - Successfully displayed image: /home/jupiter/bj_health_manage/data/ord2_edf/Theta.png
+2025-01-31 12:01:28,679 - INFO - Administrator - Attempting to delete record with ID 1 from the table.
+2025-01-31 12:01:28,681 - INFO - Administrator - Data path for ID 1: /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:01:28,694 - INFO - Administrator - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:01:28,702 - INFO - Administrator - Deleted record with ID 1 from tb_data.
+2025-01-31 12:01:28,703 - INFO - Administrator - Deleted record with ID 1 from result table.
+2025-01-31 12:01:29,407 - INFO - Administrator - Removed row 0 from table.
+2025-01-31 12:02:03,694 - INFO - Administrator - Directory copied from /home/jupiter/bj_health_manage/tmp/ord2_edf to /home/jupiter/bj_health_manage/data/ord2_edf
+2025-01-31 12:02:03,697 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf, Username: admin
+2025-01-31 12:02:04,394 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 12:02:13,317 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 12:18:13,852 - INFO - Administrator - User admin logged in successfully
+2025-01-31 12:18:15,192 - INFO - Administrator - Data table refreshed successfully with 1 records
+2025-01-31 12:18:15,193 - INFO - Administrator - Opening data view page.
+2025-01-31 12:18:27,940 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(10) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10)
+2025-01-31 12:18:27,944 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10), Username: admin
+2025-01-31 12:18:27,945 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(8) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8)
+2025-01-31 12:18:27,947 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8), Username: admin
+2025-01-31 12:18:27,947 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(3) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3)
+2025-01-31 12:18:27,950 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3), Username: admin
+2025-01-31 12:18:27,950 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(7) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7)
+2025-01-31 12:18:27,952 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7), Username: admin
+2025-01-31 12:18:27,953 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(10) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10)
+2025-01-31 12:18:27,955 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10), Username: admin
+2025-01-31 12:18:27,955 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(6) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)
+2025-01-31 12:18:27,958 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6), Username: admin
+2025-01-31 12:18:27,958 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(5) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)
+2025-01-31 12:18:27,960 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5), Username: admin
+2025-01-31 12:18:27,961 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(9) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)
+2025-01-31 12:18:27,963 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9), Username: admin
+2025-01-31 12:18:27,963 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(5) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)
+2025-01-31 12:18:27,966 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5), Username: admin
+2025-01-31 12:18:27,966 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(9) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)
+2025-01-31 12:18:27,969 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9), Username: admin
+2025-01-31 12:18:27,969 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(13) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)
+2025-01-31 12:18:27,971 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13), Username: admin
+2025-01-31 12:18:27,971 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(8) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)
+2025-01-31 12:18:27,974 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8), Username: admin
+2025-01-31 12:18:27,974 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(13) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)
+2025-01-31 12:18:27,976 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13), Username: admin
+2025-01-31 12:18:27,976 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(14) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)
+2025-01-31 12:18:27,979 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14), Username: admin
+2025-01-31 12:18:27,979 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(4) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)
+2025-01-31 12:18:27,981 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4), Username: admin
+2025-01-31 12:18:27,982 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(15) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)
+2025-01-31 12:18:27,984 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15), Username: admin
+2025-01-31 12:18:27,984 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(12) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)
+2025-01-31 12:18:27,987 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12), Username: admin
+2025-01-31 12:18:27,987 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(2) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)
+2025-01-31 12:18:27,989 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2), Username: admin
+2025-01-31 12:18:27,990 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 to /home/jupiter/bj_health_manage/data/000005_ord2_2
+2025-01-31 12:18:27,992 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2, Username: admin
+2025-01-31 12:18:27,992 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(15) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)
+2025-01-31 12:18:27,995 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15), Username: admin
+2025-01-31 12:18:27,995 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(11) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)
+2025-01-31 12:18:27,998 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11), Username: admin
+2025-01-31 12:18:27,998 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(14) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)
+2025-01-31 12:18:28,001 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14), Username: admin
+2025-01-31 12:18:28,001 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(2) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)
+2025-01-31 12:18:28,004 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2), Username: admin
+2025-01-31 12:18:28,004 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf to /home/jupiter/bj_health_manage/data/ord2_edf_1
+2025-01-31 12:18:28,007 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf_1, Username: admin
+2025-01-31 12:18:28,007 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(12) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)
+2025-01-31 12:18:28,009 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12), Username: admin
+2025-01-31 12:18:28,009 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(1) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)
+2025-01-31 12:18:28,012 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1), Username: admin
+2025-01-31 12:18:28,012 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(6) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)
+2025-01-31 12:18:28,014 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6), Username: admin
+2025-01-31 12:18:28,014 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(3) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)
+2025-01-31 12:18:28,017 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3), Username: admin
+2025-01-31 12:18:28,017 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(4) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)
+2025-01-31 12:18:28,020 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4), Username: admin
+2025-01-31 12:18:28,020 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(1) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)
+2025-01-31 12:18:28,022 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1), Username: admin
+2025-01-31 12:18:28,023 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(11) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)
+2025-01-31 12:18:28,025 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11), Username: admin
+2025-01-31 12:18:28,025 - INFO - Administrator - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(7) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)
+2025-01-31 12:18:28,028 - INFO - Administrator - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7), Username: admin
+2025-01-31 12:18:28,047 - INFO - Administrator - Data table refreshed successfully with 33 records
+2025-01-31 12:19:41,247 - INFO - Administrator - Data table refreshed successfully with 33 records
+2025-01-31 12:20:23,401 - INFO - Administrator - Button clicked in row 28, corresponding ID: 29
+2025-01-31 12:20:23,404 - INFO - Administrator - Data path retrieved from database: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)
+2025-01-31 12:20:24,288 - INFO - Administrator - Successfully displayed image: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)/Theta.png

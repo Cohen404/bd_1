@@ -7,6 +7,11 @@ import sys
 import shutil
 sys.path.append('../')
 import time
+import multiprocessing
+from multiprocessing import Pool, Manager
+import psutil
+import signal
+import traceback
 
 import numpy as np
 import scipy.io as scio
@@ -145,6 +150,19 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
 
         # 添加批量上传按钮的信号连接
         self.batch_upload_pushButton.clicked.connect(self.handle_batch_upload)
+
+        # 添加批量预处理按钮的信号连接
+        self.batch_preprocess_pushButton.clicked.connect(self.handle_batch_preprocess)
+        
+        # 初始化选中的数据
+        self.selected_data = set()
+        
+        # 设置表格可以多选
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        
+        # 连接选择变化信号
+        self.tableWidget.itemSelectionChanged.connect(self.update_selection_count)
 
     def get_user_type(self, user_id):
         """
@@ -807,6 +825,152 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"文件上传失败 {file_path}: {str(e)}")
             return False
+
+    def update_selection_count(self):
+        """更新已选择数据的数量显示"""
+        selected_rows = set(item.row() for item in self.tableWidget.selectedItems())
+        self.selected_data = selected_rows
+        count = len(selected_rows)
+        
+        if count > 200:
+            # 取消最后选择的行
+            for item in self.tableWidget.selectedItems():
+                if item.row() not in list(selected_rows)[:200]:
+                    self.tableWidget.setItemSelected(item, False)
+            count = 200
+            self.selected_data = set(list(selected_rows)[:200])
+        
+        self.selection_count_label.setText(f"已选择: {count}/200")
+
+    def handle_batch_preprocess(self):
+        """处理批量预处理请求"""
+        try:
+            # 获取选中的行
+            if not self.selected_data:
+                QMessageBox.warning(self, "警告", "请先选择要预处理的数据")
+                return
+
+            # 获取选中行的数据路径
+            data_paths = []
+            for row in self.selected_data:
+                path_item = self.tableWidget.item(row, 3)
+                if path_item:
+                    # 获取完整路径（从工具提示中）
+                    full_path = path_item.toolTip()
+                    data_paths.append(full_path)
+
+            # 创建进度对话框
+            progress_dialog = QProgressDialog(self)
+            progress_dialog.setWindowTitle("批量预处理")
+            progress_dialog.setLabelText("正在预处理数据...\n已用时间: 0秒")
+            progress_dialog.setRange(0, len(data_paths))
+            progress_dialog.setWindowModality(Qt.WindowModal)
+            progress_dialog.setAutoClose(True)
+            progress_dialog.setAutoReset(True)
+            progress_dialog.show()  # 立即显示进度条
+
+            # 创建管理器和共享计数器
+            manager = Manager()
+            counter = manager.Value('i', 0)
+            error_list = manager.list()
+            start_time = time.time()
+
+            # 获取CPU核心数
+            cpu_count = psutil.cpu_count()
+            process_count = max(1, cpu_count - 2)  # 保留2个核心给系统使用
+
+            # 创建进程池
+            pool = Pool(processes=process_count)
+            
+            # 定义回调函数
+            def update_progress(result):
+                counter.value += 1
+                elapsed_time = int(time.time() - start_time)
+                progress_dialog.setLabelText(f"正在预处理数据...\n已用时间: {elapsed_time}秒")
+                progress_dialog.setValue(counter.value)
+                
+            def error_callback(error):
+                error_list.append(str(error))
+
+            # 提交所有任务到进程池
+            for path in data_paths:
+                # 检查是否已有FIF文件
+                fif_exists = any(f.endswith('.fif') for f in os.listdir(path))
+                if fif_exists:
+                    # 如果存在FIF文件，直接更新进度
+                    counter.value += 1
+                    progress_dialog.setValue(counter.value)
+                    continue
+                
+                pool.apply_async(
+                    process_single_file, 
+                    args=(path,),
+                    callback=update_progress,
+                    error_callback=error_callback
+                )
+
+            # 关闭进程池
+            pool.close()
+
+            # 等待所有进程完成或用户取消
+            while counter.value < len(data_paths):
+                QApplication.processEvents()
+                elapsed_time = int(time.time() - start_time)
+                progress_dialog.setLabelText(f"正在预处理数据...\n已用时间: {elapsed_time}秒")
+                if progress_dialog.wasCanceled():
+                    # 终止所有子进程
+                    pool.terminate()
+                    pool.join()
+                    QMessageBox.information(self, "提示", "预处理已取消")
+                    return
+                time.sleep(0.1)
+
+            # 等待所有进程完成
+            pool.join()
+
+            # 计算总用时
+            total_time = int(time.time() - start_time)
+
+            # 检查是否有错误
+            if error_list:
+                error_msg = "\n".join(error_list)
+                QMessageBox.warning(self, "警告", f"部分文件处理失败:\n{error_msg}\n总用时: {total_time}秒")
+            else:
+                QMessageBox.information(self, "成功", f"批量预处理完成\n总用时: {total_time}秒")
+
+            # 刷新表格显示
+            self.show_table()
+
+        except Exception as e:
+            error_msg = f"批量预处理失败: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
+
+def process_single_file(data_path):
+    """
+    处理单个文件的函数（在子进程中运行）
+    
+    参数:
+    data_path (str): 数据文件路径
+    
+    返回:
+    bool: 处理是否成功
+    """
+    try:
+        # 设置进程名称，方便调试
+        multiprocessing.current_process().name = f"Preprocessor-{os.path.basename(data_path)}"
+        
+        # 调用预处理函数
+        success = data_preprocess.treat(data_path)
+        
+        if not success:
+            raise Exception(f"预处理失败: {data_path}")
+        
+        return True
+    except Exception as e:
+        error_msg = f"处理文件 {data_path} 失败: {str(e)}\n{traceback.format_exc()}"
+        logging.error(error_msg)
+        raise Exception(error_msg)
 
 # 添加一个处理线程类
 class ProcessingThread(QThread):
