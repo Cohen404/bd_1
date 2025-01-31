@@ -66,25 +66,98 @@
 - 问题：TensorFlow 无法识别 GPU
 - 原因：CUDA 版本不匹配（系统 CUDA 12.4 与 TensorFlow 2.14.0 不兼容）
 - 解决方案：
-  1. 降级 CUDA 到 11.8 版本
+  1. 升级 CUDA 到 12.3 版本
   2. 重新配置 CUDA 环境变量
   3. 确保安装正确版本的 cuDNN
+
+### Qt 插件问题
+- 问题：无法加载 Qt platform plugin "xcb"
+- 原因：Qt 依赖库配置不完整或冲突
+- 解决方案：
+  1. 安装 xcb 相关系统依赖：
+     ```bash
+     sudo apt-get install libxcb-xinerama0 libxcb-cursor0 libxcb1 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-render0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libxcb-xfixes0 libxcb-xkb1 libxkbcommon-x11-0
+     ```
+  2. 重新安装 PyQt5 相关包：
+     ```bash
+     pip uninstall -y PyQt5 PyQt5-Qt5 PyQt5-sip PyQtWebEngine PyQtWebEngine-Qt5
+     pip install PyQt5==5.15.9 PyQtWebEngine==5.15.6
+     ```
+  3. 设置 Qt 环境变量：
+     ```bash
+     export QT_DEBUG_PLUGINS=1
+     export QT_QPA_PLATFORM=xcb
+     ```
 
 ### 环境详情
 - GPU: NVIDIA GeForce RTX 2080 Ti
 - NVIDIA Driver: 550.142
-- Current CUDA: 12.4
-- Required CUDA: 11.8
-- TensorFlow: 2.14.0
+- Current CUDA: 12.3
+- Required CUDA: 12.3
+- TensorFlow: 2.17.0
 
 ### 更新记录
-- 添加 CUDA 11.8 相关依赖到 requirements.txt
-  - nvidia-cuda-runtime-cu11==11.8.89
-  - nvidia-cuda-cupti-cu11==11.8.87
-  - nvidia-cudnn-cu11==8.7.0.84
-  - nvidia-cublas-cu11==11.11.3.6
-  - nvidia-cufft-cu11==10.9.0.58
-  - nvidia-curand-cu11==10.3.0.86
-  - nvidia-cusolver-cu11==11.4.1.48
-  - nvidia-cusparse-cu11==11.7.5.86
-  - nvidia-nccl-cu11==2.14.3 
+- 添加 CUDA 12.3 相关依赖到 requirements.txt
+  - nvidia-cuda-runtime-cu12==12.3.107
+  - nvidia-cuda-cupti-cu12==12.3.101
+  - nvidia-cudnn-cu12==8.9.7.29
+  - nvidia-cublas-cu12==12.3.4.1
+  - nvidia-cufft-cu12==11.0.12.1
+  - nvidia-curand-cu12==10.3.4.107
+  - nvidia-cusolver-cu12==11.5.4.107
+  - nvidia-cusparse-cu12==12.1.3.153
+  - nvidia-nccl-cu12==2.19.3
+
+## 2024-03-21 应激评估模型优化（更新）
+### 修改内容
+1. 修改了 `model/tuili.py`：
+   - 添加了静态变量 `_model` 用于存储预加载的模型
+   - 添加了静态方法 `load_static_model()` 用于从数据库加载普通应激模型
+   - 修改 `predict()` 方法使用静态模型变量
+   - 增强了错误处理和日志记录
+   - 优化了代码注释
+
+2. 修改了 `backend/init_login_backend.py`：
+   - 移除了全局变量 `global_model`
+   - 修改预加载逻辑，使用 `EegModel.load_static_model()` 静态方法
+   - 从数据库获取模型路径（model_type=0的普通应激模型）
+   - 添加了相关的错误处理和日志记录
+
+### 优化效果
+1. 提高了应激评估的性能：
+   - 模型只需要加载一次，避免了重复加载
+   - 系统启动时就预加载模型到内存
+   - 使用静态变量存储模型，更高效的内存使用
+2. 简化了评估流程：
+   - 三种应激评估（普通应激、焦虑、抑郁）共用同一个模型
+   - 评估结果完全相同，提高了一致性
+   - 从数据库动态获取模型路径，更灵活的模型管理
+3. 增强了系统稳定性：
+   - 添加了完整的错误处理机制
+   - 改进了日志记录，便于问题追踪
+   - 使用数据库管理模型信息，更可靠的模型加载
+
+### 注意事项
+- 保持了原有的评估结果展示、存储和模型状态检测逻辑不变
+- 界面提示仍然保持英文
+- 代码风格和架构与原有代码保持一致
+- 确保数据库中存在 model_type=0 的普通应激模型记录 
+
+## 环境配置
+- Python 3.10
+- CUDA 12.3
+- TensorFlow 2.17
+- PyQt5 5.15.9
+- PyQtWebEngine 5.15.6
+
+## 最新更新
+- 2024-01-31: 修复了Qt界面显示问题
+  - 安装了必要的Qt依赖库(libxcb相关包)
+  - 重新安装了PyQt5和PyQtWebEngine
+  - 更新了CUDA依赖到12.3版本
+  - 程序现在可以正常启动和运行
+
+## 待办事项
+- [ ] 优化数据库查询性能
+- [ ] 添加更多数据可视化功能
+- [ ] 实现用户管理系统

@@ -16,6 +16,8 @@ from backend import login_backend
 import logging
 from util.window_manager import WindowManager
 from config import USER_STATUS_FILE, LOG_FILE
+from model.tuili import EegModel
+import traceback
 
 class UserFilter(logging.Filter):
     """
@@ -48,6 +50,23 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         # 注册窗口到WindowManager
         window_manager = WindowManager()
         window_manager.register_window('init_login', self)
+
+        # 预加载应激评估模型
+        self.preload_model()
+
+    def preload_model(self):
+        """
+        预加载应激评估模型
+        """
+        try:
+            # 使用静态方法加载模型
+            if EegModel.load_static_model():
+                logging.info("Successfully preloaded stress evaluation model.")
+            else:
+                logging.error("Failed to preload stress evaluation model.")
+        except Exception as e:
+            logging.error(f"Error during model preloading: {str(e)}")
+            traceback.print_exc()
 
     def open_user_login(self):
         """

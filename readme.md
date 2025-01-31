@@ -4,8 +4,11 @@
 这是一个基于PyQt5和PostgreSQL的健康管理系统。
 
 ## 环境要求
-- Python 3.8+
+- Python 3.10+
 - PostgreSQL 12+
+- CUDA 12.3
+- NVIDIA GPU Driver 550.142+
+- Qt 5.15.9
 - 其他依赖见requirements.txt
 
 ## 数据库配置
@@ -32,15 +35,38 @@ python util/init_db.py
 
 ## 安装步骤
 1. 克隆项目到本地
-2. 安装依赖：
+
+2. 安装系统依赖：
 ```bash
-pip install -r requirements.txt
+# 安装Qt相关依赖
+sudo apt-get install libxcb-xinerama0 libxcb-cursor0 libxcb1 libxcb-icccm4 \
+    libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 \
+    libxcb-render0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 \
+    libxcb-xfixes0 libxcb-xkb1 libxkbcommon-x11-0
 ```
-3. 初始化数据库：
+
+3. 配置Qt环境变量：
+```bash
+# 添加到 ~/.bashrc 文件
+export QT_DEBUG_PLUGINS=1
+export QT_QPA_PLATFORM=xcb
+```
+
+4. 安装Python依赖：
+```bash
+# 安装基本依赖
+pip install -r requirements.txt
+
+# 安装特定版本的Qt包
+pip install PyQt5==5.15.9 PyQtWebEngine==5.15.6
+```
+
+5. 初始化数据库：
 ```bash
 psql -U postgres -d health_manage -f sql_model/init.sql
 ```
-4. 运行程序：
+
+6. 运行程序：
 ```bash
 python run.py
 ```

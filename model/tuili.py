@@ -6,13 +6,50 @@ import numpy as np
 import pickle as pkl
 import h5py
 from PyQt5.QtCore import pyqtSignal, QThread
+import traceback
+from util.db_util import SessionClass
+from sql_model.tb_model import Model
 
 
 class EegModel(QThread):
     _rule = pyqtSignal(float)
     finished = pyqtSignal()
+    
+    # 静态变量用于存储预加载的模型
+    _model = None
+    
+    @staticmethod
+    def load_static_model():
+        """
+        静态方法，用于加载普通应激模型（model_type=0）
+        Returns:
+            bool: 加载是否成功
+        """
+        try:
+            # 从数据库获取普通应激模型路径
+            session = SessionClass()
+            model_info = session.query(Model).filter(Model.model_type == 0).first()
+            session.close()
+            
+            if not model_info:
+                print("Error: No stress model found in database")
+                return False
+                
+            # 加载模型
+            EegModel._model = tf.keras.models.load_model(model_info.model_path, safe_mode=False)
+            return True
+        except Exception as e:
+            print(f"Error loading model: {str(e)}")
+            traceback.print_exc()
+            return False
 
     def __init__(self, data_path, model_path):
+        """
+        初始化EegModel类
+        Args:
+            data_path: 数据路径
+            model_path: 模型路径
+        """
         self.data_path = data_path
         super(EegModel, self).__init__()
         self.model_path = model_path
@@ -31,6 +68,8 @@ class EegModel(QThread):
             'isStandard': True,
             'LOSO': True
         }
+        # 添加模型实例变量
+        self.model = None
 
     def get_data(self):
         num_of_data = 108
@@ -96,18 +135,40 @@ class EegModel(QThread):
             return data
 
     def load_model(self):
-        return tf.keras.models.load_model(self.model_path, safe_mode=False)
+        """
+        加载模型并保存到实例变量中
+        """
+        try:
+            self.model = tf.keras.models.load_model(self.model_path, safe_mode=False)
+            return True
+        except Exception as e:
+            print(f"Error loading model: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return False
 
     def predict(self):
-        X_test = self.get_data()
-        model = self.load_model()
-        y_pred = model.predict(X_test)
-        print('pred_argmax',y_pred.argmax(axis=-1))
-        print('a',float(y_pred.argmax(axis=-1).sum()))
-        print('b',len(y_pred.argmax(axis=-1)))
-        num = float(y_pred.argmax(axis=-1).sum())/len(y_pred.argmax(axis=-1))
-        print('numorig',num)
-        return num
+        """
+        使用预加载的模型进行预测
+        Returns:
+            float: 预测结果
+        """
+        try:
+            if EegModel._model is None:
+                raise Exception("Model not loaded. Please call load_static_model() first.")
+            
+            X_test = self.get_data()
+            y_pred = EegModel._model.predict(X_test)
+            print('pred_argmax',y_pred.argmax(axis=-1))
+            print('a',float(y_pred.argmax(axis=-1).sum()))
+            print('b',len(y_pred.argmax(axis=-1)))
+            num = float(y_pred.argmax(axis=-1).sum())/len(y_pred.argmax(axis=-1))
+            print('numorig',num)
+            return num
+        except Exception as e:
+            print(f"Error during prediction: {str(e)}")
+            traceback.print_exc()
+            return 0.0
 
     def run(self):
         result = self.predict()
