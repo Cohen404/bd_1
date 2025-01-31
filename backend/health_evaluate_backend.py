@@ -161,6 +161,12 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         window_manager = WindowManager()
         window_manager.register_window('health_evaluate', self)
 
+        # 添加进度条和计时器
+        self.progress_dialog = None
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.update_timer)
+        self.elapsed_seconds = 0
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -526,7 +532,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 QMessageBox.critical(self, "错误", f"查看数据时发生误: {str(e)}")
 
     # 调用模型
-    def status_model(self, data_path):  # 需要修改 暂未修改 todo
+    def status_model(self, data_path):
         if os.path.exists(MODEL_STATUS_FILE):  # 使用配置的路径
             with open(MODEL_STATUS_FILE, mode='r') as file:
                 contents = file.readlines()
@@ -542,11 +548,13 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             qyes = finish_box.addButton(self.tr("是"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:
-
                 self.status_label.setText("模型空闲")
                 os.remove(MODEL_STATUS_FILE)
+                if self.progress_dialog:
+                    self.progress_dialog.close()
+                    self.timer.stop()
+                    self.elapsed_seconds = 0
                 pass
-
         else:
             model_id, model_path = self.model_list[self.current_model_index]
             box = QMessageBox(QMessageBox.Information, "提示", "模型开始评估，请稍等！！！")
@@ -554,6 +562,21 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             box.exec_()
             if box.clickedButton() == qyes:
                 pass
+                
+            # 重置计时器
+            self.elapsed_seconds = 0
+            
+            # 创建进度条对话框
+            self.progress_dialog = QProgressDialog("正在进行评估... (已用时: 0秒)", "取消", 0, 100, self)
+            self.progress_dialog.setWindowTitle("评估进度")
+            self.progress_dialog.setWindowModality(Qt.WindowModal)
+            self.progress_dialog.setMinimumDuration(0)
+            self.progress_dialog.setValue(0)
+            self.progress_dialog.show()
+            
+            # 启动计时器
+            self.timer.start(1000)  # 每秒更新一次
+            
             # 生成status.txt文件
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
             # print(data_time)
@@ -571,6 +594,16 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 self.on_model_finished)  # connect the finished signal to a slot function
             self.test_thread.start()
 
+    def update_timer(self):
+        """更新计时器显示"""
+        if self.progress_dialog and not self.progress_dialog.wasCanceled():
+            self.elapsed_seconds += 1
+            minutes = self.elapsed_seconds // 60
+            seconds = self.elapsed_seconds % 60
+            time_str = f"{minutes}分{seconds}秒" if minutes > 0 else f"{seconds}秒"
+            current_value = self.progress_dialog.value()
+            self.progress_dialog.setLabelText(f"正在进行评估... (已用时: {time_str})")
+
     def on_model_finished(self):
         self.lock.acquire()
         try:
@@ -586,6 +619,11 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.lock.release()
 
     def waitTestRes(self, num):
+        # 更新进度条
+        if self.progress_dialog:
+            current_progress = (self.completed_models * 33) + (float(num) * 33)
+            self.progress_dialog.setValue(min(int(current_progress), 100))
+            
         with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
@@ -684,6 +722,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 )
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
+            if self.progress_dialog:
+                self.progress_dialog.setValue(100)
+                self.timer.stop()  # 停止计时器
+                self.progress_dialog.close()
             os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
             finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
             qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
