@@ -1,0 +1,48 @@
+2025-01-31 18:51:17,047 - INFO - 成功加载模型: ./model/yingji/subject-1 yingji.keras
+2025-01-31 18:51:17,740 - INFO - Function `function` contains input name(s) resource with unsupported characters which will be renamed to functional_19_1_dense_99_1_biasadd_readvariableop_resource in the SavedModel.
+2025-01-31 18:51:17,792 - INFO - Function `function` contains input name(s) resource with unsupported characters which will be renamed to functional_19_1_dense_99_1_biasadd_readvariableop_resource in the SavedModel.
+2025-01-31 18:51:19,192 - INFO - Assets written to: /tmp/tmpgh5hjut8/assets
+2025-01-31 18:51:22,480 - INFO - 量化模型已保存到: ./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 18:51:22,489 - INFO - 数据库中的模型路径已更新
+2025-01-31 18:51:22,490 - INFO - 模型量化完成
+2025-01-31 19:17:35,715 - ERROR - 加载模型时发生错误: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+2025-01-31 19:17:35,716 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/model_quantize.py", line 63, in load_model
+    self.model = tf.keras.models.load_model(self.model_path, safe_mode=False)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/keras/src/saving/saving_api.py", line 206, in load_model
+    raise ValueError(
+ValueError: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+
+2025-01-31 19:17:35,716 - ERROR - 加载模型失败
+2025-01-31 19:19:09,131 - ERROR - 加载模型时发生错误: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+2025-01-31 19:19:09,131 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/model_quantize.py", line 63, in load_model
+    self.model = tf.keras.models.load_model(self.model_path, safe_mode=False)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/keras/src/saving/saving_api.py", line 206, in load_model
+    raise ValueError(
+ValueError: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+
+2025-01-31 19:19:09,131 - ERROR - 加载模型失败
+2025-01-31 19:19:43,964 - ERROR - 加载模型时发生错误: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+2025-01-31 19:19:43,964 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/model_quantize.py", line 63, in load_model
+    self.model = tf.keras.models.load_model(self.model_path, safe_mode=False)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/keras/src/saving/saving_api.py", line 206, in load_model
+    raise ValueError(
+ValueError: File format not supported: filepath=./model/yingji/subject-1 yingji_quantized.tflite. Keras 3 only supports V3 `.keras` files and legacy H5 format files (`.h5` extension). Note that the legacy SavedModel format is not supported by `load_model()` in Keras 3. In order to reload a TensorFlow SavedModel as an inference-only layer in Keras 3, use `keras.layers.TFSMLayer(./model/yingji/subject-1 yingji_quantized.tflite, call_endpoint='serving_default')` (note that your `call_endpoint` might have a different name).
+
+2025-01-31 19:19:43,970 - ERROR - 加载模型失败
+2025-01-31 19:19:52,850 - INFO - 成功加载模型: ./model/yingji/subject-1 yingji.keras
+2025-01-31 19:19:52,850 - INFO - 开始模型量化过程...
+2025-01-31 19:19:52,850 - INFO - 开始执行模型量化...
+2025-01-31 19:19:53,543 - INFO - Function `function` contains input name(s) resource with unsupported characters which will be renamed to functional_19_1_dense_99_1_biasadd_readvariableop_resource in the SavedModel.
+2025-01-31 19:19:53,598 - INFO - Function `function` contains input name(s) resource with unsupported characters which will be renamed to functional_19_1_dense_99_1_biasadd_readvariableop_resource in the SavedModel.
+2025-01-31 19:19:54,974 - INFO - Assets written to: /tmp/tmpxwl9qa91/assets
+2025-01-31 19:19:56,530 - INFO - 生成代表性数据集用于量化校准...
+2025-01-31 19:19:56,531 - INFO - 原始模型输入shape: (None, 1, 59, 1000)
+2025-01-31 19:19:58,231 - INFO - 模型量化完成
+2025-01-31 19:19:58,231 - INFO - 量化模型已保存到: ./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:19:58,268 - INFO - 量化后模型输入信息: [{'name': 'serving_default_input_layer_19:0', 'index': 0, 'shape': array([   1,    1,   59, 1000], dtype=int32), 'shape_signature': array([  -1,    1,   59, 1000], dtype=int32), 'dtype': <class 'numpy.int8'>, 'quantization': (0.04036117345094681, -1), 'quantization_parameters': {'scales': array([0.04036117], dtype=float32), 'zero_points': array([-1], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+2025-01-31 19:19:58,268 - INFO - 量化后模型输出信息: [{'name': 'StatefulPartitionedCall_1:0', 'index': 602, 'shape': array([1, 2], dtype=int32), 'shape_signature': array([-1,  2], dtype=int32), 'dtype': <class 'numpy.int8'>, 'quantization': (0.00390625, -128), 'quantization_parameters': {'scales': array([0.00390625], dtype=float32), 'zero_points': array([-128], dtype=int32), 'quantized_dimension': 0}, 'sparsity_parameters': {}}]
+2025-01-31 19:19:58,271 - INFO - 数据库中的模型路径已更新: ./model/yingji/subject-1 yingji.keras -> ./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:19:58,273 - INFO - 模型量化完成

@@ -27,6 +27,7 @@ from sql_model.tb_data import Data
 from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from model.tuili import EegModel
+from model.tuili_int8 import EegModelInt8  # 添加INT8模型的导入
 import logging
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
@@ -42,6 +43,7 @@ from config import (
 )
 from docx import Document
 from docx.shared import Inches
+import traceback
 
 class UserFilter(logging.Filter):
     """
@@ -556,7 +558,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     self.elapsed_seconds = 0
                 pass
         else:
-            model_id, model_path = self.model_list[self.current_model_index]
+            model_id, model_path = self.model_list[0]  # 只使用第一个模型
             box = QMessageBox(QMessageBox.Information, "提示", "模型开始评估，请稍等！！！")
             qyes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
             box.exec_()
@@ -579,7 +581,6 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             
             # 生成status.txt文件
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
-            # print(data_time)
             full_path = MODEL_STATUS_FILE  # 也可以创建一个.doc的word文档
             file = open(full_path, 'w')
             file.write(str(data_time))
@@ -587,11 +588,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
 
             self.status_label.setText("评估中")
 
-            # 用模型
-            self.test_thread = EegModel(data_path, model_path)
+            # 创建并启动评估线程
+            self.test_thread = EvaluateThread(self.data_path, model_path)
             self.test_thread._rule.connect(self.waitTestRes)
-            self.test_thread.finished.connect(
-                self.on_model_finished)  # connect the finished signal to a slot function
+            self.test_thread.finished.connect(self.on_model_finished)
             self.test_thread.start()
 
     def update_timer(self):
@@ -605,23 +605,44 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.progress_dialog.setLabelText(f"正在进行评估... (已用时: {time_str})")
 
     def on_model_finished(self):
-        self.lock.acquire()
+        """
+        模型评估完成后的处理方法
+        对于第二和第三个模型，直接使用第一个模型的结果
+        """
         try:
-            self.current_model_index += 1
-            if self.current_model_index < 3:
-                model_id, model_path = self.model_list[self.current_model_index]
-                self.test_thread = EegModel(self.data_path, model_path)
-                self.test_thread._rule.connect(self.waitTestRes)
-                self.test_thread.finished.connect(
-                    self.on_model_finished)  # connect the finished signal to a slot function
-                self.test_thread.start()
-        finally:
-            self.lock.release()
+            logging.info(f"当前模型索引: {self.current_model_index}")
+            
+            if self.current_model_index == 0:
+                # 第一个模型完成后，增加索引并继续处理下一个模型
+                self.current_model_index += 1
+                if self.result_list and len(self.result_list) > 0:
+                    first_result = self.result_list[0]
+                    logging.info(f"第一个模型的结果: {first_result}")
+                    # 直接处理第二个模型
+                    self.waitTestRes(first_result / 100)  # 转换回原始比例
+                else:
+                    logging.error("无法获取第一个模型的结果")
+            elif self.current_model_index == 1:
+                # 第二个模型完成后，增加索引并继续处理第三个模型
+                self.current_model_index += 1
+                if self.result_list and len(self.result_list) > 1:
+                    first_result = self.result_list[0]
+                    logging.info(f"复用第一个模型的结果处理第三个模型: {first_result}")
+                    # 直接处理第三个模型
+                    self.waitTestRes(first_result / 100)  # 转换回原始比例
+                else:
+                    logging.error("无法获取结果用于第三个模型")
+            else:
+                logging.info("所有模型评估完成")
+                
+        except Exception as e:
+            logging.error(f"Error in on_model_finished: {str(e)}")
+            logging.error(traceback.format_exc())
 
     def waitTestRes(self, num):
         # 更新进度条
         if self.progress_dialog:
-            current_progress = (self.completed_models * 33) + (float(num) * 33)
+            current_progress = (self.current_model_index * 33) + (float(num) * 33)
             self.progress_dialog.setValue(min(int(current_progress), 100))
             
         with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
@@ -678,6 +699,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
 
         except Exception as e:
             logging.error(f"处理多模态数据时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
             # 发生错误时保持原始分数不变
             score_lb_1 = 0
             score_lb_2 = 0
@@ -769,6 +791,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
 
                 session.commit()
                 self.show_nav()
+            except Exception as e:
+                logging.error(f"保存评估结果时发生错误: {str(e)}")
+                logging.error(traceback.format_exc())
             finally:
                 session.close()
             
@@ -1075,6 +1100,62 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         except Exception as e:
             logging.error(f"Error in generateReport: {str(e)}")
             QMessageBox.critical(self, "错误", "生成报告过程中发生错误，请重试。")
+
+class EvaluateThread(QThread):
+    """
+    评估线程类，处理所有三种类型的评估
+    """
+    _rule = pyqtSignal(float)  # 用于发送评估结果的信号
+    finished = pyqtSignal()    # 评估完成的信号
+
+    def __init__(self, data_path, model_path):
+        """
+        初始化评估线程
+        
+        Args:
+            data_path: 数据路径
+            model_path: 模型路径
+        """
+        super().__init__()
+        self.data_path = data_path
+        self.model_path = model_path
+        self.current_type = 0  # 当前评估类型（0: 普通应激, 1: 抑郁, 2: 焦虑）
+
+    def run(self):
+        """
+        运行评估线程
+        对三种类型进行评估：第一种类型使用模型推理，后两种类型直接使用第一种类型的结果
+        """
+        try:
+            # 确保模型已经加载
+            if not EegModelInt8._interpreter:
+                if not EegModelInt8.load_static_model():
+                    logging.error("量化模型加载失败，无法进行评估")
+                    return
+
+            # 第一种类型：使用模型进行推理
+            logging.info("开始第一个模型（普通应激）的评估")
+            model = EegModelInt8(self.data_path, self.model_path)
+            result = model.predict()
+            logging.info(f"第一个模型评估结果: {result}")
+            self._rule.emit(result)
+            self.current_type = 1
+
+            # 第二种类型：直接使用第一个模型的结果
+            logging.info("使用第一个模型的结果用于第二个模型（抑郁）")
+            self._rule.emit(result)
+            self.current_type = 2
+
+            # 第三种类型：直接使用第一个模型的结果
+            logging.info("使用第一个模型的结果用于第三个模型（焦虑）")
+            self._rule.emit(result)
+
+            # 发送完成信号
+            self.finished.emit()
+
+        except Exception as e:
+            logging.error(f"评估过程中发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

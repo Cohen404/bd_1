@@ -3,6 +3,7 @@
 
 import sys
 sys.path.append('../')
+import os
 from datetime import datetime
 
 from PyQt5.QtCore import Qt
@@ -17,6 +18,9 @@ import logging
 from util.window_manager import WindowManager
 from config import USER_STATUS_FILE, LOG_FILE
 from model.tuili import EegModel
+from model.tuili_int8 import EegModelInt8  # 添加INT8模型的导入
+from util.db_util import SessionClass
+from sql_model.tb_model import Model
 import traceback
 
 class UserFilter(logging.Filter):
@@ -42,6 +46,25 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         初始化初始登录界面
         """
         super(front_page.Ui_MainWindow, self).__init__()
+        
+        # 配置日志
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            filename=LOG_FILE,  # 使用配置文件中定义的日志路径
+            filemode='a',  # 追加模式
+            force=True  # 强制重新配置日志
+        )
+        
+        # 同时将日志输出到控制台
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        console_handler.setFormatter(formatter)
+        logging.getLogger().addHandler(console_handler)
+        
+        logging.info("初始化登录界面...")
+        
         # 创建界面
         self.setupUi(self)
         # 连接用户登录按钮到对应的槽函数
@@ -51,6 +74,7 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         window_manager = WindowManager()
         window_manager.register_window('init_login', self)
 
+        logging.info("开始预加载模型...")
         # 预加载应激评估模型
         self.preload_model()
 
@@ -59,14 +83,31 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         预加载应激评估模型
         """
         try:
-            # 使用静态方法加载模型
-            if EegModel.load_static_model():
-                logging.info("Successfully preloaded stress evaluation model.")
+            logging.info("正在检查数据库中的模型信息...")
+            # 检查数据库中的模型信息
+            session = SessionClass()  # 使用正确的SessionClass
+            model_info = session.query(Model).filter(Model.model_type == 0).first()
+            session.close()
+            
+            if model_info:
+                logging.info(f"找到模型信息: model_type=0, path={model_info.model_path}")
+                if os.path.exists(model_info.model_path):
+                    logging.info("模型文件存在，开始加载...")
+                else:
+                    logging.error(f"模型文件不存在: {model_info.model_path}")
+                    return
             else:
-                logging.error("Failed to preload stress evaluation model.")
+                logging.error("数据库中未找到model_type=0的模型信息")
+                return
+                
+            # 使用INT8量化模型的静态方法加载模型
+            if EegModelInt8.load_static_model():
+                logging.info("成功预加载量化模型")
+            else:
+                logging.error("预加载量化模型失败")
         except Exception as e:
-            logging.error(f"Error during model preloading: {str(e)}")
-            traceback.print_exc()
+            logging.error(f"模型预加载过程中发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
 
     def open_user_login(self):
         """

@@ -8622,3 +8622,494 @@ ValueError: Could not find event data
 2025-01-31 16:58:19,263 - INFO - Administrator - 评估完成
 2025-01-31 16:58:43,439 - INFO - System - 系统启动...
 2025-01-31 17:07:12,004 - INFO - Administrator - User admin logged in successfully
+2025-01-31 19:09:37,948 - INFO - 初始化登录界面...
+2025-01-31 19:09:37,951 - INFO - 开始预加载模型...
+2025-01-31 19:09:37,951 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:09:37,956 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:09:37,956 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:09:37,991 - INFO - Successfully loaded quantized model from ./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:09:37,991 - INFO - 成功预加载量化模型
+2025-01-31 19:09:42,184 - INFO - Opening user login page.
+2025-01-31 19:09:45,314 - INFO - User admin logged in successfully
+2025-01-31 19:09:46,826 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:09:46,850 - INFO - Successfully displayed 33 data records
+2025-01-31 19:09:46,856 - INFO - Opening health evaluation page.
+2025-01-31 19:10:17,706 - ERROR - Error during prediction: Cannot set tensor: Dimension mismatch. Got 108 but expected 1 for dimension 0 of input 0.
+2025-01-31 19:10:17,707 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 186, in predict
+    EegModelInt8._interpreter.set_tensor(input_details[0]['index'], X_test_quantized)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/tensorflow/lite/python/interpreter.py", line 732, in set_tensor
+    self._interpreter.SetTensor(tensor_index, value)
+ValueError: Cannot set tensor: Dimension mismatch. Got 108 but expected 1 for dimension 0 of input 0.
+
+2025-01-31 19:10:21,990 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 19:15:02,242 - INFO - 初始化登录界面...
+2025-01-31 19:15:02,245 - INFO - 开始预加载模型...
+2025-01-31 19:15:02,246 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:15:02,250 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:15:02,250 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:15:02,336 - INFO - Successfully loaded quantized model from ./model/yingji/subject-1 yingji_quantized.tflite with GPU acceleration
+2025-01-31 19:15:02,336 - INFO - 成功预加载量化模型
+2025-01-31 19:15:03,134 - INFO - Opening user login page.
+2025-01-31 19:15:19,358 - INFO - User admin logged in successfully
+2025-01-31 19:15:20,676 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:15:20,704 - INFO - Successfully displayed 33 data records
+2025-01-31 19:15:20,711 - INFO - Opening health evaluation page.
+2025-01-31 19:15:23,565 - ERROR - Error during prediction: Cannot set tensor: Dimension mismatch. Got 108 but expected 1 for dimension 0 of input 0.
+2025-01-31 19:15:23,565 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 207, in predict
+    EegModelInt8._interpreter.set_tensor(input_details[0]['index'], X_test_quantized)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/tensorflow/lite/python/interpreter.py", line 732, in set_tensor
+    self._interpreter.SetTensor(tensor_index, value)
+ValueError: Cannot set tensor: Dimension mismatch. Got 108 but expected 1 for dimension 0 of input 0.
+
+2025-01-31 19:15:26,615 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 19:20:13,066 - INFO - 初始化登录界面...
+2025-01-31 19:20:13,070 - INFO - 开始预加载模型...
+2025-01-31 19:20:13,070 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:20:13,074 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:20:13,074 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:20:13,075 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:20:13,075 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:20:13,075 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:20:13,075 - INFO - 开始加载模型文件: ./model/yingji/subject-1 yingji_quantized.tflite
+2025-01-31 19:20:13,075 - ERROR - 模型加载过程中发生错误: type object 'Interpreter' has no attribute 'get_options'
+2025-01-31 19:20:13,075 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 79, in load_static_model
+    interpreter_options = tf.lite.Interpreter.get_options()
+AttributeError: type object 'Interpreter' has no attribute 'get_options'
+
+2025-01-31 19:20:13,075 - ERROR - 预加载量化模型失败
+2025-01-31 19:20:13,896 - INFO - Opening user login page.
+2025-01-31 19:22:05,044 - INFO - 初始化登录界面...
+2025-01-31 19:22:05,047 - INFO - 开始预加载模型...
+2025-01-31 19:22:05,047 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:22:05,051 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:22:05,051 - ERROR - 模型文件不存在: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:23:25,469 - INFO - 初始化登录界面...
+2025-01-31 19:23:25,472 - INFO - 开始预加载模型...
+2025-01-31 19:23:25,472 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:23:25,477 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:23:25,477 - ERROR - 模型文件不存在: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:24:15,459 - INFO - 初始化登录界面...
+2025-01-31 19:24:15,462 - INFO - 开始预加载模型...
+2025-01-31 19:24:15,462 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:24:15,468 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:24:15,469 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:24:15,469 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:24:15,469 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:24:15,469 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:24:15,469 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:24:15,507 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:24:15,508 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:24:15,508 - INFO - 模型加载成功
+2025-01-31 19:24:15,508 - INFO - 成功预加载量化模型
+2025-01-31 19:24:43,614 - INFO - Opening user login page.
+2025-01-31 19:24:47,446 - INFO - User admin logged in successfully
+2025-01-31 19:24:48,667 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:24:48,691 - INFO - Successfully displayed 33 data records
+2025-01-31 19:24:48,698 - INFO - Opening health evaluation page.
+2025-01-31 19:24:51,367 - INFO - Prediction result: 1.0
+2025-01-31 19:24:54,550 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2025-01-31 19:24:54,559 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2025-01-31 19:29:23,046 - INFO - 初始化登录界面...
+2025-01-31 19:29:23,048 - INFO - 开始预加载模型...
+2025-01-31 19:29:23,048 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:29:23,053 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:29:23,053 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:29:23,053 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:29:23,053 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:29:23,053 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:29:23,054 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:29:23,091 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:29:23,092 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:29:23,092 - INFO - 模型加载成功
+2025-01-31 19:29:23,092 - INFO - 成功预加载量化模型
+2025-01-31 19:29:25,776 - INFO - Opening user login page.
+2025-01-31 19:29:29,779 - INFO - User admin logged in successfully
+2025-01-31 19:29:30,905 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:29:30,930 - INFO - Successfully displayed 33 data records
+2025-01-31 19:29:30,936 - INFO - Opening health evaluation page.
+2025-01-31 19:29:35,507 - INFO - Prediction result: 1.0
+2025-01-31 19:29:39,636 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2025-01-31 19:41:22,988 - INFO - 初始化登录界面...
+2025-01-31 19:41:22,991 - INFO - 开始预加载模型...
+2025-01-31 19:41:22,991 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:41:22,996 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:41:22,996 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:41:22,996 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:41:22,996 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:41:22,996 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:41:22,997 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:41:23,076 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:41:23,076 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:41:23,076 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:41:23,076 - INFO - 成功预加载量化模型
+2025-01-31 19:41:23,886 - INFO - Opening user login page.
+2025-01-31 19:41:26,696 - INFO - User admin logged in successfully
+2025-01-31 19:41:27,950 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:41:27,976 - INFO - Successfully displayed 33 data records
+2025-01-31 19:41:27,983 - INFO - Opening health evaluation page.
+2025-01-31 19:41:45,633 - INFO - Prediction result: 1.0
+2025-01-31 19:41:48,557 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+2025-01-31 19:44:02,518 - INFO - 初始化登录界面...
+2025-01-31 19:44:02,521 - INFO - 开始预加载模型...
+2025-01-31 19:44:02,521 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:44:02,526 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:44:02,526 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:44:02,526 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:44:02,526 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:44:02,526 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:44:02,527 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:44:02,616 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:44:02,616 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:44:02,616 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:44:02,616 - INFO - 成功预加载量化模型
+2025-01-31 19:44:03,283 - INFO - Opening user login page.
+2025-01-31 19:44:07,101 - INFO - User admin logged in successfully
+2025-01-31 19:44:08,443 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:44:08,468 - INFO - Successfully displayed 33 data records
+2025-01-31 19:44:08,474 - INFO - Opening health evaluation page.
+2025-01-31 19:44:10,932 - INFO - Prediction result: 1.0
+2025-01-31 19:44:10,934 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 19:44:35,677 - INFO - Prediction result: 1.0
+2025-01-31 19:44:35,679 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 19:44:58,874 - INFO - Prediction result: 1.0
+2025-01-31 19:44:58,875 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 19:45:52,286 - INFO - 初始化登录界面...
+2025-01-31 19:45:52,289 - INFO - 开始预加载模型...
+2025-01-31 19:45:52,290 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:45:52,294 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:45:52,294 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:45:52,294 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:45:52,294 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:45:52,294 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:45:52,295 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:45:52,376 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:45:52,376 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:45:52,376 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:45:52,376 - INFO - 成功预加载量化模型
+2025-01-31 19:45:53,078 - INFO - Opening user login page.
+2025-01-31 19:45:55,849 - INFO - User admin logged in successfully
+2025-01-31 19:45:57,045 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:45:57,070 - INFO - Successfully displayed 33 data records
+2025-01-31 19:45:57,076 - INFO - Opening health evaluation page.
+2025-01-31 19:46:02,160 - INFO - Prediction result: 1.0
+2025-01-31 19:47:07,577 - INFO - 初始化登录界面...
+2025-01-31 19:47:07,579 - INFO - 开始预加载模型...
+2025-01-31 19:47:07,579 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:47:07,584 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:47:07,584 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:47:07,584 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:47:07,584 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:47:07,584 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:47:07,585 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:47:07,668 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:47:07,668 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:47:07,668 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:47:07,668 - INFO - 成功预加载量化模型
+2025-01-31 19:47:08,522 - INFO - Opening user login page.
+2025-01-31 19:47:11,698 - INFO - User admin logged in successfully
+2025-01-31 19:47:12,975 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:47:13,000 - INFO - Successfully displayed 33 data records
+2025-01-31 19:47:13,007 - INFO - Opening health evaluation page.
+2025-01-31 19:47:18,286 - INFO - Prediction result: 1.0
+2025-01-31 19:50:37,696 - INFO - 初始化登录界面...
+2025-01-31 19:50:37,699 - INFO - 开始预加载模型...
+2025-01-31 19:50:37,699 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:50:37,703 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:50:37,703 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:50:37,703 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:50:37,703 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:50:37,704 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:50:37,704 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:50:37,787 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:50:37,788 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:50:37,788 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:50:37,788 - INFO - 成功预加载量化模型
+2025-01-31 19:50:38,573 - INFO - Opening user login page.
+2025-01-31 19:50:41,134 - INFO - User admin logged in successfully
+2025-01-31 19:50:43,548 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:50:43,573 - INFO - Successfully displayed 33 data records
+2025-01-31 19:50:43,579 - INFO - Opening health evaluation page.
+2025-01-31 19:50:47,990 - INFO - Prediction result: 1.0
+2025-01-31 19:50:47,991 - INFO - 模型 0 将使用普通应激模型的结果
+2025-01-31 19:50:47,991 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:51:01,733 - INFO - 初始化登录界面...
+2025-01-31 19:51:01,736 - INFO - 开始预加载模型...
+2025-01-31 19:51:01,736 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:51:01,741 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:51:01,741 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:51:01,741 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:51:01,741 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:51:01,741 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:51:01,741 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:51:01,832 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:51:01,832 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:51:01,832 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:51:01,832 - INFO - 成功预加载量化模型
+2025-01-31 19:51:02,648 - INFO - Opening user login page.
+2025-01-31 19:51:06,752 - INFO - User admin logged in successfully
+2025-01-31 19:51:08,639 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:51:08,664 - INFO - Successfully displayed 33 data records
+2025-01-31 19:51:08,670 - INFO - Opening health evaluation page.
+2025-01-31 19:51:12,962 - INFO - Prediction result: 1.0
+2025-01-31 19:51:12,964 - INFO - 模型 0 将使用普通应激模型的结果
+2025-01-31 19:51:12,964 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:51:43,449 - INFO - Prediction result: 1.0
+2025-01-31 19:51:43,450 - INFO - 模型 0 将使用普通应激模型的结果
+2025-01-31 19:51:43,450 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:53:45,812 - INFO - 初始化登录界面...
+2025-01-31 19:53:45,815 - INFO - 开始预加载模型...
+2025-01-31 19:53:45,815 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:53:45,820 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:53:45,820 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:53:45,820 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:53:45,820 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:53:45,820 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:53:45,821 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:53:45,900 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:53:45,901 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:53:45,901 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:53:45,901 - INFO - 成功预加载量化模型
+2025-01-31 19:53:46,706 - INFO - Opening user login page.
+2025-01-31 19:53:49,355 - INFO - User admin logged in successfully
+2025-01-31 19:53:50,576 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:53:50,601 - INFO - Successfully displayed 33 data records
+2025-01-31 19:53:50,608 - INFO - Opening health evaluation page.
+2025-01-31 19:53:55,445 - INFO - Prediction result: 1.0
+2025-01-31 19:53:55,446 - INFO - 模型 0 将使用普通应激模型的结果
+2025-01-31 19:53:55,446 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:57:48,729 - INFO - 初始化登录界面...
+2025-01-31 19:57:48,732 - INFO - 开始预加载模型...
+2025-01-31 19:57:48,732 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:57:48,736 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:57:48,736 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:57:48,736 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:57:48,736 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:57:48,737 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:57:48,737 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:57:48,816 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:57:48,816 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:57:48,816 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:57:48,816 - INFO - 成功预加载量化模型
+2025-01-31 19:57:49,598 - INFO - Opening user login page.
+2025-01-31 19:57:52,415 - INFO - User admin logged in successfully
+2025-01-31 19:57:53,597 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:57:53,622 - INFO - Successfully displayed 33 data records
+2025-01-31 19:57:53,629 - INFO - Opening health evaluation page.
+2025-01-31 19:57:57,443 - INFO - Prediction result: 1.0
+2025-01-31 19:57:57,444 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 19:57:57,444 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:58:14,010 - INFO - 初始化登录界面...
+2025-01-31 19:58:14,013 - INFO - 开始预加载模型...
+2025-01-31 19:58:14,013 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:58:14,018 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:58:14,018 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:58:14,018 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:58:14,018 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:58:14,018 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:58:14,018 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:58:14,104 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:58:14,104 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:58:14,104 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:58:14,105 - INFO - 成功预加载量化模型
+2025-01-31 19:58:14,790 - INFO - Opening user login page.
+2025-01-31 19:58:17,808 - INFO - User admin logged in successfully
+2025-01-31 19:58:18,893 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:58:18,919 - INFO - Successfully displayed 33 data records
+2025-01-31 19:58:18,926 - INFO - Opening health evaluation page.
+2025-01-31 19:58:22,673 - INFO - Prediction result: 1.0
+2025-01-31 19:58:32,106 - INFO - 初始化登录界面...
+2025-01-31 19:58:32,109 - INFO - 开始预加载模型...
+2025-01-31 19:58:32,109 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:58:32,114 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:58:32,114 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:58:32,114 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:58:32,114 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:58:32,114 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:58:32,115 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:58:32,200 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:58:32,200 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:58:32,200 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:58:32,200 - INFO - 成功预加载量化模型
+2025-01-31 19:58:32,913 - INFO - Opening user login page.
+2025-01-31 19:58:35,657 - INFO - User admin logged in successfully
+2025-01-31 19:58:36,816 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:58:36,840 - INFO - Successfully displayed 33 data records
+2025-01-31 19:58:36,846 - INFO - Opening health evaluation page.
+2025-01-31 19:58:41,447 - INFO - Prediction result: 1.0
+2025-01-31 19:58:41,448 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 19:58:41,448 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 19:59:57,814 - INFO - 初始化登录界面...
+2025-01-31 19:59:57,828 - INFO - 开始预加载模型...
+2025-01-31 19:59:57,828 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:59:57,838 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:59:57,838 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:59:57,839 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:59:57,839 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:59:57,839 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:59:57,841 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:59:57,924 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:59:57,925 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:59:57,925 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 19:59:57,925 - INFO - 成功预加载量化模型
+2025-01-31 19:59:58,844 - INFO - Opening user login page.
+2025-01-31 20:00:01,404 - INFO - User admin logged in successfully
+2025-01-31 20:00:02,524 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:00:02,558 - INFO - Successfully displayed 33 data records
+2025-01-31 20:00:02,565 - INFO - Opening health evaluation page.
+2025-01-31 20:01:21,478 - INFO - Prediction result: 1.0
+2025-01-31 20:02:03,090 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 20:02:12,870 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 20:04:02,968 - INFO - 初始化登录界面...
+2025-01-31 20:04:02,971 - INFO - 开始预加载模型...
+2025-01-31 20:04:02,971 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:04:02,978 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:04:02,978 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:04:02,979 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:04:02,979 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:04:02,979 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:04:02,980 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:04:03,068 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:04:03,068 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:04:03,068 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:04:03,069 - INFO - 成功预加载量化模型
+2025-01-31 20:04:19,762 - INFO - 初始化登录界面...
+2025-01-31 20:04:19,777 - INFO - 开始预加载模型...
+2025-01-31 20:04:19,777 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:04:19,788 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:04:19,788 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:04:19,788 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:04:19,788 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:04:19,788 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:04:19,789 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:04:19,881 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:04:19,881 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:04:19,881 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:04:19,881 - INFO - 成功预加载量化模型
+2025-01-31 20:04:21,130 - INFO - Opening user login page.
+2025-01-31 20:04:23,777 - INFO - User admin logged in successfully
+2025-01-31 20:04:25,417 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:04:25,451 - INFO - Successfully displayed 33 data records
+2025-01-31 20:04:25,457 - INFO - Opening health evaluation page.
+2025-01-31 20:04:29,818 - INFO - Prediction result: 1.0
+2025-01-31 20:04:29,819 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 20:04:29,819 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 20:06:49,552 - INFO - 初始化登录界面...
+2025-01-31 20:06:49,555 - INFO - 开始预加载模型...
+2025-01-31 20:06:49,555 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:06:49,559 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:06:49,559 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:06:49,559 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:06:49,559 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:06:49,559 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:06:49,560 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:06:49,652 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:06:49,653 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:06:49,653 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:06:49,653 - INFO - 成功预加载量化模型
+2025-01-31 20:06:50,489 - INFO - Opening user login page.
+2025-01-31 20:06:53,620 - INFO - User admin logged in successfully
+2025-01-31 20:06:55,088 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:06:55,115 - INFO - Successfully displayed 33 data records
+2025-01-31 20:06:55,121 - INFO - Opening health evaluation page.
+2025-01-31 20:06:59,496 - INFO - Prediction result: 1.0
+2025-01-31 20:06:59,497 - INFO - 模型 1 将使用普通应激模型的结果
+2025-01-31 20:06:59,498 - INFO - 复用第一个模型的结果: 95.0
+2025-01-31 20:08:18,605 - INFO - 初始化登录界面...
+2025-01-31 20:08:18,608 - INFO - 开始预加载模型...
+2025-01-31 20:08:18,608 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:08:18,613 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:08:18,613 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:08:18,613 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:08:18,613 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:08:18,613 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:08:18,614 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:08:18,700 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:08:18,700 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:08:18,701 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:08:18,701 - INFO - 成功预加载量化模型
+2025-01-31 20:08:20,444 - INFO - Opening user login page.
+2025-01-31 20:08:23,488 - INFO - User admin logged in successfully
+2025-01-31 20:08:24,621 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:08:24,650 - INFO - Successfully displayed 33 data records
+2025-01-31 20:08:24,656 - INFO - Opening health evaluation page.
+2025-01-31 20:08:28,682 - INFO - Prediction result: 1.0
+2025-01-31 20:08:28,683 - INFO - 当前模型索引: 0
+2025-01-31 20:08:28,683 - INFO - 第一个模型的结果: 95.0
+2025-01-31 20:12:06,453 - INFO - 初始化登录界面...
+2025-01-31 20:12:06,456 - INFO - 开始预加载模型...
+2025-01-31 20:12:06,456 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:12:06,461 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:12:06,461 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:12:06,461 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:12:06,461 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:12:06,461 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:12:06,462 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:12:06,548 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:12:06,548 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:12:06,548 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:12:06,548 - INFO - 成功预加载量化模型
+2025-01-31 20:12:07,375 - INFO - Opening user login page.
+2025-01-31 20:12:10,266 - INFO - User admin logged in successfully
+2025-01-31 20:12:11,323 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:12:11,349 - INFO - Successfully displayed 33 data records
+2025-01-31 20:12:11,355 - INFO - Opening health evaluation page.
+2025-01-31 20:12:14,498 - ERROR - Error in get_data: expected str, bytes or os.PathLike object, not NoneType
+2025-01-31 20:12:14,498 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 224, in get_data
+    model_dir = os.path.dirname(self.model_path)
+  File "/usr/lib/python3.10/posixpath.py", line 152, in dirname
+    p = os.fspath(p)
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+
+2025-01-31 20:12:14,498 - ERROR - Error during prediction: Failed to get test data
+2025-01-31 20:12:14,499 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 252, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-01-31 20:12:14,499 - INFO - 模型推理结果: 0.0
+2025-01-31 20:26:03,793 - INFO - 初始化登录界面...
+2025-01-31 20:26:03,797 - INFO - 开始预加载模型...
+2025-01-31 20:26:03,797 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:26:03,804 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:26:03,804 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:26:03,804 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:26:03,804 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:26:03,804 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:26:03,804 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:26:03,884 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:26:03,884 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:26:03,885 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:26:03,885 - INFO - 成功预加载量化模型
+2025-01-31 20:26:04,875 - INFO - Opening user login page.
+2025-01-31 20:26:07,894 - INFO - User admin logged in successfully
+2025-01-31 20:26:09,222 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:26:09,248 - INFO - Successfully displayed 33 data records
+2025-01-31 20:26:09,254 - INFO - Opening health evaluation page.
+2025-01-31 20:26:12,769 - INFO - 开始第一个模型（普通应激）的评估
+2025-01-31 20:26:13,142 - INFO - Prediction result: 1.0
+2025-01-31 20:26:13,143 - INFO - 第一个模型评估结果: 1.0
+2025-01-31 20:26:13,143 - INFO - 使用第一个模型的结果用于第二个模型（抑郁）
+2025-01-31 20:26:13,143 - INFO - 使用第一个模型的结果用于第三个模型（焦虑）
+2025-01-31 20:26:13,145 - INFO - 当前模型索引: 0
+2025-01-31 20:26:13,145 - INFO - 第一个模型的结果: 95.0
+2025-01-31 20:26:15,270 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 20:26:15,280 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 20:26:23,273 - INFO - 开始第一个模型（普通应激）的评估
+2025-01-31 20:26:23,643 - INFO - Prediction result: 1.0
+2025-01-31 20:26:23,643 - INFO - 第一个模型评估结果: 1.0
+2025-01-31 20:26:23,643 - INFO - 使用第一个模型的结果用于第二个模型（抑郁）
+2025-01-31 20:26:23,644 - INFO - 使用第一个模型的结果用于第三个模型（焦虑）
+2025-01-31 20:26:23,645 - INFO - 当前模型索引: 0
+2025-01-31 20:26:23,645 - INFO - 第一个模型的结果: 95.0
+2025-01-31 20:26:25,456 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 20:26:25,465 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-01-31 20:26:28,733 - INFO - Returned to index page successfully
+2025-01-31 20:26:29,825 - INFO - Opening results view page.
+2025-01-31 20:26:36,128 - INFO - Returned to index page successfully
+2025-01-31 20:26:36,659 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:26:36,682 - INFO - Successfully displayed 33 data records
+2025-01-31 20:26:36,688 - INFO - Opening health evaluation page.

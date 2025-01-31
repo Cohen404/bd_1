@@ -880,6 +880,78 @@ Loading data for 298 events and 1000 original time points ...
 
 
 
+我希望你单独创建一个脚本，帮我把model_type=0的模型进行int8量化，然后把原有的载入和推理变成量化模型的载入和推理
+
+# 注意
+* 不要修改其他任何功能，之修改我让你修改的功能
+* 所有代码不要有太大的不必要变动，所有代码的逻辑、框架、类继承以及撰写风格必须按照原有代码的来，不要随意创造。
+* 界面上所有内容使用中文
+* 原有代码中已有的功能，与本次修改功能无关，或者不冲突的，一律不准有任何修改。
+* 预处理的结果必须与现在脚本中的完全一样，不要因为效率导致了错误
+* 所有的try except必须输出完整错误栈
+* 数据库连接信息在util/db_util.py, 数据结构在sql_model/目录中可以看到，数据库初始化脚本在init_db.py中
+
+
+
+
+
+
+好的，那么我希望你接下来修改模型载入和模型推理的代码，适应现在INT8推理的模型。
+
+# 注意
+* 不要修改其他任何功能，之修改我让你修改的功能
+* 所有代码不要有太大的不必要变动，所有代码的逻辑、框架、类继承以及撰写风格必须按照原有代码的来，不要随意创造。
+* 界面上所有内容使用中文
+* 原有代码中已有的功能，与本次修改功能无关，或者不冲突的，一律不准有任何修改。
+* 预处理的结果必须与现在脚本中的完全一样，不要因为效率导致了错误
+* 所有的try except必须输出完整错误栈
+* 数据库连接信息在util/db_util.py, 数据结构在sql_model/目录中可以看到，数据库初始化脚本在init_db.py中
+
+
+
+我观察系统日志，以及显存空间发现几个问题
+1. init_login中预先载入模型了之后，并没有放到GPU
+2. 评估按钮点击之后所使用的模型可能不是预先载入的，可能进行了多余的二次载入
+
+我需要你帮我分析一下代码，并且看一下有没有这些问题，有这些问题的话帮我修复了
+日志情况：
+2025-01-31 19:29:23,046 - INFO - 初始化登录界面...
+2025-01-31 19:29:23,048 - INFO - 开始预加载模型...
+2025-01-31 19:29:23,048 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 19:29:23,053 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:29:23,053 - INFO - 模型文件存在，开始加载...
+2025-01-31 19:29:23,053 - INFO - 开始加载INT8量化模型...
+2025-01-31 19:29:23,053 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 19:29:23,053 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 19:29:23,054 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 19:29:23,091 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 19:29:23,092 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 19:29:23,092 - INFO - 模型加载成功
+2025-01-31 19:29:23,092 - INFO - 成功预加载量化模型
+2025-01-31 19:29:25,776 - INFO - Opening user login page.
+2025-01-31 19:29:29,779 - INFO - User admin logged in successfully
+2025-01-31 19:29:30,905 - INFO - Administrator admin: fetching all data records
+2025-01-31 19:29:30,930 - INFO - Successfully displayed 33 data records
+2025-01-31 19:29:30,936 - INFO - Opening health evaluation page.
+2025-01-31 19:29:35,507 - INFO - Prediction result: 1.0
+2025-01-31 19:29:39,636 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+
+在点击评估按钮的时候系统也有输出错误，是不是又额外的predict函数调用：
+2025-01-31 19:29:35,507 - INFO - Prediction result: 1.0
+Error during prediction: Model not loaded. Please call load_static_model() first.
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili.py", line 158, in predict
+    raise Exception("Model not loaded. Please call load_static_model() first.")
+Exception: Model not loaded. Please call load_static_model() first.
+Error during prediction: Model not loaded. Please call load_static_model() first.
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili.py", line 158, in predict
+    raise Exception("Model not loaded. Please call load_static_model() first.")
+Exception: Model not loaded. Please call load_static_model() first.
+2025-01-31 19:29:39,636 - INFO - Updated LED colors based on scores: stress=95.0, depression=0.0, anxiety=0.0
+
+
+
 
 
 
