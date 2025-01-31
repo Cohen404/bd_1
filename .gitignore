@@ -83,3 +83,4 @@ bj_health_manage.git/
 bfg-rules.txt
 
 .backup/
+tmp/
