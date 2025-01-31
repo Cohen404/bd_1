@@ -8537,3 +8537,13 @@ ValueError: Could not find event data
 2025-01-31 12:20:23,401 - INFO - Administrator - Button clicked in row 28, corresponding ID: 29
 2025-01-31 12:20:23,404 - INFO - Administrator - Data path retrieved from database: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)
 2025-01-31 12:20:24,288 - INFO - Administrator - Successfully displayed image: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)/Theta.png
+2025-01-31 12:45:17,827 - INFO - Administrator - User admin logged in successfully
+2025-01-31 12:45:19,430 - INFO - Administrator - Data table refreshed successfully with 33 records
+2025-01-31 12:45:19,430 - INFO - Administrator - Opening data view page.
+2025-01-31 12:45:22,937 - INFO - Administrator - Returned to index page successfully
+2025-01-31 12:45:24,242 - INFO - Administrator - Data table refreshed successfully with 33 records
+2025-01-31 12:45:24,243 - INFO - Administrator - Opening data view page.
+2025-01-31 12:45:25,346 - INFO - Administrator - Returned to index page successfully
+2025-01-31 12:45:25,830 - INFO - Administrator - Administrator admin: fetching all data records
+2025-01-31 12:45:25,853 - INFO - Administrator - Successfully displayed 33 data records
+2025-01-31 12:45:25,859 - INFO - Administrator - Opening health evaluation page.

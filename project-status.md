@@ -60,3 +60,31 @@
 - 根据数据库中的权限配置动态显示功能按钮
 - 按钮布局采用两行紧凑排列,确保界面美观
 - 确保所有功能权限都在数据库中正确定义和分配 
+
+## 2025-01-31 环境配置更新
+### GPU 配置问题
+- 问题：TensorFlow 无法识别 GPU
+- 原因：CUDA 版本不匹配（系统 CUDA 12.4 与 TensorFlow 2.14.0 不兼容）
+- 解决方案：
+  1. 降级 CUDA 到 11.8 版本
+  2. 重新配置 CUDA 环境变量
+  3. 确保安装正确版本的 cuDNN
+
+### 环境详情
+- GPU: NVIDIA GeForce RTX 2080 Ti
+- NVIDIA Driver: 550.142
+- Current CUDA: 12.4
+- Required CUDA: 11.8
+- TensorFlow: 2.14.0
+
+### 更新记录
+- 添加 CUDA 11.8 相关依赖到 requirements.txt
+  - nvidia-cuda-runtime-cu11==11.8.89
+  - nvidia-cuda-cupti-cu11==11.8.87
+  - nvidia-cudnn-cu11==8.7.0.84
+  - nvidia-cublas-cu11==11.11.3.6
+  - nvidia-cufft-cu11==10.9.0.58
+  - nvidia-curand-cu11==10.3.0.86
+  - nvidia-cusolver-cu11==11.4.1.48
+  - nvidia-cusparse-cu11==11.7.5.86
+  - nvidia-nccl-cu11==2.14.3 
