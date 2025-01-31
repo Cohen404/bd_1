@@ -4,10 +4,15 @@ import tensorflow as tf
 import numpy as np
 import pickle as pkl
 import traceback
+import warnings
 from PyQt5.QtCore import pyqtSignal, QThread
 from util.db_util import SessionClass
 from sql_model.tb_model import Model
 import logging
+
+# 过滤sklearn的版本警告
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', message='Trying to unpickle estimator StandardScaler')
 
 # 配置GPU内存增长
 gpus = tf.config.experimental.list_physical_devices('GPU')

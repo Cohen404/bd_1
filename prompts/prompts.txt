@@ -954,4 +954,111 @@ Exception: Model not loaded. Please call load_static_model() first.
 
 
 
+我希望应激评估页面可以选择多个（最多200个）数据进行批量评估功能，增加一个批量评估按钮。
+
+
+# 注意
+* 不要修改其他任何功能，之修改我让你修改的功能
+* 所有代码不要有太大的不必要变动，所有代码的逻辑、框架、类继承以及撰写风格必须按照原有代码的来，不要随意创造。
+* 界面上所有内容使用中文
+* 原有代码中已有的功能，与本次修改功能无关，或者不冲突的，一律不准有任何修改。
+* 预处理的结果必须与现在脚本中的完全一样，不要因为效率导致了错误
+* 所有的try except必须输出完整错误栈
+* 数据库连接信息在util/db_util.py, 数据结构在sql_model/目录中可以看到，数据库初始化脚本在init_db.py中
+
+
+
+我希望应激评估页面可以选择多个（最多200个）数据进行批量评估功能，增加一个批量评估按钮。
+批量评估的方式如下：
+针对第一个模型
+把数据都放在一起，然后每10个数据组合成一个batch进行推理（所有数据预载）
+推理结果再根据输入的样本量计算每个输入数据的结果。这里你必须要注意，每个数据会有多个样本来进行推理，然后最后返回的是多个样本中1的占比，所以要记录每个数据输入的样本量，根据每个具体样本的输出类型来计算占比并且作为该数据的结果返回。
+针对第2、3个模型还是直接使用对应数据的第一个模型的结果就行了
+
+你可以考虑专门写一个批处理推理的python文件。
+每一个应激类型的模型预测结果的后处理过程（health_evaluate_backend.py中waitTestRes函数的计算final_score的过程，也就是line 644-line 718）专门放到一个python文件的函数或者类里，要区分类型，因为后面不同类型要用不同的后处理流程。
+
+而且我希望系统后台不会有warning错误，比如这种：
+  warnings.warn(
+/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/sklearn/base.py:376: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.3.0 when using version 1.4.1.post1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+
+
+# 注意
+* 不要修改其他任何功能，之修改我让你修改的功能
+* 所有代码不要有太大的不必要变动，所有代码的逻辑、框架、类继承以及撰写风格必须按照原有代码的来，不要随意创造。
+* 界面上所有内容使用中文
+* 原有代码中已有的功能，与本次修改功能无关，或者不冲突的，一律不准有任何修改。
+* 预处理的结果必须与现在脚本中的完全一样，不要因为效率导致了错误
+* 所有的try except必须输出完整错误栈
+* 数据库连接信息在util/db_util.py, 数据结构在sql_model/目录中可以看到，数据库初始化脚本在init_db.py中
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

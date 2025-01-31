@@ -80,44 +80,52 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnWidth(5, 150)  # 为上传时间列设置合适的宽度
 
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 2)
-        # 上传按钮
+        # 创建一个垂直布局来放置右侧的按钮
+        self.button_layout = QtWidgets.QVBoxLayout()
+        self.button_layout.setSpacing(10)  # 设置按钮之间的间距
+        self.button_layout.setContentsMargins(10, 30, 10, 10)  # 设置上下左右边距
+        
+        # 添加上传按钮
         self.upload_pushButton = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        self.upload_pushButton.setSizePolicy(sizePolicy)
-        self.upload_pushButton.setMinimumSize(QtCore.QSize(120, 50))
-        self.upload_pushButton.setMaximumSize(QtCore.QSize(120, 50))
-        self.upload_pushButton.setStyleSheet("margin-top:20px;margin-bottom:5px;margin-left:10px;\n"
-                                             "background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.upload_pushButton.setFixedSize(120, 50)
+        self.upload_pushButton.setStyleSheet("background-color: #759dcd;font-size: 18px;border-radius:12px")
         self.upload_pushButton.setObjectName("load_pushButton")
-        self.gridLayout.addWidget(self.upload_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter)
-
+        self.button_layout.addWidget(self.upload_pushButton)
+        
         # 添加批量上传按钮
         self.batch_upload_pushButton = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        self.batch_upload_pushButton.setSizePolicy(sizePolicy)
-        self.batch_upload_pushButton.setMinimumSize(QtCore.QSize(120, 50))
-        self.batch_upload_pushButton.setMaximumSize(QtCore.QSize(120, 50))
-        self.batch_upload_pushButton.setStyleSheet("margin-top:5px;margin-bottom:20px;margin-left:10px;\n"
-                                                 "background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.batch_upload_pushButton.setFixedSize(120, 50)
+        self.batch_upload_pushButton.setStyleSheet("background-color: #759dcd;font-size: 18px;border-radius:12px")
         self.batch_upload_pushButton.setObjectName("batch_upload_pushButton")
-        self.gridLayout.addWidget(self.batch_upload_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter)
+        self.button_layout.addWidget(self.batch_upload_pushButton)
+
+        # 添加选择前200条按钮
+        self.select_top_200_button = QtWidgets.QPushButton(self.centralwidget)
+        self.select_top_200_button.setFixedSize(120, 50)
+        self.select_top_200_button.setStyleSheet("background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.select_top_200_button.setObjectName("select_top_200_button")
+        self.button_layout.addWidget(self.select_top_200_button)
 
         # 添加批量预处理按钮
         self.batch_preprocess_pushButton = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        self.batch_preprocess_pushButton.setSizePolicy(sizePolicy)
-        self.batch_preprocess_pushButton.setMinimumSize(QtCore.QSize(120, 50))
-        self.batch_preprocess_pushButton.setMaximumSize(QtCore.QSize(120, 50))
-        self.batch_preprocess_pushButton.setStyleSheet("margin-top:5px;margin-bottom:20px;margin-left:10px;\n"
-                                                 "background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.batch_preprocess_pushButton.setFixedSize(120, 50)
+        self.batch_preprocess_pushButton.setStyleSheet("background-color: #759dcd;font-size: 18px;border-radius:12px")
         self.batch_preprocess_pushButton.setObjectName("batch_preprocess_pushButton")
-        self.gridLayout.addWidget(self.batch_preprocess_pushButton, 0, 2, 1, 1, QtCore.Qt.AlignCenter)
+        self.button_layout.addWidget(self.batch_preprocess_pushButton)
 
         # 添加选择数量显示标签
         self.selection_count_label = QtWidgets.QLabel(self.centralwidget)
-        self.selection_count_label.setStyleSheet("font-size: 14px; color: #333; margin-left: 10px;")
+        self.selection_count_label.setStyleSheet("font-size: 14px; color: #333; margin-top: 10px;")
         self.selection_count_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.gridLayout.addWidget(self.selection_count_label, 0, 2, 1, 1, QtCore.Qt.AlignTop)
+        self.button_layout.addWidget(self.selection_count_label)
+
+        # 添加弹簧，使按钮靠上对齐
+        self.button_layout.addStretch()
+
+        # 创建一个widget来容纳按钮布局
+        button_container = QtWidgets.QWidget()
+        button_container.setLayout(self.button_layout)
+        self.gridLayout.addWidget(button_container, 0, 2, 2, 1)
 
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -246,5 +254,6 @@ class Ui_MainWindow(object):
         self.batch_upload_pushButton.setFont(font)
         self.batch_preprocess_pushButton.setText(_translate("MainWindow", "批量预处理"))
         self.batch_preprocess_pushButton.setFont(font)
+        self.select_top_200_button.setText(_translate("MainWindow", "选择前200条"))
         self.selection_count_label.setText(_translate("MainWindow", "已选择: 0/200"))
 

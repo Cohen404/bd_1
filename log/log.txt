@@ -9113,3 +9113,954 @@ Exception: Failed to get test data
 2025-01-31 20:26:36,659 - INFO - Administrator admin: fetching all data records
 2025-01-31 20:26:36,682 - INFO - Successfully displayed 33 data records
 2025-01-31 20:26:36,688 - INFO - Opening health evaluation page.
+2025-01-31 20:31:43,387 - INFO - 初始化登录界面...
+2025-01-31 20:31:43,390 - INFO - 开始预加载模型...
+2025-01-31 20:31:43,390 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:31:43,394 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:31:43,394 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:31:43,395 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:31:43,395 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:31:43,395 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:31:43,395 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:31:43,476 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:31:43,477 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:31:43,477 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:31:43,477 - INFO - 成功预加载量化模型
+2025-01-31 20:31:44,272 - INFO - Opening user login page.
+2025-01-31 20:31:47,153 - INFO - User admin logged in successfully
+2025-01-31 20:32:54,345 - INFO - 初始化登录界面...
+2025-01-31 20:32:54,348 - INFO - 开始预加载模型...
+2025-01-31 20:32:54,348 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:32:54,356 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:32:54,356 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:32:54,356 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:32:54,356 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:32:54,356 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:32:54,357 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:32:54,436 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:32:54,436 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:32:54,436 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:32:54,436 - INFO - 成功预加载量化模型
+2025-01-31 20:32:55,587 - INFO - Opening user login page.
+2025-01-31 20:32:58,299 - INFO - User admin logged in successfully
+2025-01-31 20:32:59,665 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:32:59,690 - INFO - Successfully displayed 33 data records
+2025-01-31 20:32:59,699 - INFO - Opening health evaluation page.
+2025-01-31 20:33:13,792 - INFO - 开始第一个模型（普通应激）的评估
+2025-01-31 20:33:14,130 - INFO - Prediction result: 1.0
+2025-01-31 20:33:14,130 - INFO - 第一个模型评估结果: 1.0
+2025-01-31 20:33:14,130 - INFO - 使用第一个模型的结果用于第二个模型（抑郁）
+2025-01-31 20:33:14,130 - INFO - 使用第一个模型的结果用于第三个模型（焦虑）
+2025-01-31 20:33:56,535 - INFO - Batch evaluation cancelled by user
+2025-01-31 20:36:53,460 - INFO - 初始化登录界面...
+2025-01-31 20:36:53,462 - INFO - 开始预加载模型...
+2025-01-31 20:36:53,462 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:36:53,467 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:36:53,467 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:36:53,467 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:36:53,467 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:36:53,467 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:36:53,468 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:36:53,557 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:36:53,557 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:36:53,557 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:36:53,557 - INFO - 成功预加载量化模型
+2025-01-31 20:36:54,747 - INFO - Opening user login page.
+2025-01-31 20:37:01,235 - INFO - 初始化登录界面...
+2025-01-31 20:37:01,238 - INFO - 开始预加载模型...
+2025-01-31 20:37:01,238 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:37:01,243 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:37:01,243 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:37:01,243 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:37:01,243 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:37:01,243 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:37:01,243 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:37:01,324 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:37:01,324 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:37:01,324 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:37:01,324 - INFO - 成功预加载量化模型
+2025-01-31 20:37:02,560 - INFO - Opening user login page.
+2025-01-31 20:37:05,356 - INFO - User admin logged in successfully
+2025-01-31 20:37:06,532 - INFO - Successfully displayed 33 data records
+2025-01-31 20:37:06,540 - INFO - Opening health evaluation page.
+2025-01-31 20:37:14,959 - INFO - Prediction result: 1.0
+2025-01-31 20:38:10,395 - INFO - 初始化登录界面...
+2025-01-31 20:38:10,398 - INFO - 开始预加载模型...
+2025-01-31 20:38:10,398 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:38:10,403 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:38:10,403 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:38:10,403 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:38:10,403 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:38:10,403 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:38:10,403 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:38:10,492 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:38:10,492 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:38:10,492 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:38:10,492 - INFO - 成功预加载量化模型
+2025-01-31 20:38:11,363 - INFO - Opening user login page.
+2025-01-31 20:38:14,013 - INFO - User admin logged in successfully
+2025-01-31 20:38:15,103 - INFO - Successfully displayed 33 data records
+2025-01-31 20:38:15,111 - INFO - Opening health evaluation page.
+2025-01-31 20:38:19,790 - INFO - Prediction result: 1.0
+2025-01-31 20:40:46,776 - INFO - 初始化登录界面...
+2025-01-31 20:40:46,779 - INFO - 开始预加载模型...
+2025-01-31 20:40:46,779 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:40:46,783 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:40:46,783 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:40:46,784 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:40:46,784 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:40:46,784 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:40:46,784 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:40:46,864 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:40:46,864 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:40:46,864 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:40:46,864 - INFO - 成功预加载量化模型
+2025-01-31 20:40:47,642 - INFO - Opening user login page.
+2025-01-31 20:40:50,393 - INFO - User admin logged in successfully
+2025-01-31 20:40:51,587 - INFO - Successfully displayed 33 data records
+2025-01-31 20:40:51,595 - INFO - Opening health evaluation page.
+2025-01-31 20:41:03,006 - INFO - Prediction result: 1.0
+2025-01-31 20:41:19,840 - INFO - Returned to index page successfully
+2025-01-31 20:57:47,132 - INFO - 初始化登录界面...
+2025-01-31 20:57:47,147 - INFO - 开始预加载模型...
+2025-01-31 20:57:47,147 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 20:57:47,151 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:57:47,151 - INFO - 模型文件存在，开始加载...
+2025-01-31 20:57:47,151 - INFO - 开始加载INT8量化模型...
+2025-01-31 20:57:47,151 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 20:57:47,151 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 20:57:47,152 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 20:57:47,232 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 20:57:47,232 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 20:57:47,232 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 20:57:47,232 - INFO - 成功预加载量化模型
+2025-01-31 20:57:50,655 - INFO - Opening user login page.
+2025-01-31 20:57:53,569 - INFO - User admin logged in successfully
+2025-01-31 20:57:54,737 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:57:54,763 - INFO - Successfully displayed 33 data records
+2025-01-31 20:57:54,770 - INFO - Opening health evaluation page.
+2025-01-31 20:58:09,659 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:58:09,695 - INFO - Successfully displayed 33 data records
+2025-01-31 20:58:10,867 - INFO - Returned to index page successfully
+2025-01-31 20:58:11,837 - INFO - Opening results view page.
+2025-01-31 20:58:15,466 - INFO - Returned to index page successfully
+2025-01-31 20:58:16,215 - INFO - Administrator admin: fetching all data records
+2025-01-31 20:58:16,246 - INFO - Successfully displayed 33 data records
+2025-01-31 20:58:16,253 - INFO - Opening health evaluation page.
+2025-01-31 21:00:02,982 - INFO - 初始化登录界面...
+2025-01-31 21:00:02,985 - INFO - 开始预加载模型...
+2025-01-31 21:00:02,985 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:00:02,990 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:00:02,990 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:00:02,990 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:00:02,990 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:00:02,990 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:00:02,990 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:00:03,068 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:00:03,068 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:00:03,069 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:00:03,069 - INFO - 成功预加载量化模型
+2025-01-31 21:00:03,904 - INFO - Opening user login page.
+2025-01-31 21:00:06,665 - INFO - User admin logged in successfully
+2025-01-31 21:00:08,008 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:00:08,033 - INFO - Successfully displayed 33 data records
+2025-01-31 21:00:08,039 - INFO - Opening health evaluation page.
+2025-01-31 21:02:03,567 - INFO - 初始化登录界面...
+2025-01-31 21:02:03,571 - INFO - 开始预加载模型...
+2025-01-31 21:02:03,571 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:02:03,575 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:02:03,575 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:02:03,576 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:02:03,576 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:02:03,576 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:02:03,576 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:02:03,661 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:02:03,661 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:02:03,661 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:02:03,661 - INFO - 成功预加载量化模型
+2025-01-31 21:02:04,576 - INFO - Opening user login page.
+2025-01-31 21:02:07,898 - INFO - User admin logged in successfully
+2025-01-31 21:02:09,049 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:02:09,073 - INFO - Successfully displayed 33 data records
+2025-01-31 21:02:09,080 - INFO - Opening health evaluation page.
+2025-01-31 21:04:09,426 - INFO - 初始化登录界面...
+2025-01-31 21:04:09,429 - INFO - 开始预加载模型...
+2025-01-31 21:04:09,429 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:04:09,433 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:04:09,433 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:04:09,433 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:04:09,433 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:04:09,433 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:04:09,434 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:04:09,520 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:04:09,520 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:04:09,520 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:04:09,520 - INFO - 成功预加载量化模型
+2025-01-31 21:04:10,497 - INFO - Opening user login page.
+2025-01-31 21:04:13,627 - INFO - User admin logged in successfully
+2025-01-31 21:04:14,914 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:04:14,939 - INFO - Successfully displayed 33 data records
+2025-01-31 21:04:14,945 - INFO - Opening health evaluation page.
+2025-01-31 21:04:25,476 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:04:25,508 - INFO - Successfully displayed 33 data records
+2025-01-31 21:06:18,880 - INFO - 初始化登录界面...
+2025-01-31 21:06:18,883 - INFO - 开始预加载模型...
+2025-01-31 21:06:18,883 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:06:18,888 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:06:18,888 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:06:18,888 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:06:18,888 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:06:18,888 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:06:18,889 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:06:18,968 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:06:18,968 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:06:18,968 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:06:18,968 - INFO - 成功预加载量化模型
+2025-01-31 21:06:19,724 - INFO - Opening user login page.
+2025-01-31 21:06:23,020 - INFO - User admin logged in successfully
+2025-01-31 21:06:24,306 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:06:24,332 - INFO - Successfully displayed 33 data records
+2025-01-31 21:06:24,338 - INFO - Opening health evaluation page.
+2025-01-31 21:06:50,094 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:06:50,131 - INFO - Successfully displayed 33 data records
+2025-01-31 21:06:50,829 - INFO - Returned to index page successfully
+2025-01-31 21:06:53,174 - INFO - Opening results view page.
+2025-01-31 21:06:55,893 - INFO - Returned to index page successfully
+2025-01-31 21:10:01,975 - INFO - 初始化登录界面...
+2025-01-31 21:10:01,978 - INFO - 开始预加载模型...
+2025-01-31 21:10:01,978 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:10:01,983 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:10:01,983 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:10:01,983 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:10:01,983 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:10:01,983 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:10:01,983 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:10:02,068 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:10:02,069 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:10:02,069 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:10:02,069 - INFO - 成功预加载量化模型
+2025-01-31 21:10:03,069 - INFO - Opening user login page.
+2025-01-31 21:10:05,808 - INFO - User admin logged in successfully
+2025-01-31 21:10:07,172 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:10:07,196 - INFO - Successfully displayed 33 data records
+2025-01-31 21:10:07,203 - INFO - Opening health evaluation page.
+2025-01-31 21:10:10,676 - INFO - Returned to index page successfully
+2025-01-31 21:10:11,741 - INFO - Data table refreshed successfully with 33 records
+2025-01-31 21:10:11,741 - INFO - Opening data view page.
+2025-01-31 21:10:23,554 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(110) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(110)
+2025-01-31 21:10:23,560 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(110), Username: admin
+2025-01-31 21:10:23,560 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(69) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(69)
+2025-01-31 21:10:23,563 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(69), Username: admin
+2025-01-31 21:10:23,564 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(112) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(112)
+2025-01-31 21:10:23,566 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(112), Username: admin
+2025-01-31 21:10:23,567 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(102) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(102)
+2025-01-31 21:10:23,570 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(102), Username: admin
+2025-01-31 21:10:23,570 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(123) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(123)
+2025-01-31 21:10:23,573 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(123), Username: admin
+2025-01-31 21:10:23,573 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(107) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(107)
+2025-01-31 21:10:23,576 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(107), Username: admin
+2025-01-31 21:10:23,576 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(121) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(121)
+2025-01-31 21:10:23,579 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(121), Username: admin
+2025-01-31 21:10:23,579 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(81) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(81)
+2025-01-31 21:10:23,582 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(81), Username: admin
+2025-01-31 21:10:23,582 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(89) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(89)
+2025-01-31 21:10:23,585 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(89), Username: admin
+2025-01-31 21:10:23,585 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(86) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(86)
+2025-01-31 21:10:23,588 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(86), Username: admin
+2025-01-31 21:10:23,588 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(98) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(98)
+2025-01-31 21:10:23,591 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(98), Username: admin
+2025-01-31 21:10:23,591 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(68) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(68)
+2025-01-31 21:10:23,594 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(68), Username: admin
+2025-01-31 21:10:23,594 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(127) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(127)
+2025-01-31 21:10:23,597 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(127), Username: admin
+2025-01-31 21:10:23,597 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(78) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(78)
+2025-01-31 21:10:23,601 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(78), Username: admin
+2025-01-31 21:10:23,601 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(54) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(54)
+2025-01-31 21:10:23,604 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(54), Username: admin
+2025-01-31 21:10:23,604 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(73) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(73)
+2025-01-31 21:10:23,607 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(73), Username: admin
+2025-01-31 21:10:23,607 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(60) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(60)
+2025-01-31 21:10:23,609 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(60), Username: admin
+2025-01-31 21:10:23,610 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(93) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(93)
+2025-01-31 21:10:23,612 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(93), Username: admin
+2025-01-31 21:10:23,612 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(117) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(117)
+2025-01-31 21:10:23,615 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(117), Username: admin
+2025-01-31 21:10:23,615 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(10) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10)_1
+2025-01-31 21:10:23,618 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10)_1, Username: admin
+2025-01-31 21:10:23,618 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(41) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(41)
+2025-01-31 21:10:23,621 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(41), Username: admin
+2025-01-31 21:10:23,621 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(17) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(17)
+2025-01-31 21:10:23,623 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(17), Username: admin
+2025-01-31 21:10:23,624 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(94) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(94)
+2025-01-31 21:10:23,626 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(94), Username: admin
+2025-01-31 21:10:23,626 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(60) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(60)
+2025-01-31 21:10:23,629 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(60), Username: admin
+2025-01-31 21:10:23,629 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(49) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(49)
+2025-01-31 21:10:23,632 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(49), Username: admin
+2025-01-31 21:10:23,632 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(61) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(61)
+2025-01-31 21:10:23,634 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(61), Username: admin
+2025-01-31 21:10:23,635 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(8) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8)_1
+2025-01-31 21:10:23,637 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8)_1, Username: admin
+2025-01-31 21:10:23,637 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(115) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(115)
+2025-01-31 21:10:23,640 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(115), Username: admin
+2025-01-31 21:10:23,640 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(3) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3)_1
+2025-01-31 21:10:23,643 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3)_1, Username: admin
+2025-01-31 21:10:23,643 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(7) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7)_1
+2025-01-31 21:10:23,646 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7)_1, Username: admin
+2025-01-31 21:10:23,646 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(78) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(78)
+2025-01-31 21:10:23,649 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(78), Username: admin
+2025-01-31 21:10:23,649 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(114) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(114)
+2025-01-31 21:10:23,652 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(114), Username: admin
+2025-01-31 21:10:23,652 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(118) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(118)
+2025-01-31 21:10:23,654 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(118), Username: admin
+2025-01-31 21:10:23,655 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(40) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(40)
+2025-01-31 21:10:23,657 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(40), Username: admin
+2025-01-31 21:10:23,658 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(122) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(122)
+2025-01-31 21:10:23,660 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(122), Username: admin
+2025-01-31 21:10:23,660 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(71) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(71)
+2025-01-31 21:10:23,663 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(71), Username: admin
+2025-01-31 21:10:23,663 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(92) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(92)
+2025-01-31 21:10:23,665 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(92), Username: admin
+2025-01-31 21:10:23,666 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(67) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(67)
+2025-01-31 21:10:23,668 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(67), Username: admin
+2025-01-31 21:10:23,668 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(116) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(116)
+2025-01-31 21:10:23,671 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(116), Username: admin
+2025-01-31 21:10:23,671 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(10) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10)_1
+2025-01-31 21:10:23,674 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10)_1, Username: admin
+2025-01-31 21:10:23,674 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(109) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(109)
+2025-01-31 21:10:23,677 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(109), Username: admin
+2025-01-31 21:10:23,677 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(67) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(67)
+2025-01-31 21:10:23,679 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(67), Username: admin
+2025-01-31 21:10:23,680 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(6) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)_1
+2025-01-31 21:10:23,682 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)_1, Username: admin
+2025-01-31 21:10:23,682 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(70) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(70)
+2025-01-31 21:10:23,685 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(70), Username: admin
+2025-01-31 21:10:23,685 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(5) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)_1
+2025-01-31 21:10:23,688 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)_1, Username: admin
+2025-01-31 21:10:23,688 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(46) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(46)
+2025-01-31 21:10:23,691 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(46), Username: admin
+2025-01-31 21:10:23,691 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(25) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(25)
+2025-01-31 21:10:23,693 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(25), Username: admin
+2025-01-31 21:10:23,694 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(88) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(88)
+2025-01-31 21:10:23,696 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(88), Username: admin
+2025-01-31 21:10:23,696 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(45) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(45)
+2025-01-31 21:10:23,698 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(45), Username: admin
+2025-01-31 21:10:23,699 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(105) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(105)
+2025-01-31 21:10:23,701 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(105), Username: admin
+2025-01-31 21:10:23,702 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(66) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(66)
+2025-01-31 21:10:23,705 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(66), Username: admin
+2025-01-31 21:10:23,706 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(30) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(30)
+2025-01-31 21:10:23,708 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(30), Username: admin
+2025-01-31 21:10:23,709 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(28) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(28)
+2025-01-31 21:10:23,711 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(28), Username: admin
+2025-01-31 21:10:23,711 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(57) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(57)
+2025-01-31 21:10:23,714 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(57), Username: admin
+2025-01-31 21:10:23,714 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(97) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(97)
+2025-01-31 21:10:23,716 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(97), Username: admin
+2025-01-31 21:10:23,717 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(57) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(57)
+2025-01-31 21:10:23,719 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(57), Username: admin
+2025-01-31 21:10:23,719 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(76) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(76)
+2025-01-31 21:10:23,722 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(76), Username: admin
+2025-01-31 21:10:23,722 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(33) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(33)
+2025-01-31 21:10:23,724 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(33), Username: admin
+2025-01-31 21:10:23,724 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(31) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(31)
+2025-01-31 21:10:23,727 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(31), Username: admin
+2025-01-31 21:10:23,727 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(106) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(106)
+2025-01-31 21:10:23,729 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(106), Username: admin
+2025-01-31 21:10:23,730 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(9) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)_1
+2025-01-31 21:10:23,732 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)_1, Username: admin
+2025-01-31 21:10:23,732 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(44) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(44)
+2025-01-31 21:10:23,734 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(44), Username: admin
+2025-01-31 21:10:23,735 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(18) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(18)
+2025-01-31 21:10:23,737 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(18), Username: admin
+2025-01-31 21:10:23,737 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(115) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(115)
+2025-01-31 21:10:23,740 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(115), Username: admin
+2025-01-31 21:10:23,740 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(93) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(93)
+2025-01-31 21:10:23,742 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(93), Username: admin
+2025-01-31 21:10:23,742 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(35) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(35)
+2025-01-31 21:10:23,745 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(35), Username: admin
+2025-01-31 21:10:23,745 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(38) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(38)
+2025-01-31 21:10:23,748 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(38), Username: admin
+2025-01-31 21:10:23,748 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(56) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(56)
+2025-01-31 21:10:23,750 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(56), Username: admin
+2025-01-31 21:10:23,751 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(27) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(27)
+2025-01-31 21:10:23,753 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(27), Username: admin
+2025-01-31 21:10:23,753 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(54) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(54)
+2025-01-31 21:10:23,756 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(54), Username: admin
+2025-01-31 21:10:23,756 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(101) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(101)
+2025-01-31 21:10:23,758 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(101), Username: admin
+2025-01-31 21:10:23,758 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(5) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)_1
+2025-01-31 21:10:23,761 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)_1, Username: admin
+2025-01-31 21:10:23,761 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(103) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(103)
+2025-01-31 21:10:23,763 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(103), Username: admin
+2025-01-31 21:10:23,764 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(47) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(47)
+2025-01-31 21:10:23,766 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(47), Username: admin
+2025-01-31 21:10:23,766 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(105) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(105)
+2025-01-31 21:10:23,769 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(105), Username: admin
+2025-01-31 21:10:23,769 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(74) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(74)
+2025-01-31 21:10:23,771 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(74), Username: admin
+2025-01-31 21:10:23,772 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(68) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(68)
+2025-01-31 21:10:23,774 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(68), Username: admin
+2025-01-31 21:10:23,774 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(9) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)_1
+2025-01-31 21:10:23,777 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)_1, Username: admin
+2025-01-31 21:10:23,777 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(26) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(26)
+2025-01-31 21:10:23,779 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(26), Username: admin
+2025-01-31 21:10:23,780 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(124) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(124)
+2025-01-31 21:10:23,782 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(124), Username: admin
+2025-01-31 21:10:23,782 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(13) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)_1
+2025-01-31 21:10:23,785 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)_1, Username: admin
+2025-01-31 21:10:23,785 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(69) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(69)
+2025-01-31 21:10:23,787 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(69), Username: admin
+2025-01-31 21:10:23,787 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(74) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(74)
+2025-01-31 21:10:23,790 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(74), Username: admin
+2025-01-31 21:10:23,790 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(27) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(27)
+2025-01-31 21:10:23,793 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(27), Username: admin
+2025-01-31 21:10:23,793 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(117) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(117)
+2025-01-31 21:10:23,796 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(117), Username: admin
+2025-01-31 21:10:23,796 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(51) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(51)
+2025-01-31 21:10:23,799 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(51), Username: admin
+2025-01-31 21:10:23,799 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(8) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)_1
+2025-01-31 21:10:23,802 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)_1, Username: admin
+2025-01-31 21:10:23,802 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(63) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(63)
+2025-01-31 21:10:23,806 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(63), Username: admin
+2025-01-31 21:10:23,806 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(99) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(99)
+2025-01-31 21:10:23,809 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(99), Username: admin
+2025-01-31 21:10:23,809 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(125) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(125)
+2025-01-31 21:10:23,811 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(125), Username: admin
+2025-01-31 21:10:23,811 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(29) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(29)
+2025-01-31 21:10:23,814 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(29), Username: admin
+2025-01-31 21:10:23,814 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(100) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(100)
+2025-01-31 21:10:23,817 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(100), Username: admin
+2025-01-31 21:10:23,817 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(99) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(99)
+2025-01-31 21:10:23,819 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(99), Username: admin
+2025-01-31 21:10:23,819 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(111) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(111)
+2025-01-31 21:10:23,822 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(111), Username: admin
+2025-01-31 21:10:23,822 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(110) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(110)
+2025-01-31 21:10:23,824 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(110), Username: admin
+2025-01-31 21:10:23,825 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(95) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(95)
+2025-01-31 21:10:23,827 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(95), Username: admin
+2025-01-31 21:10:23,827 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(16) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(16)
+2025-01-31 21:10:23,830 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(16), Username: admin
+2025-01-31 21:10:23,830 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(108) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(108)
+2025-01-31 21:10:23,832 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(108), Username: admin
+2025-01-31 21:10:23,833 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(107) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(107)
+2025-01-31 21:10:23,835 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(107), Username: admin
+2025-01-31 21:10:23,835 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(64) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(64)
+2025-01-31 21:10:23,838 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(64), Username: admin
+2025-01-31 21:10:23,838 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(100) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(100)
+2025-01-31 21:10:23,841 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(100), Username: admin
+2025-01-31 21:10:23,841 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(18) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(18)
+2025-01-31 21:10:23,843 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(18), Username: admin
+2025-01-31 21:10:23,844 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(84) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(84)
+2025-01-31 21:10:23,846 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(84), Username: admin
+2025-01-31 21:10:23,846 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(32) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(32)
+2025-01-31 21:10:23,849 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(32), Username: admin
+2025-01-31 21:10:23,849 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(41) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(41)
+2025-01-31 21:10:23,852 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(41), Username: admin
+2025-01-31 21:10:23,852 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(80) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(80)
+2025-01-31 21:10:23,854 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(80), Username: admin
+2025-01-31 21:10:23,855 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(22) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(22)
+2025-01-31 21:10:23,857 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(22), Username: admin
+2025-01-31 21:10:23,857 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(13) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)_1
+2025-01-31 21:10:23,860 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)_1, Username: admin
+2025-01-31 21:10:23,860 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(50) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(50)
+2025-01-31 21:10:23,863 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(50), Username: admin
+2025-01-31 21:10:23,863 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(96) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(96)
+2025-01-31 21:10:23,865 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(96), Username: admin
+2025-01-31 21:10:23,866 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(96) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(96)
+2025-01-31 21:10:23,868 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(96), Username: admin
+2025-01-31 21:10:23,868 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(121) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(121)
+2025-01-31 21:10:23,871 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(121), Username: admin
+2025-01-31 21:10:23,871 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(16) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(16)
+2025-01-31 21:10:23,874 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(16), Username: admin
+2025-01-31 21:10:23,874 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(90) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(90)
+2025-01-31 21:10:23,876 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(90), Username: admin
+2025-01-31 21:10:23,877 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(47) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(47)
+2025-01-31 21:10:23,879 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(47), Username: admin
+2025-01-31 21:10:23,880 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(126) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(126)
+2025-01-31 21:10:23,882 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(126), Username: admin
+2025-01-31 21:10:23,882 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(62) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(62)
+2025-01-31 21:10:23,885 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(62), Username: admin
+2025-01-31 21:10:23,885 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(30) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(30)
+2025-01-31 21:10:23,888 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(30), Username: admin
+2025-01-31 21:10:23,888 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(111) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(111)
+2025-01-31 21:10:23,891 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(111), Username: admin
+2025-01-31 21:10:23,891 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(35) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(35)
+2025-01-31 21:10:23,894 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(35), Username: admin
+2025-01-31 21:10:23,894 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(42) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(42)
+2025-01-31 21:10:23,897 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(42), Username: admin
+2025-01-31 21:10:23,897 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(104) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(104)
+2025-01-31 21:10:23,900 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(104), Username: admin
+2025-01-31 21:10:23,900 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(91) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(91)
+2025-01-31 21:10:23,903 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(91), Username: admin
+2025-01-31 21:10:23,903 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(37) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(37)
+2025-01-31 21:10:23,906 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(37), Username: admin
+2025-01-31 21:10:23,906 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(84) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(84)
+2025-01-31 21:10:23,909 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(84), Username: admin
+2025-01-31 21:10:23,909 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(120) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(120)
+2025-01-31 21:10:23,911 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(120), Username: admin
+2025-01-31 21:10:23,912 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(52) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(52)
+2025-01-31 21:10:23,914 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(52), Username: admin
+2025-01-31 21:10:23,914 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(25) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(25)
+2025-01-31 21:10:23,917 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(25), Username: admin
+2025-01-31 21:10:23,917 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(36) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(36)
+2025-01-31 21:10:23,920 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(36), Username: admin
+2025-01-31 21:10:23,920 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(20) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(20)
+2025-01-31 21:10:23,923 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(20), Username: admin
+2025-01-31 21:10:23,923 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(14) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)_1
+2025-01-31 21:10:23,925 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)_1, Username: admin
+2025-01-31 21:10:23,926 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(39) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(39)
+2025-01-31 21:10:23,928 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(39), Username: admin
+2025-01-31 21:10:23,928 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(53) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(53)
+2025-01-31 21:10:23,931 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(53), Username: admin
+2025-01-31 21:10:23,931 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(102) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(102)
+2025-01-31 21:10:23,933 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(102), Username: admin
+2025-01-31 21:10:23,934 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(45) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(45)
+2025-01-31 21:10:23,936 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(45), Username: admin
+2025-01-31 21:10:23,936 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(20) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(20)
+2025-01-31 21:10:23,939 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(20), Username: admin
+2025-01-31 21:10:23,939 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(82) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(82)
+2025-01-31 21:10:23,941 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(82), Username: admin
+2025-01-31 21:10:23,942 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(119) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(119)
+2025-01-31 21:10:23,944 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(119), Username: admin
+2025-01-31 21:10:23,944 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(97) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(97)
+2025-01-31 21:10:23,946 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(97), Username: admin
+2025-01-31 21:10:23,947 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(33) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(33)
+2025-01-31 21:10:23,949 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(33), Username: admin
+2025-01-31 21:10:23,949 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(50) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(50)
+2025-01-31 21:10:23,952 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(50), Username: admin
+2025-01-31 21:10:23,952 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(4) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)_1
+2025-01-31 21:10:23,955 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)_1, Username: admin
+2025-01-31 21:10:23,955 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(62) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(62)
+2025-01-31 21:10:23,957 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(62), Username: admin
+2025-01-31 21:10:23,958 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(113) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(113)
+2025-01-31 21:10:23,960 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(113), Username: admin
+2025-01-31 21:10:23,960 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(55) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(55)
+2025-01-31 21:10:23,963 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(55), Username: admin
+2025-01-31 21:10:23,963 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(15) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)_1
+2025-01-31 21:10:23,966 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)_1, Username: admin
+2025-01-31 21:10:23,966 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(43) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(43)
+2025-01-31 21:10:23,969 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(43), Username: admin
+2025-01-31 21:10:23,969 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(116) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(116)
+2025-01-31 21:10:23,971 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(116), Username: admin
+2025-01-31 21:10:23,971 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(82) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(82)
+2025-01-31 21:10:23,974 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(82), Username: admin
+2025-01-31 21:10:23,974 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(106) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(106)
+2025-01-31 21:10:23,977 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(106), Username: admin
+2025-01-31 21:10:23,977 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(22) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(22)
+2025-01-31 21:10:23,979 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(22), Username: admin
+2025-01-31 21:10:23,980 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(76) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(76)
+2025-01-31 21:10:23,982 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(76), Username: admin
+2025-01-31 21:10:23,982 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(28) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(28)
+2025-01-31 21:10:23,986 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(28), Username: admin
+2025-01-31 21:10:23,986 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(21) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(21)
+2025-01-31 21:10:23,989 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(21), Username: admin
+2025-01-31 21:10:23,989 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(38) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(38)
+2025-01-31 21:10:23,992 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(38), Username: admin
+2025-01-31 21:10:23,992 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(85) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(85)
+2025-01-31 21:10:23,995 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(85), Username: admin
+2025-01-31 21:10:23,995 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(52) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(52)
+2025-01-31 21:10:23,998 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(52), Username: admin
+2025-01-31 21:10:23,998 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(73) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(73)
+2025-01-31 21:10:24,001 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(73), Username: admin
+2025-01-31 21:10:24,001 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(108) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(108)
+2025-01-31 21:10:24,004 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(108), Username: admin
+2025-01-31 21:10:24,004 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(113) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(113)
+2025-01-31 21:10:24,007 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(113), Username: admin
+2025-01-31 21:10:24,007 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(26) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(26)
+2025-01-31 21:10:24,010 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(26), Username: admin
+2025-01-31 21:10:24,010 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(23) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(23)
+2025-01-31 21:10:24,013 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(23), Username: admin
+2025-01-31 21:10:24,013 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(61) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(61)
+2025-01-31 21:10:24,019 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(61), Username: admin
+2025-01-31 21:10:24,019 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(72) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(72)
+2025-01-31 21:10:24,024 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(72), Username: admin
+2025-01-31 21:10:24,024 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(29) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(29)
+2025-01-31 21:10:24,028 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(29), Username: admin
+2025-01-31 21:10:24,029 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(12) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)_1
+2025-01-31 21:10:24,033 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)_1, Username: admin
+2025-01-31 21:10:24,033 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(88) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(88)
+2025-01-31 21:10:24,037 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(88), Username: admin
+2025-01-31 21:10:24,038 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(2) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)_1
+2025-01-31 21:10:24,042 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)_1, Username: admin
+2025-01-31 21:10:24,043 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(101) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(101)
+2025-01-31 21:10:24,048 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(101), Username: admin
+2025-01-31 21:10:24,048 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(109) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(109)
+2025-01-31 21:10:24,052 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(109), Username: admin
+2025-01-31 21:10:24,052 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(65) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(65)
+2025-01-31 21:10:24,056 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(65), Username: admin
+2025-01-31 21:10:24,057 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(80) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(80)
+2025-01-31 21:10:24,061 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(80), Username: admin
+2025-01-31 21:10:24,062 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(17) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(17)
+2025-01-31 21:10:24,066 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(17), Username: admin
+2025-01-31 21:10:24,066 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 to /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-01-31 21:10:24,069 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2_1, Username: admin
+2025-01-31 21:10:24,069 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(53) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(53)
+2025-01-31 21:10:24,072 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(53), Username: admin
+2025-01-31 21:10:24,072 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(15) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)_1
+2025-01-31 21:10:24,075 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)_1, Username: admin
+2025-01-31 21:10:24,075 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(103) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(103)
+2025-01-31 21:10:24,077 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(103), Username: admin
+2025-01-31 21:10:24,077 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(95) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(95)
+2025-01-31 21:10:24,080 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(95), Username: admin
+2025-01-31 21:10:24,081 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(64) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(64)
+2025-01-31 21:10:24,083 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(64), Username: admin
+2025-01-31 21:10:24,084 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(66) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(66)
+2025-01-31 21:10:24,086 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(66), Username: admin
+2025-01-31 21:10:24,086 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(24) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(24)
+2025-01-31 21:10:24,089 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(24), Username: admin
+2025-01-31 21:10:24,089 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(65) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(65)
+2025-01-31 21:10:24,092 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(65), Username: admin
+2025-01-31 21:10:24,092 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(34) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(34)
+2025-01-31 21:10:24,095 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(34), Username: admin
+2025-01-31 21:10:24,095 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(31) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(31)
+2025-01-31 21:10:24,097 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(31), Username: admin
+2025-01-31 21:10:24,098 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(92) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(92)
+2025-01-31 21:10:24,100 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(92), Username: admin
+2025-01-31 21:10:24,101 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(11) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)_1
+2025-01-31 21:10:24,103 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)_1, Username: admin
+2025-01-31 21:10:24,104 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(118) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(118)
+2025-01-31 21:10:24,106 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(118), Username: admin
+2025-01-31 21:10:24,106 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(39) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(39)
+2025-01-31 21:10:24,109 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(39), Username: admin
+2025-01-31 21:10:24,109 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(14) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)_1
+2025-01-31 21:10:24,111 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)_1, Username: admin
+2025-01-31 21:10:24,111 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(71) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(71)
+2025-01-31 21:10:24,114 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(71), Username: admin
+2025-01-31 21:10:24,114 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(123) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(123)
+2025-01-31 21:10:24,116 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(123), Username: admin
+2025-01-31 21:10:24,117 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(23) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(23)
+2025-01-31 21:10:24,119 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(23), Username: admin
+2025-01-31 21:10:24,119 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(79) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(79)
+2025-01-31 21:10:24,122 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(79), Username: admin
+2025-01-31 21:10:24,122 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(2) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)_1
+2025-01-31 21:10:24,124 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)_1, Username: admin
+2025-01-31 21:10:24,124 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(24) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(24)
+2025-01-31 21:10:24,127 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(24), Username: admin
+2025-01-31 21:10:24,127 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(48) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(48)
+2025-01-31 21:10:24,129 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(48), Username: admin
+2025-01-31 21:10:24,130 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(90) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(90)
+2025-01-31 21:10:24,132 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(90), Username: admin
+2025-01-31 21:10:24,132 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(127) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(127)
+2025-01-31 21:10:24,135 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(127), Username: admin
+2025-01-31 21:10:24,135 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf to /home/jupiter/bj_health_manage/data/ord2_edf_2
+2025-01-31 21:10:24,137 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf_2, Username: admin
+2025-01-31 21:10:24,137 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(36) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(36)
+2025-01-31 21:10:24,140 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(36), Username: admin
+2025-01-31 21:10:24,140 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(21) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(21)
+2025-01-31 21:10:24,142 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(21), Username: admin
+2025-01-31 21:10:24,143 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(91) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(91)
+2025-01-31 21:10:24,145 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(91), Username: admin
+2025-01-31 21:10:24,146 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(51) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(51)
+2025-01-31 21:10:24,148 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(51), Username: admin
+2025-01-31 21:10:24,148 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(44) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(44)
+2025-01-31 21:10:24,151 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(44), Username: admin
+2025-01-31 21:10:24,152 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(49) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(49)
+2025-01-31 21:10:24,154 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(49), Username: admin
+2025-01-31 21:10:24,154 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(77) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(77)
+2025-01-31 21:10:24,157 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(77), Username: admin
+2025-01-31 21:10:24,157 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(19) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(19)
+2025-01-31 21:10:24,160 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(19), Username: admin
+2025-01-31 21:10:24,160 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(124) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(124)
+2025-01-31 21:10:24,162 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(124), Username: admin
+2025-01-31 21:10:24,163 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(79) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(79)
+2025-01-31 21:10:24,165 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(79), Username: admin
+2025-01-31 21:10:24,165 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(58) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(58)
+2025-01-31 21:10:24,168 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(58), Username: admin
+2025-01-31 21:10:24,168 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(12) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)_1
+2025-01-31 21:10:24,171 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)_1, Username: admin
+2025-01-31 21:10:24,171 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(1) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)_1
+2025-01-31 21:10:24,173 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)_1, Username: admin
+2025-01-31 21:10:24,174 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(58) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(58)
+2025-01-31 21:10:24,176 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(58), Username: admin
+2025-01-31 21:10:24,176 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(77) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(77)
+2025-01-31 21:10:24,179 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(77), Username: admin
+2025-01-31 21:10:24,179 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(55) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(55)
+2025-01-31 21:10:24,182 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(55), Username: admin
+2025-01-31 21:10:24,182 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(119) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(119)
+2025-01-31 21:10:24,184 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(119), Username: admin
+2025-01-31 21:10:24,185 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(83) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(83)
+2025-01-31 21:10:24,187 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(83), Username: admin
+2025-01-31 21:10:24,187 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(48) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(48)
+2025-01-31 21:10:24,189 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(48), Username: admin
+2025-01-31 21:10:24,190 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(112) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(112)
+2025-01-31 21:10:24,192 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(112), Username: admin
+2025-01-31 21:10:24,192 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(72) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(72)
+2025-01-31 21:10:24,195 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(72), Username: admin
+2025-01-31 21:10:24,195 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(63) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(63)
+2025-01-31 21:10:24,198 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(63), Username: admin
+2025-01-31 21:10:24,198 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(87) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(87)
+2025-01-31 21:10:24,201 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(87), Username: admin
+2025-01-31 21:10:24,201 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(126) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(126)
+2025-01-31 21:10:24,204 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(126), Username: admin
+2025-01-31 21:10:24,204 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(87) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(87)
+2025-01-31 21:10:24,207 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(87), Username: admin
+2025-01-31 21:10:24,207 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(37) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(37)
+2025-01-31 21:10:24,210 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(37), Username: admin
+2025-01-31 21:10:24,210 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(98) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(98)
+2025-01-31 21:10:24,213 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(98), Username: admin
+2025-01-31 21:10:24,213 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(120) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(120)
+2025-01-31 21:10:24,216 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(120), Username: admin
+2025-01-31 21:10:24,216 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(86) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(86)
+2025-01-31 21:10:24,219 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(86), Username: admin
+2025-01-31 21:10:24,219 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(6) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)_1
+2025-01-31 21:10:24,222 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)_1, Username: admin
+2025-01-31 21:10:24,222 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(70) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(70)
+2025-01-31 21:10:24,225 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(70), Username: admin
+2025-01-31 21:10:24,225 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(3) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)_1
+2025-01-31 21:10:24,227 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)_1, Username: admin
+2025-01-31 21:10:24,228 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(43) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(43)
+2025-01-31 21:10:24,230 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(43), Username: admin
+2025-01-31 21:10:24,230 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(42) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(42)
+2025-01-31 21:10:24,233 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(42), Username: admin
+2025-01-31 21:10:24,233 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(4) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)_1
+2025-01-31 21:10:24,235 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)_1, Username: admin
+2025-01-31 21:10:24,235 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(94) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(94)
+2025-01-31 21:10:24,237 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(94), Username: admin
+2025-01-31 21:10:24,238 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(122) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(122)
+2025-01-31 21:10:24,240 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(122), Username: admin
+2025-01-31 21:10:24,240 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(46) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(46)
+2025-01-31 21:10:24,242 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(46), Username: admin
+2025-01-31 21:10:24,243 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(89) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(89)
+2025-01-31 21:10:24,245 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(89), Username: admin
+2025-01-31 21:10:24,245 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(75) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(75)
+2025-01-31 21:10:24,248 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(75), Username: admin
+2025-01-31 21:10:24,248 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(34) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(34)
+2025-01-31 21:10:24,251 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(34), Username: admin
+2025-01-31 21:10:24,251 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(32) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(32)
+2025-01-31 21:10:24,253 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(32), Username: admin
+2025-01-31 21:10:24,253 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(104) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(104)
+2025-01-31 21:10:24,256 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(104), Username: admin
+2025-01-31 21:10:24,256 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(59) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(59)
+2025-01-31 21:10:24,258 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(59), Username: admin
+2025-01-31 21:10:24,259 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(56) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(56)
+2025-01-31 21:10:24,261 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(56), Username: admin
+2025-01-31 21:10:24,261 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(1) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)_1
+2025-01-31 21:10:24,263 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)_1, Username: admin
+2025-01-31 21:10:24,264 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(11) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)_1
+2025-01-31 21:10:24,266 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)_1, Username: admin
+2025-01-31 21:10:24,266 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(40) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(40)
+2025-01-31 21:10:24,268 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(40), Username: admin
+2025-01-31 21:10:24,269 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(114) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(114)
+2025-01-31 21:10:24,271 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(114), Username: admin
+2025-01-31 21:10:24,271 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(59) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(59)
+2025-01-31 21:10:24,274 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(59), Username: admin
+2025-01-31 21:10:24,274 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(75) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(75)
+2025-01-31 21:10:24,277 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(75), Username: admin
+2025-01-31 21:10:24,277 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(19) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(19)
+2025-01-31 21:10:24,279 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(19), Username: admin
+2025-01-31 21:10:24,280 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(125) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(125)
+2025-01-31 21:10:24,282 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(125), Username: admin
+2025-01-31 21:10:24,282 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/000005_ord2_2 - 副本(85) to /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(85)
+2025-01-31 21:10:24,285 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(85), Username: admin
+2025-01-31 21:10:24,285 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(83) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(83)
+2025-01-31 21:10:24,288 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(83), Username: admin
+2025-01-31 21:10:24,288 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(7) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)_1
+2025-01-31 21:10:24,290 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)_1, Username: admin
+2025-01-31 21:10:24,290 - INFO - Directory moved from /home/jupiter/bj_health_manage/tmp/batchprocess - 副本(1)/ord2_edf - 副本(81) to /home/jupiter/bj_health_manage/data/ord2_edf - 副本(81)
+2025-01-31 21:10:24,293 - INFO - Data uploaded successfully. Path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(81), Username: admin
+2025-01-31 21:10:24,579 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:12:42,289 - INFO - 初始化登录界面...
+2025-01-31 21:12:42,291 - INFO - 开始预加载模型...
+2025-01-31 21:12:42,291 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:12:42,296 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:12:42,296 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:12:42,297 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:12:42,297 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:12:42,297 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:12:42,297 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:12:42,384 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:12:42,384 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:12:42,384 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:12:42,384 - INFO - 成功预加载量化模型
+2025-01-31 21:12:44,358 - INFO - Opening user login page.
+2025-01-31 21:12:47,321 - INFO - User admin logged in successfully
+2025-01-31 21:15:32,217 - INFO - 初始化登录界面...
+2025-01-31 21:15:32,220 - INFO - 开始预加载模型...
+2025-01-31 21:15:32,220 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:15:32,226 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:15:32,226 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:15:32,226 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:15:32,226 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:15:32,226 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:15:32,226 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:15:32,312 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:15:32,312 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:15:32,312 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:15:32,312 - INFO - 成功预加载量化模型
+2025-01-31 21:15:33,097 - INFO - Opening user login page.
+2025-01-31 21:15:35,850 - INFO - User admin logged in successfully
+2025-01-31 21:15:37,078 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:15:37,079 - INFO - Opening data view page.
+2025-01-31 21:21:42,861 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:21:45,403 - INFO - Returned to index page successfully
+2025-01-31 21:21:46,199 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:21:46,410 - INFO - Successfully displayed 289 data records
+2025-01-31 21:21:46,452 - INFO - Opening health evaluation page.
+2025-01-31 21:22:54,023 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:22:54,416 - INFO - Successfully displayed 289 data records
+2025-01-31 21:22:56,756 - INFO - Returned to index page successfully
+2025-01-31 21:22:57,756 - INFO - Opening results view page.
+2025-01-31 21:23:04,680 - INFO - Returned to index page successfully
+2025-01-31 21:24:27,615 - INFO - 初始化登录界面...
+2025-01-31 21:24:27,618 - INFO - 开始预加载模型...
+2025-01-31 21:24:27,618 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:24:27,623 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:24:27,623 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:24:27,623 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:24:27,623 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:24:27,623 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:24:27,623 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:24:27,708 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:24:27,708 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:24:27,708 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:24:27,708 - INFO - 成功预加载量化模型
+2025-01-31 21:24:28,468 - INFO - Opening user login page.
+2025-01-31 21:24:33,625 - INFO - User admin logged in successfully
+2025-01-31 21:24:35,265 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:24:35,266 - INFO - Opening data view page.
+2025-01-31 21:24:59,526 - INFO - 初始化登录界面...
+2025-01-31 21:24:59,529 - INFO - 开始预加载模型...
+2025-01-31 21:24:59,529 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:24:59,534 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:24:59,534 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:24:59,534 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:24:59,534 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:24:59,534 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:24:59,534 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:24:59,620 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:24:59,620 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:24:59,620 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:24:59,620 - INFO - 成功预加载量化模型
+2025-01-31 21:25:00,533 - INFO - Opening user login page.
+2025-01-31 21:25:03,871 - INFO - User admin logged in successfully
+2025-01-31 21:25:05,140 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:25:05,140 - INFO - Opening data view page.
+2025-01-31 21:25:50,620 - INFO - 初始化登录界面...
+2025-01-31 21:25:50,623 - INFO - 开始预加载模型...
+2025-01-31 21:25:50,623 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:25:50,627 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:25:50,627 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:25:50,628 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:25:50,628 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:25:50,628 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:25:50,628 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:25:50,712 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:25:50,712 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:25:50,712 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:25:50,712 - INFO - 成功预加载量化模型
+2025-01-31 21:25:51,624 - INFO - Opening user login page.
+2025-01-31 21:25:54,283 - INFO - User admin logged in successfully
+2025-01-31 21:25:56,110 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:25:56,111 - INFO - Opening data view page.
+2025-01-31 21:27:09,313 - INFO - 初始化登录界面...
+2025-01-31 21:27:09,327 - INFO - 开始预加载模型...
+2025-01-31 21:27:09,327 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:27:09,331 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:27:09,332 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:27:09,332 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:27:09,332 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:27:09,332 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:27:09,332 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:27:09,412 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:27:09,412 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:27:09,412 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:27:09,413 - INFO - 成功预加载量化模型
+2025-01-31 21:27:10,233 - INFO - Opening user login page.
+2025-01-31 21:27:12,809 - INFO - User admin logged in successfully
+2025-01-31 21:27:14,127 - INFO - Data table refreshed successfully with 289 records
+2025-01-31 21:27:14,127 - INFO - Opening data view page.
+2025-01-31 21:27:17,292 - INFO - Returned to index page successfully
+2025-01-31 21:27:17,950 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:27:18,161 - INFO - Successfully displayed 289 data records
+2025-01-31 21:27:18,201 - INFO - Opening health evaluation page.
+2025-01-31 21:29:23,614 - INFO - 初始化登录界面...
+2025-01-31 21:29:23,617 - INFO - 开始预加载模型...
+2025-01-31 21:29:23,617 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:29:23,621 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:29:23,621 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:29:23,621 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:29:23,621 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:29:23,621 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:29:23,622 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:29:23,708 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:29:23,708 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:29:23,708 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:29:23,708 - INFO - 成功预加载量化模型
+2025-01-31 21:29:25,066 - INFO - Opening user login page.
+2025-01-31 21:29:27,820 - INFO - User admin logged in successfully
+2025-01-31 21:29:29,318 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:29:29,535 - INFO - Successfully displayed 289 data records
+2025-01-31 21:29:29,574 - INFO - Opening health evaluation page.
+2025-01-31 21:34:08,827 - INFO - 初始化登录界面...
+2025-01-31 21:34:08,830 - INFO - 开始预加载模型...
+2025-01-31 21:34:08,830 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:34:08,834 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:34:08,834 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:34:08,834 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:34:08,834 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:34:08,834 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:34:08,835 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:34:08,916 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:34:08,916 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:34:08,916 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:34:08,916 - INFO - 成功预加载量化模型
+2025-01-31 21:34:09,673 - INFO - Opening user login page.
+2025-01-31 21:34:12,610 - INFO - User admin logged in successfully
+2025-01-31 21:34:14,184 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:34:14,392 - INFO - Successfully displayed 289 data records
+2025-01-31 21:34:14,433 - INFO - Opening health evaluation page.
+2025-01-31 21:35:46,661 - INFO - 初始化登录界面...
+2025-01-31 21:35:46,664 - INFO - 开始预加载模型...
+2025-01-31 21:35:46,664 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:35:46,668 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:35:46,668 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:35:46,668 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:35:46,668 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:35:46,668 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:35:46,669 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:35:46,752 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:35:46,752 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:35:46,752 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:35:46,752 - INFO - 成功预加载量化模型
+2025-01-31 21:35:48,290 - INFO - Opening user login page.
+2025-01-31 21:35:52,005 - INFO - User admin logged in successfully
+2025-01-31 21:35:53,038 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:35:53,247 - INFO - Successfully displayed 289 data records
+2025-01-31 21:35:53,287 - INFO - Opening health evaluation page.
+2025-01-31 21:38:34,161 - INFO - 初始化登录界面...
+2025-01-31 21:38:34,164 - INFO - 开始预加载模型...
+2025-01-31 21:38:34,164 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:38:34,168 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:38:34,168 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:38:34,168 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:38:34,168 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:38:34,168 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:38:34,169 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:38:34,255 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:38:34,255 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:38:34,255 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:38:34,256 - INFO - 成功预加载量化模型
+2025-01-31 21:38:34,990 - INFO - Opening user login page.
+2025-01-31 21:38:37,919 - INFO - User admin logged in successfully
+2025-01-31 21:38:39,094 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:38:39,304 - INFO - Successfully displayed 289 data records
+2025-01-31 21:38:39,344 - INFO - Opening health evaluation page.
+2025-01-31 21:42:15,812 - INFO - 初始化登录界面...
+2025-01-31 21:42:15,826 - INFO - 开始预加载模型...
+2025-01-31 21:42:15,826 - INFO - 正在检查数据库中的模型信息...
+2025-01-31 21:42:15,830 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:42:15,831 - INFO - 模型文件存在，开始加载...
+2025-01-31 21:42:15,831 - INFO - 开始加载INT8量化模型...
+2025-01-31 21:42:15,831 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-01-31 21:42:15,831 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-01-31 21:42:15,831 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-01-31 21:42:15,894 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-01-31 21:42:15,895 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-01-31 21:42:15,895 - INFO - 模型加载成功并已放置在GPU上
+2025-01-31 21:42:15,895 - INFO - 成功预加载量化模型
+2025-01-31 21:42:45,981 - INFO - Opening user login page.
+2025-01-31 21:42:48,836 - INFO - User admin logged in successfully
+2025-01-31 21:42:50,067 - INFO - Administrator admin: fetching all data records
+2025-01-31 21:42:50,283 - INFO - Successfully displayed 289 data records
+2025-01-31 21:42:50,324 - INFO - Opening health evaluation page.

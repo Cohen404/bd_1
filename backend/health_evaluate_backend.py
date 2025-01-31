@@ -28,6 +28,8 @@ from sql_model.tb_result import Result
 from util.db_util import SessionClass
 from model.tuili import EegModel
 from model.tuili_int8 import EegModelInt8  # 添加INT8模型的导入
+from model.batch_inference import BatchInferenceModel
+from model.result_processor import ResultProcessor
 import logging
 from sql_model.tb_user import User
 from util.window_manager import WindowManager
@@ -159,6 +161,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.btn_return.clicked.connect(self.return_index)
         self.pushButton_2.clicked.connect(self.next_image)
         self.pushButton.clicked.connect(self.previous_image)
+        self.batch_evaluate_button.clicked.connect(self.batchEvaluateButton)  # 连接批量评估按钮
+        self.select_top_200_button.clicked.connect(self.selectTop200)  # 连接选择前200条按钮
 
         window_manager = WindowManager()
         window_manager.register_window('health_evaluate', self)
@@ -168,6 +172,15 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_timer)
         self.elapsed_seconds = 0
+
+        # 添加批量评估相关属性
+        self.batch_inference_thread = None
+        self.selected_data_ids = []
+        self.batch_results = []
+        
+        # 修改表格设置，允许多选
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
 
     def get_user_type(self, user_id):
         """
@@ -473,12 +486,12 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                                              "font-size:13px")
         self.evaluate_pushButton.clicked.connect(self.EvaluateButton)
 
-        # 生成报告按钮 - 进一步增加宽度
+        # 生成报告按钮
         self.report_pushButton = QtWidgets.QPushButton('报告')
         self.report_pushButton.setStyleSheet("text-align : center;"
                                            "background-color : LightBlue;"
                                            "height : 30px;"
-                                           "width : 180px;"  # 增加到180px
+                                           "width : 60px;"
                                            "border-style: outset;"
                                            "font-size:13px")
         self.report_pushButton.clicked.connect(self.generateReport)
@@ -1100,6 +1113,207 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         except Exception as e:
             logging.error(f"Error in generateReport: {str(e)}")
             QMessageBox.critical(self, "错误", "生成报告过程中发生错误，请重试。")
+
+    def batchEvaluateButton(self):
+        """
+        批量评估功能
+        """
+        try:
+            # 获取选中的行
+            selected_rows = self.tableWidget.selectionModel().selectedRows()
+            if not selected_rows:
+                QMessageBox.warning(self, "警告", "请先选择要评估的数据")
+                return
+                
+            if len(selected_rows) > 200:
+                QMessageBox.warning(self, "警告", "最多只能选择200个数据进行批量评估")
+                return
+            
+            # 收集选中的数据ID和路径
+            self.selected_data_ids = []
+            data_paths = []
+            
+            session = SessionClass()
+            try:
+                for row in selected_rows:
+                    data_id = int(self.tableWidget.item(row.row(), 0).text())
+                    data = session.query(Data).filter(Data.id == data_id).first()
+                    if data and os.path.exists(data.data_path):
+                        self.selected_data_ids.append(data_id)
+                        data_paths.append(data.data_path)
+                    else:
+                        QMessageBox.warning(self, "警告", f"ID为{data_id}的数据路径不存在")
+                        return
+            finally:
+                session.close()
+            
+            if not data_paths:
+                QMessageBox.warning(self, "警告", "没有有效的数据可以评估")
+                return
+            
+            # 检查模型
+            session = SessionClass()
+            try:
+                model_0 = session.query(Model).filter(Model.model_type == 0).first()
+                if not model_0:
+                    QMessageBox.warning(self, "警告", "请先上传普通应激模型")
+                    return
+                if not os.path.exists(model_0.model_path):
+                    QMessageBox.warning(self, "警告", "普通应激模型文件不存在")
+                    return
+            finally:
+                session.close()
+            
+            # 重置计时器
+            self.elapsed_seconds = 0
+            
+            # 创建进度对话框
+            self.progress_dialog = QProgressDialog("正在进行批量评估... (已用时: 0秒)", "取消", 0, 100, self)
+            self.progress_dialog.setWindowTitle("批量评估进度")
+            self.progress_dialog.setWindowModality(Qt.WindowModal)
+            self.progress_dialog.setMinimumDuration(0)
+            self.progress_dialog.setValue(0)
+            
+            # 启动计时器
+            self.timer.start(1000)  # 每秒更新一次
+            
+            # 创建并启动批量评估线程
+            self.batch_inference_thread = BatchInferenceModel(data_paths, model_0.model_path)
+            self.batch_inference_thread.progress_updated.connect(self.updateBatchProgress)
+            self.batch_inference_thread.batch_completed.connect(self.processBatchResults)
+            self.batch_inference_thread.error_occurred.connect(self.handleBatchError)
+            self.batch_inference_thread.finished.connect(self.onBatchComplete)
+            self.batch_inference_thread.start()
+            
+        except Exception as e:
+            logging.error(f"批量评估过程中发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(self, "错误", f"批量评估过程中发生错误: {str(e)}")
+
+    def updateBatchProgress(self, progress):
+        """
+        更新批量评估进度
+        """
+        if self.progress_dialog and not self.progress_dialog.wasCanceled():
+            self.progress_dialog.setValue(int(progress))
+
+    def processBatchResults(self, batch_results):
+        """
+        处理批次结果
+        """
+        try:
+            self.batch_results.extend(batch_results)
+        except Exception as e:
+            logging.error(f"处理批次结果时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+
+    def handleBatchError(self, error_msg):
+        """
+        处理批量评估错误
+        """
+        QMessageBox.critical(self, "错误", f"批量评估发生错误: {error_msg}")
+        if self.progress_dialog:
+            self.progress_dialog.close()
+            self.timer.stop()  # 停止计时器
+
+    def onBatchComplete(self):
+        """
+        批量评估完成后的处理
+        """
+        try:
+            if self.progress_dialog:
+                self.progress_dialog.setValue(100)
+                self.progress_dialog.close()
+            
+            # 停止计时器
+            self.timer.stop()
+            self.elapsed_seconds = 0
+            
+            if not self.batch_results:
+                QMessageBox.warning(self, "警告", "批量评估未产生有效结果")
+                return
+            
+            # 更新数据库
+            session = SessionClass()
+            try:
+                result_time = datetime.now().replace(microsecond=0)
+                
+                for data_id, stress_score in zip(self.selected_data_ids, self.batch_results):
+                    # 使用第一个模型的结果作为第二和第三个模型的结果
+                    depression_score = stress_score
+                    anxiety_score = stress_score
+                    
+                    # 检查是否已存在结果
+                    existing_result = session.query(Result).filter(Result.id == data_id).first()
+                    if existing_result:
+                        # 更新现有结果
+                        existing_result.stress_score = stress_score
+                        existing_result.depression_score = depression_score
+                        existing_result.anxiety_score = anxiety_score
+                        existing_result.result_time = result_time
+                    else:
+                        # 创建新结果
+                        new_result = Result(
+                            id=data_id,
+                            stress_score=stress_score,
+                            depression_score=depression_score,
+                            anxiety_score=anxiety_score,
+                            result_time=result_time,
+                            user_id=self.user_id
+                        )
+                        session.add(new_result)
+                
+                session.commit()
+                QMessageBox.information(self, "成功", "批量评估完成")
+                
+                # 刷新表格显示
+                self.show_table()
+                
+            except Exception as e:
+                session.rollback()
+                logging.error(f"保存批量评估结果时发生错误: {str(e)}")
+                logging.error(traceback.format_exc())
+                QMessageBox.critical(self, "错误", f"保存评估结果时发生错误: {str(e)}")
+            finally:
+                session.close()
+            
+            # 清理
+            self.batch_results = []
+            self.selected_data_ids = []
+            
+        except Exception as e:
+            logging.error(f"完成批量评估时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(self, "错误", f"完成批量评估时发生错误: {str(e)}")
+
+    def selectTop200(self):
+        """
+        选择表格中的前200条数据
+        """
+        try:
+            # 先清除现有选择
+            self.tableWidget.clearSelection()
+            
+            # 获取总行数
+            total_rows = self.tableWidget.rowCount()
+            if total_rows == 0:
+                QMessageBox.warning(self, "警告", "表格中没有数据")
+                return
+            
+            # 计算要选择的行数（最多200行）
+            rows_to_select = min(200, total_rows)
+            
+            # 选择前N行
+            for row in range(rows_to_select):
+                self.tableWidget.selectRow(row)
+            
+            # 显示提示信息
+            QMessageBox.information(self, "提示", f"已选择前{rows_to_select}条数据")
+            
+        except Exception as e:
+            logging.error(f"选择前200条数据时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(self, "错误", f"选择数据时发生错误: {str(e)}")
 
 class EvaluateThread(QThread):
     """

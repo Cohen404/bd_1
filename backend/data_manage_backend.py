@@ -79,29 +79,24 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
 
         # 从文件中读取当前用户ID
         try:
-            with open(CURRENT_USER_FILE, 'r') as f:  # 使用配置的路径
+            with open(CURRENT_USER_FILE, 'r') as f:
                 self.user_id = f.read().strip()
-            print(f"当前用户ID: {self.user_id}")
-
+            
             # 从user_status.txt获取用户类型
-            user_type = operate_user.read(USER_STATUS_FILE)  # 使用配置的路径
+            user_type = operate_user.read(USER_STATUS_FILE)
             self.user_type = (user_type == '1')  # 1表示管理员
-            print(f"用户类型: {'管理员' if self.user_type else '普通用户'}")
 
             # 验证用户信息
             session = SessionClass()
             user = session.query(User).filter(User.user_id == self.user_id).first()
             session.close()
 
-            if user:
-                print(f"数据库中的用户信息: ID={user.user_id}, 用户名={user.username}, 类型={user.user_type}")
-            else:
-                print("警告：在数据库中未找到用户信息")
+            if not user:
                 QMessageBox.warning(self, "警告", "无法获取用户信息")
                 return
 
         except Exception as e:
-            print(f"获取用户信息时出错: {str(e)}")
+            logging.error(f"获取用户信息时出错: {str(e)}")
             QMessageBox.critical(self, "错误", f"获取用户信息失败：{str(e)}")
             return
 
@@ -153,6 +148,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
 
         # 添加批量预处理按钮的信号连接
         self.batch_preprocess_pushButton.clicked.connect(self.handle_batch_preprocess)
+        self.select_top_200_button.clicked.connect(self.select_top_200)
         
         # 初始化选中的数据
         self.selected_data = set()
@@ -194,17 +190,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         """
         session = SessionClass()
         try:
-            print(f"\n开始查询数据表...")
-            print(f"当前用户ID: {self.user_id}, 是否管理员: {self.user_type}")
-
             if self.user_type:  # 管理员
-                print("管理员查询所有数据")
                 data_list = session.query(Data).all()
             else:  # 普通用户
-                print(f"普通用户查询自己的数据: user_id = {self.user_id}")
                 data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
-
-            print(f"查询到 {len(data_list)} 条数据")
 
             # 清空表格
             self.tableWidget.setRowCount(0)
@@ -213,7 +202,6 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             self.tableWidget.setColumnWidth(3, 300)  # 设置路径列的宽度为300像素
 
             for data in data_list:
-                print(f"处理数据: ID={data.id}, 用户ID={data.user_id}, 路径={data.data_path}")
                 row = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(row)
                 
@@ -237,14 +225,8 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 
                 self.tableWidget.setCellWidget(row, 6, self.buttonForRow())
 
-            if len(data_list) == 0:
-                print("没有找到任何数据")
-                # 移除弹窗提示
-                # QMessageBox.information(self, "提示", "暂无数据")
-
             logging.info(f"Data table refreshed successfully with {len(data_list)} records")
         except Exception as e:
-            print(f"显示数据表格时出错: {str(e)}")
             logging.error(f"Error displaying data table: {str(e)}")
             QMessageBox.critical(self, "错误", f"显示数据表格失败：{str(e)}")
         finally:
@@ -828,19 +810,25 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
 
     def update_selection_count(self):
         """更新已选择数据的数量显示"""
-        selected_rows = set(item.row() for item in self.tableWidget.selectedItems())
-        self.selected_data = selected_rows
-        count = len(selected_rows)
-        
-        if count > 200:
-            # 取消最后选择的行
-            for item in self.tableWidget.selectedItems():
-                if item.row() not in list(selected_rows)[:200]:
-                    self.tableWidget.setItemSelected(item, False)
-            count = 200
-            self.selected_data = set(list(selected_rows)[:200])
-        
-        self.selection_count_label.setText(f"已选择: {count}/200")
+        try:
+            selected_rows = set(item.row() for item in self.tableWidget.selectedItems())
+            self.selected_data = selected_rows
+            count = len(selected_rows)
+            
+            if count > 200:
+                # 取消最后选择的行，使用正确的方法
+                current_selection = self.tableWidget.selectedItems()
+                for item in current_selection:
+                    if item.row() not in list(selected_rows)[:200]:
+                        item.setSelected(False)
+                count = 200
+                self.selected_data = set(list(selected_rows)[:200])
+            
+            self.selection_count_label.setText(f"已选择: {count}/200")
+        except Exception as e:
+            error_msg = f"更新选择计数时出错: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
 
     def handle_batch_preprocess(self):
         """处理批量预处理请求"""
@@ -946,6 +934,38 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             logging.error(error_msg)
             QMessageBox.critical(self, "错误", error_msg)
 
+    def select_top_200(self):
+        """
+        选择表格中的前200条数据
+        """
+        try:
+            # 先清除现有选择
+            self.tableWidget.clearSelection()
+            
+            # 获取总行数
+            total_rows = self.tableWidget.rowCount()
+            if total_rows == 0:
+                QMessageBox.warning(self, "警告", "表格中没有数据")
+                return
+            
+            # 计算要选择的行数（最多200行）
+            rows_to_select = min(200, total_rows)
+            
+            # 选择前N行
+            for row in range(rows_to_select):
+                self.tableWidget.selectRow(row)
+            
+            # 更新选择计数
+            self.update_selection_count()
+            
+            # 显示提示信息
+            QMessageBox.information(self, "提示", f"已选择前{rows_to_select}条数据")
+            
+        except Exception as e:
+            error_msg = f"选择前200条数据时出错: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
+
 def process_single_file(data_path):
     """
     处理单个文件的函数（在子进程中运行）
@@ -984,25 +1004,29 @@ class ProcessingThread(QThread):
         self.data_path = data_path
 
     def run(self):
-        # 数据预处理 - 30%进度
-        self.progress.emit(10)
-        print(self.data_path)
-        data_preprocess.treat(self.data_path)
-        self.progress.emit(30)
+        try:
+            # 数据预处理 - 30%进度
+            self.progress.emit(10)
+            data_preprocess.treat(self.data_path)
+            self.progress.emit(30)
 
-        # 查找EDF文件 - 40%进度
-        edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.fif')]
-        if not edf_files:
-            raise Exception("未找到FIF文件")
-        self.progress.emit(40)
+            # 查找EDF文件 - 40%进度
+            edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.fif')]
+            if not edf_files:
+                raise Exception("未找到FIF文件")
+            self.progress.emit(40)
 
-        # 特征提取和可视化 - 60-100%进度
-        file_path = os.path.join(self.data_path, edf_files[0])
-        self.progress.emit(60)
-        data_feature_calculation.analyze_eeg_data(file_path)
-        self.progress.emit(100)
+            # 特征提取和可视化 - 60-100%进度
+            file_path = os.path.join(self.data_path, edf_files[0])
+            self.progress.emit(60)
+            data_feature_calculation.analyze_eeg_data(file_path)
+            self.progress.emit(100)
 
-        self.finished.emit()
+            self.finished.emit()
+        except Exception as e:
+            error_msg = f"处理过程中发生错误: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            self.error.emit(error_msg)
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

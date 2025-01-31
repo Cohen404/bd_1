@@ -188,6 +188,58 @@ class Ui_MainWindow(object):
 
         # 返回footer组件
         self.bottom_layout, self.evaluate_time, self.pass_time = create_bottom()
+        
+        # 添加批量评估按钮
+        self.batch_evaluate_button = QtWidgets.QPushButton(self.centralwidget)
+        self.batch_evaluate_button.setObjectName("batch_evaluate_button")
+        self.batch_evaluate_button.setStyleSheet(
+            "QPushButton{color:white}"
+            "QPushButton:hover{background-color:#94b2da}"
+            "QPushButton{background-color:#4379b9}"
+            "QPushButton{border:2px}"
+            "QPushButton{border-radius:10px}"
+            "QPushButton{padding:2px 4px}"
+            "QPushButton{font-size:16px}"
+            "QPushButton{height:40px}"
+        )
+        self.batch_evaluate_button.setText("批量评估")
+        
+        # 创建一个水平布局来放置批量评估按钮
+        self.batch_button_layout = QtWidgets.QHBoxLayout()
+        # 添加左侧弹簧
+        spacerItem_left = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.batch_button_layout.addItem(spacerItem_left)
+        
+        # 添加选择前200条按钮
+        self.select_top_200_button = QtWidgets.QPushButton(self.centralwidget)
+        self.select_top_200_button.setObjectName("select_top_200_button")
+        self.select_top_200_button.setStyleSheet(
+            "QPushButton{color:white}"
+            "QPushButton:hover{background-color:#94b2da}"
+            "QPushButton{background-color:#4379b9}"
+            "QPushButton{border:2px}"
+            "QPushButton{border-radius:10px}"
+            "QPushButton{padding:2px 4px}"
+            "QPushButton{font-size:16px}"
+            "QPushButton{height:40px}"
+        )
+        self.select_top_200_button.setText("选择前200条")
+        self.batch_button_layout.addWidget(self.select_top_200_button)
+        
+        # 添加按钮之间的间距
+        spacerItem_middle = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.batch_button_layout.addItem(spacerItem_middle)
+        
+        # 添加批量评估按钮
+        self.batch_button_layout.addWidget(self.batch_evaluate_button)
+        # 添加右侧弹簧
+        spacerItem_right = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.batch_button_layout.addItem(spacerItem_right)
+        
+        # 将批量评估按钮布局添加到主布局
+        self.layout.addLayout(self.batch_button_layout)
+        
+        # 添加底部布局
         self.layout.addLayout(self.bottom_layout)
 
         self.retranslateUi(MainWindow)
@@ -243,3 +295,7 @@ class Ui_MainWindow(object):
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
+
+        # 设置批量评估按钮字体
+        self.batch_evaluate_button.setFont(font)
+        self.select_top_200_button.setFont(font)
