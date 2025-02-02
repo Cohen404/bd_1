@@ -151,7 +151,7 @@ def treat(data_dir):
         # 输出保留的通道
         remaining_channels = raw.ch_names
         print(f"保留的通道 ({len(remaining_channels)}个): {remaining_channels}")
-
+        print('11111111111111')
         # 设置电极位置
         try:
             montage = mne.channels.make_standard_montage("standard_1005")
@@ -209,25 +209,55 @@ def treat(data_dir):
         # 创建Epochs对象
         t_min = -1.0
         t_max = 1.0 - 1 / target_sfreq
-        reject_criteria = dict(eeg=100e-6)
+        reject_criteria = dict(eeg=100e-6)  # 初始阈值
+        max_attempts = 5  # 最大尝试次数，防止无限循环
+        attempt = 0
 
-        epochs = mne.Epochs(
-            raw_ref, 
-            events=events, 
-            event_id=event_id, 
-            tmin=t_min, 
-            tmax=t_max, 
-            reject=reject_criteria, 
-            baseline=None, 
-            preload=True
-        )
+        while attempt < max_attempts:
+            try:
+                print(f"尝试创建Epochs，当前reject_criteria: {reject_criteria}")
+                epochs = mne.Epochs(
+                    raw_ref, 
+                    events=events, 
+                    event_id=event_id, 
+                    tmin=t_min, 
+                    tmax=t_max, 
+                    reject=reject_criteria, 
+                    baseline=None, 
+                    preload=True
+                )
+                
+                # 获取epochs数据
+                epochs_data = epochs.get_data()
+                print(f"当前获得的epochs数量: {epochs_data.shape[0]}")
+                
+                # 检查epochs数量是否足够
+                if epochs_data.shape[0] >= 108:
+                    print("获得足够的epochs数量")
+                    break
+                else:
+                    print(f"epochs数量不足（{epochs_data.shape[0]} < 108），增加阈值重试")
+                    # 增加阈值
+                    reject_criteria['eeg'] *= 10
+                    attempt += 1
+                    
+                del epochs_data  # 释放内存
+                
+            except Exception as e:
+                print(f"创建Epochs时出错: {str(e)}")
+                reject_criteria['eeg'] *= 10
+                attempt += 1
+
+        if attempt >= max_attempts:
+            print("警告：达到最大尝试次数，使用最后一次的结果")
+
         del raw_ref
 
         # 调整epochs形状
         epochs_data = epochs.get_data()
         if epochs_data.shape[2] == 1001:
             epochs_data = epochs_data[:, :, :-1]
-
+        
         # 只取最后108个epochs
         data = epochs_data[-108::, :, :]
         print(data.shape)

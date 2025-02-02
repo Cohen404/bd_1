@@ -985,6 +985,15 @@ def process_single_file(data_path):
         
         if not success:
             raise Exception(f"预处理失败: {data_path}")
+            
+        # 查找生成的FIF文件
+        fif_files = [f for f in os.listdir(data_path) if f.endswith('.fif')]
+        if not fif_files:
+            raise Exception("预处理完成但未找到FIF文件")
+            
+        # 特征提取和可视化
+        fif_path = os.path.join(data_path, fif_files[0])
+        data_feature_calculation.analyze_eeg_data(fif_path)
         
         return True
     except Exception as e:
