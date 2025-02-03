@@ -23339,3 +23339,160 @@ FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_heal
 2025-02-03 16:22:58,712 - INFO - Returned to index page successfully
 2025-02-03 16:22:59,287 - INFO - Opening results view page.
 2025-02-03 16:23:03,312 - INFO - Returned to index page successfully
+2025-02-03 16:26:14,671 - INFO - 初始化登录界面...
+2025-02-03 16:26:14,674 - INFO - 开始预加载模型...
+2025-02-03 16:26:14,674 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 16:26:14,678 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:26:14,678 - INFO - 模型文件存在，开始加载...
+2025-02-03 16:26:14,678 - INFO - 开始加载INT8量化模型...
+2025-02-03 16:26:14,678 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 16:26:14,678 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 16:26:14,679 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:26:14,734 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 16:26:14,734 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 16:26:14,734 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 16:26:14,734 - INFO - 成功预加载量化模型
+2025-02-03 16:26:15,610 - INFO - Opening user login page.
+2025-02-03 16:26:19,465 - INFO - User user1 logged in successfully
+2025-02-03 16:26:20,720 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:26:20,727 - INFO - Successfully displayed 8 data records
+2025-02-03 16:26:20,730 - INFO - Opening health evaluation page.
+2025-02-03 16:26:23,403 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:26:23,842 - INFO - Prediction result: 1.0
+2025-02-03 16:26:23,842 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:26:23,842 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:26:23,845 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:26:24,209 - INFO - Prediction result: 1.0
+2025-02-03 16:26:24,209 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:26:24,210 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:26:25,153 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:26:25,163 - INFO - Successfully displayed 8 data records
+2025-02-03 16:26:25,999 - INFO - Returned to index page successfully
+2025-02-03 16:26:27,287 - INFO - Opening results view page.
+2025-02-03 16:30:47,020 - INFO - 初始化登录界面...
+2025-02-03 16:30:47,023 - INFO - 开始预加载模型...
+2025-02-03 16:30:47,023 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 16:30:47,027 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:30:47,028 - INFO - 模型文件存在，开始加载...
+2025-02-03 16:30:47,028 - INFO - 开始加载INT8量化模型...
+2025-02-03 16:30:47,028 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 16:30:47,028 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 16:30:47,028 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:30:47,081 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 16:30:47,082 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 16:30:47,082 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 16:30:47,082 - INFO - 成功预加载量化模型
+2025-02-03 16:30:47,956 - INFO - Opening user login page.
+2025-02-03 16:30:51,101 - INFO - User user1 logged in successfully
+2025-02-03 16:30:52,019 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:30:52,026 - INFO - Successfully displayed 8 data records
+2025-02-03 16:30:52,029 - INFO - Opening health evaluation page.
+2025-02-03 16:30:53,983 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:30:54,419 - INFO - Prediction result: 1.0
+2025-02-03 16:30:54,419 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:30:54,420 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:30:54,422 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:30:54,791 - INFO - Prediction result: 1.0
+2025-02-03 16:30:54,791 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:30:54,792 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:30:55,819 - INFO - 更新ID 291 的评估结果
+2025-02-03 16:30:55,821 - INFO - 更新ID 292 的评估结果
+2025-02-03 16:30:57,475 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:30:57,484 - INFO - Successfully displayed 8 data records
+2025-02-03 16:31:05,360 - INFO - Returned to index page successfully
+2025-02-03 16:31:06,411 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 16:31:06,412 - INFO - Opening data view page.
+2025-02-03 16:31:07,307 - INFO - Returned to index page successfully
+2025-02-03 16:31:07,921 - INFO - Opening results view page.
+2025-02-03 16:33:28,954 - INFO - 初始化登录界面...
+2025-02-03 16:33:28,957 - INFO - 开始预加载模型...
+2025-02-03 16:33:28,957 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 16:33:28,961 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:33:28,961 - INFO - 模型文件存在，开始加载...
+2025-02-03 16:33:28,961 - INFO - 开始加载INT8量化模型...
+2025-02-03 16:33:28,961 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 16:33:28,961 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 16:33:28,962 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:33:29,032 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 16:33:29,032 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 16:33:29,032 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 16:33:29,032 - INFO - 成功预加载量化模型
+2025-02-03 16:33:29,950 - INFO - Opening user login page.
+2025-02-03 16:33:33,119 - INFO - User user1 logged in successfully
+2025-02-03 16:33:34,190 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:33:34,197 - INFO - Successfully displayed 8 data records
+2025-02-03 16:33:34,201 - INFO - Opening health evaluation page.
+2025-02-03 16:33:37,738 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:33:38,168 - INFO - Prediction result: 1.0
+2025-02-03 16:33:38,168 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:33:38,174 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:33:38,176 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:33:38,538 - INFO - Prediction result: 1.0
+2025-02-03 16:33:38,538 - INFO - 抑郁量表分数 <= 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:33:38,538 - INFO - 焦虑量表分数 <= 48，直接使用量表计算结果: 50.0
+2025-02-03 16:33:39,726 - INFO - 更新ID 291 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 50.0
+2025-02-03 16:33:39,727 - INFO - 更新ID 292 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 50.0
+2025-02-03 16:33:40,567 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:33:40,576 - INFO - Successfully displayed 8 data records
+2025-02-03 16:33:41,290 - INFO - Returned to index page successfully
+2025-02-03 16:33:42,669 - INFO - Opening results view page.
+2025-02-03 16:34:07,341 - INFO - Returned to index page successfully
+2025-02-03 16:34:08,008 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:34:08,014 - INFO - Successfully displayed 8 data records
+2025-02-03 16:34:08,018 - INFO - Opening health evaluation page.
+2025-02-03 16:34:11,035 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:34:11,035 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 16:34:11,451 - INFO - Prediction result: 1.0
+2025-02-03 16:34:11,452 - INFO - 第一个模型评估结果: 95.0
+2025-02-03 16:34:11,452 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 16:34:11,453 - INFO - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:34:11,453 - INFO - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-03 16:34:11,454 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 16:34:11,454 - INFO - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-03 16:34:11,454 - INFO - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-03 16:34:11,462 - INFO - 当前模型索引: 0
+2025-02-03 16:34:11,463 - INFO - 第一个模型的结果: 95.0
+2025-02-03 16:34:11,463 - ERROR - Error in on_model_finished: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+2025-02-03 16:34:11,463 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 635, in on_model_finished
+    self.waitTestRes(first_result / 100)  # 转换回原始比例
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 661, in waitTestRes
+    with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+
+2025-02-03 16:34:13,887 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 16:34:13,892 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 16:34:16,691 - INFO - Returned to index page successfully
+2025-02-03 16:35:34,170 - INFO - 初始化登录界面...
+2025-02-03 16:35:34,173 - INFO - 开始预加载模型...
+2025-02-03 16:35:34,173 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 16:35:34,177 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:35:34,177 - INFO - 模型文件存在，开始加载...
+2025-02-03 16:35:34,177 - INFO - 开始加载INT8量化模型...
+2025-02-03 16:35:34,178 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 16:35:34,178 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 16:35:34,178 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 16:35:34,232 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 16:35:34,232 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 16:35:34,233 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 16:35:34,233 - INFO - 成功预加载量化模型
+2025-02-03 16:35:35,805 - INFO - Opening user login page.
+2025-02-03 16:35:39,463 - INFO - User user1 logged in successfully
+2025-02-03 16:35:40,519 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:35:40,525 - INFO - Successfully displayed 8 data records
+2025-02-03 16:35:40,529 - INFO - Opening health evaluation page.
+2025-02-03 16:35:42,684 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:35:43,113 - INFO - Prediction result: 1.0
+2025-02-03 16:35:43,114 - INFO - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:35:43,114 - INFO - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-03 16:35:43,117 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 16:35:43,480 - INFO - Prediction result: 1.0
+2025-02-03 16:35:43,481 - INFO - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 16:35:43,481 - INFO - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-03 16:35:44,359 - INFO - 更新ID 291 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5
+2025-02-03 16:35:44,361 - INFO - 更新ID 292 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5
+2025-02-03 16:35:45,095 - INFO - Regular user user1: fetching own data records
+2025-02-03 16:35:45,104 - INFO - Successfully displayed 8 data records
+2025-02-03 16:35:45,885 - INFO - Returned to index page successfully
+2025-02-03 16:35:47,125 - INFO - Opening results view page.
+2025-02-03 16:35:53,198 - INFO - Returned to index page successfully

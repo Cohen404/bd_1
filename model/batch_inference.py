@@ -9,6 +9,8 @@ import warnings
 from PyQt5.QtCore import QThread, pyqtSignal
 from model.tuili_int8 import EegModelInt8
 from model.result_processor import ResultProcessor
+import sys
+import pandas as pd
 
 # 设置MNE日志级别为ERROR，只显示错误信息
 mne.set_log_level('ERROR')
@@ -20,6 +22,8 @@ warnings.filterwarnings('ignore', category=RuntimeWarning)
 # 过滤sklearn的版本警告
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', message='Trying to unpickle estimator StandardScaler')
+
+sys.path.append('../')
 
 class BatchInferenceModel(QThread):
     """
@@ -33,19 +37,18 @@ class BatchInferenceModel(QThread):
     error_occurred = pyqtSignal(str)      # 错误信号
     finished = pyqtSignal()               # 完成信号
     
-    def __init__(self, data_paths, model_path, batch_size=40):
+    def __init__(self, data_paths, model_path):
         """
         初始化批量推理模型
         
         Args:
-            data_paths (list): 数据路径列表
-            model_path (str): 模型路径
-            batch_size (int): 批处理大小，默认为40
+            data_paths: 数据路径列表
+            model_path: 模型路径
         """
-        super(BatchInferenceModel, self).__init__()
+        super().__init__()
         self.data_paths = data_paths
         self.model_path = model_path
-        self.batch_size = batch_size
+        self.results = []
         self.n_channels = 59
         self.in_samples = 1000
         
@@ -125,82 +128,145 @@ class BatchInferenceModel(QThread):
             logging.error(traceback.format_exc())
             return None
     
-    def run(self):
+    def calculate_scale_scores(self, data_path):
         """
-        执行批量推理
+        计算量表分数，只计算一次
+        
+        Args:
+            data_path: 数据路径
+            
+        Returns:
+            tuple: (焦虑量表分数, 抑郁量表分数) 如果无法计算则返回 (None, None)
         """
         try:
-            # 确保模型已加载
+            # 读取量表数据
+            lb_path = os.path.join(data_path, 'lb.csv')
+            if not os.path.exists(lb_path):
+                logging.info(f"量表文件不存在: {lb_path}")
+                return None, None
+                
+            # 读取量表数据，没有header
+            df = pd.read_csv(lb_path, header=None)
+            if len(df) < 1:
+                logging.info("量表数据为空")
+                return None, None
+            
+            # 计算焦虑量表分数(前20列)
+            anxiety_reverse_items = np.array([1, 2, 5, 8, 10, 11, 15, 16, 19, 20]) - 1
+            first_20 = df.iloc[0, :20].values.astype(float)
+            reverse_mask = np.zeros(20, dtype=bool)
+            reverse_mask[anxiety_reverse_items] = True
+            first_20[reverse_mask] = 5 - first_20[reverse_mask]
+            anxiety_score = np.sum(first_20)
+            
+            # 计算抑郁量表分数(后20列)
+            depression_reverse_items = np.array([2, 5, 6, 11, 12, 14, 16, 17, 18, 20]) - 1
+            last_20 = df.iloc[0, 20:40].values.astype(float)
+            reverse_mask = np.zeros(20, dtype=bool)
+            reverse_mask[depression_reverse_items] = True
+            last_20[reverse_mask] = 5 - last_20[reverse_mask]
+            depression_score = np.sum(last_20) * 1.25
+            
+            logging.info(f"量表分数计算完成 - 焦虑量表: {anxiety_score:.2f}, 抑郁量表: {depression_score:.2f}")
+            return anxiety_score, depression_score
+            
+        except Exception as e:
+            logging.error(f"计算量表分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return None, None
+
+    def calculate_final_score(self, model_score, scale_score, score_type):
+        """
+        根据模型分数和量表分数计算最终分数
+        
+        Args:
+            model_score: 模型预测分数
+            scale_score: 量表分数
+            score_type: 分数类型 (1: 抑郁, 2: 焦虑)
+            
+        Returns:
+            float: 计算后的最终分数
+        """
+        try:
+            if scale_score is None:
+                logging.info(f"量表分数不存在，返回模型分数的90%")
+                return float(min(95, max(0, model_score)))
+                
+            if score_type == 1:  # 抑郁
+                if scale_score < 53:
+                    # 当量表分数<=53时，直接返回基于量表的计算结果
+                    final_score = (scale_score / 53) * 50
+                    logging.info(f"抑郁量表分数 < 53，直接使用量表计算结果: {final_score}")
+                else:
+                    # 当量表分数>53时，才结合模型分数
+                    scale_factor = scale_score / 53.0 * 50
+                    model_factor = model_score
+                    final_score = (scale_factor + model_factor * 0.3)
+                    logging.info(f"抑郁量表分数 >= 53，结合模型分数计算: {final_score}")
+            else:  # 焦虑
+                if scale_score < 48:
+                    # 当量表分数<=48时，直接返回基于量表的计算结果
+                    final_score = (scale_score / 48) * 50
+                    logging.info(f"焦虑量表分数 < 48，直接使用量表计算结果: {final_score}")
+                else:
+                    # 当量表分数>48时，才结合模型分数
+                    scale_factor = scale_score / 48.0 * 50
+                    model_factor = model_score
+                    final_score = (scale_factor + model_factor * 0.3)
+                    logging.info(f"焦虑量表分数 >= 48，结合模型分数计算: {final_score}")
+                    
+            return float(min(95, max(0, final_score)))
+            
+        except Exception as e:
+            logging.error(f"计算最终分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return model_score
+
+    def run(self):
+        """
+        运行批量推理
+        """
+        try:
+            # 确保模型已经加载
             if not EegModelInt8._interpreter:
                 if not EegModelInt8.load_static_model():
-                    self.error_occurred.emit("模型加载失败")
+                    self.error_occurred.emit("量化模型加载失败")
                     return
-            
-            # 获取模型输入输出细节
-            input_details = EegModelInt8._input_details
-            output_details = EegModelInt8._output_details
-            input_scale = input_details[0]['quantization'][0]
-            input_zero_point = input_details[0]['quantization'][1]
-            output_scale = output_details[0]['quantization'][0]
-            output_zero_point = output_details[0]['quantization'][1]
-            
-            total_results = []
-            total_paths = len(self.data_paths)
-            
-            # 批量处理数据
-            for batch_start in range(0, total_paths, self.batch_size):
-                batch_end = min(batch_start + self.batch_size, total_paths)
-                batch_paths = self.data_paths[batch_start:batch_end]
-                batch_results = []
-                
-                # 处理每个批次中的数据
-                for data_path in batch_paths:
-                    # 预处理数据
-                    preprocessed_data = self.preprocess_data(data_path)
-                    if preprocessed_data is None:
-                        batch_results.append(0.0)
-                        continue
+
+            total = len(self.data_paths)
+            for i, data_path in enumerate(self.data_paths):
+                try:
+                    # 计算进度
+                    progress = (i + 1) / total * 100
+                    self.progress_updated.emit(progress)
+
+                    # 计算量表分数
+                    anxiety_score_lb, depression_score_lb = self.calculate_scale_scores(data_path)
+
+                    # 使用模型进行推理
+                    model = EegModelInt8(data_path, self.model_path)
+                    model_result = model.predict() * 100
+                    model_result = float(min(95, max(0, model_result)))
+
+                    # 计算抑郁分数
+                    depression_score = self.calculate_final_score(model_result, depression_score_lb, 1)
                     
-                    # 量化输入数据
-                    data_quantized = preprocessed_data / input_scale + input_zero_point
-                    data_quantized = data_quantized.astype(np.int8)
-                    
-                    # 获取样本数量
-                    num_samples = data_quantized.shape[0] # 样本数量
-                    predictions = []
-                    
-                    # 对每个样本进行推理
-                    for i in range(num_samples):
-                        single_sample = data_quantized[i:i+1]
-                        EegModelInt8._interpreter.set_tensor(input_details[0]['index'], single_sample)
-                        EegModelInt8._interpreter.invoke()
-                        output_data = EegModelInt8._interpreter.get_tensor(output_details[0]['index'])
-                        
-                        # 反量化输出
-                        pred = (output_data.astype(np.float32) - output_zero_point) * output_scale
-                        predictions.append(pred)
-                    
-                    # 合并预测结果
-                    y_pred = np.vstack(predictions)
-                    
-                    # 计算该数据的结果（1的占比）
-                    result = float(y_pred.argmax(axis=-1).sum()) / len(y_pred.argmax(axis=-1))
-                    
-                    # 处理结果
-                    final_result = ResultProcessor.process_result(0, result * 100, data_path)
-                    batch_results.append(final_result)
-                
-                # 发送批次结果
-                self.batch_completed.emit(batch_results)
-                total_results.extend(batch_results)
-                
-                # 更新进度
-                progress = (batch_end / total_paths) * 100
-                self.progress_updated.emit(progress)
-            
-            # 发送完成信号
+                    # 计算焦虑分数
+                    anxiety_score = self.calculate_final_score(model_result, anxiety_score_lb, 2)
+
+                    # 将三个分数添加到结果列表
+                    self.results.extend([model_result, depression_score, anxiety_score])
+
+                except Exception as e:
+                    logging.error(f"处理数据 {data_path} 时发生错误: {str(e)}")
+                    logging.error(traceback.format_exc())
+                    # 发生错误时，添加默认分数
+                    self.results.extend([0, 0, 0])
+
+            # 发送结果
+            self.batch_completed.emit(self.results)
             self.finished.emit()
-            
+
         except Exception as e:
             error_msg = f"批量推理过程中发生错误: {str(e)}"
             logging.error(error_msg)

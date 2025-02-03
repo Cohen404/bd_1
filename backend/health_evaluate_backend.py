@@ -662,8 +662,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         
-        # 直接使用传入的分数，不做任何转换
-        final_score = float(num)
+        # 直接使用传入的分数，不做任何转换，并保留1位小数
+        final_score = round(float(num), 1)
         
         self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
@@ -714,9 +714,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     box.exec_()
                     if box.clickedButton() == yes_button:
                         # 如果用户选择"是"，则覆盖现有的数据
-                        existing_result.stress_score = self.result_list[0]
-                        existing_result.depression_score = self.result_list[1]
-                        existing_result.anxiety_score = self.result_list[2]
+                        existing_result.stress_score = round(self.result_list[0], 1)
+                        existing_result.depression_score = round(self.result_list[1], 1)
+                        existing_result.anxiety_score = round(self.result_list[2], 1)
                         existing_result.result_time = self.result_time
                         # 更新LED颜色
                         self.update_led_colors(existing_result)
@@ -727,9 +727,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     # 如果数据库中不存在具有当前ID的数据，直接添加新的数据
                     uploadresult = Result(
                         id=self.data_id, 
-                        stress_score=self.result_list[0],
-                        depression_score=self.result_list[1],
-                        anxiety_score=self.result_list[2],
+                        stress_score=round(self.result_list[0], 1),
+                        depression_score=round(self.result_list[1], 1),
+                        anxiety_score=round(self.result_list[2], 1),
                         result_time=self.result_time,
                         user_id=self.user_id
                     )
@@ -1173,10 +1173,31 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             try:
                 result_time = datetime.now().replace(microsecond=0)
                 
-                for data_id, stress_score in zip(self.selected_data_ids, self.batch_results):
-                    # 使用第一个模型的结果作为第二和第三个模型的结果
-                    depression_score = stress_score
-                    anxiety_score = stress_score
+                # 检查是否有已存在的结果
+                existing_results = []
+                for data_id in self.selected_data_ids:
+                    if session.query(Result).filter(Result.id == data_id).first():
+                        existing_results.append(data_id)
+
+                # 如果有已存在的结果，询问用户是否覆盖
+                if existing_results:
+                    msg = f"以下ID的评估结果已存在：\n{', '.join(map(str, existing_results))}\n是否覆盖这些结果？"
+                    box = QMessageBox(QMessageBox.Question, "提示", msg)
+                    yes_button = box.addButton(self.tr("是"), QMessageBox.YesRole)
+                    no_button = box.addButton(self.tr("否"), QMessageBox.NoRole)
+                    box.exec_()
+                    
+                    if box.clickedButton() == no_button:
+                        QMessageBox.information(self, "提示", "已取消覆盖操作")
+                        return
+                
+                # 保存或更新结果
+                for i, data_id in enumerate(self.selected_data_ids):
+                    # 每个数据有三个分数
+                    base_idx = i * 3
+                    stress_score = round(self.batch_results[base_idx], 1)
+                    depression_score = round(self.batch_results[base_idx + 1], 1)
+                    anxiety_score = round(self.batch_results[base_idx + 2], 1)
                     
                     # 检查是否已存在结果
                     existing_result = session.query(Result).filter(Result.id == data_id).first()
@@ -1186,6 +1207,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         existing_result.depression_score = depression_score
                         existing_result.anxiety_score = anxiety_score
                         existing_result.result_time = result_time
+                        logging.info(f"更新ID {data_id} 的评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}")
                     else:
                         # 创建新结果
                         new_result = Result(
@@ -1197,9 +1219,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                             user_id=self.user_id
                         )
                         session.add(new_result)
+                        logging.info(f"添加ID {data_id} 的新评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}")
                 
                 session.commit()
-                QMessageBox.information(self, "成功", "批量评估完成")
+                QMessageBox.information(self, "成功", "批量评估完成，结果已保存")
                 
                 # 刷新表格显示
                 self.show_table()
