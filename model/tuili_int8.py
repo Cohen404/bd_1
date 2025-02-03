@@ -9,10 +9,32 @@ from PyQt5.QtCore import pyqtSignal, QThread
 from util.db_util import SessionClass
 from sql_model.tb_model import Model
 import logging
+from state import operate_user
+from config import CURRENT_USER_FILE, setup_logging
+from sql_model.tb_user import User
 
 # 过滤sklearn的版本警告
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', message='Trying to unpickle estimator StandardScaler')
+
+def get_current_username():
+    """获取当前用户名，如果未登录则返回'未登录'"""
+    try:
+        user_id = operate_user.read(CURRENT_USER_FILE)
+        if user_id:
+            session = SessionClass()
+            try:
+                user = session.query(User).filter(User.user_id == user_id).first()
+                if user:
+                    return user.username
+            finally:
+                session.close()
+    except:
+        pass
+    return "未登录"
+
+# 配置日志
+setup_logging()
 
 # 配置GPU内存增长
 gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -23,9 +45,9 @@ if gpus:
             tf.config.experimental.set_memory_growth(gpu, True)
         # 指定使用第一块GPU
         tf.config.experimental.set_visible_devices(gpus[0], 'GPU')
-        logging.info(f"成功配置GPU: {gpus[0].name}")
+        logging.info(f"成功配置GPU: {gpus[0].name}", extra={'username': get_current_username()})
     except RuntimeError as e:
-        logging.error(f"GPU配置错误: {str(e)}")
+        logging.error(f"GPU配置错误: {str(e)}", extra={'username': get_current_username()})
 
 class EegModelInt8(QThread):
     """
@@ -51,18 +73,18 @@ class EegModelInt8(QThread):
                 # 检查GPU可用性
                 gpus = tf.config.experimental.list_physical_devices('GPU')
                 if gpus:
-                    logging.info(f"检测到可用GPU: {[gpu.name for gpu in gpus]}")
+                    logging.info(f"检测到可用GPU: {[gpu.name for gpu in gpus]}", extra={'username': get_current_username()})
                     # 设置GPU显存按需增长
                     for gpu in gpus:
                         tf.config.experimental.set_memory_growth(gpu, True)
                     # 指定使用第一块GPU
                     tf.config.experimental.set_visible_devices(gpus[0], 'GPU')
-                    logging.info(f"已配置GPU: {gpus[0].name}")
+                    logging.info(f"已配置GPU: {gpus[0].name}", extra={'username': get_current_username()})
                     EegModelInt8._gpu_initialized = True
                 else:
-                    logging.warning("未检测到可用GPU，将使用CPU进行推理")
+                    logging.warning("未检测到可用GPU，将使用CPU进行推理", extra={'username': get_current_username()})
             except RuntimeError as e:
-                logging.error(f"GPU配置错误: {str(e)}")
+                logging.error(f"GPU配置错误: {str(e)}", extra={'username': get_current_username()})
     
     @staticmethod
     def load_static_model():
@@ -74,10 +96,10 @@ class EegModelInt8(QThread):
         try:
             # 如果模型已经加载，直接返回True
             if EegModelInt8._interpreter is not None:
-                logging.info("模型已经加载，无需重复加载")
+                logging.info("模型已经加载，无需重复加载", extra={'username': get_current_username()})
                 return True
                 
-            logging.info("开始加载INT8量化模型...")
+            logging.info("开始加载INT8量化模型...", extra={'username': get_current_username()})
             
             # 初始化GPU
             EegModelInt8._init_gpu()
@@ -88,14 +110,14 @@ class EegModelInt8(QThread):
             session.close()
             
             if not model_info:
-                logging.error("数据库中未找到普通应激模型(model_type=0)")
+                logging.error("数据库中未找到普通应激模型(model_type=0)", extra={'username': get_current_username()})
                 return False
             
             if not os.path.exists(model_info.model_path):
-                logging.error(f"模型文件不存在: {model_info.model_path}")
+                logging.error(f"模型文件不存在: {model_info.model_path}", extra={'username': get_current_username()})
                 return False
                 
-            logging.info(f"开始加载模型文件: {model_info.model_path}")
+            logging.info(f"开始加载模型文件: {model_info.model_path}", extra={'username': get_current_username()})
             
             try:
                 # 在GPU上下文中加载模型
@@ -115,7 +137,7 @@ class EegModelInt8(QThread):
                     
                     # 验证模型输入输出
                     if not input_details or not output_details:
-                        logging.error("模型输入输出信息获取失败")
+                        logging.error("模型输入输出信息获取失败", extra={'username': get_current_username()})
                         return False
                     
                     # 记录模型信息
@@ -124,24 +146,24 @@ class EegModelInt8(QThread):
                     output_shape = output_details[0]['shape']
                     output_type = output_details[0]['dtype']
                     
-                    logging.info(f"模型输入shape: {input_shape}, 类型: {input_type}")
-                    logging.info(f"模型输出shape: {output_shape}, 类型: {output_type}")
+                    logging.info(f"模型输入shape: {input_shape}, 类型: {input_type}", extra={'username': get_current_username()})
+                    logging.info(f"模型输出shape: {output_shape}, 类型: {output_type}", extra={'username': get_current_username()})
                     
                     # 保存输入输出信息
                     EegModelInt8._input_details = input_details
                     EegModelInt8._output_details = output_details
                     
-                    logging.info("模型加载成功并已放置在GPU上")
+                    logging.info("模型加载成功并已放置在GPU上", extra={'username': get_current_username()})
                     return True
                 
             except Exception as e:
-                logging.error(f"模型加载失败: {str(e)}")
-                logging.error(traceback.format_exc())
+                logging.error(f"模型加载失败: {str(e)}", extra={'username': get_current_username()})
+                logging.error(traceback.format_exc(), extra={'username': get_current_username()})
                 return False
             
         except Exception as e:
-            logging.error(f"模型加载过程中发生错误: {str(e)}")
-            logging.error(traceback.format_exc())
+            logging.error(f"模型加载过程中发生错误: {str(e)}", extra={'username': get_current_username()})
+            logging.error(traceback.format_exc(), extra={'username': get_current_username()})
             return False
 
     def __init__(self, data_path, model_path):
@@ -238,8 +260,8 @@ class EegModelInt8(QThread):
                 return data
 
         except Exception as e:
-            logging.error(f"Error in get_data: {str(e)}")
-            logging.error(traceback.format_exc())
+            logging.error(f"Error in get_data: {str(e)}", extra={'username': get_current_username()})
+            logging.error(traceback.format_exc(), extra={'username': get_current_username()})
             return None
 
     def predict(self):
@@ -299,12 +321,12 @@ class EegModelInt8(QThread):
             
             # 计算结果
             num = float(y_pred.argmax(axis=-1).sum()) / len(y_pred.argmax(axis=-1))
-            logging.info(f'Prediction result: {num}')
+            logging.info(f'Prediction result: {num}', extra={'username': get_current_username()})
             return num
             
         except Exception as e:
-            logging.error(f"Error during prediction: {str(e)}")
-            logging.error(traceback.format_exc())
+            logging.error(f"Error during prediction: {str(e)}", extra={'username': get_current_username()})
+            logging.error(traceback.format_exc(), extra={'username': get_current_username()})
             return 0.0
 
     def run(self):
@@ -315,17 +337,14 @@ class EegModelInt8(QThread):
             result = self.predict()
             self._rule.emit(result)
         except Exception as e:
-            logging.error(f"Error in run: {str(e)}")
-            logging.error(traceback.format_exc())
+            logging.error(f"Error in run: {str(e)}", extra={'username': get_current_username()})
+            logging.error(traceback.format_exc(), extra={'username': get_current_username()})
         finally:
             self.finished.emit()
 
 if __name__ == "__main__":
     # 配置日志
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
+    setup_logging()
     
     # 测试代码
     data_path = '../data/3_wangwu'

@@ -41,7 +41,8 @@ from config import (
     DATA_DIR,
     TEMPLATE_DIR,
     RESULTS_DIR,
-    TEMPLATE_FILE
+    TEMPLATE_FILE,
+    setup_logging
 )
 from docx import Document
 from docx.shared import Inches
@@ -50,15 +51,15 @@ from front.image_viewer import ImageViewer
 
 class UserFilter(logging.Filter):
     """
-    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    自定义日志过滤器，用于添加用户信息到日志记录中
     """
-    def __init__(self, userType):
+    def __init__(self, username):
         super().__init__()
-        self.userType = userType
+        self.username = username
 
     def filter(self, record):
-        if not hasattr(record, 'userType'):
-            record.userType = self.userType
+        if not hasattr(record, 'username'):
+            record.username = self.username
         return True
 
 class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindow):
@@ -96,37 +97,33 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     self.username = user.username
                     self.email = user.email  # 添加email属性
                     self.phone = user.phone  # 添加phone属性
-                    userType = "Administrator" if self.user_type else "Regular user"
+                    username = self.username
                     print(f"Found user: {user.username}, type: {user.user_type}, id: {user.user_id}")
                 else:
                     print(f"User not found with ID: {user_id}")
                     self.user_type = False
                     self.user_id = None
-                    self.username = None
+                    self.username = "未登录"
                     self.email = None  # 添加email属性
                     self.phone = None  # 添加phone属性
-                    userType = "Unknown user"
+                    username = "未登录"
             finally:
                 session.close()
         except Exception as e:
             print(f"Error reading user status: {e}")
             self.user_type = False
             self.user_id = None
-            self.username = None
+            self.username = "未登录"
             self.email = None  # 添加email属性
             self.phone = None  # 添加phone属性
-            userType = "Unknown user"
+            username = "未登录"
 
-        # 配置 logging 模块
-        logging.basicConfig(
-            filename=LOG_FILE,  # 使用配置的路径
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        )
+        # 配置日志
+        setup_logging()
 
         # 添加过滤器
         logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
+        logger.addFilter(UserFilter(username))
 
         # 初始化其他属性
         self.test_thread = None
@@ -275,7 +272,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.anxiety_led_label.setStyleSheet(gray_style)
         
         logging.info(f"Updated LED colors based on scores: stress={result.stress_score}, "
-                    f"depression={result.depression_score}, anxiety={result.anxiety_score}")
+                    f"depression={result.depression_score}, anxiety={result.anxiety_score}", extra={'username': self.username})
 
     def show_nav(self):
         """
@@ -298,7 +295,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     # 如果没有评估结果，则设置为默认灰色
                     self.set_default_led_colors()
             except Exception as e:
-                logging.error(f"Error updating LED colors in show_nav: {str(e)}")
+                logging.error(f"Error updating LED colors in show_nav: {str(e)}", extra={'username': self.username})
                 self.set_default_led_colors()
             finally:
                 session.close()
@@ -320,16 +317,16 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             if self.user_type:  # 管理员
                 data_list = session.query(Data).all()
                 print(f"Administrator query - found {len(data_list)} records")  # 调试日志
-                logging.info(f"Administrator {self.username}: fetching all data records")
+                logging.info(f"Administrator {self.username}: fetching all data records", extra={'username': self.username})
             else:  # 普通用户
                 if self.user_id is not None:
                     data_list = session.query(Data).filter(Data.user_id == self.user_id).all()
                     print(f"Regular user query - found {len(data_list)} records")  # 调试日志
-                    logging.info(f"Regular user {self.username}: fetching own data records")
+                    logging.info(f"Regular user {self.username}: fetching own data records", extra={'username': self.username})
                 else:
                     data_list = []
                     print("No user ID available, showing no records")
-                    logging.warning("No user ID available, showing no records")
+                    logging.warning("No user ID available, showing no records", extra={'username': "未登录"})
 
             # 清空现有表格内容
             self.tableWidget.setRowCount(0)
@@ -394,10 +391,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 "时频域特征 - 小波变换", "微分熵"
             ]
 
-            logging.info(f"Image list initialized with {len(self.image_list)} items.")
+            logging.info(f"Image list initialized with {len(self.image_list)} items.", extra={'username': self.username})
 
             image_path = os.path.join(self.data_path, self.image_list[self.current_index])
-            logging.info(f"Attempting to load image from path: {image_path}")
+            logging.info(f"Attempting to load image from path: {image_path}", extra={'username': self.username})
 
             if os.path.exists(image_path):
                 pixmap = QPixmap(image_path)
@@ -413,16 +410,16 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     if len(title) > 30:  # 如果标题超过30个字符
                         title = title[:27] + "..."  # 截断并添加略号
                     self.curve_label.setText(title)
-                    logging.info(f"Successfully displayed image: {image_names[self.current_index]}")
+                    logging.info(f"Successfully displayed image: {image_names[self.current_index]}", extra={'username': self.username})
                 else:
-                    logging.error(f"Failed to load image: {image_path}")
+                    logging.error(f"Failed to load image: {image_path}", extra={'username': self.username})
                     self.curve_label.setText("无法加载图片")
             else:
-                logging.error(f"Image file does not exist: {image_path}")
+                logging.error(f"Image file does not exist: {image_path}", extra={'username': self.username})
                 self.curve_label.setText("图片文件不存在")
 
         except Exception as e:
-            logging.error(f"An error occurred while showing the image: {e}")
+            logging.error(f"An error occurred while showing the image: {e}", extra={'username': self.username})
             self.curve_label.setText("显示图片时发生错误")
 
     def next_image(self):
@@ -464,9 +461,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.hide()
             self.close()
             
-            logging.info("Returned to index page successfully")
+            logging.info("Returned to index page successfully", extra={'username': self.username})
         except Exception as e:
-            logging.error(f"Error in return_index: {str(e)}")
+            logging.error(f"Error in return_index: {str(e)}", extra={'username': self.username})
             QMessageBox.critical(self, "错误", f"返回主页时发生错误：{str(e)}")
 
     # 将查看、评估按钮封装到widget中
@@ -521,13 +518,13 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 row = self.tableWidget.indexAt(button.parent().pos()).row()
                 id = self.tableWidget.item(row, 0).text()
                 self.data_id = int(id)  # 保存当前选中的数据ID
-                logging.info(f"Button clicked in row {row}, ID: {self.data_id}")
+                logging.info(f"Button clicked in row {row}, ID: {self.data_id}", extra={'username': self.username})
 
                 session = SessionClass()
                 data = session.query(Data).filter(Data.id == self.data_id).first()
                 if data:
                     self.data_path = data.data_path
-                    logging.info(f"Data path retrieved for ID {self.data_id}: {self.data_path}")
+                    logging.info(f"Data path retrieved for ID {self.data_id}: {self.data_path}", extra={'username': self.username})
 
                     # 获取 tb_result 表中与当前数据 ID 相关的结果
                     result = session.query(Result).filter(Result.id == self.data_id).first()
@@ -536,21 +533,21 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         self.update_led_colors(result)
                         
                         self.current_index = 0  # 重置当前显示的图片索引
-                        logging.info("Initializing current image index to 0")
+                        logging.info("Initializing current image index to 0", extra={'username': self.username})
                         self.show_image()
                     else:
-                        logging.warning(f"No evaluation results found for ID {self.data_id}")
+                        logging.warning(f"No evaluation results found for ID {self.data_id}", extra={'username': self.username})
                         self.set_default_led_colors()  # 如果没有评估结果，设置为默认灰色
                         QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的评估结果")
                 else:
-                    logging.warning(f"No data record found for ID {self.data_id}")
+                    logging.warning(f"No data record found for ID {self.data_id}", extra={'username': self.username})
                     self.set_default_led_colors()  # 如果没有数据记录，设置为默认灰色
                     QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的数据记录")
                 
                 session.close()
 
             except Exception as e:
-                logging.error(f"An error occurred in checkButton: {e}")
+                logging.error(f"An error occurred in checkButton: {e}", extra={'username': self.username})
                 QMessageBox.critical(self, "错误", f"查看数据时发生误: {str(e)}")
 
     # 调用模型

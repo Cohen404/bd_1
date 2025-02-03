@@ -20,7 +20,7 @@ from backend import index_backend
 import logging
 from util.window_manager import WindowManager
 import hashlib
-from config import USER_STATUS_FILE, CURRENT_USER_FILE, LOG_FILE
+from config import USER_STATUS_FILE, CURRENT_USER_FILE, LOG_FILE, setup_logging
 
 def hash_password(password):
     """使用SHA256加密密码"""
@@ -28,14 +28,15 @@ def hash_password(password):
 
 class UserFilter(logging.Filter):
     """
-    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    自定义日志过滤器，用于添加用户信息到日志记录中
     """
-    def __init__(self, userType):
+    def __init__(self, username):
         super().__init__()
-        self.userType = userType
+        self.username = username
 
     def filter(self, record):
-        record.userType = self.userType
+        if not hasattr(record, 'username'):
+            record.username = self.username
         return True
 
 class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
@@ -61,12 +62,12 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
         # 添加密码框回车事件绑定
         self.pwd_lineEdit.returnPressed.connect(self.handle_login)
 
-        # 配置基本日志格式
-        logging.basicConfig(
-            filename=LOG_FILE,
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        )
+        # 配置日志
+        setup_logging()
+
+        # 添加过滤器
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter("未登录"))
 
     def handle_login(self):
         """统一的登录处理函数"""
@@ -77,6 +78,7 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
 
             # 验证输入不为空
             if not username or not password:
+                logging.warning("Login attempt with empty username or password", extra={'username': "未登录"})
                 QMessageBox.warning(self, "警告", "用户名和密码不能为空")
                 return
 
@@ -102,20 +104,19 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
                         f.write(is_admin)
 
                     # 设置用户类型并更新日志过滤器
-                    userType = "Administrator" if is_admin == '1' else "Regular user"
                     logger = logging.getLogger()
                     # 移除旧的过滤器
                     for filter in logger.filters:
                         if isinstance(filter, UserFilter):
                             logger.removeFilter(filter)
                     # 添加新的过滤器
-                    logger.addFilter(UserFilter(userType))
+                    logger.addFilter(UserFilter(username))
 
                     # 更新最后登录时间
                     user.last_login = datetime.now()
                     session.commit()
 
-                    logging.info(f"User {username} logged in successfully")
+                    logging.info(f"User logged in successfully", extra={'username': username})
 
                     # 根据用户类型打开相应界面
                     window_manager = WindowManager()
@@ -129,27 +130,31 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
                         window_manager.show_window('index')
 
                     self.close()
-
                 else:
+                    logging.warning(f"Failed login attempt", extra={'username': f"未登录(尝试用户名:{username})"})
                     QMessageBox.warning(self, "警告", "用户名或密码错误")
-                    logging.warning(f"Failed login attempt for username: {username}")
 
             finally:
                 session.close()
 
         except Exception as e:
-            logging.error(f"Login error: {str(e)}")
+            logging.error(f"Login error: {str(e)}", extra={'username': "未登录"})
             QMessageBox.critical(self, "错误", f"登录时发生错误：{str(e)}")
 
     def return_index(self):
         """
         返回首页
         """
-        self.index = init_login_backend.Index_WindowActions()
-        window_manager = WindowManager()
-        window_manager.register_window('init_login', self.index)
-        window_manager.show_window('init_login')
-        self.close()
+        try:
+            self.index = init_login_backend.Index_WindowActions()
+            window_manager = WindowManager()
+            window_manager.register_window('init_login', self.index)
+            window_manager.show_window('init_login')
+            logging.info("Returned to initial login page", extra={'username': "未登录"})
+            self.close()
+        except Exception as e:
+            logging.error(f"Error returning to index: {str(e)}", extra={'username': "未登录"})
+            QMessageBox.critical(self, "错误", f"返回首页时发生错误：{str(e)}")
 
 if __name__ == '__main__':
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

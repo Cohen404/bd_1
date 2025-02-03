@@ -1,4 +1,5 @@
 import os
+import logging
 
 # 获取项目根目录的绝对路径
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,4 +44,38 @@ def ensure_directories():
             os.makedirs(directory)
 
 # 在导入时就确保目录存在
-ensure_directories() 
+ensure_directories()
+
+def setup_logging():
+    """配置日志系统"""
+    # 确保日志目录存在
+    log_dir = os.path.dirname(LOG_FILE)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    
+    # 获取根日志记录器
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    
+    # 清除所有现有的处理程序
+    root_logger.handlers = []
+    
+    # 创建格式化器
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(username)s - %(message)s')
+    
+    # 创建并配置文件处理程序
+    file_handler = logging.FileHandler(LOG_FILE)
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(formatter)
+    
+    # 创建并配置控制台处理程序
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(formatter)
+    
+    # 添加处理程序到根日志记录器
+    root_logger.addHandler(file_handler)
+    root_logger.addHandler(console_handler)
+    
+    # 禁用 basicConfig 的传播
+    logging.propagate = False 

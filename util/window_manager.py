@@ -1,5 +1,29 @@
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5.QtCore import Qt
+import logging
+from state import operate_user
+from config import CURRENT_USER_FILE, setup_logging
+from sql_model.tb_user import User
+from util.db_util import SessionClass
+
+# 配置日志
+setup_logging()
+
+def get_current_username():
+    """获取当前用户名，如果未登录则返回'未登录'"""
+    try:
+        user_id = operate_user.read(CURRENT_USER_FILE)
+        if user_id:
+            session = SessionClass()
+            try:
+                user = session.query(User).filter(User.user_id == user_id).first()
+                if user:
+                    return user.username
+            finally:
+                session.close()
+    except:
+        pass
+    return "未登录"
 
 class WindowManager:
     """
@@ -56,5 +80,9 @@ class WindowManager:
                 window.move(current_pos)
             window.show()
             self.current_window = window
+            
+            # 记录日志
+            window_type = name.replace('_', ' ').title()
+            logging.info(f"Opening {window_type} page.", extra={'username': get_current_username()})
         else:
-            print(f"Window '{name}' not found") 
+            logging.error(f"Window '{name}' not found", extra={'username': get_current_username()}) 
