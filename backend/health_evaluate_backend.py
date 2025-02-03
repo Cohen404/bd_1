@@ -665,9 +665,15 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             current_progress = (self.current_model_index * 33) + (float(num) * 33)
             self.progress_dialog.setValue(min(int(current_progress), 100))
             
-        with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
-            contents = f.readlines()  # 获取模型开始运行的时间
-        self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
+        # 检查文件是否存在，如果不存在则使用当前时间
+        import os
+        if os.path.exists(MODEL_STATUS_FILE):
+            with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+                contents = f.readlines()  # 获取模型开始运行的时间
+            self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
+        else:
+            self.result_time = datetime.now()  # 使用当前时间作为默认值
+            logging.info("状态文件不存在，使用当前时间作为评估时间")
         
         # 直接使用传入的分数，不做任何转换，并保留1位小数
         final_score = round(float(num), 1)

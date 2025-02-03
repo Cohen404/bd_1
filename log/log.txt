@@ -23856,3 +23856,185 @@ FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_heal
 2025-02-03 20:48:25,045 - INFO - Successfully displayed image: Theta波段功率
 2025-02-03 20:48:28,585 - INFO - Returned to index page successfully
 2025-02-03 20:48:29,404 - INFO - Opening results view page.
+2025-02-03 21:44:21,132 - INFO - 初始化登录界面...
+2025-02-03 21:44:21,135 - INFO - 开始预加载模型...
+2025-02-03 21:44:21,135 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 21:44:21,139 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 21:44:21,139 - INFO - 模型文件存在，开始加载...
+2025-02-03 21:44:21,139 - INFO - 开始加载INT8量化模型...
+2025-02-03 21:44:21,140 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 21:44:21,140 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 21:44:21,140 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 21:44:21,212 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 21:44:21,212 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 21:44:21,212 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 21:44:21,212 - INFO - 成功预加载量化模型
+2025-02-03 21:44:23,040 - INFO - Opening user login page.
+2025-02-03 21:44:29,373 - INFO - 用户 admin 登录成功
+2025-02-03 21:44:29,381 - INFO - User admin logged in successfully
+2025-02-03 21:44:37,788 - INFO - Administrator admin: fetching all data records
+2025-02-03 21:44:38,020 - INFO - Successfully displayed 298 data records
+2025-02-03 21:44:38,065 - INFO - Opening health evaluation page.
+2025-02-03 21:44:39,883 - INFO - Button clicked in row 0, ID: 1
+2025-02-03 21:44:39,884 - INFO - Data path retrieved for ID 1: /home/jupiter/bj_health_manage/data/ord2_edf
+2025-02-03 21:44:39,887 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 21:44:39,887 - INFO - Initializing current image index to 0
+2025-02-03 21:44:43,048 - INFO - 量表文件不存在
+2025-02-03 21:44:43,051 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 21:44:43,056 - ERROR - Error in get_data: Could not find event data
+2025-02-03 21:44:43,057 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 202, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-03 21:44:43,057 - ERROR - Error during prediction: Failed to get test data
+2025-02-03 21:44:43,057 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 257, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-03 21:44:43,057 - INFO - 第一个模型评估结果: 0.0
+2025-02-03 21:44:43,057 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 21:44:43,057 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 21:44:43,058 - INFO - 抑郁评估结果: 0.0 (量表分数: 无)
+2025-02-03 21:44:43,058 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 21:44:43,058 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 21:44:43,058 - INFO - 焦虑评估结果: 0.0 (量表分数: 无)
+2025-02-03 21:44:43,061 - INFO - 当前模型索引: 0
+2025-02-03 21:44:43,061 - INFO - 第一个模型的结果: 0.0
+2025-02-03 21:44:43,061 - ERROR - Error in on_model_finished: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+2025-02-03 21:44:43,061 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 621, in on_model_finished
+    self.waitTestRes(first_result / 100)  # 转换回原始比例
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 647, in waitTestRes
+    with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+
+2025-02-03 21:44:46,366 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 21:44:51,922 - INFO - Returned to index page successfully
+2025-02-03 21:44:54,268 - INFO - Opening log management page.
+2025-02-03 22:02:56,356 - INFO - 初始化登录界面...
+2025-02-03 22:02:56,359 - INFO - 开始预加载模型...
+2025-02-03 22:02:56,360 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 22:02:56,364 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:02:56,364 - INFO - 模型文件存在，开始加载...
+2025-02-03 22:02:56,364 - INFO - 开始加载INT8量化模型...
+2025-02-03 22:02:56,364 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 22:02:56,364 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 22:02:56,365 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:02:56,440 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 22:02:56,440 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 22:02:56,440 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 22:02:56,440 - INFO - 成功预加载量化模型
+2025-02-03 22:03:04,618 - INFO - Opening user login page.
+2025-02-03 22:03:09,833 - INFO - 用户 admin 登录成功
+2025-02-03 22:03:09,840 - INFO - User admin logged in successfully
+2025-02-03 22:03:11,393 - INFO - Administrator admin: fetching all data records
+2025-02-03 22:03:11,631 - INFO - Successfully displayed 298 data records
+2025-02-03 22:03:11,676 - INFO - Opening health evaluation page.
+2025-02-03 22:03:15,339 - INFO - 量表文件不存在
+2025-02-03 22:03:15,339 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 22:03:15,720 - INFO - Prediction result: 1.0
+2025-02-03 22:03:15,721 - INFO - 第一个模型评估结果: 95.0
+2025-02-03 22:03:15,721 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 22:03:15,721 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:03:15,722 - INFO - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:03:15,723 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 22:03:15,723 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:03:15,723 - INFO - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:03:15,741 - INFO - 当前模型索引: 0
+2025-02-03 22:03:15,741 - INFO - 第一个模型的结果: 95.0
+2025-02-03 22:03:15,742 - ERROR - Error in on_model_finished: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+2025-02-03 22:03:15,742 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 621, in on_model_finished
+    self.waitTestRes(first_result / 100)  # 转换回原始比例
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 647, in waitTestRes
+    with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+
+2025-02-03 22:03:17,885 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:03:17,895 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:06:57,069 - INFO - 初始化登录界面...
+2025-02-03 22:06:57,072 - INFO - 开始预加载模型...
+2025-02-03 22:06:57,072 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 22:06:57,076 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:06:57,076 - INFO - 模型文件存在，开始加载...
+2025-02-03 22:06:57,076 - INFO - 开始加载INT8量化模型...
+2025-02-03 22:06:57,077 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 22:06:57,077 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 22:06:57,077 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:06:57,156 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 22:06:57,156 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 22:06:57,156 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 22:06:57,156 - INFO - 成功预加载量化模型
+2025-02-03 22:08:04,030 - INFO - Opening user login page.
+2025-02-03 22:08:15,910 - INFO - User admin logged in successfully
+2025-02-03 22:08:17,327 - INFO - Administrator admin: fetching all data records
+2025-02-03 22:08:17,561 - INFO - Successfully displayed 298 data records
+2025-02-03 22:08:17,606 - INFO - Opening health evaluation page.
+2025-02-03 22:08:21,520 - INFO - 量表文件不存在
+2025-02-03 22:08:21,520 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 22:08:21,891 - INFO - Prediction result: 1.0
+2025-02-03 22:08:21,891 - INFO - 第一个模型评估结果: 95.0
+2025-02-03 22:08:21,891 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 22:08:21,891 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:08:21,891 - INFO - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:08:21,892 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 22:08:21,893 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:08:21,893 - INFO - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:08:21,906 - INFO - 当前模型索引: 0
+2025-02-03 22:08:21,906 - INFO - 第一个模型的结果: 95.0
+2025-02-03 22:08:21,907 - ERROR - Error in on_model_finished: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+2025-02-03 22:08:21,907 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 642, in on_model_finished
+    self.waitTestRes(first_result / 100)  # 转换回原始比例
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 668, in waitTestRes
+    with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+
+2025-02-03 22:08:23,708 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:08:23,718 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:11:35,053 - INFO - 初始化登录界面...
+2025-02-03 22:11:35,056 - INFO - 开始预加载模型...
+2025-02-03 22:11:35,056 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 22:11:35,060 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:11:35,061 - INFO - 模型文件存在，开始加载...
+2025-02-03 22:11:35,061 - INFO - 开始加载INT8量化模型...
+2025-02-03 22:11:35,061 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 22:11:35,061 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 22:11:35,061 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 22:11:35,136 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 22:11:35,136 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 22:11:35,136 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 22:11:35,136 - INFO - 成功预加载量化模型
+2025-02-03 22:11:36,005 - INFO - Opening user login page.
+2025-02-03 22:11:39,690 - INFO - User admin logged in successfully
+2025-02-03 22:11:40,973 - INFO - Administrator admin: fetching all data records
+2025-02-03 22:11:41,211 - INFO - Successfully displayed 298 data records
+2025-02-03 22:11:41,256 - INFO - Opening health evaluation page.
+2025-02-03 22:11:45,823 - INFO - 量表文件不存在
+2025-02-03 22:11:45,823 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 22:11:46,224 - INFO - Prediction result: 1.0
+2025-02-03 22:11:46,224 - INFO - 第一个模型评估结果: 95.0
+2025-02-03 22:11:46,224 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 22:11:46,224 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:11:46,224 - INFO - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:11:46,224 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 22:11:46,224 - INFO - 量表分数不存在，返回模型分数的90%
+2025-02-03 22:11:46,224 - INFO - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-03 22:11:46,234 - INFO - 当前模型索引: 0
+2025-02-03 22:11:46,234 - INFO - 第一个模型的结果: 95.0
+2025-02-03 22:11:46,234 - INFO - 状态文件不存在，使用当前时间作为评估时间
+2025-02-03 22:11:48,668 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:11:48,677 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 22:11:50,716 - INFO - Returned to index page successfully

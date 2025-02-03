@@ -218,3 +218,10 @@
      * front/data_manage_UI.py
      * front/health_evaluate_UI.py
      * front/results_manage_UI.py
+
+## 2024-02-03
+### 修复
+1. 修复了健康评估页面在覆盖重复结果时可能卡死的问题
+   - 修改文件：backend/health_evaluate_backend.py
+   - 在waitTestRes函数中添加了文件存在性检查
+   - 当status.txt文件不存在时使用当前时间作为默认值
