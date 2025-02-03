@@ -662,105 +662,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             contents = f.readlines()  # 获取模型开始运行的时间
         self.result_time = datetime.strptime(contents[0], "%Y-%m-%d %H:%M:%S")  # 将string转化为datetime
         
-        # 将分数转换为0-95的范围
-        probability_score = float(num) * 100  # 将num*100改num*95，使得最大值为95
-        probability_score = max(0, min(95, probability_score))  # 确保分数在0-95之间
-        
-        # 取数据文件所在目录
-        data_dir = self.data_path
-        
-        score_lb_1 = 0
-        score_lb_2 = 0
-        score_xq = 0
-        has_lb_data = False  # 标记是否存在量表数据
-
-        try:
-            # 检查并处理量表数据
-            lb_path = os.path.join(data_dir, 'lb.csv')
-            if os.path.exists(lb_path):
-                import pandas as pd
-                df = pd.read_csv(lb_path)
-                if len(df) >= 1:  # 确保有数据行
-                    has_lb_data = True
-                    # 计算焦虑量表分数(前20列)
-                    anxiety_reverse_items = [1, 2, 5, 8, 10, 11, 15, 16, 19, 20]  # 需要反向计算的题目
-                    first_20 = df.iloc[0, :20]  # 获取前20列数据
-                    # 创建一个布尔掩码,标记需要反向计算的列
-                    reverse_mask = [(i + 1) in anxiety_reverse_items for i in range(20)]
-                    # 使用向量化操作计算分数
-                    score_lb_1 = first_20.where(~pd.Series(reverse_mask), 5 - first_20).sum()
-                    
-                    # 计算抑郁量表分数(后20列)
-                    depression_reverse_items = [2, 5, 6, 11, 12, 14, 16, 17, 18, 20]  # 需要反向计算的题目
-                    last_20 = df.iloc[0, 20:40]  # 获取后20列数据
-                    # 创建一个布尔掩码,标记需要反向计算的列
-                    reverse_mask = [(i + 1) in depression_reverse_items for i in range(20)]
-                    # 使用向量化操作计算分数
-                    score_lb_2 = last_20.where(~pd.Series(reverse_mask), 5 - last_20).sum() * 1.25
-                    
-                    logging.info(f"量表数据处理完成: 焦虑量表分数={score_lb_1}, 抑郁量表分数={score_lb_2}")
-
-            # 检查并处理血清学数据
-            xq_path = os.path.join(data_dir, 'xq.csv')
-            if os.path.exists(xq_path):
-                import pandas as pd
-                df = pd.read_csv(xq_path)
-                if len(df) >= 1:  # 确保有数据行
-                    # 处理所有列的数据
-                    def clean_value(val):
-                        if isinstance(val, str):
-                            val = val.replace('<', '').replace('>', '').replace('≤', '').replace('≥', '')
-                        try:
-                            return float(val)
-                        except:
-                            return 0
-
-                    # 应用清理函数并求和
-                    xq_sum = sum(clean_value(val) for val in df.iloc[0])
-                    score_xq = xq_sum / 5000
-                    logging.info(f"血清学数据处理完成: score_xq={score_xq}")
-
-        except Exception as e:
-            logging.error(f"处理多模态数据时发生错误: {str(e)}")
-            logging.error(traceback.format_exc())
-            # 发生错误时保持原始分数不变
-            score_lb_1 = 0
-            score_lb_2 = 0
-            score_xq = 0
-
-        # 根据不同类型计算最终分数
-        final_score = probability_score
-        if len(self.result_list) == 0:  # 普通应激
-            final_score = probability_score + score_xq
-        elif len(self.result_list) == 1:  # 抑郁
-            if not has_lb_data:  # 如果量表不存在
-                final_score = probability_score * 0.9
-            else:
-                # 根据抑郁量表分数(score_lb_2)调整最终分数
-                if score_lb_2 <= 53:
-                    # 量表分数<=53时,最终分数在0-50之间
-                    final_score = (score_lb_2 / 53) * 50
-                else:
-                    # 量表分数>53时,结合模型结果计算0-95之间的分数
-                    scale_factor = (score_lb_2 - 53) / (80 - 53)  # 量表分数映射到0-1
-                    model_factor = probability_score / 95  # 模型分数映射到0-1
-                    final_score = (scale_factor * 0.7 + model_factor * 0.3) * 95  # 综合计算,权重可调
-        elif len(self.result_list) == 2:  # 焦虑
-            if not has_lb_data:  # 如果量表不存在
-                final_score = probability_score * 0.9
-            else:
-                # 根据焦虑量表分数(score_lb_1)调整最终分数
-                if score_lb_1 <= 48:
-                    # 量表分数<=48时,最终分数在0-50之间
-                    final_score = (score_lb_1 / 48) * 50
-                else:
-                    # 量表分数>48时,结合模型结果计算0-95之间的分数
-                    scale_factor = (score_lb_1 - 48) / (80 - 48)  # 量表分数映射到0-1
-                    model_factor = probability_score / 95  # 模型分数映射到0-1
-                    final_score = (scale_factor * 0.7 + model_factor * 0.3) * 95  # 综合计算,权重可调
-        
-        # 确保最终分数不超过100，并转换为数字
-        final_score = float(min(95, max(0, final_score)))
+        # 直接使用传入的分数，不做任何转换
+        final_score = float(num)
         
         self.result_list.append(final_score)  # 存储最终分数
         self.completed_models += 1  # 增加已完成的模型数量
@@ -1366,11 +1269,107 @@ class EvaluateThread(QThread):
         self.data_path = data_path
         self.model_path = model_path
         self.current_type = 0  # 当前评估类型（0: 普通应激, 1: 抑郁, 2: 焦虑）
+        self.anxiety_score_lb = None  # 焦虑量表分数
+        self.depression_score_lb = None  # 抑郁量表分数
+
+    def calculate_scale_scores(self):
+        """
+        计算量表分数，只计算一次
+        
+        Returns:
+            tuple: (焦虑量表分数, 抑郁量表分数) 如果无法计算则返回 (None, None)
+        """
+        try:
+            import pandas as pd
+            import numpy as np
+            
+            # 读取量表数据
+            lb_path = os.path.join(self.data_path, 'lb.csv')
+            if not os.path.exists(lb_path):
+                logging.info("量表文件不存在")
+                return None, None
+                
+            # 读取量表数据，没有header
+            df = pd.read_csv(lb_path, header=None)
+            if len(df) < 1:
+                logging.info("量表数据为空")
+                return None, None
+            
+            # 计算焦虑量表分数(前20列)
+            anxiety_reverse_items = np.array([1, 2, 5, 8, 10, 11, 15, 16, 19, 20]) - 1
+            first_20 = df.iloc[0, :20].values.astype(float)
+            reverse_mask = np.zeros(20, dtype=bool)
+            reverse_mask[anxiety_reverse_items] = True
+            first_20[reverse_mask] = 5 - first_20[reverse_mask]
+            anxiety_score = np.sum(first_20)
+            
+            # 计算抑郁量表分数(后20列)
+            depression_reverse_items = np.array([2, 5, 6, 11, 12, 14, 16, 17, 18, 20]) - 1
+            last_20 = df.iloc[0, 20:40].values.astype(float)
+            reverse_mask = np.zeros(20, dtype=bool)
+            reverse_mask[depression_reverse_items] = True
+            last_20[reverse_mask] = 5 - last_20[reverse_mask]
+            depression_score = np.sum(last_20) * 1.25
+            
+            logging.info(f"量表分数计算完成 - 焦虑量表: {anxiety_score:.2f}, 抑郁量表: {depression_score:.2f}")
+            return anxiety_score, depression_score
+            
+        except Exception as e:
+            logging.error(f"计算量表分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return None, None
+
+    def calculate_final_score(self, model_score, scale_score, score_type):
+        """
+        根据模型分数和量表分数计算最终分数
+        
+        Args:
+            model_score: 模型预测分数
+            scale_score: 量表分数
+            score_type: 分数类型 (1: 抑郁, 2: 焦虑)
+            
+        Returns:
+            float: 计算后的最终分数
+        """
+        try:
+            if scale_score is None:
+                logging.info(f"量表分数不存在，返回模型分数的90%")
+                return float(min(95, max(0, model_score)))
+                
+            if score_type == 1:  # 抑郁
+                if scale_score < 53:
+                    # 当量表分数<=53时，直接返回基于量表的计算结果
+                    final_score = (scale_score / 53) * 50
+                    logging.info(f"抑郁量表分数 < 53，直接使用量表计算结果: {final_score}")
+                else:
+                    # 当量表分数>53时，才结合模型分数
+                    scale_factor = scale_score / 53.0 * 50
+                    model_factor = model_score
+                    final_score = (scale_factor + model_factor * 0.3)
+                    logging.info(f"抑郁量表分数 >= 53，结合模型分数计算: {final_score}")
+            else:  # 焦虑
+                if scale_score < 48:
+                    # 当量表分数<=48时，直接返回基于量表的计算结果
+                    final_score = (scale_score / 48) * 50
+                    logging.info(f"焦虑量表分数 < 48，直接使用量表计算结果: {final_score}")
+                else:
+                    # 当量表分数>48时，才结合模型分数
+                    scale_factor = scale_score / 48.0 * 50
+                    model_factor = model_score
+                    final_score = (scale_factor + model_factor * 0.3)
+                    logging.info(f"焦虑量表分数 >= 48，结合模型分数计算: {final_score}")
+                    
+            return float(min(95, max(0, final_score)))
+            
+        except Exception as e:
+            logging.error(f"计算最终分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return model_score
 
     def run(self):
         """
         运行评估线程
-        对三种类型进行评估：第一种类型使用模型推理，后两种类型直接使用第一种类型的结果
+        对三种类型进行评估：第一种类型使用模型推理，后两种类型使用第一种类型的结果结合量表计算
         """
         try:
             # 确保模型已经加载
@@ -1379,22 +1378,30 @@ class EvaluateThread(QThread):
                     logging.error("量化模型加载失败，无法进行评估")
                     return
 
-            # 第一种类型：使用模型进行推理
+            # 预先计算量表分数
+            self.anxiety_score_lb, self.depression_score_lb = self.calculate_scale_scores()
+
+            # 第一种类型：使用模型进行推理（普通应激不使用量表分数）
             logging.info("开始第一个模型（普通应激）的评估")
             model = EegModelInt8(self.data_path, self.model_path)
-            result = model.predict()
-            logging.info(f"第一个模型评估结果: {result}")
-            self._rule.emit(result)
+            model_result = model.predict() * 100
+            model_result = float(min(95, max(0, model_result)))
+            logging.info(f"第一个模型评估结果: {model_result}")
+            self._rule.emit(model_result)
             self.current_type = 1
 
-            # 第二种类型：直接使用第一个模型的结果
-            logging.info("使用第一个模型的结果用于第二个模型（抑郁）")
-            self._rule.emit(result)
+            # 第二种类型：使用第一个模型的结果结合抑郁量表分数
+            logging.info("计算第二个模型（抑郁）的结果")
+            depression_score = self.calculate_final_score(model_result, self.depression_score_lb, 1)
+            logging.info(f"抑郁评估结果: {depression_score} (量表分数: {self.depression_score_lb if self.depression_score_lb is not None else '无'})")
+            self._rule.emit(depression_score)
             self.current_type = 2
 
-            # 第三种类型：直接使用第一个模型的结果
-            logging.info("使用第一个模型的结果用于第三个模型（焦虑）")
-            self._rule.emit(result)
+            # 第三种类型：使用第一个模型的结果结合焦虑量表分数
+            logging.info("计算第三个模型（焦虑）的结果")
+            anxiety_score = self.calculate_final_score(model_result, self.anxiety_score_lb, 2)
+            logging.info(f"焦虑评估结果: {anxiety_score} (量表分数: {self.anxiety_score_lb if self.anxiety_score_lb is not None else '无'})")
+            self._rule.emit(anxiety_score)
 
             # 发送完成信号
             self.finished.emit()
