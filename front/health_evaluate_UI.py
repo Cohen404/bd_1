@@ -90,7 +90,7 @@ class Ui_MainWindow(object):
         self.button_layout = QtWidgets.QHBoxLayout()
         self.curve_layout.addLayout(self.button_layout)
 
-        # 在水平布局中添加两个按钮
+        # 在水平布局中添加按钮
         self.pushButton = QtWidgets.QPushButton(self.curve)
         self.pushButton.setObjectName("prevButton")
         self.button_layout.addWidget(self.pushButton)
@@ -98,12 +98,15 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("nextButton")
         self.button_layout.addWidget(self.pushButton_2)
         self.pushButton.setStyleSheet("background-color: white;")
-        self.pushButton_2.setStyleSheet("background-color: white; ")
+        self.pushButton_2.setStyleSheet("background-color: white;")
+        
+        # 添加图片查看按钮
+        self.view_image_btn = QtWidgets.QPushButton(self.curve)
+        self.view_image_btn.setStyleSheet("background-color: white;font-size: 14px;border-radius:5px;padding: 5px;")
+        self.view_image_btn.setObjectName("view_image_btn")
+        self.button_layout.addWidget(self.view_image_btn)
 
         self.gridLayout_2.addWidget(self.curve, 2, 4, 1, 1)
-        # self.curve_graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        # self.curve_graphicsView.setObjectName("curve_graphicsView")
-        # self.gridLayout_2.addWidget(self.curve_graphicsView, 1, 4, 1, 1)
 
         # 垂直布局,包含三种状态的Widget和剩余寿命的Widget
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -266,9 +269,9 @@ class Ui_MainWindow(object):
         self.depression_label.setText(_translate("MainWindow", "抑郁"))
         self.anxiety_label.setText(_translate("MainWindow", "焦虑"))
 
-        self.pushButton.setText(_translate("MainWindow", "Prev"))
-        self.pushButton_2.setText(_translate("MainWindow", "Next"))
-
+        self.pushButton.setText(_translate("MainWindow", "上一张"))
+        self.pushButton_2.setText(_translate("MainWindow", "下一张"))
+        self.view_image_btn.setText(_translate("MainWindow", "图片查看"))
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑

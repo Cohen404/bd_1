@@ -24,6 +24,7 @@ from datetime import datetime
 import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.data_manage_UI as data_manage_UI
+from front.image_viewer import ImageViewer
 
 # 导入跳转页面的后端部分
 from backend import index_backend
@@ -159,6 +160,12 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         
         # 连接选择变化信号
         self.tableWidget.itemSelectionChanged.connect(self.update_selection_count)
+
+        # 连接图片查看按钮
+        self.view_image_btn.clicked.connect(self.view_current_image)
+        
+        # 初始化图片查看器
+        self.image_viewer = None
 
     def get_user_type(self, user_id):
         """
@@ -965,6 +972,24 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             error_msg = f"选择前200条数据时出错: {str(e)}\n{traceback.format_exc()}"
             logging.error(error_msg)
             QMessageBox.critical(self, "错误", error_msg)
+
+    def view_current_image(self):
+        """
+        查看当前显示的图片
+        """
+        try:
+            if hasattr(self, 'pixmap') and self.pixmap and not self.pixmap.isNull():
+                # 创建图片查看器对话框
+                self.image_viewer = ImageViewer(self)
+                self.image_viewer.set_image(self.pixmap)
+                self.image_viewer.exec_()
+            else:
+                QMessageBox.warning(self, "提示", "请先选择要查看的图片")
+                
+        except Exception as e:
+            logging.error(f"查看图片时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(self, "错误", f"查看图片时发生错误: {str(e)}")
 
 def process_single_file(data_path):
     """

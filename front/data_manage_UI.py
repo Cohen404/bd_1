@@ -194,7 +194,14 @@ class Ui_MainWindow(object):
         self.graphicsView.setSizePolicy(sizePolicy)
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout_3.addWidget(self.graphicsView)
-        self.gridLayout.addWidget(self.widget_2, 1, 1, 1, 2)
+        
+        # 添加图片查看按钮
+        self.view_image_btn = QtWidgets.QPushButton(self.widget_2)
+        self.view_image_btn.setStyleSheet("background-color: white;font-size: 14px;border-radius:5px;padding: 5px;")
+        self.view_image_btn.setObjectName("view_image_btn")
+        self.verticalLayout_3.addWidget(self.view_image_btn)
+        
+        self.gridLayout.addWidget(self.widget_2, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.layout.addLayout(self.gridLayout)  # 把主体部分加入垂直布局
@@ -232,7 +239,8 @@ class Ui_MainWindow(object):
         self.channel_comboBox.setItemText(3, _translate("MainWindow", "time_domain_features"))
         self.channel_comboBox.setItemText(4, _translate("MainWindow", "time_frequency_features"))
 
-        self.pressure_curve_label.setText(_translate("MainWindow", "数据可视"))
+        self.pressure_curve_label.setText(_translate("MainWindow", "数据可视化"))
+        self.view_image_btn.setText(_translate("MainWindow", "图片查看"))
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑

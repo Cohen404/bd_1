@@ -23496,3 +23496,363 @@ FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_heal
 2025-02-03 16:35:45,885 - INFO - Returned to index page successfully
 2025-02-03 16:35:47,125 - INFO - Opening results view page.
 2025-02-03 16:35:53,198 - INFO - Returned to index page successfully
+2025-02-03 20:03:21,458 - INFO - 初始化登录界面...
+2025-02-03 20:03:21,461 - INFO - 开始预加载模型...
+2025-02-03 20:03:21,461 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:03:21,466 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:03:21,466 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:03:21,466 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:03:21,466 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:03:21,466 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:03:21,467 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:03:21,524 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:03:21,524 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:03:21,524 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:03:21,524 - INFO - 成功预加载量化模型
+2025-02-03 20:03:25,513 - INFO - Opening user login page.
+2025-02-03 20:03:31,715 - INFO - User admin logged in successfully
+2025-02-03 20:03:33,307 - INFO - Opening results view page.
+2025-02-03 20:03:44,629 - INFO - Returned to index page successfully
+2025-02-03 20:03:46,319 - INFO - Opening log management page.
+2025-02-03 20:04:20,823 - INFO - Returned to index page successfully
+2025-02-03 20:09:53,831 - INFO - 初始化登录界面...
+2025-02-03 20:09:53,835 - INFO - 开始预加载模型...
+2025-02-03 20:09:53,835 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:09:53,842 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:09:53,842 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:09:53,842 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:09:53,842 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:09:53,842 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:09:53,843 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:09:53,920 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:09:53,920 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:09:53,920 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:09:53,920 - INFO - 成功预加载量化模型
+2025-02-03 20:09:54,865 - INFO - Opening user login page.
+2025-02-03 20:09:58,133 - INFO - User user1 logged in successfully
+2025-02-03 20:09:59,494 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:09:59,495 - INFO - Opening data view page.
+2025-02-03 20:10:00,829 - INFO - Button clicked in row 1, corresponding ID: 292
+2025-02-03 20:10:00,831 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:10:01,933 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-03 20:10:15,406 - INFO - Returned to index page successfully
+2025-02-03 20:10:16,617 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:10:16,624 - INFO - Successfully displayed 8 data records
+2025-02-03 20:10:16,628 - INFO - Opening health evaluation page.
+2025-02-03 20:10:18,389 - INFO - Button clicked in row 0, ID: 291
+2025-02-03 20:10:18,391 - INFO - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:10:18,392 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:18,392 - INFO - Initializing current image index to 0
+2025-02-03 20:10:18,392 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:18,392 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-03 20:10:18,399 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:24,688 - INFO - Button clicked in row 1, ID: 292
+2025-02-03 20:10:24,689 - INFO - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:10:24,690 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:24,690 - INFO - Initializing current image index to 0
+2025-02-03 20:10:24,690 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:24,690 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-03 20:10:24,690 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:25,390 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:10:25,391 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:10:25,392 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:10:25,392 - INFO - Initializing current image index to 0
+2025-02-03 20:10:25,392 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:25,392 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:10:25,397 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:27,909 - INFO - Button clicked in row 0, ID: 291
+2025-02-03 20:10:27,910 - INFO - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:10:27,911 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:27,911 - INFO - Initializing current image index to 0
+2025-02-03 20:10:27,911 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:27,911 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-03 20:10:27,911 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:28,470 - INFO - Button clicked in row 1, ID: 292
+2025-02-03 20:10:28,471 - INFO - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:10:28,472 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:28,472 - INFO - Initializing current image index to 0
+2025-02-03 20:10:28,472 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:28,472 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-03 20:10:28,472 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:28,887 - INFO - Button clicked in row 0, ID: 291
+2025-02-03 20:10:28,888 - INFO - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:10:28,888 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:28,888 - INFO - Initializing current image index to 0
+2025-02-03 20:10:28,888 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:28,889 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-03 20:10:28,889 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:29,509 - INFO - Button clicked in row 1, ID: 292
+2025-02-03 20:10:29,511 - INFO - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:10:29,511 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:10:29,512 - INFO - Initializing current image index to 0
+2025-02-03 20:10:29,512 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:29,512 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-03 20:10:29,512 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:30,078 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:10:30,079 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:10:30,079 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:10:30,079 - INFO - Initializing current image index to 0
+2025-02-03 20:10:30,079 - INFO - Image list initialized with 15 items.
+2025-02-03 20:10:30,079 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:10:30,080 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:10:31,516 - INFO - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-03 20:10:31,517 - INFO - 开始第一个模型（普通应激）的评估
+2025-02-03 20:10:31,958 - INFO - Prediction result: 1.0
+2025-02-03 20:10:31,958 - INFO - 第一个模型评估结果: 95.0
+2025-02-03 20:10:31,958 - INFO - 计算第二个模型（抑郁）的结果
+2025-02-03 20:10:31,958 - INFO - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-03 20:10:31,958 - INFO - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-03 20:10:31,959 - INFO - 计算第三个模型（焦虑）的结果
+2025-02-03 20:10:31,959 - INFO - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-03 20:10:31,959 - INFO - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-03 20:10:31,966 - INFO - 当前模型索引: 0
+2025-02-03 20:10:31,966 - INFO - 第一个模型的结果: 95.0
+2025-02-03 20:10:31,966 - ERROR - Error in on_model_finished: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+2025-02-03 20:10:31,967 - ERROR - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 636, in on_model_finished
+    self.waitTestRes(first_result / 100)  # 转换回原始比例
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 662, in waitTestRes
+    with open(MODEL_STATUS_FILE, mode='r', encoding='utf-8') as f:  # 使用配置的路径
+FileNotFoundError: [Errno 2] 没有那个文件或目录: '/home/jupiter/bj_health_manage/state/status.txt'
+
+2025-02-03 20:10:34,591 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:12:45,125 - INFO - 初始化登录界面...
+2025-02-03 20:12:45,128 - INFO - 开始预加载模型...
+2025-02-03 20:12:45,128 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:12:45,133 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:12:45,133 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:12:45,133 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:12:45,133 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:12:45,133 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:12:45,134 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:12:45,204 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:12:45,204 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:12:45,204 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:12:45,204 - INFO - 成功预加载量化模型
+2025-02-03 20:12:46,316 - INFO - Opening user login page.
+2025-02-03 20:12:51,055 - INFO - User user1 logged in successfully
+2025-02-03 20:12:52,175 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:12:52,175 - INFO - Opening data view page.
+2025-02-03 20:12:53,543 - INFO - Button clicked in row 0, corresponding ID: 291
+2025-02-03 20:12:53,545 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:12:54,566 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-03 20:12:59,871 - INFO - Returned to index page successfully
+2025-02-03 20:13:00,628 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:13:00,638 - INFO - Successfully displayed 8 data records
+2025-02-03 20:13:00,641 - INFO - Opening health evaluation page.
+2025-02-03 20:13:03,095 - INFO - Button clicked in row 3, ID: 294
+2025-02-03 20:13:03,096 - INFO - Data path retrieved for ID 294: /home/jupiter/bj_health_manage/data/5
+2025-02-03 20:13:03,098 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:13:03,098 - INFO - Initializing current image index to 0
+2025-02-03 20:13:03,098 - INFO - Image list initialized with 15 items.
+2025-02-03 20:13:03,098 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/5/Theta.png
+2025-02-03 20:13:03,105 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:13:04,749 - INFO - Returned to index page successfully
+2025-02-03 20:13:05,879 - INFO - Opening results view page.
+2025-02-03 20:13:08,324 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:13:16,477 - ERROR - 导出结果时发生错误：No module named 'openpyxl'
+2025-02-03 20:13:47,469 - INFO - Returned to index page successfully
+2025-02-03 20:13:48,202 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:13:48,203 - INFO - Opening data view page.
+2025-02-03 20:13:50,000 - INFO - Button clicked in row 3, corresponding ID: 294
+2025-02-03 20:13:50,002 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/5
+2025-02-03 20:13:51,184 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/5/Theta.png
+2025-02-03 20:13:53,912 - INFO - Returned to index page successfully
+2025-02-03 20:13:54,623 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:13:54,629 - INFO - Successfully displayed 8 data records
+2025-02-03 20:13:54,634 - INFO - Opening health evaluation page.
+2025-02-03 20:13:56,951 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:13:56,952 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:13:56,953 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:13:56,953 - INFO - Initializing current image index to 0
+2025-02-03 20:13:56,953 - INFO - Image list initialized with 15 items.
+2025-02-03 20:13:56,953 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:13:56,953 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:14:00,007 - INFO - Returned to index page successfully
+2025-02-03 20:31:29,719 - INFO - 初始化登录界面...
+2025-02-03 20:31:29,722 - INFO - 开始预加载模型...
+2025-02-03 20:31:29,722 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:31:29,726 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:31:29,726 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:31:29,726 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:31:29,726 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:31:29,726 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:31:29,727 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:31:29,804 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:31:29,804 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:31:29,804 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:31:29,804 - INFO - 成功预加载量化模型
+2025-02-03 20:31:30,678 - INFO - Opening user login page.
+2025-02-03 20:31:34,402 - INFO - User user1 logged in successfully
+2025-02-03 20:31:35,587 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:31:35,587 - INFO - Opening data view page.
+2025-02-03 20:31:37,197 - INFO - Button clicked in row 2, corresponding ID: 293
+2025-02-03 20:31:37,199 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:31:38,181 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:37:15,442 - INFO - 初始化登录界面...
+2025-02-03 20:37:15,444 - INFO - 开始预加载模型...
+2025-02-03 20:37:15,444 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:37:15,449 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:37:15,449 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:37:15,449 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:37:15,449 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:37:15,449 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:37:15,449 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:37:15,525 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:37:15,525 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:37:15,525 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:37:15,525 - INFO - 成功预加载量化模型
+2025-02-03 20:37:16,613 - INFO - Opening user login page.
+2025-02-03 20:37:20,025 - INFO - User user1 logged in successfully
+2025-02-03 20:37:21,650 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:37:21,651 - INFO - Opening data view page.
+2025-02-03 20:37:22,972 - INFO - Button clicked in row 4, corresponding ID: 295
+2025-02-03 20:37:22,974 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/7
+2025-02-03 20:37:23,918 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/7/Theta.png
+2025-02-03 20:37:49,564 - INFO - Returned to index page successfully
+2025-02-03 20:37:50,304 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:37:50,310 - INFO - Successfully displayed 8 data records
+2025-02-03 20:37:50,314 - INFO - Opening health evaluation page.
+2025-02-03 20:37:53,028 - INFO - Button clicked in row 0, ID: 291
+2025-02-03 20:37:53,029 - INFO - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:37:53,030 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:37:53,031 - INFO - Initializing current image index to 0
+2025-02-03 20:37:53,031 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:53,031 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/theta.png
+2025-02-03 20:37:53,031 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/1_1/theta.png
+2025-02-03 20:37:54,669 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:37:54,670 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:37:54,671 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:37:54,671 - INFO - Initializing current image index to 0
+2025-02-03 20:37:54,671 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:54,671 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:37:54,671 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:37:56,435 - INFO - Button clicked in row 0, ID: 291
+2025-02-03 20:37:56,436 - INFO - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-03 20:37:56,437 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:37:56,437 - INFO - Initializing current image index to 0
+2025-02-03 20:37:56,437 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:56,437 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/theta.png
+2025-02-03 20:37:56,437 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/1_1/theta.png
+2025-02-03 20:37:56,760 - INFO - Button clicked in row 1, ID: 292
+2025-02-03 20:37:56,761 - INFO - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:37:56,762 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:37:56,762 - INFO - Initializing current image index to 0
+2025-02-03 20:37:56,762 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:56,762 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/theta.png
+2025-02-03 20:37:56,762 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/2/theta.png
+2025-02-03 20:37:57,146 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:37:57,147 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:37:57,147 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:37:57,148 - INFO - Initializing current image index to 0
+2025-02-03 20:37:57,148 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:57,148 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:37:57,148 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:37:57,500 - INFO - Button clicked in row 4, ID: 295
+2025-02-03 20:37:57,501 - INFO - Data path retrieved for ID 295: /home/jupiter/bj_health_manage/data/7
+2025-02-03 20:37:57,502 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:37:57,502 - INFO - Initializing current image index to 0
+2025-02-03 20:37:57,502 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:57,502 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/7/theta.png
+2025-02-03 20:37:57,502 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/7/theta.png
+2025-02-03 20:37:58,613 - INFO - Button clicked in row 6, ID: 297
+2025-02-03 20:37:58,614 - INFO - Data path retrieved for ID 297: /home/jupiter/bj_health_manage/data/9
+2025-02-03 20:37:58,615 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:37:58,615 - INFO - Initializing current image index to 0
+2025-02-03 20:37:58,615 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:58,615 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:37:58,615 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:37:59,099 - INFO - Button clicked in row 5, ID: 296
+2025-02-03 20:37:59,100 - INFO - Data path retrieved for ID 296: /home/jupiter/bj_health_manage/data/8
+2025-02-03 20:37:59,101 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:37:59,101 - INFO - Initializing current image index to 0
+2025-02-03 20:37:59,101 - INFO - Image list initialized with 15 items.
+2025-02-03 20:37:59,101 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/8/theta.png
+2025-02-03 20:37:59,101 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/8/theta.png
+2025-02-03 20:38:04,252 - INFO - Button clicked in row 6, ID: 297
+2025-02-03 20:38:04,258 - INFO - Data path retrieved for ID 297: /home/jupiter/bj_health_manage/data/9
+2025-02-03 20:38:04,259 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:38:04,259 - INFO - Initializing current image index to 0
+2025-02-03 20:38:04,259 - INFO - Image list initialized with 15 items.
+2025-02-03 20:38:04,259 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:38:04,259 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:38:04,843 - INFO - Button clicked in row 5, ID: 296
+2025-02-03 20:38:04,844 - INFO - Data path retrieved for ID 296: /home/jupiter/bj_health_manage/data/8
+2025-02-03 20:38:04,845 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:38:04,845 - INFO - Initializing current image index to 0
+2025-02-03 20:38:04,845 - INFO - Image list initialized with 15 items.
+2025-02-03 20:38:04,845 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/8/theta.png
+2025-02-03 20:38:04,845 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/8/theta.png
+2025-02-03 20:38:05,380 - INFO - Button clicked in row 6, ID: 297
+2025-02-03 20:38:05,381 - INFO - Data path retrieved for ID 297: /home/jupiter/bj_health_manage/data/9
+2025-02-03 20:38:05,382 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:38:05,382 - INFO - Initializing current image index to 0
+2025-02-03 20:38:05,382 - INFO - Image list initialized with 15 items.
+2025-02-03 20:38:05,382 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:38:05,382 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/9/theta.png
+2025-02-03 20:38:06,279 - INFO - Returned to index page successfully
+2025-02-03 20:38:07,171 - INFO - Opening results view page.
+2025-02-03 20:42:54,986 - INFO - 初始化登录界面...
+2025-02-03 20:42:54,989 - INFO - 开始预加载模型...
+2025-02-03 20:42:54,990 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:42:54,994 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:42:54,994 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:42:54,994 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:42:54,994 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:42:54,994 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:42:54,995 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:42:55,068 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:42:55,068 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:42:55,068 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:42:55,068 - INFO - 成功预加载量化模型
+2025-02-03 20:42:56,118 - INFO - Opening user login page.
+2025-02-03 20:43:00,339 - INFO - User user1 logged in successfully
+2025-02-03 20:43:01,482 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:43:01,482 - INFO - Opening data view page.
+2025-02-03 20:43:03,283 - INFO - Button clicked in row 2, corresponding ID: 293
+2025-02-03 20:43:03,284 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:43:04,443 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-03 20:43:07,045 - INFO - Returned to index page successfully
+2025-02-03 20:43:07,864 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:43:07,873 - INFO - Successfully displayed 8 data records
+2025-02-03 20:43:07,876 - INFO - Opening health evaluation page.
+2025-02-03 20:43:09,283 - INFO - Button clicked in row 2, ID: 293
+2025-02-03 20:43:09,284 - INFO - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-03 20:43:09,286 - INFO - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-03 20:43:09,286 - INFO - Initializing current image index to 0
+2025-02-03 20:43:09,286 - INFO - Image list initialized with 15 items.
+2025-02-03 20:43:09,286 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:43:09,286 - ERROR - Image file does not exist: /home/jupiter/bj_health_manage/data/3/theta.png
+2025-02-03 20:48:07,733 - INFO - 初始化登录界面...
+2025-02-03 20:48:07,737 - INFO - 开始预加载模型...
+2025-02-03 20:48:07,737 - INFO - 正在检查数据库中的模型信息...
+2025-02-03 20:48:07,741 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:48:07,741 - INFO - 模型文件存在，开始加载...
+2025-02-03 20:48:07,741 - INFO - 开始加载INT8量化模型...
+2025-02-03 20:48:07,741 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-03 20:48:07,741 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-03 20:48:07,742 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-03 20:48:07,812 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-03 20:48:07,812 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-03 20:48:07,812 - INFO - 模型加载成功并已放置在GPU上
+2025-02-03 20:48:07,812 - INFO - 成功预加载量化模型
+2025-02-03 20:48:08,768 - INFO - Opening user login page.
+2025-02-03 20:48:12,567 - INFO - User user1 logged in successfully
+2025-02-03 20:48:13,797 - INFO - Data table refreshed successfully with 8 records
+2025-02-03 20:48:13,797 - INFO - Opening data view page.
+2025-02-03 20:48:15,604 - INFO - Button clicked in row 3, corresponding ID: 294
+2025-02-03 20:48:15,606 - INFO - Data path retrieved from database: /home/jupiter/bj_health_manage/data/5
+2025-02-03 20:48:16,422 - INFO - Successfully displayed image: /home/jupiter/bj_health_manage/data/5/Theta.png
+2025-02-03 20:48:22,613 - INFO - Returned to index page successfully
+2025-02-03 20:48:23,491 - INFO - Regular user user1: fetching own data records
+2025-02-03 20:48:23,501 - INFO - Successfully displayed 8 data records
+2025-02-03 20:48:23,505 - INFO - Opening health evaluation page.
+2025-02-03 20:48:25,036 - INFO - Button clicked in row 1, ID: 292
+2025-02-03 20:48:25,037 - INFO - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-03 20:48:25,039 - INFO - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-03 20:48:25,039 - INFO - Initializing current image index to 0
+2025-02-03 20:48:25,039 - INFO - Image list initialized with 15 items.
+2025-02-03 20:48:25,039 - INFO - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-03 20:48:25,045 - INFO - Successfully displayed image: Theta波段功率
+2025-02-03 20:48:28,585 - INFO - Returned to index page successfully
+2025-02-03 20:48:29,404 - INFO - Opening results view page.

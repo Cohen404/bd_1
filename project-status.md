@@ -205,3 +205,16 @@
 - [ ] 继续优化用户界面体验
 - [ ] 完善错误处理机制
 - [ ] 优化数据处理性能
+
+# 项目状态记录
+
+## 2024-03-21 更新
+1. 新增图片查看功能
+   - 创建了新的图片查看器组件 `front/image_viewer.py`
+   - 支持图片放大、缩小、拖拽功能
+   - 在数据管理界面、健康评估界面和结果管理界面添加了图片查看按钮
+   - 修改的文件:
+     * front/image_viewer.py (新增)
+     * front/data_manage_UI.py
+     * front/health_evaluate_UI.py
+     * front/results_manage_UI.py

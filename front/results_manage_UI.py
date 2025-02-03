@@ -190,7 +190,7 @@ class Ui_MainWindow(object):
         self.button_layout = QtWidgets.QHBoxLayout()
         self.verticalLayout_2.addLayout(self.button_layout)
 
-        # 在水平布局中添加两个按钮
+        # 在水平布局中添加按钮
         self.pushButton = QtWidgets.QPushButton(self.widget)
         self.pushButton.setObjectName("prevButton")
         self.button_layout.addWidget(self.pushButton)
@@ -198,7 +198,13 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("nextButton")
         self.button_layout.addWidget(self.pushButton_2)
         self.pushButton.setStyleSheet("background-color: white;")
-        self.pushButton_2.setStyleSheet("background-color: white; ")
+        self.pushButton_2.setStyleSheet("background-color: white;")
+        
+        # 添加图片查看按钮
+        self.view_image_btn = QtWidgets.QPushButton(self.widget)
+        self.view_image_btn.setStyleSheet("background-color: white;font-size: 14px;border-radius:5px;padding: 5px;")
+        self.view_image_btn.setObjectName("view_image_btn")
+        self.button_layout.addWidget(self.view_image_btn)
 
         self.gridLayout.addWidget(self.widget, 0, 1, 1, 1)
 
@@ -369,8 +375,9 @@ class Ui_MainWindow(object):
         """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
+        MainWindow.setStyleSheet("QMainWindow{background-color:#d4e2f4}")
         self.life_label.setText(_translate("MainWindow", "当前评估结果"))
-        self.status_label.setText(_translate("MainWindow", "EEG特征图"))
+        self.status_label.setText(_translate("MainWindow", "数据可视化"))
         self.pressure_curve_label.setText(_translate("MainWindow", "历史评估结果"))
 
         font = QFont()
@@ -401,8 +408,9 @@ class Ui_MainWindow(object):
         self.acoustic_label.setText(_translate("MainWindow", "抑郁状态"))
         self.mechanical_label.setText(_translate("MainWindow", "焦虑状态"))
 
-        self.pushButton.setText(_translate("MainWindow", "Prev"))
-        self.pushButton_2.setText(_translate("MainWindow", "Next"))
+        self.pushButton.setText(_translate("MainWindow", "上一张"))
+        self.pushButton_2.setText(_translate("MainWindow", "下一张"))
+        self.view_image_btn.setText(_translate("MainWindow", "图片查看"))
 
         self.health_label.setFont(font)
         self.acoustic_label.setFont(font)

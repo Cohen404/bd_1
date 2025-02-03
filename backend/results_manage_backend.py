@@ -24,6 +24,7 @@ from PyQt5.QtWidgets import (
 import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.results_manage_UI as results_manage_UI
+from front.image_viewer import ImageViewer
 
 # 导入跳转页面的后端部分
 from backend import index_backend
@@ -154,6 +155,12 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
 
         # 添加导出按钮事件连接
         self.export_btn.clicked.connect(self.export_results)
+
+        # 连接图片查看按钮
+        self.view_image_btn.clicked.connect(self.view_current_image)
+        
+        # 初始化图片查看器
+        self.image_viewer = None
 
     def get_user_type(self, user_id):
         """
@@ -633,6 +640,35 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
             error_msg = f"导出结果时发生错误：{str(e)}"
             logging.error(error_msg)
             QMessageBox.critical(self, "错误", error_msg)
+
+    def view_current_image(self):
+        """
+        查看当前显示的图片
+        """
+        try:
+            if self.current_data_path:
+                # 获取当前图片的标题和文件名
+                title, filename = self.image_types[self.current_image_index]
+                image_path = os.path.join(self.current_data_path, filename)
+                
+                if os.path.exists(image_path):
+                    pixmap = QPixmap(image_path)
+                    if not pixmap.isNull():
+                        # 创建图片查看器对话框
+                        self.image_viewer = ImageViewer(self)
+                        self.image_viewer.set_image(pixmap)
+                        self.image_viewer.exec_()
+                    else:
+                        QMessageBox.warning(self, "提示", "无法加载图片")
+                else:
+                    QMessageBox.warning(self, "提示", "图片文件不存在")
+            else:
+                QMessageBox.warning(self, "提示", "请先选择要查看的数据")
+                
+        except Exception as e:
+            logging.error(f"查看图片时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            QMessageBox.critical(self, "错误", f"查看图片时发生错误: {str(e)}")
 
 class ReportViewer(QMainWindow):
     """报告查看窗口"""
