@@ -529,8 +529,13 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     # 获取 tb_result 表中与当前数据 ID 相关的结果
                     result = session.query(Result).filter(Result.id == self.data_id).first()
                     if result:
-                        # 更新LED颜色
+                        # 更新LED颜色和分数显示
                         self.update_led_colors(result)
+                        
+                        # 更新分数显示
+                        self.ordinarystress_label.setText(f"普通应激 ({result.stress_score:.1f})")
+                        self.depression_label.setText(f"抑郁 ({result.depression_score:.1f})")
+                        self.anxiety_label.setText(f"焦虑 ({result.anxiety_score:.1f})")
                         
                         self.current_index = 0  # 重置当前显示的图片索引
                         logging.info("Initializing current image index to 0", extra={'username': self.username})
@@ -538,10 +543,18 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     else:
                         logging.warning(f"No evaluation results found for ID {self.data_id}", extra={'username': self.username})
                         self.set_default_led_colors()  # 如果没有评估结果，设置为默认灰色
+                        # 清空分数显示
+                        self.ordinarystress_label.setText("普通应激")
+                        self.depression_label.setText("抑郁")
+                        self.anxiety_label.setText("焦虑")
                         QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的评估结果")
                 else:
                     logging.warning(f"No data record found for ID {self.data_id}", extra={'username': self.username})
                     self.set_default_led_colors()  # 如果没有数据记录，设置为默认灰色
+                    # 清空分数显示
+                    self.ordinarystress_label.setText("普通应激")
+                    self.depression_label.setText("抑郁")
+                    self.anxiety_label.setText("焦虑")
                     QMessageBox.warning(self, "提示", f"没有找到 ID 为 {self.data_id} 的数据记录")
                 
                 session.close()

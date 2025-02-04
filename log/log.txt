@@ -610,3 +610,101 @@ Exception: Failed to get test data
 2025-02-04 11:58:55,527 - INFO - user1 - Successfully displayed image: Theta波段功率
 2025-02-04 11:59:00,285 - INFO - user1 - Opening Index page.
 2025-02-04 11:59:00,285 - INFO - user1 - Returned to index page successfully
+2025-02-04 12:03:00,942 - INFO - user1 - 成功配置GPU: /physical_device:GPU:0
+2025-02-04 12:03:01,262 - INFO - 初始化登录界面...
+2025-02-04 12:03:01,265 - INFO - 开始预加载模型...
+2025-02-04 12:03:01,265 - INFO - 正在检查数据库中的模型信息...
+2025-02-04 12:03:01,268 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 12:03:01,268 - INFO - 模型文件存在，开始加载...
+2025-02-04 12:03:01,269 - INFO - 开始加载INT8量化模型...
+2025-02-04 12:03:01,269 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-04 12:03:01,270 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-04 12:03:01,271 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 12:03:01,366 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-04 12:03:01,367 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-04 12:03:01,367 - INFO - 模型加载成功并已放置在GPU上
+2025-02-04 12:03:01,367 - INFO - 成功预加载量化模型
+2025-02-04 12:03:02,213 - INFO - 未登录 - Opening user login page.
+2025-02-04 12:03:02,227 - INFO - user1 - Opening Login page.
+2025-02-04 12:03:08,616 - INFO - user1 - User logged in successfully
+2025-02-04 12:03:08,637 - INFO - user1 - Opening Index page.
+2025-02-04 12:03:12,324 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-04 12:03:12,331 - INFO - user1 - Successfully displayed 8 data records
+2025-02-04 12:03:12,335 - INFO - user1 - Opening health evaluation page.
+2025-02-04 12:03:12,386 - INFO - user1 - Opening Health Evaluate page.
+2025-02-04 12:03:14,319 - INFO - user1 - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-04 12:03:14,319 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 12:03:14,690 - INFO - user1 - Prediction result: 1.0
+2025-02-04 12:03:14,690 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 12:03:14,690 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 12:03:14,690 - INFO - user1 - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-04 12:03:14,690 - INFO - user1 - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-04 12:03:14,690 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 12:03:14,690 - INFO - user1 - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-04 12:03:14,690 - INFO - user1 - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-04 12:03:14,694 - INFO - user1 - 当前模型索引: 0
+2025-02-04 12:03:14,694 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 12:03:14,694 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 12:03:16,612 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:16,616 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:17,356 - INFO - user1 - Button clicked in row 1, ID: 292
+2025-02-04 12:03:17,357 - INFO - user1 - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-04 12:03:17,358 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:17,358 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:17,358 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:17,358 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-04 12:03:17,366 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:18,020 - INFO - user1 - Button clicked in row 2, ID: 293
+2025-02-04 12:03:18,021 - INFO - user1 - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-04 12:03:18,022 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:18,022 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:18,022 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:18,022 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-04 12:03:18,027 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:18,548 - INFO - user1 - Button clicked in row 3, ID: 294
+2025-02-04 12:03:18,549 - INFO - user1 - Data path retrieved for ID 294: /home/jupiter/bj_health_manage/data/5
+2025-02-04 12:03:18,549 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 12:03:18,550 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:18,550 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:18,550 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/5/Theta.png
+2025-02-04 12:03:18,555 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:19,164 - INFO - user1 - Button clicked in row 4, ID: 295
+2025-02-04 12:03:19,165 - INFO - user1 - Data path retrieved for ID 295: /home/jupiter/bj_health_manage/data/7
+2025-02-04 12:03:19,166 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 12:03:19,166 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:19,166 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:19,166 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/7/Theta.png
+2025-02-04 12:03:19,172 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:19,660 - INFO - user1 - Button clicked in row 5, ID: 296
+2025-02-04 12:03:19,661 - INFO - user1 - Data path retrieved for ID 296: /home/jupiter/bj_health_manage/data/8
+2025-02-04 12:03:19,662 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 12:03:19,662 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:19,662 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:19,662 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/8/Theta.png
+2025-02-04 12:03:19,666 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:20,444 - INFO - user1 - Button clicked in row 2, ID: 293
+2025-02-04 12:03:20,445 - INFO - user1 - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-04 12:03:20,446 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:20,446 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:20,446 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:20,446 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-04 12:03:20,451 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:20,900 - INFO - user1 - Button clicked in row 1, ID: 292
+2025-02-04 12:03:20,901 - INFO - user1 - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-04 12:03:20,902 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:20,902 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:20,902 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:20,902 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-04 12:03:20,906 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:21,252 - INFO - user1 - Button clicked in row 0, ID: 291
+2025-02-04 12:03:21,253 - INFO - user1 - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-04 12:03:21,254 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 12:03:21,254 - INFO - user1 - Initializing current image index to 0
+2025-02-04 12:03:21,254 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 12:03:21,254 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-04 12:03:21,258 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 12:03:22,334 - INFO - user1 - Opening Index page.
+2025-02-04 12:03:22,334 - INFO - user1 - Returned to index page successfully
+2025-02-04 12:03:23,101 - INFO - user1 - Opening results view page.
+2025-02-04 12:03:23,108 - INFO - user1 - Opening Results View page.
+2025-02-04 12:03:26,169 - ERROR - user1 - 导出结果时发生错误：No module named 'openpyxl'
