@@ -708,3 +708,49 @@ Exception: Failed to get test data
 2025-02-04 12:03:23,101 - INFO - user1 - Opening results view page.
 2025-02-04 12:03:23,108 - INFO - user1 - Opening Results View page.
 2025-02-04 12:03:26,169 - ERROR - user1 - 导出结果时发生错误：No module named 'openpyxl'
+2025-02-04 12:06:13,742 - INFO - user1 - 成功配置GPU: /physical_device:GPU:0
+2025-02-04 12:06:14,065 - INFO - 初始化登录界面...
+2025-02-04 12:06:14,068 - INFO - 开始预加载模型...
+2025-02-04 12:06:14,068 - INFO - 正在检查数据库中的模型信息...
+2025-02-04 12:06:14,070 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 12:06:14,070 - INFO - 模型文件存在，开始加载...
+2025-02-04 12:06:14,071 - INFO - 开始加载INT8量化模型...
+2025-02-04 12:06:14,072 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-04 12:06:14,072 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-04 12:06:14,073 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 12:06:14,157 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-04 12:06:14,158 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-04 12:06:14,159 - INFO - 模型加载成功并已放置在GPU上
+2025-02-04 12:06:14,159 - INFO - 成功预加载量化模型
+2025-02-04 12:06:14,896 - INFO - 未登录 - Opening user login page.
+2025-02-04 12:06:14,910 - INFO - user1 - Opening Login page.
+2025-02-04 12:06:17,759 - INFO - user1 - User logged in successfully
+2025-02-04 12:06:17,790 - INFO - user1 - Opening Index page.
+2025-02-04 12:06:19,804 - INFO - user1 - Data table refreshed successfully with 8 records
+2025-02-04 12:06:19,804 - INFO - user1 - Opening data view page.
+2025-02-04 12:06:19,838 - INFO - user1 - Opening Data View page.
+2025-02-04 12:06:21,664 - INFO - user1 - Opening Index page.
+2025-02-04 12:06:21,664 - INFO - user1 - Returned to index page successfully
+2025-02-04 12:06:22,224 - INFO - user1 - Opening results view page.
+2025-02-04 12:06:22,233 - INFO - user1 - Opening Results View page.
+2025-02-04 12:06:25,279 - INFO - user1 - Results exported to Excel: /home/jupiter/bj_health_manage/评估结果.xlsx
+2025-02-04 12:06:54,353 - INFO - user1 - Opening Index page.
+2025-02-04 12:06:54,354 - INFO - user1 - Returned to index page successfully
+2025-02-04 12:06:55,417 - INFO - user1 - Returning to login page.
+2025-02-04 12:06:55,426 - INFO - user1 - Opening Login page.
+2025-02-04 12:06:58,639 - INFO - admin - User logged in successfully
+2025-02-04 12:06:58,649 - INFO - admin - Opening Admin page.
+2025-02-04 12:06:59,763 - INFO - admin - Data table refreshed successfully with 298 records
+2025-02-04 12:06:59,764 - INFO - admin - Opening data view page.
+2025-02-04 12:06:59,778 - INFO - admin - Opening Data View page.
+2025-02-04 12:07:02,866 - INFO - admin - Opening Admin page.
+2025-02-04 12:07:02,867 - INFO - admin - Returned to index page successfully
+2025-02-04 12:07:03,454 - INFO - admin - Opening user management page.
+2025-02-04 12:07:03,466 - INFO - admin - Opening User Manage page.
+2025-02-04 12:07:04,225 - INFO - admin - Opening Admin page.
+2025-02-04 12:07:04,226 - INFO - admin - Returned to index page successfully
+2025-02-04 12:07:05,356 - INFO - admin - Opening results view page.
+2025-02-04 12:07:05,382 - INFO - admin - Opening Results View page.
+2025-02-04 12:07:10,313 - INFO - admin - Results exported to Excel: /home/jupiter/bj_health_manage/评估结果.xlsx
+2025-02-04 12:07:30,233 - INFO - admin - Opening Admin page.
+2025-02-04 12:07:30,233 - INFO - admin - Returned to index page successfully
