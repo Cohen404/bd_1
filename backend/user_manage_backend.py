@@ -202,8 +202,20 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                     'user_type': user.user_type
                 }
                 
+                # 检查新用户名是否与其他用户重复
+                new_username = username_edit.text()
+                if new_username != user.username:
+                    existing_user = session.query(User).filter(
+                        User.username == new_username,
+                        User.user_id != user_id
+                    ).first()
+                    if existing_user:
+                        logging.warning(f"Attempted to update user {user_id} with duplicate username: {new_username}")
+                        QMessageBox.warning(self, "用户名重复", "该用户名已被使用，请更换其他用户名！")
+                        return
+                
                 # 更新用户信息
-                user.username = username_edit.text()
+                user.username = new_username
                 user.email = email_edit.text() or None
                 user.phone = phone_edit.text() or None
                 user.user_type = "admin" if role_combo.currentText() == "管理员" else "user"
@@ -248,16 +260,17 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             QMessageBox.warning(self, "输入错误", "用户名和密码不能为空！")
             return
 
-        # 对密码进行SHA256加密
-        hashed_password = hash_password(password)
-
         session = SessionClass()
         try:
-            # 检查用户名是否存在
-            if session.query(User).filter(User.username == username).first():
-                logging.warning(f"Attempted to add user with existing username: {username}")
-                QMessageBox.warning(self, "错误", "用户名已存在！")
+            # 检查用户名是否已存在
+            existing_user = session.query(User).filter(User.username == username).first()
+            if existing_user:
+                logging.warning(f"Attempted to create user with duplicate username: {username}")
+                QMessageBox.warning(self, "用户名重复", "该用户名已被使用，请更换其他用户名！")
                 return
+
+            # 对密码进行SHA256加密
+            hashed_password = hash_password(password)
 
             new_user = User(
                 user_id=f"user{int(time.time())}",

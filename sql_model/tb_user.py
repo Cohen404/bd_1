@@ -8,7 +8,7 @@ class User(Base):
     __tablename__ = 'tb_user'
     
     user_id = Column(String(64), primary_key=True, nullable=False, comment='用户ID')
-    username = Column(String(50), nullable=False, comment='用户名')
+    username = Column(String(50), nullable=False, unique=True, comment='用户名')
     password = Column(String(64), nullable=False, comment='密码')
     email = Column(String(100), nullable=True, comment='邮箱')
     phone = Column(String(20), nullable=True, comment='电话')
