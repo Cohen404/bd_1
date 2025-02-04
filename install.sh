@@ -280,17 +280,26 @@ chmod +x run_system.sh
 # 创建桌面启动器
 echo "Creating desktop launcher..."
 WORKSPACE_PATH=$(pwd)
+
+# 复制系统图标到项目目录
+echo "Setting up application icon..."
+sudo cp /usr/share/icons/gnome/48x48/apps/system-config-users.png "${WORKSPACE_PATH}/app_icon.png"
+sudo chmod 644 "${WORKSPACE_PATH}/app_icon.png"
+
 cat > BJ_Health_System.desktop << EOF
 [Desktop Entry]
 Version=1.0
 Type=Application
 Name=BJ Health Management System
 Comment=Launch BJ Health Management System
-Exec=gnome-terminal --working-directory=${WORKSPACE_PATH} -e "./run_system.sh"
-Icon=${WORKSPACE_PATH}/img/logo.png
-Terminal=true
+Exec=${WORKSPACE_PATH}/run_system.sh
+Icon=${WORKSPACE_PATH}/app_icon.png
+Terminal=false
 Categories=Application;
 EOF
+
+# 设置启动器权限
+chmod +x BJ_Health_System.desktop
 
 # 检测桌面目录位置并复制启动器
 echo "Detecting desktop directory..."
