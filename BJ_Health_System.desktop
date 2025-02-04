@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=BJ Health Management System
+Comment=Launch BJ Health Management System
+Exec=gnome-terminal --working-directory=/home/jupiter/bj_health_manage -e "./run_system.sh"
+Icon=/home/jupiter/bj_health_manage/img/logo.png
+Terminal=true
+Categories=Application; 
