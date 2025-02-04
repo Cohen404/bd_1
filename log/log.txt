@@ -374,3 +374,239 @@ Opening Log Manage page.
 2025-02-04 11:41:13,737 - WARNING - admin - Attempted to update user user003 with duplicate username: user1
 2025-02-04 11:41:17,985 - INFO - admin - Opening Admin page.
 2025-02-04 11:41:17,985 - INFO - admin - Returned to index page successfully
+2025-02-04 11:49:00,458 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-04 11:49:00,794 - INFO - 初始化登录界面...
+2025-02-04 11:49:00,796 - INFO - 开始预加载模型...
+2025-02-04 11:49:00,797 - INFO - 正在检查数据库中的模型信息...
+2025-02-04 11:49:00,799 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 11:49:00,799 - INFO - 模型文件存在，开始加载...
+2025-02-04 11:49:00,800 - INFO - 开始加载INT8量化模型...
+2025-02-04 11:49:00,800 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-04 11:49:00,801 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-04 11:49:00,802 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 11:49:00,889 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-04 11:49:00,890 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-04 11:49:00,891 - INFO - 模型加载成功并已放置在GPU上
+2025-02-04 11:49:00,891 - INFO - 成功预加载量化模型
+2025-02-04 11:49:01,672 - INFO - 未登录 - Opening user login page.
+2025-02-04 11:49:01,690 - INFO - admin - Opening Login page.
+2025-02-04 11:49:04,583 - INFO - user1 - User logged in successfully
+2025-02-04 11:49:04,605 - INFO - user1 - Opening Index page.
+2025-02-04 11:49:05,463 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-04 11:49:05,470 - INFO - user1 - Successfully displayed 8 data records
+2025-02-04 11:49:05,473 - INFO - user1 - Opening health evaluation page.
+2025-02-04 11:49:05,524 - INFO - user1 - Opening Health Evaluate page.
+2025-02-04 11:49:06,882 - INFO - user1 - Started evaluation for data: /home/jupiter/bj_health_manage/data/1_1
+2025-02-04 11:49:06,884 - INFO - user1 - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-04 11:49:06,884 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:49:07,259 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:49:07,259 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:49:07,259 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:49:07,259 - INFO - user1 - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-04 11:49:07,259 - INFO - user1 - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-04 11:49:07,259 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:49:07,259 - INFO - user1 - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-04 11:49:07,259 - INFO - user1 - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-04 11:49:07,260 - ERROR - user1 - Error in waitTestRes: 'list' object has no attribute 'stress_score'
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 587, in waitTestRes
+    self.update_led_colors(self.result_list)
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 251, in update_led_colors
+    if result.stress_score >= 50:
+AttributeError: 'list' object has no attribute 'stress_score'
+
+2025-02-04 11:49:07,270 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:49:07,271 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:56:24,130 - INFO - user1 - 成功配置GPU: /physical_device:GPU:0
+2025-02-04 11:56:24,466 - INFO - 初始化登录界面...
+2025-02-04 11:56:24,520 - INFO - 开始预加载模型...
+2025-02-04 11:56:24,520 - INFO - 正在检查数据库中的模型信息...
+2025-02-04 11:56:24,523 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 11:56:24,523 - INFO - 模型文件存在，开始加载...
+2025-02-04 11:56:24,524 - INFO - 开始加载INT8量化模型...
+2025-02-04 11:56:24,524 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-04 11:56:24,525 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-04 11:56:24,526 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-04 11:56:24,613 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-04 11:56:24,614 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-04 11:56:24,615 - INFO - 模型加载成功并已放置在GPU上
+2025-02-04 11:56:24,615 - INFO - 成功预加载量化模型
+2025-02-04 11:56:25,543 - INFO - 未登录 - Opening user login page.
+2025-02-04 11:56:25,556 - INFO - user1 - Opening Login page.
+2025-02-04 11:56:28,570 - INFO - user1 - User logged in successfully
+2025-02-04 11:56:28,592 - INFO - user1 - Opening Index page.
+2025-02-04 11:56:29,669 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-04 11:56:29,676 - INFO - user1 - Successfully displayed 8 data records
+2025-02-04 11:56:29,679 - INFO - user1 - Opening health evaluation page.
+2025-02-04 11:56:29,733 - INFO - user1 - Opening Health Evaluate page.
+2025-02-04 11:56:31,689 - INFO - user1 - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-04 11:56:31,689 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:56:32,060 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:56:32,061 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:56:32,061 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:56:32,061 - INFO - user1 - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-04 11:56:32,061 - INFO - user1 - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-04 11:56:32,062 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:56:32,062 - INFO - user1 - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-04 11:56:32,062 - INFO - user1 - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-04 11:56:32,063 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:56:32,064 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:56:32,064 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:56:33,551 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:56:33,561 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:56:35,825 - INFO - user1 - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-04 11:56:35,825 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:56:36,178 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:56:36,179 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:56:36,184 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:56:36,184 - INFO - user1 - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-04 11:56:36,184 - INFO - user1 - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-04 11:56:36,184 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:56:36,184 - INFO - user1 - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-04 11:56:36,184 - INFO - user1 - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-04 11:56:36,187 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:56:36,187 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:56:36,187 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:56:37,310 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:56:37,319 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:56:38,848 - INFO - user1 - 量表文件不存在
+2025-02-04 11:56:38,848 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:56:38,851 - ERROR - user1 - Error in get_data: Could not find event data
+2025-02-04 11:56:38,852 - ERROR - user1 - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-04 11:56:38,853 - ERROR - user1 - Error during prediction: Failed to get test data
+2025-02-04 11:56:38,853 - ERROR - user1 - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-04 11:56:38,853 - INFO - user1 - 第一个模型评估结果: 0.0
+2025-02-04 11:56:38,853 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:56:38,854 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:56:38,854 - INFO - user1 - 抑郁评估结果: 0.0 (量表分数: 无)
+2025-02-04 11:56:38,854 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:56:38,854 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:56:38,854 - INFO - user1 - 焦虑评估结果: 0.0 (量表分数: 无)
+2025-02-04 11:56:38,856 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:56:38,856 - INFO - user1 - 第一个模型的结果: 0.0
+2025-02-04 11:56:38,856 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:56:40,150 - INFO - user1 - Updated LED colors based on scores: stress=0.0, depression=0.0, anxiety=0.0
+2025-02-04 11:56:40,153 - INFO - user1 - Updated LED colors based on scores: stress=0.0, depression=0.0, anxiety=0.0
+2025-02-04 11:56:43,599 - INFO - user1 - 量表文件不存在
+2025-02-04 11:56:43,599 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:56:43,915 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:56:43,915 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:56:43,915 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:56:43,916 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:56:43,916 - INFO - user1 - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-04 11:56:43,916 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:56:43,916 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:56:43,916 - INFO - user1 - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-04 11:56:43,918 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:56:43,918 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:56:43,918 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:56:45,199 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:56:45,202 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:00,538 - INFO - user1 - Opening Index page.
+2025-02-04 11:58:00,538 - INFO - user1 - Returned to index page successfully
+2025-02-04 11:58:01,214 - INFO - user1 - Data table refreshed successfully with 8 records
+2025-02-04 11:58:01,214 - INFO - user1 - Opening data view page.
+2025-02-04 11:58:01,231 - INFO - user1 - Opening Data View page.
+2025-02-04 11:58:03,369 - INFO - user1 - Started processing data from: /home/jupiter/bj_health_manage/data/3
+2025-02-04 11:58:10,928 - INFO - user1 - Data processing completed successfully
+2025-02-04 11:58:16,039 - INFO - user1 - Button clicked in row 2, corresponding ID: 293
+2025-02-04 11:58:16,042 - INFO - user1 - Data path retrieved from database: /home/jupiter/bj_health_manage/data/3
+2025-02-04 11:58:16,934 - INFO - user1 - Successfully displayed image: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-04 11:58:24,465 - INFO - user1 - Opening Index page.
+2025-02-04 11:58:24,465 - INFO - user1 - Returned to index page successfully
+2025-02-04 11:58:25,220 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-04 11:58:25,227 - INFO - user1 - Successfully displayed 8 data records
+2025-02-04 11:58:25,230 - INFO - user1 - Opening health evaluation page.
+2025-02-04 11:58:25,238 - INFO - user1 - Opening Health Evaluate page.
+2025-02-04 11:58:28,368 - INFO - user1 - 量表文件不存在
+2025-02-04 11:58:28,374 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:58:28,711 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:58:28,711 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:58:28,711 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:58:28,711 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:58:28,711 - INFO - user1 - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-04 11:58:28,711 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:58:28,711 - INFO - user1 - 量表分数不存在，返回模型分数的90%
+2025-02-04 11:58:28,712 - INFO - user1 - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-04 11:58:28,714 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:58:28,714 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:58:28,715 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:58:30,616 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:30,626 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:49,058 - INFO - user1 - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-04 11:58:49,058 - INFO - user1 - 开始第一个模型（普通应激）的评估
+2025-02-04 11:58:49,394 - INFO - user1 - Prediction result: 1.0
+2025-02-04 11:58:49,394 - INFO - user1 - 第一个模型评估结果: 95.0
+2025-02-04 11:58:49,394 - INFO - user1 - 计算第二个模型（抑郁）的结果
+2025-02-04 11:58:49,394 - INFO - user1 - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-04 11:58:49,395 - INFO - user1 - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-04 11:58:49,395 - INFO - user1 - 计算第三个模型（焦虑）的结果
+2025-02-04 11:58:49,395 - INFO - user1 - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-04 11:58:49,395 - INFO - user1 - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-04 11:58:49,397 - INFO - user1 - 当前模型索引: 0
+2025-02-04 11:58:49,397 - INFO - user1 - 第一个模型的结果: 95.0
+2025-02-04 11:58:49,397 - INFO - user1 - 状态文件不存在，使用当前时间作为评估时间
+2025-02-04 11:58:50,641 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:58:50,650 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:58:52,535 - INFO - user1 - Button clicked in row 1, ID: 292
+2025-02-04 11:58:52,537 - INFO - user1 - Data path retrieved for ID 292: /home/jupiter/bj_health_manage/data/2
+2025-02-04 11:58:52,538 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:58:52,538 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:52,538 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:52,538 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/2/Theta.png
+2025-02-04 11:58:52,542 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:58:53,728 - INFO - user1 - Button clicked in row 0, ID: 291
+2025-02-04 11:58:53,729 - INFO - user1 - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-04 11:58:53,730 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:58:53,730 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:53,730 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:53,730 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-04 11:58:53,734 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:58:54,135 - INFO - user1 - Button clicked in row 2, ID: 293
+2025-02-04 11:58:54,136 - INFO - user1 - Data path retrieved for ID 293: /home/jupiter/bj_health_manage/data/3
+2025-02-04 11:58:54,137 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-04 11:58:54,137 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:54,137 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:54,137 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/3/Theta.png
+2025-02-04 11:58:54,138 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:58:54,744 - INFO - user1 - Button clicked in row 3, ID: 294
+2025-02-04 11:58:54,745 - INFO - user1 - Data path retrieved for ID 294: /home/jupiter/bj_health_manage/data/5
+2025-02-04 11:58:54,746 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:54,746 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:54,746 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:54,746 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/5/Theta.png
+2025-02-04 11:58:54,751 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:58:55,151 - INFO - user1 - Button clicked in row 4, ID: 295
+2025-02-04 11:58:55,153 - INFO - user1 - Data path retrieved for ID 295: /home/jupiter/bj_health_manage/data/7
+2025-02-04 11:58:55,153 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:55,153 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:55,153 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:55,153 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/7/Theta.png
+2025-02-04 11:58:55,159 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:58:55,520 - INFO - user1 - Button clicked in row 5, ID: 296
+2025-02-04 11:58:55,521 - INFO - user1 - Data path retrieved for ID 296: /home/jupiter/bj_health_manage/data/8
+2025-02-04 11:58:55,522 - INFO - user1 - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-04 11:58:55,522 - INFO - user1 - Initializing current image index to 0
+2025-02-04 11:58:55,522 - INFO - user1 - Image list initialized with 15 items.
+2025-02-04 11:58:55,522 - INFO - user1 - Attempting to load image from path: /home/jupiter/bj_health_manage/data/8/Theta.png
+2025-02-04 11:58:55,527 - INFO - user1 - Successfully displayed image: Theta波段功率
+2025-02-04 11:59:00,285 - INFO - user1 - Opening Index page.
+2025-02-04 11:59:00,285 - INFO - user1 - Returned to index page successfully

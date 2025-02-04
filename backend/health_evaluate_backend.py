@@ -585,17 +585,6 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             # 重置计时器
             self.elapsed_seconds = 0
             
-            # 创建进度条对话框
-            self.progress_dialog = QProgressDialog("正在进行评估... (已用时: 0秒)", "取消", 0, 100, self)
-            self.progress_dialog.setWindowTitle("评估进度")
-            self.progress_dialog.setWindowModality(Qt.WindowModal)
-            self.progress_dialog.setMinimumDuration(0)
-            self.progress_dialog.setValue(0)
-            self.progress_dialog.show()
-            
-            # 启动计时器
-            self.timer.start(1000)  # 每秒更新一次
-            
             # 生成status.txt文件
             data_time = datetime.now().replace(microsecond=0)  # 获取到当前时间
             full_path = MODEL_STATUS_FILE  # 也可以创建一个.doc的word文档
@@ -657,11 +646,6 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             logging.error(traceback.format_exc())
 
     def waitTestRes(self, num):
-        # 更新进度条
-        if self.progress_dialog:
-            current_progress = (self.current_model_index * 33) + (float(num) * 33)
-            self.progress_dialog.setValue(min(int(current_progress), 100))
-            
         # 检查文件是否存在，如果不存在则使用当前时间
         import os
         if os.path.exists(MODEL_STATUS_FILE):
