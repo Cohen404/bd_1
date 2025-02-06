@@ -796,3 +796,503 @@ Exception: Failed to get test data
 2025-02-04 20:48:52,254 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
 2025-02-04 20:48:52,255 - INFO - 模型加载成功并已放置在GPU上
 2025-02-04 20:48:52,255 - INFO - 成功预加载量化模型
+2025-02-05 17:44:56,166 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 17:44:56,641 - INFO - 初始化登录界面...
+2025-02-05 17:44:56,643 - INFO - 开始预加载模型...
+2025-02-05 17:44:56,644 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 17:44:56,646 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:44:56,646 - INFO - 模型文件存在，开始加载...
+2025-02-05 17:44:56,647 - INFO - 开始加载INT8量化模型...
+2025-02-05 17:44:56,647 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 17:44:56,648 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 17:44:56,649 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:44:56,722 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 17:44:56,723 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 17:44:56,723 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 17:44:56,723 - INFO - 成功预加载量化模型
+2025-02-05 17:44:57,637 - INFO - 未登录 - Opening user login page.
+2025-02-05 17:44:57,752 - INFO - admin - Opening Login page.
+2025-02-05 17:45:00,424 - INFO - admin - User logged in successfully
+2025-02-05 17:45:00,535 - INFO - admin - Opening Admin page.
+2025-02-05 17:45:47,658 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 17:45:48,079 - INFO - 初始化登录界面...
+2025-02-05 17:45:48,081 - INFO - 开始预加载模型...
+2025-02-05 17:45:48,085 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 17:45:48,088 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:45:48,088 - INFO - 模型文件存在，开始加载...
+2025-02-05 17:45:48,088 - INFO - 开始加载INT8量化模型...
+2025-02-05 17:45:48,089 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 17:45:48,090 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 17:45:48,090 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:45:48,175 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 17:45:48,175 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 17:45:48,176 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 17:45:48,176 - INFO - 成功预加载量化模型
+2025-02-05 17:45:50,346 - INFO - 未登录 - Opening user login page.
+2025-02-05 17:45:50,360 - INFO - admin - Opening Login page.
+2025-02-05 17:45:53,529 - INFO - admin - User logged in successfully
+2025-02-05 17:45:53,594 - INFO - admin - Opening Admin page.
+2025-02-05 17:45:54,677 - INFO - admin - Opening model control page.
+2025-02-05 17:45:54,685 - INFO - admin - Opening Model Control page.
+2025-02-05 17:45:55,935 - INFO - admin - Opening Admin page.
+2025-02-05 17:45:55,935 - INFO - admin - Returned to index page successfully
+2025-02-05 17:45:56,767 - INFO - admin - Opening model control page.
+2025-02-05 17:45:56,867 - INFO - admin - Opening Model Control page.
+2025-02-05 17:45:58,618 - INFO - admin - Opening Admin page.
+2025-02-05 17:45:58,619 - INFO - admin - Returned to index page successfully
+2025-02-05 17:45:59,500 - INFO - admin - Opening results view page.
+2025-02-05 17:45:59,542 - INFO - admin - Opening Results View page.
+2025-02-05 17:46:01,141 - INFO - admin - Opening Admin page.
+2025-02-05 17:46:01,142 - INFO - admin - Returned to index page successfully
+2025-02-05 17:46:01,868 - INFO - admin - Data table refreshed successfully with 292 records
+2025-02-05 17:46:01,869 - INFO - admin - Opening data view page.
+2025-02-05 17:46:01,950 - INFO - admin - Opening Data View page.
+2025-02-05 17:46:02,866 - INFO - admin - Opening Admin page.
+2025-02-05 17:46:02,866 - INFO - admin - Returned to index page successfully
+2025-02-05 17:46:03,752 - INFO - admin - Opening help window.
+2025-02-05 17:46:15,403 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 17:46:15,645 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 17:46:15,697 - INFO - admin - Opening health evaluation page.
+2025-02-05 17:46:15,800 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 17:46:21,554 - INFO - admin - 量表文件不存在
+2025-02-05 17:46:21,554 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-05 17:46:21,964 - INFO - admin - Prediction result: 1.0
+2025-02-05 17:46:21,964 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-05 17:46:21,965 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-05 17:46:21,965 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 17:46:21,965 - INFO - admin - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-05 17:46:21,965 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-05 17:46:21,965 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 17:46:21,965 - INFO - admin - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-05 17:46:21,989 - INFO - admin - 当前模型索引: 0
+2025-02-05 17:46:21,989 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-05 17:46:21,990 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-05 17:46:24,308 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 17:46:24,317 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 17:46:27,917 - INFO - admin - Opening Admin page.
+2025-02-05 17:46:27,918 - INFO - admin - Returned to index page successfully
+2025-02-05 17:48:43,641 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 17:48:44,025 - INFO - 初始化登录界面...
+2025-02-05 17:48:44,028 - INFO - 开始预加载模型...
+2025-02-05 17:48:44,028 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 17:48:44,030 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:48:44,030 - INFO - 模型文件存在，开始加载...
+2025-02-05 17:48:44,031 - INFO - 开始加载INT8量化模型...
+2025-02-05 17:48:44,031 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 17:48:44,032 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 17:48:44,033 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:48:44,130 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 17:48:44,131 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 17:48:44,132 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 17:48:44,132 - INFO - 成功预加载量化模型
+2025-02-05 17:48:45,013 - INFO - 未登录 - Opening user login page.
+2025-02-05 17:48:45,080 - INFO - admin - Opening Login page.
+2025-02-05 17:48:48,571 - INFO - admin - User logged in successfully
+2025-02-05 17:48:48,697 - INFO - admin - Opening Admin page.
+2025-02-05 17:48:49,803 - INFO - admin - Opening help window.
+2025-02-05 17:48:53,859 - INFO - admin - Opening help window.
+2025-02-05 17:48:56,203 - INFO - admin - Opening help window.
+2025-02-05 17:49:24,020 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 17:49:24,382 - INFO - 初始化登录界面...
+2025-02-05 17:49:24,385 - INFO - 开始预加载模型...
+2025-02-05 17:49:24,385 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 17:49:24,388 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:49:24,388 - INFO - 模型文件存在，开始加载...
+2025-02-05 17:49:24,389 - INFO - 开始加载INT8量化模型...
+2025-02-05 17:49:24,389 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 17:49:24,390 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 17:49:24,391 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:49:24,523 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 17:49:24,524 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 17:49:24,525 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 17:49:24,525 - INFO - 成功预加载量化模型
+2025-02-05 17:49:25,398 - INFO - 未登录 - Opening user login page.
+2025-02-05 17:49:25,463 - INFO - admin - Opening Login page.
+2025-02-05 17:49:28,275 - INFO - admin - User logged in successfully
+2025-02-05 17:49:28,323 - INFO - admin - Opening Admin page.
+2025-02-05 17:49:31,579 - INFO - admin - Opening help window.
+2025-02-05 17:50:51,270 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 17:50:51,628 - INFO - 初始化登录界面...
+2025-02-05 17:50:51,631 - INFO - 开始预加载模型...
+2025-02-05 17:50:51,631 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 17:50:51,633 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:50:51,633 - INFO - 模型文件存在，开始加载...
+2025-02-05 17:50:51,634 - INFO - 开始加载INT8量化模型...
+2025-02-05 17:50:51,635 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 17:50:51,635 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 17:50:51,636 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 17:50:51,739 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 17:50:51,740 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 17:50:51,741 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 17:50:51,741 - INFO - 成功预加载量化模型
+2025-02-05 17:50:52,654 - INFO - 未登录 - Opening user login page.
+2025-02-05 17:50:52,778 - INFO - admin - Opening Login page.
+2025-02-05 17:50:55,619 - INFO - admin - User logged in successfully
+2025-02-05 17:50:55,689 - INFO - admin - Opening Admin page.
+2025-02-05 17:50:57,027 - INFO - admin - 尝试打开帮助文档: /home/jupiter/bj_health_manage/manual.pdf
+2025-02-05 17:50:57,027 - INFO - admin - 成功启动PDF查看器
+2025-02-05 17:50:57,027 - INFO - admin - Opening help window.
+2025-02-05 22:20:42,387 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:23:18,494 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:23:18,893 - INFO - 初始化登录界面...
+2025-02-05 22:23:18,895 - INFO - 开始预加载模型...
+2025-02-05 22:23:18,895 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:23:18,898 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:23:18,898 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:23:18,899 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:23:18,899 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:23:18,900 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:23:18,901 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:23:18,991 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:23:18,991 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:23:18,992 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:23:18,992 - INFO - 成功预加载量化模型
+2025-02-05 22:23:19,899 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:23:20,030 - INFO - admin - Opening Login page.
+2025-02-05 22:23:23,385 - INFO - admin - User logged in successfully
+2025-02-05 22:23:23,497 - INFO - admin - Opening Admin page.
+2025-02-05 22:23:24,729 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:23:24,954 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:23:24,999 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:23:25,096 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:23:28,786 - INFO - admin - 量表文件不存在
+2025-02-05 22:23:28,787 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-05 22:23:29,166 - INFO - admin - Prediction result: 1.0
+2025-02-05 22:23:29,167 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-05 22:23:29,167 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-05 22:23:29,167 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 22:23:29,167 - INFO - admin - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-05 22:23:29,167 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-05 22:23:29,167 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 22:23:29,167 - INFO - admin - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-05 22:23:29,180 - INFO - admin - 当前模型索引: 0
+2025-02-05 22:23:29,180 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-05 22:23:29,180 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-05 22:23:31,315 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 22:23:33,219 - INFO - admin - 量表文件不存在
+2025-02-05 22:23:33,219 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-05 22:23:33,573 - INFO - admin - Prediction result: 1.0
+2025-02-05 22:23:33,573 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-05 22:23:33,573 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-05 22:23:33,573 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 22:23:33,574 - INFO - admin - 抑郁评估结果: 95.0 (量表分数: 无)
+2025-02-05 22:23:33,574 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-05 22:23:33,574 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-05 22:23:33,574 - INFO - admin - 焦虑评估结果: 95.0 (量表分数: 无)
+2025-02-05 22:23:33,597 - INFO - admin - 当前模型索引: 0
+2025-02-05 22:23:33,597 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-05 22:23:33,597 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-05 22:23:34,874 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 22:23:34,885 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 22:23:35,856 - INFO - admin - Button clicked in row 291, ID: 298
+2025-02-05 22:23:35,858 - INFO - admin - Data path retrieved for ID 298: /home/jupiter/bj_health_manage/data/10
+2025-02-05 22:23:35,859 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-05 22:23:35,859 - INFO - admin - Initializing current image index to 0
+2025-02-05 22:23:35,859 - INFO - admin - Image list initialized with 15 items.
+2025-02-05 22:23:35,859 - INFO - admin - Attempting to load image from path: /home/jupiter/bj_health_manage/data/10/Theta.png
+2025-02-05 22:23:35,874 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-05 22:23:36,997 - ERROR - admin - Error converting to PDF: No module named 'docx2pdf'
+2025-02-05 22:24:46,219 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:24:46,579 - INFO - 初始化登录界面...
+2025-02-05 22:24:46,582 - INFO - 开始预加载模型...
+2025-02-05 22:24:46,582 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:24:46,585 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:24:46,585 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:24:46,586 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:24:46,587 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:24:46,588 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:24:46,589 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:24:46,687 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:24:46,688 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:24:46,688 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:24:46,689 - INFO - 成功预加载量化模型
+2025-02-05 22:24:47,557 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:24:47,662 - INFO - admin - Opening Login page.
+2025-02-05 22:24:51,593 - INFO - admin - User logged in successfully
+2025-02-05 22:24:51,655 - INFO - admin - Opening Admin page.
+2025-02-05 22:24:52,276 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:24:52,498 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:24:52,542 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:24:52,645 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:24:54,795 - ERROR - admin - Error converting to PDF: docx2pdf is not implemented for linux as it requires Microsoft Word to be installed
+2025-02-05 22:28:06,075 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:28:06,435 - INFO - 初始化登录界面...
+2025-02-05 22:28:06,438 - INFO - 开始预加载模型...
+2025-02-05 22:28:06,438 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:28:06,442 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:28:06,442 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:28:06,443 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:28:06,444 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:28:06,444 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:28:06,445 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:28:06,543 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:28:06,543 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:28:06,544 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:28:06,544 - INFO - 成功预加载量化模型
+2025-02-05 22:28:07,285 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:28:07,326 - INFO - admin - Opening Login page.
+2025-02-05 22:28:10,004 - INFO - admin - User logged in successfully
+2025-02-05 22:28:10,126 - INFO - admin - Opening Admin page.
+2025-02-05 22:28:11,197 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:28:11,425 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:28:11,469 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:28:11,576 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:28:14,500 - ERROR - admin - Error converting to PDF: [Errno 2] 没有那个文件或目录: 'libreoffice'
+2025-02-05 22:29:20,651 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:29:20,996 - INFO - 初始化登录界面...
+2025-02-05 22:29:20,998 - INFO - 开始预加载模型...
+2025-02-05 22:29:20,998 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:29:21,000 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:29:21,000 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:29:21,001 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:29:21,002 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:29:21,002 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:29:21,005 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:29:21,093 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:29:21,094 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:29:21,095 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:29:21,095 - INFO - 成功预加载量化模型
+2025-02-05 22:29:21,944 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:29:22,007 - INFO - admin - Opening Login page.
+2025-02-05 22:29:27,449 - INFO - admin - User logged in successfully
+2025-02-05 22:29:27,575 - INFO - admin - Opening Admin page.
+2025-02-05 22:29:28,655 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:29:28,886 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:29:28,931 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:29:29,008 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:29:31,109 - ERROR - admin - Error converting to PDF: 转换失败: Warning: failed to launch javaldx - java may not function correctly
+/usr/lib/libreoffice/program/soffice.bin: error while loading shared libraries: libreglo.so: cannot open shared object file: No such file or directory
+
+2025-02-05 22:36:34,127 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:36:34,427 - INFO - 初始化登录界面...
+2025-02-05 22:36:34,429 - INFO - 开始预加载模型...
+2025-02-05 22:36:34,429 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:36:34,432 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:36:34,432 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:36:34,433 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:36:34,434 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:36:34,434 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:36:34,435 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:36:34,542 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:36:34,543 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:36:34,544 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:36:34,544 - INFO - 成功预加载量化模型
+2025-02-05 22:36:35,398 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:36:35,436 - INFO - admin - Opening Login page.
+2025-02-05 22:36:38,363 - INFO - admin - User logged in successfully
+2025-02-05 22:36:38,485 - INFO - admin - Opening Admin page.
+2025-02-05 22:36:39,638 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:36:39,908 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:36:39,955 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:36:40,049 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:36:43,070 - ERROR - admin - Error generating report: PDF.__init__() takes 1 positional argument but 3 were given
+2025-02-05 22:39:00,218 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:39:00,484 - INFO - 初始化登录界面...
+2025-02-05 22:39:00,488 - INFO - 开始预加载模型...
+2025-02-05 22:39:00,490 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:39:00,494 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:39:00,494 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:39:00,495 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:39:00,496 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:39:00,498 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:39:00,499 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:39:00,599 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:39:00,600 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:39:00,600 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:39:00,600 - INFO - 成功预加载量化模型
+2025-02-05 22:39:01,396 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:39:01,470 - INFO - admin - Opening Login page.
+2025-02-05 22:39:04,362 - INFO - admin - User logged in successfully
+2025-02-05 22:39:04,488 - INFO - admin - Opening Admin page.
+2025-02-05 22:39:05,732 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:39:05,964 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:39:06,010 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:39:06,088 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:39:08,437 - ERROR - admin - Error generating report: PDF.__init__() takes 1 positional argument but 3 were given
+2025-02-05 22:39:56,530 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:39:56,805 - INFO - 初始化登录界面...
+2025-02-05 22:39:56,807 - INFO - 开始预加载模型...
+2025-02-05 22:39:56,807 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:39:56,810 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:39:56,810 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:39:56,811 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:39:56,811 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:39:56,812 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:39:56,813 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:39:56,920 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:39:56,921 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:39:56,922 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:39:56,922 - INFO - 成功预加载量化模型
+2025-02-05 22:39:57,904 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:39:57,982 - INFO - admin - Opening Login page.
+2025-02-05 22:40:00,996 - INFO - admin - User logged in successfully
+2025-02-05 22:40:01,122 - INFO - admin - Opening Admin page.
+2025-02-05 22:40:02,165 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:40:02,389 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:40:02,432 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:40:02,555 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:40:05,116 - ERROR - admin - Error generating report: PDF.__init__() takes 1 positional argument but 3 were given
+2025-02-05 22:41:05,422 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:41:05,702 - INFO - 初始化登录界面...
+2025-02-05 22:41:05,705 - INFO - 开始预加载模型...
+2025-02-05 22:41:05,705 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:41:05,709 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:41:05,709 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:41:05,710 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:41:05,710 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:41:05,711 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:41:05,712 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:41:05,810 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:41:05,811 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:41:05,812 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:41:05,812 - INFO - 成功预加载量化模型
+2025-02-05 22:41:06,729 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:41:06,839 - INFO - admin - Opening Login page.
+2025-02-05 22:41:10,143 - INFO - admin - User logged in successfully
+2025-02-05 22:41:10,200 - INFO - admin - Opening Admin page.
+2025-02-05 22:41:11,377 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:41:11,598 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:41:11,643 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:41:11,723 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:41:14,426 - ERROR - admin - Error generating report: PDF.__init__() takes 1 positional argument but 3 were given
+2025-02-05 22:42:33,385 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:42:33,683 - INFO - 初始化登录界面...
+2025-02-05 22:42:33,685 - INFO - 开始预加载模型...
+2025-02-05 22:42:33,685 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:42:33,688 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:42:33,688 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:42:33,689 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:42:33,690 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:42:33,690 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:42:33,691 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:42:33,795 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:42:33,795 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:42:33,796 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:42:33,796 - INFO - 成功预加载量化模型
+2025-02-05 22:42:34,653 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:42:34,709 - INFO - admin - Opening Login page.
+2025-02-05 22:42:38,002 - INFO - admin - User logged in successfully
+2025-02-05 22:42:38,125 - INFO - admin - Opening Admin page.
+2025-02-05 22:42:39,590 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:42:39,814 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:42:39,859 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:42:39,957 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:42:42,396 - ERROR - admin - Error generating PDF: PDF.__init__() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 1043, in generateReport
+    html.write_pdf(target=pdf_path)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/__init__.py", line 252, in write_pdf
+    self.render(font_config, counter_style, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/document.py", line 399, in write_pdf
+    pdf = generate_pdf(self, target, zoom, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/pdf/__init__.py", line 127, in generate_pdf
+    pdf = pydyf.PDF((version or '1.7'), identifier)
+TypeError: PDF.__init__() takes 1 positional argument but 3 were given
+
+2025-02-05 22:42:42,396 - ERROR - admin - Error generating report: Error generating PDF: PDF.__init__() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 1043, in generateReport
+    html.write_pdf(target=pdf_path)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/__init__.py", line 252, in write_pdf
+    self.render(font_config, counter_style, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/document.py", line 399, in write_pdf
+    pdf = generate_pdf(self, target, zoom, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/pdf/__init__.py", line 127, in generate_pdf
+    pdf = pydyf.PDF((version or '1.7'), identifier)
+TypeError: PDF.__init__() takes 1 positional argument but 3 were given
+
+2025-02-05 22:43:28,247 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:43:28,540 - INFO - 初始化登录界面...
+2025-02-05 22:43:28,542 - INFO - 开始预加载模型...
+2025-02-05 22:43:28,546 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:43:28,549 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:43:28,549 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:43:28,550 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:43:28,550 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:43:28,551 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:43:28,552 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:43:28,667 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:43:28,668 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:43:28,668 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:43:28,669 - INFO - 成功预加载量化模型
+2025-02-05 22:43:29,608 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:43:29,741 - INFO - admin - Opening Login page.
+2025-02-05 22:43:32,749 - INFO - admin - User logged in successfully
+2025-02-05 22:43:32,818 - INFO - admin - Opening Admin page.
+2025-02-05 22:43:33,870 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:43:34,098 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:43:34,143 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:43:34,224 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:43:37,127 - ERROR - admin - Error generating PDF: PDF.__init__() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 1049, in generateReport
+    html.write_pdf(pdf_path, stylesheets=[css])
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/__init__.py", line 252, in write_pdf
+    self.render(font_config, counter_style, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/document.py", line 399, in write_pdf
+    pdf = generate_pdf(self, target, zoom, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/pdf/__init__.py", line 127, in generate_pdf
+    pdf = pydyf.PDF((version or '1.7'), identifier)
+TypeError: PDF.__init__() takes 1 positional argument but 3 were given
+
+2025-02-05 22:43:37,127 - ERROR - admin - Error generating report: Error generating PDF: PDF.__init__() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 1049, in generateReport
+    html.write_pdf(pdf_path, stylesheets=[css])
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/__init__.py", line 252, in write_pdf
+    self.render(font_config, counter_style, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/document.py", line 399, in write_pdf
+    pdf = generate_pdf(self, target, zoom, **options)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/weasyprint/pdf/__init__.py", line 127, in generate_pdf
+    pdf = pydyf.PDF((version or '1.7'), identifier)
+TypeError: PDF.__init__() takes 1 positional argument but 3 were given
+
+2025-02-05 22:45:19,089 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-05 22:45:19,367 - INFO - 初始化登录界面...
+2025-02-05 22:45:19,369 - INFO - 开始预加载模型...
+2025-02-05 22:45:19,369 - INFO - 正在检查数据库中的模型信息...
+2025-02-05 22:45:19,372 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:45:19,372 - INFO - 模型文件存在，开始加载...
+2025-02-05 22:45:19,373 - INFO - 开始加载INT8量化模型...
+2025-02-05 22:45:19,373 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-05 22:45:19,374 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-05 22:45:19,375 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-05 22:45:19,482 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-05 22:45:19,483 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-05 22:45:19,484 - INFO - 模型加载成功并已放置在GPU上
+2025-02-05 22:45:19,484 - INFO - 成功预加载量化模型
+2025-02-05 22:45:20,228 - INFO - 未登录 - Opening user login page.
+2025-02-05 22:45:20,342 - INFO - admin - Opening Login page.
+2025-02-05 22:45:23,616 - INFO - admin - User logged in successfully
+2025-02-05 22:45:23,685 - INFO - admin - Opening Admin page.
+2025-02-05 22:45:25,664 - INFO - admin - Administrator admin: fetching all data records
+2025-02-05 22:45:25,887 - INFO - admin - Successfully displayed 292 data records
+2025-02-05 22:45:25,932 - INFO - admin - Opening health evaluation page.
+2025-02-05 22:45:26,008 - INFO - admin - Opening Health Evaluate page.
+2025-02-05 22:45:31,636 - INFO - admin - Report generated successfully for result ID 298
+2025-02-05 22:45:32,708 - INFO - admin - Opening Admin page.
+2025-02-05 22:45:32,709 - INFO - admin - Returned to index page successfully
+2025-02-05 22:45:34,024 - INFO - admin - Opening results view page.
+2025-02-05 22:45:34,108 - INFO - admin - Opening Results View page.
+2025-02-06 10:19:02,748 - INFO - admin - Opening Admin page.
+2025-02-06 10:19:02,748 - INFO - admin - Returned to index page successfully
+2025-02-06 10:19:03,672 - INFO - admin - Administrator admin: fetching all data records
+2025-02-06 10:19:03,903 - INFO - admin - Successfully displayed 292 data records
+2025-02-06 10:19:03,948 - INFO - admin - Opening health evaluation page.
+2025-02-06 10:19:04,054 - INFO - admin - Opening Health Evaluate page.
+2025-02-06 10:19:09,477 - INFO - admin - Report generated successfully for result ID 297
+2025-02-06 10:19:12,091 - INFO - admin - Opening Admin page.
+2025-02-06 10:19:12,092 - INFO - admin - Returned to index page successfully
+2025-02-06 10:19:13,359 - INFO - admin - Opening results view page.
+2025-02-06 10:19:13,453 - INFO - admin - Opening Results View page.
+2025-02-06 10:19:19,388 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_297.pdf
+2025-02-06 10:19:22,157 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_298.pdf
+2025-02-06 10:19:24,900 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_297.pdf
+2025-02-06 10:19:33,900 - INFO - admin - Opening Admin page.
+2025-02-06 10:19:33,900 - INFO - admin - Returned to index page successfully
+2025-02-06 10:19:35,505 - INFO - admin - Administrator admin: fetching all data records
+2025-02-06 10:19:35,809 - INFO - admin - Successfully displayed 292 data records
+2025-02-06 10:19:35,855 - INFO - admin - Opening health evaluation page.
+2025-02-06 10:19:35,935 - INFO - admin - Opening Health Evaluate page.
+2025-02-06 10:19:57,123 - INFO - admin - Opening Admin page.
+2025-02-06 10:19:57,123 - INFO - admin - Returned to index page successfully

@@ -5,6 +5,9 @@ import threading
 from sql_model.tb_model import Model
 
 import os
+import markdown
+from weasyprint import HTML, CSS
+from weasyprint.text.fonts import FontConfiguration
 
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
@@ -879,170 +882,202 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         QMessageBox.warning(self, "警告", "评估结果不完整，请确保完成所有评估项目。")
                         return
 
-                    # 读取模板文件
-                    template_path = TEMPLATE_FILE
-                    if not os.path.exists(template_path):
-                        QMessageBox.warning(self, "警告", "未找到报告模板文件。")
-                        return
-
                     # 更新进度 - 40%
                     progress.setValue(40)
 
-                    doc = Document(template_path)
+                    # 创建临时目录存储图片和HTML
+                    temp_dir = os.path.join(RESULTS_DIR, f'temp_{result_id}')
+                    os.makedirs(temp_dir, exist_ok=True)
 
-                    # 替换用户信息和评估结果
-                    for paragraph in doc.paragraphs:
-                        text = paragraph.text
-                        text = text.replace('[user.username]', self.username)
-                        text = text.replace('[user.email]', self.email or '未填写')
-                        text = text.replace('[user.phone]', self.phone or '未填写')
-                        text = text.replace('[user.created_at]', str(datetime.now()))
+                    # 复制图片到临时目录并生成图片HTML
+                    images_html = ""
+                    data_path = data.data_path
+                    image_list = [
+                        ("Theta波段功率", "Theta.png"),
+                        ("Alpha波段功率", "Alpha.png"),
+                        ("Beta波段功率", "Beta.png"),
+                        ("Gamma波段功率", "Gamma.png"),
+                        ("均分频带1", "frequency_band_1.png"),
+                        ("均分频带2", "frequency_band_2.png"),
+                        ("均分频带3", "frequency_band_3.png"),
+                        ("均分频带4", "frequency_band_4.png"),
+                        ("均分频带5", "frequency_band_5.png"),
+                        ("时域特征 - 过零率", "time_过零率.png"),
+                        ("时域特征 - 方差", "time_方差.png"),
+                        ("时域特征 - 能量", "time_能量.png"),
+                        ("时域特征 - 差分", "time_差分.png"),
+                        ("时频域特征 - 小波变换", "frequency_wavelet.png"),
+                        ("微分熵", "differential_entropy.png")
+                    ]
+
+                    for title, img_name in image_list:
+                        img_path = os.path.join(data_path, img_name)
+                        if os.path.exists(img_path):
+                            # 复制图片到临时目录
+                            temp_img_path = os.path.join(temp_dir, img_name)
+                            import shutil
+                            shutil.copy2(img_path, temp_img_path)
+                            # 添加图片到HTML
+                            images_html += f'<h3>{title}</h3><img src="file://{temp_img_path}" style="max-width: 100%; height: auto;"><br>'
+
+                    # 更新进度 - 50%
+                    progress.setValue(50)
+
+                    # 生成防护建议
+                    suggestions = []
+                    if result.stress_score < 50 and result.depression_score < 50 and result.anxiety_score < 50:
+                        normal_path = os.path.join('templates', 'normal.txt')
+                        if os.path.exists(normal_path):
+                            with open(normal_path, 'r', encoding='utf-8') as f:
+                                suggestions.append(f.read())
+                    else:
+                        if result.stress_score >= 50:
+                            stress_path = os.path.join('templates', 'stress.txt')
+                            if os.path.exists(stress_path):
+                                with open(stress_path, 'r', encoding='utf-8') as f:
+                                    suggestions.append(f.read())
                         
-                        # 替换评估结果
-                        text = text.replace('[normal_yingji.score]', str(result.stress_score))
-                        text = text.replace('[normal_yingji.result]', 
-                                          "可能存在应激情况" if result.stress_score >= 50 else "低概率存在应激情况")
+                        if result.depression_score >= 50:
+                            depression_path = os.path.join('templates', 'depression.txt')
+                            if os.path.exists(depression_path):
+                                with open(depression_path, 'r', encoding='utf-8') as f:
+                                    suggestions.append(f.read())
                         
-                        text = text.replace('[depression.score]', str(result.depression_score))
-                        text = text.replace('[depression.result]', 
-                                          "可能存在抑郁情况" if result.depression_score >= 50 else "低概率存在抑郁情况")
-                        
-                        text = text.replace('[stress.score]', str(result.anxiety_score))
-                        text = text.replace('[stress.result]', 
-                                          "可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况")
-                        
-                        # 根据分数生成防护建议
-                        if '[suggest]' in text:
-                            suggestions = []
-                            
-                            # 如果所有分数都低于50%，使用normal.txt的内容
-                            if result.stress_score < 50 and result.depression_score < 50 and result.anxiety_score < 50:
-                                normal_path = os.path.join('templates', 'normal.txt')
-                                if os.path.exists(normal_path):
-                                    with open(normal_path, 'r', encoding='utf-8') as f:
-                                        suggestions.append(f.read())
-                            else:
-                                # 检查各个状态并添加相应建议
-                                if result.stress_score >= 50:
-                                    stress_path = os.path.join('templates', 'stress.txt')
-                                    if os.path.exists(stress_path):
-                                        with open(stress_path, 'r', encoding='utf-8') as f:
-                                            suggestions.append(f.read())
-                                
-                                if result.depression_score >= 50:
-                                    depression_path = os.path.join('templates', 'depression.txt')
-                                    if os.path.exists(depression_path):
-                                        with open(depression_path, 'r', encoding='utf-8') as f:
-                                            suggestions.append(f.read())
-                                
-                                if result.anxiety_score >= 50:
-                                    anxiety_path = os.path.join('templates', 'anxiety.txt')
-                                    if os.path.exists(anxiety_path):
-                                        with open(anxiety_path, 'r', encoding='utf-8') as f:
-                                            suggestions.append(f.read())
-                            
-                            # 将所有建议组合起来，用换行符分隔
-                            text = text.replace('[suggest]', '\n'.join(suggestions))
-                        
-                        paragraph.text = text
+                        if result.anxiety_score >= 50:
+                            anxiety_path = os.path.join('templates', 'anxiety.txt')
+                            if os.path.exists(anxiety_path):
+                                with open(anxiety_path, 'r', encoding='utf-8') as f:
+                                    suggestions.append(f.read())
 
                     # 更新进度 - 60%
                     progress.setValue(60)
 
-                    # 添加图片
-                    data_path = data.data_path
-                    image_paths = {
-                        '[signals.eeg]': [
-                            ("Theta波段功率", "Theta.png"),
-                            ("Alpha波段功率", "Alpha.png"),
-                            ("Beta波段功率", "Beta.png"),
-                            ("Gamma波段功率", "Gamma.png"),
-                            ("均分频带1", "frequency_band_1.png"),
-                            ("均分频带2", "frequency_band_2.png"),
-                            ("均分频带3", "frequency_band_3.png"),
-                            ("均分频带4", "frequency_band_4.png"),
-                            ("均分频带5", "frequency_band_5.png"),
-                            ("域特征 - 过零率", "time_过零率.png"),
-                            ("时域特征 - 方差", "time_方差.png"),
-                            ("时域特征 - 能量", "time_能量.png"),
-                            ("时域特征 - 差分", "time_差分.png"),
-                            ("时频域特征 - 小波变换", "frequency_wavelet.png"),
-                            ("微分熵", "differential_entropy.png")
-                        ],
-                        '[signals.blood]': ['xq.png'],
-                        '[signals.scale]': ['lb.png']
-                    }
+                    # 生成完整的HTML内容
+                    html_content = f'''
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>应激评估报告</title>
+                        <style>
+                            body {{
+                                font-family: SimSun, "Microsoft YaHei", sans-serif;
+                                line-height: 1.5;
+                                margin: 2.5cm;
+                            }}
+                            h1 {{ 
+                                font-size: 24pt;
+                                text-align: center;
+                                margin-bottom: 2em;
+                            }}
+                            h2 {{ 
+                                font-size: 18pt;
+                                margin-top: 1.5em;
+                                border-bottom: 1px solid #ccc;
+                            }}
+                            h3 {{ 
+                                font-size: 14pt;
+                                margin-top: 1em;
+                            }}
+                            p {{ 
+                                text-indent: 2em;
+                                margin: 0.5em 0;
+                            }}
+                            img {{
+                                max-width: 100%;
+                                height: auto;
+                                margin: 1em 0;
+                            }}
+                            @page {{
+                                @top-center {{
+                                    content: "应激评估报告";
+                                    font-size: 9pt;
+                                }}
+                                @bottom-center {{
+                                    content: "第 " counter(page) " 页";
+                                    font-size: 9pt;
+                                }}
+                            }}
+                        </style>
+                    </head>
+                    <body>
+                        <h1>应激评估报告</h1>
+                        
+                        <h2>1. 用户基本信息</h2>
+                        <p>用户名：{self.username}</p>
+                        <p>邮箱：{self.email or '未填写'}</p>
+                        <p>手机：{self.phone or '未填写'}</p>
+                        <p>用户创建时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+                        
+                        <h2>2. 应激评估信息</h2>
+                        <p>普通应激评分：{result.stress_score}, 评估结果：{"可能存在应激情况" if result.stress_score >= 50 else "低概率存在应激情况"}</p>
+                        <p>抑郁评分：{result.depression_score}, 评估结果：{"可能存在抑郁情况" if result.depression_score >= 50 else "低概率存在抑郁情况"}</p>
+                        <p>焦虑评分：{result.anxiety_score}, 评估结果：{"可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况"}</p>
+                        
+                        <h2>3. 评估数据可视化</h2>
+                        {images_html}
+                        
+                        <h2>4. 防护建议</h2>
+                        <p>{"<br>".join(suggestions)}</p>
+                    </body>
+                    </html>
+                    '''
 
-                    for placeholder, images in image_paths.items():
-                        for paragraph in doc.paragraphs:
-                            if placeholder in paragraph.text:
-                                paragraph.text = paragraph.text.replace(placeholder, '')
-                                
-                                # 对于脑电信号图片，添加标题和图片
-                                if placeholder == '[signals.eeg]':
-                                    for title, img_name in images:
-                                        img_path = os.path.join(data_path, img_name)
-                                        if os.path.exists(img_path):
-                                            try:
-                                                # 添加图片标题
-                                                title_run = paragraph.add_run(f"\n{title}:\n")
-                                                title_run.bold = True  # 标题加粗
-                                                
-                                                # 添加图片
-                                                img_run = paragraph.add_run()
-                                                img_run.add_picture(img_path, width=Inches(6))
-                                                
-                                                # 添加额外的换行
-                                                paragraph.add_run("\n")
-                                            except Exception as img_error:
-                                                logging.error(f"Error adding image {img_path}: {str(img_error)}")
-                                                continue
-                                # 对于其他类型的图片，直接添加
-                                else:
-                                    for img_name in images:
-                                        img_path = os.path.join(data_path, img_name)
-                                        if os.path.exists(img_path):
-                                            try:
-                                                run = paragraph.add_run()
-                                                run.add_picture(img_path, width=Inches(6))
-                                            except Exception as img_error:
-                                                logging.error(f"Error adding image {img_path}: {str(img_error)}")
-                                                continue
+                    # 保存HTML文件
+                    html_path = os.path.join(temp_dir, 'report.html')
+                    with open(html_path, 'w', encoding='utf-8') as f:
+                        f.write(html_content)
 
-                    # 更新进度 - 80%
-                    progress.setValue(80)
+                    # 更新进度 - 70%
+                    progress.setValue(70)
 
                     # 创建results目录（如不存在）
                     results_dir = RESULTS_DIR
                     os.makedirs(results_dir, exist_ok=True)
 
-                    # 保存 docx 报告
-                    docx_path = os.path.join(results_dir, f'report_{result_id}.docx')
-                    doc.save(docx_path)
+                    # 生成PDF文件
+                    pdf_path = os.path.join(results_dir, f'report_{result_id}.pdf')
+                    try:
+                        import pdfkit
+                        # 配置wkhtmltopdf
+                        options = {
+                            'page-size': 'A4',
+                            'margin-top': '2.5cm',
+                            'margin-right': '2.5cm',
+                            'margin-bottom': '2.5cm',
+                            'margin-left': '2.5cm',
+                            'encoding': 'UTF-8',
+                            'header-center': '应激评估报告',
+                            'header-font-size': '9',
+                            'footer-center': '[page]',
+                            'footer-font-size': '9',
+                            'enable-local-file-access': None  # 允许访问本地文件
+                        }
+                        pdfkit.from_file(html_path, pdf_path, options=options)
+                    except Exception as e:
+                        import traceback
+                        error_msg = f"Error generating PDF: {str(e)}\n{traceback.format_exc()}"
+                        logging.error(error_msg)
+                        raise Exception(error_msg)
 
                     # 更新进度 - 90%
                     progress.setValue(90)
 
-                    # 转换为 PDF
-                    try:
-                        from docx2pdf import convert
-                        pdf_path = os.path.join(results_dir, f'report_{result_id}.pdf')
-                        convert(docx_path, pdf_path)
-                        
-                        # 更新数据库中的报告路径
-                        result.report_path = pdf_path
-                        session.commit()
-                        
-                        # 更新进度 - 100%
-                        progress.setValue(100)
-                        
-                        # 显示完成提示
-                        QMessageBox.information(self, "成功", "报告生成完毕，可以在结果管理中查看。")
-                        logging.info(f"Report generated successfully for result ID {result_id}")
-                        
-                    except Exception as pdf_error:
-                        logging.error(f"Error converting to PDF: {str(pdf_error)}")
-                        QMessageBox.warning(self, "警告", "报告生成失败，请重试。")
+                    # 更新数据库中的报告路径
+                    result.report_path = pdf_path
+                    session.commit()
+
+                    # 清理临时文件
+                    import shutil
+                    if os.path.exists(temp_dir):
+                        shutil.rmtree(temp_dir)
+
+                    # 更新进度 - 100%
+                    progress.setValue(100)
+                    
+                    # 显示完成提示
+                    QMessageBox.information(self, "成功", "报告生成完毕，可以在结果管理中查看。")
+                    logging.info(f"Report generated successfully for result ID {result_id}")
 
                 except Exception as e:
                     logging.error(f"Error generating report: {str(e)}")

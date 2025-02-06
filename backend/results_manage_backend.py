@@ -4,6 +4,7 @@
 import os
 import sys
 import fitz  # PyMuPDF
+import subprocess
 
 import logging
 from pyqt5_plugins.examplebutton import QtWidgets
@@ -551,9 +552,14 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
                         QMessageBox.warning(self, "警告", "报告文件不存在")
                         return
 
-                    # 创建报告查看窗口
-                    self.report_viewer = ReportViewer(result.report_path)
-                    self.report_viewer.show()
+                    # 使用系统PDF查看器打开报告
+                    try:
+                        subprocess.Popen(['xdg-open', result.report_path])
+                        logging.info(f"成功打开报告文件: {result.report_path}")
+                    except Exception as e:
+                        error_msg = f"打开报告失败: {str(e)}"
+                        logging.error(error_msg)
+                        QMessageBox.critical(self, "错误", f"打开报告失败：{str(e)}\n请确保系统安装了PDF查看器。")
 
                 finally:
                     session.close()

@@ -62,6 +62,11 @@ sudo apt-get install -y \
     libxkbcommon-dev \
     libxkbcommon-x11-dev
 
+# 安装系统依赖
+echo "正在安装系统依赖..."
+sudo apt-get update
+sudo apt-get install -y python3-pip python3-pyqt5 python3-pyqt5.qtwebengine evince xdg-utils
+
 # 设置环境变量
 echo "Setting up environment variables..."
 sudo bash -c 'cat > /etc/profile.d/qt.sh << EOF

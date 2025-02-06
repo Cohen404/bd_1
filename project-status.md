@@ -280,3 +280,15 @@
 2. 环境依赖更新：
    - 添加了openpyxl 3.1.5
    - 添加了et-xmlfile 2.0.0（openpyxl的依赖）
+
+## 2024-02-05
+- 修复了帮助文档和报告查看功能
+  - 修改了 `backend/help_window_backend.py`：使用系统PDF查看器(evince)打开帮助文档
+  - 修改了 `front/help_window_UI.py`：简化了UI界面
+  - 修改了 `backend/results_manage_backend.py`：使用系统PDF查看器打开报告文件
+  - 更新了 `install.sh`：添加了必要的系统依赖（evince, xdg-utils等）
+  
+- 主要改动：
+  1. 使用系统默认PDF查看器替代了内置的PDF查看功能
+  2. 添加了必要的错误处理和日志记录
+  3. 更新了安装脚本以确保所需组件的安装
