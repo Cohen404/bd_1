@@ -84,3 +84,12 @@ bfg-rules.txt
 
 .backup/
 tmp/
+.auto-coder/
+actions/
+output.txt
+.auto-coder/
+actions/
+output.txt
+.auto-coder/
+actions/
+output.txt

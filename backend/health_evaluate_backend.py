@@ -6,8 +6,6 @@ from sql_model.tb_model import Model
 
 import os
 import markdown
-from weasyprint import HTML, CSS
-from weasyprint.text.fonts import FontConfiguration
 
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QThread, pyqtSignal

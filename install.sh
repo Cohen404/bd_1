@@ -80,6 +80,7 @@ export QT_XCB_GL_INTEGRATION=xcb_egl
 export QT_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins:/usr/lib/qt5/plugins
 export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins/platforms
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
+export PYTHONPATH=/usr/lib/python3/dist-packages:\$PYTHONPATH
 # 禁用OpenCV的Qt插件
 export OPENCV_QT_DISABLE=1
 EOF'
@@ -104,6 +105,7 @@ export QT_XCB_GL_INTEGRATION=xcb_egl
 export QT_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins:/usr/lib/qt5/plugins
 export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins/platforms
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH
+export PYTHONPATH=/usr/lib/python3/dist-packages:\$PYTHONPATH
 # 禁用OpenCV的Qt插件
 export OPENCV_QT_DISABLE=1
 EOF

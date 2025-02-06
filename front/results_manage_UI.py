@@ -47,15 +47,32 @@ class Ui_MainWindow(object):
         # self.widget.setGeometry(QtCore.QRect(180, 151, 528, 434))
         # self.widget.setObjectName("widget")
 
-        # 垂直方向布局
+        # 创建主垂直布局
         self.layout = QtWidgets.QVBoxLayout(self.centralwidget)
 
         # 返回header组件
         self.header_layout, _, self.btn_return, self.time_show, self.statu_show = create_header('结果查看')
         self.layout.addLayout(self.header_layout)
 
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        # 创建滚动区域
+        self.scroll_area = QtWidgets.QScrollArea(self.centralwidget)
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setObjectName("scroll_area")
+        self.scroll_area.setStyleSheet("QScrollArea { border: none; background-color: transparent; }")
+        
+        # 创建滚动区域的内容容器
+        self.scroll_content = QtWidgets.QWidget()
+        self.scroll_content.setObjectName("scroll_content")
+        
+        # 创建网格布局并设置到滚动内容容器
+        self.gridLayout = QtWidgets.QGridLayout(self.scroll_content)
         self.gridLayout.setObjectName("gridLayout")
+
+        # 设置滚动区域的widget
+        self.scroll_area.setWidget(self.scroll_content)
+        
+        # 将滚动区域添加到主布局
+        self.layout.addWidget(self.scroll_area)
 
         # 当前评估结果
         self.widget_2 = QtWidgets.QWidget(self.centralwidget)

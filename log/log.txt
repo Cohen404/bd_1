@@ -1296,3 +1296,33 @@ TypeError: PDF.__init__() takes 1 positional argument but 3 were given
 2025-02-06 10:19:35,935 - INFO - admin - Opening Health Evaluate page.
 2025-02-06 10:19:57,123 - INFO - admin - Opening Admin page.
 2025-02-06 10:19:57,123 - INFO - admin - Returned to index page successfully
+2025-02-06 11:55:44,954 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-06 11:55:45,531 - INFO - 初始化登录界面...
+2025-02-06 11:55:45,534 - INFO - 开始预加载模型...
+2025-02-06 11:55:45,534 - INFO - 正在检查数据库中的模型信息...
+2025-02-06 11:55:45,537 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 11:55:45,537 - INFO - 模型文件存在，开始加载...
+2025-02-06 11:55:45,538 - INFO - 开始加载INT8量化模型...
+2025-02-06 11:55:45,539 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-06 11:55:45,539 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-06 11:55:45,540 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 11:55:45,643 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-06 11:55:45,643 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-06 11:55:45,644 - INFO - 模型加载成功并已放置在GPU上
+2025-02-06 11:55:45,644 - INFO - 成功预加载量化模型
+2025-02-06 11:55:46,884 - INFO - 未登录 - Opening user login page.
+2025-02-06 11:55:46,950 - INFO - admin - Opening Login page.
+2025-02-06 12:05:53,208 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-06 12:05:53,624 - INFO - 初始化登录界面...
+2025-02-06 12:05:53,626 - INFO - 开始预加载模型...
+2025-02-06 12:05:53,626 - INFO - 正在检查数据库中的模型信息...
+2025-02-06 12:05:53,629 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:05:53,629 - INFO - 模型文件存在，开始加载...
+2025-02-06 12:05:53,629 - INFO - 开始加载INT8量化模型...
+2025-02-06 12:05:53,630 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-06 12:05:53,631 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-06 12:05:53,632 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:05:53,735 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-06 12:05:53,735 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-06 12:05:53,736 - INFO - 模型加载成功并已放置在GPU上
+2025-02-06 12:05:53,736 - INFO - 成功预加载量化模型
