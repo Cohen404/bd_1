@@ -167,6 +167,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         # 初始化图片查看器
         self.image_viewer = None
 
+        # 连接批量删除按钮
+        self.batch_delete_pushButton.clicked.connect(self.handle_batch_delete)
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -990,6 +993,103 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             logging.error(f"查看图片时发生错误: {str(e)}")
             logging.error(traceback.format_exc())
             QMessageBox.critical(self, "错误", f"查看图片时发生错误: {str(e)}")
+
+    def handle_batch_delete(self):
+        """处理批量删除功能"""
+        try:
+            # 获取选中的行
+            selected_rows = set(item.row() for item in self.tableWidget.selectedItems())
+            if not selected_rows:
+                QMessageBox.warning(self, "警告", "请先选择要删除的数据")
+                return
+
+            # 添加确认对话框
+            reply = QMessageBox.question(self, '确认删除', 
+                                       f'确定要删除这{len(selected_rows)}条数据吗？此操作不可恢复。',
+                                       QMessageBox.Yes | QMessageBox.No,
+                                       QMessageBox.No)
+            
+            if reply == QMessageBox.No:
+                logging.info("User cancelled batch deletion")
+                return
+            
+            logging.info(f"Attempting to delete {len(selected_rows)} records from the table.")
+
+            # 创建进度对话框
+            progress = QProgressDialog("正在删除数据...", None, 0, len(selected_rows), self)
+            progress.setWindowModality(Qt.WindowModal)
+            progress.setWindowTitle("删除中")
+            progress.show()
+
+            deleted_count = 0
+            failed_count = 0
+
+            # 开始数据库会话
+            session = SessionClass()
+            try:
+                # 根据id从tb_data中获取数据路径path
+                for i, row in enumerate(selected_rows):
+                    progress.setValue(i)
+                    if progress.wasCanceled():
+                        break
+
+                    try:
+                        id = self.tableWidget.item(row, 0).text()
+                        data = session.query(Data).filter(Data.id == id).first()
+                        if data:
+                            path = data.data_path
+                            logging.info(f"Data path for ID {id}: {path}")
+
+                            # 检查数据路径是否存在
+                            if os.path.exists(path):
+                                # 删除'../data/'下对应的文件夹
+                                shutil.rmtree(path)
+                                logging.info(f"Deleted folder at path: {path}")
+
+                            # 从tb_data中删除对应记录
+                            session.query(Data).filter(Data.id == id).delete()
+                            session.commit()
+                            logging.info(f"Deleted record with ID {id} from tb_data.")
+
+                            # 删除result表中对应数据
+                            session.query(Result).filter(Result.id == id).delete()
+                            session.commit()
+                            logging.info(f"Deleted record with ID {id} from result table.")
+                            
+                            deleted_count += 1
+                        else:
+                            logging.warning(f"No data found with ID {id}.")
+                            failed_count += 1
+                    except Exception as e:
+                        logging.error(f"Error deleting record with ID {id}: {str(e)}")
+                        failed_count += 1
+                        continue
+
+                progress.setValue(len(selected_rows))
+
+                # 刷新表格显示
+                self.show_table()
+
+                # 显示最终删除结果
+                if failed_count == 0:
+                    QMessageBox.information(self, "成功", f"成功删除{deleted_count}条数据")
+                else:
+                    QMessageBox.warning(self, "完成", f"删除完成\n成功：{deleted_count}条\n失败：{failed_count}条")
+
+            except Exception as e:
+                logging.error(f"Error occurred while deleting records: {str(e)}")
+                QMessageBox.critical(self, "错误", f"删除记录时发生错误: {str(e)}")
+            finally:
+                session.close()
+
+            # 重置选中的数据
+            self.selected_data = set()
+            self.update_selection_count()
+
+        except Exception as e:
+            error_msg = f"批量删除失败: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
 
 def process_single_file(data_path):
     """

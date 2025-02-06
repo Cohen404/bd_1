@@ -113,6 +113,13 @@ class Ui_MainWindow(object):
         self.batch_preprocess_pushButton.setObjectName("batch_preprocess_pushButton")
         self.button_layout.addWidget(self.batch_preprocess_pushButton)
 
+        # 添加批量删除按钮
+        self.batch_delete_pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.batch_delete_pushButton.setFixedSize(120, 50)
+        self.batch_delete_pushButton.setStyleSheet("background-color: #759dcd;font-size: 18px;border-radius:12px")
+        self.batch_delete_pushButton.setObjectName("batch_delete_pushButton")
+        self.button_layout.addWidget(self.batch_delete_pushButton)
+
         # 添加选择数量显示标签
         self.selection_count_label = QtWidgets.QLabel(self.centralwidget)
         self.selection_count_label.setStyleSheet("font-size: 14px; color: #333; margin-top: 10px;")
@@ -241,6 +248,10 @@ class Ui_MainWindow(object):
 
         self.pressure_curve_label.setText(_translate("MainWindow", "数据可视化"))
         self.view_image_btn.setText(_translate("MainWindow", "图片查看"))
+        self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
+        self.batch_preprocess_pushButton.setText(_translate("MainWindow", "批量预处理"))
+        self.batch_delete_pushButton.setText(_translate("MainWindow", "批量删除"))
+        self.select_top_200_button.setText(_translate("MainWindow", "选择前200条"))
 
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑
@@ -258,10 +269,7 @@ class Ui_MainWindow(object):
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")
-        self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
         self.batch_upload_pushButton.setFont(font)
-        self.batch_preprocess_pushButton.setText(_translate("MainWindow", "批量预处理"))
         self.batch_preprocess_pushButton.setFont(font)
-        self.select_top_200_button.setText(_translate("MainWindow", "选择前200条"))
         self.selection_count_label.setText(_translate("MainWindow", "已选择: 0/200"))
 

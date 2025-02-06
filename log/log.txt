@@ -1326,3 +1326,1300 @@ TypeError: PDF.__init__() takes 1 positional argument but 3 were given
 2025-02-06 12:05:53,735 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
 2025-02-06 12:05:53,736 - INFO - 模型加载成功并已放置在GPU上
 2025-02-06 12:05:53,736 - INFO - 成功预加载量化模型
+2025-02-06 12:08:04,730 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-06 12:08:05,113 - INFO - 初始化登录界面...
+2025-02-06 12:08:05,115 - INFO - 开始预加载模型...
+2025-02-06 12:08:05,115 - INFO - 正在检查数据库中的模型信息...
+2025-02-06 12:08:05,118 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:08:05,118 - INFO - 模型文件存在，开始加载...
+2025-02-06 12:08:05,119 - INFO - 开始加载INT8量化模型...
+2025-02-06 12:08:05,119 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-06 12:08:05,120 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-06 12:08:05,121 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:08:05,230 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-06 12:08:05,231 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-06 12:08:05,232 - INFO - 模型加载成功并已放置在GPU上
+2025-02-06 12:08:05,232 - INFO - 成功预加载量化模型
+2025-02-06 12:08:06,102 - INFO - 未登录 - Opening user login page.
+2025-02-06 12:08:06,163 - INFO - admin - Opening Login page.
+2025-02-06 12:08:09,218 - INFO - admin - User logged in successfully
+2025-02-06 12:08:09,313 - INFO - admin - Opening Admin page.
+2025-02-06 12:08:11,403 - INFO - admin - Data table refreshed successfully with 292 records
+2025-02-06 12:08:11,404 - INFO - admin - Opening data view page.
+2025-02-06 12:08:11,479 - INFO - admin - Opening Data View page.
+2025-02-06 12:08:26,820 - INFO - admin - Attempting to delete 200 records from the table.
+2025-02-06 12:08:26,821 - INFO - admin - Data path for ID 7: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)
+2025-02-06 12:08:26,822 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)
+2025-02-06 12:08:26,830 - INFO - admin - Deleted record with ID 7 from tb_data.
+2025-02-06 12:08:26,832 - INFO - admin - Deleted record with ID 7 from result table.
+2025-02-06 12:08:28,173 - INFO - admin - Data path for ID 8: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)
+2025-02-06 12:08:28,174 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)
+2025-02-06 12:08:28,181 - INFO - admin - Deleted record with ID 8 from tb_data.
+2025-02-06 12:08:28,183 - INFO - admin - Deleted record with ID 8 from result table.
+2025-02-06 12:08:29,197 - INFO - admin - Data path for ID 9: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)
+2025-02-06 12:08:29,204 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)
+2025-02-06 12:08:29,205 - INFO - admin - Deleted record with ID 9 from tb_data.
+2025-02-06 12:08:29,207 - INFO - admin - Deleted record with ID 9 from result table.
+2025-02-06 12:08:29,853 - INFO - admin - Data path for ID 10: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)
+2025-02-06 12:08:29,854 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)
+2025-02-06 12:08:29,861 - INFO - admin - Deleted record with ID 10 from tb_data.
+2025-02-06 12:08:29,863 - INFO - admin - Deleted record with ID 10 from result table.
+2025-02-06 12:08:30,301 - INFO - admin - Data path for ID 11: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)
+2025-02-06 12:08:30,301 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)
+2025-02-06 12:08:30,309 - INFO - admin - Deleted record with ID 11 from tb_data.
+2025-02-06 12:08:30,311 - INFO - admin - Deleted record with ID 11 from result table.
+2025-02-06 12:08:30,471 - INFO - admin - Data path for ID 12: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)
+2025-02-06 12:08:30,471 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)
+2025-02-06 12:08:30,479 - INFO - admin - Deleted record with ID 12 from tb_data.
+2025-02-06 12:08:30,481 - INFO - admin - Deleted record with ID 12 from result table.
+2025-02-06 12:08:30,722 - INFO - admin - Data path for ID 13: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)
+2025-02-06 12:08:30,722 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)
+2025-02-06 12:08:30,730 - INFO - admin - Deleted record with ID 13 from tb_data.
+2025-02-06 12:08:30,732 - INFO - admin - Deleted record with ID 13 from result table.
+2025-02-06 12:08:31,213 - INFO - admin - Data path for ID 14: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)
+2025-02-06 12:08:31,213 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)
+2025-02-06 12:08:31,215 - INFO - admin - Deleted record with ID 14 from tb_data.
+2025-02-06 12:08:31,216 - INFO - admin - Deleted record with ID 14 from result table.
+2025-02-06 12:08:31,608 - INFO - admin - Data path for ID 15: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)
+2025-02-06 12:08:31,608 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)
+2025-02-06 12:08:31,616 - INFO - admin - Deleted record with ID 15 from tb_data.
+2025-02-06 12:08:31,618 - INFO - admin - Deleted record with ID 15 from result table.
+2025-02-06 12:08:31,863 - INFO - admin - Data path for ID 16: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)
+2025-02-06 12:08:31,864 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)
+2025-02-06 12:08:31,871 - INFO - admin - Deleted record with ID 16 from tb_data.
+2025-02-06 12:08:31,873 - INFO - admin - Deleted record with ID 16 from result table.
+2025-02-06 12:08:32,638 - INFO - admin - Data path for ID 17: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)
+2025-02-06 12:08:32,638 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)
+2025-02-06 12:08:32,646 - INFO - admin - Deleted record with ID 17 from tb_data.
+2025-02-06 12:08:32,647 - INFO - admin - Deleted record with ID 17 from result table.
+2025-02-06 12:08:32,846 - INFO - admin - Data path for ID 18: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)
+2025-02-06 12:08:32,847 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)
+2025-02-06 12:08:32,849 - INFO - admin - Deleted record with ID 18 from tb_data.
+2025-02-06 12:08:32,850 - INFO - admin - Deleted record with ID 18 from result table.
+2025-02-06 12:08:33,029 - INFO - admin - Data path for ID 19: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)
+2025-02-06 12:08:33,030 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)
+2025-02-06 12:08:33,038 - INFO - admin - Deleted record with ID 19 from tb_data.
+2025-02-06 12:08:33,040 - INFO - admin - Deleted record with ID 19 from result table.
+2025-02-06 12:08:33,238 - INFO - admin - Data path for ID 20: /home/jupiter/bj_health_manage/data/000005_ord2_2
+2025-02-06 12:08:33,238 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2
+2025-02-06 12:08:33,246 - INFO - admin - Deleted record with ID 20 from tb_data.
+2025-02-06 12:08:33,249 - INFO - admin - Deleted record with ID 20 from result table.
+2025-02-06 12:08:33,405 - INFO - admin - Data path for ID 21: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)
+2025-02-06 12:08:33,405 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)
+2025-02-06 12:08:33,413 - INFO - admin - Deleted record with ID 21 from tb_data.
+2025-02-06 12:08:33,415 - INFO - admin - Deleted record with ID 21 from result table.
+2025-02-06 12:08:33,567 - INFO - admin - Data path for ID 22: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)
+2025-02-06 12:08:33,568 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)
+2025-02-06 12:08:33,575 - INFO - admin - Deleted record with ID 22 from tb_data.
+2025-02-06 12:08:33,578 - INFO - admin - Deleted record with ID 22 from result table.
+2025-02-06 12:08:34,226 - INFO - admin - Data path for ID 23: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)
+2025-02-06 12:08:34,227 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)
+2025-02-06 12:08:34,230 - INFO - admin - Deleted record with ID 23 from tb_data.
+2025-02-06 12:08:34,232 - INFO - admin - Deleted record with ID 23 from result table.
+2025-02-06 12:08:34,363 - INFO - admin - Data path for ID 24: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)
+2025-02-06 12:08:34,363 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)
+2025-02-06 12:08:34,371 - INFO - admin - Deleted record with ID 24 from tb_data.
+2025-02-06 12:08:34,373 - INFO - admin - Deleted record with ID 24 from result table.
+2025-02-06 12:08:34,505 - INFO - admin - Data path for ID 25: /home/jupiter/bj_health_manage/data/ord2_edf_1
+2025-02-06 12:08:34,505 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf_1
+2025-02-06 12:08:34,513 - INFO - admin - Deleted record with ID 25 from tb_data.
+2025-02-06 12:08:34,515 - INFO - admin - Deleted record with ID 25 from result table.
+2025-02-06 12:08:34,646 - INFO - admin - Data path for ID 26: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)
+2025-02-06 12:08:34,646 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)
+2025-02-06 12:08:34,654 - INFO - admin - Deleted record with ID 26 from tb_data.
+2025-02-06 12:08:34,656 - INFO - admin - Deleted record with ID 26 from result table.
+2025-02-06 12:08:34,797 - INFO - admin - Data path for ID 27: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)
+2025-02-06 12:08:34,798 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)
+2025-02-06 12:08:34,806 - INFO - admin - Deleted record with ID 27 from tb_data.
+2025-02-06 12:08:34,808 - INFO - admin - Deleted record with ID 27 from result table.
+2025-02-06 12:08:34,930 - INFO - admin - Data path for ID 28: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)
+2025-02-06 12:08:34,931 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)
+2025-02-06 12:08:34,938 - INFO - admin - Deleted record with ID 28 from tb_data.
+2025-02-06 12:08:34,940 - INFO - admin - Deleted record with ID 28 from result table.
+2025-02-06 12:08:35,068 - INFO - admin - Data path for ID 29: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)
+2025-02-06 12:08:35,068 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)
+2025-02-06 12:08:35,070 - INFO - admin - Deleted record with ID 29 from tb_data.
+2025-02-06 12:08:35,072 - INFO - admin - Deleted record with ID 29 from result table.
+2025-02-06 12:08:35,197 - INFO - admin - Data path for ID 30: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)
+2025-02-06 12:08:35,198 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)
+2025-02-06 12:08:35,206 - INFO - admin - Deleted record with ID 30 from tb_data.
+2025-02-06 12:08:35,208 - INFO - admin - Deleted record with ID 30 from result table.
+2025-02-06 12:08:35,331 - INFO - admin - Data path for ID 31: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)
+2025-02-06 12:08:35,331 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)
+2025-02-06 12:08:35,339 - INFO - admin - Deleted record with ID 31 from tb_data.
+2025-02-06 12:08:35,341 - INFO - admin - Deleted record with ID 31 from result table.
+2025-02-06 12:08:35,464 - INFO - admin - Data path for ID 32: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)
+2025-02-06 12:08:35,464 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)
+2025-02-06 12:08:35,471 - INFO - admin - Deleted record with ID 32 from tb_data.
+2025-02-06 12:08:35,473 - INFO - admin - Deleted record with ID 32 from result table.
+2025-02-06 12:08:35,601 - INFO - admin - Data path for ID 33: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)
+2025-02-06 12:08:35,608 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)
+2025-02-06 12:08:35,610 - INFO - admin - Deleted record with ID 33 from tb_data.
+2025-02-06 12:08:35,613 - INFO - admin - Deleted record with ID 33 from result table.
+2025-02-06 12:08:35,737 - INFO - admin - Data path for ID 34: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(110)
+2025-02-06 12:08:35,744 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(110)
+2025-02-06 12:08:35,746 - INFO - admin - Deleted record with ID 34 from tb_data.
+2025-02-06 12:08:35,749 - INFO - admin - Deleted record with ID 34 from result table.
+2025-02-06 12:08:35,799 - INFO - admin - Data path for ID 35: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(69)
+2025-02-06 12:08:35,799 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(69)
+2025-02-06 12:08:35,801 - INFO - admin - Deleted record with ID 35 from tb_data.
+2025-02-06 12:08:35,803 - INFO - admin - Deleted record with ID 35 from result table.
+2025-02-06 12:08:35,980 - INFO - admin - Data path for ID 36: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(112)
+2025-02-06 12:08:35,995 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(112)
+2025-02-06 12:08:35,997 - INFO - admin - Deleted record with ID 36 from tb_data.
+2025-02-06 12:08:36,000 - INFO - admin - Deleted record with ID 36 from result table.
+2025-02-06 12:08:36,146 - INFO - admin - Data path for ID 37: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(102)
+2025-02-06 12:08:36,147 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(102)
+2025-02-06 12:08:36,148 - INFO - admin - Deleted record with ID 37 from tb_data.
+2025-02-06 12:08:36,150 - INFO - admin - Deleted record with ID 37 from result table.
+2025-02-06 12:08:36,266 - INFO - admin - Data path for ID 38: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(123)
+2025-02-06 12:08:36,267 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(123)
+2025-02-06 12:08:36,275 - INFO - admin - Deleted record with ID 38 from tb_data.
+2025-02-06 12:08:36,277 - INFO - admin - Deleted record with ID 38 from result table.
+2025-02-06 12:08:36,414 - INFO - admin - Data path for ID 39: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(107)
+2025-02-06 12:08:36,414 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(107)
+2025-02-06 12:08:36,422 - INFO - admin - Deleted record with ID 39 from tb_data.
+2025-02-06 12:08:36,424 - INFO - admin - Deleted record with ID 39 from result table.
+2025-02-06 12:08:36,506 - INFO - admin - Data path for ID 40: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(121)
+2025-02-06 12:08:36,507 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(121)
+2025-02-06 12:08:36,508 - INFO - admin - Deleted record with ID 40 from tb_data.
+2025-02-06 12:08:36,510 - INFO - admin - Deleted record with ID 40 from result table.
+2025-02-06 12:08:36,697 - INFO - admin - Data path for ID 41: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(81)
+2025-02-06 12:08:36,697 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(81)
+2025-02-06 12:08:36,699 - INFO - admin - Deleted record with ID 41 from tb_data.
+2025-02-06 12:08:36,702 - INFO - admin - Deleted record with ID 41 from result table.
+2025-02-06 12:08:36,846 - INFO - admin - Data path for ID 42: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(89)
+2025-02-06 12:08:36,853 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(89)
+2025-02-06 12:08:36,855 - INFO - admin - Deleted record with ID 42 from tb_data.
+2025-02-06 12:08:36,857 - INFO - admin - Deleted record with ID 42 from result table.
+2025-02-06 12:08:36,980 - INFO - admin - Data path for ID 43: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(86)
+2025-02-06 12:08:36,981 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(86)
+2025-02-06 12:08:36,982 - INFO - admin - Deleted record with ID 43 from tb_data.
+2025-02-06 12:08:36,984 - INFO - admin - Deleted record with ID 43 from result table.
+2025-02-06 12:08:37,486 - INFO - admin - Data path for ID 44: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(98)
+2025-02-06 12:08:37,486 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(98)
+2025-02-06 12:08:37,488 - INFO - admin - Deleted record with ID 44 from tb_data.
+2025-02-06 12:08:37,490 - INFO - admin - Deleted record with ID 44 from result table.
+2025-02-06 12:08:38,145 - INFO - admin - Data path for ID 45: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(68)
+2025-02-06 12:08:38,152 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(68)
+2025-02-06 12:08:38,154 - INFO - admin - Deleted record with ID 45 from tb_data.
+2025-02-06 12:08:38,155 - INFO - admin - Deleted record with ID 45 from result table.
+2025-02-06 12:08:38,287 - INFO - admin - Data path for ID 46: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(127)
+2025-02-06 12:08:38,294 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(127)
+2025-02-06 12:08:38,296 - INFO - admin - Deleted record with ID 46 from tb_data.
+2025-02-06 12:08:38,298 - INFO - admin - Deleted record with ID 46 from result table.
+2025-02-06 12:08:38,446 - INFO - admin - Data path for ID 47: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(78)
+2025-02-06 12:08:38,447 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(78)
+2025-02-06 12:08:38,448 - INFO - admin - Deleted record with ID 47 from tb_data.
+2025-02-06 12:08:38,450 - INFO - admin - Deleted record with ID 47 from result table.
+2025-02-06 12:08:38,580 - INFO - admin - Data path for ID 48: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(54)
+2025-02-06 12:08:38,581 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(54)
+2025-02-06 12:08:38,589 - INFO - admin - Deleted record with ID 48 from tb_data.
+2025-02-06 12:08:38,591 - INFO - admin - Deleted record with ID 48 from result table.
+2025-02-06 12:08:38,714 - INFO - admin - Data path for ID 49: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(73)
+2025-02-06 12:08:38,715 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(73)
+2025-02-06 12:08:38,723 - INFO - admin - Deleted record with ID 49 from tb_data.
+2025-02-06 12:08:38,725 - INFO - admin - Deleted record with ID 49 from result table.
+2025-02-06 12:08:39,261 - INFO - admin - Data path for ID 50: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(60)
+2025-02-06 12:08:39,262 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(60)
+2025-02-06 12:08:39,270 - INFO - admin - Deleted record with ID 50 from tb_data.
+2025-02-06 12:08:39,271 - INFO - admin - Deleted record with ID 50 from result table.
+2025-02-06 12:08:39,922 - INFO - admin - Data path for ID 51: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(93)
+2025-02-06 12:08:39,922 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(93)
+2025-02-06 12:08:39,924 - INFO - admin - Deleted record with ID 51 from tb_data.
+2025-02-06 12:08:39,925 - INFO - admin - Deleted record with ID 51 from result table.
+2025-02-06 12:08:40,030 - INFO - admin - Data path for ID 52: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(117)
+2025-02-06 12:08:40,031 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(117)
+2025-02-06 12:08:40,033 - INFO - admin - Deleted record with ID 52 from tb_data.
+2025-02-06 12:08:40,035 - INFO - admin - Deleted record with ID 52 from result table.
+2025-02-06 12:08:40,188 - INFO - admin - Data path for ID 53: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10)_1
+2025-02-06 12:08:40,188 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(10)_1
+2025-02-06 12:08:40,196 - INFO - admin - Deleted record with ID 53 from tb_data.
+2025-02-06 12:08:40,198 - INFO - admin - Deleted record with ID 53 from result table.
+2025-02-06 12:08:40,354 - INFO - admin - Data path for ID 54: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(41)
+2025-02-06 12:08:40,354 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(41)
+2025-02-06 12:08:40,362 - INFO - admin - Deleted record with ID 54 from tb_data.
+2025-02-06 12:08:40,363 - INFO - admin - Deleted record with ID 54 from result table.
+2025-02-06 12:08:40,506 - INFO - admin - Data path for ID 55: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(17)
+2025-02-06 12:08:40,513 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(17)
+2025-02-06 12:08:40,515 - INFO - admin - Deleted record with ID 55 from tb_data.
+2025-02-06 12:08:40,517 - INFO - admin - Deleted record with ID 55 from result table.
+2025-02-06 12:08:40,647 - INFO - admin - Data path for ID 56: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(94)
+2025-02-06 12:08:40,648 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(94)
+2025-02-06 12:08:40,649 - INFO - admin - Deleted record with ID 56 from tb_data.
+2025-02-06 12:08:40,651 - INFO - admin - Deleted record with ID 56 from result table.
+2025-02-06 12:08:40,763 - INFO - admin - Data path for ID 57: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(60)
+2025-02-06 12:08:40,764 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(60)
+2025-02-06 12:08:40,771 - INFO - admin - Deleted record with ID 57 from tb_data.
+2025-02-06 12:08:40,774 - INFO - admin - Deleted record with ID 57 from result table.
+2025-02-06 12:08:40,913 - INFO - admin - Data path for ID 58: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(49)
+2025-02-06 12:08:40,913 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(49)
+2025-02-06 12:08:40,920 - INFO - admin - Deleted record with ID 58 from tb_data.
+2025-02-06 12:08:40,922 - INFO - admin - Deleted record with ID 58 from result table.
+2025-02-06 12:08:41,570 - INFO - admin - Data path for ID 59: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(61)
+2025-02-06 12:08:41,570 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(61)
+2025-02-06 12:08:41,577 - INFO - admin - Deleted record with ID 59 from tb_data.
+2025-02-06 12:08:41,579 - INFO - admin - Deleted record with ID 59 from result table.
+2025-02-06 12:08:41,746 - INFO - admin - Data path for ID 60: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8)_1
+2025-02-06 12:08:41,747 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(8)_1
+2025-02-06 12:08:41,754 - INFO - admin - Deleted record with ID 60 from tb_data.
+2025-02-06 12:08:41,756 - INFO - admin - Deleted record with ID 60 from result table.
+2025-02-06 12:08:41,900 - INFO - admin - Data path for ID 61: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(115)
+2025-02-06 12:08:41,901 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(115)
+2025-02-06 12:08:41,903 - INFO - admin - Deleted record with ID 61 from tb_data.
+2025-02-06 12:08:41,905 - INFO - admin - Deleted record with ID 61 from result table.
+2025-02-06 12:08:42,030 - INFO - admin - Data path for ID 62: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3)_1
+2025-02-06 12:08:42,031 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(3)_1
+2025-02-06 12:08:42,038 - INFO - admin - Deleted record with ID 62 from tb_data.
+2025-02-06 12:08:42,041 - INFO - admin - Deleted record with ID 62 from result table.
+2025-02-06 12:08:42,164 - INFO - admin - Data path for ID 63: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7)_1
+2025-02-06 12:08:42,165 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(7)_1
+2025-02-06 12:08:42,172 - INFO - admin - Deleted record with ID 63 from tb_data.
+2025-02-06 12:08:42,175 - INFO - admin - Deleted record with ID 63 from result table.
+2025-02-06 12:08:42,237 - INFO - admin - Data path for ID 64: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(78)
+2025-02-06 12:08:42,238 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(78)
+2025-02-06 12:08:42,239 - INFO - admin - Deleted record with ID 64 from tb_data.
+2025-02-06 12:08:42,241 - INFO - admin - Deleted record with ID 64 from result table.
+2025-02-06 12:08:42,416 - INFO - admin - Data path for ID 65: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(114)
+2025-02-06 12:08:42,416 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(114)
+2025-02-06 12:08:42,423 - INFO - admin - Deleted record with ID 65 from tb_data.
+2025-02-06 12:08:42,425 - INFO - admin - Deleted record with ID 65 from result table.
+2025-02-06 12:08:42,550 - INFO - admin - Data path for ID 66: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(118)
+2025-02-06 12:08:42,550 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(118)
+2025-02-06 12:08:42,558 - INFO - admin - Deleted record with ID 66 from tb_data.
+2025-02-06 12:08:42,561 - INFO - admin - Deleted record with ID 66 from result table.
+2025-02-06 12:08:42,688 - INFO - admin - Data path for ID 67: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(40)
+2025-02-06 12:08:42,688 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(40)
+2025-02-06 12:08:42,696 - INFO - admin - Deleted record with ID 67 from tb_data.
+2025-02-06 12:08:42,698 - INFO - admin - Deleted record with ID 67 from result table.
+2025-02-06 12:08:42,833 - INFO - admin - Data path for ID 68: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(122)
+2025-02-06 12:08:42,839 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(122)
+2025-02-06 12:08:42,841 - INFO - admin - Deleted record with ID 68 from tb_data.
+2025-02-06 12:08:42,844 - INFO - admin - Deleted record with ID 68 from result table.
+2025-02-06 12:08:42,964 - INFO - admin - Data path for ID 69: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(71)
+2025-02-06 12:08:42,970 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(71)
+2025-02-06 12:08:42,972 - INFO - admin - Deleted record with ID 69 from tb_data.
+2025-02-06 12:08:42,975 - INFO - admin - Deleted record with ID 69 from result table.
+2025-02-06 12:08:43,100 - INFO - admin - Data path for ID 70: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(92)
+2025-02-06 12:08:43,101 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(92)
+2025-02-06 12:08:43,103 - INFO - admin - Deleted record with ID 70 from tb_data.
+2025-02-06 12:08:43,105 - INFO - admin - Deleted record with ID 70 from result table.
+2025-02-06 12:08:43,221 - INFO - admin - Data path for ID 71: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(67)
+2025-02-06 12:08:43,221 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(67)
+2025-02-06 12:08:43,229 - INFO - admin - Deleted record with ID 71 from tb_data.
+2025-02-06 12:08:43,231 - INFO - admin - Deleted record with ID 71 from result table.
+2025-02-06 12:08:43,353 - INFO - admin - Data path for ID 72: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(116)
+2025-02-06 12:08:43,353 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(116)
+2025-02-06 12:08:43,355 - INFO - admin - Deleted record with ID 72 from tb_data.
+2025-02-06 12:08:43,357 - INFO - admin - Deleted record with ID 72 from result table.
+2025-02-06 12:08:43,483 - INFO - admin - Data path for ID 73: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10)_1
+2025-02-06 12:08:43,484 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(10)_1
+2025-02-06 12:08:43,485 - INFO - admin - Deleted record with ID 73 from tb_data.
+2025-02-06 12:08:43,488 - INFO - admin - Deleted record with ID 73 from result table.
+2025-02-06 12:08:43,621 - INFO - admin - Data path for ID 74: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(109)
+2025-02-06 12:08:43,621 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(109)
+2025-02-06 12:08:43,629 - INFO - admin - Deleted record with ID 74 from tb_data.
+2025-02-06 12:08:43,631 - INFO - admin - Deleted record with ID 74 from result table.
+2025-02-06 12:08:43,787 - INFO - admin - Data path for ID 75: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(67)
+2025-02-06 12:08:43,788 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(67)
+2025-02-06 12:08:43,796 - INFO - admin - Deleted record with ID 75 from tb_data.
+2025-02-06 12:08:43,798 - INFO - admin - Deleted record with ID 75 from result table.
+2025-02-06 12:08:43,922 - INFO - admin - Data path for ID 76: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)_1
+2025-02-06 12:08:43,923 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(6)_1
+2025-02-06 12:08:43,931 - INFO - admin - Deleted record with ID 76 from tb_data.
+2025-02-06 12:08:43,933 - INFO - admin - Deleted record with ID 76 from result table.
+2025-02-06 12:08:44,063 - INFO - admin - Data path for ID 77: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(70)
+2025-02-06 12:08:44,064 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(70)
+2025-02-06 12:08:44,071 - INFO - admin - Deleted record with ID 77 from tb_data.
+2025-02-06 12:08:44,073 - INFO - admin - Deleted record with ID 77 from result table.
+2025-02-06 12:08:44,198 - INFO - admin - Data path for ID 78: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)_1
+2025-02-06 12:08:44,198 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(5)_1
+2025-02-06 12:08:44,206 - INFO - admin - Deleted record with ID 78 from tb_data.
+2025-02-06 12:08:44,208 - INFO - admin - Deleted record with ID 78 from result table.
+2025-02-06 12:08:44,330 - INFO - admin - Data path for ID 79: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(46)
+2025-02-06 12:08:44,331 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(46)
+2025-02-06 12:08:44,339 - INFO - admin - Deleted record with ID 79 from tb_data.
+2025-02-06 12:08:44,341 - INFO - admin - Deleted record with ID 79 from result table.
+2025-02-06 12:08:44,464 - INFO - admin - Data path for ID 80: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(25)
+2025-02-06 12:08:44,464 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(25)
+2025-02-06 12:08:44,472 - INFO - admin - Deleted record with ID 80 from tb_data.
+2025-02-06 12:08:44,474 - INFO - admin - Deleted record with ID 80 from result table.
+2025-02-06 12:08:44,599 - INFO - admin - Data path for ID 81: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(88)
+2025-02-06 12:08:44,606 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(88)
+2025-02-06 12:08:44,608 - INFO - admin - Deleted record with ID 81 from tb_data.
+2025-02-06 12:08:44,610 - INFO - admin - Deleted record with ID 81 from result table.
+2025-02-06 12:08:44,751 - INFO - admin - Data path for ID 82: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(45)
+2025-02-06 12:08:44,752 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(45)
+2025-02-06 12:08:44,759 - INFO - admin - Deleted record with ID 82 from tb_data.
+2025-02-06 12:08:44,761 - INFO - admin - Deleted record with ID 82 from result table.
+2025-02-06 12:08:44,880 - INFO - admin - Data path for ID 83: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(105)
+2025-02-06 12:08:44,881 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(105)
+2025-02-06 12:08:44,888 - INFO - admin - Deleted record with ID 83 from tb_data.
+2025-02-06 12:08:44,890 - INFO - admin - Deleted record with ID 83 from result table.
+2025-02-06 12:08:45,014 - INFO - admin - Data path for ID 84: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(66)
+2025-02-06 12:08:45,015 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(66)
+2025-02-06 12:08:45,023 - INFO - admin - Deleted record with ID 84 from tb_data.
+2025-02-06 12:08:45,024 - INFO - admin - Deleted record with ID 84 from result table.
+2025-02-06 12:08:45,167 - INFO - admin - Data path for ID 85: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(30)
+2025-02-06 12:08:45,168 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(30)
+2025-02-06 12:08:45,176 - INFO - admin - Deleted record with ID 85 from tb_data.
+2025-02-06 12:08:45,178 - INFO - admin - Deleted record with ID 85 from result table.
+2025-02-06 12:08:45,301 - INFO - admin - Data path for ID 86: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(28)
+2025-02-06 12:08:45,301 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(28)
+2025-02-06 12:08:45,308 - INFO - admin - Deleted record with ID 86 from tb_data.
+2025-02-06 12:08:45,310 - INFO - admin - Deleted record with ID 86 from result table.
+2025-02-06 12:08:45,434 - INFO - admin - Data path for ID 87: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(57)
+2025-02-06 12:08:45,435 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(57)
+2025-02-06 12:08:45,443 - INFO - admin - Deleted record with ID 87 from tb_data.
+2025-02-06 12:08:45,445 - INFO - admin - Deleted record with ID 87 from result table.
+2025-02-06 12:08:45,568 - INFO - admin - Data path for ID 88: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(97)
+2025-02-06 12:08:45,568 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(97)
+2025-02-06 12:08:45,576 - INFO - admin - Deleted record with ID 88 from tb_data.
+2025-02-06 12:08:45,579 - INFO - admin - Deleted record with ID 88 from result table.
+2025-02-06 12:08:45,716 - INFO - admin - Data path for ID 89: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(57)
+2025-02-06 12:08:45,717 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(57)
+2025-02-06 12:08:45,724 - INFO - admin - Deleted record with ID 89 from tb_data.
+2025-02-06 12:08:45,726 - INFO - admin - Deleted record with ID 89 from result table.
+2025-02-06 12:08:45,871 - INFO - admin - Data path for ID 90: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(76)
+2025-02-06 12:08:45,872 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(76)
+2025-02-06 12:08:45,879 - INFO - admin - Deleted record with ID 90 from tb_data.
+2025-02-06 12:08:45,881 - INFO - admin - Deleted record with ID 90 from result table.
+2025-02-06 12:08:46,029 - INFO - admin - Data path for ID 91: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(33)
+2025-02-06 12:08:46,030 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(33)
+2025-02-06 12:08:46,037 - INFO - admin - Deleted record with ID 91 from tb_data.
+2025-02-06 12:08:46,039 - INFO - admin - Deleted record with ID 91 from result table.
+2025-02-06 12:08:46,106 - INFO - admin - Data path for ID 92: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(31)
+2025-02-06 12:08:46,107 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(31)
+2025-02-06 12:08:46,109 - INFO - admin - Deleted record with ID 92 from tb_data.
+2025-02-06 12:08:46,112 - INFO - admin - Deleted record with ID 92 from result table.
+2025-02-06 12:08:46,250 - INFO - admin - Data path for ID 93: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(106)
+2025-02-06 12:08:46,250 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(106)
+2025-02-06 12:08:46,258 - INFO - admin - Deleted record with ID 93 from tb_data.
+2025-02-06 12:08:46,260 - INFO - admin - Deleted record with ID 93 from result table.
+2025-02-06 12:08:46,435 - INFO - admin - Data path for ID 94: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)_1
+2025-02-06 12:08:46,435 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(9)_1
+2025-02-06 12:08:46,443 - INFO - admin - Deleted record with ID 94 from tb_data.
+2025-02-06 12:08:46,445 - INFO - admin - Deleted record with ID 94 from result table.
+2025-02-06 12:08:46,566 - INFO - admin - Data path for ID 95: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(44)
+2025-02-06 12:08:46,567 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(44)
+2025-02-06 12:08:46,574 - INFO - admin - Deleted record with ID 95 from tb_data.
+2025-02-06 12:08:46,576 - INFO - admin - Deleted record with ID 95 from result table.
+2025-02-06 12:08:46,697 - INFO - admin - Data path for ID 96: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(18)
+2025-02-06 12:08:46,697 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(18)
+2025-02-06 12:08:46,705 - INFO - admin - Deleted record with ID 96 from tb_data.
+2025-02-06 12:08:46,707 - INFO - admin - Deleted record with ID 96 from result table.
+2025-02-06 12:08:46,830 - INFO - admin - Data path for ID 97: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(115)
+2025-02-06 12:08:46,831 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(115)
+2025-02-06 12:08:46,839 - INFO - admin - Deleted record with ID 97 from tb_data.
+2025-02-06 12:08:46,841 - INFO - admin - Deleted record with ID 97 from result table.
+2025-02-06 12:08:46,968 - INFO - admin - Data path for ID 98: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(93)
+2025-02-06 12:08:46,968 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(93)
+2025-02-06 12:08:46,976 - INFO - admin - Deleted record with ID 98 from tb_data.
+2025-02-06 12:08:46,978 - INFO - admin - Deleted record with ID 98 from result table.
+2025-02-06 12:08:47,097 - INFO - admin - Data path for ID 99: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(35)
+2025-02-06 12:08:47,097 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(35)
+2025-02-06 12:08:47,105 - INFO - admin - Deleted record with ID 99 from tb_data.
+2025-02-06 12:08:47,107 - INFO - admin - Deleted record with ID 99 from result table.
+2025-02-06 12:08:47,230 - INFO - admin - Data path for ID 100: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(38)
+2025-02-06 12:08:47,231 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(38)
+2025-02-06 12:08:47,238 - INFO - admin - Deleted record with ID 100 from tb_data.
+2025-02-06 12:08:47,240 - INFO - admin - Deleted record with ID 100 from result table.
+2025-02-06 12:08:47,367 - INFO - admin - Data path for ID 101: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(56)
+2025-02-06 12:08:47,367 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(56)
+2025-02-06 12:08:47,375 - INFO - admin - Deleted record with ID 101 from tb_data.
+2025-02-06 12:08:47,377 - INFO - admin - Deleted record with ID 101 from result table.
+2025-02-06 12:08:47,455 - INFO - admin - Data path for ID 102: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(27)
+2025-02-06 12:08:47,456 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(27)
+2025-02-06 12:08:47,457 - INFO - admin - Deleted record with ID 102 from tb_data.
+2025-02-06 12:08:47,459 - INFO - admin - Deleted record with ID 102 from result table.
+2025-02-06 12:08:47,630 - INFO - admin - Data path for ID 103: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(54)
+2025-02-06 12:08:47,630 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(54)
+2025-02-06 12:08:47,637 - INFO - admin - Deleted record with ID 103 from tb_data.
+2025-02-06 12:08:47,639 - INFO - admin - Deleted record with ID 103 from result table.
+2025-02-06 12:08:47,766 - INFO - admin - Data path for ID 104: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(101)
+2025-02-06 12:08:47,766 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(101)
+2025-02-06 12:08:47,774 - INFO - admin - Deleted record with ID 104 from tb_data.
+2025-02-06 12:08:47,776 - INFO - admin - Deleted record with ID 104 from result table.
+2025-02-06 12:08:47,855 - INFO - admin - Data path for ID 105: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)_1
+2025-02-06 12:08:47,856 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(5)_1
+2025-02-06 12:08:47,858 - INFO - admin - Deleted record with ID 105 from tb_data.
+2025-02-06 12:08:47,860 - INFO - admin - Deleted record with ID 105 from result table.
+2025-02-06 12:08:48,047 - INFO - admin - Data path for ID 106: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(103)
+2025-02-06 12:08:48,047 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(103)
+2025-02-06 12:08:48,055 - INFO - admin - Deleted record with ID 106 from tb_data.
+2025-02-06 12:08:48,057 - INFO - admin - Deleted record with ID 106 from result table.
+2025-02-06 12:08:48,187 - INFO - admin - Data path for ID 107: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(47)
+2025-02-06 12:08:48,188 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(47)
+2025-02-06 12:08:48,196 - INFO - admin - Deleted record with ID 107 from tb_data.
+2025-02-06 12:08:48,198 - INFO - admin - Deleted record with ID 107 from result table.
+2025-02-06 12:08:48,354 - INFO - admin - Data path for ID 108: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(105)
+2025-02-06 12:08:48,360 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(105)
+2025-02-06 12:08:48,362 - INFO - admin - Deleted record with ID 108 from tb_data.
+2025-02-06 12:08:48,363 - INFO - admin - Deleted record with ID 108 from result table.
+2025-02-06 12:08:48,496 - INFO - admin - Data path for ID 109: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(74)
+2025-02-06 12:08:48,497 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(74)
+2025-02-06 12:08:48,498 - INFO - admin - Deleted record with ID 109 from tb_data.
+2025-02-06 12:08:48,500 - INFO - admin - Deleted record with ID 109 from result table.
+2025-02-06 12:08:48,617 - INFO - admin - Data path for ID 110: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(68)
+2025-02-06 12:08:48,617 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(68)
+2025-02-06 12:08:48,625 - INFO - admin - Deleted record with ID 110 from tb_data.
+2025-02-06 12:08:48,626 - INFO - admin - Deleted record with ID 110 from result table.
+2025-02-06 12:08:48,749 - INFO - admin - Data path for ID 111: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)_1
+2025-02-06 12:08:48,750 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(9)_1
+2025-02-06 12:08:48,752 - INFO - admin - Deleted record with ID 111 from tb_data.
+2025-02-06 12:08:48,754 - INFO - admin - Deleted record with ID 111 from result table.
+2025-02-06 12:08:48,872 - INFO - admin - Data path for ID 112: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(26)
+2025-02-06 12:08:48,872 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(26)
+2025-02-06 12:08:48,875 - INFO - admin - Deleted record with ID 112 from tb_data.
+2025-02-06 12:08:48,877 - INFO - admin - Deleted record with ID 112 from result table.
+2025-02-06 12:08:49,030 - INFO - admin - Data path for ID 113: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(124)
+2025-02-06 12:08:49,031 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(124)
+2025-02-06 12:08:49,038 - INFO - admin - Deleted record with ID 113 from tb_data.
+2025-02-06 12:08:49,040 - INFO - admin - Deleted record with ID 113 from result table.
+2025-02-06 12:08:49,164 - INFO - admin - Data path for ID 114: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)_1
+2025-02-06 12:08:49,164 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(13)_1
+2025-02-06 12:08:49,166 - INFO - admin - Deleted record with ID 114 from tb_data.
+2025-02-06 12:08:49,167 - INFO - admin - Deleted record with ID 114 from result table.
+2025-02-06 12:08:49,284 - INFO - admin - Data path for ID 115: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(69)
+2025-02-06 12:08:49,285 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(69)
+2025-02-06 12:08:49,293 - INFO - admin - Deleted record with ID 115 from tb_data.
+2025-02-06 12:08:49,295 - INFO - admin - Deleted record with ID 115 from result table.
+2025-02-06 12:08:49,418 - INFO - admin - Data path for ID 116: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(74)
+2025-02-06 12:08:49,418 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(74)
+2025-02-06 12:08:49,426 - INFO - admin - Deleted record with ID 116 from tb_data.
+2025-02-06 12:08:49,428 - INFO - admin - Deleted record with ID 116 from result table.
+2025-02-06 12:08:49,563 - INFO - admin - Data path for ID 117: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(27)
+2025-02-06 12:08:49,563 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(27)
+2025-02-06 12:08:49,571 - INFO - admin - Deleted record with ID 117 from tb_data.
+2025-02-06 12:08:49,573 - INFO - admin - Deleted record with ID 117 from result table.
+2025-02-06 12:08:49,713 - INFO - admin - Data path for ID 118: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(117)
+2025-02-06 12:08:49,713 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(117)
+2025-02-06 12:08:49,721 - INFO - admin - Deleted record with ID 118 from tb_data.
+2025-02-06 12:08:49,723 - INFO - admin - Deleted record with ID 118 from result table.
+2025-02-06 12:08:49,879 - INFO - admin - Data path for ID 119: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(51)
+2025-02-06 12:08:49,880 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(51)
+2025-02-06 12:08:49,888 - INFO - admin - Deleted record with ID 119 from tb_data.
+2025-02-06 12:08:49,890 - INFO - admin - Deleted record with ID 119 from result table.
+2025-02-06 12:08:49,955 - INFO - admin - Data path for ID 120: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)_1
+2025-02-06 12:08:49,955 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(8)_1
+2025-02-06 12:08:49,957 - INFO - admin - Deleted record with ID 120 from tb_data.
+2025-02-06 12:08:49,959 - INFO - admin - Deleted record with ID 120 from result table.
+2025-02-06 12:08:50,130 - INFO - admin - Data path for ID 121: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(63)
+2025-02-06 12:08:50,130 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(63)
+2025-02-06 12:08:50,132 - INFO - admin - Deleted record with ID 121 from tb_data.
+2025-02-06 12:08:50,134 - INFO - admin - Deleted record with ID 121 from result table.
+2025-02-06 12:08:50,289 - INFO - admin - Data path for ID 122: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(99)
+2025-02-06 12:08:50,290 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(99)
+2025-02-06 12:08:50,298 - INFO - admin - Deleted record with ID 122 from tb_data.
+2025-02-06 12:08:50,300 - INFO - admin - Deleted record with ID 122 from result table.
+2025-02-06 12:08:50,456 - INFO - admin - Data path for ID 123: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(125)
+2025-02-06 12:08:50,457 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(125)
+2025-02-06 12:08:50,464 - INFO - admin - Deleted record with ID 123 from tb_data.
+2025-02-06 12:08:50,467 - INFO - admin - Deleted record with ID 123 from result table.
+2025-02-06 12:08:50,538 - INFO - admin - Data path for ID 124: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(29)
+2025-02-06 12:08:50,539 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(29)
+2025-02-06 12:08:50,540 - INFO - admin - Deleted record with ID 124 from tb_data.
+2025-02-06 12:08:50,542 - INFO - admin - Deleted record with ID 124 from result table.
+2025-02-06 12:08:50,663 - INFO - admin - Data path for ID 125: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(100)
+2025-02-06 12:08:50,664 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(100)
+2025-02-06 12:08:50,666 - INFO - admin - Deleted record with ID 125 from tb_data.
+2025-02-06 12:08:50,667 - INFO - admin - Deleted record with ID 125 from result table.
+2025-02-06 12:08:50,781 - INFO - admin - Data path for ID 126: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(99)
+2025-02-06 12:08:50,781 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(99)
+2025-02-06 12:08:50,789 - INFO - admin - Deleted record with ID 126 from tb_data.
+2025-02-06 12:08:50,791 - INFO - admin - Deleted record with ID 126 from result table.
+2025-02-06 12:08:50,921 - INFO - admin - Data path for ID 127: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(111)
+2025-02-06 12:08:50,922 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(111)
+2025-02-06 12:08:50,929 - INFO - admin - Deleted record with ID 127 from tb_data.
+2025-02-06 12:08:50,931 - INFO - admin - Deleted record with ID 127 from result table.
+2025-02-06 12:08:51,071 - INFO - admin - Data path for ID 128: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(110)
+2025-02-06 12:08:51,071 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(110)
+2025-02-06 12:08:51,079 - INFO - admin - Deleted record with ID 128 from tb_data.
+2025-02-06 12:08:51,081 - INFO - admin - Deleted record with ID 128 from result table.
+2025-02-06 12:08:51,230 - INFO - admin - Data path for ID 129: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(95)
+2025-02-06 12:08:51,230 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(95)
+2025-02-06 12:08:51,238 - INFO - admin - Deleted record with ID 129 from tb_data.
+2025-02-06 12:08:51,240 - INFO - admin - Deleted record with ID 129 from result table.
+2025-02-06 12:08:51,305 - INFO - admin - Data path for ID 130: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(16)
+2025-02-06 12:08:51,305 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(16)
+2025-02-06 12:08:51,307 - INFO - admin - Deleted record with ID 130 from tb_data.
+2025-02-06 12:08:51,308 - INFO - admin - Deleted record with ID 130 from result table.
+2025-02-06 12:08:51,485 - INFO - admin - Data path for ID 131: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(108)
+2025-02-06 12:08:51,485 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(108)
+2025-02-06 12:08:51,493 - INFO - admin - Deleted record with ID 131 from tb_data.
+2025-02-06 12:08:51,495 - INFO - admin - Deleted record with ID 131 from result table.
+2025-02-06 12:08:51,630 - INFO - admin - Data path for ID 132: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(107)
+2025-02-06 12:08:51,631 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(107)
+2025-02-06 12:08:51,632 - INFO - admin - Deleted record with ID 132 from tb_data.
+2025-02-06 12:08:51,635 - INFO - admin - Deleted record with ID 132 from result table.
+2025-02-06 12:08:51,788 - INFO - admin - Data path for ID 133: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(64)
+2025-02-06 12:08:51,789 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(64)
+2025-02-06 12:08:51,796 - INFO - admin - Deleted record with ID 133 from tb_data.
+2025-02-06 12:08:51,799 - INFO - admin - Deleted record with ID 133 from result table.
+2025-02-06 12:08:51,950 - INFO - admin - Data path for ID 134: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(100)
+2025-02-06 12:08:51,950 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(100)
+2025-02-06 12:08:51,957 - INFO - admin - Deleted record with ID 134 from tb_data.
+2025-02-06 12:08:51,959 - INFO - admin - Deleted record with ID 134 from result table.
+2025-02-06 12:08:52,083 - INFO - admin - Data path for ID 135: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(18)
+2025-02-06 12:08:52,084 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(18)
+2025-02-06 12:08:52,091 - INFO - admin - Deleted record with ID 135 from tb_data.
+2025-02-06 12:08:52,094 - INFO - admin - Deleted record with ID 135 from result table.
+2025-02-06 12:08:52,173 - INFO - admin - Data path for ID 136: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(84)
+2025-02-06 12:08:52,173 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(84)
+2025-02-06 12:08:52,176 - INFO - admin - Deleted record with ID 136 from tb_data.
+2025-02-06 12:08:52,178 - INFO - admin - Deleted record with ID 136 from result table.
+2025-02-06 12:08:52,315 - INFO - admin - Data path for ID 137: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(32)
+2025-02-06 12:08:52,315 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(32)
+2025-02-06 12:08:52,323 - INFO - admin - Deleted record with ID 137 from tb_data.
+2025-02-06 12:08:52,325 - INFO - admin - Deleted record with ID 137 from result table.
+2025-02-06 12:08:52,497 - INFO - admin - Data path for ID 138: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(41)
+2025-02-06 12:08:52,497 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(41)
+2025-02-06 12:08:52,505 - INFO - admin - Deleted record with ID 138 from tb_data.
+2025-02-06 12:08:52,507 - INFO - admin - Deleted record with ID 138 from result table.
+2025-02-06 12:08:52,634 - INFO - admin - Data path for ID 139: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(80)
+2025-02-06 12:08:52,634 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(80)
+2025-02-06 12:08:52,642 - INFO - admin - Deleted record with ID 139 from tb_data.
+2025-02-06 12:08:52,644 - INFO - admin - Deleted record with ID 139 from result table.
+2025-02-06 12:08:52,797 - INFO - admin - Data path for ID 140: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(22)
+2025-02-06 12:08:52,797 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(22)
+2025-02-06 12:08:52,805 - INFO - admin - Deleted record with ID 140 from tb_data.
+2025-02-06 12:08:52,806 - INFO - admin - Deleted record with ID 140 from result table.
+2025-02-06 12:08:52,933 - INFO - admin - Data path for ID 141: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)_1
+2025-02-06 12:08:52,933 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(13)_1
+2025-02-06 12:08:52,941 - INFO - admin - Deleted record with ID 141 from tb_data.
+2025-02-06 12:08:52,943 - INFO - admin - Deleted record with ID 141 from result table.
+2025-02-06 12:08:53,022 - INFO - admin - Data path for ID 142: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(50)
+2025-02-06 12:08:53,023 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(50)
+2025-02-06 12:08:53,025 - INFO - admin - Deleted record with ID 142 from tb_data.
+2025-02-06 12:08:53,027 - INFO - admin - Deleted record with ID 142 from result table.
+2025-02-06 12:08:53,197 - INFO - admin - Data path for ID 143: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(96)
+2025-02-06 12:08:53,197 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(96)
+2025-02-06 12:08:53,205 - INFO - admin - Deleted record with ID 143 from tb_data.
+2025-02-06 12:08:53,207 - INFO - admin - Deleted record with ID 143 from result table.
+2025-02-06 12:08:53,330 - INFO - admin - Data path for ID 144: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(96)
+2025-02-06 12:08:53,330 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(96)
+2025-02-06 12:08:53,338 - INFO - admin - Deleted record with ID 144 from tb_data.
+2025-02-06 12:08:53,340 - INFO - admin - Deleted record with ID 144 from result table.
+2025-02-06 12:08:53,468 - INFO - admin - Data path for ID 145: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(121)
+2025-02-06 12:08:53,468 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(121)
+2025-02-06 12:08:53,470 - INFO - admin - Deleted record with ID 145 from tb_data.
+2025-02-06 12:08:53,473 - INFO - admin - Deleted record with ID 145 from result table.
+2025-02-06 12:08:53,597 - INFO - admin - Data path for ID 146: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(16)
+2025-02-06 12:08:53,598 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(16)
+2025-02-06 12:08:53,600 - INFO - admin - Deleted record with ID 146 from tb_data.
+2025-02-06 12:08:53,602 - INFO - admin - Deleted record with ID 146 from result table.
+2025-02-06 12:08:53,755 - INFO - admin - Data path for ID 147: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(90)
+2025-02-06 12:08:53,756 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(90)
+2025-02-06 12:08:53,763 - INFO - admin - Deleted record with ID 147 from tb_data.
+2025-02-06 12:08:53,765 - INFO - admin - Deleted record with ID 147 from result table.
+2025-02-06 12:08:53,850 - INFO - admin - Data path for ID 148: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(47)
+2025-02-06 12:08:53,851 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(47)
+2025-02-06 12:08:53,853 - INFO - admin - Deleted record with ID 148 from tb_data.
+2025-02-06 12:08:53,854 - INFO - admin - Deleted record with ID 148 from result table.
+2025-02-06 12:08:54,030 - INFO - admin - Data path for ID 149: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(126)
+2025-02-06 12:08:54,031 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(126)
+2025-02-06 12:08:54,038 - INFO - admin - Deleted record with ID 149 from tb_data.
+2025-02-06 12:08:54,040 - INFO - admin - Deleted record with ID 149 from result table.
+2025-02-06 12:08:54,164 - INFO - admin - Data path for ID 150: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(62)
+2025-02-06 12:08:54,164 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(62)
+2025-02-06 12:08:54,166 - INFO - admin - Deleted record with ID 150 from tb_data.
+2025-02-06 12:08:54,168 - INFO - admin - Deleted record with ID 150 from result table.
+2025-02-06 12:08:54,323 - INFO - admin - Data path for ID 151: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(30)
+2025-02-06 12:08:54,323 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(30)
+2025-02-06 12:08:54,325 - INFO - admin - Deleted record with ID 151 from tb_data.
+2025-02-06 12:08:54,327 - INFO - admin - Deleted record with ID 151 from result table.
+2025-02-06 12:08:54,451 - INFO - admin - Data path for ID 152: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(111)
+2025-02-06 12:08:54,451 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(111)
+2025-02-06 12:08:54,454 - INFO - admin - Deleted record with ID 152 from tb_data.
+2025-02-06 12:08:54,457 - INFO - admin - Deleted record with ID 152 from result table.
+2025-02-06 12:08:54,601 - INFO - admin - Data path for ID 153: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(35)
+2025-02-06 12:08:54,601 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(35)
+2025-02-06 12:08:54,609 - INFO - admin - Deleted record with ID 153 from tb_data.
+2025-02-06 12:08:54,611 - INFO - admin - Deleted record with ID 153 from result table.
+2025-02-06 12:08:54,763 - INFO - admin - Data path for ID 154: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(42)
+2025-02-06 12:08:54,764 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(42)
+2025-02-06 12:08:54,771 - INFO - admin - Deleted record with ID 154 from tb_data.
+2025-02-06 12:08:54,773 - INFO - admin - Deleted record with ID 154 from result table.
+2025-02-06 12:08:54,905 - INFO - admin - Data path for ID 155: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(104)
+2025-02-06 12:08:54,905 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(104)
+2025-02-06 12:08:54,913 - INFO - admin - Deleted record with ID 155 from tb_data.
+2025-02-06 12:08:54,914 - INFO - admin - Deleted record with ID 155 from result table.
+2025-02-06 12:08:55,071 - INFO - admin - Data path for ID 156: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(91)
+2025-02-06 12:08:55,071 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(91)
+2025-02-06 12:08:55,079 - INFO - admin - Deleted record with ID 156 from tb_data.
+2025-02-06 12:08:55,081 - INFO - admin - Deleted record with ID 156 from result table.
+2025-02-06 12:08:55,229 - INFO - admin - Data path for ID 157: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(37)
+2025-02-06 12:08:55,230 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(37)
+2025-02-06 12:08:55,238 - INFO - admin - Deleted record with ID 157 from tb_data.
+2025-02-06 12:08:55,240 - INFO - admin - Deleted record with ID 157 from result table.
+2025-02-06 12:08:55,303 - INFO - admin - Data path for ID 158: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(84)
+2025-02-06 12:08:55,304 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(84)
+2025-02-06 12:08:55,305 - INFO - admin - Deleted record with ID 158 from tb_data.
+2025-02-06 12:08:55,307 - INFO - admin - Deleted record with ID 158 from result table.
+2025-02-06 12:08:55,484 - INFO - admin - Data path for ID 159: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(120)
+2025-02-06 12:08:55,485 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(120)
+2025-02-06 12:08:55,492 - INFO - admin - Deleted record with ID 159 from tb_data.
+2025-02-06 12:08:55,494 - INFO - admin - Deleted record with ID 159 from result table.
+2025-02-06 12:08:55,571 - INFO - admin - Data path for ID 160: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(52)
+2025-02-06 12:08:55,572 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(52)
+2025-02-06 12:08:55,574 - INFO - admin - Deleted record with ID 160 from tb_data.
+2025-02-06 12:08:55,576 - INFO - admin - Deleted record with ID 160 from result table.
+2025-02-06 12:08:55,751 - INFO - admin - Data path for ID 161: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(25)
+2025-02-06 12:08:55,752 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(25)
+2025-02-06 12:08:55,759 - INFO - admin - Deleted record with ID 161 from tb_data.
+2025-02-06 12:08:55,762 - INFO - admin - Deleted record with ID 161 from result table.
+2025-02-06 12:08:55,899 - INFO - admin - Data path for ID 162: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(36)
+2025-02-06 12:08:55,900 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(36)
+2025-02-06 12:08:55,907 - INFO - admin - Deleted record with ID 162 from tb_data.
+2025-02-06 12:08:55,909 - INFO - admin - Deleted record with ID 162 from result table.
+2025-02-06 12:08:56,033 - INFO - admin - Data path for ID 163: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(20)
+2025-02-06 12:08:56,034 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(20)
+2025-02-06 12:08:56,041 - INFO - admin - Deleted record with ID 163 from tb_data.
+2025-02-06 12:08:56,043 - INFO - admin - Deleted record with ID 163 from result table.
+2025-02-06 12:08:56,121 - INFO - admin - Data path for ID 164: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)_1
+2025-02-06 12:08:56,121 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(14)_1
+2025-02-06 12:08:56,123 - INFO - admin - Deleted record with ID 164 from tb_data.
+2025-02-06 12:08:56,125 - INFO - admin - Deleted record with ID 164 from result table.
+2025-02-06 12:08:56,296 - INFO - admin - Data path for ID 165: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(39)
+2025-02-06 12:08:56,297 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(39)
+2025-02-06 12:08:56,305 - INFO - admin - Deleted record with ID 165 from tb_data.
+2025-02-06 12:08:56,307 - INFO - admin - Deleted record with ID 165 from result table.
+2025-02-06 12:08:56,434 - INFO - admin - Data path for ID 166: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(53)
+2025-02-06 12:08:56,435 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(53)
+2025-02-06 12:08:56,443 - INFO - admin - Deleted record with ID 166 from tb_data.
+2025-02-06 12:08:56,444 - INFO - admin - Deleted record with ID 166 from result table.
+2025-02-06 12:08:56,580 - INFO - admin - Data path for ID 167: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(102)
+2025-02-06 12:08:56,580 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(102)
+2025-02-06 12:08:56,588 - INFO - admin - Deleted record with ID 167 from tb_data.
+2025-02-06 12:08:56,590 - INFO - admin - Deleted record with ID 167 from result table.
+2025-02-06 12:08:56,714 - INFO - admin - Data path for ID 168: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(45)
+2025-02-06 12:08:56,715 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(45)
+2025-02-06 12:08:56,722 - INFO - admin - Deleted record with ID 168 from tb_data.
+2025-02-06 12:08:56,724 - INFO - admin - Deleted record with ID 168 from result table.
+2025-02-06 12:08:56,847 - INFO - admin - Data path for ID 169: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(20)
+2025-02-06 12:08:56,847 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(20)
+2025-02-06 12:08:56,855 - INFO - admin - Deleted record with ID 169 from tb_data.
+2025-02-06 12:08:56,857 - INFO - admin - Deleted record with ID 169 from result table.
+2025-02-06 12:08:56,984 - INFO - admin - Data path for ID 170: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(82)
+2025-02-06 12:08:56,985 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(82)
+2025-02-06 12:08:56,993 - INFO - admin - Deleted record with ID 170 from tb_data.
+2025-02-06 12:08:56,995 - INFO - admin - Deleted record with ID 170 from result table.
+2025-02-06 12:08:57,151 - INFO - admin - Data path for ID 171: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(119)
+2025-02-06 12:08:57,151 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(119)
+2025-02-06 12:08:57,153 - INFO - admin - Deleted record with ID 171 from tb_data.
+2025-02-06 12:08:57,155 - INFO - admin - Deleted record with ID 171 from result table.
+2025-02-06 12:08:57,271 - INFO - admin - Data path for ID 172: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(97)
+2025-02-06 12:08:57,272 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(97)
+2025-02-06 12:08:57,280 - INFO - admin - Deleted record with ID 172 from tb_data.
+2025-02-06 12:08:57,282 - INFO - admin - Deleted record with ID 172 from result table.
+2025-02-06 12:08:57,429 - INFO - admin - Data path for ID 173: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(33)
+2025-02-06 12:08:57,429 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(33)
+2025-02-06 12:08:57,437 - INFO - admin - Deleted record with ID 173 from tb_data.
+2025-02-06 12:08:57,439 - INFO - admin - Deleted record with ID 173 from result table.
+2025-02-06 12:08:57,505 - INFO - admin - Data path for ID 174: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(50)
+2025-02-06 12:08:57,505 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(50)
+2025-02-06 12:08:57,507 - INFO - admin - Deleted record with ID 174 from tb_data.
+2025-02-06 12:08:57,509 - INFO - admin - Deleted record with ID 174 from result table.
+2025-02-06 12:08:57,697 - INFO - admin - Data path for ID 175: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)_1
+2025-02-06 12:08:57,697 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(4)_1
+2025-02-06 12:08:57,705 - INFO - admin - Deleted record with ID 175 from tb_data.
+2025-02-06 12:08:57,707 - INFO - admin - Deleted record with ID 175 from result table.
+2025-02-06 12:08:57,830 - INFO - admin - Data path for ID 176: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(62)
+2025-02-06 12:08:57,831 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(62)
+2025-02-06 12:08:57,839 - INFO - admin - Deleted record with ID 176 from tb_data.
+2025-02-06 12:08:57,841 - INFO - admin - Deleted record with ID 176 from result table.
+2025-02-06 12:08:57,964 - INFO - admin - Data path for ID 177: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(113)
+2025-02-06 12:08:57,965 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(113)
+2025-02-06 12:08:57,973 - INFO - admin - Deleted record with ID 177 from tb_data.
+2025-02-06 12:08:57,975 - INFO - admin - Deleted record with ID 177 from result table.
+2025-02-06 12:08:58,102 - INFO - admin - Data path for ID 178: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(55)
+2025-02-06 12:08:58,102 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(55)
+2025-02-06 12:08:58,110 - INFO - admin - Deleted record with ID 178 from tb_data.
+2025-02-06 12:08:58,112 - INFO - admin - Deleted record with ID 178 from result table.
+2025-02-06 12:08:58,247 - INFO - admin - Data path for ID 179: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)_1
+2025-02-06 12:08:58,247 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(15)_1
+2025-02-06 12:08:58,255 - INFO - admin - Deleted record with ID 179 from tb_data.
+2025-02-06 12:08:58,257 - INFO - admin - Deleted record with ID 179 from result table.
+2025-02-06 12:08:58,385 - INFO - admin - Data path for ID 180: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(43)
+2025-02-06 12:08:58,385 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(43)
+2025-02-06 12:08:58,393 - INFO - admin - Deleted record with ID 180 from tb_data.
+2025-02-06 12:08:58,395 - INFO - admin - Deleted record with ID 180 from result table.
+2025-02-06 12:08:58,483 - INFO - admin - Data path for ID 181: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(116)
+2025-02-06 12:08:58,483 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(116)
+2025-02-06 12:08:58,485 - INFO - admin - Deleted record with ID 181 from tb_data.
+2025-02-06 12:08:58,487 - INFO - admin - Deleted record with ID 181 from result table.
+2025-02-06 12:08:58,663 - INFO - admin - Data path for ID 182: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(82)
+2025-02-06 12:08:58,664 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(82)
+2025-02-06 12:08:58,666 - INFO - admin - Deleted record with ID 182 from tb_data.
+2025-02-06 12:08:58,668 - INFO - admin - Deleted record with ID 182 from result table.
+2025-02-06 12:08:58,788 - INFO - admin - Data path for ID 183: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(106)
+2025-02-06 12:08:58,788 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(106)
+2025-02-06 12:08:58,796 - INFO - admin - Deleted record with ID 183 from tb_data.
+2025-02-06 12:08:58,798 - INFO - admin - Deleted record with ID 183 from result table.
+2025-02-06 12:08:58,963 - INFO - admin - Data path for ID 184: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(22)
+2025-02-06 12:08:58,963 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(22)
+2025-02-06 12:08:58,971 - INFO - admin - Deleted record with ID 184 from tb_data.
+2025-02-06 12:08:58,973 - INFO - admin - Deleted record with ID 184 from result table.
+2025-02-06 12:08:59,117 - INFO - admin - Data path for ID 185: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(76)
+2025-02-06 12:08:59,118 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(76)
+2025-02-06 12:08:59,125 - INFO - admin - Deleted record with ID 185 from tb_data.
+2025-02-06 12:08:59,127 - INFO - admin - Deleted record with ID 185 from result table.
+2025-02-06 12:08:59,247 - INFO - admin - Data path for ID 186: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(28)
+2025-02-06 12:08:59,247 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(28)
+2025-02-06 12:08:59,255 - INFO - admin - Deleted record with ID 186 from tb_data.
+2025-02-06 12:08:59,257 - INFO - admin - Deleted record with ID 186 from result table.
+2025-02-06 12:08:59,380 - INFO - admin - Data path for ID 187: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(21)
+2025-02-06 12:08:59,380 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(21)
+2025-02-06 12:08:59,388 - INFO - admin - Deleted record with ID 187 from tb_data.
+2025-02-06 12:08:59,390 - INFO - admin - Deleted record with ID 187 from result table.
+2025-02-06 12:08:59,533 - INFO - admin - Data path for ID 188: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(38)
+2025-02-06 12:08:59,534 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(38)
+2025-02-06 12:08:59,541 - INFO - admin - Deleted record with ID 188 from tb_data.
+2025-02-06 12:08:59,543 - INFO - admin - Deleted record with ID 188 from result table.
+2025-02-06 12:08:59,668 - INFO - admin - Data path for ID 189: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(85)
+2025-02-06 12:08:59,668 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(85)
+2025-02-06 12:08:59,676 - INFO - admin - Deleted record with ID 189 from tb_data.
+2025-02-06 12:08:59,678 - INFO - admin - Deleted record with ID 189 from result table.
+2025-02-06 12:08:59,814 - INFO - admin - Data path for ID 190: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(52)
+2025-02-06 12:08:59,814 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(52)
+2025-02-06 12:08:59,822 - INFO - admin - Deleted record with ID 190 from tb_data.
+2025-02-06 12:08:59,824 - INFO - admin - Deleted record with ID 190 from result table.
+2025-02-06 12:08:59,947 - INFO - admin - Data path for ID 191: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(73)
+2025-02-06 12:08:59,948 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(73)
+2025-02-06 12:08:59,955 - INFO - admin - Deleted record with ID 191 from tb_data.
+2025-02-06 12:08:59,958 - INFO - admin - Deleted record with ID 191 from result table.
+2025-02-06 12:09:00,080 - INFO - admin - Data path for ID 192: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(108)
+2025-02-06 12:09:00,080 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(108)
+2025-02-06 12:09:00,088 - INFO - admin - Deleted record with ID 192 from tb_data.
+2025-02-06 12:09:00,090 - INFO - admin - Deleted record with ID 192 from result table.
+2025-02-06 12:09:00,171 - INFO - admin - Data path for ID 193: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(113)
+2025-02-06 12:09:00,172 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(113)
+2025-02-06 12:09:00,173 - INFO - admin - Deleted record with ID 193 from tb_data.
+2025-02-06 12:09:00,175 - INFO - admin - Deleted record with ID 193 from result table.
+2025-02-06 12:09:00,347 - INFO - admin - Data path for ID 194: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(26)
+2025-02-06 12:09:00,347 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(26)
+2025-02-06 12:09:00,355 - INFO - admin - Deleted record with ID 194 from tb_data.
+2025-02-06 12:09:00,357 - INFO - admin - Deleted record with ID 194 from result table.
+2025-02-06 12:09:00,482 - INFO - admin - Data path for ID 195: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(23)
+2025-02-06 12:09:00,483 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(23)
+2025-02-06 12:09:00,492 - INFO - admin - Deleted record with ID 195 from tb_data.
+2025-02-06 12:09:00,493 - INFO - admin - Deleted record with ID 195 from result table.
+2025-02-06 12:09:00,613 - INFO - admin - Data path for ID 196: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(61)
+2025-02-06 12:09:00,614 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(61)
+2025-02-06 12:09:00,615 - INFO - admin - Deleted record with ID 196 from tb_data.
+2025-02-06 12:09:00,617 - INFO - admin - Deleted record with ID 196 from result table.
+2025-02-06 12:09:00,733 - INFO - admin - Data path for ID 197: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(72)
+2025-02-06 12:09:00,734 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(72)
+2025-02-06 12:09:00,742 - INFO - admin - Deleted record with ID 197 from tb_data.
+2025-02-06 12:09:00,744 - INFO - admin - Deleted record with ID 197 from result table.
+2025-02-06 12:09:00,896 - INFO - admin - Data path for ID 198: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(29)
+2025-02-06 12:09:00,897 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(29)
+2025-02-06 12:09:00,904 - INFO - admin - Deleted record with ID 198 from tb_data.
+2025-02-06 12:09:00,907 - INFO - admin - Deleted record with ID 198 from result table.
+2025-02-06 12:09:01,034 - INFO - admin - Data path for ID 199: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)_1
+2025-02-06 12:09:01,035 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(12)_1
+2025-02-06 12:09:01,042 - INFO - admin - Deleted record with ID 199 from tb_data.
+2025-02-06 12:09:01,044 - INFO - admin - Deleted record with ID 199 from result table.
+2025-02-06 12:09:01,121 - INFO - admin - Data path for ID 200: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(88)
+2025-02-06 12:09:01,121 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(88)
+2025-02-06 12:09:01,123 - INFO - admin - Deleted record with ID 200 from tb_data.
+2025-02-06 12:09:01,125 - INFO - admin - Deleted record with ID 200 from result table.
+2025-02-06 12:09:01,694 - INFO - admin - Data path for ID 201: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)_1
+2025-02-06 12:09:01,694 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(2)_1
+2025-02-06 12:09:01,702 - INFO - admin - Deleted record with ID 201 from tb_data.
+2025-02-06 12:09:01,703 - INFO - admin - Deleted record with ID 201 from result table.
+2025-02-06 12:09:02,206 - INFO - admin - Data path for ID 202: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(101)
+2025-02-06 12:09:02,213 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(101)
+2025-02-06 12:09:02,214 - INFO - admin - Deleted record with ID 202 from tb_data.
+2025-02-06 12:09:02,215 - INFO - admin - Deleted record with ID 202 from result table.
+2025-02-06 12:09:02,439 - INFO - admin - Data path for ID 203: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(109)
+2025-02-06 12:09:02,439 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(109)
+2025-02-06 12:09:02,447 - INFO - admin - Deleted record with ID 203 from tb_data.
+2025-02-06 12:09:02,448 - INFO - admin - Deleted record with ID 203 from result table.
+2025-02-06 12:09:02,638 - INFO - admin - Data path for ID 204: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(65)
+2025-02-06 12:09:02,639 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(65)
+2025-02-06 12:09:02,646 - INFO - admin - Deleted record with ID 204 from tb_data.
+2025-02-06 12:09:02,647 - INFO - admin - Deleted record with ID 204 from result table.
+2025-02-06 12:09:02,831 - INFO - admin - Data path for ID 205: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(80)
+2025-02-06 12:09:02,832 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(80)
+2025-02-06 12:09:02,839 - INFO - admin - Deleted record with ID 205 from tb_data.
+2025-02-06 12:09:02,841 - INFO - admin - Deleted record with ID 205 from result table.
+2025-02-06 12:09:03,018 - INFO - admin - Data path for ID 206: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(17)
+2025-02-06 12:09:03,019 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(17)
+2025-02-06 12:09:03,021 - INFO - admin - Deleted record with ID 206 from tb_data.
+2025-02-06 12:09:03,022 - INFO - admin - Deleted record with ID 206 from result table.
+2025-02-06 12:09:03,278 - INFO - admin - Data table refreshed successfully with 92 records
+2025-02-06 12:10:39,427 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-06 12:10:39,788 - INFO - 初始化登录界面...
+2025-02-06 12:10:39,790 - INFO - 开始预加载模型...
+2025-02-06 12:10:39,791 - INFO - 正在检查数据库中的模型信息...
+2025-02-06 12:10:39,793 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:10:39,793 - INFO - 模型文件存在，开始加载...
+2025-02-06 12:10:39,794 - INFO - 开始加载INT8量化模型...
+2025-02-06 12:10:39,795 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-06 12:10:39,795 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-06 12:10:39,796 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:10:39,912 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-06 12:10:39,913 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-06 12:10:39,913 - INFO - 模型加载成功并已放置在GPU上
+2025-02-06 12:10:39,913 - INFO - 成功预加载量化模型
+2025-02-06 12:10:40,713 - INFO - 未登录 - Opening user login page.
+2025-02-06 12:10:40,828 - INFO - admin - Opening Login page.
+2025-02-06 12:10:44,213 - INFO - admin - User logged in successfully
+2025-02-06 12:10:44,255 - INFO - admin - Opening Admin page.
+2025-02-06 12:10:45,537 - INFO - admin - Data table refreshed successfully with 92 records
+2025-02-06 12:10:45,538 - INFO - admin - Opening data view page.
+2025-02-06 12:10:45,611 - INFO - admin - Opening Data View page.
+2025-02-06 12:10:48,310 - INFO - admin - Attempting to delete record with ID 207 from the table.
+2025-02-06 12:10:48,312 - INFO - admin - Data path for ID 207: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-02-06 12:10:48,312 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2_1
+2025-02-06 12:10:48,315 - INFO - admin - Deleted record with ID 207 from tb_data.
+2025-02-06 12:10:48,316 - INFO - admin - Deleted record with ID 207 from result table.
+2025-02-06 12:10:49,159 - INFO - admin - Removed row 0 from table.
+2025-02-06 12:10:51,990 - INFO - admin - Attempting to delete 6 records from the table.
+2025-02-06 12:10:51,995 - INFO - admin - Data path for ID 208: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(53)
+2025-02-06 12:10:52,001 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(53)
+2025-02-06 12:10:52,003 - INFO - admin - Deleted record with ID 208 from tb_data.
+2025-02-06 12:10:52,005 - INFO - admin - Deleted record with ID 208 from result table.
+2025-02-06 12:10:52,005 - INFO - admin - Data path for ID 209: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)_1
+2025-02-06 12:10:52,006 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(15)_1
+2025-02-06 12:10:52,007 - INFO - admin - Deleted record with ID 209 from tb_data.
+2025-02-06 12:10:52,008 - INFO - admin - Deleted record with ID 209 from result table.
+2025-02-06 12:10:52,009 - INFO - admin - Data path for ID 210: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(103)
+2025-02-06 12:10:52,010 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(103)
+2025-02-06 12:10:52,011 - INFO - admin - Deleted record with ID 210 from tb_data.
+2025-02-06 12:10:52,012 - INFO - admin - Deleted record with ID 210 from result table.
+2025-02-06 12:10:52,013 - INFO - admin - Data path for ID 211: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(95)
+2025-02-06 12:10:52,013 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(95)
+2025-02-06 12:10:52,015 - INFO - admin - Deleted record with ID 211 from tb_data.
+2025-02-06 12:10:52,015 - INFO - admin - Deleted record with ID 211 from result table.
+2025-02-06 12:10:52,016 - INFO - admin - Data path for ID 212: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(64)
+2025-02-06 12:10:52,016 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(64)
+2025-02-06 12:10:52,018 - INFO - admin - Deleted record with ID 212 from tb_data.
+2025-02-06 12:10:52,019 - INFO - admin - Deleted record with ID 212 from result table.
+2025-02-06 12:10:52,020 - INFO - admin - Data path for ID 213: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(66)
+2025-02-06 12:10:52,020 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(66)
+2025-02-06 12:10:52,021 - INFO - admin - Deleted record with ID 213 from tb_data.
+2025-02-06 12:10:52,022 - INFO - admin - Deleted record with ID 213 from result table.
+2025-02-06 12:10:52,122 - INFO - admin - Data table refreshed successfully with 85 records
+2025-02-06 12:10:59,103 - INFO - admin - Attempting to delete 76 records from the table.
+2025-02-06 12:10:59,129 - INFO - admin - Data path for ID 214: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(24)
+2025-02-06 12:10:59,130 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(24)
+2025-02-06 12:10:59,137 - INFO - admin - Deleted record with ID 214 from tb_data.
+2025-02-06 12:10:59,138 - INFO - admin - Deleted record with ID 214 from result table.
+2025-02-06 12:10:59,139 - INFO - admin - Data path for ID 215: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(65)
+2025-02-06 12:10:59,139 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(65)
+2025-02-06 12:10:59,140 - INFO - admin - Deleted record with ID 215 from tb_data.
+2025-02-06 12:10:59,141 - INFO - admin - Deleted record with ID 215 from result table.
+2025-02-06 12:10:59,141 - INFO - admin - Data path for ID 216: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(34)
+2025-02-06 12:10:59,141 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(34)
+2025-02-06 12:10:59,143 - INFO - admin - Deleted record with ID 216 from tb_data.
+2025-02-06 12:10:59,143 - INFO - admin - Deleted record with ID 216 from result table.
+2025-02-06 12:10:59,144 - INFO - admin - Data path for ID 217: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(31)
+2025-02-06 12:10:59,144 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(31)
+2025-02-06 12:10:59,145 - INFO - admin - Deleted record with ID 217 from tb_data.
+2025-02-06 12:10:59,146 - INFO - admin - Deleted record with ID 217 from result table.
+2025-02-06 12:10:59,146 - INFO - admin - Data path for ID 218: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(92)
+2025-02-06 12:10:59,147 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(92)
+2025-02-06 12:10:59,148 - INFO - admin - Deleted record with ID 218 from tb_data.
+2025-02-06 12:10:59,149 - INFO - admin - Deleted record with ID 218 from result table.
+2025-02-06 12:10:59,150 - INFO - admin - Data path for ID 219: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)_1
+2025-02-06 12:10:59,151 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(11)_1
+2025-02-06 12:10:59,152 - INFO - admin - Deleted record with ID 219 from tb_data.
+2025-02-06 12:10:59,153 - INFO - admin - Deleted record with ID 219 from result table.
+2025-02-06 12:10:59,154 - INFO - admin - Data path for ID 220: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(118)
+2025-02-06 12:10:59,154 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(118)
+2025-02-06 12:10:59,156 - INFO - admin - Deleted record with ID 220 from tb_data.
+2025-02-06 12:10:59,157 - INFO - admin - Deleted record with ID 220 from result table.
+2025-02-06 12:10:59,158 - INFO - admin - Data path for ID 221: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(39)
+2025-02-06 12:10:59,158 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(39)
+2025-02-06 12:10:59,160 - INFO - admin - Deleted record with ID 221 from tb_data.
+2025-02-06 12:10:59,160 - INFO - admin - Deleted record with ID 221 from result table.
+2025-02-06 12:10:59,161 - INFO - admin - Data path for ID 222: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)_1
+2025-02-06 12:10:59,162 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(14)_1
+2025-02-06 12:10:59,163 - INFO - admin - Deleted record with ID 222 from tb_data.
+2025-02-06 12:10:59,164 - INFO - admin - Deleted record with ID 222 from result table.
+2025-02-06 12:10:59,165 - INFO - admin - Data path for ID 223: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(71)
+2025-02-06 12:10:59,166 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(71)
+2025-02-06 12:10:59,167 - INFO - admin - Deleted record with ID 223 from tb_data.
+2025-02-06 12:10:59,168 - INFO - admin - Deleted record with ID 223 from result table.
+2025-02-06 12:10:59,169 - INFO - admin - Data path for ID 224: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(123)
+2025-02-06 12:10:59,170 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(123)
+2025-02-06 12:10:59,171 - INFO - admin - Deleted record with ID 224 from tb_data.
+2025-02-06 12:10:59,172 - INFO - admin - Deleted record with ID 224 from result table.
+2025-02-06 12:10:59,173 - INFO - admin - Data path for ID 225: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(23)
+2025-02-06 12:10:59,174 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(23)
+2025-02-06 12:10:59,175 - INFO - admin - Deleted record with ID 225 from tb_data.
+2025-02-06 12:10:59,176 - INFO - admin - Deleted record with ID 225 from result table.
+2025-02-06 12:10:59,177 - INFO - admin - Data path for ID 226: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(79)
+2025-02-06 12:10:59,177 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(79)
+2025-02-06 12:10:59,179 - INFO - admin - Deleted record with ID 226 from tb_data.
+2025-02-06 12:10:59,180 - INFO - admin - Deleted record with ID 226 from result table.
+2025-02-06 12:10:59,181 - INFO - admin - Data path for ID 227: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)_1
+2025-02-06 12:10:59,182 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(2)_1
+2025-02-06 12:10:59,183 - INFO - admin - Deleted record with ID 227 from tb_data.
+2025-02-06 12:10:59,184 - INFO - admin - Deleted record with ID 227 from result table.
+2025-02-06 12:10:59,185 - INFO - admin - Data path for ID 228: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(24)
+2025-02-06 12:10:59,186 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(24)
+2025-02-06 12:10:59,187 - INFO - admin - Deleted record with ID 228 from tb_data.
+2025-02-06 12:10:59,188 - INFO - admin - Deleted record with ID 228 from result table.
+2025-02-06 12:10:59,189 - INFO - admin - Data path for ID 229: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(48)
+2025-02-06 12:10:59,190 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(48)
+2025-02-06 12:10:59,191 - INFO - admin - Deleted record with ID 229 from tb_data.
+2025-02-06 12:10:59,192 - INFO - admin - Deleted record with ID 229 from result table.
+2025-02-06 12:10:59,193 - INFO - admin - Data path for ID 230: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(90)
+2025-02-06 12:10:59,193 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(90)
+2025-02-06 12:10:59,195 - INFO - admin - Deleted record with ID 230 from tb_data.
+2025-02-06 12:10:59,196 - INFO - admin - Deleted record with ID 230 from result table.
+2025-02-06 12:10:59,196 - INFO - admin - Data path for ID 231: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(127)
+2025-02-06 12:10:59,197 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(127)
+2025-02-06 12:10:59,198 - INFO - admin - Deleted record with ID 231 from tb_data.
+2025-02-06 12:10:59,199 - INFO - admin - Deleted record with ID 231 from result table.
+2025-02-06 12:10:59,199 - INFO - admin - Data path for ID 232: /home/jupiter/bj_health_manage/data/ord2_edf_2
+2025-02-06 12:10:59,200 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf_2
+2025-02-06 12:10:59,201 - INFO - admin - Deleted record with ID 232 from tb_data.
+2025-02-06 12:10:59,201 - INFO - admin - Deleted record with ID 232 from result table.
+2025-02-06 12:10:59,202 - INFO - admin - Data path for ID 233: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(36)
+2025-02-06 12:10:59,202 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(36)
+2025-02-06 12:10:59,203 - INFO - admin - Deleted record with ID 233 from tb_data.
+2025-02-06 12:10:59,204 - INFO - admin - Deleted record with ID 233 from result table.
+2025-02-06 12:10:59,205 - INFO - admin - Data path for ID 234: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(21)
+2025-02-06 12:10:59,205 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(21)
+2025-02-06 12:10:59,206 - INFO - admin - Deleted record with ID 234 from tb_data.
+2025-02-06 12:10:59,207 - INFO - admin - Deleted record with ID 234 from result table.
+2025-02-06 12:10:59,207 - INFO - admin - Data path for ID 235: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(91)
+2025-02-06 12:10:59,207 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(91)
+2025-02-06 12:10:59,209 - INFO - admin - Deleted record with ID 235 from tb_data.
+2025-02-06 12:10:59,209 - INFO - admin - Deleted record with ID 235 from result table.
+2025-02-06 12:10:59,210 - INFO - admin - Data path for ID 236: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(51)
+2025-02-06 12:10:59,210 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(51)
+2025-02-06 12:10:59,211 - INFO - admin - Deleted record with ID 236 from tb_data.
+2025-02-06 12:10:59,212 - INFO - admin - Deleted record with ID 236 from result table.
+2025-02-06 12:10:59,213 - INFO - admin - Data path for ID 237: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(44)
+2025-02-06 12:10:59,213 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(44)
+2025-02-06 12:10:59,214 - INFO - admin - Deleted record with ID 237 from tb_data.
+2025-02-06 12:10:59,215 - INFO - admin - Deleted record with ID 237 from result table.
+2025-02-06 12:10:59,216 - INFO - admin - Data path for ID 238: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(49)
+2025-02-06 12:10:59,216 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(49)
+2025-02-06 12:10:59,218 - INFO - admin - Deleted record with ID 238 from tb_data.
+2025-02-06 12:10:59,219 - INFO - admin - Deleted record with ID 238 from result table.
+2025-02-06 12:10:59,220 - INFO - admin - Data path for ID 239: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(77)
+2025-02-06 12:10:59,220 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(77)
+2025-02-06 12:10:59,222 - INFO - admin - Deleted record with ID 239 from tb_data.
+2025-02-06 12:10:59,222 - INFO - admin - Deleted record with ID 239 from result table.
+2025-02-06 12:10:59,223 - INFO - admin - Data path for ID 240: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(19)
+2025-02-06 12:10:59,223 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(19)
+2025-02-06 12:10:59,225 - INFO - admin - Deleted record with ID 240 from tb_data.
+2025-02-06 12:10:59,225 - INFO - admin - Deleted record with ID 240 from result table.
+2025-02-06 12:10:59,226 - INFO - admin - Data path for ID 241: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(124)
+2025-02-06 12:10:59,226 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(124)
+2025-02-06 12:10:59,227 - INFO - admin - Deleted record with ID 241 from tb_data.
+2025-02-06 12:10:59,228 - INFO - admin - Deleted record with ID 241 from result table.
+2025-02-06 12:10:59,228 - INFO - admin - Data path for ID 242: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(79)
+2025-02-06 12:10:59,229 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(79)
+2025-02-06 12:10:59,230 - INFO - admin - Deleted record with ID 242 from tb_data.
+2025-02-06 12:10:59,231 - INFO - admin - Deleted record with ID 242 from result table.
+2025-02-06 12:10:59,232 - INFO - admin - Data path for ID 243: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(58)
+2025-02-06 12:10:59,232 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(58)
+2025-02-06 12:10:59,234 - INFO - admin - Deleted record with ID 243 from tb_data.
+2025-02-06 12:10:59,235 - INFO - admin - Deleted record with ID 243 from result table.
+2025-02-06 12:10:59,235 - INFO - admin - Data path for ID 244: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)_1
+2025-02-06 12:10:59,236 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(12)_1
+2025-02-06 12:10:59,238 - INFO - admin - Deleted record with ID 244 from tb_data.
+2025-02-06 12:10:59,239 - INFO - admin - Deleted record with ID 244 from result table.
+2025-02-06 12:10:59,239 - INFO - admin - Data path for ID 245: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)_1
+2025-02-06 12:10:59,240 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(1)_1
+2025-02-06 12:10:59,241 - INFO - admin - Deleted record with ID 245 from tb_data.
+2025-02-06 12:10:59,242 - INFO - admin - Deleted record with ID 245 from result table.
+2025-02-06 12:10:59,243 - INFO - admin - Data path for ID 246: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(58)
+2025-02-06 12:10:59,243 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(58)
+2025-02-06 12:10:59,245 - INFO - admin - Deleted record with ID 246 from tb_data.
+2025-02-06 12:10:59,246 - INFO - admin - Deleted record with ID 246 from result table.
+2025-02-06 12:10:59,247 - INFO - admin - Data path for ID 247: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(77)
+2025-02-06 12:10:59,248 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(77)
+2025-02-06 12:10:59,249 - INFO - admin - Deleted record with ID 247 from tb_data.
+2025-02-06 12:10:59,250 - INFO - admin - Deleted record with ID 247 from result table.
+2025-02-06 12:10:59,251 - INFO - admin - Data path for ID 248: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(55)
+2025-02-06 12:10:59,251 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(55)
+2025-02-06 12:10:59,253 - INFO - admin - Deleted record with ID 248 from tb_data.
+2025-02-06 12:10:59,254 - INFO - admin - Deleted record with ID 248 from result table.
+2025-02-06 12:10:59,255 - INFO - admin - Data path for ID 249: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(119)
+2025-02-06 12:10:59,255 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(119)
+2025-02-06 12:10:59,257 - INFO - admin - Deleted record with ID 249 from tb_data.
+2025-02-06 12:10:59,257 - INFO - admin - Deleted record with ID 249 from result table.
+2025-02-06 12:10:59,258 - INFO - admin - Data path for ID 250: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(83)
+2025-02-06 12:10:59,258 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(83)
+2025-02-06 12:10:59,260 - INFO - admin - Deleted record with ID 250 from tb_data.
+2025-02-06 12:10:59,261 - INFO - admin - Deleted record with ID 250 from result table.
+2025-02-06 12:10:59,261 - INFO - admin - Data path for ID 251: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(48)
+2025-02-06 12:10:59,262 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(48)
+2025-02-06 12:10:59,263 - INFO - admin - Deleted record with ID 251 from tb_data.
+2025-02-06 12:10:59,264 - INFO - admin - Deleted record with ID 251 from result table.
+2025-02-06 12:10:59,265 - INFO - admin - Data path for ID 252: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(112)
+2025-02-06 12:10:59,265 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(112)
+2025-02-06 12:10:59,266 - INFO - admin - Deleted record with ID 252 from tb_data.
+2025-02-06 12:10:59,268 - INFO - admin - Deleted record with ID 252 from result table.
+2025-02-06 12:10:59,269 - INFO - admin - Data path for ID 253: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(72)
+2025-02-06 12:10:59,269 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(72)
+2025-02-06 12:10:59,271 - INFO - admin - Deleted record with ID 253 from tb_data.
+2025-02-06 12:10:59,272 - INFO - admin - Deleted record with ID 253 from result table.
+2025-02-06 12:10:59,273 - INFO - admin - Data path for ID 254: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(63)
+2025-02-06 12:10:59,274 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(63)
+2025-02-06 12:10:59,275 - INFO - admin - Deleted record with ID 254 from tb_data.
+2025-02-06 12:10:59,276 - INFO - admin - Deleted record with ID 254 from result table.
+2025-02-06 12:10:59,277 - INFO - admin - Data path for ID 255: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(87)
+2025-02-06 12:10:59,278 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(87)
+2025-02-06 12:10:59,280 - INFO - admin - Deleted record with ID 255 from tb_data.
+2025-02-06 12:10:59,281 - INFO - admin - Deleted record with ID 255 from result table.
+2025-02-06 12:10:59,282 - INFO - admin - Data path for ID 256: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(126)
+2025-02-06 12:10:59,282 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(126)
+2025-02-06 12:10:59,284 - INFO - admin - Deleted record with ID 256 from tb_data.
+2025-02-06 12:10:59,285 - INFO - admin - Deleted record with ID 256 from result table.
+2025-02-06 12:10:59,286 - INFO - admin - Data path for ID 257: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(87)
+2025-02-06 12:10:59,286 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(87)
+2025-02-06 12:10:59,288 - INFO - admin - Deleted record with ID 257 from tb_data.
+2025-02-06 12:10:59,289 - INFO - admin - Deleted record with ID 257 from result table.
+2025-02-06 12:10:59,290 - INFO - admin - Data path for ID 258: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(37)
+2025-02-06 12:10:59,291 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(37)
+2025-02-06 12:10:59,292 - INFO - admin - Deleted record with ID 258 from tb_data.
+2025-02-06 12:10:59,293 - INFO - admin - Deleted record with ID 258 from result table.
+2025-02-06 12:10:59,294 - INFO - admin - Data path for ID 259: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(98)
+2025-02-06 12:10:59,295 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(98)
+2025-02-06 12:10:59,297 - INFO - admin - Deleted record with ID 259 from tb_data.
+2025-02-06 12:10:59,297 - INFO - admin - Deleted record with ID 259 from result table.
+2025-02-06 12:10:59,298 - INFO - admin - Data path for ID 260: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(120)
+2025-02-06 12:10:59,298 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(120)
+2025-02-06 12:10:59,300 - INFO - admin - Deleted record with ID 260 from tb_data.
+2025-02-06 12:10:59,301 - INFO - admin - Deleted record with ID 260 from result table.
+2025-02-06 12:10:59,301 - INFO - admin - Data path for ID 261: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(86)
+2025-02-06 12:10:59,302 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(86)
+2025-02-06 12:10:59,303 - INFO - admin - Deleted record with ID 261 from tb_data.
+2025-02-06 12:10:59,304 - INFO - admin - Deleted record with ID 261 from result table.
+2025-02-06 12:10:59,304 - INFO - admin - Data path for ID 262: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)_1
+2025-02-06 12:10:59,305 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(6)_1
+2025-02-06 12:10:59,306 - INFO - admin - Deleted record with ID 262 from tb_data.
+2025-02-06 12:10:59,307 - INFO - admin - Deleted record with ID 262 from result table.
+2025-02-06 12:10:59,307 - INFO - admin - Data path for ID 263: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(70)
+2025-02-06 12:10:59,308 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(70)
+2025-02-06 12:10:59,309 - INFO - admin - Deleted record with ID 263 from tb_data.
+2025-02-06 12:10:59,310 - INFO - admin - Deleted record with ID 263 from result table.
+2025-02-06 12:10:59,310 - INFO - admin - Data path for ID 264: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)_1
+2025-02-06 12:10:59,311 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(3)_1
+2025-02-06 12:10:59,312 - INFO - admin - Deleted record with ID 264 from tb_data.
+2025-02-06 12:10:59,313 - INFO - admin - Deleted record with ID 264 from result table.
+2025-02-06 12:10:59,314 - INFO - admin - Data path for ID 265: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(43)
+2025-02-06 12:10:59,314 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(43)
+2025-02-06 12:10:59,315 - INFO - admin - Deleted record with ID 265 from tb_data.
+2025-02-06 12:10:59,316 - INFO - admin - Deleted record with ID 265 from result table.
+2025-02-06 12:10:59,317 - INFO - admin - Data path for ID 266: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(42)
+2025-02-06 12:10:59,317 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(42)
+2025-02-06 12:10:59,318 - INFO - admin - Deleted record with ID 266 from tb_data.
+2025-02-06 12:10:59,319 - INFO - admin - Deleted record with ID 266 from result table.
+2025-02-06 12:10:59,320 - INFO - admin - Data path for ID 267: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)_1
+2025-02-06 12:10:59,321 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(4)_1
+2025-02-06 12:10:59,322 - INFO - admin - Deleted record with ID 267 from tb_data.
+2025-02-06 12:10:59,323 - INFO - admin - Deleted record with ID 267 from result table.
+2025-02-06 12:10:59,324 - INFO - admin - Data path for ID 268: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(94)
+2025-02-06 12:10:59,324 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(94)
+2025-02-06 12:10:59,326 - INFO - admin - Deleted record with ID 268 from tb_data.
+2025-02-06 12:10:59,327 - INFO - admin - Deleted record with ID 268 from result table.
+2025-02-06 12:10:59,328 - INFO - admin - Data path for ID 269: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(122)
+2025-02-06 12:10:59,328 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(122)
+2025-02-06 12:10:59,330 - INFO - admin - Deleted record with ID 269 from tb_data.
+2025-02-06 12:10:59,331 - INFO - admin - Deleted record with ID 269 from result table.
+2025-02-06 12:10:59,332 - INFO - admin - Data path for ID 270: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(46)
+2025-02-06 12:10:59,332 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(46)
+2025-02-06 12:10:59,334 - INFO - admin - Deleted record with ID 270 from tb_data.
+2025-02-06 12:10:59,334 - INFO - admin - Deleted record with ID 270 from result table.
+2025-02-06 12:10:59,335 - INFO - admin - Data path for ID 271: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(89)
+2025-02-06 12:10:59,335 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(89)
+2025-02-06 12:10:59,337 - INFO - admin - Deleted record with ID 271 from tb_data.
+2025-02-06 12:10:59,337 - INFO - admin - Deleted record with ID 271 from result table.
+2025-02-06 12:10:59,338 - INFO - admin - Data path for ID 272: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(75)
+2025-02-06 12:10:59,338 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(75)
+2025-02-06 12:10:59,340 - INFO - admin - Deleted record with ID 272 from tb_data.
+2025-02-06 12:10:59,341 - INFO - admin - Deleted record with ID 272 from result table.
+2025-02-06 12:10:59,342 - INFO - admin - Data path for ID 273: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(34)
+2025-02-06 12:10:59,342 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(34)
+2025-02-06 12:10:59,344 - INFO - admin - Deleted record with ID 273 from tb_data.
+2025-02-06 12:10:59,345 - INFO - admin - Deleted record with ID 273 from result table.
+2025-02-06 12:10:59,346 - INFO - admin - Data path for ID 274: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(32)
+2025-02-06 12:10:59,346 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(32)
+2025-02-06 12:10:59,348 - INFO - admin - Deleted record with ID 274 from tb_data.
+2025-02-06 12:10:59,349 - INFO - admin - Deleted record with ID 274 from result table.
+2025-02-06 12:10:59,350 - INFO - admin - Data path for ID 275: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(104)
+2025-02-06 12:10:59,351 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(104)
+2025-02-06 12:10:59,353 - INFO - admin - Deleted record with ID 275 from tb_data.
+2025-02-06 12:10:59,354 - INFO - admin - Deleted record with ID 275 from result table.
+2025-02-06 12:10:59,355 - INFO - admin - Data path for ID 276: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(59)
+2025-02-06 12:10:59,355 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(59)
+2025-02-06 12:10:59,357 - INFO - admin - Deleted record with ID 276 from tb_data.
+2025-02-06 12:10:59,358 - INFO - admin - Deleted record with ID 276 from result table.
+2025-02-06 12:10:59,359 - INFO - admin - Data path for ID 277: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(56)
+2025-02-06 12:10:59,360 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(56)
+2025-02-06 12:10:59,361 - INFO - admin - Deleted record with ID 277 from tb_data.
+2025-02-06 12:10:59,362 - INFO - admin - Deleted record with ID 277 from result table.
+2025-02-06 12:10:59,363 - INFO - admin - Data path for ID 278: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)_1
+2025-02-06 12:10:59,363 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(1)_1
+2025-02-06 12:10:59,365 - INFO - admin - Deleted record with ID 278 from tb_data.
+2025-02-06 12:10:59,366 - INFO - admin - Deleted record with ID 278 from result table.
+2025-02-06 12:10:59,367 - INFO - admin - Data path for ID 279: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)_1
+2025-02-06 12:10:59,367 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(11)_1
+2025-02-06 12:10:59,369 - INFO - admin - Deleted record with ID 279 from tb_data.
+2025-02-06 12:10:59,370 - INFO - admin - Deleted record with ID 279 from result table.
+2025-02-06 12:10:59,371 - INFO - admin - Data path for ID 280: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(40)
+2025-02-06 12:10:59,371 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(40)
+2025-02-06 12:10:59,373 - INFO - admin - Deleted record with ID 280 from tb_data.
+2025-02-06 12:10:59,374 - INFO - admin - Deleted record with ID 280 from result table.
+2025-02-06 12:10:59,375 - INFO - admin - Data path for ID 281: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(114)
+2025-02-06 12:10:59,375 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(114)
+2025-02-06 12:10:59,377 - INFO - admin - Deleted record with ID 281 from tb_data.
+2025-02-06 12:10:59,377 - INFO - admin - Deleted record with ID 281 from result table.
+2025-02-06 12:10:59,378 - INFO - admin - Data path for ID 282: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(59)
+2025-02-06 12:10:59,379 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(59)
+2025-02-06 12:10:59,380 - INFO - admin - Deleted record with ID 282 from tb_data.
+2025-02-06 12:10:59,381 - INFO - admin - Deleted record with ID 282 from result table.
+2025-02-06 12:10:59,381 - INFO - admin - Data path for ID 283: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(75)
+2025-02-06 12:10:59,381 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(75)
+2025-02-06 12:10:59,383 - INFO - admin - Deleted record with ID 283 from tb_data.
+2025-02-06 12:10:59,384 - INFO - admin - Deleted record with ID 283 from result table.
+2025-02-06 12:10:59,384 - INFO - admin - Data path for ID 284: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(19)
+2025-02-06 12:10:59,385 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(19)
+2025-02-06 12:10:59,386 - INFO - admin - Deleted record with ID 284 from tb_data.
+2025-02-06 12:10:59,387 - INFO - admin - Deleted record with ID 284 from result table.
+2025-02-06 12:10:59,388 - INFO - admin - Data path for ID 285: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(125)
+2025-02-06 12:10:59,388 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(125)
+2025-02-06 12:10:59,389 - INFO - admin - Deleted record with ID 285 from tb_data.
+2025-02-06 12:10:59,390 - INFO - admin - Deleted record with ID 285 from result table.
+2025-02-06 12:10:59,391 - INFO - admin - Data path for ID 286: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(85)
+2025-02-06 12:10:59,392 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/000005_ord2_2 - 副本(85)
+2025-02-06 12:10:59,393 - INFO - admin - Deleted record with ID 286 from tb_data.
+2025-02-06 12:10:59,394 - INFO - admin - Deleted record with ID 286 from result table.
+2025-02-06 12:10:59,395 - INFO - admin - Data path for ID 287: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(83)
+2025-02-06 12:10:59,396 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(83)
+2025-02-06 12:10:59,398 - INFO - admin - Deleted record with ID 287 from tb_data.
+2025-02-06 12:10:59,399 - INFO - admin - Deleted record with ID 287 from result table.
+2025-02-06 12:10:59,400 - INFO - admin - Data path for ID 288: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)_1
+2025-02-06 12:10:59,400 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(7)_1
+2025-02-06 12:10:59,401 - INFO - admin - Deleted record with ID 288 from tb_data.
+2025-02-06 12:10:59,402 - INFO - admin - Deleted record with ID 288 from result table.
+2025-02-06 12:10:59,403 - INFO - admin - Data path for ID 289: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(81)
+2025-02-06 12:10:59,404 - INFO - admin - Deleted folder at path: /home/jupiter/bj_health_manage/data/ord2_edf - 副本(81)
+2025-02-06 12:10:59,405 - INFO - admin - Deleted record with ID 289 from tb_data.
+2025-02-06 12:10:59,406 - INFO - admin - Deleted record with ID 289 from result table.
+2025-02-06 12:10:59,420 - INFO - admin - Data table refreshed successfully with 9 records
+2025-02-06 12:11:01,012 - INFO - admin - Opening Admin page.
+2025-02-06 12:11:01,012 - INFO - admin - Returned to index page successfully
+2025-02-06 12:11:01,546 - INFO - admin - Administrator admin: fetching all data records
+2025-02-06 12:11:01,554 - INFO - admin - Successfully displayed 9 data records
+2025-02-06 12:11:01,558 - INFO - admin - Opening health evaluation page.
+2025-02-06 12:11:01,645 - INFO - admin - Opening Health Evaluate page.
+2025-02-06 12:11:04,606 - INFO - admin - Button clicked in row 0, ID: 290
+2025-02-06 12:11:04,607 - INFO - admin - Data path retrieved for ID 290: /home/jupiter/bj_health_manage/data/1
+2025-02-06 12:11:04,609 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-06 12:11:04,609 - INFO - admin - Initializing current image index to 0
+2025-02-06 12:11:04,609 - INFO - admin - Image list initialized with 15 items.
+2025-02-06 12:11:04,609 - INFO - admin - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1/Theta.png
+2025-02-06 12:11:04,623 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-06 12:11:05,086 - INFO - admin - Button clicked in row 1, ID: 291
+2025-02-06 12:11:05,087 - INFO - admin - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-06 12:11:05,088 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-06 12:11:05,088 - INFO - admin - Initializing current image index to 0
+2025-02-06 12:11:05,088 - INFO - admin - Image list initialized with 15 items.
+2025-02-06 12:11:05,088 - INFO - admin - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-06 12:11:05,099 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-06 12:11:05,654 - INFO - admin - Button clicked in row 0, ID: 290
+2025-02-06 12:11:05,655 - INFO - admin - Data path retrieved for ID 290: /home/jupiter/bj_health_manage/data/1
+2025-02-06 12:11:05,656 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=95.0, anxiety=95.0
+2025-02-06 12:11:05,656 - INFO - admin - Initializing current image index to 0
+2025-02-06 12:11:05,656 - INFO - admin - Image list initialized with 15 items.
+2025-02-06 12:11:05,656 - INFO - admin - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1/Theta.png
+2025-02-06 12:11:05,656 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-06 12:11:06,014 - INFO - admin - Button clicked in row 1, ID: 291
+2025-02-06 12:11:06,015 - INFO - admin - Data path retrieved for ID 291: /home/jupiter/bj_health_manage/data/1_1
+2025-02-06 12:11:06,015 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-06 12:11:06,016 - INFO - admin - Initializing current image index to 0
+2025-02-06 12:11:06,016 - INFO - admin - Image list initialized with 15 items.
+2025-02-06 12:11:06,016 - INFO - admin - Attempting to load image from path: /home/jupiter/bj_health_manage/data/1_1/Theta.png
+2025-02-06 12:11:06,016 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-06 12:11:07,534 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-06 12:11:07,534 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-06 12:11:07,920 - INFO - admin - Prediction result: 1.0
+2025-02-06 12:11:07,920 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-06 12:11:07,920 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-06 12:11:07,920 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-06 12:11:07,920 - INFO - admin - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-06 12:11:07,920 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-06 12:11:07,921 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-06 12:11:07,921 - INFO - admin - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-06 12:11:07,948 - INFO - admin - 当前模型索引: 0
+2025-02-06 12:11:07,948 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-06 12:11:07,948 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-06 12:11:10,527 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-06 12:11:10,536 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-06 12:11:13,951 - INFO - admin - Report generated successfully for result ID 291
+2025-02-06 12:11:14,662 - INFO - admin - Opening Admin page.
+2025-02-06 12:11:14,662 - INFO - admin - Returned to index page successfully
+2025-02-06 12:11:15,899 - INFO - admin - Opening results view page.
+2025-02-06 12:11:15,945 - INFO - admin - Opening Results View page.
+2025-02-06 12:11:20,376 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_291.pdf
+2025-02-06 12:11:23,944 - INFO - admin - Opening Admin page.
+2025-02-06 12:11:23,945 - INFO - admin - Returned to index page successfully
+2025-02-06 12:11:24,651 - INFO - admin - Administrator admin: fetching all data records
+2025-02-06 12:11:24,659 - INFO - admin - Successfully displayed 9 data records
+2025-02-06 12:11:24,662 - INFO - admin - Opening health evaluation page.
+2025-02-06 12:11:24,778 - INFO - admin - Opening Health Evaluate page.
+2025-02-06 12:11:27,428 - INFO - admin - Opening Admin page.
+2025-02-06 12:11:27,428 - INFO - admin - Returned to index page successfully
+2025-02-06 12:11:28,328 - INFO - admin - Data table refreshed successfully with 9 records
+2025-02-06 12:11:28,329 - INFO - admin - Opening data view page.
+2025-02-06 12:11:28,382 - INFO - admin - Opening Data View page.
+2025-02-06 12:11:29,712 - INFO - admin - Opening Admin page.
+2025-02-06 12:11:29,713 - INFO - admin - Returned to index page successfully
+2025-02-06 12:12:47,274 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-06 12:12:47,657 - INFO - 初始化登录界面...
+2025-02-06 12:12:47,659 - INFO - 开始预加载模型...
+2025-02-06 12:12:47,659 - INFO - 正在检查数据库中的模型信息...
+2025-02-06 12:12:47,662 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:12:47,662 - INFO - 模型文件存在，开始加载...
+2025-02-06 12:12:47,663 - INFO - 开始加载INT8量化模型...
+2025-02-06 12:12:47,663 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-06 12:12:47,664 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-06 12:12:47,665 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-06 12:12:47,763 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-06 12:12:47,763 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-06 12:12:47,764 - INFO - 模型加载成功并已放置在GPU上
+2025-02-06 12:12:47,764 - INFO - 成功预加载量化模型
+2025-02-06 12:12:48,571 - INFO - 未登录 - Opening user login page.
+2025-02-06 12:12:48,695 - INFO - admin - Opening Login page.
+2025-02-06 12:12:51,544 - INFO - admin - User logged in successfully
+2025-02-06 12:12:51,603 - INFO - admin - Opening Admin page.
+2025-02-06 12:12:52,917 - INFO - admin - Successfully displayed 9 results in table
+2025-02-06 12:12:52,918 - INFO - admin - Opening results view page.
+2025-02-06 12:12:53,044 - INFO - admin - Opening Results View page.
+2025-02-06 12:13:01,146 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_291.pdf
+2025-02-06 12:13:12,275 - INFO - admin - Opening Admin page.
+2025-02-06 12:13:12,275 - INFO - admin - Returned to index page successfully
+2025-02-06 12:13:12,837 - INFO - admin - Administrator admin: fetching all data records
+2025-02-06 12:13:12,845 - INFO - admin - Successfully displayed 9 data records
+2025-02-06 12:13:12,848 - INFO - admin - Opening health evaluation page.
+2025-02-06 12:13:12,944 - INFO - admin - Opening Health Evaluate page.
+2025-02-06 12:13:19,527 - INFO - admin - Opening Admin page.
+2025-02-06 12:13:19,527 - INFO - admin - Returned to index page successfully
+2025-02-06 12:13:20,347 - INFO - admin - Data table refreshed successfully with 9 records
+2025-02-06 12:13:20,347 - INFO - admin - Opening data view page.
+2025-02-06 12:13:20,444 - INFO - admin - Opening Data View page.
+2025-02-06 12:13:28,273 - INFO - admin - Button clicked in row 0, corresponding ID: 290
+2025-02-06 12:13:28,274 - INFO - admin - Data path retrieved from database: /home/jupiter/bj_health_manage/data/1
+2025-02-06 12:13:29,312 - INFO - admin - Successfully displayed image: /home/jupiter/bj_health_manage/data/1/Theta.png
+2025-02-06 12:13:32,857 - INFO - admin - Button clicked in row 0, corresponding ID: 290
+2025-02-06 12:13:32,858 - INFO - admin - Data path retrieved from database: /home/jupiter/bj_health_manage/data/1
+2025-02-06 12:13:35,003 - INFO - admin - Successfully displayed image: /home/jupiter/bj_health_manage/data/1/Beta.png
+2025-02-06 12:13:36,467 - INFO - admin - Opening Admin page.
+2025-02-06 12:13:36,467 - INFO - admin - Returned to index page successfully
+2025-02-06 12:13:37,821 - INFO - admin - Successfully displayed 9 results in table
+2025-02-06 12:13:37,821 - INFO - admin - Opening results view page.
+2025-02-06 12:13:37,864 - INFO - admin - Opening Results View page.
+2025-02-06 12:13:38,994 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_291.pdf
+2025-02-06 12:14:07,356 - INFO - admin - Opening Admin page.
+2025-02-06 12:14:07,356 - INFO - admin - Returned to index page successfully

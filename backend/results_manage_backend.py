@@ -104,9 +104,9 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         self.pushButton_2.clicked.connect(self.show_next_image)
 
         # 设置表格列
-        self.tableWidget.setColumnCount(7)  # 设置为7列，包括查看按钮列
+        self.tableWidget.setColumnCount(8)  # 设置为8列，包括数据路径列
         self.tableWidget.setHorizontalHeaderLabels([
-            'ID', '用户名', '评估时间', '普通应激', '抑郁', '焦虑', '操作'
+            'ID', '用户名', '评估时间', '数据路径', '普通应激', '抑郁', '焦虑', '操作'
         ])
 
         # 设置表格样式
@@ -119,11 +119,12 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         header = self.tableWidget.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)  # ID列
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)  # 用户名列
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)          # 评估时间列
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)  # 普通应激列
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)  # 抑郁列
-        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
-        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)  # 评估时间列
+        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)          # 数据路径列
+        header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)  # 普通应激列
+        header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 抑郁列
+        header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
+        header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
 
         # 设置所有LED为默认灰色
         default_style = (
@@ -281,54 +282,67 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
                 )
 
     def show_table(self):
-        """显示结果表格"""
-        session = SessionClass()
+        """
+        显示结果表格
+        """
         try:
-            # 获取当前用户ID
-            user_id = self.user_id
-            if not user_id:
-                QMessageBox.warning(self, "错误", "无法获取当前用户信息")
-                return
+            session = SessionClass()
+            
+            # 根据用户类型获取结果
+            if self.user_type:  # 管理员
+                results = session.query(Result).order_by(Result.result_time.desc()).all()
+            else:  # 普通用户
+                results = session.query(Result).filter(
+                    Result.user_id == self.user_id
+                ).order_by(Result.result_time.desc()).all()
 
-            # 查询结果
-            if self.user_type:  # 管理员可以看到所有结果
-                results = session.query(Result).all()
-            else:  # 普通用户只能看到自己的结果
-                results = session.query(Result).filter(Result.user_id == user_id).all()
-
-            # 显示结果
+            # 设置表格行数
             self.tableWidget.setRowCount(len(results))
-            
-            # 设置行高
-            for i in range(len(results)):
-                self.tableWidget.setRowHeight(i, 50)  # 设置每行高度为50像素
-            
+
+            # 填充表格数据
             for i, result in enumerate(results):
-                # 获取用户信息
-                user = session.query(User).filter(User.user_id == result.user_id).first()
-                username = user.username if user else "未知用户"
+                try:
+                    # 获取用户名
+                    user = session.query(User).filter(User.user_id == result.user_id).first()
+                    username = user.username if user else "未知用户"
 
-                # 设置表格内容
-                self.tableWidget.setItem(i, 0, QTableWidgetItem(str(result.id)))
-                self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
-                self.tableWidget.setItem(i, 2, QTableWidgetItem(
-                    result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''))
-                self.tableWidget.setItem(i, 3, QTableWidgetItem(str(result.stress_score)))  # 普通应激分数
-                self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.depression_score)))  # 抑郁分数
-                self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.anxiety_score)))  # 焦虑分数
+                    # 设置表格项
+                    self.tableWidget.setItem(i, 0, QTableWidgetItem(str(result.id)))
+                    self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
+                    self.tableWidget.setItem(i, 2, QTableWidgetItem(
+                        result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''))
+                    
+                    # 获取数据路径
+                    data = session.query(Data).filter(Data.id == result.id).first()
+                    if data:
+                        # 只显示路径的最后一部分
+                        display_path = os.path.basename(data.data_path)
+                        path_item = QTableWidgetItem(display_path)
+                        path_item.setToolTip(data.data_path)  # 设置完整路径为工具提示
+                    else:
+                        path_item = QTableWidgetItem("数据不存在")
+                    self.tableWidget.setItem(i, 3, path_item)
+                    
+                    self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.stress_score)))  # 普通应激分数
+                    self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.depression_score)))  # 抑郁分数
+                    self.tableWidget.setItem(i, 6, QTableWidgetItem(str(result.anxiety_score)))  # 焦虑分数
 
-                # 添加操作按钮
-                self.tableWidget.setCellWidget(i, 6, self.buttonForRow(i))
+                    # 添加操作按钮
+                    self.tableWidget.setCellWidget(i, 7, self.buttonForRow(i))
+
+                except Exception as e:
+                    logging.error(f"Error processing result {result.id}: {str(e)}")
+                    continue
 
             # 启用表格滚动
-            self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-            
-            # 更新当前评估结果显示
-            self.update_current_status()
+            self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+            self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
 
+            logging.info(f"Successfully displayed {len(results)} results in table")
+            
         except Exception as e:
-            logging.error(f"Error displaying results table: {str(e)}")
-            QMessageBox.critical(self, "错误", f"显示结果表格失败：{str(e)}")
+            logging.error(f"Error showing table: {str(e)}")
+            QMessageBox.critical(self, "错误", f"显示结果表格时发生错误：{str(e)}")
         finally:
             session.close()
 
