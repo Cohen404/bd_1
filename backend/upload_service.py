@@ -23,22 +23,6 @@ os.makedirs('../log', exist_ok=True)
 
 app = Flask(__name__)
 
-# 配置日志
-logging.basicConfig(
-    filename='../log/log.txt',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(username)s - %(message)s'
-)
-
-# 从环境变量获取IP白名单，如果没有则使用默认值
-try:
-    ALLOWED_IPS = set(json.loads(os.environ.get('ALLOWED_IPS', '["127.0.0.1"]')))
-    username = os.environ.get('USERNAME', 'system')
-except json.JSONDecodeError:
-    ALLOWED_IPS = {'127.0.0.1'}
-    username = 'system'
-    logging.error("Failed to parse ALLOWED_IPS from environment, using default")
-
 # 添加用户名过滤器
 class UsernameFilter(logging.Filter):
     def __init__(self, username):
@@ -49,9 +33,44 @@ class UsernameFilter(logging.Filter):
         record.username = self.username
         return True
 
-# 设置用户名
-logger = logging.getLogger()
+# 配置日志
+def setup_logger():
+    """配置日志系统"""
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    
+    # 清除现有的处理器
+    logger.handlers.clear()
+    
+    # 创建文件处理器
+    file_handler = logging.FileHandler('../log/log.txt')
+    file_handler.setLevel(logging.INFO)
+    
+    # 创建格式化器
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(username)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    
+    # 添加处理器到logger
+    logger.addHandler(file_handler)
+    
+    return logger
+
+# 从环境变量获取IP白名单和用户名，如果没有则使用默认值
+try:
+    ALLOWED_IPS = set(json.loads(os.environ.get('ALLOWED_IPS', '["127.0.0.1"]')))
+    username = os.environ.get('USERNAME', 'system')
+except json.JSONDecodeError:
+    ALLOWED_IPS = {'127.0.0.1'}
+    username = 'system'
+    logging.error("Failed to parse ALLOWED_IPS from environment, using default")
+
+# 设置日志系统
+logger = setup_logger()
 logger.addFilter(UsernameFilter(username))
+
+# 设置Werkzeug日志
+werkzeug_logger = logging.getLogger('werkzeug')
+werkzeug_logger.addFilter(UsernameFilter(username))
 
 def get_client_ip():
     """获取客户端真实IP地址"""

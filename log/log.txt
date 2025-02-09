@@ -3014,3 +3014,204 @@ Exception: Failed to get test data
 2025-02-09 16:40:07,859 - INFO - admin - admin001 - Upload service stopped on return to index
 2025-02-09 16:40:07,861 - INFO - admin - Opening Admin page.
 2025-02-09 16:40:07,861 - INFO - admin - Returned to index page successfully
+2025-02-09 16:42:22,725 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:42:23,093 - INFO - 初始化登录界面...
+2025-02-09 16:42:23,095 - INFO - 开始预加载模型...
+2025-02-09 16:42:23,095 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:42:23,097 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:42:23,097 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:42:23,098 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:42:23,099 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:42:23,099 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:42:23,100 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:42:23,201 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:42:23,202 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:42:23,202 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:42:23,202 - INFO - 成功预加载量化模型
+2025-02-09 16:42:24,297 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:42:24,363 - INFO - admin - Opening Login page.
+2025-02-09 16:42:27,078 - INFO - admin - User logged in successfully
+2025-02-09 16:42:27,123 - INFO - admin - Opening Admin page.
+2025-02-09 16:42:28,332 - INFO - admin - Opening parameter control page.
+2025-02-09 16:42:28,429 - INFO - admin - Opening Param Control page.
+2025-02-09 16:42:30,238 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:42:41,822 - INFO - admin - admin001 - Upload service stopped on return to index
+2025-02-09 16:42:41,830 - INFO - admin - Opening Admin page.
+2025-02-09 16:42:41,830 - INFO - admin - Returned to index page successfully
+2025-02-09 16:42:43,059 - INFO - admin - Opening log management page.
+2025-02-09 16:42:43,148 - INFO - admin - Opening Log Manage page.
+2025-02-09 16:42:59,165 - INFO - admin - Opening Admin page.
+2025-02-09 16:42:59,166 - INFO - admin - Returned to index page successfully
+2025-02-09 16:44:28,133 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:44:28,581 - INFO - 初始化登录界面...
+2025-02-09 16:44:28,583 - INFO - 开始预加载模型...
+2025-02-09 16:44:28,583 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:44:28,586 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:44:28,586 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:44:28,587 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:44:28,588 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:44:28,588 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:44:28,589 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:44:28,690 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:44:28,690 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:44:28,691 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:44:28,691 - INFO - 成功预加载量化模型
+2025-02-09 16:44:29,515 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:44:29,629 - INFO - admin - Opening Login page.
+2025-02-09 16:44:32,272 - INFO - admin - User logged in successfully
+2025-02-09 16:44:32,339 - INFO - admin - Opening Admin page.
+2025-02-09 16:44:33,734 - INFO - admin - Opening parameter control page.
+2025-02-09 16:44:33,812 - INFO - admin - Opening Param Control page.
+2025-02-09 16:44:35,000 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:46:49,883 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:47:12,858 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:47:13,228 - INFO - 初始化登录界面...
+2025-02-09 16:47:13,231 - INFO - 开始预加载模型...
+2025-02-09 16:47:13,231 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:47:13,235 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:47:13,235 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:47:13,236 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:47:13,237 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:47:13,238 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:47:13,239 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:47:13,381 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:47:13,382 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:47:13,383 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:47:13,383 - INFO - 成功预加载量化模型
+2025-02-09 16:47:14,270 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:47:14,377 - INFO - admin - Opening Login page.
+2025-02-09 16:47:17,284 - INFO - user1 - User logged in successfully
+2025-02-09 16:47:17,360 - INFO - user1 - Opening Index page.
+2025-02-09 16:47:19,171 - INFO - user1 - Data table refreshed successfully with 0 records
+2025-02-09 16:47:19,171 - INFO - user1 - Opening data view page.
+2025-02-09 16:47:19,261 - INFO - user1 - Opening Data View page.
+2025-02-09 16:47:20,166 - INFO - user1 - Opening Index page.
+2025-02-09 16:47:20,166 - INFO - user1 - Returned to index page successfully
+2025-02-09 16:47:20,664 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-09 16:47:20,664 - INFO - user1 - Successfully displayed 0 data records
+2025-02-09 16:47:20,666 - INFO - user1 - Opening health evaluation page.
+2025-02-09 16:47:20,761 - INFO - user1 - Opening Health Evaluate page.
+2025-02-09 16:47:21,444 - INFO - user1 - Opening Index page.
+2025-02-09 16:47:21,444 - INFO - user1 - Returned to index page successfully
+2025-02-09 16:47:21,852 - INFO - user1 - Returning to login page.
+2025-02-09 16:47:21,896 - INFO - user1 - Opening Login page.
+2025-02-09 16:47:24,943 - INFO - admin - User logged in successfully
+2025-02-09 16:47:24,963 - INFO - admin - Opening Admin page.
+2025-02-09 16:47:26,242 - INFO - user1 - Opening log management page.
+2025-02-09 16:47:26,270 - INFO - admin - Opening Log Manage page.
+2025-02-09 16:47:29,127 - INFO - admin - Opening Admin page.
+2025-02-09 16:47:29,128 - INFO - user1 - Returned to index page successfully
+2025-02-09 16:47:29,961 - INFO - user1 - Opening parameter control page.
+2025-02-09 16:47:30,060 - INFO - admin - Opening Param Control page.
+2025-02-09 16:47:31,500 - INFO - user1 - admin001 - Started upload service
+2025-02-09 16:49:15,223 - INFO - user1 - admin001 - Upload service stopped on window close
+2025-02-09 16:49:18,933 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:49:19,287 - INFO - 初始化登录界面...
+2025-02-09 16:49:19,290 - INFO - 开始预加载模型...
+2025-02-09 16:49:19,290 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:49:19,292 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:49:19,292 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:49:19,293 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:49:19,293 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:49:19,294 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:49:19,295 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:49:19,405 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:49:19,407 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:49:19,408 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:49:19,408 - INFO - 成功预加载量化模型
+2025-02-09 16:49:20,238 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:49:20,342 - INFO - admin - Opening Login page.
+2025-02-09 16:49:22,870 - INFO - admin - User logged in successfully
+2025-02-09 16:49:22,943 - INFO - admin - Opening Admin page.
+2025-02-09 16:49:24,275 - INFO - admin - Opening parameter control page.
+2025-02-09 16:49:24,359 - INFO - admin - Opening Param Control page.
+2025-02-09 16:49:25,230 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:50:14,025 - INFO - admin - admin001 - Upload service stopped on window close
+2025-02-09 16:50:18,633 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:50:19,024 - INFO - 初始化登录界面...
+2025-02-09 16:50:19,028 - INFO - 开始预加载模型...
+2025-02-09 16:50:19,028 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:50:19,030 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:50:19,030 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:50:19,031 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:50:19,032 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:50:19,032 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:50:19,033 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:50:19,133 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:50:19,135 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:50:19,135 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:50:19,136 - INFO - 成功预加载量化模型
+2025-02-09 16:50:20,593 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:50:20,675 - INFO - admin - Opening Login page.
+2025-02-09 16:50:23,723 - INFO - admin - User logged in successfully
+2025-02-09 16:50:23,842 - INFO - admin - Opening Admin page.
+2025-02-09 16:50:26,612 - INFO - admin - Opening parameter control page.
+2025-02-09 16:50:26,691 - INFO - admin - Opening Param Control page.
+2025-02-09 16:50:27,536 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:50:34,071 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:50:40,617 - INFO - admin - Opening Admin page.
+2025-02-09 16:50:40,618 - INFO - admin - Returned to index page successfully
+2025-02-09 16:50:41,569 - INFO - admin - Opening log management page.
+2025-02-09 16:50:41,658 - INFO - admin - Opening Log Manage page.
+2025-02-09 16:50:46,841 - INFO - admin - Opening Admin page.
+2025-02-09 16:50:46,841 - INFO - admin - Returned to index page successfully
+2025-02-09 16:50:47,459 - INFO - admin - Successfully displayed 1 results in table
+2025-02-09 16:50:47,459 - INFO - admin - Opening results view page.
+2025-02-09 16:50:47,558 - INFO - admin - Opening Results View page.
+2025-02-09 16:50:48,585 - INFO - admin - Opening Admin page.
+2025-02-09 16:50:48,585 - INFO - admin - Returned to index page successfully
+2025-02-09 16:50:49,449 - INFO - admin - Data table refreshed successfully with 7 records
+2025-02-09 16:50:49,450 - INFO - admin - Opening data view page.
+2025-02-09 16:50:49,496 - INFO - admin - Opening Data View page.
+2025-02-09 16:50:54,834 - INFO - admin - Opening Admin page.
+2025-02-09 16:50:54,834 - INFO - admin - Returned to index page successfully
+2025-02-09 16:50:58,562 - INFO - admin - Data table refreshed successfully with 7 records
+2025-02-09 16:50:58,562 - INFO - admin - Opening data view page.
+2025-02-09 16:50:58,611 - INFO - admin - Opening Data View page.
+2025-02-09 16:51:02,034 - INFO - admin - Attempting to delete 7 records from the table.
+2025-02-09 16:51:02,061 - INFO - admin - Data path for ID 1: ../data/control_2_1
+2025-02-09 16:51:02,062 - INFO - admin - Deleted folder at path: ../data/control_2_1
+2025-02-09 16:51:02,069 - INFO - admin - Deleted record with ID 1 from tb_data.
+2025-02-09 16:51:02,071 - INFO - admin - Deleted record with ID 1 from result table.
+2025-02-09 16:51:02,072 - INFO - admin - Data path for ID 2: ../data/control_2_2
+2025-02-09 16:51:02,072 - INFO - admin - Deleted folder at path: ../data/control_2_2
+2025-02-09 16:51:02,074 - INFO - admin - Deleted record with ID 2 from tb_data.
+2025-02-09 16:51:02,074 - INFO - admin - Deleted record with ID 2 from result table.
+2025-02-09 16:51:02,075 - INFO - admin - Data path for ID 3: ../data/control_2_3
+2025-02-09 16:51:02,075 - INFO - admin - Deleted folder at path: ../data/control_2_3
+2025-02-09 16:51:02,077 - INFO - admin - Deleted record with ID 3 from tb_data.
+2025-02-09 16:51:02,077 - INFO - admin - Deleted record with ID 3 from result table.
+2025-02-09 16:51:02,078 - INFO - admin - Data path for ID 4: ../data/control_2_4
+2025-02-09 16:51:02,078 - INFO - admin - Deleted folder at path: ../data/control_2_4
+2025-02-09 16:51:02,080 - INFO - admin - Deleted record with ID 4 from tb_data.
+2025-02-09 16:51:02,080 - INFO - admin - Deleted record with ID 4 from result table.
+2025-02-09 16:51:02,081 - INFO - admin - Data path for ID 5: ../data/control_2_5
+2025-02-09 16:51:02,081 - INFO - admin - Deleted folder at path: ../data/control_2_5
+2025-02-09 16:51:02,083 - INFO - admin - Deleted record with ID 5 from tb_data.
+2025-02-09 16:51:02,083 - INFO - admin - Deleted record with ID 5 from result table.
+2025-02-09 16:51:02,084 - INFO - admin - Data path for ID 6: ../data/control_2_6
+2025-02-09 16:51:02,084 - INFO - admin - Deleted folder at path: ../data/control_2_6
+2025-02-09 16:51:02,085 - INFO - admin - Deleted record with ID 6 from tb_data.
+2025-02-09 16:51:02,086 - INFO - admin - Deleted record with ID 6 from result table.
+2025-02-09 16:51:02,086 - INFO - admin - Data path for ID 7: ../data/control_2_7
+2025-02-09 16:51:02,087 - INFO - admin - Deleted folder at path: ../data/control_2_7
+2025-02-09 16:51:02,088 - INFO - admin - Deleted record with ID 7 from tb_data.
+2025-02-09 16:51:02,089 - INFO - admin - Deleted record with ID 7 from result table.
+2025-02-09 16:51:02,124 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-09 16:51:03,770 - INFO - admin - Opening Admin page.
+2025-02-09 16:51:03,770 - INFO - admin - Returned to index page successfully
+2025-02-09 16:51:04,750 - INFO - admin - Administrator admin: fetching all data records
+2025-02-09 16:51:04,750 - INFO - admin - Successfully displayed 0 data records
+2025-02-09 16:51:04,752 - INFO - admin - Opening health evaluation page.
+2025-02-09 16:51:04,858 - INFO - admin - Opening Health Evaluate page.
+2025-02-09 16:51:05,828 - INFO - admin - Opening Admin page.
+2025-02-09 16:51:05,828 - INFO - admin - Returned to index page successfully
+2025-02-09 16:51:06,449 - INFO - admin - Successfully displayed 0 results in table
+2025-02-09 16:51:06,449 - INFO - admin - Opening results view page.
+2025-02-09 16:51:06,542 - INFO - admin - Opening Results View page.
+2025-02-09 16:51:07,234 - INFO - admin - Opening Admin page.
+2025-02-09 16:51:07,234 - INFO - admin - Returned to index page successfully
+2025-02-09 16:51:08,414 - INFO - admin - Opening model control page.
+2025-02-09 16:51:08,509 - INFO - admin - Opening Model Control page.
+2025-02-09 16:51:10,141 - INFO - admin - Opening Admin page.
+2025-02-09 16:51:10,141 - INFO - admin - Returned to index page successfully
