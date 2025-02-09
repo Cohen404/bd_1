@@ -11,10 +11,12 @@ from datetime import datetime
 from functools import partial
 from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QRadioButton, QTableWidgetItem, QWidget, QPushButton, QHBoxLayout, \
-    QMessageBox, QFileDialog, QInputDialog, QProgressDialog
+    QMessageBox, QFileDialog, QInputDialog, QProgressDialog, QListWidgetItem
 import shutil
 import subprocess
 import zipfile
+import re
+import requests
 from front.model_manage_UI import Ui_model_Control
 from backend import admin_index_backend, index_backend
 from state import operate_user
@@ -32,6 +34,7 @@ from config import (
     MODEL_STATUS_FILE,
     DATA_DIR
 )
+import json
 
 # 定义备份目录
 BACKUP_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.backup')
@@ -293,6 +296,199 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         window_manager = WindowManager()
         window_manager.register_window('param_control', self)
 
+        self._admin_window = None
+        self.upload_service_process = None
+        self.ip_whitelist = {'127.0.0.1'}  # 默认包含localhost
+        
+        # 获取当前用户名
+        with open(CURRENT_USER_FILE, 'r') as f:
+            self.username = f.read().strip()
+        
+        # 连接上传服务控制按钮事件
+        self.service_toggle_btn.clicked.connect(self.toggle_upload_service)
+        self.add_ip_btn.clicked.connect(self.add_ip_to_whitelist)
+        self.delete_ip_btn.clicked.connect(self.delete_selected_ip)  # 连接删除按钮事件
+        
+        # 允许删除IP白名单中的项目
+        self.ip_list.itemDoubleClicked.connect(self.remove_ip_from_whitelist)
+        
+        # 初始化IP白名单显示
+        self.refresh_ip_list()
+        
+        # 显示参数
+        self.SHOWUi()
+
+    def is_valid_ip(self, ip):
+        """
+        验证IP地址格式是否正确
+        
+        参数:
+        ip (str): IP地址
+        
+        返回:
+        bool: IP地址是否有效
+        """
+        pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
+        if not re.match(pattern, ip):
+            return False
+        
+        # 检查每个数字是否在0-255范围内
+        parts = ip.split('.')
+        return all(0 <= int(part) <= 255 for part in parts)
+
+    def add_ip_to_whitelist(self):
+        """添加IP到白名单"""
+        ip = self.ip_input.text().strip()
+        
+        if not ip:
+            QMessageBox.warning(self, "警告", "请输入IP地址")
+            return
+            
+        if not self.is_valid_ip(ip):
+            QMessageBox.warning(self, "警告", "请输入有效的IP地址")
+            return
+            
+        if ip in self.ip_whitelist:
+            QMessageBox.warning(self, "警告", "该IP已在白名单中")
+            return
+            
+        self.ip_whitelist.add(ip)
+        self.refresh_ip_list()
+        self.ip_input.clear()
+        
+        # 如果服务正在运行，更新服务的白名单
+        self.update_service_whitelist()
+        
+        logging.info(f"{self.username} - Added IP {ip} to whitelist")
+
+    def remove_ip_from_whitelist(self, item):
+        """
+        从白名单中删除IP
+        
+        参数:
+        item (QListWidgetItem): 列表项
+        """
+        ip = item.text()
+        reply = QMessageBox.question(self, '确认', f'确定要删除IP {ip} 吗？',
+                                   QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                                   
+        if reply == QMessageBox.Yes:
+            self.ip_whitelist.remove(ip)
+            self.refresh_ip_list()
+            
+            # 如果服务正在运行，更新服务的白名单
+            self.update_service_whitelist()
+            
+            logging.info(f"{self.username} - Removed IP {ip} from whitelist")
+
+    def refresh_ip_list(self):
+        """刷新IP白名单显示"""
+        self.ip_list.clear()
+        for ip in sorted(self.ip_whitelist):
+            item = QListWidgetItem(ip)
+            self.ip_list.addItem(item)
+
+    def update_service_whitelist(self):
+        """更新运行中的上传服务的IP白名单"""
+        if self.upload_service_process is not None:
+            try:
+                response = requests.post('http://localhost:5000/api/update_whitelist', 
+                                      json={'whitelist': list(self.ip_whitelist)})
+                if response.status_code == 200:
+                    logging.info(f"{self.username} - Updated upload service whitelist")
+                else:
+                    logging.error(f"{self.username} - Failed to update upload service whitelist")
+            except Exception as e:
+                logging.error(f"{self.username} - Error updating whitelist: {str(e)}")
+
+    def toggle_upload_service(self):
+        """切换上传服务的开启/关闭状态"""
+        if self.upload_service_process is None:
+            # 启动服务
+            try:
+                # 准备环境变量
+                env = os.environ.copy()
+                # 将IP白名单转换为JSON字符串并通过环境变量传递
+                env['ALLOWED_IPS'] = json.dumps(list(self.ip_whitelist))
+                env['LOG_FILE'] = LOG_FILE
+                env['USERNAME'] = self.username
+                
+                # 启动上传服务进程
+                cmd = [sys.executable, 'backend/upload_service.py']
+                self.upload_service_process = subprocess.Popen(
+                    cmd,
+                    env=env
+                )
+                
+                self.service_toggle_btn.setText('关闭服务')
+                self.service_toggle_btn.setStyleSheet("""
+                    QPushButton {
+                        font-size: 20px;
+                        height: 60px;
+                        width: 180px;
+                        color: white;
+                        background-color: rgb(215, 0, 0);
+                        border-radius: 10px;
+                    }
+                    QPushButton:hover {
+                        background-color: rgb(195, 0, 0);
+                    }
+                """)
+                
+                logging.info(f"{self.username} - Started upload service")
+                QMessageBox.information(self, "成功", "上传服务已启动")
+                
+            except Exception as e:
+                logging.error(f"{self.username} - Failed to start upload service: {str(e)}")
+                QMessageBox.critical(self, "错误", f"启动上传服务失败：{str(e)}")
+                self.upload_service_process = None
+                
+        else:
+            # 关闭服务
+            try:
+                self.upload_service_process.terminate()
+                self.upload_service_process = None
+                
+                self.service_toggle_btn.setText('开启服务')
+                self.service_toggle_btn.setStyleSheet("""
+                    QPushButton {
+                        font-size: 20px;
+                        height: 60px;
+                        width: 180px;
+                        color: white;
+                        background-color: rgb(0, 120, 215);
+                        border-radius: 10px;
+                    }
+                    QPushButton:hover {
+                        background-color: rgb(0, 100, 195);
+                    }
+                """)
+                
+                logging.info(f"{self.username} - Stopped upload service")
+                QMessageBox.information(self, "成功", "上传服务已关闭")
+                
+            except Exception as e:
+                logging.error(f"{self.username} - Failed to stop upload service: {str(e)}")
+                QMessageBox.critical(self, "错误", f"关闭上传服务失败：{str(e)}")
+
+    def closeEvent(self, event):
+        """
+        窗口关闭事件处理
+        
+        参数:
+        event: 关闭事件
+        """
+        # 关闭上传服务
+        if self.upload_service_process is not None:
+            try:
+                self.upload_service_process.terminate()
+                self.upload_service_process = None
+                logging.info(f"{self.username} - Upload service stopped on window close")
+            except Exception as e:
+                logging.error(f"{self.username} - Error stopping upload service on window close: {str(e)}")
+        
+        event.accept()
+
     def show_progress_dialog(self, title, label_text, duration_ms=600000):  # 10分钟 = 600000毫秒
         """
         显示进度对话框
@@ -491,6 +687,15 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         user_status = operate_user.read(path)
         
         try:
+            # 关闭上传服务
+            if self.upload_service_process is not None:
+                try:
+                    self.upload_service_process.terminate()
+                    self.upload_service_process = None
+                    logging.info(f"{self.username} - Upload service stopped on return to index")
+                except Exception as e:
+                    logging.error(f"{self.username} - Error stopping upload service on return to index: {str(e)}")
+
             window_manager = WindowManager()
             if user_status == '1':  # 管理员
                 # 检查是否已存在admin窗口
@@ -584,3 +789,13 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
             QMessageBox.critical(self, "错误", f"加载参数时发生错误：{str(e)}")
         finally:
             session.close()
+
+    def delete_selected_ip(self):
+        """删除选中的IP地址"""
+        selected_items = self.ip_list.selectedItems()
+        if not selected_items:
+            QMessageBox.warning(self, "警告", "请先选择要删除的IP地址")
+            return
+            
+        item = selected_items[0]  # 获取选中的项
+        self.remove_ip_from_whitelist(item)

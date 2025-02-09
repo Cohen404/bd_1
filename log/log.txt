@@ -2623,3 +2623,394 @@ TypeError: PDF.__init__() takes 1 positional argument but 3 were given
 2025-02-06 12:13:38,994 - INFO - admin - 成功打开报告文件: /home/jupiter/bj_health_manage/data/results/report_291.pdf
 2025-02-06 12:14:07,356 - INFO - admin - Opening Admin page.
 2025-02-06 12:14:07,356 - INFO - admin - Returned to index page successfully
+2025-02-09 15:46:38,379 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 15:46:38,778 - INFO - 初始化登录界面...
+2025-02-09 15:46:38,781 - INFO - 开始预加载模型...
+2025-02-09 15:46:38,781 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 15:46:38,784 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 15:46:38,784 - INFO - 模型文件存在，开始加载...
+2025-02-09 15:46:38,784 - INFO - 开始加载INT8量化模型...
+2025-02-09 15:46:38,785 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 15:46:38,786 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 15:46:38,787 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 15:46:38,894 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 15:46:38,894 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 15:46:38,895 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 15:46:38,895 - INFO - 成功预加载量化模型
+2025-02-09 15:46:47,377 - INFO - 未登录 - Opening user login page.
+2025-02-09 15:46:47,407 - INFO - admin - Opening Login page.
+2025-02-09 15:46:50,488 - INFO - admin - User logged in successfully
+2025-02-09 15:46:50,548 - INFO - admin - Opening Admin page.
+2025-02-09 15:47:45,876 - ERROR - admin - Error loading parameters: (psycopg2.errors.UndefinedColumn) column tb_system_params.upload_service_enabled does not exist
+LINE 1: ...m_params.model_num AS tb_system_params_model_num, tb_system_...
+                                                             ^
+
+[SQL: SELECT tb_system_params.param_id AS tb_system_params_param_id, tb_system_params.eeg_frequency AS tb_system_params_eeg_frequency, tb_system_params.electrode_count AS tb_system_params_electrode_count, tb_system_params.scale_question_num AS tb_system_params_scale_question_num, tb_system_params.model_num AS tb_system_params_model_num, tb_system_params.upload_service_enabled AS tb_system_params_upload_service_enabled, tb_system_params.id AS tb_system_params_id 
+FROM tb_system_params 
+WHERE tb_system_params.id = %(id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'id_1': 1, 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-09 15:47:49,470 - INFO - admin - Opening parameter control page.
+2025-02-09 15:47:49,483 - INFO - admin - Opening Param Control page.
+2025-02-09 15:49:49,326 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 15:49:49,694 - INFO - 初始化登录界面...
+2025-02-09 15:49:49,697 - INFO - 开始预加载模型...
+2025-02-09 15:49:49,697 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 15:49:49,700 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 15:49:49,700 - INFO - 模型文件存在，开始加载...
+2025-02-09 15:49:49,701 - INFO - 开始加载INT8量化模型...
+2025-02-09 15:49:49,701 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 15:49:49,702 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 15:49:49,703 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 15:49:49,778 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 15:49:49,779 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 15:49:49,779 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 15:49:49,779 - INFO - 成功预加载量化模型
+2025-02-09 15:50:30,615 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 15:50:30,982 - INFO - 初始化登录界面...
+2025-02-09 15:50:30,984 - INFO - 开始预加载模型...
+2025-02-09 15:50:30,988 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 15:50:30,990 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji.keras
+2025-02-09 15:50:30,990 - ERROR - 模型文件不存在: ./model/yingji/subject-1 yingji.keras
+2025-02-09 15:50:31,911 - INFO - 未登录 - Opening user login page.
+2025-02-09 15:50:32,030 - INFO - admin - Opening Login page.
+2025-02-09 15:50:34,828 - INFO - admin - User logged in successfully
+2025-02-09 15:50:34,891 - INFO - admin - Opening Admin page.
+2025-02-09 15:50:35,920 - INFO - admin - Opening parameter control page.
+2025-02-09 15:50:36,012 - INFO - admin - Opening Param Control page.
+2025-02-09 16:20:44,054 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:20:44,414 - INFO - 初始化登录界面...
+2025-02-09 16:20:44,416 - INFO - 开始预加载模型...
+2025-02-09 16:20:44,416 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:20:44,419 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji.keras
+2025-02-09 16:20:44,419 - ERROR - 模型文件不存在: ./model/yingji/subject-1 yingji.keras
+2025-02-09 16:20:45,255 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:20:45,309 - INFO - admin - Opening Login page.
+2025-02-09 16:20:47,941 - INFO - admin - User logged in successfully
+2025-02-09 16:20:48,004 - INFO - admin - Opening Admin page.
+2025-02-09 16:20:49,288 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-09 16:20:49,289 - INFO - admin - Opening data view page.
+2025-02-09 16:20:49,392 - INFO - admin - Opening Data View page.
+2025-02-09 16:20:51,223 - INFO - admin - Opening Admin page.
+2025-02-09 16:20:51,223 - INFO - admin - Returned to index page successfully
+2025-02-09 16:22:06,964 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:22:07,320 - INFO - 初始化登录界面...
+2025-02-09 16:22:07,322 - INFO - 开始预加载模型...
+2025-02-09 16:22:07,322 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:22:07,325 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1 yingji.keras
+2025-02-09 16:22:07,325 - ERROR - 模型文件不存在: ./model/yingji/subject-1 yingji.keras
+2025-02-09 16:22:08,583 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:22:08,602 - INFO - admin - Opening Login page.
+2025-02-09 16:22:11,919 - INFO - admin - User logged in successfully
+2025-02-09 16:22:12,043 - INFO - admin - Opening Admin page.
+2025-02-09 16:22:12,923 - INFO - admin - Opening parameter control page.
+2025-02-09 16:22:13,041 - INFO - admin - Opening Param Control page.
+2025-02-09 16:22:16,734 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:23:05,615 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:23:07,209 - INFO - admin - Opening Admin page.
+2025-02-09 16:23:07,209 - INFO - admin - Returned to index page successfully
+2025-02-09 16:23:08,390 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-09 16:23:08,391 - INFO - admin - Opening data view page.
+2025-02-09 16:23:08,475 - INFO - admin - Opening Data View page.
+2025-02-09 16:23:10,007 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-02-09 16:23:10,009 - INFO - admin - Data path retrieved from database: ../data/control_2_1
+2025-02-09 16:23:11,041 - INFO - admin - Successfully displayed image: ../data/control_2_1/Theta.png
+2025-02-09 16:23:13,049 - INFO - admin - Started processing data from: ../data/control_2_1
+2025-02-09 16:23:13,124 - ERROR - admin - 数据预处理失败: cannot reshape array of size 0 into shape (59,1000)
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_preprocess.py", line 51, in treat
+    epochs.save(save_dir, overwrite=True)
+  File "<decorator-gen-224>", line 12, in save
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 2263, in save
+    _save_split(this_epochs, split_fnames, part_idx, n_parts, fmt, overwrite)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 138, in _save_split
+    _save_part(fid, epochs, fmt, n_parts, next_fname, next_idx)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 158, in _save_part
+    data = epochs.get_data(copy=False)
+  File "<decorator-gen-221>", line 12, in get_data
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 1916, in get_data
+    return self._get_data(
+  File "<decorator-gen-220>", line 12, in _get_data
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 1703, in _get_data
+    epoch_noproj = self._get_epoch_from_raw(idx)
+  File "<decorator-gen-235>", line 12, in _get_epoch_from_raw
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 4110, in _get_epoch_from_raw
+    data.shape = raw.epoch_shape
+ValueError: cannot reshape array of size 0 into shape (59,1000)
+
+2025-02-09 16:23:13,129 - ERROR - admin - 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 77, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in /home/jupiter/bj_health_manage/../data/control_2_1/fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_manage_backend.py", line 1156, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 304, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 82, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-09 16:23:13,143 - ERROR - admin - Error during processing: 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 77, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in /home/jupiter/bj_health_manage/../data/control_2_1/fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/data_manage_backend.py", line 1156, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 304, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "/home/jupiter/bj_health_manage/backend/data_feature_calculation.py", line 82, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-09 16:23:31,210 - INFO - admin - Opening Admin page.
+2025-02-09 16:23:31,210 - INFO - admin - Returned to index page successfully
+2025-02-09 16:23:31,805 - INFO - admin - Administrator admin: fetching all data records
+2025-02-09 16:23:31,806 - INFO - admin - Successfully displayed 1 data records
+2025-02-09 16:23:31,809 - INFO - admin - Opening health evaluation page.
+2025-02-09 16:23:31,891 - INFO - admin - Opening Health Evaluate page.
+2025-02-09 16:23:37,609 - INFO - admin - Opening model control page.
+2025-02-09 16:23:37,644 - INFO - admin - Opening Model Control page.
+2025-02-09 16:23:38,406 - INFO - admin - Opening Admin page.
+2025-02-09 16:23:38,407 - INFO - admin - Returned to index page successfully
+2025-02-09 16:23:39,950 - INFO - admin - Opening model control page.
+2025-02-09 16:23:40,023 - INFO - admin - Opening Model Control page.
+2025-02-09 16:23:46,156 - INFO - admin - Selected model type: 普通应激评估模型 (Index: 0)
+2025-02-09 16:23:52,808 - INFO - admin - Copied model file to temporary directory: ../tmp/subject-1_yingji_quantized.tflite
+2025-02-09 16:23:52,808 - INFO - admin - Deleted existing model file: ./model/yingji/subject-1_ yingji.keras
+2025-02-09 16:23:52,808 - INFO - admin - Moved model file to: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:23:52,809 - INFO - admin - Updated existing model record for type 普通应激评估模型. New path: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:23:52,811 - INFO - admin - Model upload and database update completed successfully.
+2025-02-09 16:23:52,812 - INFO - admin - Temporary directory cleaned up.
+2025-02-09 16:23:54,756 - INFO - admin - Opening Admin page.
+2025-02-09 16:23:54,757 - INFO - admin - Returned to index page successfully
+2025-02-09 16:23:55,532 - INFO - admin - Administrator admin: fetching all data records
+2025-02-09 16:23:55,533 - INFO - admin - Successfully displayed 1 data records
+2025-02-09 16:23:55,536 - INFO - admin - Opening health evaluation page.
+2025-02-09 16:23:55,623 - INFO - admin - Opening Health Evaluate page.
+2025-02-09 16:23:58,029 - INFO - admin - 开始加载INT8量化模型...
+2025-02-09 16:23:58,029 - INFO - admin - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:23:58,030 - INFO - admin - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:23:58,031 - INFO - admin - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:23:58,137 - INFO - admin - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:23:58,138 - INFO - admin - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:23:58,139 - INFO - admin - 模型加载成功并已放置在GPU上
+2025-02-09 16:23:58,141 - ERROR - admin - 计算量表分数时发生错误: could not convert string to float: 'CB0101'
+2025-02-09 16:23:58,141 - ERROR - admin - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/backend/health_evaluate_backend.py", line 1389, in calculate_scale_scores
+    first_20 = df.iloc[0, :20].values.astype(float)
+ValueError: could not convert string to float: 'CB0101'
+
+2025-02-09 16:23:58,141 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-09 16:23:58,143 - ERROR - admin - Error in get_data: Could not find event data
+2025-02-09 16:23:58,144 - ERROR - admin - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "/home/jupiter/bj_health_manage/venv/lib/python3.10/site-packages/mne/event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-09 16:23:58,145 - ERROR - admin - Error during prediction: Failed to get test data
+2025-02-09 16:23:58,145 - ERROR - admin - Traceback (most recent call last):
+  File "/home/jupiter/bj_health_manage/model/tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-09 16:23:58,145 - INFO - admin - 第一个模型评估结果: 0.0
+2025-02-09 16:23:58,145 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-09 16:23:58,145 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-09 16:23:58,145 - INFO - admin - 抑郁评估结果: 0.0 (量表分数: 无)
+2025-02-09 16:23:58,146 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-09 16:23:58,146 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-09 16:23:58,146 - INFO - admin - 焦虑评估结果: 0.0 (量表分数: 无)
+2025-02-09 16:23:58,222 - INFO - admin - 当前模型索引: 0
+2025-02-09 16:23:58,222 - INFO - admin - 第一个模型的结果: 0.0
+2025-02-09 16:23:58,222 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-09 16:23:59,003 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=0.0, anxiety=0.0
+2025-02-09 16:23:59,006 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=0.0, anxiety=0.0
+2025-02-09 16:24:06,524 - INFO - admin - Opening Admin page.
+2025-02-09 16:24:06,524 - INFO - admin - Returned to index page successfully
+2025-02-09 16:24:07,405 - INFO - admin - Opening log management page.
+2025-02-09 16:24:07,506 - INFO - admin - Opening Log Manage page.
+2025-02-09 16:25:13,089 - INFO - admin - Opening Admin page.
+2025-02-09 16:25:13,090 - INFO - admin - Returned to index page successfully
+2025-02-09 16:25:16,622 - INFO - admin - Opening parameter control page.
+2025-02-09 16:25:16,707 - INFO - admin - Opening Param Control page.
+2025-02-09 16:25:17,442 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:25:18,867 - INFO - admin - Opening Admin page.
+2025-02-09 16:25:18,868 - INFO - admin - admin001 - Upload service stopped on window close
+2025-02-09 16:25:18,868 - INFO - admin - Returned to index page successfully
+2025-02-09 16:25:19,686 - INFO - admin - Opening parameter control page.
+2025-02-09 16:25:19,773 - INFO - admin - Opening Param Control page.
+2025-02-09 16:26:03,379 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:26:23,043 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:26:59,150 - INFO - admin - Opening Admin page.
+2025-02-09 16:26:59,151 - INFO - admin - Returned to index page successfully
+2025-02-09 16:34:40,210 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:34:40,656 - INFO - 初始化登录界面...
+2025-02-09 16:34:40,659 - INFO - 开始预加载模型...
+2025-02-09 16:34:40,660 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:34:40,663 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:34:40,664 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:34:40,665 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:34:40,666 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:34:40,667 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:34:40,668 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:34:40,777 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:34:40,779 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:34:40,779 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:34:40,780 - INFO - 成功预加载量化模型
+2025-02-09 16:34:41,550 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:34:41,652 - INFO - admin - Opening Login page.
+2025-02-09 16:34:44,581 - INFO - admin - User logged in successfully
+2025-02-09 16:34:44,627 - INFO - admin - Opening Admin page.
+2025-02-09 16:34:46,875 - INFO - admin - Opening parameter control page.
+2025-02-09 16:34:46,951 - INFO - admin - Opening Param Control page.
+2025-02-09 16:34:52,207 - INFO - admin - Opening Admin page.
+2025-02-09 16:34:52,207 - INFO - admin - Returned to index page successfully
+2025-02-09 16:36:26,233 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:36:26,593 - INFO - 初始化登录界面...
+2025-02-09 16:36:26,595 - INFO - 开始预加载模型...
+2025-02-09 16:36:26,595 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:36:26,598 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:36:26,598 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:36:26,599 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:36:26,600 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:36:26,601 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:36:26,602 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:36:26,701 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:36:26,702 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:36:26,702 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:36:26,702 - INFO - 成功预加载量化模型
+2025-02-09 16:36:27,743 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:36:27,817 - INFO - admin - Opening Login page.
+2025-02-09 16:36:30,128 - INFO - admin - User logged in successfully
+2025-02-09 16:36:30,193 - INFO - admin - Opening Admin page.
+2025-02-09 16:36:33,396 - INFO - admin - Opening parameter control page.
+2025-02-09 16:36:33,500 - INFO - admin - Opening Param Control page.
+2025-02-09 16:37:59,797 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:38:00,160 - INFO - 初始化登录界面...
+2025-02-09 16:38:00,163 - INFO - 开始预加载模型...
+2025-02-09 16:38:00,163 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:38:00,165 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:38:00,165 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:38:00,166 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:38:00,166 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:38:00,167 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:38:00,168 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:38:00,277 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:38:00,278 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:38:00,279 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:38:00,279 - INFO - 成功预加载量化模型
+2025-02-09 16:38:01,252 - INFO - 未登录 - Opening user login page.
+2025-02-09 16:38:01,332 - INFO - admin - Opening Login page.
+2025-02-09 16:38:04,128 - INFO - admin - User logged in successfully
+2025-02-09 16:38:04,192 - INFO - admin - Opening Admin page.
+2025-02-09 16:38:05,286 - INFO - admin - Opening parameter control page.
+2025-02-09 16:38:05,365 - INFO - admin - Opening Param Control page.
+2025-02-09 16:38:08,643 - INFO - admin - admin001 - Removed IP 127.0.0.1 from whitelist
+2025-02-09 16:38:13,991 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 16:38:14,358 - INFO - 初始化登录界面...
+2025-02-09 16:38:14,360 - INFO - 开始预加载模型...
+2025-02-09 16:38:14,360 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 16:38:14,363 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:38:14,363 - INFO - 模型文件存在，开始加载...
+2025-02-09 16:38:14,363 - INFO - 开始加载INT8量化模型...
+2025-02-09 16:38:14,364 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 16:38:14,364 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 16:38:14,365 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 16:38:14,445 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 16:38:14,446 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 16:38:14,447 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 16:38:14,447 - INFO - 成功预加载量化模型
+2025-02-09 16:38:38,442 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:38:45,169 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:38:50,201 - INFO - admin - admin001 - Added IP 127.0.0.1 to whitelist
+2025-02-09 16:38:56,074 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:39:02,322 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:39:03,772 - INFO - admin - Opening Admin page.
+2025-02-09 16:39:03,772 - INFO - admin - Returned to index page successfully
+2025-02-09 16:39:04,760 - INFO - admin - Opening parameter control page.
+2025-02-09 16:39:04,849 - INFO - admin - Opening Param Control page.
+2025-02-09 16:39:05,450 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:39:06,738 - INFO - admin - admin001 - Upload service stopped on return to index
+2025-02-09 16:39:06,740 - INFO - admin - Opening Admin page.
+2025-02-09 16:39:06,741 - INFO - admin - Returned to index page successfully
+2025-02-09 16:39:08,367 - INFO - admin - Opening parameter control page.
+2025-02-09 16:39:08,449 - INFO - admin - Opening Param Control page.
+2025-02-09 16:39:11,834 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:39:20,762 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 16:39:24,493 - INFO - admin - Opening Admin page.
+2025-02-09 16:39:24,493 - INFO - admin - Returned to index page successfully
+2025-02-09 16:39:25,639 - INFO - admin - Opening parameter control page.
+2025-02-09 16:39:25,715 - INFO - admin - Opening Param Control page.
+2025-02-09 16:39:26,667 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:39:29,386 - INFO - admin - admin001 - Upload service stopped on return to index
+2025-02-09 16:39:29,388 - INFO - admin - Opening Admin page.
+2025-02-09 16:39:29,388 - INFO - admin - Returned to index page successfully
+2025-02-09 16:39:31,952 - INFO - admin - Opening parameter control page.
+2025-02-09 16:39:32,031 - INFO - admin - Opening Param Control page.
+2025-02-09 16:39:33,291 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:39:45,098 - INFO - admin - admin001 - Upload service stopped on return to index
+2025-02-09 16:39:45,100 - INFO - admin - Opening Admin page.
+2025-02-09 16:39:45,101 - INFO - admin - Returned to index page successfully
+2025-02-09 16:39:49,320 - INFO - admin - Opening parameter control page.
+2025-02-09 16:39:49,399 - INFO - admin - Opening Param Control page.
+2025-02-09 16:39:50,323 - INFO - admin - admin001 - Started upload service
+2025-02-09 16:40:07,859 - INFO - admin - admin001 - Upload service stopped on return to index
+2025-02-09 16:40:07,861 - INFO - admin - Opening Admin page.
+2025-02-09 16:40:07,861 - INFO - admin - Returned to index page successfully

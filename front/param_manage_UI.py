@@ -12,6 +12,7 @@ class Ui_param_Control(QWidget):
     负责创建和设置参数控制界面的所有UI元素，包括：
     - 参数设置
     - 系统备份和恢复
+    - 上传服务控制
     """
 
     def __init__(self):
@@ -33,6 +34,7 @@ class Ui_param_Control(QWidget):
         - 创建并设置布局
         - 添加页面头部和参数设置表单
         - 添加系统备份和恢复功能
+        - 添加上传服务控制功能
         """
         # 窗体标题和尺寸
         self.setWindowTitle('长远航作业应激神经系统功能预警评估系统')
@@ -55,7 +57,11 @@ class Ui_param_Control(QWidget):
         layout.addLayout(self.init_table())
         layout.addStretch()
 
-        # 3.创建备份恢复功能
+        # 3.创建上传服务控制布局
+        layout.addLayout(self.init_upload_service_control())
+        layout.addStretch()
+
+        # 4.创建备份恢复功能
         layout.addLayout(self.init_backup_restore())
         layout.addStretch()
 
@@ -117,6 +123,119 @@ class Ui_param_Control(QWidget):
         self.param_layout.addWidget(self.save_button)
         
         return self.param_layout
+
+    def init_upload_service_control(self):
+        """
+        初始化上传服务控制布局
+        
+        返回:
+        upload_service_layout: 上传服务控制布局
+        """
+        upload_service_layout = QVBoxLayout()
+        
+        # 创建标题
+        title_label = QLabel("上传服务控制")
+        title_label.setStyleSheet("font-size: 30px; margin-bottom: 10px;")
+        title_label.setAlignment(Qt.AlignCenter)
+        upload_service_layout.addWidget(title_label)
+        
+        # 创建控制按钮布局
+        control_layout = QHBoxLayout()
+        
+        # 创建开启/关闭按钮
+        self.service_toggle_btn = QPushButton('开启服务')
+        self.service_toggle_btn.setStyleSheet("""
+            QPushButton {
+                font-size: 20px;
+                height: 60px;
+                width: 180px;
+                color: white;
+                background-color: rgb(0, 120, 215);
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(0, 100, 195);
+            }
+        """)
+        control_layout.addWidget(self.service_toggle_btn)
+        
+        # 创建IP白名单输入框和按钮布局
+        ip_layout = QHBoxLayout()
+        
+        # IP输入框
+        self.ip_input = QLineEdit()
+        self.ip_input.setPlaceholderText("输入IP地址（例如：192.168.1.100）")
+        self.ip_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 20px;
+                height: 60px;
+                padding: 0 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+        """)
+        ip_layout.addWidget(self.ip_input)
+        
+        # 添加IP按钮
+        self.add_ip_btn = QPushButton('添加IP')
+        self.add_ip_btn.setStyleSheet("""
+            QPushButton {
+                font-size: 20px;
+                height: 60px;
+                width: 120px;
+                color: white;
+                background-color: rgb(0, 120, 215);
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(0, 100, 195);
+            }
+        """)
+        ip_layout.addWidget(self.add_ip_btn)
+
+        # 删除IP按钮
+        self.delete_ip_btn = QPushButton('删除IP')
+        self.delete_ip_btn.setStyleSheet("""
+            QPushButton {
+                font-size: 20px;
+                height: 60px;
+                width: 120px;
+                color: white;
+                background-color: rgb(215, 0, 0);
+                border-radius: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(195, 0, 0);
+            }
+        """)
+        ip_layout.addWidget(self.delete_ip_btn)
+        
+        # 创建IP白名单显示区域
+        self.ip_list = QListWidget()
+        self.ip_list.setStyleSheet("""
+            QListWidget {
+                font-size: 18px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 5px;
+                background-color: white;
+            }
+            QListWidget::item {
+                padding: 5px;
+                border-bottom: 1px solid #eee;
+            }
+            QListWidget::item:selected {
+                background-color: #e0e0e0;
+            }
+        """)
+        self.ip_list.setMaximumHeight(150)
+        
+        # 添加所有组件到主布局
+        upload_service_layout.addLayout(control_layout)
+        upload_service_layout.addLayout(ip_layout)
+        upload_service_layout.addWidget(self.ip_list)
+        
+        return upload_service_layout
 
     def init_backup_restore(self):
         """
