@@ -3215,3 +3215,32 @@ Exception: Failed to get test data
 2025-02-09 16:51:08,509 - INFO - admin - Opening Model Control page.
 2025-02-09 16:51:10,141 - INFO - admin - Opening Admin page.
 2025-02-09 16:51:10,141 - INFO - admin - Returned to index page successfully
+2025-02-09 21:56:10,193 - INFO - admin - 成功配置GPU: /physical_device:GPU:0
+2025-02-09 21:56:10,536 - INFO - 初始化登录界面...
+2025-02-09 21:56:10,538 - INFO - 开始预加载模型...
+2025-02-09 21:56:10,538 - INFO - 正在检查数据库中的模型信息...
+2025-02-09 21:56:10,540 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 21:56:10,540 - INFO - 模型文件存在，开始加载...
+2025-02-09 21:56:10,541 - INFO - 开始加载INT8量化模型...
+2025-02-09 21:56:10,542 - INFO - 检测到可用GPU: ['/physical_device:GPU:0']
+2025-02-09 21:56:10,542 - INFO - 已配置GPU: /physical_device:GPU:0
+2025-02-09 21:56:10,543 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-09 21:56:10,641 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-09 21:56:10,642 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-09 21:56:10,642 - INFO - 模型加载成功并已放置在GPU上
+2025-02-09 21:56:10,642 - INFO - 成功预加载量化模型
+2025-02-09 21:56:11,540 - INFO - 未登录 - Opening user login page.
+2025-02-09 21:56:11,581 - INFO - admin - Opening Login page.
+2025-02-09 21:56:14,299 - INFO - admin - User logged in successfully
+2025-02-09 21:56:14,357 - INFO - admin - Opening Admin page.
+2025-02-09 21:56:19,335 - INFO - admin - Opening parameter control page.
+2025-02-09 21:56:19,431 - INFO - admin - Opening Param Control page.
+2025-02-09 21:56:20,178 - INFO - admin - admin001 - Started upload service
+2025-02-09 21:56:45,514 - INFO - admin - admin001 - Stopped upload service
+2025-02-09 21:56:47,212 - INFO - admin - Opening Admin page.
+2025-02-09 21:56:47,212 - INFO - admin - Returned to index page successfully
+2025-02-09 21:56:48,121 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-09 21:56:48,122 - INFO - admin - Opening data view page.
+2025-02-09 21:56:48,148 - INFO - admin - Opening Data View page.
+2025-02-09 21:56:51,957 - INFO - admin - Opening Admin page.
+2025-02-09 21:56:51,957 - INFO - admin - Returned to index page successfully

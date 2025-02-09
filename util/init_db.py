@@ -109,7 +109,7 @@ def init_database():
             Model(
                 id=1,
                 model_type=0,
-                model_path='./model/yingji/subject-1 yingji.keras',
+                model_path='./model/yingji/subject-1_yingji_quantized.tflite',
                 create_time=datetime.now()
             ),
             Model(

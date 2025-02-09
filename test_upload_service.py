@@ -35,8 +35,8 @@ def create_test_zip(source_dir, output_zip):
 def test_upload():
     """测试上传接口"""
     url = 'http://localhost:5000/api/upload'
+    test_username = 'admin'  # 使用管理员账号进行测试
     
-    # 1. 测试IP白名单
     print("\n1. 测试IP白名单...")
     # 1.1 测试允许的IP (localhost)
     print("1.1 测试允许的IP (localhost)...")
@@ -46,7 +46,6 @@ def test_upload():
     
     # 1.2 测试不允许的IP
     print("\n1.2 测试不允许的IP...")
-    # 通过设置X-Forwarded-For头来模拟不同的IP
     headers = {'X-Forwarded-For': '192.168.1.200'}  # 一个不在白名单中的IP
     response = requests.post(url, headers=headers)
     print(f"不允许的IP测试响应: {response.status_code}")
@@ -54,13 +53,13 @@ def test_upload():
 
     # 2. 测试无文件上传
     print("\n2. 测试无文件上传...")
-    data = {'user_id': 'admin001'}  # 使用管理员用户ID
+    data = {'username': test_username}
     response = requests.post(url, data=data)
     print(f"无文件测试响应: {response.status_code}")
     print(f"响应内容: {response.json()}")
 
-    # 3. 测试无user_id
-    print("\n3. 测试无user_id...")
+    # 3. 测试无username
+    print("\n3. 测试无username...")
     # 创建临时ZIP文件
     with tempfile.NamedTemporaryFile(suffix='.zip', delete=False) as temp_zip:
         if not create_test_zip('tmp/control_2', temp_zip.name):
@@ -69,13 +68,12 @@ def test_upload():
         
         files = {'file': ('test.zip', open(temp_zip.name, 'rb'))}
         response = requests.post(url, files=files)
-        print(f"无user_id测试响应: {response.status_code}")
+        print(f"无username测试响应: {response.status_code}")
         print(f"响应内容: {response.json()}")
 
     # 4. 测试完整上传流程
     print("\n4. 测试完整上传流程...")
-    # 使用管理员用户ID
-    data = {'user_id': 'admin001'}
+    data = {'username': test_username}
     files = {'file': ('test.zip', open(temp_zip.name, 'rb'))}
     response = requests.post(url, files=files, data=data)
     print(f"完整上传测试响应: {response.status_code}")
@@ -88,5 +86,8 @@ if __name__ == '__main__':
     # 确保测试数据目录存在
     if not os.path.exists('tmp/control_2'):
         print("错误: 测试数据目录 'tmp/control_2' 不存在")
+        logging.error("测试数据目录 'tmp/control_2' 不存在")
     else:
-        test_upload() 
+        logging.info("开始运行上传服务测试...")
+        test_upload()
+        logging.info("上传服务测试完成") 

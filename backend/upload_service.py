@@ -21,8 +21,6 @@ import logging
 # 创建日志目录
 os.makedirs('../log', exist_ok=True)
 
-app = Flask(__name__)
-
 # 添加用户名过滤器
 class UsernameFilter(logging.Filter):
     def __init__(self, username):
@@ -72,6 +70,19 @@ logger.addFilter(UsernameFilter(username))
 werkzeug_logger = logging.getLogger('werkzeug')
 werkzeug_logger.addFilter(UsernameFilter(username))
 
+# 创建Flask应用
+app = Flask(__name__)
+
+# 设置Flask日志
+app.logger.handlers = []  # 清除默认处理器
+for handler in logger.handlers:
+    app.logger.addHandler(handler)
+app.logger.setLevel(logging.INFO)
+app.logger.addFilter(UsernameFilter(username))
+
+# 记录服务启动日志
+logging.info("上传服务已启动，监听IP白名单: " + str(list(ALLOWED_IPS)))
+
 def get_client_ip():
     """获取客户端真实IP地址"""
     # 首先尝试获取X-Forwarded-For头
@@ -85,7 +96,10 @@ def get_client_ip():
 def check_ip_whitelist():
     """检查请求IP是否在白名单中"""
     client_ip = get_client_ip()
-    logging.info(f"Incoming request from IP: {client_ip}")
+    if client_ip in ALLOWED_IPS:
+        logging.info(f"接收到来自白名单IP的请求: {client_ip}")
+    else:
+        logging.warning(f"接收到来自未授权IP的请求: {client_ip}")
     return client_ip in ALLOWED_IPS
 
 def check_user_permission(user_id):
@@ -133,17 +147,19 @@ def update_whitelist():
     try:
         data = request.get_json()
         if not data or 'whitelist' not in data:
+            logging.warning("更新白名单失败：未提供白名单数据")
             return jsonify({'success': False, 'message': 'No whitelist provided'}), 400
             
         whitelist = set(data['whitelist'])
         global ALLOWED_IPS
+        old_ips = ALLOWED_IPS.copy()
         ALLOWED_IPS = whitelist
         
-        logging.info("IP whitelist updated")
+        logging.info(f"IP白名单已更新。原白名单: {list(old_ips)}，新白名单: {list(ALLOWED_IPS)}")
         return jsonify({'success': True, 'message': 'Whitelist updated successfully'}), 200
         
     except Exception as e:
-        logging.error(f"Error updating whitelist: {str(e)}")
+        logging.error(f"更新白名单时发生错误: {str(e)}")
         return jsonify({'success': False, 'message': f'Error updating whitelist: {str(e)}'}), 500
 
 @app.route('/api/upload', methods=['POST'])
@@ -153,7 +169,7 @@ def upload_data():
     
     参数:
     - file: ZIP文件(二进制)
-    - user_id: 用户ID
+    - username: 用户名
     
     返回:
     JSON格式的响应，包含:
@@ -162,9 +178,9 @@ def upload_data():
     - data_path: 字符串，成功时返回数据存储路径
     """
     # 检查IP白名单
+    client_ip = get_client_ip()
     if not check_ip_whitelist():
-        client_ip = get_client_ip()
-        logging.warning(f"Unauthorized IP attempt: {client_ip}")
+        logging.warning(f"未授权的IP地址尝试上传数据: {client_ip}")
         return jsonify({
             'success': False, 
             'message': 'Unauthorized IP address'
@@ -173,29 +189,35 @@ def upload_data():
     try:
         # 验证请求参数
         if 'file' not in request.files:
+            logging.warning(f"来自IP {client_ip} 的请求未包含文件")
             return jsonify({'success': False, 'message': 'No file found'}), 400
         
-        user_id = request.form.get('user_id')
-        if not user_id:
-            return jsonify({'success': False, 'message': 'No user_id provided'}), 400
+        username = request.form.get('username')
+        if not username:
+            logging.warning(f"来自IP {client_ip} 的请求未提供username")
+            return jsonify({'success': False, 'message': 'No username provided'}), 400
 
         # 验证用户权限
-        if not check_user_permission(user_id):
-            return jsonify({'success': False, 'message': 'User not authorized'}), 403
-
-        # 获取用户信息
         session = SessionClass()
-        user = session.query(User).filter(User.user_id == user_id).first()
+        user = session.query(User).filter(User.username == username).first()
         if not user:
             session.close()
+            logging.warning(f"未找到用户 {username} (IP: {client_ip})")
             return jsonify({'success': False, 'message': 'User not found'}), 404
+
+        # 验证用户权限
+        if not check_user_permission(user.user_id):
+            session.close()
+            logging.warning(f"用户 {username} (IP: {client_ip}) 没有上传权限")
+            return jsonify({'success': False, 'message': 'User not authorized'}), 403
 
         # 更新日志用户名
         logger.removeFilter(logger.filters[0])
-        logger.addFilter(UsernameFilter(user.username))
+        logger.addFilter(UsernameFilter(username))
 
         uploaded_file = request.files['file']
         if not uploaded_file.filename.endswith('.zip'):
+            logging.warning(f"用户 {username} (IP: {client_ip}) 尝试上传非ZIP文件: {uploaded_file.filename}")
             return jsonify({'success': False, 'message': 'Only ZIP files are supported'}), 400
 
         # 创建临时目录
@@ -203,10 +225,12 @@ def upload_data():
             # 保存ZIP文件到临时目录
             zip_path = os.path.join(temp_dir, 'upload.zip')
             uploaded_file.save(zip_path)
+            logging.info(f"用户 {username} (IP: {client_ip}) 上传的文件已保存到临时目录")
 
             # 解压ZIP文件到临时目录
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                 zip_ref.extractall(temp_dir)
+                logging.info(f"用户 {username} 的ZIP文件已解压")
 
             # 获取解压后的文件夹名称
             extracted_items = os.listdir(temp_dir)
@@ -217,6 +241,7 @@ def upload_data():
                     break
 
             if not extracted_dir:
+                logging.warning(f"用户 {username} 上传的ZIP文件中没有有效目录")
                 return jsonify({'success': False, 'message': 'No valid directory found in ZIP file'}), 400
 
             # 构建目标路径
@@ -236,6 +261,7 @@ def upload_data():
 
             # 复制文件到目标目录
             shutil.copytree(os.path.join(temp_dir, extracted_dir), target_dir)
+            logging.info(f"用户 {username} 的数据已复制到目标目录: {target_dir}")
 
             try:
                 # 获取最大ID
@@ -258,7 +284,7 @@ def upload_data():
                 session.add(new_data)
                 session.commit()
 
-                logging.info(f"Data uploaded successfully. Path: {target_dir}")
+                logging.info(f"用户 {username} (IP: {client_ip}) 成功上传数据。路径: {target_dir}")
                 
                 return jsonify({
                     'success': True,
@@ -270,16 +296,21 @@ def upload_data():
                 session.rollback()
                 if os.path.exists(target_dir):
                     shutil.rmtree(target_dir)
-                logging.error(f"Database error during upload: {str(e)}")
+                logging.error(f"用户 {username} 上传数据时发生数据库错误: {str(e)}")
                 return jsonify({'success': False, 'message': f'Database error: {str(e)}'}), 500
             
             finally:
                 session.close()
 
     except Exception as e:
-        logging.error(f"Error in upload API: {str(e)}")
+        logging.error(f"上传API发生错误: {str(e)}")
         return jsonify({'success': False, 'message': f'Server error: {str(e)}'}), 500
 
 if __name__ == '__main__':
-    logging.info("Upload service started")
-    app.run(host='0.0.0.0', port=5000) 
+    try:
+        logging.info(f"上传服务开始启动，监听地址: 0.0.0.0:5000")
+        app.run(host='0.0.0.0', port=5000)
+    except Exception as e:
+        logging.error(f"上传服务启动失败: {str(e)}")
+    finally:
+        logging.info("上传服务已关闭") 
