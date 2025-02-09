@@ -184,10 +184,10 @@ def init_database():
                 created_at=datetime.now()
             ),
             Permission(
-                permission_id='PERM_DATA_COLLECTION',
-                permission_name='数据采集',
-                page_url='/data_collection',
-                description='数据采集页面访问权限',
+                permission_id='PERM_STRESS_ASSESSMENT',
+                permission_name='应激评估',
+                page_url='/stress_assessment',
+                description='应激评估页面访问权限',
                 created_at=datetime.now()
             ),
             Permission(
@@ -233,13 +233,13 @@ def init_database():
             RolePermission(role_id='admin', permission_id='PERM_DATA_MANAGE'),
             RolePermission(role_id='admin', permission_id='PERM_MODEL_MANAGE'),
             RolePermission(role_id='admin', permission_id='PERM_CHANGE_PWD'),
-            RolePermission(role_id='admin', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='admin', permission_id='PERM_STRESS_ASSESSMENT'),
             RolePermission(role_id='admin', permission_id='PERM_RESULT_VIEW'),
             RolePermission(role_id='admin', permission_id='PERM_PARAM_MANAGE'),
             RolePermission(role_id='admin', permission_id='PERM_LOG_MANAGE'),
             
             # 普通用户只有基本权限
-            RolePermission(role_id='user', permission_id='PERM_DATA_COLLECTION'),
+            RolePermission(role_id='user', permission_id='PERM_STRESS_ASSESSMENT'),
             RolePermission(role_id='user', permission_id='PERM_CHANGE_PWD'),
             RolePermission(role_id='user', permission_id='PERM_RESULT_VIEW'),
             RolePermission(role_id='user', permission_id='PERM_DATA_MANAGE')

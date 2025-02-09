@@ -144,7 +144,7 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         
         # 获取所有可见按钮
         visible_buttons = []
-        if 'PERM_DATA_COLLECTION' in permissions:
+        if 'PERM_STRESS_ASSESSMENT' in permissions:
             visible_buttons.append(self.health_assess_Button)
         if 'PERM_DATA_MANAGE' in permissions:
             visible_buttons.append(self.data_view_Button)
