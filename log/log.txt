@@ -6102,3 +6102,340 @@ ValueError: Could not find event data
 2025-02-10 19:02:50,417 - INFO - admin - Returned to index page successfully
 2025-02-10 19:02:51,001 - INFO - admin - Switched to regular user mode. Login page is being opened.
 2025-02-10 19:02:51,060 - INFO - admin - Opening Login page.
+2025-02-10 19:04:08,364 - INFO - 初始化登录界面...
+2025-02-10 19:04:08,367 - INFO - 开始预加载模型...
+2025-02-10 19:04:08,367 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:04:08,377 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:04:08,378 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:04:08,382 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:04:08,384 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:04:08,387 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:04:08,433 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:04:08,435 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:04:08,436 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:04:08,437 - INFO - 成功预加载量化模型
+2025-02-10 19:04:09,722 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:04:09,776 - INFO - admin - Opening Login page.
+2025-02-10 19:04:13,120 - INFO - admin - User logged in successfully
+2025-02-10 19:04:13,330 - INFO - admin - Opening Admin page.
+2025-02-10 19:04:16,124 - INFO - admin - Opening parameter control page.
+2025-02-10 19:04:16,196 - INFO - admin - Opening Param Control page.
+2025-02-10 19:04:31,726 - INFO - admin - System backup created successfully: system_backup_20250210_190416.zip
+2025-02-10 19:07:29,316 - INFO - 初始化登录界面...
+2025-02-10 19:07:29,320 - INFO - 开始预加载模型...
+2025-02-10 19:07:29,320 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:07:29,328 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:07:29,329 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:07:29,333 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:07:29,335 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:07:29,338 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:07:29,384 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:07:29,387 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:07:29,389 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:07:29,389 - INFO - 成功预加载量化模型
+2025-02-10 19:07:30,551 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:07:30,625 - INFO - admin - Opening Login page.
+2025-02-10 19:07:34,080 - INFO - admin - User logged in successfully
+2025-02-10 19:07:34,308 - INFO - admin - Opening Admin page.
+2025-02-10 19:07:37,418 - INFO - admin - Opening parameter control page.
+2025-02-10 19:07:37,514 - INFO - admin - Opening Param Control page.
+2025-02-10 19:07:53,187 - INFO - admin - System backup created successfully: system_backup_20250210_190738.zip
+2025-02-10 19:08:08,608 - INFO - admin - System restored successfully
+2025-02-10 19:09:10,963 - INFO - 初始化登录界面...
+2025-02-10 19:09:10,967 - INFO - 开始预加载模型...
+2025-02-10 19:09:10,967 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:09:10,978 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:09:10,980 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:09:10,980 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:09:10,980 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:09:10,983 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:09:11,026 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:09:11,026 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:09:11,027 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:09:11,027 - INFO - 成功预加载量化模型
+2025-02-10 19:09:12,201 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:09:12,255 - INFO - 未登录 - Opening Login page.
+2025-02-10 19:09:15,317 - INFO - admin - User logged in successfully
+2025-02-10 19:09:15,523 - INFO - admin - Opening Admin page.
+2025-02-10 19:09:16,773 - INFO - admin - Opening parameter control page.
+2025-02-10 19:09:16,877 - INFO - admin - Opening Param Control page.
+2025-02-10 19:09:17,666 - INFO - admin - 开始系统备份操作
+2025-02-10 19:09:17,679 - INFO - admin - 开始创建备份文件
+2025-02-10 19:09:17,680 - INFO - admin - 开始备份数据库
+2025-02-10 19:09:17,681 - INFO - admin - 执行数据库备份命令: pg_dump --host=localhost --port=5432 --username=postgres --dbname=bj_health_db --format=p --file=D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\.backup\temp_db_backup.sql
+2025-02-10 19:09:18,024 - INFO - admin - 数据库备份完成
+2025-02-10 19:09:18,025 - INFO - admin - 将数据库备份添加到压缩文件
+2025-02-10 19:09:18,035 - INFO - admin - 删除临时数据库备份文件
+2025-02-10 19:09:18,036 - INFO - admin - 开始备份data目录: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data
+2025-02-10 19:09:18,037 - INFO - admin - 备份文件: data\000005_ord2\1_110114.edf
+2025-02-10 19:09:20,610 - INFO - admin - 备份文件: data\000005_ord2\ACC_sub_L.csv
+2025-02-10 19:09:20,994 - INFO - admin - 备份文件: data\000005_ord2\Alpha.png
+2025-02-10 19:09:21,010 - INFO - admin - 备份文件: data\000005_ord2\Beta.png
+2025-02-10 19:09:21,020 - INFO - admin - 备份文件: data\000005_ord2\differential_entropy.png
+2025-02-10 19:09:21,032 - INFO - admin - 备份文件: data\000005_ord2\eeg_features.csv
+2025-02-10 19:09:21,047 - INFO - admin - 备份文件: data\000005_ord2\feature_names.txt
+2025-02-10 19:09:21,049 - INFO - admin - 备份文件: data\000005_ord2\fif.fif
+2025-02-10 19:09:21,062 - INFO - admin - 备份文件: data\000005_ord2\frequency_band_1.png
+2025-02-10 19:09:21,072 - INFO - admin - 备份文件: data\000005_ord2\frequency_band_2.png
+2025-02-10 19:09:21,083 - INFO - admin - 备份文件: data\000005_ord2\frequency_band_3.png
+2025-02-10 19:09:21,095 - INFO - admin - 备份文件: data\000005_ord2\frequency_band_4.png
+2025-02-10 19:09:21,106 - INFO - admin - 备份文件: data\000005_ord2\frequency_band_5.png
+2025-02-10 19:09:21,117 - INFO - admin - 备份文件: data\000005_ord2\frequency_domain_features.png
+2025-02-10 19:09:21,130 - INFO - admin - 备份文件: data\000005_ord2\frequency_wavelet.png
+2025-02-10 19:09:21,143 - INFO - admin - 备份文件: data\000005_ord2\Gamma.png
+2025-02-10 19:09:21,154 - INFO - admin - 备份文件: data\000005_ord2\lb.csv
+2025-02-10 19:09:21,155 - INFO - admin - 备份文件: data\000005_ord2\Theta.png
+2025-02-10 19:09:21,165 - INFO - admin - 备份文件: data\000005_ord2\theta_alpha_beta_gamma_powers.png
+2025-02-10 19:09:21,178 - INFO - admin - 备份文件: data\000005_ord2\time_domain_features.png
+2025-02-10 19:09:21,191 - INFO - admin - 备份文件: data\000005_ord2\time_frequency_features.png
+2025-02-10 19:09:21,204 - INFO - admin - 备份文件: data\000005_ord2\time_差分.png
+2025-02-10 19:09:21,216 - INFO - admin - 备份文件: data\000005_ord2\time_方差.png
+2025-02-10 19:09:21,228 - INFO - admin - 备份文件: data\000005_ord2\time_能量.png
+2025-02-10 19:09:21,240 - INFO - admin - 备份文件: data\000005_ord2\time_过零率.png
+2025-02-10 19:09:21,251 - INFO - admin - 备份文件: data\000005_ord2\xq.csv
+2025-02-10 19:09:21,254 - INFO - admin - 备份文件: data\000005_ord2_1\1_110114.edf
+2025-02-10 19:09:23,731 - INFO - admin - 备份文件: data\000005_ord2_1\ACC_sub_L.csv
+2025-02-10 19:09:24,114 - INFO - admin - 备份文件: data\000005_ord2_1\Alpha.png
+2025-02-10 19:09:24,125 - INFO - admin - 备份文件: data\000005_ord2_1\Beta.png
+2025-02-10 19:09:24,135 - INFO - admin - 备份文件: data\000005_ord2_1\differential_entropy.png
+2025-02-10 19:09:24,142 - INFO - admin - 备份文件: data\000005_ord2_1\eeg_features.csv
+2025-02-10 19:09:24,158 - INFO - admin - 备份文件: data\000005_ord2_1\feature_names.txt
+2025-02-10 19:09:24,160 - INFO - admin - 备份文件: data\000005_ord2_1\fif.fif
+2025-02-10 19:09:29,636 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_band_1.png
+2025-02-10 19:09:29,650 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_band_2.png
+2025-02-10 19:09:29,661 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_band_3.png
+2025-02-10 19:09:29,676 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_band_4.png
+2025-02-10 19:09:29,688 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_band_5.png
+2025-02-10 19:09:29,700 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_domain_features.png
+2025-02-10 19:09:29,715 - INFO - admin - 备份文件: data\000005_ord2_1\frequency_wavelet.png
+2025-02-10 19:09:29,730 - INFO - admin - 备份文件: data\000005_ord2_1\Gamma.png
+2025-02-10 19:09:29,741 - INFO - admin - 备份文件: data\000005_ord2_1\lb.csv
+2025-02-10 19:09:29,743 - INFO - admin - 备份文件: data\000005_ord2_1\Theta.png
+2025-02-10 19:09:29,756 - INFO - admin - 备份文件: data\000005_ord2_1\theta_alpha_beta_gamma_powers.png
+2025-02-10 19:09:29,770 - INFO - admin - 备份文件: data\000005_ord2_1\time_domain_features.png
+2025-02-10 19:09:29,786 - INFO - admin - 备份文件: data\000005_ord2_1\time_frequency_features.png
+2025-02-10 19:09:29,803 - INFO - admin - 备份文件: data\000005_ord2_1\time_差分.png
+2025-02-10 19:09:29,815 - INFO - admin - 备份文件: data\000005_ord2_1\time_方差.png
+2025-02-10 19:09:29,827 - INFO - admin - 备份文件: data\000005_ord2_1\time_能量.png
+2025-02-10 19:09:29,839 - INFO - admin - 备份文件: data\000005_ord2_1\time_过零率.png
+2025-02-10 19:09:29,850 - INFO - admin - 备份文件: data\000005_ord2_1\xq.csv
+2025-02-10 19:09:29,853 - INFO - admin - 备份文件: data\000005_ord2_2\1_110114.edf
+2025-02-10 19:09:33,413 - INFO - admin - 备份文件: data\000005_ord2_2\ACC_sub_L.csv
+2025-02-10 19:09:33,986 - INFO - admin - 备份文件: data\000005_ord2_2\Alpha.png
+2025-02-10 19:09:34,000 - INFO - admin - 备份文件: data\000005_ord2_2\Beta.png
+2025-02-10 19:09:34,012 - INFO - admin - 备份文件: data\000005_ord2_2\differential_entropy.png
+2025-02-10 19:09:34,025 - INFO - admin - 备份文件: data\000005_ord2_2\eeg_features.csv
+2025-02-10 19:09:34,041 - INFO - admin - 备份文件: data\000005_ord2_2\feature_names.txt
+2025-02-10 19:09:34,044 - INFO - admin - 备份文件: data\000005_ord2_2\fif.fif
+2025-02-10 19:09:34,054 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_band_1.png
+2025-02-10 19:09:34,067 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_band_2.png
+2025-02-10 19:09:34,079 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_band_3.png
+2025-02-10 19:09:34,094 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_band_4.png
+2025-02-10 19:09:34,107 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_band_5.png
+2025-02-10 19:09:34,120 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_domain_features.png
+2025-02-10 19:09:34,136 - INFO - admin - 备份文件: data\000005_ord2_2\frequency_wavelet.png
+2025-02-10 19:09:34,152 - INFO - admin - 备份文件: data\000005_ord2_2\Gamma.png
+2025-02-10 19:09:34,164 - INFO - admin - 备份文件: data\000005_ord2_2\lb.csv
+2025-02-10 19:09:34,166 - INFO - admin - 备份文件: data\000005_ord2_2\Theta.png
+2025-02-10 19:09:34,179 - INFO - admin - 备份文件: data\000005_ord2_2\theta_alpha_beta_gamma_powers.png
+2025-02-10 19:09:34,194 - INFO - admin - 备份文件: data\000005_ord2_2\time_domain_features.png
+2025-02-10 19:09:34,208 - INFO - admin - 备份文件: data\000005_ord2_2\time_frequency_features.png
+2025-02-10 19:09:34,223 - INFO - admin - 备份文件: data\000005_ord2_2\time_差分.png
+2025-02-10 19:09:34,234 - INFO - admin - 备份文件: data\000005_ord2_2\time_方差.png
+2025-02-10 19:09:34,246 - INFO - admin - 备份文件: data\000005_ord2_2\time_能量.png
+2025-02-10 19:09:34,257 - INFO - admin - 备份文件: data\000005_ord2_2\time_过零率.png
+2025-02-10 19:09:34,271 - INFO - admin - 备份文件: data\000005_ord2_2\xq.csv
+2025-02-10 19:09:34,273 - INFO - admin - 开始备份model目录: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model
+2025-02-10 19:09:34,273 - INFO - admin - 备份文件: model\batch_inference.py
+2025-02-10 19:09:34,274 - INFO - admin - 备份文件: model\description
+2025-02-10 19:09:34,275 - INFO - admin - 备份文件: model\model_quantize.py
+2025-02-10 19:09:34,277 - INFO - admin - 备份文件: model\result_processor.py
+2025-02-10 19:09:34,277 - INFO - admin - 备份文件: model\tuili.py
+2025-02-10 19:09:34,279 - INFO - admin - 备份文件: model\tuili_int8.py
+2025-02-10 19:09:34,280 - INFO - admin - 备份文件: model\jiaolv\subject-1jiaolv.keras
+2025-02-10 19:09:34,425 - INFO - admin - 备份文件: model\jiaolv\standarder\std_0.pkl
+2025-02-10 19:09:34,439 - INFO - admin - 备份文件: model\jiaolv\standarder\std_1.pkl
+2025-02-10 19:09:34,451 - INFO - admin - 备份文件: model\jiaolv\standarder\std_10.pkl
+2025-02-10 19:09:34,461 - INFO - admin - 备份文件: model\jiaolv\standarder\std_11.pkl
+2025-02-10 19:09:34,475 - INFO - admin - 备份文件: model\jiaolv\standarder\std_12.pkl
+2025-02-10 19:09:34,488 - INFO - admin - 备份文件: model\jiaolv\standarder\std_13.pkl
+2025-02-10 19:09:34,502 - INFO - admin - 备份文件: model\jiaolv\standarder\std_14.pkl
+2025-02-10 19:09:34,514 - INFO - admin - 备份文件: model\jiaolv\standarder\std_15.pkl
+2025-02-10 19:09:34,529 - INFO - admin - 备份文件: model\jiaolv\standarder\std_16.pkl
+2025-02-10 19:09:34,542 - INFO - admin - 备份文件: model\jiaolv\standarder\std_17.pkl
+2025-02-10 19:09:34,552 - INFO - admin - 备份文件: model\jiaolv\standarder\std_18.pkl
+2025-02-10 19:09:34,596 - INFO - admin - 备份文件: model\jiaolv\standarder\std_19.pkl
+2025-02-10 19:09:34,610 - INFO - admin - 备份文件: model\jiaolv\standarder\std_2.pkl
+2025-02-10 19:09:34,623 - INFO - admin - 备份文件: model\jiaolv\standarder\std_20.pkl
+2025-02-10 19:09:34,636 - INFO - admin - 备份文件: model\jiaolv\standarder\std_21.pkl
+2025-02-10 19:09:34,649 - INFO - admin - 备份文件: model\jiaolv\standarder\std_22.pkl
+2025-02-10 19:09:34,660 - INFO - admin - 备份文件: model\jiaolv\standarder\std_23.pkl
+2025-02-10 19:09:34,671 - INFO - admin - 备份文件: model\jiaolv\standarder\std_24.pkl
+2025-02-10 19:09:34,683 - INFO - admin - 备份文件: model\jiaolv\standarder\std_25.pkl
+2025-02-10 19:09:34,694 - INFO - admin - 备份文件: model\jiaolv\standarder\std_26.pkl
+2025-02-10 19:09:34,708 - INFO - admin - 备份文件: model\jiaolv\standarder\std_27.pkl
+2025-02-10 19:09:34,720 - INFO - admin - 备份文件: model\jiaolv\standarder\std_28.pkl
+2025-02-10 19:09:34,733 - INFO - admin - 备份文件: model\jiaolv\standarder\std_29.pkl
+2025-02-10 19:09:34,746 - INFO - admin - 备份文件: model\jiaolv\standarder\std_3.pkl
+2025-02-10 19:09:34,759 - INFO - admin - 备份文件: model\jiaolv\standarder\std_30.pkl
+2025-02-10 19:09:34,771 - INFO - admin - 备份文件: model\jiaolv\standarder\std_31.pkl
+2025-02-10 19:09:34,785 - INFO - admin - 备份文件: model\jiaolv\standarder\std_32.pkl
+2025-02-10 19:09:34,798 - INFO - admin - 备份文件: model\jiaolv\standarder\std_33.pkl
+2025-02-10 19:09:34,810 - INFO - admin - 备份文件: model\jiaolv\standarder\std_34.pkl
+2025-02-10 19:09:34,824 - INFO - admin - 备份文件: model\jiaolv\standarder\std_35.pkl
+2025-02-10 19:09:34,836 - INFO - admin - 备份文件: model\jiaolv\standarder\std_36.pkl
+2025-02-10 19:09:34,848 - INFO - admin - 备份文件: model\jiaolv\standarder\std_37.pkl
+2025-02-10 19:09:34,861 - INFO - admin - 备份文件: model\jiaolv\standarder\std_38.pkl
+2025-02-10 19:09:34,877 - INFO - admin - 备份文件: model\jiaolv\standarder\std_39.pkl
+2025-02-10 19:09:34,890 - INFO - admin - 备份文件: model\jiaolv\standarder\std_4.pkl
+2025-02-10 19:09:34,903 - INFO - admin - 备份文件: model\jiaolv\standarder\std_40.pkl
+2025-02-10 19:09:34,917 - INFO - admin - 备份文件: model\jiaolv\standarder\std_41.pkl
+2025-02-10 19:09:34,928 - INFO - admin - 备份文件: model\jiaolv\standarder\std_42.pkl
+2025-02-10 19:09:34,941 - INFO - admin - 备份文件: model\jiaolv\standarder\std_43.pkl
+2025-02-10 19:09:34,954 - INFO - admin - 备份文件: model\jiaolv\standarder\std_44.pkl
+2025-02-10 19:09:34,966 - INFO - admin - 备份文件: model\jiaolv\standarder\std_45.pkl
+2025-02-10 19:09:34,978 - INFO - admin - 备份文件: model\jiaolv\standarder\std_46.pkl
+2025-02-10 19:09:34,991 - INFO - admin - 备份文件: model\jiaolv\standarder\std_47.pkl
+2025-02-10 19:09:35,004 - INFO - admin - 备份文件: model\jiaolv\standarder\std_48.pkl
+2025-02-10 19:09:35,018 - INFO - admin - 备份文件: model\jiaolv\standarder\std_49.pkl
+2025-02-10 19:09:35,033 - INFO - admin - 备份文件: model\jiaolv\standarder\std_5.pkl
+2025-02-10 19:09:35,045 - INFO - admin - 备份文件: model\jiaolv\standarder\std_50.pkl
+2025-02-10 19:09:35,058 - INFO - admin - 备份文件: model\jiaolv\standarder\std_51.pkl
+2025-02-10 19:09:35,069 - INFO - admin - 备份文件: model\jiaolv\standarder\std_52.pkl
+2025-02-10 19:09:35,083 - INFO - admin - 备份文件: model\jiaolv\standarder\std_53.pkl
+2025-02-10 19:09:35,096 - INFO - admin - 备份文件: model\jiaolv\standarder\std_54.pkl
+2025-02-10 19:09:35,106 - INFO - admin - 备份文件: model\jiaolv\standarder\std_55.pkl
+2025-02-10 19:09:35,119 - INFO - admin - 备份文件: model\jiaolv\standarder\std_56.pkl
+2025-02-10 19:09:35,132 - INFO - admin - 备份文件: model\jiaolv\standarder\std_57.pkl
+2025-02-10 19:09:35,144 - INFO - admin - 备份文件: model\jiaolv\standarder\std_58.pkl
+2025-02-10 19:09:35,160 - INFO - admin - 备份文件: model\jiaolv\standarder\std_6.pkl
+2025-02-10 19:09:35,172 - INFO - admin - 备份文件: model\jiaolv\standarder\std_7.pkl
+2025-02-10 19:09:35,185 - INFO - admin - 备份文件: model\jiaolv\standarder\std_8.pkl
+2025-02-10 19:09:35,199 - INFO - admin - 备份文件: model\jiaolv\standarder\std_9.pkl
+2025-02-10 19:09:35,212 - INFO - admin - 备份文件: model\yingji\subject-1_yingji_quantized.tflite
+2025-02-10 19:09:35,225 - INFO - admin - 备份文件: model\yingji\standarder\std_0.pkl
+2025-02-10 19:09:35,239 - INFO - admin - 备份文件: model\yingji\standarder\std_1.pkl
+2025-02-10 19:09:35,251 - INFO - admin - 备份文件: model\yingji\standarder\std_10.pkl
+2025-02-10 19:09:35,264 - INFO - admin - 备份文件: model\yingji\standarder\std_11.pkl
+2025-02-10 19:09:35,278 - INFO - admin - 备份文件: model\yingji\standarder\std_12.pkl
+2025-02-10 19:09:35,293 - INFO - admin - 备份文件: model\yingji\standarder\std_13.pkl
+2025-02-10 19:09:35,306 - INFO - admin - 备份文件: model\yingji\standarder\std_14.pkl
+2025-02-10 19:09:35,319 - INFO - admin - 备份文件: model\yingji\standarder\std_15.pkl
+2025-02-10 19:09:35,330 - INFO - admin - 备份文件: model\yingji\standarder\std_16.pkl
+2025-02-10 19:09:35,345 - INFO - admin - 备份文件: model\yingji\standarder\std_17.pkl
+2025-02-10 19:09:35,357 - INFO - admin - 备份文件: model\yingji\standarder\std_18.pkl
+2025-02-10 19:09:35,370 - INFO - admin - 备份文件: model\yingji\standarder\std_19.pkl
+2025-02-10 19:09:35,387 - INFO - admin - 备份文件: model\yingji\standarder\std_2.pkl
+2025-02-10 19:09:35,400 - INFO - admin - 备份文件: model\yingji\standarder\std_20.pkl
+2025-02-10 19:09:35,463 - INFO - admin - 备份文件: model\yingji\standarder\std_21.pkl
+2025-02-10 19:09:35,476 - INFO - admin - 备份文件: model\yingji\standarder\std_22.pkl
+2025-02-10 19:09:35,489 - INFO - admin - 备份文件: model\yingji\standarder\std_23.pkl
+2025-02-10 19:09:35,504 - INFO - admin - 备份文件: model\yingji\standarder\std_24.pkl
+2025-02-10 19:09:35,517 - INFO - admin - 备份文件: model\yingji\standarder\std_25.pkl
+2025-02-10 19:09:35,530 - INFO - admin - 备份文件: model\yingji\standarder\std_26.pkl
+2025-02-10 19:09:35,546 - INFO - admin - 备份文件: model\yingji\standarder\std_27.pkl
+2025-02-10 19:09:35,558 - INFO - admin - 备份文件: model\yingji\standarder\std_28.pkl
+2025-02-10 19:09:35,570 - INFO - admin - 备份文件: model\yingji\standarder\std_29.pkl
+2025-02-10 19:09:35,582 - INFO - admin - 备份文件: model\yingji\standarder\std_3.pkl
+2025-02-10 19:09:35,595 - INFO - admin - 备份文件: model\yingji\standarder\std_30.pkl
+2025-02-10 19:09:35,608 - INFO - admin - 备份文件: model\yingji\standarder\std_31.pkl
+2025-02-10 19:09:35,620 - INFO - admin - 备份文件: model\yingji\standarder\std_32.pkl
+2025-02-10 19:09:35,634 - INFO - admin - 备份文件: model\yingji\standarder\std_33.pkl
+2025-02-10 19:09:35,646 - INFO - admin - 备份文件: model\yingji\standarder\std_34.pkl
+2025-02-10 19:09:35,660 - INFO - admin - 备份文件: model\yingji\standarder\std_35.pkl
+2025-02-10 19:09:35,673 - INFO - admin - 备份文件: model\yingji\standarder\std_36.pkl
+2025-02-10 19:09:35,685 - INFO - admin - 备份文件: model\yingji\standarder\std_37.pkl
+2025-02-10 19:09:35,698 - INFO - admin - 备份文件: model\yingji\standarder\std_38.pkl
+2025-02-10 19:09:35,711 - INFO - admin - 备份文件: model\yingji\standarder\std_39.pkl
+2025-02-10 19:09:35,725 - INFO - admin - 备份文件: model\yingji\standarder\std_4.pkl
+2025-02-10 19:09:35,738 - INFO - admin - 备份文件: model\yingji\standarder\std_40.pkl
+2025-02-10 19:09:35,751 - INFO - admin - 备份文件: model\yingji\standarder\std_41.pkl
+2025-02-10 19:09:35,764 - INFO - admin - 备份文件: model\yingji\standarder\std_42.pkl
+2025-02-10 19:09:35,774 - INFO - admin - 备份文件: model\yingji\standarder\std_43.pkl
+2025-02-10 19:09:35,788 - INFO - admin - 备份文件: model\yingji\standarder\std_44.pkl
+2025-02-10 19:09:35,802 - INFO - admin - 备份文件: model\yingji\standarder\std_45.pkl
+2025-02-10 19:09:35,814 - INFO - admin - 备份文件: model\yingji\standarder\std_46.pkl
+2025-02-10 19:09:35,826 - INFO - admin - 备份文件: model\yingji\standarder\std_47.pkl
+2025-02-10 19:09:35,838 - INFO - admin - 备份文件: model\yingji\standarder\std_48.pkl
+2025-02-10 19:09:35,916 - INFO - admin - 备份文件: model\yingji\standarder\std_49.pkl
+2025-02-10 19:09:35,929 - INFO - admin - 备份文件: model\yingji\standarder\std_5.pkl
+2025-02-10 19:09:35,942 - INFO - admin - 备份文件: model\yingji\standarder\std_50.pkl
+2025-02-10 19:09:35,956 - INFO - admin - 备份文件: model\yingji\standarder\std_51.pkl
+2025-02-10 19:09:35,971 - INFO - admin - 备份文件: model\yingji\standarder\std_52.pkl
+2025-02-10 19:09:35,985 - INFO - admin - 备份文件: model\yingji\standarder\std_53.pkl
+2025-02-10 19:09:35,999 - INFO - admin - 备份文件: model\yingji\standarder\std_54.pkl
+2025-02-10 19:09:36,012 - INFO - admin - 备份文件: model\yingji\standarder\std_55.pkl
+2025-02-10 19:09:36,023 - INFO - admin - 备份文件: model\yingji\standarder\std_56.pkl
+2025-02-10 19:09:36,036 - INFO - admin - 备份文件: model\yingji\standarder\std_57.pkl
+2025-02-10 19:09:36,051 - INFO - admin - 备份文件: model\yingji\standarder\std_58.pkl
+2025-02-10 19:09:36,062 - INFO - admin - 备份文件: model\yingji\standarder\std_6.pkl
+2025-02-10 19:09:36,075 - INFO - admin - 备份文件: model\yingji\standarder\std_7.pkl
+2025-02-10 19:09:36,088 - INFO - admin - 备份文件: model\yingji\standarder\std_8.pkl
+2025-02-10 19:09:36,102 - INFO - admin - 备份文件: model\yingji\standarder\std_9.pkl
+2025-02-10 19:09:36,116 - INFO - admin - 备份文件: model\yiyu\subject-1 yiyu.keras
+2025-02-10 19:09:36,253 - INFO - admin - 备份文件: model\yiyu\standarder\std_0.pkl
+2025-02-10 19:09:36,273 - INFO - admin - 备份文件: model\yiyu\standarder\std_1.pkl
+2025-02-10 19:09:36,286 - INFO - admin - 备份文件: model\yiyu\standarder\std_10.pkl
+2025-02-10 19:09:36,301 - INFO - admin - 备份文件: model\yiyu\standarder\std_11.pkl
+2025-02-10 19:09:36,316 - INFO - admin - 备份文件: model\yiyu\standarder\std_12.pkl
+2025-02-10 19:09:36,330 - INFO - admin - 备份文件: model\yiyu\standarder\std_13.pkl
+2025-02-10 19:09:36,345 - INFO - admin - 备份文件: model\yiyu\standarder\std_14.pkl
+2025-02-10 19:09:36,361 - INFO - admin - 备份文件: model\yiyu\standarder\std_15.pkl
+2025-02-10 19:09:36,375 - INFO - admin - 备份文件: model\yiyu\standarder\std_16.pkl
+2025-02-10 19:09:36,389 - INFO - admin - 备份文件: model\yiyu\standarder\std_17.pkl
+2025-02-10 19:09:36,404 - INFO - admin - 备份文件: model\yiyu\standarder\std_18.pkl
+2025-02-10 19:09:36,416 - INFO - admin - 备份文件: model\yiyu\standarder\std_19.pkl
+2025-02-10 19:09:36,430 - INFO - admin - 备份文件: model\yiyu\standarder\std_2.pkl
+2025-02-10 19:09:36,444 - INFO - admin - 备份文件: model\yiyu\standarder\std_20.pkl
+2025-02-10 19:09:36,460 - INFO - admin - 备份文件: model\yiyu\standarder\std_21.pkl
+2025-02-10 19:09:36,477 - INFO - admin - 备份文件: model\yiyu\standarder\std_22.pkl
+2025-02-10 19:09:36,492 - INFO - admin - 备份文件: model\yiyu\standarder\std_23.pkl
+2025-02-10 19:09:36,505 - INFO - admin - 备份文件: model\yiyu\standarder\std_24.pkl
+2025-02-10 19:09:36,519 - INFO - admin - 备份文件: model\yiyu\standarder\std_25.pkl
+2025-02-10 19:09:36,533 - INFO - admin - 备份文件: model\yiyu\standarder\std_26.pkl
+2025-02-10 19:09:36,547 - INFO - admin - 备份文件: model\yiyu\standarder\std_27.pkl
+2025-02-10 19:09:36,562 - INFO - admin - 备份文件: model\yiyu\standarder\std_28.pkl
+2025-02-10 19:09:36,575 - INFO - admin - 备份文件: model\yiyu\standarder\std_29.pkl
+2025-02-10 19:09:36,590 - INFO - admin - 备份文件: model\yiyu\standarder\std_3.pkl
+2025-02-10 19:09:36,604 - INFO - admin - 备份文件: model\yiyu\standarder\std_30.pkl
+2025-02-10 19:09:36,616 - INFO - admin - 备份文件: model\yiyu\standarder\std_31.pkl
+2025-02-10 19:09:36,631 - INFO - admin - 备份文件: model\yiyu\standarder\std_32.pkl
+2025-02-10 19:09:36,646 - INFO - admin - 备份文件: model\yiyu\standarder\std_33.pkl
+2025-02-10 19:09:36,661 - INFO - admin - 备份文件: model\yiyu\standarder\std_34.pkl
+2025-02-10 19:09:36,677 - INFO - admin - 备份文件: model\yiyu\standarder\std_35.pkl
+2025-02-10 19:09:36,692 - INFO - admin - 备份文件: model\yiyu\standarder\std_36.pkl
+2025-02-10 19:09:36,707 - INFO - admin - 备份文件: model\yiyu\standarder\std_37.pkl
+2025-02-10 19:09:36,721 - INFO - admin - 备份文件: model\yiyu\standarder\std_38.pkl
+2025-02-10 19:09:36,736 - INFO - admin - 备份文件: model\yiyu\standarder\std_39.pkl
+2025-02-10 19:09:36,751 - INFO - admin - 备份文件: model\yiyu\standarder\std_4.pkl
+2025-02-10 19:09:36,767 - INFO - admin - 备份文件: model\yiyu\standarder\std_40.pkl
+2025-02-10 19:09:36,782 - INFO - admin - 备份文件: model\yiyu\standarder\std_41.pkl
+2025-02-10 19:09:36,799 - INFO - admin - 备份文件: model\yiyu\standarder\std_42.pkl
+2025-02-10 19:09:36,813 - INFO - admin - 备份文件: model\yiyu\standarder\std_43.pkl
+2025-02-10 19:09:36,828 - INFO - admin - 备份文件: model\yiyu\standarder\std_44.pkl
+2025-02-10 19:09:36,842 - INFO - admin - 备份文件: model\yiyu\standarder\std_45.pkl
+2025-02-10 19:09:36,857 - INFO - admin - 备份文件: model\yiyu\standarder\std_46.pkl
+2025-02-10 19:09:36,876 - INFO - admin - 备份文件: model\yiyu\standarder\std_47.pkl
+2025-02-10 19:09:36,895 - INFO - admin - 备份文件: model\yiyu\standarder\std_48.pkl
+2025-02-10 19:09:36,910 - INFO - admin - 备份文件: model\yiyu\standarder\std_49.pkl
+2025-02-10 19:09:36,928 - INFO - admin - 备份文件: model\yiyu\standarder\std_5.pkl
+2025-02-10 19:09:36,943 - INFO - admin - 备份文件: model\yiyu\standarder\std_50.pkl
+2025-02-10 19:09:36,957 - INFO - admin - 备份文件: model\yiyu\standarder\std_51.pkl
+2025-02-10 19:09:36,972 - INFO - admin - 备份文件: model\yiyu\standarder\std_52.pkl
+2025-02-10 19:09:36,988 - INFO - admin - 备份文件: model\yiyu\standarder\std_53.pkl
+2025-02-10 19:09:37,005 - INFO - admin - 备份文件: model\yiyu\standarder\std_54.pkl
+2025-02-10 19:09:37,019 - INFO - admin - 备份文件: model\yiyu\standarder\std_55.pkl
+2025-02-10 19:09:37,033 - INFO - admin - 备份文件: model\yiyu\standarder\std_56.pkl
+2025-02-10 19:09:37,047 - INFO - admin - 备份文件: model\yiyu\standarder\std_57.pkl
+2025-02-10 19:09:37,062 - INFO - admin - 备份文件: model\yiyu\standarder\std_58.pkl
+2025-02-10 19:09:37,077 - INFO - admin - 备份文件: model\yiyu\standarder\std_6.pkl
+2025-02-10 19:09:37,091 - INFO - admin - 备份文件: model\yiyu\standarder\std_7.pkl
+2025-02-10 19:09:37,104 - INFO - admin - 备份文件: model\yiyu\standarder\std_8.pkl
+2025-02-10 19:09:37,119 - INFO - admin - 备份文件: model\yiyu\standarder\std_9.pkl
+2025-02-10 19:09:37,134 - INFO - admin - 备份文件: model\__pycache__\batch_inference.cpython-310.pyc
+2025-02-10 19:09:37,136 - INFO - admin - 备份文件: model\__pycache__\result_processor.cpython-310.pyc
+2025-02-10 19:09:37,137 - INFO - admin - 备份文件: model\__pycache__\tuili.cpython-310.pyc
+2025-02-10 19:09:37,138 - INFO - admin - 备份文件: model\__pycache__\tuili_int8.cpython-310.pyc
+2025-02-10 19:09:37,141 - INFO - admin - 系统备份完成，备份文件保存在: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\.backup\system_backup_20250210_190917.zip
+2025-02-10 19:09:37,144 - INFO - admin - System backup created successfully: system_backup_20250210_190917.zip
+2025-02-10 19:09:55,686 - INFO - admin - System restored successfully

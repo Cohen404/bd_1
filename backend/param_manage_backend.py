@@ -58,73 +58,107 @@ class BackupThread(QThread):
     备份操作线程类
     """
     finished = pyqtSignal(bool, str)  # 完成信号，传递成功/失败状态和消息
+    progress_updated = pyqtSignal(int)  # 添加进度信号
 
     def __init__(self, backup_path):
         super().__init__()
         self.backup_path = backup_path
 
     def run(self):
-        """
-        执行备份操作
-        """
         try:
+            logging.info("开始系统备份操作")
+            
+            # 检查pg_dump是否存在
+            if not shutil.which('pg_dump'):
+                logging.error("未找到pg_dump命令")
+                self.finished.emit(False, "未找到pg_dump命令，请确保已安装PostgreSQL客户端工具")
+                return
+                
+            self.progress_updated.emit(10)
+            logging.info("开始创建备份文件")
+            
             # 创建ZIP文件
             with zipfile.ZipFile(self.backup_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-                # 1. 备份数据库文件
+                # 1. 备份数据库
+                logging.info("开始备份数据库")
                 db_backup_path = os.path.join(BACKUP_DIR, 'temp_db_backup.sql')
                 
-                # 使用pg_dump备份数据库
                 dump_command = [
                     'pg_dump',
                     f'--host={HOST}',
                     f'--port={PORT}',
                     f'--username={USERNAME}',
                     f'--dbname={DATABASE}',
-                    '--format=p',  # plain text format
+                    '--format=p',
                     f'--file={db_backup_path}'
                 ]
                 
-                # 设置环境变量PGPASSWORD
                 env = os.environ.copy()
                 env['PGPASSWORD'] = PASSWORD
                 
-                # 执行pg_dump命令
-                process = subprocess.Popen(
-                    dump_command,
-                    env=env,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE
-                )
-                _, stderr = process.communicate()
+                try:
+                    logging.info(f"执行数据库备份命令: {' '.join(dump_command)}")
+                    process = subprocess.run(
+                        dump_command,
+                        env=env,
+                        timeout=60,
+                        capture_output=True,
+                        text=True
+                    )
+                    if process.returncode != 0:
+                        error_msg = f"数据库备份失败: {process.stderr}"
+                        logging.error(error_msg)
+                        raise Exception(error_msg)
+                    logging.info("数据库备份完成")
+                except subprocess.TimeoutExpired:
+                    error_msg = "数据库备份超时"
+                    logging.error(error_msg)
+                    raise Exception(error_msg)
+                    
+                self.progress_updated.emit(40)
                 
-                if process.returncode != 0:
-                    raise Exception(f"数据库备份失败: {stderr.decode()}")
-                
-                # 添加数据库备份文件到zip
+                # 添加数据库备份到zip
+                logging.info("将数据库备份添加到压缩文件")
                 zipf.write(db_backup_path, 'database.sql')
-                os.remove(db_backup_path)  # 删除临时文件
-
+                os.remove(db_backup_path)
+                logging.info("删除临时数据库备份文件")
+                
+                self.progress_updated.emit(60)
+                
                 # 2. 备份data目录
                 data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
                 if os.path.exists(data_dir):
+                    logging.info(f"开始备份data目录: {data_dir}")
                     for root, dirs, files in os.walk(data_dir):
                         for file in files:
                             file_path = os.path.join(root, file)
                             arcname = os.path.relpath(file_path, os.path.dirname(data_dir))
+                            logging.info(f"备份文件: {arcname}")
                             zipf.write(file_path, arcname)
+                else:
+                    logging.warning("data目录不存在")
 
                 # 3. 备份model目录
                 model_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'model')
                 if os.path.exists(model_dir):
+                    logging.info(f"开始备份model目录: {model_dir}")
                     for root, dirs, files in os.walk(model_dir):
                         for file in files:
                             file_path = os.path.join(root, file)
                             arcname = os.path.relpath(file_path, os.path.dirname(model_dir))
+                            logging.info(f"备份文件: {arcname}")
                             zipf.write(file_path, arcname)
+                else:
+                    logging.warning("model目录不存在")
 
+            self.progress_updated.emit(100)
+            logging.info(f"系统备份完成，备份文件保存在: {self.backup_path}")
             self.finished.emit(True, self.backup_path)
+            
         except Exception as e:
-            self.finished.emit(False, str(e))
+            error_msg = f"备份过程发生错误: {str(e)}"
+            logging.error(error_msg)
+            self.finished.emit(False, error_msg)
 
 class RestoreThread(QThread):
     """
