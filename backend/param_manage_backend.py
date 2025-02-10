@@ -729,25 +729,77 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         session = SessionClass()
 
         try:
+            # 参数验证
+            try:
+                eeg_freq = float(self.sample_freq.text())
+                electrode_count = int(self.electrode_numbers.text())
+                question_num = int(self.question_num.text())
+                model_num = int(self.model_num.text())
+                
+                # 检查是否为负数
+                if eeg_freq < 0:
+                    raise ValueError("脑电采样频率不能为负数")
+                if electrode_count < 0:
+                    raise ValueError("电极数量不能为负数") 
+                if question_num < 0:
+                    raise ValueError("量表题目数不能为负数")
+                if model_num < 0:
+                    raise ValueError("模型数量不能为负数")
+                    
+            except ValueError as ve:
+                QMessageBox.warning(self, "输入错误", str(ve))
+                logging.warning(f"Parameter validation failed: {str(ve)}")
+                return
+
             # 查找现有记录
             existing_data = session.query(SystemParams).filter(SystemParams.id == 1).first()
 
             if existing_data is not None:
+                # 记录修改前的值
+                old_values = {
+                    "eeg_frequency": existing_data.eeg_frequency,
+                    "electrode_count": existing_data.electrode_count,
+                    "scale_question_num": existing_data.scale_question_num,
+                    "model_num": existing_data.model_num
+                }
+                
                 # 更新现有记录
                 logging.info("Updating existing SystemParams record.")
-                existing_data.eeg_frequency = float(self.sample_freq.text())
-                existing_data.electrode_count = int(self.electrode_numbers.text())
-                existing_data.scale_question_num = int(self.question_num.text())
-                existing_data.model_num = int(self.model_num.text())
+                existing_data.eeg_frequency = eeg_freq
+                existing_data.electrode_count = electrode_count
+                existing_data.scale_question_num = question_num
+                existing_data.model_num = model_num
+                
+                # 记录修改的内容
+                changes = []
+                if old_values["eeg_frequency"] != eeg_freq:
+                    changes.append(f"脑电采样频率: {old_values['eeg_frequency']} -> {eeg_freq}")
+                if old_values["electrode_count"] != electrode_count:
+                    changes.append(f"电极数量: {old_values['electrode_count']} -> {electrode_count}")
+                if old_values["scale_question_num"] != question_num:
+                    changes.append(f"量表题目数: {old_values['scale_question_num']} -> {question_num}")
+                if old_values["model_num"] != model_num:
+                    changes.append(f"模型数量: {old_values['model_num']} -> {model_num}")
+                    
+                if changes:
+                    logging.info(f"Parameter changes: {'; '.join(changes)}")
+                else:
+                    logging.info("No parameter values were changed")
+                    
             else:
                 # 创建新记录
-                logging.info("Creating new SystemParams record.")
+                logging.info("Creating new SystemParams record with values: "
+                            f"eeg_frequency={eeg_freq}, "
+                            f"electrode_count={electrode_count}, "
+                            f"scale_question_num={question_num}, "
+                            f"model_num={model_num}")
+                            
                 new_data = SystemParams(
                     param_id='PARAM_001',  # 设置一个固定的param_id
-                    eeg_frequency=float(self.sample_freq.text()),
-                    electrode_count=int(self.electrode_numbers.text()),
-                    scale_question_num=int(self.question_num.text()),
-                    model_num=int(self.model_num.text()),
+                    eeg_frequency=eeg_freq,
+                    electrode_count=electrode_count,
+                    scale_question_num=question_num,
+                    model_num=model_num,
                     id=1  # 设置固定的id
                 )
                 session.add(new_data)

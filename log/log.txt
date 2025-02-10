@@ -5682,3 +5682,55 @@ ValueError: Could not find event data
 2025-02-10 17:25:55,899 - INFO - admin - Button clicked in row 0, corresponding ID: 1
 2025-02-10 17:25:55,902 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
 2025-02-10 17:25:56,888 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Theta.png
+2025-02-10 17:36:44,275 - INFO - 初始化登录界面...
+2025-02-10 17:36:44,279 - INFO - 开始预加载模型...
+2025-02-10 17:36:44,279 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 17:36:44,288 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:36:44,289 - INFO - 模型文件存在，开始加载...
+2025-02-10 17:36:44,294 - INFO - 开始加载INT8量化模型...
+2025-02-10 17:36:44,296 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 17:36:44,299 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:36:44,364 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 17:36:44,365 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 17:36:44,368 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 17:36:44,368 - INFO - 成功预加载量化模型
+2025-02-10 17:36:45,490 - INFO - 未登录 - Opening user login page.
+2025-02-10 17:36:45,552 - INFO - admin - Opening Login page.
+2025-02-10 17:36:49,119 - INFO - admin - User logged in successfully
+2025-02-10 17:36:49,327 - INFO - admin - Opening Admin page.
+2025-02-10 17:36:53,083 - INFO - admin - Opening parameter control page.
+2025-02-10 17:36:53,175 - INFO - admin - Opening Param Control page.
+2025-02-10 17:36:57,061 - INFO - admin - Starting database save operation.
+2025-02-10 17:36:57,064 - INFO - admin - Updating existing SystemParams record.
+2025-02-10 17:36:57,064 - INFO - admin - Parameter changes: 脑电采样频率: 500.0 -> 5001.0
+2025-02-10 17:36:57,068 - INFO - admin - Database transaction committed successfully.
+2025-02-10 17:36:57,849 - INFO - admin - Database session closed.
+2025-02-10 17:36:58,455 - INFO - admin - Opening Admin page.
+2025-02-10 17:36:58,472 - INFO - admin - Returned to index page successfully
+2025-02-10 17:36:59,605 - INFO - admin - Opening log management page.
+2025-02-10 17:36:59,670 - INFO - admin - Opening Log Manage page.
+2025-02-10 17:37:03,067 - INFO - admin - Opening Admin page.
+2025-02-10 17:37:03,068 - INFO - admin - Returned to index page successfully
+2025-02-10 17:37:09,099 - INFO - admin - Opening log management page.
+2025-02-10 17:37:09,172 - INFO - admin - Opening Log Manage page.
+2025-02-10 17:37:10,339 - INFO - admin - Opening Admin page.
+2025-02-10 17:37:10,340 - INFO - admin - Returned to index page successfully
+2025-02-10 17:39:14,965 - INFO - admin - Opening parameter control page.
+2025-02-10 17:39:15,046 - INFO - admin - Opening Param Control page.
+2025-02-10 17:39:17,929 - INFO - admin - Starting database save operation.
+2025-02-10 17:39:18,918 - WARNING - admin - Parameter validation failed: 脑电采样频率不能为负数
+2025-02-10 17:39:18,919 - INFO - admin - Database session closed.
+2025-02-10 17:39:21,057 - INFO - admin - Starting database save operation.
+2025-02-10 17:39:21,798 - WARNING - admin - Parameter validation failed: 脑电采样频率不能为负数
+2025-02-10 17:39:21,799 - INFO - admin - Database session closed.
+2025-02-10 17:39:23,634 - INFO - admin - Starting database save operation.
+2025-02-10 17:39:24,263 - WARNING - admin - Parameter validation failed: 电极数量不能为负数
+2025-02-10 17:39:24,263 - INFO - admin - Database session closed.
+2025-02-10 17:39:27,097 - INFO - admin - Starting database save operation.
+2025-02-10 17:39:27,855 - WARNING - admin - Parameter validation failed: 量表题目数不能为负数
+2025-02-10 17:39:27,856 - INFO - admin - Database session closed.
+2025-02-10 17:39:30,625 - INFO - admin - Starting database save operation.
+2025-02-10 17:39:31,438 - WARNING - admin - Parameter validation failed: 模型数量不能为负数
+2025-02-10 17:39:31,439 - INFO - admin - Database session closed.
+2025-02-10 17:39:33,298 - INFO - admin - Opening Admin page.
+2025-02-10 17:39:33,298 - INFO - admin - Returned to index page successfully
