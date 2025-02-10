@@ -875,11 +875,14 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
     # 添加生成报告的方法
     def generateReport(self):
         """生成评估报告"""
+        start_time = datetime.now()
         try:
             button = self.sender()
             if button:
                 row = self.tableWidget.indexAt(button.parent().pos()).row()
                 result_id = int(self.tableWidget.item(row, 0).text())
+                
+                logging.info(f"开始生成报告，结果ID: {result_id}")
                 
                 # 创建进度条对话框
                 progress = QProgressDialog("正在生成报告...", None, 0, 100, self)
@@ -1110,12 +1113,17 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     # 更新进度 - 100%
                     progress.setValue(100)
                     
+                    end_time = datetime.now()
+                    duration = (end_time - start_time).total_seconds()
+                    logging.info(f"报告生成完成，结果ID: {result_id}，耗时: {duration:.2f}秒")
+                    
                     # 显示完成提示
                     QMessageBox.information(self, "成功", "报告生成完毕，可以在结果管理中查看。")
-                    logging.info(f"Report generated successfully for result ID {result_id}")
 
                 except Exception as e:
-                    logging.error(f"Error generating report: {str(e)}")
+                    end_time = datetime.now()
+                    duration = (end_time - start_time).total_seconds()
+                    logging.error(f"生成报告失败，结果ID: {result_id}，耗时: {duration:.2f}秒，错误: {str(e)}")
                     QMessageBox.critical(self, "错误", "生成报告时发生错误，请重试。")
                 finally:
                     session.close()
@@ -1123,7 +1131,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     progress.close()
 
         except Exception as e:
-            logging.error(f"Error in generateReport: {str(e)}")
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+            logging.error(f"生成报告过程发生错误，耗时: {duration:.2f}秒，错误: {str(e)}")
             QMessageBox.critical(self, "错误", "生成报告过程中发生错误，请重试。")
 
     def batchEvaluateButton(self):

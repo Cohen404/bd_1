@@ -6960,3 +6960,314 @@ ValueError: Could not find event data
 2025-02-10 20:24:54,106 - INFO - admin - Returned to index page successfully
 2025-02-10 20:24:55,612 - INFO - admin - Opening log management page.
 2025-02-10 20:24:55,680 - INFO - admin - Opening Log Manage page.
+2025-02-10 20:49:27,462 - INFO - 初始化登录界面...
+2025-02-10 20:49:27,465 - INFO - 开始预加载模型...
+2025-02-10 20:49:27,466 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 20:49:27,477 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:49:27,477 - INFO - 模型文件存在，开始加载...
+2025-02-10 20:49:27,482 - INFO - 开始加载INT8量化模型...
+2025-02-10 20:49:27,485 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 20:49:27,488 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:49:27,529 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 20:49:27,530 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 20:49:27,532 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 20:49:27,532 - INFO - 成功预加载量化模型
+2025-02-10 20:49:30,681 - INFO - 未登录 - Opening user login page.
+2025-02-10 20:49:30,734 - INFO - admin - Opening Login page.
+2025-02-10 20:49:33,974 - INFO - admin - User logged in successfully
+2025-02-10 20:49:34,181 - INFO - admin - Opening Admin page.
+2025-02-10 20:49:35,046 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:49:35,054 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:49:35,081 - INFO - admin - Opening health evaluation page.
+2025-02-10 20:49:35,169 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 20:49:37,500 - INFO - admin - 批量评估完成 - 处理数据量: 1个, 用时: 6毫秒
+2025-02-10 20:49:37,518 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 20:49:38,924 - INFO - admin - Prediction result: 1.0
+2025-02-10 20:49:38,942 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 20:49:38,942 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 20:49:40,260 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5
+2025-02-10 20:49:40,900 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:49:40,903 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:50:21,165 - INFO - admin - 开始生成报告...
+2025-02-10 20:50:21,178 - INFO - admin - 开始处理结果ID: 1的报告生成
+2025-02-10 20:50:21,187 - INFO - admin - 成功获取评估结果数据
+2025-02-10 20:50:21,212 - INFO - admin - 成功获取数据记录
+2025-02-10 20:50:21,213 - INFO - admin - 评估分数检查完成
+2025-02-10 20:50:21,213 - INFO - admin - 创建临时目录: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\results\temp_1
+2025-02-10 20:50:21,225 - INFO - admin - 处理图片: Theta.png
+2025-02-10 20:50:21,237 - INFO - admin - 处理图片: Alpha.png
+2025-02-10 20:50:21,248 - INFO - admin - 处理图片: Beta.png
+2025-02-10 20:50:21,259 - INFO - admin - 处理图片: Gamma.png
+2025-02-10 20:50:21,270 - INFO - admin - 处理图片: frequency_band_1.png
+2025-02-10 20:50:21,281 - INFO - admin - 处理图片: frequency_band_2.png
+2025-02-10 20:50:21,295 - INFO - admin - 处理图片: frequency_band_3.png
+2025-02-10 20:50:21,307 - INFO - admin - 处理图片: frequency_band_4.png
+2025-02-10 20:50:21,320 - INFO - admin - 处理图片: frequency_band_5.png
+2025-02-10 20:50:21,332 - INFO - admin - 处理图片: time_过零率.png
+2025-02-10 20:50:21,345 - INFO - admin - 处理图片: time_方差.png
+2025-02-10 20:50:21,356 - INFO - admin - 处理图片: time_能量.png
+2025-02-10 20:50:21,368 - INFO - admin - 处理图片: time_差分.png
+2025-02-10 20:50:21,379 - INFO - admin - 处理图片: frequency_wavelet.png
+2025-02-10 20:50:21,390 - INFO - admin - 处理图片: differential_entropy.png
+2025-02-10 20:50:21,392 - INFO - admin - 图片处理完成
+2025-02-10 20:50:21,393 - INFO - admin - 添加应激防护建议
+2025-02-10 20:50:21,393 - INFO - admin - 添加焦虑防护建议
+2025-02-10 20:50:21,394 - INFO - admin - 防护建议生成完成
+2025-02-10 20:50:21,395 - INFO - admin - HTML内容生成完成
+2025-02-10 20:50:21,396 - INFO - admin - HTML文件保存完成
+2025-02-10 20:50:21,559 - ERROR - admin - Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1110, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:50:21,562 - ERROR - admin - Error generating report: Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1110, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:50:23,901 - INFO - admin - Opening Admin page.
+2025-02-10 20:50:23,901 - INFO - admin - Returned to index page successfully
+2025-02-10 20:51:52,642 - INFO - 初始化登录界面...
+2025-02-10 20:51:52,646 - INFO - 开始预加载模型...
+2025-02-10 20:51:52,646 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 20:51:52,658 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:51:52,658 - INFO - 模型文件存在，开始加载...
+2025-02-10 20:51:52,666 - INFO - 开始加载INT8量化模型...
+2025-02-10 20:51:52,669 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 20:51:52,672 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:51:52,712 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 20:51:52,714 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 20:51:52,716 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 20:51:52,716 - INFO - 成功预加载量化模型
+2025-02-10 20:51:55,078 - INFO - 未登录 - Opening user login page.
+2025-02-10 20:51:55,129 - INFO - admin - Opening Login page.
+2025-02-10 20:51:58,285 - INFO - admin - User logged in successfully
+2025-02-10 20:51:58,510 - INFO - admin - Opening Admin page.
+2025-02-10 20:52:02,610 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:52:02,616 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:52:02,636 - INFO - admin - Opening health evaluation page.
+2025-02-10 20:52:02,710 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 20:52:03,680 - INFO - admin - 开始生成报告...
+2025-02-10 20:52:03,693 - INFO - admin - 开始处理结果ID: 1的报告生成
+2025-02-10 20:52:03,705 - INFO - admin - 成功获取评估结果数据
+2025-02-10 20:52:03,729 - INFO - admin - 成功获取数据记录
+2025-02-10 20:52:03,731 - INFO - admin - 评估分数检查完成
+2025-02-10 20:52:03,731 - INFO - admin - 创建临时目录: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\results\temp_1
+2025-02-10 20:52:03,733 - INFO - admin - 处理图片: Theta.png
+2025-02-10 20:52:03,735 - INFO - admin - 处理图片: Alpha.png
+2025-02-10 20:52:03,736 - INFO - admin - 处理图片: Beta.png
+2025-02-10 20:52:03,737 - INFO - admin - 处理图片: Gamma.png
+2025-02-10 20:52:03,739 - INFO - admin - 处理图片: frequency_band_1.png
+2025-02-10 20:52:03,740 - INFO - admin - 处理图片: frequency_band_2.png
+2025-02-10 20:52:03,742 - INFO - admin - 处理图片: frequency_band_3.png
+2025-02-10 20:52:03,743 - INFO - admin - 处理图片: frequency_band_4.png
+2025-02-10 20:52:03,744 - INFO - admin - 处理图片: frequency_band_5.png
+2025-02-10 20:52:03,746 - INFO - admin - 处理图片: time_过零率.png
+2025-02-10 20:52:03,747 - INFO - admin - 处理图片: time_方差.png
+2025-02-10 20:52:03,749 - INFO - admin - 处理图片: time_能量.png
+2025-02-10 20:52:03,750 - INFO - admin - 处理图片: time_差分.png
+2025-02-10 20:52:03,752 - INFO - admin - 处理图片: frequency_wavelet.png
+2025-02-10 20:52:03,753 - INFO - admin - 处理图片: differential_entropy.png
+2025-02-10 20:52:03,754 - INFO - admin - 图片处理完成
+2025-02-10 20:52:03,754 - INFO - admin - 添加应激防护建议
+2025-02-10 20:52:03,756 - INFO - admin - 添加焦虑防护建议
+2025-02-10 20:52:03,757 - INFO - admin - 防护建议生成完成
+2025-02-10 20:52:03,758 - INFO - admin - HTML内容生成完成
+2025-02-10 20:52:03,759 - INFO - admin - HTML文件保存完成
+2025-02-10 20:52:03,764 - ERROR - admin - 生成PDF时发生错误: 未找到wkhtmltopdf，请先安装wkhtmltopdf软件。
+Windows下载地址: https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe
+Linux安装命令: sudo apt-get install wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1107, in generateReport
+    raise Exception("未找到wkhtmltopdf，请先安装wkhtmltopdf软件。\n" +
+Exception: 未找到wkhtmltopdf，请先安装wkhtmltopdf软件。
+Windows下载地址: https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe
+Linux安装命令: sudo apt-get install wkhtmltopdf
+
+2025-02-10 20:52:03,766 - ERROR - admin - Error generating report: 生成PDF时发生错误: 未找到wkhtmltopdf，请先安装wkhtmltopdf软件。
+Windows下载地址: https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe
+Linux安装命令: sudo apt-get install wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1107, in generateReport
+    raise Exception("未找到wkhtmltopdf，请先安装wkhtmltopdf软件。\n" +
+Exception: 未找到wkhtmltopdf，请先安装wkhtmltopdf软件。
+Windows下载地址: https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe
+Linux安装命令: sudo apt-get install wkhtmltopdf
+
+2025-02-10 20:52:22,513 - INFO - 初始化登录界面...
+2025-02-10 20:52:22,518 - INFO - 开始预加载模型...
+2025-02-10 20:52:22,518 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 20:52:22,533 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:52:22,533 - INFO - 模型文件存在，开始加载...
+2025-02-10 20:52:22,541 - INFO - 开始加载INT8量化模型...
+2025-02-10 20:52:22,544 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 20:52:22,547 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:52:22,610 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 20:52:22,613 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 20:52:22,616 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 20:52:22,616 - INFO - 成功预加载量化模型
+2025-02-10 20:52:23,685 - INFO - 未登录 - Opening user login page.
+2025-02-10 20:52:23,786 - INFO - admin - Opening Login page.
+2025-02-10 20:52:27,375 - INFO - admin - User logged in successfully
+2025-02-10 20:52:27,596 - INFO - admin - Opening Admin page.
+2025-02-10 20:52:28,795 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:52:28,802 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:52:28,822 - INFO - admin - Opening health evaluation page.
+2025-02-10 20:52:28,938 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 20:52:29,778 - ERROR - admin - Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1091, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:52:29,782 - ERROR - admin - Error generating report: Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1091, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:53:06,175 - INFO - 初始化登录界面...
+2025-02-10 20:53:06,179 - INFO - 开始预加载模型...
+2025-02-10 20:53:06,179 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 20:53:06,189 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:53:06,189 - INFO - 模型文件存在，开始加载...
+2025-02-10 20:53:06,195 - INFO - 开始加载INT8量化模型...
+2025-02-10 20:53:06,197 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 20:53:06,200 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 20:53:06,240 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 20:53:06,244 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 20:53:06,246 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 20:53:06,246 - INFO - 成功预加载量化模型
+2025-02-10 20:53:07,424 - INFO - 未登录 - Opening user login page.
+2025-02-10 20:53:07,486 - INFO - admin - Opening Login page.
+2025-02-10 20:53:10,701 - INFO - admin - User logged in successfully
+2025-02-10 20:53:10,927 - INFO - admin - Opening Admin page.
+2025-02-10 20:53:11,752 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:53:11,758 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:53:11,779 - INFO - admin - Opening health evaluation page.
+2025-02-10 20:53:11,850 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 20:53:14,002 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 20:53:14,003 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-10 20:53:15,265 - INFO - admin - Prediction result: 1.0
+2025-02-10 20:53:15,282 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-10 20:53:15,282 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-10 20:53:15,283 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 20:53:15,283 - INFO - admin - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-10 20:53:15,283 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-10 20:53:15,284 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 20:53:15,284 - INFO - admin - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-10 20:53:15,319 - INFO - admin - 当前模型索引: 0
+2025-02-10 20:53:15,319 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-10 20:53:15,320 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-10 20:53:17,105 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 20:53:17,113 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 20:53:17,862 - ERROR - admin - Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1091, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:53:17,865 - ERROR - admin - Error generating report: Error generating PDF: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+Traceback (most recent call last):
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 35, in __init__
+    with open(self.wkhtmltopdf) as f:
+FileNotFoundError: [Errno 2] No such file or directory: b''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1091, in generateReport
+    pdfkit.from_file(html_path, pdf_path, options=options)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\api.py", line 48, in from_file
+    r = PDFKit(input, 'file', options=options, toc=toc, cover=cover, css=css,
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\pdfkit.py", line 45, in __init__
+    self.configuration = (Configuration() if configuration is None
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\pdfkit\configuration.py", line 38, in __init__
+    raise IOError('No wkhtmltopdf executable found: "%s"\n'
+OSError: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+2025-02-10 20:54:02,590 - INFO - admin - Opening Admin page.
+2025-02-10 20:54:02,590 - INFO - admin - Returned to index page successfully
+2025-02-10 20:54:03,736 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 20:54:03,741 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 20:54:03,760 - INFO - admin - Opening health evaluation page.
+2025-02-10 20:54:03,829 - INFO - admin - Opening Health Evaluate page.
