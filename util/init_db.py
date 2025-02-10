@@ -21,9 +21,9 @@ from datetime import datetime
 # PostgreSQL配置信息
 HOST = '127.0.0.1'
 PORT = 5432
-DATABASE = 'bj_health_manage'
+DATABASE = 'bj_health_db'
 USERNAME = 'postgres'
-PASSWORD = 'postgres'
+PASSWORD = 'tj654478'
 
 def hash_password(password):
     """使用SHA-256对密码进行哈希"""

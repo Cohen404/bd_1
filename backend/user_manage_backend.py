@@ -4,6 +4,7 @@
 import os
 import sys
 import logging
+import re  # 添加到文件顶部的导入部分
 sys.path.append('../')
 import time
 from datetime import datetime
@@ -42,6 +43,23 @@ from config import (
 def hash_password(password):
     """使用SHA256加密密码"""
     return hashlib.sha256(password.encode()).hexdigest()
+
+def validate_phone(phone):
+    """
+    验证电话号码格式
+    
+    参数：
+    phone: 要验证的电话号码字符串
+    
+    功能：
+    - 验证电话号码是否只包含合法字符（数字、加号、减号、空格、括号）
+    
+    返回：
+    bool: 电话号码格式是否合法
+    """
+    # 允许数字、加号、减号、空格、括号
+    phone_pattern = r'^[0-9()+\-\s]*$'
+    return bool(re.match(phone_pattern, phone))
 
 class UserFilter(logging.Filter):
     """
@@ -202,6 +220,12 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 new_email = email_edit.text().strip()
                 new_phone = phone_edit.text().strip()
                 
+                # 验证电话号码格式
+                if new_phone and not validate_phone(new_phone):
+                    logging.warning(f"Attempted to update user with invalid phone format: {new_phone}")
+                    QMessageBox.warning(self, "输入错误", "电话号码格式不正确，只能包含数字、加号、减号、空格和括号！")
+                    return
+                
                 # 验证必填项
                 if not new_username:
                     logging.warning(f"Attempted to update user {user_id} with empty username")
@@ -318,6 +342,12 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             QMessageBox.warning(self, "输入错误", "密码为必填项，请输入密码！")
             return
 
+        # 验证电话号码格式
+        if phone and not validate_phone(phone):
+            logging.warning(f"Attempted to add user with invalid phone format: {phone}")
+            QMessageBox.warning(self, "输入错误", "电话号码格式不正确，只能包含数字、加号、减号、空格和括号！")
+            return
+        
         # 检查输入长度
         if len(username) > 30:
             logging.warning(f"Attempted to add user with username too long: {len(username)} chars")
