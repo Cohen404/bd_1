@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt # 导入matplotlib的pyplot模块用于绘图
 import seaborn as sns           # 导入seaborn库用于数据可视化
 import os
 import pandas as pd
+import logging
 
 # 设置绘图风格
 sns.set_style("whitegrid")      # 设置seaborn绘图的背景样式
@@ -299,7 +300,27 @@ def create_feature_dataframe(time_domain_features, frequency_domain_features, ti
     return df, feature_names
 
 def analyze_eeg_data(file_path):
+    """
+    分析EEG数据并提取特征
+    
+    参数：
+    file_path: EEG数据文件路径
+    
+    功能：
+    - 检查是否已存在fif文件，如果存在则直接返回True
+    - 如果不存在，则进行特征提取和可视化
+    
+    返回：
+    bool: 处理是否成功
+    """
     try:
+        # 检查文件扩展名
+        if file_path.endswith('.fif'):
+            # 如果是fif文件，说明已经预处理过，直接返回成功
+            logging.info(f"File {file_path} is already preprocessed (fif format)")
+            return True
+            
+        # 以下是原有的特征提取和可视化逻辑
         # 加载和预处理数据
         data1, eeg_data = load_preprocess_data(file_path)
         global folder_path  # 声明要修改全局变量
