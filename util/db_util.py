@@ -12,9 +12,9 @@ load_dotenv()
 # PostgreSQL配置信息
 HOST = os.getenv('DB_HOST', '127.0.0.1')
 PORT = os.getenv('DB_PORT', 5432)
-DATABASE = os.getenv('DB_NAME', 'bj_health_db')
-USERNAME = os.getenv('DB_USER', 'postgres')
-PASSWORD = os.getenv('DB_PASS', 'tj654478')
+DATABASE = os.getenv('DB_DATABASE', 'bj_health_manage')
+USERNAME = os.getenv('DB_USERNAME', 'postgres')
+PASSWORD = os.getenv('DB_PASSWORD', 'postgres')
 
 # 创建数据库连接
 connection_string = f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
