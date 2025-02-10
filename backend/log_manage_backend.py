@@ -20,6 +20,7 @@ from sql_model.tb_user import User
 from util.db_util import SessionClass
 import logging
 from util.window_manager import WindowManager
+import time
 
 from config import (
     USER_STATUS_FILE, 
@@ -288,6 +289,8 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
+        start_time = time.time()  # 记录开始时间
+        
         path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
@@ -306,6 +309,11 @@ class Log_Manage_WindowActions(log_manage_UI.Ui_MainWindow, QMainWindow):
             # 隐藏并关闭当前窗口
             self.hide()
             self.close()
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回首页耗时: {elapsed_ms}毫秒")
             
             logging.info("Returned to index page successfully")
         except Exception as e:

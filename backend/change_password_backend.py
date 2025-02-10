@@ -16,6 +16,7 @@ import logging
 from util.window_manager import WindowManager
 import hashlib
 from config import USER_STATUS_FILE, CURRENT_USER_FILE, LOG_FILE
+import time
 
 def hash_password(password):
     """使用SHA256加密密码"""
@@ -224,6 +225,8 @@ class change_pwd_Controller(QWidget):
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
+        start_time = time.time()  # 记录开始时间
+        
         path = USER_STATUS_FILE  # 使用配置的路径
         user_status = operate_user.read(path)
         
@@ -242,6 +245,11 @@ class change_pwd_Controller(QWidget):
             # 隐藏并关闭当前窗口
             self.hide()
             self.close()
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回首页耗时: {elapsed_ms}毫秒")
             
             logging.info("Returned to index page successfully")
         except Exception as e:

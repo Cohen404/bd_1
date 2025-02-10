@@ -5,6 +5,7 @@
 
 import sys
 from datetime import datetime
+import time
 sys.path.append('../')
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
@@ -145,11 +146,19 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
         """
         返回首页
         """
+        start_time = time.time()  # 记录开始时间
+        
         try:
             self.index = init_login_backend.Index_WindowActions()
             window_manager = WindowManager()
             window_manager.register_window('init_login', self.index)
             window_manager.show_window('init_login')
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回首页耗时: {elapsed_ms}毫秒", extra={'username': "未登录"})
+            
             logging.info("Returned to initial login page", extra={'username': "未登录"})
             self.close()
         except Exception as e:

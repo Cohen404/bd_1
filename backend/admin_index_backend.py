@@ -5,6 +5,7 @@
 """
 
 import sys
+import time
 
 from front import param_manage_UI
 
@@ -12,7 +13,7 @@ sys.path.append('../')
 from datetime import datetime
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 import state.operate_user as operate_user
 # 导入本页面的前端部分
 import front.admin_index_UI as admin_index_UI
@@ -185,15 +186,25 @@ class AdminWindowActions(admin_index_UI.Ui_MainWindow, QMainWindow):
         """
         返回首页
         """
-        start_time = datetime.now()
-        operate_user.ordinary_user(USER_STATUS_FILE)  # 使用配置文件中的路径
-        self.login = login_backend.Login_WindowActions()
-        end_time = datetime.now()
-        logging.info(f"Switched to regular user mode. Login page is being opened. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
-        window_manager = WindowManager()
-        window_manager.register_window('login', self.login)
-        window_manager.show_window('login')
-        self.close()
+        start_time = time.time()  # 记录开始时间
+        
+        try:
+            operate_user.ordinary_user(USER_STATUS_FILE)  # 使用配置文件中的路径
+            self.login = login_backend.Login_WindowActions()
+            window_manager = WindowManager()
+            window_manager.register_window('login', self.login)
+            window_manager.show_window('login')
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回登录页面耗时: {elapsed_ms}毫秒")
+            
+            logging.info("Switched to regular user mode. Login page is being opened.")
+            self.close()
+        except Exception as e:
+            logging.error(f"Error in return_index: {str(e)}")
+            QMessageBox.critical(self, "错误", f"返回登录页面时发生错误：{str(e)}")
 
     # 打开健康评估页面
     def open_health_evaluate(self):

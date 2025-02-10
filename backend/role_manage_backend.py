@@ -5,6 +5,7 @@ import os
 import sys
 import logging
 import traceback
+import time
 sys.path.append('../')
 from datetime import datetime
 
@@ -284,6 +285,8 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             
     def return_to_user_manage(self):
         """返回用户管理界面"""
+        start_time = time.time()  # 记录开始时间
+        
         try:
             window_manager = WindowManager()
             self._user_manage_window = user_manage_backend.User_Manage_WindowActions()
@@ -293,6 +296,11 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             # 隐藏并关闭当前窗口
             self.hide()
             self.close()
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回用户管理界面耗时: {elapsed_ms}毫秒")
             
             logging.info("Returned to user management page")
         except Exception as e:

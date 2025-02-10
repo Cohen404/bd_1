@@ -470,6 +470,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         返回到相应的主页面
         根据用户类型返回到管理员或普通用户页面
         """
+        start_time = time.time()  # 记录开始时间
+        
         path = USER_STATUS_FILE
         user_status = operate_user.read(path)
         
@@ -488,6 +490,11 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             # 隐藏并关闭当前窗口
             self.hide()
             self.close()
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回首页耗时: {elapsed_ms}毫秒", extra={'username': self.username})
             
             logging.info("Returned to index page successfully", extra={'username': self.username})
         except Exception as e:

@@ -4,9 +4,10 @@
 import sys
 sys.path.append('../')
 from datetime import datetime
+import time
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from state import operate_user as operate_user
 # 导入本页面的前端部分
 import front.index_UI as front_page
@@ -240,16 +241,24 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         返回登录页面
         """
-        start_time = datetime.now()
-        self.login = login_backend.Login_WindowActions()
-        end_time = datetime.now()
-        logger = logging.getLogger()
-        logger.addFilter(UserFilter(self.username))
-        logging.info(f"Returning to login page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
-        window_manager = WindowManager()
-        window_manager.register_window('login', self.login)
-        window_manager.show_window('login')
-        self.close()
+        start_time = time.time()  # 记录开始时间
+        
+        try:
+            self.login = login_backend.Login_WindowActions()
+            window_manager = WindowManager()
+            window_manager.register_window('login', self.login)
+            window_manager.show_window('login')
+            
+            # 记录返回耗时
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"返回登录页面耗时: {elapsed_ms}毫秒", extra={'username': self.username})
+            
+            logging.info("Returned to login page", extra={'username': self.username})
+            self.close()
+        except Exception as e:
+            logging.error(f"Error returning to login: {str(e)}", extra={'username': self.username})
+            QMessageBox.critical(self, "错误", f"返回登录页面时发生错误：{str(e)}")
 
     def open_help(self):
         """
