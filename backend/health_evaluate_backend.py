@@ -1206,12 +1206,8 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.batch_inference_thread.finished.connect(self.onBatchComplete)
             self.batch_inference_thread.start()
             
-            # 在完成后记录耗时和处理的数据数量
-            end_time = time.time()
-            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
-            logging.info(f"批量评估完成 - 处理数据量: {selected_count}个, 用时: {elapsed_ms}毫秒")
-            
-            QMessageBox.information(self, "完成", f"批量评估完成\n处理数据量: {selected_count}个")
+            # 记录开始处理的日志
+            logging.info(f"开始批量评估 - 选中数据量: {selected_count}个")
             
         except Exception as e:
             error_msg = f"批量评估失败: {str(e)}"
@@ -1284,38 +1280,67 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         QMessageBox.information(self, "提示", "已取消覆盖操作")
                         return
                 
+                # 记录成功处理的数量
+                success_count = 0
+                
                 # 保存或更新结果
                 for i, data_id in enumerate(self.selected_data_ids):
-                    # 每个数据有三个分数
-                    base_idx = i * 3
-                    stress_score = round(self.batch_results[base_idx], 1)
-                    depression_score = round(self.batch_results[base_idx + 1], 1)
-                    anxiety_score = round(self.batch_results[base_idx + 2], 1)
-                    
-                    # 检查是否已存在结果
-                    existing_result = session.query(Result).filter(Result.id == data_id).first()
-                    if existing_result:
-                        # 更新现有结果
-                        existing_result.stress_score = stress_score
-                        existing_result.depression_score = depression_score
-                        existing_result.anxiety_score = anxiety_score
-                        existing_result.result_time = result_time
-                        logging.info(f"更新ID {data_id} 的评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}")
-                    else:
-                        # 创建新结果
-                        new_result = Result(
-                            id=data_id,
-                            stress_score=stress_score,
-                            depression_score=depression_score,
-                            anxiety_score=anxiety_score,
-                            result_time=result_time,
-                            user_id=self.user_id
-                        )
-                        session.add(new_result)
-                        logging.info(f"添加ID {data_id} 的新评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}")
+                    try:
+                        # 每个数据有三个分数
+                        base_idx = i * 3
+                        if base_idx + 2 >= len(self.batch_results):
+                            logging.error(f"数据索引超出范围: {base_idx}")
+                            continue
+                            
+                        stress_score = round(self.batch_results[base_idx], 1)
+                        depression_score = round(self.batch_results[base_idx + 1], 1)
+                        anxiety_score = round(self.batch_results[base_idx + 2], 1)
+                        
+                        # 计算社交孤立分数，确保不为null
+                        try:
+                            if stress_score is None or depression_score is None or anxiety_score is None:
+                                social_isolation_score = 0
+                                logging.warning(f"ID {data_id} 的某些分数为空，社交孤立分数设为0")
+                            else:
+                                social_isolation_score = round((stress_score + depression_score + anxiety_score) / 20, 1)
+                        except Exception as e:
+                            social_isolation_score = 0
+                            logging.error(f"计算ID {data_id} 的社交孤立分数时发生错误: {str(e)}，设为0")
+                        
+                        # 检查是否已存在结果
+                        existing_result = session.query(Result).filter(Result.id == data_id).first()
+                        if existing_result:
+                            # 更新现有结果
+                            existing_result.stress_score = stress_score
+                            existing_result.depression_score = depression_score
+                            existing_result.anxiety_score = anxiety_score
+                            existing_result.social_isolation_score = social_isolation_score
+                            existing_result.result_time = result_time
+                            logging.info(f"更新ID {data_id} 的评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}, 社交孤立: {social_isolation_score:.1f}")
+                        else:
+                            # 创建新结果
+                            new_result = Result(
+                                id=data_id,
+                                stress_score=stress_score,
+                                depression_score=depression_score,
+                                anxiety_score=anxiety_score,
+                                social_isolation_score=social_isolation_score,
+                                result_time=result_time,
+                                user_id=self.user_id
+                            )
+                            session.add(new_result)
+                            logging.info(f"添加ID {data_id} 的新评估结果 - 应激: {stress_score:.1f}, 抑郁: {depression_score:.1f}, 焦虑: {anxiety_score:.1f}, 社交孤立: {social_isolation_score:.1f}")
+                        
+                        success_count += 1
+                        
+                    except Exception as e:
+                        logging.error(f"处理ID {data_id} 时发生错误: {str(e)}")
+                        continue
                 
                 session.commit()
-                QMessageBox.information(self, "成功", "批量评估完成，结果已保存")
+                
+                # 在所有处理完成后显示成功信息
+                QMessageBox.information(self, "成功", f"批量评估完成\n成功处理: {success_count} 条数据")
                 
                 # 刷新表格显示
                 self.show_table()

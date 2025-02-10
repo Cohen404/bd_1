@@ -7271,3 +7271,99 @@ If this file exists please check that this process can read it or you can pass p
 2025-02-10 20:54:03,741 - INFO - admin - Successfully displayed 1 data records
 2025-02-10 20:54:03,760 - INFO - admin - Opening health evaluation page.
 2025-02-10 20:54:03,829 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:12:27,033 - INFO - 初始化登录界面...
+2025-02-10 21:12:27,036 - INFO - 开始预加载模型...
+2025-02-10 21:12:27,036 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:12:27,047 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:12:27,047 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:12:27,052 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:12:27,055 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:12:27,057 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:12:27,099 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:12:27,102 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:12:27,104 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:12:27,104 - INFO - 成功预加载量化模型
+2025-02-10 21:12:44,247 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:12:44,312 - INFO - admin - Opening Login page.
+2025-02-10 21:12:47,771 - INFO - admin - User logged in successfully
+2025-02-10 21:12:48,018 - INFO - admin - Opening Admin page.
+2025-02-10 21:12:48,888 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:12:48,896 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:12:48,917 - INFO - admin - Opening health evaluation page.
+2025-02-10 21:12:49,039 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:12:50,971 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:12:50,972 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-10 21:12:52,065 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:12:52,076 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-10 21:12:52,077 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-10 21:12:52,077 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:12:52,078 - INFO - admin - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-10 21:12:52,078 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-10 21:12:52,078 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:12:52,078 - INFO - admin - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-10 21:12:52,112 - INFO - admin - 当前模型索引: 0
+2025-02-10 21:12:52,113 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-10 21:12:52,114 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-10 21:12:54,675 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 21:12:54,684 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 21:12:56,193 - INFO - admin - 批量评估完成 - 处理数据量: 1个, 用时: 6毫秒
+2025-02-10 21:12:56,197 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:12:57,259 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:12:57,268 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:12:57,269 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:12:58,643 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:12:59,587 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:12:59,591 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:13:13,457 - INFO - admin - 批量评估完成 - 处理数据量: 1个, 用时: 4毫秒
+2025-02-10 21:13:13,460 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:13:14,520 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:13:14,528 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:13:14,529 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:13:18,204 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:13:20,052 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:13:20,056 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:14:54,498 - INFO - 初始化登录界面...
+2025-02-10 21:14:54,502 - INFO - 开始预加载模型...
+2025-02-10 21:14:54,502 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:14:54,514 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:14:54,514 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:14:54,520 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:14:54,524 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:14:54,530 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:14:54,571 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:14:54,574 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:14:54,576 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:14:54,577 - INFO - 成功预加载量化模型
+2025-02-10 21:14:55,555 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:14:55,606 - INFO - admin - Opening Login page.
+2025-02-10 21:14:59,038 - INFO - admin - User logged in successfully
+2025-02-10 21:14:59,303 - INFO - admin - Opening Admin page.
+2025-02-10 21:15:00,309 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:15:00,315 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:15:00,336 - INFO - admin - Opening health evaluation page.
+2025-02-10 21:15:00,441 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:15:01,990 - INFO - admin - 开始批量评估 - 选中数据量: 1个
+2025-02-10 21:15:02,014 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:15:03,259 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:15:03,272 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:15:03,273 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:15:04,711 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:15:05,397 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:15:05,400 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:15:08,245 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:15:08,246 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-02-10 21:15:09,328 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:15:09,341 - INFO - admin - 第一个模型评估结果: 95.0
+2025-02-10 21:15:09,341 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-02-10 21:15:09,342 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:15:09,344 - INFO - admin - 抑郁评估结果: 40.09433962264151 (量表分数: 42.5)
+2025-02-10 21:15:09,344 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-02-10 21:15:09,344 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:15:09,345 - INFO - admin - 焦虑评估结果: 78.5 (量表分数: 48.0)
+2025-02-10 21:15:09,396 - INFO - admin - 当前模型索引: 0
+2025-02-10 21:15:09,397 - INFO - admin - 第一个模型的结果: 95.0
+2025-02-10 21:15:09,397 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-02-10 21:15:11,135 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 21:15:11,141 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 21:15:12,080 - INFO - admin - Opening Admin page.
+2025-02-10 21:15:12,080 - INFO - admin - Returned to index page successfully
