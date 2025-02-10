@@ -49,6 +49,7 @@ from docx import Document
 from docx.shared import Inches
 import traceback
 from front.image_viewer import ImageViewer
+import time
 
 class UserFilter(logging.Filter):
     """
@@ -424,18 +425,34 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.curve_label.setText("显示图片时发生错误")
 
     def next_image(self):
+        """显示下一张图片"""
+        start_time = time.time()  # 记录开始时间
+        
         if self.current_index < len(self.image_list) - 1:
             self.current_index += 1
         else:
             self.current_index = 0
         self.show_image()
+        
+        # 记录切换耗时
+        end_time = time.time()
+        elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+        logging.info(f"切换到下一张图片 - 当前索引: {self.current_index}, 用时: {elapsed_ms}毫秒")
 
     def previous_image(self):
+        """显示上一张图片"""
+        start_time = time.time()  # 记录开始时间
+        
         if self.current_index > 0:
             self.current_index -= 1
         else:
             self.current_index = len(self.image_list) - 1
         self.show_image()
+        
+        # 记录切换耗时
+        end_time = time.time()
+        elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+        logging.info(f"切换到上一张图片 - 当前索引: {self.current_index}, 用时: {elapsed_ms}毫秒")
 
     # btn_return返回首页
     def return_index(self):
@@ -1104,6 +1121,10 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 QMessageBox.warning(self, "警告", "最多只能选择200个数据进行批量评估")
                 return
             
+            # 记录开始时间和选中的数据数量
+            start_time = time.time()
+            selected_count = len(selected_rows)
+            
             # 收集选中的数据ID和路径
             self.selected_data_ids = []
             data_paths = []
@@ -1143,14 +1164,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.elapsed_seconds = 0
             
             # 创建进度对话框
-            self.progress_dialog = QProgressDialog("正在进行批量评估... (已用时: 0秒)", "取消", 0, 100, self)
-            self.progress_dialog.setWindowTitle("批量评估进度")
+            self.progress_dialog = QProgressDialog("正在进行批量评估...", "取消", 0, len(selected_rows), self)
             self.progress_dialog.setWindowModality(Qt.WindowModal)
             self.progress_dialog.setMinimumDuration(0)
-            self.progress_dialog.setValue(0)
-            
-            # 启动计时器
-            self.timer.start(1000)  # 每秒更新一次
             
             # 创建并启动批量评估线程
             self.batch_inference_thread = BatchInferenceModel(data_paths, model_0.model_path)
@@ -1160,10 +1176,17 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.batch_inference_thread.finished.connect(self.onBatchComplete)
             self.batch_inference_thread.start()
             
+            # 在完成后记录耗时和处理的数据数量
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"批量评估完成 - 处理数据量: {selected_count}个, 用时: {elapsed_ms}毫秒")
+            
+            QMessageBox.information(self, "完成", f"批量评估完成\n处理数据量: {selected_count}个")
+            
         except Exception as e:
-            logging.error(f"批量评估过程中发生错误: {str(e)}")
-            logging.error(traceback.format_exc())
-            QMessageBox.critical(self, "错误", f"批量评估过程中发生错误: {str(e)}")
+            error_msg = f"批量评估失败: {str(e)}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
 
     def updateBatchProgress(self, progress):
         """

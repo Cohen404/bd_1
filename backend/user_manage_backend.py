@@ -25,6 +25,9 @@ from backend import index_backend
 from backend import admin_index_backend
 from backend import role_manage_backend
 from sql_model.tb_user import User
+from sql_model.tb_permission import Permission
+from sql_model.tb_role_permission import RolePermission
+from sql_model.tb_user_role import UserRole
 from util.db_util import SessionClass
 from util.window_manager import WindowManager
 
@@ -218,7 +221,22 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 user.username = new_username
                 user.email = email_edit.text() or None
                 user.phone = phone_edit.text() or None
-                user.user_type = "admin" if role_combo.currentText() == "管理员" else "user"
+                new_user_type = "admin" if role_combo.currentText() == "管理员" else "user"
+                
+                # 如果用户类型发生变化，更新用户-角色关联
+                if new_user_type != user.user_type:
+                    # 删除旧的用户-角色关联
+                    session.query(UserRole).filter_by(user_id=user_id).delete()
+                    
+                    # 创建新的用户-角色关联
+                    new_user_role = UserRole(
+                        user_id=user_id,
+                        role_id=new_user_type
+                    )
+                    session.add(new_user_role)
+                    
+                    # 更新用户类型
+                    user.user_type = new_user_type
                 
                 # 记录变更到日志
                 changes = []
@@ -262,6 +280,13 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
 
         session = SessionClass()
         try:
+            # 检查角色是否存在及是否有权限配置
+            role_permissions = session.query(RolePermission).filter_by(role_id=user_type).all()
+            if not role_permissions:
+                logging.error(f"No permissions found for role: {user_type}")
+                QMessageBox.warning(self, "错误", f"角色 {user_type} 未配置权限，请先在角色管理中配置权限！")
+                return
+
             # 检查用户名是否已存在
             existing_user = session.query(User).filter(User.username == username).first()
             if existing_user:
@@ -272,17 +297,27 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             # 对密码进行SHA256加密
             hashed_password = hash_password(password)
 
+            # 生成用户ID
+            user_id = f"user{int(time.time())}"
+
             new_user = User(
-                user_id=f"user{int(time.time())}",
+                user_id=user_id,
                 username=username,
-                password=hashed_password,  # 存储加密后的密码
+                password=hashed_password,
                 email=email or None,
                 phone=phone or None,
                 user_type=user_type,
                 created_at=datetime.now()
             )
 
+            # 创建用户-角色关联
+            new_user_role = UserRole(
+                user_id=user_id,
+                role_id=user_type
+            )
+
             session.add(new_user)
+            session.add(new_user_role)
             session.commit()
             
             # 清空输入框
@@ -292,7 +327,7 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             self.phoneIN.clear()
             
             self.show_table()
-            logging.info(f"New user added: {username} (type: {user_type})")
+            logging.info(f"New user added: {username} (type: {user_type}) with {len(role_permissions)} permissions")
             QMessageBox.information(self, "成功", "用户添加成功！")
             
         except Exception as e:
@@ -322,8 +357,12 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             )
 
             if reply == QMessageBox.Yes:
+                # 先删除用户-角色关联
+                session.query(UserRole).filter_by(user_id=user_id).delete()
+                # 再删除用户
                 session.delete(user)
                 session.commit()
+                
                 logging.info(f"User deleted successfully: {user.username} (ID: {user_id})")
                 QMessageBox.information(self, "成功", "用户删除成功！")
                 self.show_table()

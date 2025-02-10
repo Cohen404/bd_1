@@ -4432,3 +4432,658 @@ RuntimeError: There is at least 1 reference to internal data
 2025-02-10 00:32:45,215 - INFO - admin - Returned to index page successfully
 2025-02-10 00:32:47,130 - INFO - admin - Switched to regular user mode. Login page is being opened.
 2025-02-10 00:32:47,226 - INFO - admin - Opening Login page.
+2025-02-10 13:42:00,464 - INFO - 初始化登录界面...
+2025-02-10 13:42:00,500 - INFO - 开始预加载模型...
+2025-02-10 13:42:00,500 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:42:00,510 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:42:00,511 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:42:00,516 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:42:00,518 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:42:00,521 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:42:00,661 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:42:00,663 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:42:00,664 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:42:00,664 - INFO - 成功预加载量化模型
+2025-02-10 13:42:15,065 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:42:15,128 - INFO - admin - Opening Login page.
+2025-02-10 13:42:18,671 - INFO - admin - User logged in successfully
+2025-02-10 13:42:18,893 - INFO - admin - Opening Admin page.
+2025-02-10 13:42:20,808 - INFO - admin - Opening parameter control page.
+2025-02-10 13:42:20,893 - INFO - admin - Opening Param Control page.
+2025-02-10 13:42:23,462 - INFO - admin - Opening Admin page.
+2025-02-10 13:42:23,465 - INFO - admin - Returned to index page successfully
+2025-02-10 13:42:24,105 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:42:24,106 - INFO - admin - Successfully displayed 0 data records
+2025-02-10 13:42:24,125 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:42:24,211 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:42:25,705 - INFO - admin - Opening Admin page.
+2025-02-10 13:42:25,705 - INFO - admin - Returned to index page successfully
+2025-02-10 13:42:26,893 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-10 13:42:26,894 - INFO - admin - Opening data view page.
+2025-02-10 13:42:26,988 - INFO - admin - Opening Data View page.
+2025-02-10 13:48:16,841 - INFO - 初始化登录界面...
+2025-02-10 13:48:16,845 - INFO - 开始预加载模型...
+2025-02-10 13:48:16,845 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:48:16,855 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:48:16,856 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:48:16,862 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:48:16,863 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:48:16,867 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:48:16,907 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:48:16,910 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:48:16,912 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:48:16,913 - INFO - 成功预加载量化模型
+2025-02-10 13:48:26,631 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:48:26,702 - INFO - admin - Opening Login page.
+2025-02-10 13:48:31,393 - INFO - admin - User logged in successfully
+2025-02-10 13:48:31,626 - INFO - admin - Opening Admin page.
+2025-02-10 13:48:35,849 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-10 13:48:35,853 - INFO - admin - Opening data view page.
+2025-02-10 13:48:36,050 - INFO - admin - Opening Data View page.
+2025-02-10 13:48:47,740 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/codenew/bj_health_manage/tmp/test\000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 13:48:47,748 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2, Username: admin
+2025-02-10 13:48:47,749 - INFO - admin - 批量上传完成 - 成功: 1个, 失败: 0个, 用时: 10毫秒
+2025-02-10 13:48:47,768 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 13:48:49,995 - INFO - admin - Opening Admin page.
+2025-02-10 13:48:49,995 - INFO - admin - Returned to index page successfully
+2025-02-10 13:48:51,248 - INFO - admin - Opening log management page.
+2025-02-10 13:48:51,410 - INFO - admin - Opening Log Manage page.
+2025-02-10 13:49:01,237 - INFO - admin - Opening Admin page.
+2025-02-10 13:49:01,240 - INFO - admin - Returned to index page successfully
+2025-02-10 13:49:01,823 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:49:01,829 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:49:01,849 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:49:01,987 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:49:03,112 - INFO - admin - Opening Admin page.
+2025-02-10 13:49:03,112 - INFO - admin - Returned to index page successfully
+2025-02-10 13:49:04,314 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 13:49:04,316 - INFO - admin - Opening data view page.
+2025-02-10 13:49:04,433 - INFO - admin - Opening Data View page.
+2025-02-10 13:49:05,675 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 13:49:05,678 - ERROR - admin - 处理过程中发生错误: 未找到FIF文件
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1157, in run
+    raise Exception("未找到FIF文件")
+Exception: 未找到FIF文件
+
+2025-02-10 13:49:05,702 - ERROR - admin - Error during processing: 处理过程中发生错误: 未找到FIF文件
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1157, in run
+    raise Exception("未找到FIF文件")
+Exception: 未找到FIF文件
+
+2025-02-10 13:49:25,558 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 13:49:25,560 - ERROR - admin - 处理过程中发生错误: 未找到FIF文件
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1157, in run
+    raise Exception("未找到FIF文件")
+Exception: 未找到FIF文件
+
+2025-02-10 13:49:25,581 - ERROR - admin - Error during processing: 处理过程中发生错误: 未找到FIF文件
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1157, in run
+    raise Exception("未找到FIF文件")
+Exception: 未找到FIF文件
+
+2025-02-10 13:50:01,855 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 13:50:18,710 - INFO - admin - Data processing completed successfully
+2025-02-10 13:50:20,950 - INFO - admin - Opening Admin page.
+2025-02-10 13:50:20,957 - INFO - admin - Returned to index page successfully
+2025-02-10 13:50:21,980 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:50:21,986 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:50:22,007 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:50:22,109 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:52:31,913 - INFO - 初始化登录界面...
+2025-02-10 13:52:31,916 - INFO - 开始预加载模型...
+2025-02-10 13:52:31,916 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:52:31,926 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:52:31,926 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:52:31,930 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:52:31,933 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:52:31,934 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:52:31,975 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:52:31,977 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:52:31,979 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:52:31,979 - INFO - 成功预加载量化模型
+2025-02-10 13:52:34,454 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:52:34,534 - INFO - admin - Opening Login page.
+2025-02-10 13:52:38,130 - INFO - admin - User logged in successfully
+2025-02-10 13:52:38,354 - INFO - admin - Opening Admin page.
+2025-02-10 13:52:39,461 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:52:39,469 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:52:39,488 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:52:39,569 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:52:42,103 - ERROR - admin - 计算量表分数时发生错误: could not convert string to float: 'CB0101'
+2025-02-10 13:52:42,105 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\batch_inference.py", line 156, in calculate_scale_scores
+    first_20 = df.iloc[0, :20].values.astype(float)
+ValueError: could not convert string to float: 'CB0101'
+
+2025-02-10 13:52:43,295 - INFO - admin - Prediction result: 1.0
+2025-02-10 13:52:43,303 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:52:43,304 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:52:43,348 - INFO - admin - 添加ID 1 的新评估结果 - 应激: 95.0, 抑郁: 95.0, 焦虑: 95.0
+2025-02-10 13:52:44,599 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:52:44,604 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:52:45,511 - INFO - admin - Opening Admin page.
+2025-02-10 13:52:45,512 - INFO - admin - Returned to index page successfully
+2025-02-10 13:52:46,764 - INFO - admin - Opening log management page.
+2025-02-10 13:52:46,935 - INFO - admin - Opening Log Manage page.
+2025-02-10 13:53:16,997 - INFO - 初始化登录界面...
+2025-02-10 13:53:17,000 - INFO - 开始预加载模型...
+2025-02-10 13:53:17,000 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:53:17,009 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:53:17,010 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:53:17,016 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:53:17,019 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:53:17,022 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:53:17,061 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:53:17,063 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:53:17,066 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:53:17,066 - INFO - 成功预加载量化模型
+2025-02-10 13:53:18,376 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:53:18,432 - INFO - admin - Opening Login page.
+2025-02-10 13:53:22,517 - INFO - admin - User logged in successfully
+2025-02-10 13:53:22,740 - INFO - admin - Opening Admin page.
+2025-02-10 13:53:23,725 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:53:23,730 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:53:23,751 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:53:23,843 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:53:26,419 - INFO - admin - 批量评估完成 - 成功: 0个, 失败: 0个, 用时: 1毫秒
+2025-02-10 13:53:26,425 - ERROR - admin - 计算量表分数时发生错误: could not convert string to float: 'CB0101'
+2025-02-10 13:53:26,426 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\batch_inference.py", line 156, in calculate_scale_scores
+    first_20 = df.iloc[0, :20].values.astype(float)
+ValueError: could not convert string to float: 'CB0101'
+
+2025-02-10 13:53:27,587 - INFO - admin - Prediction result: 1.0
+2025-02-10 13:53:27,596 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:53:27,597 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:53:29,540 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 95.0, 焦虑: 95.0
+2025-02-10 13:53:30,106 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:53:30,110 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:53:31,326 - INFO - admin - Opening Admin page.
+2025-02-10 13:53:31,327 - INFO - admin - Returned to index page successfully
+2025-02-10 13:53:32,293 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:53:32,298 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:53:32,318 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:53:32,398 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:53:33,380 - INFO - admin - Opening Admin page.
+2025-02-10 13:53:33,382 - INFO - admin - Returned to index page successfully
+2025-02-10 13:53:34,395 - INFO - admin - Opening log management page.
+2025-02-10 13:53:34,526 - INFO - admin - Opening Log Manage page.
+2025-02-10 13:53:45,976 - INFO - admin - Opening Admin page.
+2025-02-10 13:53:45,977 - INFO - admin - Returned to index page successfully
+2025-02-10 13:53:46,853 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:53:46,859 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:53:46,879 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:53:46,982 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:53:48,806 - INFO - admin - 批量评估完成 - 成功: 0个, 失败: 0个, 用时: 1毫秒
+2025-02-10 13:53:48,811 - ERROR - admin - 计算量表分数时发生错误: could not convert string to float: 'CB0101'
+2025-02-10 13:53:48,812 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\batch_inference.py", line 156, in calculate_scale_scores
+    first_20 = df.iloc[0, :20].values.astype(float)
+ValueError: could not convert string to float: 'CB0101'
+
+2025-02-10 13:53:49,855 - INFO - admin - Prediction result: 1.0
+2025-02-10 13:53:49,866 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:53:49,866 - INFO - admin - 量表分数不存在，返回模型分数的90%
+2025-02-10 13:53:52,092 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 95.0, 焦虑: 95.0
+2025-02-10 13:53:52,898 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:53:52,902 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:53:55,886 - INFO - admin - Opening Admin page.
+2025-02-10 13:53:55,889 - INFO - admin - Returned to index page successfully
+2025-02-10 13:55:29,413 - INFO - 初始化登录界面...
+2025-02-10 13:55:29,416 - INFO - 开始预加载模型...
+2025-02-10 13:55:29,416 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:55:29,425 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:55:29,426 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:55:29,431 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:55:29,434 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:55:29,437 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:55:29,488 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:55:29,490 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:55:29,492 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:55:29,492 - INFO - 成功预加载量化模型
+2025-02-10 13:55:32,035 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:55:32,094 - INFO - admin - Opening Login page.
+2025-02-10 13:55:35,533 - INFO - admin - User logged in successfully
+2025-02-10 13:55:35,739 - INFO - admin - Opening Admin page.
+2025-02-10 13:55:36,727 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:55:36,734 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:55:36,757 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:55:36,850 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:55:38,197 - INFO - admin - 批量评估完成 - 成功: 0个, 失败: 0个, 用时: 1毫秒
+2025-02-10 13:55:38,203 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 13:55:39,471 - INFO - admin - Prediction result: 1.0
+2025-02-10 13:55:39,482 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 13:55:39,482 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 13:55:40,776 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5
+2025-02-10 13:55:41,438 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:55:41,443 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:55:42,971 - INFO - admin - Opening Admin page.
+2025-02-10 13:55:42,972 - INFO - admin - Returned to index page successfully
+2025-02-10 13:55:43,952 - INFO - admin - Opening log management page.
+2025-02-10 13:55:44,039 - INFO - admin - Opening Log Manage page.
+2025-02-10 13:59:22,149 - INFO - 初始化登录界面...
+2025-02-10 13:59:22,153 - INFO - 开始预加载模型...
+2025-02-10 13:59:22,153 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 13:59:22,164 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:59:22,165 - INFO - 模型文件存在，开始加载...
+2025-02-10 13:59:22,171 - INFO - 开始加载INT8量化模型...
+2025-02-10 13:59:22,173 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 13:59:22,177 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 13:59:22,217 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 13:59:22,219 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 13:59:22,222 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 13:59:22,222 - INFO - 成功预加载量化模型
+2025-02-10 13:59:24,794 - INFO - 未登录 - Opening user login page.
+2025-02-10 13:59:24,854 - INFO - admin - Opening Login page.
+2025-02-10 13:59:28,214 - INFO - admin - User logged in successfully
+2025-02-10 13:59:28,422 - INFO - admin - Opening Admin page.
+2025-02-10 13:59:29,530 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:59:29,537 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:59:29,561 - INFO - admin - Opening health evaluation page.
+2025-02-10 13:59:29,656 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 13:59:32,387 - INFO - admin - 批量评估完成 - 处理数据量: 1个, 用时: 7毫秒
+2025-02-10 13:59:32,392 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 13:59:33,619 - INFO - admin - Prediction result: 1.0
+2025-02-10 13:59:33,629 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 13:59:33,629 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 13:59:35,172 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5
+2025-02-10 13:59:35,956 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 13:59:35,960 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 13:59:37,260 - INFO - admin - Opening Admin page.
+2025-02-10 13:59:37,261 - INFO - admin - Returned to index page successfully
+2025-02-10 13:59:38,539 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 13:59:38,540 - INFO - admin - Opening results view page.
+2025-02-10 13:59:38,650 - INFO - admin - Opening Results View page.
+2025-02-10 13:59:39,791 - INFO - admin - Opening Admin page.
+2025-02-10 13:59:39,793 - INFO - admin - Returned to index page successfully
+2025-02-10 13:59:40,681 - INFO - admin - Opening log management page.
+2025-02-10 13:59:40,785 - INFO - admin - Opening Log Manage page.
+2025-02-10 13:59:47,196 - INFO - admin - Opening Admin page.
+2025-02-10 13:59:47,199 - INFO - admin - Returned to index page successfully
+2025-02-10 14:02:52,652 - INFO - 初始化登录界面...
+2025-02-10 14:02:52,656 - INFO - 开始预加载模型...
+2025-02-10 14:02:52,656 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 14:02:52,666 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 14:02:52,667 - INFO - 模型文件存在，开始加载...
+2025-02-10 14:02:52,671 - INFO - 开始加载INT8量化模型...
+2025-02-10 14:02:52,673 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 14:02:52,676 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 14:02:52,714 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 14:02:52,716 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 14:02:52,718 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 14:02:52,718 - INFO - 成功预加载量化模型
+2025-02-10 14:02:54,855 - INFO - 未登录 - Opening user login page.
+2025-02-10 14:02:54,941 - INFO - admin - Opening Login page.
+2025-02-10 14:02:58,841 - INFO - admin - User logged in successfully
+2025-02-10 14:02:59,066 - INFO - admin - Opening Admin page.
+2025-02-10 14:02:59,925 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 14:02:59,932 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 14:02:59,954 - INFO - admin - Opening health evaluation page.
+2025-02-10 14:03:00,071 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 14:03:01,153 - INFO - admin - Button clicked in row 0, ID: 1
+2025-02-10 14:03:01,156 - INFO - admin - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 14:03:01,162 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 14:03:01,163 - INFO - admin - Initializing current image index to 0
+2025-02-10 14:03:01,163 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:01,165 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Theta.png
+2025-02-10 14:03:01,207 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-10 14:03:02,570 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:02,570 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Alpha.png
+2025-02-10 14:03:02,592 - INFO - admin - Successfully displayed image: Alpha波段功率
+2025-02-10 14:03:02,592 - INFO - admin - 切换到下一张图片 - 当前索引: 1, 用时: 22毫秒
+2025-02-10 14:03:02,729 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:02,729 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Beta.png
+2025-02-10 14:03:02,750 - INFO - admin - Successfully displayed image: Beta波段功率
+2025-02-10 14:03:02,750 - INFO - admin - 切换到下一张图片 - 当前索引: 2, 用时: 20毫秒
+2025-02-10 14:03:02,882 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:02,883 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Gamma.png
+2025-02-10 14:03:02,903 - INFO - admin - Successfully displayed image: Gamma波段功率
+2025-02-10 14:03:02,903 - INFO - admin - 切换到下一张图片 - 当前索引: 3, 用时: 21毫秒
+2025-02-10 14:03:03,049 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,051 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\frequency_band_1.png
+2025-02-10 14:03:03,072 - INFO - admin - Successfully displayed image: 均分频带1
+2025-02-10 14:03:03,073 - INFO - admin - 切换到下一张图片 - 当前索引: 4, 用时: 23毫秒
+2025-02-10 14:03:03,394 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,394 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Gamma.png
+2025-02-10 14:03:03,395 - INFO - admin - Successfully displayed image: Gamma波段功率
+2025-02-10 14:03:03,395 - INFO - admin - 切换到上一张图片 - 当前索引: 3, 用时: 2毫秒
+2025-02-10 14:03:03,530 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,530 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Beta.png
+2025-02-10 14:03:03,531 - INFO - admin - Successfully displayed image: Beta波段功率
+2025-02-10 14:03:03,531 - INFO - admin - 切换到上一张图片 - 当前索引: 2, 用时: 0毫秒
+2025-02-10 14:03:03,658 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,659 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Alpha.png
+2025-02-10 14:03:03,673 - INFO - admin - Successfully displayed image: Alpha波段功率
+2025-02-10 14:03:03,674 - INFO - admin - 切换到上一张图片 - 当前索引: 1, 用时: 16毫秒
+2025-02-10 14:03:03,770 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,770 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Theta.png
+2025-02-10 14:03:03,784 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-10 14:03:03,784 - INFO - admin - 切换到上一张图片 - 当前索引: 0, 用时: 13毫秒
+2025-02-10 14:03:03,889 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:03,889 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\differential_entropy.png
+2025-02-10 14:03:03,910 - INFO - admin - Successfully displayed image: 微分熵
+2025-02-10 14:03:03,911 - INFO - admin - 切换到上一张图片 - 当前索引: 14, 用时: 21毫秒
+2025-02-10 14:03:04,010 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 14:03:04,010 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\frequency_wavelet.png
+2025-02-10 14:03:04,044 - INFO - admin - Successfully displayed image: 时频域特征 - 小波变换
+2025-02-10 14:03:04,044 - INFO - admin - 切换到上一张图片 - 当前索引: 13, 用时: 34毫秒
+2025-02-10 14:03:04,783 - INFO - admin - Opening Admin page.
+2025-02-10 14:03:04,784 - INFO - admin - Returned to index page successfully
+2025-02-10 14:03:05,975 - INFO - admin - Opening log management page.
+2025-02-10 14:03:06,060 - INFO - admin - Opening Log Manage page.
+2025-02-10 14:03:14,644 - INFO - admin - Opening Admin page.
+2025-02-10 14:03:14,645 - INFO - admin - Returned to index page successfully
+2025-02-10 15:22:54,991 - INFO - 初始化登录界面...
+2025-02-10 15:22:54,995 - INFO - 开始预加载模型...
+2025-02-10 15:22:54,995 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 15:22:55,012 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:22:55,013 - INFO - 模型文件存在，开始加载...
+2025-02-10 15:22:55,021 - INFO - 开始加载INT8量化模型...
+2025-02-10 15:22:55,024 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 15:22:55,027 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:22:55,106 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 15:22:55,108 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 15:22:55,110 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 15:22:55,110 - INFO - 成功预加载量化模型
+2025-02-10 15:22:56,411 - INFO - 未登录 - Opening user login page.
+2025-02-10 15:22:56,509 - INFO - admin - Opening Login page.
+2025-02-10 15:23:00,080 - INFO - admin - User logged in successfully
+2025-02-10 15:23:00,406 - INFO - admin - Opening Admin page.
+2025-02-10 15:23:01,583 - INFO - admin - Opening user management page.
+2025-02-10 15:23:01,816 - INFO - admin - Opening User Manage page.
+2025-02-10 15:23:12,408 - INFO - admin - New user added: test (type: user)
+2025-02-10 15:23:15,043 - INFO - admin - Opening Admin page.
+2025-02-10 15:23:15,043 - INFO - admin - Returned to index page successfully
+2025-02-10 15:23:15,515 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:23:15,596 - INFO - admin - Opening Login page.
+2025-02-10 15:23:18,214 - WARNING - 未登录(尝试用户名:test) - Failed login attempt
+2025-02-10 15:23:20,584 - INFO - test - User logged in successfully
+2025-02-10 15:23:20,850 - INFO - test - Opening Index page.
+2025-02-10 15:23:22,471 - INFO - test - Returning to login page.
+2025-02-10 15:23:22,593 - INFO - test - Opening Login page.
+2025-02-10 15:39:46,959 - INFO - 初始化登录界面...
+2025-02-10 15:39:46,964 - INFO - 开始预加载模型...
+2025-02-10 15:39:46,964 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 15:39:46,979 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:39:46,980 - INFO - 模型文件存在，开始加载...
+2025-02-10 15:39:46,987 - INFO - 开始加载INT8量化模型...
+2025-02-10 15:39:46,989 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 15:39:46,992 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:39:47,046 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 15:39:47,049 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 15:39:47,051 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 15:39:47,051 - INFO - 成功预加载量化模型
+2025-02-10 15:39:48,512 - INFO - 未登录 - Opening user login page.
+2025-02-10 15:39:48,636 - INFO - test - Opening Login page.
+2025-02-10 15:39:52,476 - INFO - admin - User logged in successfully
+2025-02-10 15:39:52,771 - INFO - admin - Opening Admin page.
+2025-02-10 15:39:53,882 - INFO - admin - Opening user management page.
+2025-02-10 15:39:54,164 - INFO - admin - Opening User Manage page.
+2025-02-10 15:39:57,805 - INFO - admin - User deleted successfully: test (ID: user1739172192)
+2025-02-10 15:40:06,303 - ERROR - admin - Error adding new user 'test1': (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束"tb_role_permission_pkey"
+DETAIL:  键值"(role_id, permission_id)=(user, PERM_CHANGE_PWD)" 已经存在
+
+[SQL: INSERT INTO tb_role_permission (role_id, permission_id) VALUES (%(role_id__0)s, %(permission_id__0)s), (%(role_id__1)s, %(permission_id__1)s), (%(role_id__2)s, %(permission_id__2)s), (%(role_id__3)s, %(permission_id__3)s)]
+[parameters: {'role_id__0': 'user', 'permission_id__0': 'PERM_CHANGE_PWD', 'role_id__1': 'user', 'permission_id__1': 'PERM_DATA_MANAGE', 'role_id__2': 'user', 'permission_id__2': 'PERM_RESULT_VIEW', 'role_id__3': 'user', 'permission_id__3': 'PERM_STRESS_ASSESSMENT'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-02-10 15:40:20,300 - ERROR - admin - Error adding new user 'test': (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束"tb_role_permission_pkey"
+DETAIL:  键值"(role_id, permission_id)=(user, PERM_CHANGE_PWD)" 已经存在
+
+[SQL: INSERT INTO tb_role_permission (role_id, permission_id) VALUES (%(role_id__0)s, %(permission_id__0)s), (%(role_id__1)s, %(permission_id__1)s), (%(role_id__2)s, %(permission_id__2)s), (%(role_id__3)s, %(permission_id__3)s)]
+[parameters: {'role_id__0': 'user', 'permission_id__0': 'PERM_CHANGE_PWD', 'role_id__1': 'user', 'permission_id__1': 'PERM_DATA_MANAGE', 'role_id__2': 'user', 'permission_id__2': 'PERM_RESULT_VIEW', 'role_id__3': 'user', 'permission_id__3': 'PERM_STRESS_ASSESSMENT'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-02-10 15:48:27,423 - INFO - 初始化登录界面...
+2025-02-10 15:48:27,427 - INFO - 开始预加载模型...
+2025-02-10 15:48:27,428 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 15:48:27,440 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:48:27,440 - INFO - 模型文件存在，开始加载...
+2025-02-10 15:48:27,448 - INFO - 开始加载INT8量化模型...
+2025-02-10 15:48:27,450 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 15:48:27,454 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:48:27,521 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 15:48:27,524 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 15:48:27,525 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 15:48:27,526 - INFO - 成功预加载量化模型
+2025-02-10 15:48:29,141 - INFO - 未登录 - Opening user login page.
+2025-02-10 15:48:29,313 - INFO - admin - Opening Login page.
+2025-02-10 15:48:32,589 - INFO - admin - User logged in successfully
+2025-02-10 15:48:32,886 - INFO - admin - Opening Admin page.
+2025-02-10 15:48:35,600 - INFO - admin - Opening user management page.
+2025-02-10 15:48:35,756 - INFO - admin - Opening User Manage page.
+2025-02-10 15:48:43,528 - ERROR - admin - Error adding new user 'test': (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束"tb_role_permission_pkey"
+DETAIL:  键值"(role_id, permission_id)=(user, PERM_CHANGE_PWD)" 已经存在
+
+[SQL: INSERT INTO tb_role_permission (role_id, permission_id) VALUES (%(role_id__0)s, %(permission_id__0)s), (%(role_id__1)s, %(permission_id__1)s), (%(role_id__2)s, %(permission_id__2)s), (%(role_id__3)s, %(permission_id__3)s)]
+[parameters: {'role_id__0': 'user', 'permission_id__0': 'PERM_CHANGE_PWD', 'role_id__1': 'user', 'permission_id__1': 'PERM_DATA_MANAGE', 'role_id__2': 'user', 'permission_id__2': 'PERM_RESULT_VIEW', 'role_id__3': 'user', 'permission_id__3': 'PERM_STRESS_ASSESSMENT'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-02-10 15:52:53,325 - INFO - 初始化登录界面...
+2025-02-10 15:52:53,362 - INFO - 开始预加载模型...
+2025-02-10 15:52:53,363 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 15:52:53,382 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:52:53,383 - INFO - 模型文件存在，开始加载...
+2025-02-10 15:52:53,395 - INFO - 开始加载INT8量化模型...
+2025-02-10 15:52:53,398 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 15:52:53,401 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:52:53,466 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 15:52:53,468 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 15:52:53,469 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 15:52:53,470 - INFO - 成功预加载量化模型
+2025-02-10 15:52:56,537 - INFO - 未登录 - Opening user login page.
+2025-02-10 15:52:56,600 - INFO - admin - Opening Login page.
+2025-02-10 15:53:01,060 - INFO - admin - User logged in successfully
+2025-02-10 15:53:01,336 - INFO - admin - Opening Admin page.
+2025-02-10 15:53:02,605 - INFO - admin - Opening user management page.
+2025-02-10 15:53:02,702 - INFO - admin - Opening User Manage page.
+2025-02-10 15:53:09,236 - INFO - admin - New user added: test (type: user) with 4 permissions
+2025-02-10 15:53:15,472 - INFO - admin - Opening Admin page.
+2025-02-10 15:53:15,475 - INFO - admin - Returned to index page successfully
+2025-02-10 15:53:16,172 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:53:16,262 - INFO - admin - Opening Login page.
+2025-02-10 15:53:18,665 - INFO - test - User logged in successfully
+2025-02-10 15:53:18,778 - INFO - test - Opening Index page.
+2025-02-10 15:53:20,288 - INFO - test - Returning to login page.
+2025-02-10 15:53:20,368 - INFO - test - Opening Login page.
+2025-02-10 15:57:25,521 - INFO - admin - User logged in successfully
+2025-02-10 15:57:25,630 - INFO - admin - Opening Admin page.
+2025-02-10 15:57:26,857 - INFO - admin - Opening user management page.
+2025-02-10 15:57:26,944 - INFO - admin - Opening User Manage page.
+2025-02-10 15:57:31,331 - INFO - admin - User deleted successfully: test (ID: user1739173989)
+2025-02-10 15:57:39,005 - INFO - admin - New user added: test (type: user) with 4 permissions
+2025-02-10 15:57:40,634 - INFO - admin - Opening Admin page.
+2025-02-10 15:57:40,637 - INFO - admin - Returned to index page successfully
+2025-02-10 15:57:41,707 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:57:41,800 - INFO - admin - Opening Login page.
+2025-02-10 15:57:43,759 - INFO - test - User logged in successfully
+2025-02-10 15:57:43,865 - INFO - test - Opening Index page.
+2025-02-10 15:57:44,847 - INFO - test - Returning to login page.
+2025-02-10 15:57:44,942 - INFO - test - Opening Login page.
+2025-02-10 15:58:21,010 - INFO - 初始化登录界面...
+2025-02-10 15:58:21,016 - INFO - 开始预加载模型...
+2025-02-10 15:58:21,016 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 15:58:21,033 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:58:21,034 - INFO - 模型文件存在，开始加载...
+2025-02-10 15:58:21,042 - INFO - 开始加载INT8量化模型...
+2025-02-10 15:58:21,045 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 15:58:21,049 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 15:58:21,103 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 15:58:21,106 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 15:58:21,107 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 15:58:21,108 - INFO - 成功预加载量化模型
+2025-02-10 15:58:25,226 - INFO - 未登录 - Opening user login page.
+2025-02-10 15:58:25,320 - INFO - test - Opening Login page.
+2025-02-10 15:58:28,726 - INFO - admin - User logged in successfully
+2025-02-10 15:58:29,064 - INFO - admin - Opening Admin page.
+2025-02-10 15:58:30,462 - INFO - admin - Opening user management page.
+2025-02-10 15:58:30,618 - INFO - admin - Opening User Manage page.
+2025-02-10 15:58:33,406 - INFO - admin - User deleted successfully: test (ID: user1739174258)
+2025-02-10 15:58:37,780 - INFO - admin - New user added: test (type: user) with 4 permissions
+2025-02-10 15:58:44,930 - INFO - admin - Opening Admin page.
+2025-02-10 15:58:44,931 - INFO - admin - Returned to index page successfully
+2025-02-10 15:58:46,163 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:58:46,242 - INFO - admin - Opening Login page.
+2025-02-10 15:58:49,739 - INFO - test - User logged in successfully
+2025-02-10 15:58:49,843 - INFO - test - Opening Index page.
+2025-02-10 15:58:51,353 - INFO - test - Returning to login page.
+2025-02-10 15:58:51,425 - INFO - test - Opening Login page.
+2025-02-10 15:58:58,688 - INFO - admin - User logged in successfully
+2025-02-10 15:58:58,777 - INFO - admin - Opening Admin page.
+2025-02-10 15:59:00,234 - INFO - admin - Opening user management page.
+2025-02-10 15:59:00,319 - INFO - admin - Opening User Manage page.
+2025-02-10 15:59:07,165 - INFO - admin - New user added: admint (type: user) with 4 permissions
+2025-02-10 15:59:08,823 - INFO - admin - Opening Admin page.
+2025-02-10 15:59:08,824 - INFO - admin - Returned to index page successfully
+2025-02-10 15:59:09,413 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:59:09,494 - INFO - admin - Opening Login page.
+2025-02-10 15:59:12,078 - INFO - admint - User logged in successfully
+2025-02-10 15:59:12,163 - INFO - admint - Opening Index page.
+2025-02-10 15:59:14,049 - INFO - admint - Returning to login page.
+2025-02-10 15:59:14,126 - INFO - admint - Opening Login page.
+2025-02-10 15:59:20,562 - INFO - admin - User logged in successfully
+2025-02-10 15:59:20,663 - INFO - admin - Opening Admin page.
+2025-02-10 15:59:21,864 - INFO - admin - Opening user management page.
+2025-02-10 15:59:21,947 - INFO - admin - Opening User Manage page.
+2025-02-10 15:59:26,650 - INFO - admin - User edit cancelled for user ID: admin001
+2025-02-10 15:59:32,379 - INFO - admin - User user1739174347 updated: role: user -> admin
+2025-02-10 15:59:36,350 - INFO - admin - Opening Admin page.
+2025-02-10 15:59:36,351 - INFO - admin - Returned to index page successfully
+2025-02-10 15:59:37,830 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:59:37,917 - INFO - admin - Opening Login page.
+2025-02-10 15:59:40,401 - INFO - admint - User logged in successfully
+2025-02-10 15:59:40,505 - INFO - admint - Opening Admin page.
+2025-02-10 15:59:43,870 - INFO - admint - Switched to regular user mode. Login page is being opened.
+2025-02-10 15:59:43,970 - INFO - admint - Opening Login page.
+2025-02-10 16:02:23,888 - INFO - 初始化登录界面...
+2025-02-10 16:02:23,892 - INFO - 开始预加载模型...
+2025-02-10 16:02:23,893 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 16:02:23,907 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:02:23,908 - INFO - 模型文件存在，开始加载...
+2025-02-10 16:02:23,925 - INFO - 开始加载INT8量化模型...
+2025-02-10 16:02:23,928 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 16:02:23,932 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:02:23,996 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 16:02:23,999 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 16:02:24,001 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 16:02:24,002 - INFO - 成功预加载量化模型
+2025-02-10 16:02:28,818 - INFO - 未登录 - Opening user login page.
+2025-02-10 16:02:28,891 - INFO - admint - Opening Login page.
+2025-02-10 16:02:32,379 - INFO - admin - User logged in successfully
+2025-02-10 16:02:32,692 - INFO - admin - Opening Admin page.
+2025-02-10 16:02:33,821 - INFO - admin - Opening user management page.
+2025-02-10 16:02:33,967 - INFO - admin - Opening User Manage page.
+2025-02-10 16:02:37,806 - ERROR - admin - Error deleting user user1739174347: (psycopg2.errors.ForeignKeyViolation) 错误:  在 "tb_user" 上的更新或删除操作违反了在 "tb_user_role" 上的外键约束 "tb_user_role_user_id_fkey"
+DETAIL:  键值对(user_id)=(user1739174347)仍然是从表"tb_user_role"引用的.
+
+[SQL: DELETE FROM tb_user WHERE tb_user.user_id = %(user_id)s]
+[parameters: {'user_id': 'user1739174347'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-02-10 16:03:05,328 - INFO - admin - User user1739174347 updated: role: admin -> user
+2025-02-10 16:03:09,098 - INFO - admin - User user1739174347 updated: role: user -> admin
+2025-02-10 16:03:45,456 - INFO - 初始化登录界面...
+2025-02-10 16:03:45,460 - INFO - 开始预加载模型...
+2025-02-10 16:03:45,461 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 16:03:45,472 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:03:45,473 - INFO - 模型文件存在，开始加载...
+2025-02-10 16:03:45,481 - INFO - 开始加载INT8量化模型...
+2025-02-10 16:03:45,483 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 16:03:45,488 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:03:45,542 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 16:03:45,545 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 16:03:45,547 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 16:03:45,548 - INFO - 成功预加载量化模型
+2025-02-10 16:03:46,754 - INFO - 未登录 - Opening user login page.
+2025-02-10 16:03:46,856 - INFO - admin - Opening Login page.
+2025-02-10 16:03:49,983 - INFO - admin - User logged in successfully
+2025-02-10 16:03:50,298 - INFO - admin - Opening Admin page.
+2025-02-10 16:03:51,323 - INFO - admin - Opening user management page.
+2025-02-10 16:03:51,458 - INFO - admin - Opening User Manage page.
+2025-02-10 16:03:55,148 - ERROR - admin - Error deleting user user1739174347: A transaction is already begun on this Session.
+2025-02-10 16:04:16,766 - INFO - 初始化登录界面...
+2025-02-10 16:04:16,771 - INFO - 开始预加载模型...
+2025-02-10 16:04:16,772 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 16:04:16,788 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:04:16,789 - INFO - 模型文件存在，开始加载...
+2025-02-10 16:04:16,797 - INFO - 开始加载INT8量化模型...
+2025-02-10 16:04:16,799 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 16:04:16,804 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:04:16,868 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 16:04:16,871 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 16:04:16,872 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 16:04:16,873 - INFO - 成功预加载量化模型
+2025-02-10 16:04:18,052 - INFO - 未登录 - Opening user login page.
+2025-02-10 16:04:18,107 - INFO - admin - Opening Login page.
+2025-02-10 16:04:21,294 - INFO - admin - User logged in successfully
+2025-02-10 16:04:21,562 - INFO - admin - Opening Admin page.
+2025-02-10 16:04:22,789 - INFO - admin - Opening user management page.
+2025-02-10 16:04:22,926 - INFO - admin - Opening User Manage page.
+2025-02-10 16:04:26,249 - INFO - admin - User deleted successfully: admint (ID: user1739174347)
+2025-02-10 16:04:30,601 - INFO - admin - User user1739174317 updated: role: user -> admin
+2025-02-10 16:04:46,476 - INFO - admin - Opening Admin page.
+2025-02-10 16:04:46,477 - INFO - admin - Returned to index page successfully
+2025-02-10 16:04:47,118 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:04:47,196 - INFO - admin - Opening Login page.
+2025-02-10 16:04:51,097 - INFO - test - User logged in successfully
+2025-02-10 16:04:51,192 - INFO - test - Opening Admin page.
+2025-02-10 16:04:52,566 - INFO - test - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:04:52,633 - INFO - test - Opening Login page.
+2025-02-10 16:04:57,899 - INFO - admin - User logged in successfully
+2025-02-10 16:04:57,985 - INFO - admin - Opening Admin page.
+2025-02-10 16:04:59,488 - INFO - admin - Opening user management page.
+2025-02-10 16:04:59,576 - INFO - admin - Opening User Manage page.
+2025-02-10 16:05:10,409 - INFO - admin - New user added: t2 (type: user) with 4 permissions
+2025-02-10 16:05:12,341 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:12,344 - INFO - admin - Returned to index page successfully
+2025-02-10 16:05:13,615 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:05:13,687 - INFO - admin - Opening Login page.
+2025-02-10 16:05:15,603 - INFO - t2 - User logged in successfully
+2025-02-10 16:05:15,687 - INFO - t2 - Opening Index page.
+2025-02-10 16:05:16,659 - INFO - t2 - Returning to login page.
+2025-02-10 16:05:16,730 - INFO - t2 - Opening Login page.
+2025-02-10 16:05:20,332 - WARNING - 未登录(尝试用户名:admin) - Failed login attempt
+2025-02-10 16:05:23,919 - INFO - admin - User logged in successfully
+2025-02-10 16:05:24,003 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:25,128 - INFO - admin - Opening user management page.
+2025-02-10 16:05:25,257 - INFO - admin - Opening User Manage page.
+2025-02-10 16:05:31,666 - INFO - admin - New user added: t3 (type: user) with 4 permissions
+2025-02-10 16:05:33,598 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:33,598 - INFO - admin - Returned to index page successfully
+2025-02-10 16:05:34,330 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 16:05:34,341 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 16:05:34,371 - INFO - admin - Opening health evaluation page.
+2025-02-10 16:05:34,503 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 16:05:35,326 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:35,327 - INFO - admin - Returned to index page successfully
+2025-02-10 16:05:36,345 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:05:36,422 - INFO - admin - Opening Login page.
+2025-02-10 16:05:38,967 - INFO - 初始化登录界面...
+2025-02-10 16:05:38,970 - INFO - 开始预加载模型...
+2025-02-10 16:05:38,971 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 16:05:38,972 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:05:38,973 - INFO - 模型文件存在，开始加载...
+2025-02-10 16:05:38,975 - INFO - 模型已经加载，无需重复加载
+2025-02-10 16:05:38,976 - INFO - 成功预加载量化模型
+2025-02-10 16:05:39,032 - INFO - Opening Init Login page.
+2025-02-10 16:05:39,033 - INFO - Returned to initial login page
+2025-02-10 16:05:39,757 - INFO - admin - Opening user login page.
+2025-02-10 16:05:39,840 - INFO - admin - Opening Login page.
+2025-02-10 16:05:42,918 - INFO - admin - User logged in successfully
+2025-02-10 16:05:43,001 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:44,161 - INFO - admin - Opening user management page.
+2025-02-10 16:05:44,271 - INFO - admin - Opening User Manage page.
+2025-02-10 16:05:46,841 - INFO - admin - User deleted successfully: t3 (ID: user1739174731)
+2025-02-10 16:05:52,958 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:52,958 - INFO - admin - Returned to index page successfully
+2025-02-10 16:05:54,104 - INFO - admin - Opening user management page.
+2025-02-10 16:05:54,204 - INFO - admin - Opening User Manage page.
+2025-02-10 16:05:57,424 - INFO - admin - New user added: t3 (type: admin) with 9 permissions
+2025-02-10 16:05:59,045 - INFO - admin - Opening Admin page.
+2025-02-10 16:05:59,046 - INFO - admin - Returned to index page successfully
+2025-02-10 16:05:59,220 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:05:59,337 - INFO - admin - Opening Login page.
+2025-02-10 16:06:01,949 - INFO - t3 - User logged in successfully
+2025-02-10 16:06:02,042 - INFO - t3 - Opening Admin page.
+2025-02-10 16:06:02,976 - INFO - admin - Switched to regular user mode. Login page is being opened.
+2025-02-10 16:06:03,069 - INFO - t3 - Opening Login page.

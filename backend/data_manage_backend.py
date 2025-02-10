@@ -717,6 +717,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             if not parent_dir:
                 return
             
+            # 添加计时开始
+            start_time = time.time()
+            
             success_count = 0
             failed_count = 0
             
@@ -793,16 +796,20 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     if os.path.exists(target_dir):
                         shutil.rmtree(target_dir)
             
+            # 在完成后添加计时结束和日志记录
+            end_time = time.time()
+            elapsed_ms = int((end_time - start_time) * 1000)  # 转换为毫秒
+            logging.info(f"批量上传完成 - 成功: {success_count}个, 失败: {failed_count}个, 用时: {elapsed_ms}毫秒")
+
             # 刷新表格显示
             self.show_table()
             
-            # 显示上传结果
-            QMessageBox.information(self, "上传完成", 
-                f"批量上传完成\n成功：{success_count}个\n失败：{failed_count}个")
-            
+            QMessageBox.information(self, "完成", f"批量上传完成\n成功: {success_count}个\n失败: {failed_count}个")
+
         except Exception as e:
-            logging.error(f"批量上传过程出错: {str(e)}")
-            QMessageBox.critical(self, "错误", f"批量上传过程出错：{str(e)}")
+            error_msg = f"批量上传失败: {str(e)}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
     
     def upload_file(self, file_path):
         """
