@@ -7367,3 +7367,237 @@ If this file exists please check that this process can read it or you can pass p
 2025-02-10 21:15:11,141 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
 2025-02-10 21:15:12,080 - INFO - admin - Opening Admin page.
 2025-02-10 21:15:12,080 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:05,300 - INFO - 初始化登录界面...
+2025-02-10 21:19:05,303 - INFO - 开始预加载模型...
+2025-02-10 21:19:05,303 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:19:05,314 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:19:05,315 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:19:05,321 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:19:05,323 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:19:05,327 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:19:05,372 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:19:05,374 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:19:05,376 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:19:05,377 - INFO - 成功预加载量化模型
+2025-02-10 21:19:06,506 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:19:06,582 - INFO - admin - Opening Login page.
+2025-02-10 21:19:09,731 - INFO - admin - User logged in successfully
+2025-02-10 21:19:09,974 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:10,933 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 21:19:10,935 - INFO - admin - Opening data view page. Time taken: 0.05 seconds
+2025-02-10 21:19:11,040 - INFO - admin - Opening Data View page.
+2025-02-10 21:19:11,892 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:11,894 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:12,483 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 21:19:12,487 - INFO - admin - Opening results view page. Time taken: 0.10 seconds
+2025-02-10 21:19:12,600 - INFO - admin - Opening Results View page.
+2025-02-10 21:19:13,022 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:13,023 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:14,032 - INFO - admin - Opening log management page. Time taken: 0.32 seconds
+2025-02-10 21:19:14,110 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:19:49,425 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:49,427 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:50,494 - INFO - admin - Opening model control page. Time taken: 0.04 seconds
+2025-02-10 21:19:50,597 - INFO - admin - Opening Model Control page.
+2025-02-10 21:19:51,244 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:51,244 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:51,855 - INFO - admin - Opening password change page. Time taken: 0.01 seconds
+2025-02-10 21:19:51,928 - INFO - admin - Opening Change Pwd page.
+2025-02-10 21:19:52,538 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:52,539 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:53,091 - INFO - admin - Opening user management page. Time taken: 0.04 seconds
+2025-02-10 21:19:53,202 - INFO - admin - Opening User Manage page.
+2025-02-10 21:19:53,723 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:53,724 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:54,194 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:19:54,199 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:19:54,221 - INFO - admin - Opening health evaluation page. Time taken: 0.05 seconds
+2025-02-10 21:19:54,327 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:19:54,884 - INFO - admin - Opening Admin page.
+2025-02-10 21:19:54,885 - INFO - admin - Returned to index page successfully
+2025-02-10 21:19:56,077 - INFO - admin - Opening log management page. Time taken: 0.42 seconds
+2025-02-10 21:19:56,142 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:20:11,069 - INFO - admin - Opening Admin page.
+2025-02-10 21:20:11,070 - INFO - admin - Returned to index page successfully
+2025-02-10 21:20:11,444 - INFO - admin - Switched to regular user mode. Login page is being opened. Time taken: 0.01 seconds
+2025-02-10 21:20:11,554 - INFO - admin - Opening Login page.
+2025-02-10 21:20:19,018 - INFO - user1 - User logged in successfully
+2025-02-10 21:20:19,105 - INFO - user1 - Opening Index page.
+2025-02-10 21:20:20,467 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-10 21:20:20,468 - INFO - admin - Successfully displayed 0 data records
+2025-02-10 21:20:20,486 - INFO - admin - Opening health evaluation page. Time taken: 0.04 seconds
+2025-02-10 21:20:20,595 - INFO - user1 - Opening Health Evaluate page.
+2025-02-10 21:20:21,221 - INFO - user1 - Opening Index page.
+2025-02-10 21:20:21,222 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:20:21,668 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-10 21:20:21,669 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-02-10 21:20:21,783 - INFO - user1 - Opening Data View page.
+2025-02-10 21:20:22,233 - INFO - user1 - Opening Index page.
+2025-02-10 21:20:22,233 - INFO - admin - Returned to index page successfully
+2025-02-10 21:20:23,137 - INFO - admin - Successfully displayed 0 results in table
+2025-02-10 21:20:23,141 - INFO - admin - Opening results view page. Time taken: 0.13 seconds
+2025-02-10 21:20:23,281 - INFO - user1 - Opening Results View page.
+2025-02-10 21:20:23,718 - INFO - user1 - Opening Index page.
+2025-02-10 21:20:23,719 - INFO - admin - Returned to index page successfully
+2025-02-10 21:20:24,223 - INFO - admin - Opening password change page. Time taken: 0.01 seconds
+2025-02-10 21:20:24,301 - INFO - user1 - Opening Change Pwd page.
+2025-02-10 21:20:24,902 - INFO - user1 - Opening Index page.
+2025-02-10 21:20:24,903 - INFO - admin - Returned to index page successfully
+2025-02-10 21:20:25,174 - INFO - admin - Returning to login page. Time taken: 0.01 seconds
+2025-02-10 21:20:25,278 - INFO - user1 - Opening Login page.
+2025-02-10 21:20:27,935 - INFO - admin - User logged in successfully
+2025-02-10 21:20:28,022 - INFO - admin - Opening Admin page.
+2025-02-10 21:20:29,549 - INFO - admin - Opening log management page. Time taken: 0.59 seconds
+2025-02-10 21:20:29,620 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:22:43,014 - INFO - 初始化登录界面...
+2025-02-10 21:22:43,017 - INFO - 开始预加载模型...
+2025-02-10 21:22:43,017 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:22:43,028 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:22:43,030 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:22:43,036 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:22:43,038 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:22:43,041 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:22:43,083 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:22:43,085 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:22:43,086 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:22:43,087 - INFO - 成功预加载量化模型
+2025-02-10 21:22:44,114 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:22:44,182 - INFO - admin - Opening Login page.
+2025-02-10 21:22:51,706 - INFO - user1 - User logged in successfully
+2025-02-10 21:22:51,713 - ERROR - user1 - Error getting username: type object 'User' has no attribute 'id'
+2025-02-10 21:22:51,978 - INFO - user1 - Opening Index page.
+2025-02-10 21:22:52,721 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-10 21:22:52,721 - INFO - user1 - Successfully displayed 0 data records
+2025-02-10 21:22:52,741 - INFO - user1 - Opening health evaluation page. Time taken: 0.05 seconds
+2025-02-10 21:22:52,840 - INFO - user1 - Opening Health Evaluate page.
+2025-02-10 21:22:53,495 - ERROR - user1 - Error getting username: type object 'User' has no attribute 'id'
+2025-02-10 21:22:53,589 - INFO - user1 - Opening Index page.
+2025-02-10 21:22:53,590 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:22:54,030 - INFO - user1 - Data table refreshed successfully with 0 records
+2025-02-10 21:22:54,031 - INFO - user1 - Opening data view page. Time taken: 0.03 seconds
+2025-02-10 21:22:54,140 - INFO - user1 - Opening Data View page.
+2025-02-10 21:22:54,565 - INFO - user1 - Opening Index page.
+2025-02-10 21:22:54,565 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:22:55,266 - INFO - user1 - Successfully displayed 0 results in table
+2025-02-10 21:22:55,271 - INFO - user1 - Opening results view page. Time taken: 0.11 seconds
+2025-02-10 21:22:55,381 - INFO - user1 - Opening Results View page.
+2025-02-10 21:22:55,770 - INFO - user1 - Opening Index page.
+2025-02-10 21:22:55,771 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:22:56,210 - INFO - user1 - Opening password change page. Time taken: 0.01 seconds
+2025-02-10 21:22:56,299 - INFO - user1 - Opening Change Pwd page.
+2025-02-10 21:22:56,927 - ERROR - user1 - Error getting username: type object 'User' has no attribute 'id'
+2025-02-10 21:22:57,006 - INFO - user1 - Opening Index page.
+2025-02-10 21:22:57,007 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:22:57,841 - INFO - user1 - Returning to login page. Time taken: 0.01 seconds
+2025-02-10 21:22:57,949 - INFO - user1 - Opening Login page.
+2025-02-10 21:23:00,692 - INFO - admin - User logged in successfully
+2025-02-10 21:23:00,779 - INFO - admin - Opening Admin page.
+2025-02-10 21:23:02,067 - INFO - user1 - Opening log management page. Time taken: 0.39 seconds
+2025-02-10 21:23:02,163 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:24:23,926 - INFO - 初始化登录界面...
+2025-02-10 21:24:23,930 - INFO - 开始预加载模型...
+2025-02-10 21:24:23,930 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:24:23,939 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:24:23,940 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:24:23,944 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:24:23,946 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:24:23,949 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:24:23,989 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:24:23,990 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:24:23,993 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:24:23,994 - INFO - 成功预加载量化模型
+2025-02-10 21:24:25,247 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:24:25,391 - INFO - admin - Opening Login page.
+2025-02-10 21:24:28,497 - INFO - admin - User logged in successfully
+2025-02-10 21:24:28,729 - INFO - admin - Opening Admin page.
+2025-02-10 21:24:29,682 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:24:29,689 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:24:29,711 - INFO - admin - Opening health evaluation page. Time taken: 0.06 seconds
+2025-02-10 21:24:29,871 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:24:30,446 - INFO - admin - Opening Admin page.
+2025-02-10 21:24:30,447 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:31,626 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 21:24:31,628 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-02-10 21:24:31,802 - INFO - admin - Opening Data View page.
+2025-02-10 21:24:32,128 - INFO - admin - Opening Admin page.
+2025-02-10 21:24:32,135 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:33,039 - INFO - admin - Opening log management page. Time taken: 0.33 seconds
+2025-02-10 21:24:33,123 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:24:37,083 - INFO - admin - Opening Admin page.
+2025-02-10 21:24:37,084 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:37,748 - INFO - admin - Switched to regular user mode. Login page is being opened. Time taken: 0.00 seconds
+2025-02-10 21:24:37,821 - INFO - admin - Opening Login page.
+2025-02-10 21:24:41,031 - INFO - user1 - User logged in successfully
+2025-02-10 21:24:41,128 - INFO - user1 - Opening Index page.
+2025-02-10 21:24:41,959 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-10 21:24:41,960 - INFO - admin - Successfully displayed 0 data records
+2025-02-10 21:24:41,978 - INFO - admin - Opening health evaluation page. Time taken: 0.04 seconds
+2025-02-10 21:24:42,090 - INFO - user1 - Opening Health Evaluate page.
+2025-02-10 21:24:42,613 - INFO - user1 - Opening Index page.
+2025-02-10 21:24:42,614 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:24:43,094 - INFO - admin - Data table refreshed successfully with 0 records
+2025-02-10 21:24:43,096 - INFO - admin - Opening data view page. Time taken: 0.03 seconds
+2025-02-10 21:24:43,191 - INFO - user1 - Opening Data View page.
+2025-02-10 21:24:43,644 - INFO - user1 - Opening Index page.
+2025-02-10 21:24:43,644 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:44,272 - INFO - admin - Successfully displayed 0 results in table
+2025-02-10 21:24:44,276 - INFO - admin - Opening results view page. Time taken: 0.10 seconds
+2025-02-10 21:24:44,380 - INFO - user1 - Opening Results View page.
+2025-02-10 21:24:44,903 - INFO - user1 - Opening Index page.
+2025-02-10 21:24:44,905 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:45,382 - INFO - admin - Opening password change page. Time taken: 0.01 seconds
+2025-02-10 21:24:45,474 - INFO - user1 - Opening Change Pwd page.
+2025-02-10 21:24:46,317 - INFO - user1 - Opening Index page.
+2025-02-10 21:24:46,319 - INFO - admin - Returned to index page successfully
+2025-02-10 21:24:46,628 - INFO - admin - Returning to login page. Time taken: 0.01 seconds
+2025-02-10 21:24:46,691 - INFO - user1 - Opening Login page.
+2025-02-10 21:24:49,436 - INFO - admin - User logged in successfully
+2025-02-10 21:24:49,566 - INFO - admin - Opening Admin page.
+2025-02-10 21:24:51,054 - INFO - admin - Opening log management page. Time taken: 0.38 seconds
+2025-02-10 21:24:51,142 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:26:18,427 - INFO - 初始化登录界面...
+2025-02-10 21:26:18,430 - INFO - 开始预加载模型...
+2025-02-10 21:26:18,431 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:26:18,439 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:26:18,441 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:26:18,446 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:26:18,447 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:26:18,451 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:26:18,490 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:26:18,492 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:26:18,494 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:26:18,496 - INFO - 成功预加载量化模型
+2025-02-10 21:26:19,497 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:26:19,551 - INFO - admin - Opening Login page.
+2025-02-10 21:26:22,709 - INFO - admin - User logged in successfully
+2025-02-10 21:26:22,979 - INFO - admin - Opening Admin page.
+2025-02-10 21:26:25,053 - INFO - admin - Switched to regular user mode. Login page is being opened. Time taken: 0.00 seconds
+2025-02-10 21:26:25,152 - INFO - admin - Opening Login page.
+2025-02-10 21:26:28,043 - INFO - user1 - User logged in successfully
+2025-02-10 21:26:28,132 - INFO - user1 - Opening Index page.
+2025-02-10 21:26:29,001 - INFO - user1 - Regular user user1: fetching own data records
+2025-02-10 21:26:29,001 - INFO - user1 - Successfully displayed 0 data records
+2025-02-10 21:26:29,021 - INFO - user1 - Opening health evaluation page. Time taken: 0.05 seconds
+2025-02-10 21:26:29,132 - INFO - user1 - Opening Health Evaluate page.
+2025-02-10 21:26:29,611 - INFO - user1 - Opening Index page.
+2025-02-10 21:26:29,612 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:26:30,137 - INFO - user1 - Data table refreshed successfully with 0 records
+2025-02-10 21:26:30,138 - INFO - user1 - Opening data view page. Time taken: 0.03 seconds
+2025-02-10 21:26:30,234 - INFO - user1 - Opening Data View page.
+2025-02-10 21:26:30,639 - INFO - user1 - Opening Index page.
+2025-02-10 21:26:30,642 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:26:31,193 - INFO - user1 - Successfully displayed 0 results in table
+2025-02-10 21:26:31,197 - INFO - user1 - Opening results view page. Time taken: 0.11 seconds
+2025-02-10 21:26:31,303 - INFO - user1 - Opening Results View page.
+2025-02-10 21:26:31,752 - INFO - user1 - Opening Index page.
+2025-02-10 21:26:31,753 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:26:32,171 - INFO - user1 - Opening password change page. Time taken: 0.01 seconds
+2025-02-10 21:26:32,259 - INFO - user1 - Opening Change Pwd page.
+2025-02-10 21:26:32,828 - INFO - user1 - Opening Index page.
+2025-02-10 21:26:32,828 - INFO - user1 - Returned to index page successfully
+2025-02-10 21:26:32,941 - INFO - user1 - Returning to login page. Time taken: 0.00 seconds
+2025-02-10 21:26:33,009 - INFO - user1 - Opening Login page.
+2025-02-10 21:26:36,107 - INFO - admin - User logged in successfully
+2025-02-10 21:26:36,196 - INFO - admin - Opening Admin page.
+2025-02-10 21:26:37,617 - INFO - user1 - Opening log management page. Time taken: 0.38 seconds
+2025-02-10 21:26:37,733 - INFO - admin - Opening Log Manage page.

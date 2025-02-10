@@ -40,14 +40,14 @@ from sql_model.tb_role_permission import RolePermission
 
 class UserFilter(logging.Filter):
     """
-    自定义日志过滤器，用于添加用户类型信息到日志记录中
+    自定义日志过滤器，用于添加用户信息到日志记录中
     """
-    def __init__(self, userType):
+    def __init__(self, username):
         super().__init__()
-        self.userType = userType
+        self.username = username
 
     def filter(self, record):
-        record.userType = self.userType
+        record.userType = self.username
         return True
 
 
@@ -68,6 +68,26 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         with open(CURRENT_USER_FILE, 'r') as f:
             self.user_id = f.read().strip()
             
+        # 获取当前用户名
+        session = SessionClass()
+        try:
+            user = session.query(User).filter(User.user_id == self.user_id).first()
+            self.username = user.username if user else "unknown"
+        except Exception as e:
+            logging.error(f"Error getting username: {str(e)}")
+            self.username = "unknown"
+        finally:
+            session.close()
+            
+        # 配置日志
+        logging.basicConfig(
+            filename=LOG_FILE,
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
+        )
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+            
         # 获取用户权限并显示对应按钮
         self.show_buttons_by_permission()
         
@@ -78,18 +98,6 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         self.btn_help.clicked.connect(self.open_help)
         self.btn_return.clicked.connect(self.return_login)
         self.change_pwd_Button.clicked.connect(self.open_change_pwd)
-
-        # 配置日志
-        path = USER_STATUS_FILE
-        user = operate_user.read(path)
-        userType = "Regular user" if user == 0 else "Administrator"
-        logging.basicConfig(
-            filename=LOG_FILE,
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(userType)s - %(message)s'
-        )
-        logger = logging.getLogger()
-        logger.addFilter(UserFilter(userType))
 
         window_manager = WindowManager()
         window_manager.register_window('index', self)
@@ -172,8 +180,12 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开健康评估页面
         """
+        start_time = datetime.now()
         self.health_evaluate = health_evaluate_backend.Health_Evaluate_WindowActions()
-        logging.info("Opening health evaluation page.")
+        end_time = datetime.now()
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+        logging.info(f"Opening health evaluation page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
         window_manager = WindowManager()
         window_manager.register_window('health_evaluate', self.health_evaluate)
         window_manager.show_window('health_evaluate')
@@ -183,8 +195,12 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开数据查看页面
         """
+        start_time = datetime.now()
         self.data_view = data_manage_backend.Data_View_WindowActions()
-        logging.info("Opening data view page.")
+        end_time = datetime.now()
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+        logging.info(f"Opening data view page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
         window_manager = WindowManager()
         window_manager.register_window('data_view', self.data_view)
         window_manager.show_window('data_view')
@@ -194,8 +210,12 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开结果查看页面
         """
+        start_time = datetime.now()
         self.results_view = results_manage_backend.Results_View_WindowActions()
-        logging.info("Opening results view page.")
+        end_time = datetime.now()
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+        logging.info(f"Opening results view page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
         window_manager = WindowManager()
         window_manager.register_window('results_view', self.results_view)
         window_manager.show_window('results_view')
@@ -205,8 +225,12 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开密码修改页面
         """
+        start_time = datetime.now()
         self.change_pwd = change_password_backend.change_pwd_Controller()
-        logging.info("Opening password change page.")
+        end_time = datetime.now()
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+        logging.info(f"Opening password change page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
         window_manager = WindowManager()
         window_manager.register_window('change_pwd', self.change_pwd)
         window_manager.show_window('change_pwd')
@@ -216,8 +240,12 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         返回登录页面
         """
+        start_time = datetime.now()
         self.login = login_backend.Login_WindowActions()
-        logging.info("Returning to login page.")
+        end_time = datetime.now()
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
+        logging.info(f"Returning to login page. Time taken: {(end_time - start_time).total_seconds():.2f} seconds")
         window_manager = WindowManager()
         window_manager.register_window('login', self.login)
         window_manager.show_window('login')
@@ -227,6 +255,8 @@ class Index_WindowActions(front_page.Ui_MainWindow, QMainWindow):
         """
         打开帮助窗口
         """
+        logger = logging.getLogger()
+        logger.addFilter(UserFilter(self.username))
         self.help_window = HelpWindow()
         logging.info("Opening help window.")
         # 不需要使用 WindowManager，因为帮助窗口是独立的
