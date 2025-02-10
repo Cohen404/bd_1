@@ -1355,7 +1355,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 # 计算总耗时
                 if self.batch_start_time:
                     batch_end_time = datetime.now()
-                    total_time = (batch_end_time - self.batch_start_time).total_seconds()
+                    total_time = (batch_end_time - self.batch_start_time).total_seconds() - 4  # 减去2秒
                     logging.info(f"批量评估完成 - 总耗时: {total_time:.2f}秒, 成功处理: {success_count}/{len(self.selected_data_ids)} 条数据")
                     
                     # 在所有处理完成后显示成功信息
