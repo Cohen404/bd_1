@@ -293,6 +293,43 @@ class Ui_MainWindow(object):
         self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.verticalLayout.addWidget(self.tableWidget)
 
+        # 添加筛选区域
+        self.filter_widget = QtWidgets.QWidget(self.centralwidget)
+        self.filter_layout = QtWidgets.QHBoxLayout(self.filter_widget)
+
+        # 用户类型筛选
+        self.user_type_label = QtWidgets.QLabel("用户类型:", self.filter_widget)
+        self.user_type_combo = QtWidgets.QComboBox(self.filter_widget)
+        self.user_type_combo.addItems(["全部", "管理员", "普通用户"])
+        self.filter_layout.addWidget(self.user_type_label)
+        self.filter_layout.addWidget(self.user_type_combo)
+
+        # 用户筛选
+        self.user_label = QtWidgets.QLabel("用户:", self.filter_widget)
+        self.user_combo = QtWidgets.QComboBox(self.filter_widget)
+        self.filter_layout.addWidget(self.user_label)
+        self.filter_layout.addWidget(self.user_combo)
+
+        # 日期范围筛选
+        self.date_label = QtWidgets.QLabel("日期范围:", self.filter_widget)
+        self.date_start = QtWidgets.QDateEdit(self.filter_widget)
+        self.date_start.setCalendarPopup(True)
+        self.date_end = QtWidgets.QDateEdit(self.filter_widget)
+        self.date_end.setCalendarPopup(True)
+        self.filter_layout.addWidget(self.date_label)
+        self.filter_layout.addWidget(self.date_start)
+        self.filter_layout.addWidget(QtWidgets.QLabel("至"))
+        self.filter_layout.addWidget(self.date_end)
+
+        # 筛选和重置按钮
+        self.filter_btn = QtWidgets.QPushButton("应用筛选", self.filter_widget)
+        self.reset_filter_btn = QtWidgets.QPushButton("重置", self.filter_widget)
+        self.filter_layout.addWidget(self.filter_btn)
+        self.filter_layout.addWidget(self.reset_filter_btn)
+
+        # 将筛选区域添加到主布局
+        self.verticalLayout.insertWidget(1, self.filter_widget)  # 插入到表格上方
+
         self.gridLayout.addWidget(self.widget1, 1, 0, 2, 2)
 
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()

@@ -6439,3 +6439,77 @@ ValueError: Could not find event data
 2025-02-10 19:09:37,141 - INFO - admin - 系统备份完成，备份文件保存在: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\.backup\system_backup_20250210_190917.zip
 2025-02-10 19:09:37,144 - INFO - admin - System backup created successfully: system_backup_20250210_190917.zip
 2025-02-10 19:09:55,686 - INFO - admin - System restored successfully
+2025-02-10 19:13:58,200 - INFO - 初始化登录界面...
+2025-02-10 19:13:58,204 - INFO - 开始预加载模型...
+2025-02-10 19:13:58,204 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:13:58,214 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:13:58,214 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:13:58,215 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:13:58,215 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:13:58,216 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:13:58,298 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:13:58,299 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:13:58,299 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:13:58,299 - INFO - 成功预加载量化模型
+2025-02-10 19:13:59,345 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:13:59,398 - INFO - 未登录 - Opening Login page.
+2025-02-10 19:14:02,694 - INFO - admin - User logged in successfully
+2025-02-10 19:14:02,930 - INFO - admin - Opening Admin page.
+2025-02-10 19:14:05,049 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:15:07,430 - INFO - 初始化登录界面...
+2025-02-10 19:15:07,433 - INFO - 开始预加载模型...
+2025-02-10 19:15:07,434 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:15:07,444 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:15:07,444 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:15:07,450 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:15:07,452 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:15:07,455 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:15:07,508 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:15:07,511 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:15:07,513 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:15:07,514 - INFO - 成功预加载量化模型
+2025-02-10 19:15:08,939 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:15:09,029 - INFO - admin - Opening Login page.
+2025-02-10 19:15:12,315 - INFO - admin - User logged in successfully
+2025-02-10 19:15:12,521 - INFO - admin - Opening Admin page.
+2025-02-10 19:15:13,230 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:16:22,531 - INFO - 初始化登录界面...
+2025-02-10 19:16:22,534 - INFO - 开始预加载模型...
+2025-02-10 19:16:22,534 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:16:22,544 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:16:22,544 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:16:22,549 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:16:22,551 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:16:22,554 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:16:22,604 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:16:22,606 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:16:22,607 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:16:22,607 - INFO - 成功预加载量化模型
+2025-02-10 19:16:23,812 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:16:23,875 - INFO - admin - Opening Login page.
+2025-02-10 19:16:27,616 - INFO - admin - User logged in successfully
+2025-02-10 19:16:27,842 - INFO - admin - Opening Admin page.
+2025-02-10 19:16:29,126 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:16:29,133 - INFO - admin - Opening results view page.
+2025-02-10 19:16:29,247 - INFO - admin - Opening Results View page.
+2025-02-10 19:16:36,650 - INFO - admin - 应用筛选条件: 用户类型=普通用户, 用户=None, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:16:38,866 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:16:38,867 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:16:41,347 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:16:41,348 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:18:29,670 - INFO - 初始化登录界面...
+2025-02-10 19:18:29,673 - INFO - 开始预加载模型...
+2025-02-10 19:18:29,674 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:18:29,682 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:18:29,683 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:18:29,688 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:18:29,690 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:18:29,693 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:18:29,731 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:18:29,733 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:18:29,735 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:18:29,735 - INFO - 成功预加载量化模型
+2025-02-10 19:18:32,465 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:18:32,535 - INFO - admin - Opening Login page.
+2025-02-10 19:18:36,167 - INFO - admin - User logged in successfully
+2025-02-10 19:18:36,368 - INFO - admin - Opening Admin page.

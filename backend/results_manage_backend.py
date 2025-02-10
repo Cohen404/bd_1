@@ -165,6 +165,21 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         # 初始化图片查看器
         self.image_viewer = None
 
+        # 设置日期选择器的默认值
+        self.date_start.setDate(QtCore.QDate.currentDate().addMonths(-1))
+        self.date_end.setDate(QtCore.QDate.currentDate())
+        
+        # 设置日期选择器的显示格式
+        self.date_start.setDisplayFormat("yyyy-MM-dd")
+        self.date_end.setDisplayFormat("yyyy-MM-dd")
+        
+        # 加载用户列表
+        self.load_users()
+        
+        # 连接筛选按钮事件
+        self.filter_btn.clicked.connect(self.apply_filter)
+        self.reset_filter_btn.clicked.connect(self.reset_filter)
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -657,13 +672,13 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
             rows = self.tableWidget.rowCount()
             cols = self.tableWidget.columnCount()
             headers = []
-            for col in range(cols-1):  # 不包括最后一列的"操作"
+            for col in range(cols-1):  # 不包括最后一列"操作"
                 headers.append(self.tableWidget.horizontalHeaderItem(col).text())
             
             data = []
             for row in range(rows):
                 row_data = []
-                for col in range(cols-1):  # 不包括最后一列的"操作"
+                for col in range(cols-1):  # 不包括最后一列"操作"
                     item = self.tableWidget.item(row, col)
                     row_data.append(item.text() if item else "")
                 data.append(row_data)
@@ -708,6 +723,119 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
             logging.error(f"查看图片时发生错误: {str(e)}")
             logging.error(traceback.format_exc())
             QMessageBox.critical(self, "错误", f"查看图片时发生错误: {str(e)}")
+
+    def load_users(self):
+        """加载用户列表到下拉框"""
+        try:
+            session = SessionClass()
+            users = session.query(User).all()
+            self.user_combo.clear()
+            self.user_combo.addItem("全部")
+            for user in users:
+                self.user_combo.addItem(user.username, user.user_id)
+        except Exception as e:
+            logging.error(f"加载用户列表失败: {str(e)}")
+        finally:
+            session.close()
+
+    def apply_filter(self):
+        """应用筛选条件"""
+        try:
+            session = SessionClass()
+            query = session.query(Result)
+
+            # 用户类型筛选
+            user_type = self.user_type_combo.currentText()
+            if user_type != "全部":
+                user_type_value = 'admin' if user_type == "管理员" else 'user'
+                user_ids = [u.user_id for u in session.query(User).filter(User.user_type == user_type_value)]
+                query = query.filter(Result.user_id.in_(user_ids))
+
+            # 用户筛选
+            selected_user = self.user_combo.currentData()
+            if selected_user:
+                query = query.filter(Result.user_id == selected_user)
+
+            # 日期范围筛选
+            start_date = self.date_start.date().toPyDate()
+            end_date = self.date_end.date().toPyDate()
+            query = query.filter(
+                Result.result_time >= start_date,
+                Result.result_time <= end_date + timedelta(days=1)
+            )
+
+            # 获取结果并显示
+            results = query.order_by(Result.result_time.desc()).all()
+            self.update_table(results)
+            
+            logging.info(f"应用筛选条件: 用户类型={user_type}, 用户={selected_user}, 日期范围={start_date}至{end_date}")
+
+        except Exception as e:
+            logging.error(f"应用筛选条件失败: {str(e)}")
+            QMessageBox.critical(self, "错误", f"应用筛选条件失败：{str(e)}")
+        finally:
+            session.close()
+
+    def reset_filter(self):
+        """重置筛选条件"""
+        self.user_type_combo.setCurrentText("全部")
+        self.user_combo.setCurrentText("全部")
+        self.date_start.setDate(QtCore.QDate.currentDate().addMonths(-1))
+        self.date_end.setDate(QtCore.QDate.currentDate())
+        self.show_table()  # 显示所有数据
+        logging.info("重置筛选条件")
+
+    def update_table(self, results):
+        """更新表格显示"""
+        session = SessionClass()
+        try:
+            self.tableWidget.setRowCount(len(results))
+            for i, result in enumerate(results):
+                try:
+                    # 获取用户名
+                    user = session.query(User).filter(User.user_id == result.user_id).first()
+                    username = user.username if user else "未知用户"
+
+                    # 设置表格项
+                    self.tableWidget.setItem(i, 0, QTableWidgetItem(str(result.id)))
+                    self.tableWidget.setItem(i, 1, QTableWidgetItem(username))
+                    self.tableWidget.setItem(i, 2, QTableWidgetItem(
+                        result.result_time.strftime('%Y-%m-%d %H:%M:%S') if result.result_time else ''))
+                    
+                    # 获取数据路径
+                    data = session.query(Data).filter(Data.id == result.id).first()
+                    if data:
+                        # 只显示路径的最后一部分
+                        display_path = os.path.basename(data.data_path)
+                        path_item = QTableWidgetItem(display_path)
+                        path_item.setToolTip(data.data_path)  # 设置完整路径为工具提示
+                    else:
+                        path_item = QTableWidgetItem("数据不存在")
+                    self.tableWidget.setItem(i, 3, path_item)
+                    
+                    self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.stress_score)))  # 普通应激分数
+                    self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.depression_score)))  # 抑郁分数
+                    self.tableWidget.setItem(i, 6, QTableWidgetItem(str(result.anxiety_score)))  # 焦虑分数
+                    self.tableWidget.setItem(i, 7, QTableWidgetItem(str(result.social_isolation_score)))  # 社交孤立分数
+
+                    # 添加操作按钮
+                    self.tableWidget.setCellWidget(i, 8, self.buttonForRow(i))
+
+                except Exception as e:
+                    logging.error(f"Error processing result {result.id}: {str(e)}")
+                    continue
+
+            # 启用表格滚动
+            self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+            self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+
+            logging.info(f"Successfully displayed {len(results)} results in table")
+            
+        except Exception as e:
+            logging.error(f"Error updating table: {str(e)}")
+            QMessageBox.critical(self, "错误", f"更新表格失败：{str(e)}")
+        finally:
+            session.close()
 
 class ReportViewer(QMainWindow):
     """报告查看窗口"""
