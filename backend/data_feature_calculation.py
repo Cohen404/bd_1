@@ -307,24 +307,37 @@ def analyze_eeg_data(file_path):
     file_path: EEG数据文件路径
     
     功能：
-    - 检查是否已存在fif文件，如果存在则直接返回True
-    - 如果不存在，则进行特征提取和可视化
+    - 检查是否已存在fif文件和可视化图片，如果都存在则直接返回True
+    - 如果只有fif文件但没有图片，则只生成可视化图像
+    - 如果都不存在，则进行特征提取和可视化
     
     返回：
     bool: 处理是否成功
     """
     try:
-        # 检查文件扩展名
-        if file_path.endswith('.fif'):
-            # 如果是fif文件，说明已经预处理过，直接返回成功
-            logging.info(f"File {file_path} is already preprocessed (fif format)")
+        # 获取数据目录路径
+        data_dir = os.path.dirname(file_path)
+        global folder_path
+        folder_path = data_dir
+
+        # 检查是否已存在可视化图片
+        required_images = [
+            'time_过零率.png', 'time_方差.png', 'time_能量.png', 'time_差分.png',
+            'frequency_band_1.png', 'frequency_band_2.png', 'frequency_band_3.png',
+            'frequency_band_4.png', 'frequency_band_5.png',
+            'frequency_wavelet.png', 'differential_entropy.png',
+            'Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'
+        ]
+        
+        all_images_exist = all(os.path.exists(os.path.join(data_dir, img)) for img in required_images)
+        
+        # 如果是fif文件且所有图片都存在，直接返回
+        if file_path.endswith('.fif') and all_images_exist:
+            logging.info(f"File {file_path} is already processed with visualizations")
             return True
-            
-        # 以下是原有的特征提取和可视化逻辑
+
         # 加载和预处理数据
         data1, eeg_data = load_preprocess_data(file_path)
-        global folder_path  # 声明要修改全局变量
-        folder_path = os.path.dirname(file_path)
 
         # 如果数据是3D的（epochs数据），取平均值转换为2D
         if len(eeg_data.shape) == 3:
@@ -343,34 +356,39 @@ def analyze_eeg_data(file_path):
         time_frequency_features = [extract_time_frequency_features(channel) for channel in eeg_data]
         theta_alpha_beta_gamma_powers = [extract_theta_alpha_beta_gamma_powers(channel, sfreq) for channel in eeg_data]
 
-        # 创建特征DataFrame
-        feature_df, feature_names = create_feature_dataframe(
-            time_domain_features, 
-            frequency_domain_features, 
-            time_frequency_features, 
-            theta_alpha_beta_gamma_powers
-        )
+        # 如果不是fif文件，则保存特征到CSV
+        if not file_path.endswith('.fif'):
+            # 创建特征DataFrame
+            feature_df, feature_names = create_feature_dataframe(
+                time_domain_features, 
+                frequency_domain_features, 
+                time_frequency_features, 
+                theta_alpha_beta_gamma_powers
+            )
 
-        # 保存DataFrame到CSV文件
-        csv_path = os.path.join(folder_path, 'eeg_features.csv')
-        feature_df.to_csv(csv_path)
-        print(f"特征已保存到: {csv_path}")
+            # 保存DataFrame到CSV文件
+            csv_path = os.path.join(folder_path, 'eeg_features.csv')
+            feature_df.to_csv(csv_path)
+            print(f"特征已保存到: {csv_path}")
 
-        # 保存特征名称到文本文件
-        feature_names_path = os.path.join(folder_path, 'feature_names.txt')
-        with open(feature_names_path, 'w') as f:
-            for name in feature_names:
-                f.write(f"{name}\n")
-        print(f"特征名称已保存到: {feature_names_path}")
+            # 保存特征名称到文本文件
+            feature_names_path = os.path.join(folder_path, 'feature_names.txt')
+            with open(feature_names_path, 'w') as f:
+                for name in feature_names:
+                    f.write(f"{name}\n")
+            print(f"特征名称已保存到: {feature_names_path}")
 
-        # 可视化
-        plot_time_domain_features(time_domain_features)
-        plot_frequency_domain_features(frequency_domain_features)
-        plot_time_frequency_features(time_frequency_features)
-        plot_differential_entropy(frequency_domain_features)
-        plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
+        # 如果图片不完整，则生成可视化图像
+        if not all_images_exist:
+            plot_time_domain_features(time_domain_features)
+            plot_frequency_domain_features(frequency_domain_features)
+            plot_time_frequency_features(time_frequency_features)
+            plot_differential_entropy(frequency_domain_features)
+            plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
         
-        return feature_df, feature_names
+        if not file_path.endswith('.fif'):
+            return feature_df, feature_names
+        return True
         
     except Exception as e:
         print(f"分析过程中出现错误: {str(e)}")

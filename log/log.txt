@@ -6513,3 +6513,304 @@ ValueError: Could not find event data
 2025-02-10 19:18:32,535 - INFO - admin - Opening Login page.
 2025-02-10 19:18:36,167 - INFO - admin - User logged in successfully
 2025-02-10 19:18:36,368 - INFO - admin - Opening Admin page.
+2025-02-10 19:18:37,414 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:18:37,419 - INFO - admin - Opening results view page.
+2025-02-10 19:18:37,499 - INFO - admin - Opening Results View page.
+2025-02-10 19:18:44,216 - INFO - admin - 应用筛选条件: 用户类型=普通用户, 用户=None, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:18:48,761 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:18:48,762 - INFO - admin - 重置筛选条件
+2025-02-10 19:18:56,487 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:18:56,488 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-09至2025-02-10
+2025-02-10 19:18:59,422 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:18:59,422 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-11至2025-02-10
+2025-02-10 19:19:00,093 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:00,095 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-11至2025-02-10
+2025-02-10 19:19:00,263 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:00,263 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-11至2025-02-10
+2025-02-10 19:19:00,438 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:00,439 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-11至2025-02-10
+2025-02-10 19:19:05,542 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:05,543 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-12至2025-02-10
+2025-02-10 19:19:05,990 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:05,991 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-12至2025-02-10
+2025-02-10 19:19:06,166 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:06,167 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-12至2025-02-10
+2025-02-10 19:19:06,341 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:06,343 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-01-12至2025-02-10
+2025-02-10 19:19:15,982 - ERROR - admin - Error processing result 1: name 'session' is not defined
+2025-02-10 19:19:15,983 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-02-10至2025-02-10
+2025-02-10 19:19:18,798 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-02-11至2025-02-10
+2025-02-10 19:19:19,638 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=None, 日期范围=2025-02-11至2025-02-10
+2025-02-10 19:19:20,026 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:19:20,027 - INFO - admin - 重置筛选条件
+2025-02-10 19:19:25,375 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=user002, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:19:25,558 - INFO - admin - 应用筛选条件: 用户类型=全部, 用户=user002, 日期范围=2025-01-10至2025-02-10
+2025-02-10 19:19:26,746 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 19:19:26,747 - INFO - admin - 重置筛选条件
+2025-02-10 19:45:56,344 - INFO - 初始化登录界面...
+2025-02-10 19:45:56,348 - INFO - 开始预加载模型...
+2025-02-10 19:45:56,348 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:45:56,364 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:45:56,365 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:45:56,373 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:45:56,376 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:45:56,381 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:45:56,436 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:45:56,439 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:45:56,442 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:45:56,442 - INFO - 成功预加载量化模型
+2025-02-10 19:46:20,590 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:46:20,662 - INFO - admin - Opening Login page.
+2025-02-10 19:46:23,325 - INFO - admin - User logged in successfully
+2025-02-10 19:46:23,584 - INFO - admin - Opening Admin page.
+2025-02-10 19:46:25,306 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 19:46:25,308 - INFO - admin - Opening data view page.
+2025-02-10 19:46:25,424 - INFO - admin - Opening Data View page.
+2025-02-10 19:46:26,572 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-02-10 19:46:26,576 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:46:27,879 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\Theta.png
+2025-02-10 19:46:48,763 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-02-10 19:46:48,767 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:46:50,176 - ERROR - admin - Image file does not exist: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\Theta.png
+2025-02-10 19:46:52,432 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:47:10,170 - INFO - admin - Data processing completed successfully
+2025-02-10 19:47:18,421 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-02-10 19:47:18,424 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:47:19,648 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\Theta.png
+2025-02-10 19:52:30,534 - INFO - 初始化登录界面...
+2025-02-10 19:52:30,538 - INFO - 开始预加载模型...
+2025-02-10 19:52:30,538 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 19:52:30,552 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:52:30,553 - INFO - 模型文件存在，开始加载...
+2025-02-10 19:52:30,561 - INFO - 开始加载INT8量化模型...
+2025-02-10 19:52:30,563 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 19:52:30,566 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 19:52:30,632 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 19:52:30,635 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 19:52:30,636 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 19:52:30,637 - INFO - 成功预加载量化模型
+2025-02-10 19:52:35,862 - INFO - 未登录 - Opening user login page.
+2025-02-10 19:52:35,932 - INFO - admin - Opening Login page.
+2025-02-10 19:52:38,730 - INFO - admin - User logged in successfully
+2025-02-10 19:52:38,955 - INFO - admin - Opening Admin page.
+2025-02-10 19:52:40,243 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 19:52:40,245 - INFO - admin - Opening data view page.
+2025-02-10 19:52:40,339 - INFO - admin - Opening Data View page.
+2025-02-10 19:52:41,564 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:52:41,739 - ERROR - admin - 数据预处理失败: cannot reshape array of size 0 into shape (59,1000)
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 51, in treat
+    epochs.save(save_dir, overwrite=True)
+  File "<decorator-gen-224>", line 12, in save
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 2263, in save
+    _save_split(this_epochs, split_fnames, part_idx, n_parts, fmt, overwrite)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 138, in _save_split
+    _save_part(fid, epochs, fmt, n_parts, next_fname, next_idx)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 158, in _save_part
+    data = epochs.get_data(copy=False)
+  File "<decorator-gen-221>", line 12, in get_data
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 1916, in get_data
+    return self._get_data(
+  File "<decorator-gen-220>", line 12, in _get_data
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 1703, in _get_data
+    epoch_noproj = self._get_epoch_from_raw(idx)
+  File "<decorator-gen-235>", line 12, in _get_epoch_from_raw
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 4110, in _get_epoch_from_raw
+    data.shape = raw.epoch_shape
+ValueError: cannot reshape array of size 0 into shape (59,1000)
+
+2025-02-10 19:52:41,743 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif is already processed with visualizations
+2025-02-10 19:52:41,745 - INFO - admin - Data processing completed successfully
+2025-02-10 19:52:43,909 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:52:43,943 - ERROR - admin - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:52:43,958 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif is already processed with visualizations
+2025-02-10 19:52:43,981 - INFO - admin - Data processing completed successfully
+2025-02-10 19:53:23,830 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:53:23,844 - ERROR - admin - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:53:23,900 - ERROR - admin - 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 78, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1163, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 340, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 83, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:53:23,905 - ERROR - admin - Error during processing: 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 78, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1163, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 340, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 83, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:53:53,560 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-02-10 19:53:53,573 - ERROR - admin - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:53:53,602 - ERROR - admin - 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 78, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1163, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 340, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 83, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-02-10 19:53:53,630 - ERROR - admin - Error during processing: 处理过程中发生错误: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 78, in load_preprocess_data
+    data = mne.io.read_raw_fif(filename, preload=True)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 543, in read_raw_fif
+    return Raw(
+  File "<decorator-gen-369>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 105, in __init__
+    raw, next_fname, buffer_size_sec = self._read_raw_file(
+  File "<decorator-gen-370>", line 12, in _read_raw_file
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\io\fiff\raw.py", line 211, in _read_raw_file
+    raise ValueError("No raw data in %s" % fname_rep)
+ValueError: No raw data in D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_manage_backend.py", line 1163, in run
+    data_feature_calculation.analyze_eeg_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 340, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(file_path)
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 83, in load_preprocess_data
+    epochs = mne.read_epochs(filename, preload=True)
+  File "<decorator-gen-233>", line 12, in read_epochs
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3870, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-234>", line 12, in __init__
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3951, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\epochs.py", line 3675, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\bj_health\lib\site-packages\mne\event.py", line 173, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
