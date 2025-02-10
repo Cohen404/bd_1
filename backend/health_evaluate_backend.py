@@ -83,6 +83,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.tableWidget.setColumnCount(len(self.lst))
         self.tableWidget.setHorizontalHeaderLabels(self.lst)
         
+        # 添加批量评估时间记录变量
+        self.batch_start_time = None
+        
         # 从文件中读取用户ID
         try:
             user_id = operate_user.read(CURRENT_USER_FILE)  # 使用配置的路径
@@ -1141,6 +1144,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         批量评估功能
         """
         try:
+            
             # 获取选中的行
             selected_rows = self.tableWidget.selectionModel().selectedRows()
             if not selected_rows:
@@ -1152,7 +1156,6 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 return
             
             # 记录开始时间和选中的数据数量
-            start_time = time.time()
             selected_count = len(selected_rows)
             
             # 收集选中的数据ID和路径
@@ -1208,6 +1211,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             
             # 记录开始处理的日志
             logging.info(f"开始批量评估 - 选中数据量: {selected_count}个")
+                        # 记录开始时间
+            self.batch_start_time = datetime.now()
+
             
         except Exception as e:
             error_msg = f"批量评估失败: {str(e)}"
@@ -1339,8 +1345,17 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 
                 session.commit()
                 
-                # 在所有处理完成后显示成功信息
-                QMessageBox.information(self, "成功", f"批量评估完成\n成功处理: {success_count} 条数据")
+                # 计算总耗时
+                if self.batch_start_time:
+                    batch_end_time = datetime.now()
+                    total_time = (batch_end_time - self.batch_start_time).total_seconds()
+                    logging.info(f"批量评估完成 - 总耗时: {total_time:.2f}秒, 成功处理: {success_count}/{len(self.selected_data_ids)} 条数据")
+                    
+                    # 在所有处理完成后显示成功信息
+                    QMessageBox.information(self, "成功", f"批量评估完成\n成功处理: {success_count} 条数据\n总耗时: {total_time:.2f}秒")
+                else:
+                    logging.warning("无法计算批量评估总耗时：未找到开始时间")
+                    QMessageBox.information(self, "成功", f"批量评估完成\n成功处理: {success_count} 条数据")
                 
                 # 刷新表格显示
                 self.show_table()

@@ -7601,3 +7601,181 @@ If this file exists please check that this process can read it or you can pass p
 2025-02-10 21:26:36,196 - INFO - admin - Opening Admin page.
 2025-02-10 21:26:37,617 - INFO - user1 - Opening log management page. Time taken: 0.38 seconds
 2025-02-10 21:26:37,733 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:37:49,623 - INFO - 初始化登录界面...
+2025-02-10 21:37:49,627 - INFO - 开始预加载模型...
+2025-02-10 21:37:49,627 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:37:49,637 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:37:49,637 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:37:49,642 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:37:49,645 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:37:49,648 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:37:49,710 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:37:49,712 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:37:49,714 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:37:49,714 - INFO - 成功预加载量化模型
+2025-02-10 21:37:50,772 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:37:50,849 - INFO - admin - Opening Login page.
+2025-02-10 21:37:54,719 - INFO - admin - User logged in successfully
+2025-02-10 21:37:54,945 - INFO - admin - Opening Admin page.
+2025-02-10 21:37:56,674 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:37:56,682 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:37:56,712 - INFO - admin - Opening health evaluation page. Time taken: 0.08 seconds
+2025-02-10 21:37:56,882 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:37:58,630 - INFO - admin - 开始批量评估 - 选中数据量: 1个
+2025-02-10 21:37:58,651 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:37:59,840 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:37:59,852 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:37:59,853 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:38:01,079 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:38:01,083 - ERROR - admin - 保存批量评估结果时发生错误: name 'batch_start_time' is not defined
+2025-02-10 21:38:01,085 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\health_evaluate_backend.py", line 1346, in onBatchComplete
+    total_time = (batch_end_time - batch_start_time).total_seconds()
+NameError: name 'batch_start_time' is not defined
+
+2025-02-10 21:39:17,233 - INFO - 初始化登录界面...
+2025-02-10 21:39:17,236 - INFO - 开始预加载模型...
+2025-02-10 21:39:17,237 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:39:17,248 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:39:17,249 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:39:17,253 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:39:17,255 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:39:17,258 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:39:17,297 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:39:17,299 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:39:17,301 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:39:17,302 - INFO - 成功预加载量化模型
+2025-02-10 21:39:19,630 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:39:19,704 - INFO - admin - Opening Login page.
+2025-02-10 21:39:23,115 - INFO - admin - User logged in successfully
+2025-02-10 21:39:23,317 - INFO - admin - Opening Admin page.
+2025-02-10 21:39:30,723 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:39:30,729 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:39:30,752 - INFO - admin - Opening health evaluation page. Time taken: 0.05 seconds
+2025-02-10 21:39:30,860 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:39:32,760 - INFO - admin - 开始批量评估 - 选中数据量: 1个
+2025-02-10 21:39:32,784 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:39:34,031 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:39:34,041 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:39:34,041 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:39:35,099 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:39:35,103 - INFO - admin - 批量评估完成 - 总耗时: 2.35秒, 成功处理: 1/1 条数据
+2025-02-10 21:39:35,913 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:39:35,916 - INFO - admin - Successfully displayed 1 data records
+2025-02-10 21:39:36,980 - INFO - admin - Opening Admin page.
+2025-02-10 21:39:36,980 - INFO - admin - Returned to index page successfully
+2025-02-10 21:39:39,133 - INFO - admin - Opening log management page. Time taken: 0.37 seconds
+2025-02-10 21:39:39,219 - INFO - admin - Opening Log Manage page.
+2025-02-10 21:39:45,180 - INFO - admin - Opening Admin page.
+2025-02-10 21:39:45,180 - INFO - admin - Returned to index page successfully
+2025-02-10 21:39:46,194 - INFO - admin - Data table refreshed successfully with 1 records
+2025-02-10 21:39:46,195 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-02-10 21:39:46,288 - INFO - admin - Opening Data View page.
+2025-02-10 21:39:55,579 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/codenew/bj_health_manage/data/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_3
+2025-02-10 21:39:55,591 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_3, Username: admin
+2025-02-10 21:39:56,422 - INFO - admin - Data table refreshed successfully with 2 records
+2025-02-10 21:39:58,135 - INFO - admin - Opening Admin page.
+2025-02-10 21:39:58,137 - INFO - admin - Returned to index page successfully
+2025-02-10 21:39:58,680 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:39:58,691 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 21:39:58,716 - INFO - admin - Opening health evaluation page. Time taken: 0.06 seconds
+2025-02-10 21:39:58,827 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:40:00,247 - INFO - admin - 开始批量评估 - 选中数据量: 2个
+2025-02-10 21:40:00,267 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:40:01,402 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:40:01,413 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:40:01,414 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:40:01,420 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:40:02,072 - ERROR - admin - Error in get_data: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+2025-02-10 21:40:02,075 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 256, in get_data
+    with open(save_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+
+2025-02-10 21:40:02,163 - ERROR - admin - Error during prediction: Failed to get test data
+2025-02-10 21:40:02,165 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-10 21:40:02,165 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:40:02,167 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-02-10 21:40:03,196 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:40:03,198 - INFO - admin - 添加ID 2 的新评估结果 - 应激: 0.0, 抑郁: 40.1, 焦虑: 50.0, 社交孤立: 4.5
+2025-02-10 21:40:03,201 - INFO - admin - 批量评估完成 - 总耗时: 2.96秒, 成功处理: 2/2 条数据
+2025-02-10 21:40:03,900 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:40:03,910 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 21:40:04,612 - INFO - admin - Opening Admin page.
+2025-02-10 21:40:04,613 - INFO - admin - Returned to index page successfully
+2025-02-10 21:40:49,083 - INFO - 初始化登录界面...
+2025-02-10 21:40:49,086 - INFO - 开始预加载模型...
+2025-02-10 21:40:49,086 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 21:40:49,098 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:40:49,099 - INFO - 模型文件存在，开始加载...
+2025-02-10 21:40:49,104 - INFO - 开始加载INT8量化模型...
+2025-02-10 21:40:49,106 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 21:40:49,109 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 21:40:49,151 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 21:40:49,154 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 21:40:49,155 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 21:40:49,157 - INFO - 成功预加载量化模型
+2025-02-10 21:40:50,170 - INFO - 未登录 - Opening user login page.
+2025-02-10 21:40:50,215 - INFO - admin - Opening Login page.
+2025-02-10 21:40:53,536 - INFO - admin - User logged in successfully
+2025-02-10 21:40:53,805 - INFO - admin - Opening Admin page.
+2025-02-10 21:40:54,653 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:40:54,664 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 21:40:54,688 - INFO - admin - Opening health evaluation page. Time taken: 0.07 seconds
+2025-02-10 21:40:54,830 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 21:40:56,589 - INFO - admin - 开始批量评估 - 选中数据量: 2个
+2025-02-10 21:40:56,612 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:40:57,739 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:40:57,746 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:40:57,746 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:40:57,751 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:40:58,298 - ERROR - admin - Error in get_data: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+2025-02-10 21:40:58,302 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 256, in get_data
+    with open(save_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+
+2025-02-10 21:40:58,392 - ERROR - admin - Error during prediction: Failed to get test data
+2025-02-10 21:40:58,394 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-10 21:40:58,395 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:40:58,395 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-02-10 21:40:59,763 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:40:59,768 - INFO - admin - 更新ID 2 的评估结果 - 应激: 0.0, 抑郁: 40.1, 焦虑: 50.0, 社交孤立: 4.5
+2025-02-10 21:40:59,771 - INFO - admin - 批量评估完成 - 总耗时: 3.18秒, 成功处理: 2/2 条数据
+2025-02-10 21:41:02,323 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:41:02,330 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 21:41:05,025 - INFO - admin - 开始批量评估 - 选中数据量: 2个
+2025-02-10 21:41:05,044 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:41:06,066 - INFO - admin - Prediction result: 1.0
+2025-02-10 21:41:06,074 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:41:06,074 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-02-10 21:41:06,078 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-02-10 21:41:06,572 - ERROR - admin - Error in get_data: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+2025-02-10 21:41:06,574 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 256, in get_data
+    with open(save_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+
+2025-02-10 21:41:06,625 - ERROR - admin - Error during prediction: Failed to get test data
+2025-02-10 21:41:06,628 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-02-10 21:41:06,629 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-02-10 21:41:06,629 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-02-10 21:41:07,476 - INFO - admin - 更新ID 1 的评估结果 - 应激: 95.0, 抑郁: 40.1, 焦虑: 78.5, 社交孤立: 10.7
+2025-02-10 21:41:07,479 - INFO - admin - 更新ID 2 的评估结果 - 应激: 0.0, 抑郁: 40.1, 焦虑: 50.0, 社交孤立: 4.5
+2025-02-10 21:41:07,482 - INFO - admin - 批量评估完成 - 总耗时: 2.46秒, 成功处理: 2/2 条数据
+2025-02-10 21:41:08,451 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 21:41:08,460 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 21:41:09,082 - INFO - admin - Opening Admin page.
+2025-02-10 21:41:09,084 - INFO - admin - Returned to index page successfully
