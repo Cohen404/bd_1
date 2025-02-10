@@ -165,6 +165,19 @@ class Ui_MainWindow(object):
         self.anxiety_label.setStyleSheet("color: white; font-size: 14px;")
         self.gridLayout.addWidget(self.anxiety_label, 2, 1, 1, 1)
 
+        # 社交孤立
+        self.social_led_label = QtWidgets.QLabel(self.classifer)
+        self.social_led_label.setStyleSheet(
+            "min-width: 30px; min-height: 30px;max-width:30px; max-height: 30px;border-radius: 16px; border:2px solid white;background:white")
+        self.social_led_label.setText("")
+        self.social_led_label.setObjectName("social_led_label")
+        self.gridLayout.addWidget(self.social_led_label, 3, 0, 1, 1)
+        self.social_label = QtWidgets.QLabel(self.classifer)
+        self.social_label.setObjectName("social_label")
+        self.social_label.setText("社交孤立")
+        self.social_label.setStyleSheet("color: white; font-size: 14px;")
+        self.gridLayout.addWidget(self.social_label, 3, 1, 1, 1)
+
         self.verticalLayout.addWidget(self.classifer)
         self.gridLayout_2.addLayout(self.verticalLayout, 0, 4, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -268,6 +281,7 @@ class Ui_MainWindow(object):
         self.ordinarystress_label.setText(_translate("MainWindow", "普通应激"))
         self.depression_label.setText(_translate("MainWindow", "抑郁"))
         self.anxiety_label.setText(_translate("MainWindow", "焦虑"))
+        self.social_label.setText(_translate("MainWindow", "社交孤立"))
 
         self.pushButton.setText(_translate("MainWindow", "上一张"))
         self.pushButton_2.setText(_translate("MainWindow", "下一张"))
@@ -288,6 +302,7 @@ class Ui_MainWindow(object):
         self.depression_label.setStyleSheet("font-size:25px;color:black")
         self.ordinarystress_label.setStyleSheet("font-size:25px")
         self.anxiety_label.setStyleSheet("font-size:25px")
+        self.social_label.setStyleSheet("font-size:25px")
 
         # self.mechanical_label.setStyleSheet("font-size:25px")
         # self.life_label.setStyleSheet("font-size:25px;color:black")

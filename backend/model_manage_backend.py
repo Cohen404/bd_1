@@ -102,9 +102,10 @@ class model_control_Controller(Ui_model_Control):
         model_list (list): 包含模型信息的列表
         """
         model_type_mapping = {
-             '0': "普通应激评估模型",
-             '1': "抑郁评估模型",
-             '2': "焦虑评估模型"
+            '0': "普通应激评估模型",
+            '1': "抑郁评估模型",
+            '2': "焦虑评估模型",
+            '3': "社交孤立评估模型"
         }
         if model_list is None:
             return
@@ -144,7 +145,7 @@ class model_control_Controller(Ui_model_Control):
         """
         上传模型的处理函数
         """
-        model_types = ["普通应激评估模型", "抑郁评估模型", "焦虑评估模型"]
+        model_types = ["普通应激评估模型", "抑郁评估模型", "焦虑评估模型", "社交孤立评估模型"]
         model_type_name, okPressed = QInputDialog.getItem(self, "上传模型", "模型类型:", model_types, 0, False)
 
         if okPressed and model_type_name:
@@ -166,7 +167,8 @@ class model_control_Controller(Ui_model_Control):
                 model_type_dir_mapping = {
                     0: "./model/yingji",
                     1: "./model/yiyu",
-                    2: "./model/jiaolv"
+                    2: "./model/jiaolv",
+                    3: "./model/shejiao"
                 }
                 target_dir = model_type_dir_mapping.get(model_type)
 
@@ -229,7 +231,8 @@ class model_control_Controller(Ui_model_Control):
         model_type_mapping = {
             '0': "普通应激评估模型",
             '1': "抑郁评估模型",
-            '2': "焦虑评估模型"
+            '2': "焦虑评估模型",
+            '3': "社交孤立评估模型"
         }
         # 从模型路径中提取模型的名称
         model_name = os.path.basename(model_path)
@@ -301,7 +304,8 @@ class model_control_Controller(Ui_model_Control):
             model_type_mapping = {
                 "普通应激评估模型": '0',
                 "抑郁评估模型": '1',
-                "焦虑评估模型": '2'
+                "焦虑评估模型": '2',
+                "社交孤立评估模型": '3'
             }
             model_type = model_type_mapping.get(model_type_num)
 

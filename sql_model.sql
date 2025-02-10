@@ -54,6 +54,7 @@ CREATE TABLE tb_result (
   stress_score FLOAT NOT NULL,
   depression_score FLOAT NOT NULL,
   anxiety_score FLOAT NOT NULL,
+  social_isolation_score FLOAT NOT NULL,
   report_path VARCHAR(255),
   user_id VARCHAR(64) NOT NULL
 );
@@ -63,6 +64,7 @@ COMMENT ON COLUMN tb_result.result_time IS '结果计算时间';
 COMMENT ON COLUMN tb_result.stress_score IS '0-100,0不普通应激，100普通应激';
 COMMENT ON COLUMN tb_result.depression_score IS '0-100,0不抑郁，100抑郁';
 COMMENT ON COLUMN tb_result.anxiety_score IS '0-100,0不焦虑，100焦虑';
+COMMENT ON COLUMN tb_result.social_isolation_score IS '0-100,0不社交孤立，100社交孤立';
 COMMENT ON COLUMN tb_result.report_path IS '报告路径';
 COMMENT ON COLUMN tb_result.user_id IS '关联用户ID';
 
@@ -98,7 +100,7 @@ CREATE TABLE tb_model (
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 COMMENT ON TABLE tb_model IS '模型表';
-COMMENT ON COLUMN tb_model.model_type IS '0普通应激模型，1抑郁评估模型，2焦虑评估模型';
+COMMENT ON COLUMN tb_model.model_type IS '0普通应激模型，1抑郁评估模型，2焦虑评估模型，3社交孤立评估模型';
 COMMENT ON COLUMN tb_model.model_path IS '模型路径';
 COMMENT ON COLUMN tb_model.create_time IS '创建时间';
 
@@ -108,7 +110,8 @@ COMMENT ON COLUMN tb_model.create_time IS '创建时间';
 INSERT INTO tb_model (model_type, model_path, create_time) VALUES 
 (0, './model/yingji/subject-1 yingji.keras', CURRENT_TIMESTAMP),
 (1, './model/yiyu/subject-1 yiyu.keras', CURRENT_TIMESTAMP),
-(2, './model/jiaolv/subject-1jiaolv.keras', CURRENT_TIMESTAMP);
+(2, './model/jiaolv/subject-1jiaolv.keras', CURRENT_TIMESTAMP),
+(3, './model/shejiao/subject-1shejiao.keras', CURRENT_TIMESTAMP);
 
 -- ----------------------------
 -- Table structure for tb_role

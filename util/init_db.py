@@ -1,6 +1,7 @@
 import os
 import sys
 import hashlib
+from dotenv import load_dotenv
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sqlalchemy import create_engine, text
@@ -18,12 +19,15 @@ from sql_model.tb_user_role import UserRole
 from sql_model.tb_role_permission import RolePermission
 from datetime import datetime
 
-# PostgreSQL配置信息
-HOST = '127.0.0.1'
-PORT = 5432
-DATABASE = 'bj_health_manage'
-USERNAME = 'postgres'
-PASSWORD = 'postgres'
+# 加载.env文件
+load_dotenv()
+
+# 从环境变量获取数据库配置
+HOST = os.getenv('DB_HOST', '127.0.0.1')
+PORT = os.getenv('DB_PORT', '5432')
+DATABASE = os.getenv('DB_NAME', 'bj_health_db')
+USERNAME = os.getenv('DB_USER', 'postgres')
+PASSWORD = os.getenv('DB_PASS', 'tj654478')
 
 def hash_password(password):
     """使用SHA-256对密码进行哈希"""
@@ -122,6 +126,12 @@ def init_database():
                 id=3,
                 model_type=2,
                 model_path='./model/jiaolv/subject-1jiaolv.keras',
+                create_time=datetime.now()
+            ),
+            Model(
+                id=4,
+                model_type=3,
+                model_path='./model/shejiao/subject-1shejiao.keras',
                 create_time=datetime.now()
             )
         ]

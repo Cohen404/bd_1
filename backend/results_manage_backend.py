@@ -104,9 +104,9 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         self.pushButton_2.clicked.connect(self.show_next_image)
 
         # 设置表格列
-        self.tableWidget.setColumnCount(8)  # 设置为8列，包括数据路径列
+        self.tableWidget.setColumnCount(9)  # 增加一列
         self.tableWidget.setHorizontalHeaderLabels([
-            'ID', '用户名', '评估时间', '数据路径', '普通应激', '抑郁', '焦虑', '操作'
+            'ID', '用户名', '评估时间', '数据路径', '普通应激', '抑郁', '焦虑', '社交孤立', '操作'
         ])
 
         # 设置表格样式
@@ -124,7 +124,8 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)  # 普通应激列
         header.setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)  # 抑郁列
         header.setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)  # 焦虑列
-        header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
+        header.setSectionResizeMode(7, QtWidgets.QHeaderView.ResizeToContents)  # 社交孤立列
+        header.setSectionResizeMode(8, QtWidgets.QHeaderView.ResizeToContents)  # 操作列
 
         # 设置所有LED为默认灰色
         default_style = (
@@ -326,9 +327,10 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
                     self.tableWidget.setItem(i, 4, QTableWidgetItem(str(result.stress_score)))  # 普通应激分数
                     self.tableWidget.setItem(i, 5, QTableWidgetItem(str(result.depression_score)))  # 抑郁分数
                     self.tableWidget.setItem(i, 6, QTableWidgetItem(str(result.anxiety_score)))  # 焦虑分数
+                    self.tableWidget.setItem(i, 7, QTableWidgetItem(str(result.social_isolation_score)))  # 社交孤立分数
 
                     # 添加操作按钮
-                    self.tableWidget.setCellWidget(i, 7, self.buttonForRow(i))
+                    self.tableWidget.setCellWidget(i, 8, self.buttonForRow(i))
 
                 except Exception as e:
                     logging.error(f"Error processing result {result.id}: {str(e)}")
@@ -410,6 +412,23 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
             f"background: {'red' if result.anxiety_score >= 50 else 'gray'}; "
             "margin-left: 0px;"  # 移除左边距
         )
+
+        # 添加社交孤立状态更新
+        if hasattr(result, 'social_isolation_score'):
+            self.social_label.setText(f"社交孤立 ({result.social_isolation_score})")
+            self.social_led_label.setStyleSheet(
+                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                "border-radius: 16px; border: 2px solid white; "
+                f"background: {'red' if result.social_isolation_score >= 50 else 'gray'}; "
+                "margin-left: 0px;"
+            )
+        else:
+            self.social_label.setText("社交孤立")
+            self.social_led_label.setStyleSheet(
+                "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                "border-radius: 16px; border: 2px solid white; background: gray; "
+                "margin-left: 0px;"
+            )
 
     def display_image(self, image_path):
         """显示图片"""

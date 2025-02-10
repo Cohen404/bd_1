@@ -165,11 +165,33 @@ class Ui_MainWindow(object):
         self.mechanical_layout.addWidget(self.mechanical_label)
         self.mechanical_layout.addItem(self.mechanical_spacer)  # 添加弹簧
 
+        # 在 classifer 部分添加社交孤立状态
+        # 社交孤立
+        self.social_layout = QtWidgets.QHBoxLayout()
+        self.social_led_label = QtWidgets.QLabel(self.classifer)
+        self.social_led_label.setStyleSheet(
+            "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+            "border-radius: 16px; border: 2px solid white; background: white"
+        )
+        self.social_led_label.setText("")
+        self.social_led_label.setObjectName("social_led_label")
+        self.social_label = QtWidgets.QLabel(self.classifer)
+        self.social_label.setObjectName("social_label")
 
-        # 将每个水平布局添加到垂直布局中
+        # 创建弹簧并添加到布局
+        self.social_spacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
+                                                   QtWidgets.QSizePolicy.Minimum)
+
+        self.social_layout.addItem(self.social_spacer)  # 添加弹簧
+        self.social_layout.addWidget(self.social_led_label)
+        self.social_layout.addWidget(self.social_label)
+        self.social_layout.addItem(self.social_spacer)  # 添加弹簧
+
+        # 将社交孤立布局添加到垂直布局中
         self.verticalLayout1.addLayout(self.health_layout)
         self.verticalLayout1.addLayout(self.acoustic_layout)
         self.verticalLayout1.addLayout(self.mechanical_layout)
+        self.verticalLayout1.addLayout(self.social_layout)  # 添加社交孤立布局
 
 
         self.verticalLayout_3.addWidget(self.classifer)
@@ -260,7 +282,7 @@ class Ui_MainWindow(object):
         # self.verticalLayout.addWidget(self.curve_graphicsView)
 
         # 改为表格
-        self.lst = ['ID', '用户名', '评估时间', '普通应激', '抑郁', '焦虑']
+        self.lst = ['ID', '用户名', '评估时间', '普通应激', '抑郁', '焦虑', '社交孤立']
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setStyleSheet("margin-right:15px")
         self.tableWidget.setObjectName("tableWidget")
@@ -424,6 +446,7 @@ class Ui_MainWindow(object):
         self.health_label.setText(_translate("MainWindow", "普通应激"))
         self.acoustic_label.setText(_translate("MainWindow", "抑郁状态"))
         self.mechanical_label.setText(_translate("MainWindow", "焦虑状态"))
+        self.social_label.setText(_translate("MainWindow", "社交孤立"))
 
         self.pushButton.setText(_translate("MainWindow", "上一张"))
         self.pushButton_2.setText(_translate("MainWindow", "下一张"))
@@ -432,10 +455,12 @@ class Ui_MainWindow(object):
         self.health_label.setFont(font)
         self.acoustic_label.setFont(font)
         self.mechanical_label.setFont(font)
+        self.social_label.setFont(font)
 
         self.health_label.setStyleSheet("font-size:25px;color:black")
         self.acoustic_label.setStyleSheet("font-size:25px")
         self.mechanical_label.setStyleSheet("font-size:25px")
+        self.social_label.setStyleSheet("font-size:25px")
 
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")

@@ -156,38 +156,9 @@ if defined db_exists (
     echo [OK] 数据库已删除
 )
 
-:: 检查用户是否存在
-echo [CHECK] 检查数据库用户是否存在...
-set "user_exists="
-for /f "tokens=1" %%a in ('psql -U postgres -c "SELECT usename FROM pg_user WHERE usename='bj_health_user';"') do (
-    if "%%a"=="bj_health_user" set "user_exists=true"
-)
-
-if defined user_exists (
-    echo [INFO] 数据库用户已存在，正在删除...
-    psql -U postgres -c "DROP OWNED BY bj_health_user;"
-    psql -U postgres -c "DROP USER bj_health_user;"
-    if %ERRORLEVEL% NEQ 0 (
-        echo [ERROR] 删除用户失败！
-        pause
-        exit /b 1
-    )
-    echo [OK] 数据库用户已删除
-)
-
-:: 创建新用户
-echo [INFO] 创建数据库用户...
-psql -U postgres -c "CREATE USER bj_health_user WITH PASSWORD 'bj_health_pass';"
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERROR] 创建用户失败！
-    pause
-    exit /b 1
-)
-echo [OK] 数据库用户创建成功
-
 :: 创建新数据库
 echo [INFO] 创建数据库...
-psql -U postgres -c "CREATE DATABASE bj_health_db OWNER bj_health_user;"
+psql -U postgres -c "CREATE DATABASE bj_health_db;"
 if %ERRORLEVEL% NEQ 0 (
     echo [ERROR] 创建数据库失败！
     pause
@@ -195,15 +166,6 @@ if %ERRORLEVEL% NEQ 0 (
 )
 echo [OK] 数据库创建成功
 
-:: 初始化数据库表和数据
-echo [INFO] 正在初始化数据库表和数据...
-python util/init_db.py
-if %ERRORLEVEL% NEQ 0 (
-    echo [ERROR] 初始化数据库表和数据失败！
-    pause
-    exit /b 1
-)
-echo [OK] 数据库表和数据初始化完成
 
 :: 检查sql_model.sql是否存在
 echo [CHECK] 检查数据库模型文件...
@@ -216,7 +178,7 @@ echo [OK] 数据库模型文件检查通过
 
 :: 导入数据库结构
 echo [INFO] 正在导入数据库结构...
-psql -U bj_health_user -d bj_health_db -f sql_model.sql
+psql -U postgres -d bj_health_db -f sql_model.sql
 if %ERRORLEVEL% NEQ 0 (
     echo [ERROR] 导入数据库结构失败！
     pause
@@ -234,8 +196,8 @@ echo [INFO] 正在创建.env文件...
 echo DB_HOST=localhost
 echo DB_PORT=5432
 echo DB_NAME=bj_health_db
-echo DB_USER=bj_health_user
-echo DB_PASS=bj_health_pass
+echo DB_USER=postgres
+echo DB_PASS=tj654478
 echo SECRET_KEY=your_secret_key_here
 echo DEBUG=False
 ) > .env

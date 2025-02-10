@@ -243,6 +243,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         self.ordinarystress_led_label.setStyleSheet(default_style)
         self.depression_led_label.setStyleSheet(default_style)
         self.anxiety_led_label.setStyleSheet(default_style)
+        self.social_led_label.setStyleSheet(default_style)  # 添加社交孤立LED
 
     def update_led_colors(self, result):
         """根据结果更新LED颜色"""
@@ -272,6 +273,12 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             self.anxiety_led_label.setStyleSheet(red_style)
         else:
             self.anxiety_led_label.setStyleSheet(gray_style)
+        
+        # 社交孤立
+        if result.social_isolation_score >= 50:
+            self.social_led_label.setStyleSheet(red_style)
+        else:
+            self.social_led_label.setStyleSheet(gray_style)
         
         logging.info(f"Updated LED colors based on scores: stress={result.stress_score}, "
                     f"depression={result.depression_score}, anxiety={result.anxiety_score}", extra={'username': self.username})
@@ -730,6 +737,16 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             
             session = SessionClass()
             try:
+                # 计算社交孤立分数
+                social_isolation_score = round((self.result_list[0] + self.result_list[1] + self.result_list[2]) / 20, 1)
+                self.social_label.setText(f"社交孤立 ({social_isolation_score})")
+                if social_isolation_score > 50:
+                    self.social_led_label.setStyleSheet(
+                        "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                        "border-radius: 16px; border: 2px solid white; background: red"
+                    )
+
+                # 如果数据库中已经存在具有当前ID的数据，显示一个提示框询问用户是否要覆盖现有的数据
                 existing_result = session.query(Result).filter(Result.id == self.data_id).first()
                 if existing_result is not None:
                     # 如果数据库中已经存在具有当前ID的数据，显示一个提示框询问用户是否要覆盖现有的数据
@@ -742,6 +759,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         existing_result.stress_score = round(self.result_list[0], 1)
                         existing_result.depression_score = round(self.result_list[1], 1)
                         existing_result.anxiety_score = round(self.result_list[2], 1)
+                        existing_result.social_isolation_score = social_isolation_score
                         existing_result.result_time = self.result_time
                         # 更新LED颜色
                         self.update_led_colors(existing_result)
@@ -755,6 +773,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         stress_score=round(self.result_list[0], 1),
                         depression_score=round(self.result_list[1], 1),
                         anxiety_score=round(self.result_list[2], 1),
+                        social_isolation_score=social_isolation_score,
                         result_time=self.result_time,
                         user_id=self.user_id
                     )
@@ -1028,6 +1047,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         <p>普通应激评分：{result.stress_score}, 评估结果：{"可能存在应激情况" if result.stress_score >= 50 else "低概率存在应激情况"}</p>
                         <p>抑郁评分：{result.depression_score}, 评估结果：{"可能存在抑郁情况" if result.depression_score >= 50 else "低概率存在抑郁情况"}</p>
                         <p>焦虑评分：{result.anxiety_score}, 评估结果：{"可能存在焦虑情况" if result.anxiety_score >= 50 else "低概率存在焦虑情况"}</p>
+                        <p>社交孤立评分：{result.social_isolation_score}, 评估结果：{"可能存在社交孤立情况" if result.social_isolation_score >= 50 else "低概率存在社交孤立情况"}</p>
                         
                         <h2>3. 评估数据可视化</h2>
                         {images_html}

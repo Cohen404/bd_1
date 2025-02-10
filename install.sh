@@ -252,6 +252,10 @@ mkdir -p data/results
 mkdir -p model
 mkdir -p templates
 mkdir -p state
+mkdir -p ./model/yingji
+mkdir -p ./model/yiyu
+mkdir -p ./model/jiaolv
+mkdir -p ./model/shejiao
 
 # 设置权限
 echo "Setting permissions..."
