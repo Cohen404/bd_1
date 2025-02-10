@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QDialog
 from PyQt5.QtCore import Qt, QRectF
 from PyQt5.QtGui import QPixmap, QImage, QPainter
+import logging  # 添加日志模块导入
 
 class ImageViewer(QDialog):
     """
@@ -154,10 +155,12 @@ class ImageViewer(QDialog):
             # 获取场景中的第一个图片项
             items = self.scene.items()
             if not items:
+                logging.warning("没有找到要保存的图片项")
                 return
                 
             pixmap_item = items[0]
             if not hasattr(pixmap_item, 'pixmap'):
+                logging.warning("图片项不包含pixmap属性")
                 return
                 
             # 打开文件保存对话框
@@ -170,9 +173,16 @@ class ImageViewer(QDialog):
             
             if file_path:
                 # 保存图片
-                pixmap_item.pixmap().save(file_path)
+                success = pixmap_item.pixmap().save(file_path)
+                if success:
+                    logging.info(f"图片已成功保存到: {file_path}")
+                else:
+                    logging.error(f"保存图片失败: {file_path}")
                 
         except Exception as e:
             import traceback
-            print(f"保存图片时发生错误: {str(e)}")
+            error_msg = f"保存图片时发生错误: {str(e)}"
+            logging.error(error_msg)
+            logging.error(traceback.format_exc())
+            print(error_msg)
             print(traceback.format_exc()) 
