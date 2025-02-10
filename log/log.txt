@@ -5620,3 +5620,65 @@ ValueError: Could not find event data
 2025-02-10 16:52:01,264 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_1
 2025-02-10 16:52:13,087 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_1\fif.fif is already preprocessed (fif format)
 2025-02-10 16:52:13,089 - INFO - admin - Data processing completed successfully
+2025-02-10 17:21:02,843 - INFO - 初始化登录界面...
+2025-02-10 17:21:02,848 - INFO - 开始预加载模型...
+2025-02-10 17:21:02,848 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 17:21:02,861 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:21:02,861 - INFO - 模型文件存在，开始加载...
+2025-02-10 17:21:02,868 - INFO - 开始加载INT8量化模型...
+2025-02-10 17:21:02,871 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 17:21:02,875 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:21:02,918 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 17:21:02,921 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 17:21:02,924 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 17:21:02,924 - INFO - 成功预加载量化模型
+2025-02-10 17:21:06,529 - INFO - 未登录 - Opening user login page.
+2025-02-10 17:21:06,584 - INFO - admin - Opening Login page.
+2025-02-10 17:21:09,832 - INFO - admin - User logged in successfully
+2025-02-10 17:21:10,027 - INFO - admin - Opening Admin page.
+2025-02-10 17:21:10,961 - INFO - admin - Successfully displayed 1 results in table
+2025-02-10 17:21:10,962 - INFO - admin - Opening results view page.
+2025-02-10 17:21:11,035 - INFO - admin - Opening Results View page.
+2025-02-10 17:21:18,822 - INFO - admin - Opening Admin page.
+2025-02-10 17:21:18,826 - INFO - admin - Returned to index page successfully
+2025-02-10 17:21:19,446 - INFO - admin - Data table refreshed successfully with 2 records
+2025-02-10 17:21:19,448 - INFO - admin - Opening data view page.
+2025-02-10 17:21:19,569 - INFO - admin - Opening Data View page.
+2025-02-10 17:21:24,972 - INFO - admin - Button clicked in row 1, corresponding ID: 2
+2025-02-10 17:21:24,975 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_1
+2025-02-10 17:21:25,894 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_1\Theta.png
+2025-02-10 17:21:29,144 - INFO - admin - Opening Admin page.
+2025-02-10 17:21:29,144 - INFO - admin - Returned to index page successfully
+2025-02-10 17:21:29,754 - INFO - admin - Administrator admin: fetching all data records
+2025-02-10 17:21:29,762 - INFO - admin - Successfully displayed 2 data records
+2025-02-10 17:21:29,787 - INFO - admin - Opening health evaluation page.
+2025-02-10 17:21:29,887 - INFO - admin - Opening Health Evaluate page.
+2025-02-10 17:21:33,316 - INFO - admin - Button clicked in row 0, ID: 1
+2025-02-10 17:21:33,318 - INFO - admin - Data path retrieved for ID 1: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 17:21:33,320 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5
+2025-02-10 17:21:33,320 - INFO - admin - Initializing current image index to 0
+2025-02-10 17:21:33,320 - INFO - admin - Image list initialized with 15 items.
+2025-02-10 17:21:33,321 - INFO - admin - Attempting to load image from path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Theta.png
+2025-02-10 17:21:33,321 - INFO - admin - Successfully displayed image: Theta波段功率
+2025-02-10 17:25:47,316 - INFO - 初始化登录界面...
+2025-02-10 17:25:47,320 - INFO - 开始预加载模型...
+2025-02-10 17:25:47,320 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 17:25:47,329 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:25:47,329 - INFO - 模型文件存在，开始加载...
+2025-02-10 17:25:47,334 - INFO - 开始加载INT8量化模型...
+2025-02-10 17:25:47,337 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 17:25:47,340 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 17:25:47,391 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 17:25:47,394 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 17:25:47,396 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 17:25:47,396 - INFO - 成功预加载量化模型
+2025-02-10 17:25:48,633 - INFO - 未登录 - Opening user login page.
+2025-02-10 17:25:48,698 - INFO - admin - Opening Login page.
+2025-02-10 17:25:52,159 - INFO - admin - User logged in successfully
+2025-02-10 17:25:52,384 - INFO - admin - Opening Admin page.
+2025-02-10 17:25:54,681 - INFO - admin - Data table refreshed successfully with 2 records
+2025-02-10 17:25:54,682 - INFO - admin - Opening data view page.
+2025-02-10 17:25:54,839 - INFO - admin - Opening Data View page.
+2025-02-10 17:25:55,899 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-02-10 17:25:55,902 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2
+2025-02-10 17:25:56,888 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2\Theta.png

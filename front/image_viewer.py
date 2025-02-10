@@ -51,6 +51,7 @@ class ImageViewer(QDialog):
         self.zoom_in_btn = QPushButton('放大')
         self.zoom_out_btn = QPushButton('缩小')
         self.reset_btn = QPushButton('重置')
+        self.save_btn = QPushButton('保存')
         
         # 设置按钮样式
         button_style = """
@@ -68,11 +69,13 @@ class ImageViewer(QDialog):
         self.zoom_in_btn.setStyleSheet(button_style)
         self.zoom_out_btn.setStyleSheet(button_style)
         self.reset_btn.setStyleSheet(button_style)
+        self.save_btn.setStyleSheet(button_style)
         
         # 添加按钮到布局
         button_layout.addWidget(self.zoom_in_btn)
         button_layout.addWidget(self.zoom_out_btn)
         button_layout.addWidget(self.reset_btn)
+        button_layout.addWidget(self.save_btn)
         
         # 添加按钮布局到主布局
         layout.addLayout(button_layout)
@@ -81,6 +84,7 @@ class ImageViewer(QDialog):
         self.zoom_in_btn.clicked.connect(self.zoom_in)
         self.zoom_out_btn.clicked.connect(self.zoom_out)
         self.reset_btn.clicked.connect(self.reset_view)
+        self.save_btn.clicked.connect(self.save_image)
         
         # 初始化缩放系数
         self.zoom_factor = 1.0
@@ -139,4 +143,36 @@ class ImageViewer(QDialog):
         self.zoom_factor = 1.0
         
         # 调整视图以适应场景
-        self.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio) 
+        self.view.fitInView(self.scene.sceneRect(), Qt.KeepAspectRatio)
+        
+    def save_image(self):
+        """
+        保存图片到本地
+        """
+        from PyQt5.QtWidgets import QFileDialog
+        try:
+            # 获取场景中的第一个图片项
+            items = self.scene.items()
+            if not items:
+                return
+                
+            pixmap_item = items[0]
+            if not hasattr(pixmap_item, 'pixmap'):
+                return
+                
+            # 打开文件保存对话框
+            file_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "保存图片",
+                "",
+                "图片文件 (*.png *.jpg *.bmp);;所有文件 (*.*)"
+            )
+            
+            if file_path:
+                # 保存图片
+                pixmap_item.pixmap().save(file_path)
+                
+        except Exception as e:
+            import traceback
+            print(f"保存图片时发生错误: {str(e)}")
+            print(traceback.format_exc()) 
