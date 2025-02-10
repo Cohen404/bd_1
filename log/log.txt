@@ -5087,3 +5087,32 @@ DETAIL:  键值对(user_id)=(user1739174347)仍然是从表"tb_user_role"引用�
 2025-02-10 16:06:02,042 - INFO - t3 - Opening Admin page.
 2025-02-10 16:06:02,976 - INFO - admin - Switched to regular user mode. Login page is being opened.
 2025-02-10 16:06:03,069 - INFO - t3 - Opening Login page.
+2025-02-10 16:06:06,880 - INFO - admin - User logged in successfully
+2025-02-10 16:06:06,956 - INFO - admin - Opening Admin page.
+2025-02-10 16:06:08,079 - INFO - admin - Opening user management page.
+2025-02-10 16:06:08,159 - INFO - admin - Opening User Manage page.
+2025-02-10 16:22:47,474 - INFO - 初始化登录界面...
+2025-02-10 16:22:47,478 - INFO - 开始预加载模型...
+2025-02-10 16:22:47,478 - INFO - 正在检查数据库中的模型信息...
+2025-02-10 16:22:47,493 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:22:47,494 - INFO - 模型文件存在，开始加载...
+2025-02-10 16:22:47,501 - INFO - 开始加载INT8量化模型...
+2025-02-10 16:22:47,504 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-02-10 16:22:47,509 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-02-10 16:22:47,585 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-02-10 16:22:47,587 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-02-10 16:22:47,589 - INFO - 模型加载成功并已放置在GPU上
+2025-02-10 16:22:47,589 - INFO - 成功预加载量化模型
+2025-02-10 16:23:16,123 - INFO - 未登录 - Opening user login page.
+2025-02-10 16:23:16,182 - INFO - admin - Opening Login page.
+2025-02-10 16:23:18,737 - INFO - admin - User logged in successfully
+2025-02-10 16:23:18,982 - INFO - admin - Opening Admin page.
+2025-02-10 16:23:20,286 - INFO - admin - Opening user management page.
+2025-02-10 16:23:20,382 - INFO - admin - Opening User Manage page.
+2025-02-10 16:23:27,085 - WARNING - admin - Attempted to add user with empty password
+2025-02-10 16:23:36,247 - WARNING - admin - Attempted to add user with email too long: 368 chars
+2025-02-10 16:23:39,773 - WARNING - admin - Attempted to add user with phone too long: 368 chars
+2025-02-10 16:23:43,005 - WARNING - admin - Attempted to add user with username too long: 368 chars
+2025-02-10 16:23:46,686 - WARNING - admin - Attempted to add user with username too long: 368 chars
+2025-02-10 16:23:48,466 - INFO - admin - Opening Admin page.
+2025-02-10 16:23:48,467 - INFO - admin - Returned to index page successfully

@@ -104,37 +104,55 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.hLayout.addLayout(self.gridLayout)
 
-        # 用户名
-        self.nameLabel = QtWidgets.QLabel("用户名：", self.centralwidget)
+        # 用户名（必填项）
+        self.nameLabel = QtWidgets.QLabel("用户名", self.centralwidget)
+        self.nameRequired = QtWidgets.QLabel("*", self.centralwidget)  # 添加必填标记
+        self.nameRequired.setStyleSheet("color: red; font-weight: bold")  # 设置红色样式
+        nameLayout = QHBoxLayout()  # 创建水平布局来放置标签和星号
+        nameLayout.addWidget(self.nameLabel)
+        nameLayout.addWidget(self.nameRequired)
+        nameLayout.addStretch()  # 添加弹簧使星号紧跟标签
         self.nameIN = QtWidgets.QLineEdit(self.centralwidget)
-        self.gridLayout.addWidget(self.nameLabel, 0, 0)
+        self.gridLayout.addLayout(nameLayout, 0, 0)  # 使用布局替代单个标签
         self.gridLayout.addWidget(self.nameIN, 0, 1)
         
-        # 密码
-        self.pswdLabel = QtWidgets.QLabel("密码：", self.centralwidget)
+        # 密码（必填项）
+        self.pswdLabel = QtWidgets.QLabel("密码", self.centralwidget)
+        self.pswdRequired = QtWidgets.QLabel("*", self.centralwidget)  # 添加必填标记
+        self.pswdRequired.setStyleSheet("color: red; font-weight: bold")  # 设置红色样式
+        pswdLayout = QHBoxLayout()  # 创建水平布局来放置标签和星号
+        pswdLayout.addWidget(self.pswdLabel)
+        pswdLayout.addWidget(self.pswdRequired)
+        pswdLayout.addStretch()  # 添加弹簧使星号紧跟标签
         self.pswdIN = QtWidgets.QLineEdit(self.centralwidget)
         self.pswdIN.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.gridLayout.addWidget(self.pswdLabel, 1, 0)
+        self.gridLayout.addLayout(pswdLayout, 1, 0)  # 使用布局替代单个标签
         self.gridLayout.addWidget(self.pswdIN, 1, 1)
         
-        # 邮箱
-        self.emailLabel = QtWidgets.QLabel("邮箱：", self.centralwidget)
+        # 邮箱（选填项）
+        self.emailLabel = QtWidgets.QLabel("邮箱", self.centralwidget)
         self.emailIN = QtWidgets.QLineEdit(self.centralwidget)
         self.gridLayout.addWidget(self.emailLabel, 0, 2)
         self.gridLayout.addWidget(self.emailIN, 0, 3)
         
-        # 电话
-        self.phoneLabel = QtWidgets.QLabel("电话：", self.centralwidget)
+        # 电话（选填项）
+        self.phoneLabel = QtWidgets.QLabel("电话", self.centralwidget)
         self.phoneIN = QtWidgets.QLineEdit(self.centralwidget)
         self.gridLayout.addWidget(self.phoneLabel, 1, 2)
         self.gridLayout.addWidget(self.phoneIN, 1, 3)
         
-        # 角色选择
-        self.characterLabel = QtWidgets.QLabel("角色：", self.centralwidget)
+        # 角色选择（必填项）
+        self.characterLabel = QtWidgets.QLabel("角色", self.centralwidget)
+        self.characterRequired = QtWidgets.QLabel("*", self.centralwidget)  # 添加必填标记
+        self.characterRequired.setStyleSheet("color: red; font-weight: bold")  # 设置红色样式
+        characterLayout = QHBoxLayout()  # 创建水平布局来放置标签和星号
+        characterLayout.addWidget(self.characterLabel)
+        characterLayout.addWidget(self.characterRequired)
+        characterLayout.addStretch()  # 添加弹簧使星号紧跟标签
         self.character_comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.character_comboBox.addItem("普通用户")
         self.character_comboBox.addItem("管理员")
-        self.gridLayout.addWidget(self.characterLabel, 2, 0)
+        self.gridLayout.addLayout(characterLayout, 2, 0)  # 使用布局替代单个标签
         self.gridLayout.addWidget(self.character_comboBox, 2, 1)
 
         # 上传按钮
@@ -166,34 +184,49 @@ class Ui_MainWindow(object):
         功能:
         - 设置窗口标题
         - 设置各个标签和按钮的文本
-        - 设置字体
-        - 设置样式
+        - 设置字体和样式
+        - 标记必填项和选填项
         """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "长远航作业应激神经系统功能预警评估系统"))
-        self.nameLabel.setText(_translate("MainWindow", "用户名："))
-        self.pswdLabel.setText(_translate("MainWindow", "密码："))
-        self.characterLabel.setText(_translate("MainWindow", "角色："))
+        
+        # 设置标签文本
+        self.nameLabel.setText(_translate("MainWindow", "用户名"))  # 必填项
+        self.pswdLabel.setText(_translate("MainWindow", "密码"))    # 必填项
+        self.emailLabel.setText(_translate("MainWindow", "邮箱"))   # 选填项
+        self.phoneLabel.setText(_translate("MainWindow", "电话"))   # 选填项
+        self.characterLabel.setText(_translate("MainWindow", "角色")) # 必填项
 
+        # 设置字体
         font = QFont()
         font.setFamily("Microsoft YaHei")  # 微软雅黑
-        self.nameLabel.setFont(font)
-        self.pswdLabel.setFont(font)
-        self.characterLabel.setFont(font)
-        self.character_comboBox.setFont(font)
+        
+        # 为所有标签和输入框设置字体
+        for widget in [self.nameLabel, self.pswdLabel, self.emailLabel, 
+                      self.phoneLabel, self.characterLabel, self.nameIN, 
+                      self.pswdIN, self.character_comboBox]:
+            widget.setFont(font)
 
-        self.nameIN.setFont(font)
-        self.pswdIN.setFont(font)
+        # 设置标签样式
+        labelStyle = "font-size:20px"
+        self.nameLabel.setStyleSheet(labelStyle)
+        self.pswdLabel.setStyleSheet(labelStyle)
+        self.emailLabel.setStyleSheet(labelStyle)
+        self.phoneLabel.setStyleSheet(labelStyle)
+        self.characterLabel.setStyleSheet(labelStyle)
+        
+        # 设置输入框和下拉框样式
+        inputStyle = "font-size:16px"
+        self.nameIN.setStyleSheet(inputStyle)
+        self.pswdIN.setStyleSheet(inputStyle)
+        self.emailIN.setStyleSheet(inputStyle)
+        self.phoneIN.setStyleSheet(inputStyle)
+        self.character_comboBox.setStyleSheet(inputStyle)
 
-        self.nameLabel.setStyleSheet("font-size:20px")
-        self.pswdLabel.setStyleSheet("font-size:20px")
-        self.characterLabel.setStyleSheet("font-size:20px")
-        self.character_comboBox.setStyleSheet("font-size:16px")
-        self.nameIN.setStyleSheet("font-size:16px")
-        self.pswdIN.setStyleSheet("font-size:16px")
-
+        # 设置添加按钮文本
         self.addButton.setText(_translate("MainWindow", "添加"))
 
+        # 设置表格样式
         self.tableWidget.horizontalHeader().setStyleSheet(
             "QHeaderView::section{background-color:#5c8ac3;font-size:11pt;color: black;};")
         self.tableWidget.setStyleSheet("background-color:#d4e2f4; color:black; border:1px solid #5c8ac3")

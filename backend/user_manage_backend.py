@@ -197,6 +197,31 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             dialog.setLayout(layout)
             
             if dialog.exec_() == QDialog.Accepted:
+                # 获取输入值并去除首尾空格
+                new_username = username_edit.text().strip()
+                new_email = email_edit.text().strip()
+                new_phone = phone_edit.text().strip()
+                
+                # 验证必填项
+                if not new_username:
+                    logging.warning(f"Attempted to update user {user_id} with empty username")
+                    QMessageBox.warning(self, "输入错误", "用户名为必填项，请输入用户名！")
+                    return
+                
+                # 检查输入长度
+                if len(new_username) > 30:
+                    logging.warning(f"Attempted to update user with username too long: {len(new_username)} chars")
+                    QMessageBox.warning(self, "输入错误", "用户名长度不能超过30个字符！")
+                    return
+                if new_email and len(new_email) > 30:
+                    logging.warning(f"Attempted to update user with email too long: {len(new_email)} chars")
+                    QMessageBox.warning(self, "输入错误", "邮箱长度不能超过30个字符！")
+                    return
+                if new_phone and len(new_phone) > 30:
+                    logging.warning(f"Attempted to update user with phone too long: {len(new_phone)} chars")
+                    QMessageBox.warning(self, "输入错误", "电话长度不能超过30个字符！")
+                    return
+
                 # 记录原始值用于日志
                 old_values = {
                     'username': user.username,
@@ -206,7 +231,6 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 }
                 
                 # 检查新用户名是否与其他用户重复
-                new_username = username_edit.text()
                 if new_username != user.username:
                     existing_user = session.query(User).filter(
                         User.username == new_username,
@@ -219,8 +243,8 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 
                 # 更新用户信息
                 user.username = new_username
-                user.email = email_edit.text() or None
-                user.phone = phone_edit.text() or None
+                user.email = new_email or None
+                user.phone = new_phone or None
                 new_user_type = "admin" if role_combo.currentText() == "管理员" else "user"
                 
                 # 如果用户类型发生变化，更新用户-角色关联
@@ -266,16 +290,50 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             session.close()
 
     def add_user(self):
-        """添加新用户"""
+        """
+        添加新用户
+        
+        功能：
+        - 验证必填项（用户名、密码、角色）是否已填写
+        - 验证输入长度是否符合要求（<=30字符）
+        - 验证用户名是否重复
+        - 创建新用户并保存到数据库
+        
+        返回：无
+        """
+        # 获取输入值并去除首尾空格
         username = self.nameIN.text().strip()
         password = self.pswdIN.text().strip()
         email = self.emailIN.text().strip()
         phone = self.phoneIN.text().strip()
         user_type = 'admin' if self.character_comboBox.currentText() == "管理员" else 'user'
 
-        if not username or not password:
-            logging.warning("Attempted to add user with empty username or password")
-            QMessageBox.warning(self, "输入错误", "用户名和密码不能为空！")
+        # 验证必填项
+        if not username:
+            logging.warning("Attempted to add user with empty username")
+            QMessageBox.warning(self, "输入错误", "用户名为必填项，请输入用户名！")
+            return
+        if not password:
+            logging.warning("Attempted to add user with empty password")
+            QMessageBox.warning(self, "输入错误", "密码为必填项，请输入密码！")
+            return
+
+        # 检查输入长度
+        if len(username) > 30:
+            logging.warning(f"Attempted to add user with username too long: {len(username)} chars")
+            QMessageBox.warning(self, "输入错误", "用户名长度不能超过30个字符！")
+            return
+        if len(password) > 30:
+            logging.warning("Attempted to add user with password too long")
+            QMessageBox.warning(self, "输入错误", "密码长度不能超过30个字符！")
+            return
+        if email and len(email) > 30:
+            logging.warning(f"Attempted to add user with email too long: {len(email)} chars")
+            QMessageBox.warning(self, "输入错误", "邮箱长度不能超过30个字符！")
+            return
+        if phone and len(phone) > 30:
+            logging.warning(f"Attempted to add user with phone too long: {len(phone)} chars")
+            QMessageBox.warning(self, "输入错误", "电话长度不能超过30个字符！")
             return
 
         session = SessionClass()
