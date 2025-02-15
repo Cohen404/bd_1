@@ -34,7 +34,7 @@ def create_test_zip(source_dir, output_zip):
 
 def test_upload():
     """测试上传接口"""
-    url = 'http://localhost:5000/api/upload'
+    url = 'http://10.168.2.152:5000/api/upload'
     test_username = 'admin'  # 使用管理员账号进行测试
     
     print("\n1. 测试IP白名单...")
@@ -60,33 +60,44 @@ def test_upload():
 
     # 3. 测试无username
     print("\n3. 测试无username...")
-    # 创建临时ZIP文件
-    with tempfile.NamedTemporaryFile(suffix='.zip', delete=False) as temp_zip:
-        if not create_test_zip('tmp/control_2', temp_zip.name):
+    temp_zip = None
+    try:
+        # 创建临时ZIP文件
+        temp_zip = tempfile.NamedTemporaryFile(suffix='.zip', delete=False)
+        if not create_test_zip('tmp/abcde', temp_zip.name):
             print("创建测试ZIP文件失败")
             return
         
-        files = {'file': ('test.zip', open(temp_zip.name, 'rb'))}
-        response = requests.post(url, files=files)
-        print(f"无username测试响应: {response.status_code}")
-        print(f"响应内容: {response.json()}")
+        with open(temp_zip.name, 'rb') as zip_file:
+            files = {'file': ('test.zip', zip_file)}
+            response = requests.post(url, files=files)
+            print(f"无username测试响应: {response.status_code}")
+            print(f"响应内容: {response.json()}")
 
-    # 4. 测试完整上传流程
-    print("\n4. 测试完整上传流程...")
-    data = {'username': test_username}
-    files = {'file': ('test.zip', open(temp_zip.name, 'rb'))}
-    response = requests.post(url, files=files, data=data)
-    print(f"完整上传测试响应: {response.status_code}")
-    print(f"响应内容: {response.json()}")
+        # 4. 测试完整上传流程
+        print("\n4. 测试完整上传流程...")
+        data = {'username': test_username}
+        with open(temp_zip.name, 'rb') as zip_file:
+            files = {'file': ('test.zip', zip_file)}
+            response = requests.post(url, files=files, data=data)
+            print(f"完整上传测试响应: {response.status_code}")
+            print(f"响应内容: {response.json()}")
     
-    # 清理临时文件
-    os.unlink(temp_zip.name)
+    finally:
+        # 确保文件句柄已关闭
+        if temp_zip:
+            temp_zip.close()
+            try:
+                # 尝试删除临时文件
+                os.unlink(temp_zip.name)
+            except Exception as e:
+                logging.warning(f"删除临时文件失败: {str(e)}")
 
 if __name__ == '__main__':
     # 确保测试数据目录存在
-    if not os.path.exists('tmp/control_2'):
-        print("错误: 测试数据目录 'tmp/control_2' 不存在")
-        logging.error("测试数据目录 'tmp/control_2' 不存在")
+    if not os.path.exists('tmp/abcde'):
+        print("错误: 测试数据目录 'tmp/abcde' 不存在")
+        logging.error("测试数据目录 'tmp/abcde' 不存在")
     else:
         logging.info("开始运行上传服务测试...")
         test_upload()

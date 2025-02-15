@@ -1433,6 +1433,7 @@ https://scikit-learn.org/stable/model_persistence.html#security-maintainability-
 
 
 点击功能页面的时候，要记录每个页面的跳转所用时间，也就是按下按钮记录一下，跳转页面成功记录一个日志就可以了
+
 # 注意
 * 不要修改其他任何功能，只修改我让你修改的功能
 * 所有代码不要有太大的不必要变动，所有代码的逻辑、框架、类继承以及撰写风格必须按照原有代码的来，不要随意创造。
@@ -1444,8 +1445,9 @@ https://scikit-learn.org/stable/model_persistence.html#security-maintainability-
 
 
 
+我希望你把 上传服务的是的功能写成一个简单的窗口化应用，这个窗口化应用可以显示本机ip，选择上传服务的ip和端口，选择发送的zip文件，并且有一个上传按钮，点击上传后，可以向这个ip和端口发送zip文件，发送文件的方式要参考test_upload_service.py中的撰写方式。
 
-
+我希望你来编写我想要的窗口化应用，代码放到 upload_app目录中
 
 
 
