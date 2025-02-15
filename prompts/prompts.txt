@@ -1449,6 +1449,8 @@ https://scikit-learn.org/stable/model_persistence.html#security-maintainability-
 
 我希望你来编写我想要的窗口化应用，代码放到 upload_app目录中
 
+upload_window.py的界面、控件、
+字体等所有元素的大小大一些，并且自适应
 
 
 
