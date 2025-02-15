@@ -17,55 +17,79 @@ class UploadWindow(QMainWindow):
     def init_ui(self):
         """初始化UI界面"""
         self.setWindowTitle('文件上传工具')
-        self.setFixedSize(400, 300)
+        # 设置窗口初始大小和最小大小
+        self.resize(600, 450)
+        self.setMinimumSize(500, 400)
         
         # 主布局
         main_widget = QWidget()
         self.setCentralWidget(main_widget)
         layout = QVBoxLayout(main_widget)
         
+        # 设置默认字体
+        font = self.font()
+        font.setPointSize(12)
+        self.setFont(font)
+        
         # 获取本机IP
         self.local_ip = self.get_local_ip()
         
         # 本机IP显示
         ip_layout = QHBoxLayout()
-        ip_layout.addWidget(QLabel('本机IP:'))
+        ip_label = QLabel('本机IP:')
+        ip_label.setMinimumWidth(80)
+        ip_layout.addWidget(ip_label)
         self.local_ip_label = QLabel(self.local_ip)
-        ip_layout.addWidget(self.local_ip_label)
+        self.local_ip_label.setMinimumHeight(30)
+        ip_layout.addWidget(self.local_ip_label, stretch=1)
         layout.addLayout(ip_layout)
         
         # 服务器地址输入
         server_layout = QHBoxLayout()
-        server_layout.addWidget(QLabel('服务器IP:'))
+        server_label = QLabel('服务器IP:')
+        server_label.setMinimumWidth(80)
+        server_layout.addWidget(server_label)
         self.server_ip_input = QLineEdit('127.0.0.1')
-        server_layout.addWidget(self.server_ip_input)
+        self.server_ip_input.setMinimumHeight(35)
+        server_layout.addWidget(self.server_ip_input, stretch=1)
         layout.addLayout(server_layout)
         
         # 端口输入
         port_layout = QHBoxLayout()
-        port_layout.addWidget(QLabel('端口号:'))
+        port_label = QLabel('端口号:')
+        port_label.setMinimumWidth(80)
+        port_layout.addWidget(port_label)
         self.port_input = QLineEdit('5000')
-        port_layout.addWidget(self.port_input)
+        self.port_input.setMinimumHeight(35)
+        port_layout.addWidget(self.port_input, stretch=1)
         layout.addLayout(port_layout)
         
         # 文件选择
         file_layout = QHBoxLayout()
         self.file_path_label = QLabel('未选择文件')
-        file_layout.addWidget(self.file_path_label)
+        self.file_path_label.setMinimumHeight(35)
+        file_layout.addWidget(self.file_path_label, stretch=1)
         select_file_btn = QPushButton('选择文件')
+        select_file_btn.setMinimumSize(100, 35)
         select_file_btn.clicked.connect(self.select_file)
         file_layout.addWidget(select_file_btn)
         layout.addLayout(file_layout)
         
         # 上传按钮
         upload_btn = QPushButton('上传')
+        upload_btn.setMinimumSize(150, 50)
         upload_btn.clicked.connect(self.upload_file)
         layout.addWidget(upload_btn)
         
         # 状态显示
         self.status_label = QLabel('')
         self.status_label.setAlignment(Qt.AlignCenter)
+        self.status_label.setMinimumHeight(40)
         layout.addWidget(self.status_label)
+        
+        # 设置布局间距
+        layout.setSpacing(15)
+        layout.setContentsMargins(20, 20, 20, 20)
         
     def get_local_ip(self):
         """获取本机IP地址"""
