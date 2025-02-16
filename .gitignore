@@ -99,3 +99,4 @@ output.txt
 actions/
 output.txt
 .VSCodeCounter/
+tmp/

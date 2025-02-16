@@ -661,7 +661,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
     def on_model_finished(self):
         """
         模型评估完成后的处理方法
-        对于第二和第三个模型，直接使用第一个模型的结果
+        对于第二和第三个模型
         """
         try:
             logging.info(f"当前模型索引: {self.current_model_index}")
@@ -681,7 +681,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 self.current_model_index += 1
                 if self.result_list and len(self.result_list) > 1:
                     first_result = self.result_list[0]
-                    logging.info(f"复用第一个模型的结果处理第三个模型: {first_result}")
+                    logging.info(f"结果处理第三个模型: {first_result}")
                     # 直接处理第三个模型
                     self.waitTestRes(first_result / 100)  # 转换回原始比例
                 else:
@@ -1582,14 +1582,14 @@ class EvaluateThread(QThread):
             # 第二种类型：使用第一个模型的结果结合抑郁量表分数
             logging.info("计算第二个模型（抑郁）的结果")
             depression_score = self.calculate_final_score(model_result, self.depression_score_lb, 1)
-            logging.info(f"抑郁评估结果: {depression_score} (量表分数: {self.depression_score_lb if self.depression_score_lb is not None else '无'})")
+            logging.info(f"抑郁评估结果: {depression_score}")
             self._rule.emit(depression_score)
             self.current_type = 2
 
             # 第三种类型：使用第一个模型的结果结合焦虑量表分数
             logging.info("计算第三个模型（焦虑）的结果")
             anxiety_score = self.calculate_final_score(model_result, self.anxiety_score_lb, 2)
-            logging.info(f"焦虑评估结果: {anxiety_score} (量表分数: {self.anxiety_score_lb if self.anxiety_score_lb is not None else '无'})")
+            logging.info(f"焦虑评估结果: {anxiety_score}")
             self._rule.emit(anxiety_score)
 
             # 发送完成信号
