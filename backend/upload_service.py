@@ -102,12 +102,12 @@ def check_ip_whitelist():
         logging.warning(f"接收到来自未授权IP的请求: {client_ip}")
     return client_ip in ALLOWED_IPS
 
-def check_user_permission(user_id):
+def check_user_permission(username):
     """
     检查用户是否有上传数据的权限
     
     参数:
-    - user_id: 用户ID
+    - username: 用户名
     
     返回:
     - bool: 是否有权限
@@ -115,7 +115,7 @@ def check_user_permission(user_id):
     session = SessionClass()
     try:
         # 检查用户是否存在
-        user = session.query(User).filter(User.user_id == user_id).first()
+        user = session.query(User).filter(User.username == username).first()
         if not user:
             return False
             
@@ -206,7 +206,7 @@ def upload_data():
             return jsonify({'success': False, 'message': 'User not found'}), 404
 
         # 验证用户权限
-        if not check_user_permission(user.user_id):
+        if not check_user_permission(username):
             session.close()
             logging.warning(f"用户 {username} (IP: {client_ip}) 没有上传权限")
             return jsonify({'success': False, 'message': 'User not authorized'}), 403
@@ -245,7 +245,7 @@ def upload_data():
                 return jsonify({'success': False, 'message': 'No valid directory found in ZIP file'}), 400
 
             # 构建目标路径
-            target_base_dir = '../data'
+            target_base_dir = '../data'  # 修改为相对于当前目录的data目录
             target_dir = os.path.join(target_base_dir, extracted_dir)
 
             # 处理重名
@@ -273,11 +273,11 @@ def upload_data():
                 # 创建数据记录
                 new_data = Data(
                     id=max_id,
-                    personnel_id=str(user.user_id),  # 使用用户ID作为人员ID
+                    personnel_id=username,  # 使用用户名作为人员ID
                     data_path=target_dir,
                     upload_time=datetime.now(),
-                    user_id=str(user.user_id),
-                    personnel_name=user.username,
+                    user_id=username,  # 使用用户名作为用户ID
+                    personnel_name=username,  # 使用用户名作为人员名称
                     upload_user=1 if user.user_type == 'admin' else 0
                 )
 

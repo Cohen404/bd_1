@@ -212,25 +212,47 @@ echo "- Virtual env: $VIRTUAL_ENV"
 
 # 配置PostgreSQL数据库
 echo "Configuring PostgreSQL database..."
+
 # 检查PostgreSQL服务是否在运行
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
 
-# 创建数据库和用户
-echo "Creating database and user..."
-sudo -u postgres psql << EOF
+# 设置postgres用户密码（如果未设置）
+echo "Setting up postgres user password..."
+sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+
+# 使用postgres用户执行数据库操作
+echo "Checking and removing existing database and user..."
+PGPASSWORD=postgres psql -U postgres -h localhost << EOF
+-- 删除已存在的数据库连接
+SELECT pg_terminate_backend(pid) 
+FROM pg_stat_activity 
+WHERE datname = 'bj_health_db';
+
+-- 删除已存在的数据库
+DROP DATABASE IF EXISTS bj_health_db;
+EOF
+
+# 创建数据库
+echo "Creating database..."
+PGPASSWORD=postgres psql -U postgres -h localhost << EOF
 CREATE DATABASE bj_health_db;
-CREATE USER bj_health_user WITH PASSWORD 'bj_health_pass';
-ALTER ROLE bj_health_user SET client_encoding TO 'utf8';
-ALTER ROLE bj_health_user SET default_transaction_isolation TO 'read committed';
-ALTER ROLE bj_health_user SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE bj_health_db TO bj_health_user;
+ALTER DATABASE bj_health_db OWNER TO postgres;
 \c bj_health_db
 EOF
 
 # 导入数据库结构
 echo "Importing database schema..."
-sudo -u postgres psql bj_health_db < sql_model.sql
+PGPASSWORD=postgres psql -U postgres -h localhost -d bj_health_db -f sql_model.sql
+
+# 验证数据库连接
+echo "Verifying database connection..."
+if PGPASSWORD=postgres psql -U postgres -h localhost -d bj_health_db -c '\q'; then
+    echo "Database connection successful!"
+else
+    echo "Error: Failed to connect to database"
+    exit 1
+fi
 
 # 创建.env文件
 echo "Creating .env file..."
@@ -238,8 +260,8 @@ cat > .env << EOF
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=bj_health_db
-DB_USER=bj_health_user
-DB_PASS=bj_health_pass
+DB_USER=postgres
+DB_PASS=postgres
 SECRET_KEY=your_secret_key_here
 DEBUG=False
 EOF
@@ -262,7 +284,7 @@ echo "Setting permissions..."
 chmod +x run.py
 
 # 创建运行脚本
-echo "Creating run script..."
+echo "Creating run scripts..."
 cat > run_system.sh << 'EOF'
 #!/bin/bash
 
@@ -286,17 +308,37 @@ echo "Starting BJ Health Management System..."
 python run.py
 EOF
 
+# 创建上传客户端运行脚本
+cat > run_upload_client.sh << 'EOF'
+#!/bin/bash
+
+# 获取脚本所在目录的绝对路径
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# 进入项目目录
+cd "$SCRIPT_DIR"
+
+# 激活虚拟环境
+source venv/bin/activate
+
+# 运行上传客户端
+echo "Starting Upload Client..."
+python upload_app/upload_window.py
+EOF
+
 chmod +x run_system.sh
+chmod +x run_upload_client.sh
 
 # 创建桌面启动器
-echo "Creating desktop launcher..."
+echo "Creating desktop launchers..."
 WORKSPACE_PATH=$(pwd)
 
 # 复制系统图标到项目目录
-echo "Setting up application icon..."
+echo "Setting up application icons..."
 sudo cp /usr/share/icons/gnome/48x48/apps/system-config-users.png "${WORKSPACE_PATH}/app_icon.png"
 sudo chmod 644 "${WORKSPACE_PATH}/app_icon.png"
 
+# 创建主系统桌面启动器
 cat > BJ_Health_System.desktop << EOF
 [Desktop Entry]
 Version=1.0
@@ -309,8 +351,22 @@ Terminal=false
 Categories=Application;
 EOF
 
+# 创建上传客户端桌面启动器
+cat > BJ_Health_Upload_Client.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=BJ Health Upload Client
+Comment=Launch BJ Health Upload Client
+Exec=${WORKSPACE_PATH}/run_upload_client.sh
+Icon=${WORKSPACE_PATH}/client_icon.png
+Terminal=false
+Categories=Application;
+EOF
+
 # 设置启动器权限
 chmod +x BJ_Health_System.desktop
+chmod +x BJ_Health_Upload_Client.desktop
 
 # 检测桌面目录位置并复制启动器
 echo "Detecting desktop directory..."
@@ -325,28 +381,21 @@ done
 
 if [ -z "$DESKTOP_DIR" ]; then
     echo "Warning: Could not find desktop directory. The launcher will be created in home directory."
-    echo "Please manually move BJ_Health_System.desktop to your desktop directory."
+    echo "Please manually move desktop files to your desktop directory."
     DESKTOP_DIR="$HOME"
 fi
 
 # 复制启动器到检测到的目录
-echo "Copying launcher to $DESKTOP_DIR..."
+echo "Copying launchers to $DESKTOP_DIR..."
 cp BJ_Health_System.desktop "$DESKTOP_DIR/"
+cp BJ_Health_Upload_Client.desktop "$DESKTOP_DIR/"
 chmod +x "$DESKTOP_DIR/BJ_Health_System.desktop"
+chmod +x "$DESKTOP_DIR/BJ_Health_Upload_Client.desktop"
 
-# 更新项目状态文件
-echo "Updating project status..."
-cat >> project-status.md << EOF
-
-## $(date '+%Y-%m-%d %H:%M:%S') - System Installation
-- Installed system dependencies
-- Created Python virtual environment
-- Installed Python packages from requirements.txt
-- Configured PostgreSQL database
-- Created necessary directories
-- Set up environment variables
-- Created desktop launcher for easy access
-EOF
+# 初始化数据库数据
+echo "Initializing database data..."
+source venv/bin/activate
+python util/init_db.py
 
 echo "Installation completed successfully!"
 echo "To start using the system, you can either:"
