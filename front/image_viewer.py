@@ -155,12 +155,12 @@ class ImageViewer(QDialog):
             # 获取场景中的第一个图片项
             items = self.scene.items()
             if not items:
-                logging.warning("没有找到要保存的图片项")
+                logging.warning("没有找到要保存的图片")
                 return
                 
             pixmap_item = items[0]
             if not hasattr(pixmap_item, 'pixmap'):
-                logging.warning("图片项不包含pixmap属性")
+                logging.warning("图片格式不正确")
                 return
                 
             # 打开文件保存对话框

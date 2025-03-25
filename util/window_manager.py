@@ -83,6 +83,6 @@ class WindowManager:
             
             # 记录日志
             window_type = name.replace('_', ' ').title()
-            logging.info(f"Opening {window_type} page.", extra={'username': get_current_username()})
+            logging.info(f"打开{window_type}页面", extra={'username': get_current_username()})
         else:
-            logging.error(f"Window '{name}' not found", extra={'username': get_current_username()}) 
+            logging.error(f"窗口'{name}'不存在", extra={'username': get_current_username()}) 

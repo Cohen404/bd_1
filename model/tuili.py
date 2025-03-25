@@ -32,7 +32,7 @@ class EegModel(QThread):
             session.close()
             
             if not model_info:
-                print("Error: No stress model found in database")
+                print("错误：数据库中未找到应激模型")
                 return False
                 
             # 加载模型

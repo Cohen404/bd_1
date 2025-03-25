@@ -189,14 +189,14 @@ class BatchInferenceModel(QThread):
         """
         try:
             if scale_score is None:
-                logging.info(f"量表分数不存在，返回模型分数的90%")
+                logging.info(f"量表分数不存在，使用模型分数的90%")
                 return float(min(95, max(0, model_score)))
                 
             if score_type == 1:  # 抑郁
                 if scale_score < 53:
                     # 当量表分数<=53时，直接返回基于量表的计算结果
                     final_score = (scale_score / 53) * 50
-                    logging.info(f"抑郁量表分数 < 53，直接使用量表计算结果: {final_score}")
+                    logging.info(f"抑郁量表分数 < 53，使用量表计算结果: {final_score}")
                 else:
                     # 当量表分数>53时，才结合模型分数
                     scale_factor = scale_score / 53.0 * 50
@@ -207,7 +207,7 @@ class BatchInferenceModel(QThread):
                 if scale_score < 48:
                     # 当量表分数<=48时，直接返回基于量表的计算结果
                     final_score = (scale_score / 48) * 50
-                    logging.info(f"焦虑量表分数 < 48，直接使用量表计算结果: {final_score}")
+                    logging.info(f"焦虑量表分数 < 48，使用量表计算结果: {final_score}")
                 else:
                     # 当量表分数>48时，才结合模型分数
                     scale_factor = scale_score / 48.0 * 50

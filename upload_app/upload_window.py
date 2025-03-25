@@ -142,7 +142,7 @@ class UploadWindow(QMainWindow):
                         
             return self.temp_zip.name
         except Exception as e:
-            QMessageBox.critical(self, '错误', f'创建ZIP文件失败：{str(e)}')
+            QMessageBox.critical(self, '错误', f'创建压缩文件失败：{str(e)}')
             if self.temp_zip:
                 self.temp_zip.close()
                 try:
@@ -209,10 +209,10 @@ class UploadWindow(QMainWindow):
                     
         except requests.exceptions.RequestException as e:
             self.status_label.setText('上传失败')
-            QMessageBox.critical(self, '错误', f'上传过程中发生错误：{str(e)}')
+            QMessageBox.critical(self, '错误', f'网络连接错误：{str(e)}')
         except Exception as e:
             self.status_label.setText('上传失败')
-            QMessageBox.critical(self, '错误', f'发生未知错误：{str(e)}')
+            QMessageBox.critical(self, '错误', f'系统错误：{str(e)}')
         finally:
             # 清理临时文件
             if self.temp_zip:

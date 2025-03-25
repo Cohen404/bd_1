@@ -26,10 +26,10 @@ def create_test_zip(source_dir, output_zip):
                     file_path = os.path.join(root, file)
                     arcname = os.path.relpath(file_path, os.path.dirname(source_dir))
                     zipf.write(file_path, arcname)
-        logging.info(f"成功创建ZIP文件: {output_zip}")
+        logging.info(f"成功创建压缩文件: {output_zip}")
         return True
     except Exception as e:
-        logging.error(f"创建ZIP文件失败: {str(e)}")
+        logging.error(f"创建压缩文件失败: {str(e)}")
         return False
 
 def test_upload():
@@ -38,8 +38,8 @@ def test_upload():
     test_username = 'admin'  # 使用管理员账号进行测试
     
     print("\n1. 测试IP白名单...")
-    # 1.1 测试允许的IP (localhost)
-    print("1.1 测试允许的IP (localhost)...")
+    # 1.1 测试允许的IP (本地)
+    print("1.1 测试允许的IP (本地)...")
     response = requests.post(url)
     print(f"允许的IP测试响应: {response.status_code}")
     print(f"响应内容: {response.json()}")
@@ -58,20 +58,20 @@ def test_upload():
     print(f"无文件测试响应: {response.status_code}")
     print(f"响应内容: {response.json()}")
 
-    # 3. 测试无username
-    print("\n3. 测试无username...")
+    # 3. 测试无用户名
+    print("\n3. 测试无用户名...")
     temp_zip = None
     try:
         # 创建临时ZIP文件
         temp_zip = tempfile.NamedTemporaryFile(suffix='.zip', delete=False)
         if not create_test_zip('tmp/abcde', temp_zip.name):
-            print("创建测试ZIP文件失败")
+            print("创建测试压缩文件失败")
             return
         
         with open(temp_zip.name, 'rb') as zip_file:
             files = {'file': ('test.zip', zip_file)}
             response = requests.post(url, files=files)
-            print(f"无username测试响应: {response.status_code}")
+            print(f"无用户名测试响应: {response.status_code}")
             print(f"响应内容: {response.json()}")
 
         # 4. 测试完整上传流程
@@ -96,8 +96,8 @@ def test_upload():
 if __name__ == '__main__':
     # 确保测试数据目录存在
     if not os.path.exists('tmp/abcde'):
-        print("错误: 测试数据目录 'tmp/abcde' 不存在")
-        logging.error("测试数据目录 'tmp/abcde' 不存在")
+        print("错误: 测试数据目录不存在")
+        logging.error("测试数据目录不存在")
     else:
         logging.info("开始运行上传服务测试...")
         test_upload()
