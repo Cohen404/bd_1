@@ -119,7 +119,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             "均分频带",
             "时域特征",
             "时频域特征",
-            "微分熵"
+            "微分熵",
+            "血清数据",
+            "量表数据"
         ])
 
         # 从文件中读取用户类型并设置userType
@@ -469,6 +471,12 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         elif feature_type == "微分熵":
             image_path = os.path.join(self.data_path, 'differential_entropy.png')
             image_name = "微分熵"
+        elif feature_type == "血清数据":
+            image_path = os.path.join(self.data_path, 'serum_analysis.png')
+            image_name = "血清指标分析"
+        elif feature_type == "量表数据":
+            image_path = os.path.join(self.data_path, 'scale_analysis.png')
+            image_name = "量表得分分析"
         else:
             logging.warning(f"Unknown feature type selected: {feature_type}")
             return
@@ -1151,16 +1159,22 @@ class ProcessingThread(QThread):
             data_preprocess.treat(self.data_path)
             self.progress.emit(30)
 
-            # 查找EDF文件 - 40%进度
-            edf_files = [f for f in os.listdir(self.data_path) if f.endswith('.fif')]
-            if not edf_files:
+            # 查找FIF文件 - 40%进度
+            fif_files = [f for f in os.listdir(self.data_path) if f.endswith('.fif')]
+            if not fif_files:
                 raise Exception("未找到FIF文件")
             self.progress.emit(40)
 
-            # 特征提取和可视化 - 60-100%进度
-            file_path = os.path.join(self.data_path, edf_files[0])
+            # 特征提取和可视化 - 60-90%进度
+            file_path = os.path.join(self.data_path, fif_files[0])
             self.progress.emit(60)
             data_feature_calculation.analyze_eeg_data(file_path)
+            self.progress.emit(80)
+            
+            # 血清和量表数据可视化 - 90-100%进度
+            data_feature_calculation.plot_serum_data(self.data_path)
+            self.progress.emit(90)
+            data_feature_calculation.plot_scale_data(self.data_path)
             self.progress.emit(100)
 
             self.finished.emit()

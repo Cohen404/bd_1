@@ -7896,3 +7896,588 @@ Exception: Failed to get test data
 2025-03-25 16:13:44,004 - INFO - admin - 打开Admin页面
 2025-03-25 16:13:44,005 - INFO - admin - 返回首页耗时: 239毫秒
 2025-03-25 16:13:44,005 - INFO - admin - Returned to index page successfully
+2025-03-25 20:14:04,330 - INFO - 初始化登录界面...
+2025-03-25 20:14:04,334 - INFO - 开始预加载模型...
+2025-03-25 20:14:04,334 - INFO - 正在检查数据库中的模型信息...
+2025-03-25 20:14:04,342 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 20:14:04,343 - INFO - 模型文件存在，开始加载...
+2025-03-25 20:14:04,350 - INFO - 开始加载INT8量化模型...
+2025-03-25 20:14:04,352 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-03-25 20:14:04,356 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 20:14:04,426 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-03-25 20:14:04,428 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-03-25 20:14:04,431 - INFO - 模型加载成功并已放置在GPU上
+2025-03-25 20:14:04,431 - INFO - 成功预加载量化模型
+2025-03-25 21:39:18,333 - INFO - 未登录 - Opening user login page.
+2025-03-25 21:39:18,462 - INFO - admin - 打开Login页面
+2025-03-25 21:39:21,653 - INFO - admin - User logged in successfully
+2025-03-25 21:39:22,068 - INFO - admin - 打开Admin页面
+2025-03-25 21:39:23,225 - INFO - admin - Data table refreshed successfully with 2 records
+2025-03-25 21:39:23,227 - INFO - admin - Opening data view page. Time taken: 0.03 seconds
+2025-03-25 21:39:23,546 - INFO - admin - 打开Data View页面
+2025-03-25 21:39:24,539 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-03-25 21:39:24,756 - ERROR - admin - 数据预处理失败: cannot reshape array of size 0 into shape (59,1000)
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 51, in treat
+    epochs.save(save_dir, overwrite=True)
+  File "<decorator-gen-250>", line 12, in save
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 2308, in save
+    _save_split(this_epochs, split_fnames, part_idx, n_parts, fmt, overwrite)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 136, in _save_split
+    _save_part(fid, epochs, fmt, n_parts, next_fname, next_idx)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 156, in _save_part
+    data = epochs.get_data(copy=False)
+  File "<decorator-gen-247>", line 12, in get_data
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 1919, in get_data
+    return self._get_data(
+  File "<decorator-gen-246>", line 12, in _get_data
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 1713, in _get_data
+    epoch_noproj = self._get_epoch_from_raw(idx)
+  File "<decorator-gen-262>", line 12, in _get_epoch_from_raw
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4451, in _get_epoch_from_raw
+    data.shape = raw.epoch_shape
+ValueError: cannot reshape array of size 0 into shape (59,1000)
+
+2025-03-25 21:39:24,760 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif is already processed with visualizations
+2025-03-25 21:39:24,761 - INFO - admin - Data processing completed successfully
+2025-03-25 21:39:26,433 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-03-25 21:39:26,437 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-03-25 21:39:29,198 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\Gamma.png
+2025-03-25 21:39:30,633 - INFO - admin - 打开Admin页面
+2025-03-25 21:39:30,633 - INFO - admin - Returned to index page successfully
+2025-03-25 21:56:03,230 - INFO - 初始化登录界面...
+2025-03-25 21:56:03,233 - INFO - 开始预加载模型...
+2025-03-25 21:56:03,233 - INFO - 正在检查数据库中的模型信息...
+2025-03-25 21:56:03,240 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 21:56:03,240 - INFO - 模型文件存在，开始加载...
+2025-03-25 21:56:03,246 - INFO - 开始加载INT8量化模型...
+2025-03-25 21:56:03,249 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-03-25 21:56:03,251 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 21:56:03,296 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-03-25 21:56:03,299 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-03-25 21:56:03,300 - INFO - 模型加载成功并已放置在GPU上
+2025-03-25 21:56:03,301 - INFO - 成功预加载量化模型
+2025-03-25 21:56:10,231 - INFO - 未登录 - Opening user login page.
+2025-03-25 21:56:10,427 - INFO - admin - 打开Login页面
+2025-03-25 21:56:13,048 - INFO - admin - User logged in successfully
+2025-03-25 21:56:13,354 - INFO - admin - 打开Admin页面
+2025-03-25 21:56:14,536 - INFO - admin - Successfully displayed 2 results in table
+2025-03-25 21:56:14,540 - INFO - admin - Opening results view page. Time taken: 0.07 seconds
+2025-03-25 21:56:14,722 - INFO - admin - 打开Results View页面
+2025-03-25 21:56:15,650 - INFO - admin - 打开Admin页面
+2025-03-25 21:56:15,650 - INFO - admin - 返回首页耗时: 55毫秒
+2025-03-25 21:56:15,651 - INFO - admin - Returned to index page successfully
+2025-03-25 21:56:16,325 - INFO - admin - Data table refreshed successfully with 2 records
+2025-03-25 21:56:16,327 - INFO - admin - Opening data view page. Time taken: 0.02 seconds
+2025-03-25 21:56:16,548 - INFO - admin - 打开Data View页面
+2025-03-25 21:56:17,725 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-03-25 21:56:17,766 - ERROR - admin - 数据预处理失败: Could not find event data
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 49, in treat
+    epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
+  File "<decorator-gen-260>", line 12, in read_epochs
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4213, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-261>", line 12, in __init__
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4292, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4019, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\event.py", line 169, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-03-25 21:56:17,768 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\fif.fif is already processed with visualizations
+2025-03-25 21:56:17,768 - WARNING - admin - 血清数据文件不存在: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\xq.csv
+2025-03-25 21:56:18,221 - INFO - admin - Data processing completed successfully
+2025-03-25 21:56:20,225 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-03-25 21:56:20,228 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-03-25 21:56:23,383 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\Gamma.png
+2025-03-25 21:56:26,434 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-03-25 21:56:26,437 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-03-25 21:56:26,463 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2\differential_entropy.png
+2025-03-25 21:58:47,172 - INFO - 初始化登录界面...
+2025-03-25 21:58:47,175 - INFO - 开始预加载模型...
+2025-03-25 21:58:47,176 - INFO - 正在检查数据库中的模型信息...
+2025-03-25 21:58:47,183 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 21:58:47,184 - INFO - 模型文件存在，开始加载...
+2025-03-25 21:58:47,189 - INFO - 开始加载INT8量化模型...
+2025-03-25 21:58:47,192 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-03-25 21:58:47,196 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 21:58:47,243 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-03-25 21:58:47,246 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-03-25 21:58:47,248 - INFO - 模型加载成功并已放置在GPU上
+2025-03-25 21:58:47,248 - INFO - 成功预加载量化模型
+2025-03-25 21:58:48,506 - INFO - 未登录 - Opening user login page.
+2025-03-25 21:58:48,750 - INFO - admin - 打开Login页面
+2025-03-25 21:58:51,475 - INFO - admin - User logged in successfully
+2025-03-25 21:58:51,878 - INFO - admin - 打开Admin页面
+2025-03-25 21:58:53,091 - INFO - admin - Data table refreshed successfully with 2 records
+2025-03-25 21:58:53,093 - INFO - admin - Opening data view page. Time taken: 0.03 seconds
+2025-03-25 21:58:53,403 - INFO - admin - 打开Data View页面
+2025-03-25 21:59:03,733 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/codenew/bj_health_manage/data/000005_ord2 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 21:59:03,753 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4, Username: admin
+2025-03-25 21:59:04,691 - INFO - admin - Data table refreshed successfully with 3 records
+2025-03-25 21:59:07,170 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 21:59:23,318 - ERROR - admin - 绘制血清数据图表时发生错误: ufunc 'add' did not contain a loop with signature matching types (dtype('int32'), dtype('<U5')) -> None
+2025-03-25 21:59:23,440 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_feature_calculation.py", line 420, in plot_serum_data
+    plt.bar(range(len(df.columns)), df.iloc[0].values)
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\pyplot.py", line 2375, in bar
+    return gca().bar(
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\__init__.py", line 1433, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\axes\_axes.py", line 2460, in bar
+    r = mpatches.Rectangle(
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\_api\deprecation.py", line 454, in wrapper
+    return func(*args, **kwargs)
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\patches.py", line 726, in __init__
+    self._convert_units()  # Validate the inputs.
+  File "D:\miniconda3\envs\301\lib\site-packages\matplotlib\patches.py", line 737, in _convert_units
+    y1 = self.convert_yunits(self._y0 + self._height)
+numpy.core._exceptions._UFuncNoLoopError: ufunc 'add' did not contain a loop with signature matching types (dtype('int32'), dtype('<U5')) -> None
+
+2025-03-25 21:59:23,701 - INFO - admin - Data processing completed successfully
+2025-03-25 22:00:24,816 - INFO - 初始化登录界面...
+2025-03-25 22:00:24,819 - INFO - 开始预加载模型...
+2025-03-25 22:00:24,819 - INFO - 正在检查数据库中的模型信息...
+2025-03-25 22:00:24,829 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 22:00:24,829 - INFO - 模型文件存在，开始加载...
+2025-03-25 22:00:24,835 - INFO - 开始加载INT8量化模型...
+2025-03-25 22:00:24,838 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-03-25 22:00:24,844 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 22:00:24,887 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-03-25 22:00:24,891 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-03-25 22:00:24,892 - INFO - 模型加载成功并已放置在GPU上
+2025-03-25 22:00:24,893 - INFO - 成功预加载量化模型
+2025-03-25 22:00:29,611 - INFO - 未登录 - Opening user login page.
+2025-03-25 22:00:29,915 - INFO - admin - 打开Login页面
+2025-03-25 22:00:32,574 - INFO - admin - User logged in successfully
+2025-03-25 22:00:32,888 - INFO - admin - 打开Admin页面
+2025-03-25 22:00:34,203 - INFO - admin - Data table refreshed successfully with 3 records
+2025-03-25 22:00:34,205 - INFO - admin - Opening data view page. Time taken: 0.03 seconds
+2025-03-25 22:00:34,408 - INFO - admin - 打开Data View页面
+2025-03-25 22:00:36,612 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 22:00:36,732 - ERROR - admin - 数据预处理失败: cannot reshape array of size 0 into shape (59,1000)
+Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\backend\data_preprocess.py", line 51, in treat
+    epochs.save(save_dir, overwrite=True)
+  File "<decorator-gen-250>", line 12, in save
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 2308, in save
+    _save_split(this_epochs, split_fnames, part_idx, n_parts, fmt, overwrite)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 136, in _save_split
+    _save_part(fid, epochs, fmt, n_parts, next_fname, next_idx)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 156, in _save_part
+    data = epochs.get_data(copy=False)
+  File "<decorator-gen-247>", line 12, in get_data
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 1919, in get_data
+    return self._get_data(
+  File "<decorator-gen-246>", line 12, in _get_data
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 1713, in _get_data
+    epoch_noproj = self._get_epoch_from_raw(idx)
+  File "<decorator-gen-262>", line 12, in _get_epoch_from_raw
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4451, in _get_epoch_from_raw
+    data.shape = raw.epoch_shape
+ValueError: cannot reshape array of size 0 into shape (59,1000)
+
+2025-03-25 22:00:36,734 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\fif.fif is already processed with visualizations
+2025-03-25 22:00:37,377 - INFO - admin - Data processing completed successfully
+2025-03-25 22:31:25,995 - INFO - 初始化登录界面...
+2025-03-25 22:31:25,997 - INFO - 开始预加载模型...
+2025-03-25 22:31:25,997 - INFO - 正在检查数据库中的模型信息...
+2025-03-25 22:31:26,006 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 22:31:26,007 - INFO - 模型文件存在，开始加载...
+2025-03-25 22:31:26,013 - INFO - 开始加载INT8量化模型...
+2025-03-25 22:31:26,016 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-03-25 22:31:26,020 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-03-25 22:31:26,062 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-03-25 22:31:26,065 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-03-25 22:31:26,067 - INFO - 模型加载成功并已放置在GPU上
+2025-03-25 22:31:26,067 - INFO - 成功预加载量化模型
+2025-03-25 22:31:29,063 - INFO - 未登录 - Opening user login page.
+2025-03-25 22:31:29,273 - INFO - admin - 打开Login页面
+2025-03-25 22:31:32,301 - INFO - admin - User logged in successfully
+2025-03-25 22:31:32,662 - INFO - admin - 打开Admin页面
+2025-03-25 22:31:33,581 - INFO - admin - Data table refreshed successfully with 3 records
+2025-03-25 22:31:33,582 - INFO - admin - Opening data view page. Time taken: 0.03 seconds
+2025-03-25 22:31:33,823 - INFO - admin - 打开Data View页面
+2025-03-25 22:31:35,612 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 22:31:46,350 - INFO - admin - File D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\fif.fif is already processed with visualizations
+2025-03-25 22:31:46,927 - INFO - admin - Data processing completed successfully
+2025-03-25 22:31:51,896 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-03-25 22:31:51,901 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 22:31:51,933 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\serum_analysis.png
+2025-03-25 22:32:05,449 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-03-25 22:32:05,451 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-03-25 22:32:05,485 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\scale_analysis.png
+2025-04-02 22:35:03,681 - INFO - 初始化登录界面...
+2025-04-02 22:35:03,708 - INFO - 开始预加载模型...
+2025-04-02 22:35:03,708 - INFO - 正在检查数据库中的模型信息...
+2025-04-02 22:35:03,720 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-02 22:35:03,720 - INFO - 模型文件存在，开始加载...
+2025-04-02 22:35:03,735 - INFO - 开始加载INT8量化模型...
+2025-04-02 22:35:03,737 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-02 22:35:03,741 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-02 22:35:03,786 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-02 22:35:03,788 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-02 22:35:03,791 - INFO - 模型加载成功并已放置在GPU上
+2025-04-02 22:35:03,791 - INFO - 成功预加载量化模型
+2025-04-02 22:35:06,560 - INFO - 未登录 - Opening user login page.
+2025-04-02 22:35:06,615 - INFO - admin - 打开Login页面
+2025-04-02 22:35:10,166 - INFO - admin - User logged in successfully
+2025-04-02 22:35:10,374 - INFO - admin - 打开Admin页面
+2025-04-02 22:35:11,222 - INFO - admin - Data table refreshed successfully with 3 records
+2025-04-02 22:35:11,225 - INFO - admin - Opening data view page. Time taken: 0.06 seconds
+2025-04-02 22:35:11,327 - INFO - admin - 打开Data View页面
+2025-04-02 22:35:12,811 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-04-02 22:35:12,814 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_2
+2025-04-02 22:35:17,674 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-04-02 22:35:17,677 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-04-02 22:35:22,450 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-04-02 22:35:22,453 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-04-02 22:35:22,858 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\serum_analysis.png
+2025-04-02 22:35:26,242 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-04-02 22:35:26,245 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-04-02 22:35:26,274 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\scale_analysis.png
+2025-04-02 22:35:29,521 - INFO - admin - Button clicked in row 2, corresponding ID: 3
+2025-04-02 22:35:29,524 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4
+2025-04-02 22:35:29,525 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\000005_ord2_4\serum_analysis.png
+2025-04-02 22:36:00,932 - INFO - admin - 打开Admin页面
+2025-04-02 22:36:00,933 - INFO - admin - Returned to index page successfully
+2025-04-07 23:10:59,805 - INFO - 初始化登录界面...
+2025-04-07 23:10:59,828 - INFO - 开始预加载模型...
+2025-04-07 23:10:59,828 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:10:59,837 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:10:59,837 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:10:59,845 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:10:59,848 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:10:59,853 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:10:59,903 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:10:59,906 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:10:59,908 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:10:59,908 - INFO - 成功预加载量化模型
+2025-04-07 23:11:10,703 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:11:10,775 - INFO - admin - 打开Login页面
+2025-04-07 23:11:13,441 - INFO - admin - User logged in successfully
+2025-04-07 23:11:13,644 - INFO - admin - 打开Admin页面
+2025-04-07 23:11:14,823 - INFO - admin - Opening model control page. Time taken: 0.05 seconds
+2025-04-07 23:11:14,888 - INFO - admin - 打开Model Control页面
+2025-04-07 23:11:16,554 - INFO - admin - Attempting to delete model of type: 社交孤立评估模型 (Mapped to: 3)
+2025-04-07 23:11:17,412 - INFO - admin - Deleting model file at path: ./model/shejiao/subject-1shejiao.keras
+2025-04-07 23:11:17,413 - WARNING - admin - Model file not found at path: ./model/shejiao/subject-1shejiao.keras
+2025-04-07 23:11:17,416 - INFO - admin - Deleted model record from database for type: 社交孤立评估模型
+2025-04-07 23:11:20,417 - INFO - admin - Selected model type: 社交孤立评估模型 (Index: 3)
+2025-04-07 23:11:23,880 - INFO - admin - Copied model file to temporary directory: ../tmp\install.sh
+2025-04-07 23:12:18,242 - INFO - 初始化登录界面...
+2025-04-07 23:12:18,245 - INFO - 开始预加载模型...
+2025-04-07 23:12:18,245 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:12:18,253 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:12:18,253 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:12:18,260 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:12:18,263 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:12:18,266 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:12:18,310 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:12:18,313 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:12:18,314 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:12:18,314 - INFO - 成功预加载量化模型
+2025-04-07 23:12:19,431 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:12:19,540 - INFO - admin - 打开Login页面
+2025-04-07 23:12:22,257 - INFO - admin - User logged in successfully
+2025-04-07 23:12:22,498 - INFO - admin - 打开Admin页面
+2025-04-07 23:12:23,533 - INFO - admin - Opening model control page. Time taken: 0.03 seconds
+2025-04-07 23:12:23,666 - INFO - admin - 打开Model Control页面
+2025-04-07 23:12:28,338 - INFO - admin - Selected model type: 社交孤立评估模型 (Index: 3)
+2025-04-07 23:12:31,463 - INFO - admin - Copied model file to temporary directory: ../tmp\readme.md
+2025-04-07 23:12:31,467 - INFO - admin - Deleted existing model file: ./model/shejiao\subject-1 shejiao.keras
+2025-04-07 23:12:31,468 - INFO - admin - Moved model file to: ./model/shejiao\readme.md
+2025-04-07 23:12:31,472 - INFO - admin - Added new model record for type 社交孤立评估模型. Path: ./model/shejiao\readme.md
+2025-04-07 23:30:51,059 - INFO - 初始化登录界面...
+2025-04-07 23:30:51,061 - INFO - 开始预加载模型...
+2025-04-07 23:30:51,062 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:30:51,071 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:30:51,072 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:30:51,079 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:30:51,081 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:30:51,083 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:30:51,129 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:30:51,131 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:30:51,133 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:30:51,133 - INFO - 成功预加载量化模型
+2025-04-07 23:30:53,816 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:30:53,898 - INFO - admin - 打开Login页面
+2025-04-07 23:30:57,106 - INFO - admin - User logged in successfully
+2025-04-07 23:30:57,310 - INFO - admin - 打开Admin页面
+2025-04-07 23:31:03,209 - INFO - admin - Opening model control page. Time taken: 0.02 seconds
+2025-04-07 23:31:03,282 - INFO - admin - 打开Model Control页面
+2025-04-07 23:31:07,729 - INFO - admin - Selected model type: 社交孤立评估模型 (Index: 3)
+2025-04-07 23:31:10,980 - INFO - admin - Copied model file to temporary directory: ../tmp\requirements.txt
+2025-04-07 23:31:10,981 - INFO - admin - Moved model file to: ./model/shejiao\requirements.txt
+2025-04-07 23:31:10,984 - WARNING - admin - No model record found for type: 社交孤立评估模型
+2025-04-07 23:31:10,986 - INFO - admin - Model upload and database update completed successfully.
+2025-04-07 23:31:10,987 - INFO - admin - Temporary directory cleaned up.
+2025-04-07 23:31:14,543 - INFO - admin - 打开Admin页面
+2025-04-07 23:31:14,544 - INFO - admin - 返回首页耗时: 188毫秒
+2025-04-07 23:31:14,544 - INFO - admin - Returned to index page successfully
+2025-04-07 23:31:15,136 - INFO - admin - Administrator admin: fetching all data records
+2025-04-07 23:31:15,144 - INFO - admin - Successfully displayed 3 data records
+2025-04-07 23:31:15,153 - INFO - admin - Opening health evaluation page. Time taken: 0.04 seconds
+2025-04-07 23:31:15,332 - INFO - admin - 打开Health Evaluate页面
+2025-04-07 23:31:17,883 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:31:17,883 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:31:17,901 - ERROR - admin - Error in get_data: Could not find event data
+2025-04-07 23:31:17,951 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-260>", line 12, in read_epochs
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4213, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-261>", line 12, in __init__
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4292, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4019, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\event.py", line 169, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-04-07 23:31:17,954 - ERROR - admin - Error during prediction: Failed to get test data
+2025-04-07 23:31:17,956 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-04-07 23:31:17,956 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-07 23:31:17,956 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:31:17,956 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:31:17,958 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:31:17,958 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:31:17,958 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-04-07 23:31:17,958 - INFO - admin - 焦虑评估结果: 50.0
+2025-04-07 23:31:17,992 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:31:17,992 - INFO - admin - 第一个模型的结果: 0.0
+2025-04-07 23:31:17,992 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:31:20,604 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0
+2025-04-07 23:31:20,612 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0
+2025-04-07 23:36:22,268 - INFO - 初始化登录界面...
+2025-04-07 23:36:22,271 - INFO - 开始预加载模型...
+2025-04-07 23:36:22,271 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:36:22,281 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:36:22,282 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:36:22,286 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:36:22,288 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:36:22,290 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:36:22,352 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:36:22,353 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:36:22,356 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:36:22,356 - INFO - 成功预加载量化模型
+2025-04-07 23:36:43,456 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:36:43,528 - INFO - admin - 打开Login页面
+2025-04-07 23:36:46,370 - INFO - admin - User logged in successfully
+2025-04-07 23:36:46,581 - INFO - admin - 打开Admin页面
+2025-04-07 23:36:48,336 - INFO - admin - Administrator admin: fetching all data records
+2025-04-07 23:36:48,345 - INFO - admin - Successfully displayed 3 data records
+2025-04-07 23:36:48,354 - INFO - admin - Opening health evaluation page. Time taken: 0.04 seconds
+2025-04-07 23:36:48,429 - INFO - admin - 打开Health Evaluate页面
+2025-04-07 23:36:50,974 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:36:50,974 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:36:50,984 - ERROR - admin - Error in get_data: Could not find event data
+2025-04-07 23:36:50,988 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-260>", line 12, in read_epochs
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4213, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-261>", line 12, in __init__
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4292, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4019, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\event.py", line 169, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-04-07 23:36:50,991 - ERROR - admin - Error during prediction: Failed to get test data
+2025-04-07 23:36:50,993 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-04-07 23:36:50,993 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-07 23:36:50,993 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:36:50,994 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:36:50,994 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:36:50,994 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:36:50,994 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-04-07 23:36:50,995 - INFO - admin - 焦虑评估结果: 50.0
+2025-04-07 23:36:51,033 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:36:51,033 - INFO - admin - 第一个模型的结果: 0.0
+2025-04-07 23:36:51,034 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:36:54,102 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:36:54,109 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:37:24,710 - INFO - 初始化登录界面...
+2025-04-07 23:37:24,712 - INFO - 开始预加载模型...
+2025-04-07 23:37:24,713 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:37:24,720 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:37:24,721 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:37:24,726 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:37:24,728 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:37:24,731 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:37:24,779 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:37:24,782 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:37:24,783 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:37:24,784 - INFO - 成功预加载量化模型
+2025-04-07 23:37:31,002 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:37:31,073 - INFO - admin - 打开Login页面
+2025-04-07 23:37:33,621 - INFO - admin - User logged in successfully
+2025-04-07 23:37:33,834 - INFO - admin - 打开Admin页面
+2025-04-07 23:37:35,184 - INFO - admin - Administrator admin: fetching all data records
+2025-04-07 23:37:35,192 - INFO - admin - Successfully displayed 3 data records
+2025-04-07 23:37:35,200 - INFO - admin - Opening health evaluation page. Time taken: 0.03 seconds
+2025-04-07 23:37:35,282 - INFO - admin - 打开Health Evaluate页面
+2025-04-07 23:37:38,143 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:37:38,145 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:37:38,153 - ERROR - admin - Error in get_data: Could not find event data
+2025-04-07 23:37:38,159 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-260>", line 12, in read_epochs
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4213, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-261>", line 12, in __init__
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4292, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4019, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\event.py", line 169, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-04-07 23:37:38,161 - ERROR - admin - Error during prediction: Failed to get test data
+2025-04-07 23:37:38,163 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-04-07 23:37:38,163 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-07 23:37:38,164 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:37:38,164 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:37:38,164 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:37:38,164 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:37:38,164 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-04-07 23:37:38,164 - INFO - admin - 焦虑评估结果: 50.0
+2025-04-07 23:37:38,200 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:37:38,200 - INFO - admin - 第一个模型的结果: 0.0
+2025-04-07 23:37:38,200 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:38:31,687 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:41:26,202 - INFO - 初始化登录界面...
+2025-04-07 23:41:26,205 - INFO - 开始预加载模型...
+2025-04-07 23:41:26,205 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:41:26,212 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:41:26,213 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:41:26,220 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:41:26,221 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:41:26,226 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:41:26,290 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:41:26,293 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:41:26,295 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:41:26,295 - INFO - 成功预加载量化模型
+2025-04-07 23:42:10,677 - INFO - 初始化登录界面...
+2025-04-07 23:42:10,681 - INFO - 开始预加载模型...
+2025-04-07 23:42:10,681 - INFO - 正在检查数据库中的模型信息...
+2025-04-07 23:42:10,689 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:42:10,690 - INFO - 模型文件存在，开始加载...
+2025-04-07 23:42:10,696 - INFO - 开始加载INT8量化模型...
+2025-04-07 23:42:10,698 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-07 23:42:10,702 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-07 23:42:10,748 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-07 23:42:10,750 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-07 23:42:10,752 - INFO - 模型加载成功并已放置在GPU上
+2025-04-07 23:42:10,752 - INFO - 成功预加载量化模型
+2025-04-07 23:42:12,003 - INFO - 未登录 - Opening user login page.
+2025-04-07 23:42:12,164 - INFO - admin - 打开Login页面
+2025-04-07 23:42:14,724 - INFO - admin - User logged in successfully
+2025-04-07 23:42:14,998 - INFO - admin - 打开Admin页面
+2025-04-07 23:42:15,851 - INFO - admin - Administrator admin: fetching all data records
+2025-04-07 23:42:15,860 - INFO - admin - Successfully displayed 3 data records
+2025-04-07 23:42:15,868 - INFO - admin - Opening health evaluation page. Time taken: 0.04 seconds
+2025-04-07 23:42:16,070 - INFO - admin - 打开Health Evaluate页面
+2025-04-07 23:42:19,097 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:42:19,098 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:42:21,091 - INFO - admin - Prediction result: 1.0
+2025-04-07 23:42:21,112 - INFO - admin - 第一个模型评估结果: 95.0
+2025-04-07 23:42:21,112 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:42:21,112 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:42:21,112 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:42:21,114 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:42:21,114 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 78.5
+2025-04-07 23:42:21,114 - INFO - admin - 焦虑评估结果: 78.5
+2025-04-07 23:42:21,132 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5, social_isolation=10.7
+2025-04-07 23:42:21,138 - INFO - admin - Updated LED colors based on scores: stress=95.0, depression=40.1, anxiety=78.5, social_isolation=10.7
+2025-04-07 23:42:21,161 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:42:21,161 - INFO - admin - 第一个模型的结果: 95.0
+2025-04-07 23:42:21,161 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:42:24,796 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:42:24,797 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:42:24,806 - ERROR - admin - Error in get_data: Could not find event data
+2025-04-07 23:42:24,811 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 224, in get_data
+    raw = mne.read_epochs(file_path)
+  File "<decorator-gen-260>", line 12, in read_epochs
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4213, in read_epochs
+    return EpochsFIF(fname, proj, preload, verbose)
+  File "<decorator-gen-261>", line 12, in __init__
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4292, in __init__
+    ) = _read_one_epoch_file(fid, tree, preload)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\epochs.py", line 4019, in _read_one_epoch_file
+    events, mappings = _read_events_fif(fid, tree)
+  File "D:\miniconda3\envs\301\lib\site-packages\mne\event.py", line 169, in _read_events_fif
+    raise ValueError("Could not find event data")
+ValueError: Could not find event data
+
+2025-04-07 23:42:24,814 - ERROR - admin - Error during prediction: Failed to get test data
+2025-04-07 23:42:24,816 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-04-07 23:42:24,816 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-07 23:42:24,816 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:42:24,817 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:42:24,817 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:42:24,817 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:42:24,818 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-04-07 23:42:24,818 - INFO - admin - 焦虑评估结果: 50.0
+2025-04-07 23:42:24,865 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:42:24,866 - INFO - admin - 第一个模型的结果: 0.0
+2025-04-07 23:42:24,866 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:42:25,897 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:42:25,903 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:42:27,839 - INFO - admin - 量表分数计算完成 - 焦虑量表: 48.00, 抑郁量表: 42.50
+2025-04-07 23:42:27,840 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-07 23:42:28,793 - ERROR - admin - Error in get_data: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+2025-04-07 23:42:28,796 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 256, in get_data
+    with open(save_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: './model/yingji\\standarder\\std_59.pkl'
+
+2025-04-07 23:42:28,912 - ERROR - admin - Error during prediction: Failed to get test data
+2025-04-07 23:42:28,914 - ERROR - admin - Traceback (most recent call last):
+  File "D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\model\tuili_int8.py", line 279, in predict
+    raise Exception("Failed to get test data")
+Exception: Failed to get test data
+
+2025-04-07 23:42:28,914 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-07 23:42:28,914 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-07 23:42:28,914 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 40.09433962264151
+2025-04-07 23:42:28,915 - INFO - admin - 抑郁评估结果: 40.09433962264151
+2025-04-07 23:42:28,915 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-07 23:42:28,915 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 50.0
+2025-04-07 23:42:28,916 - INFO - admin - 焦虑评估结果: 50.0
+2025-04-07 23:42:28,942 - INFO - admin - 当前模型索引: 0
+2025-04-07 23:42:28,942 - INFO - admin - 第一个模型的结果: 0.0
+2025-04-07 23:42:28,944 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-07 23:42:29,593 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:42:29,597 - INFO - admin - Updated LED colors based on scores: stress=0.0, depression=40.1, anxiety=50.0, social_isolation=4.5
+2025-04-07 23:42:30,794 - INFO - admin - 打开Admin页面
+2025-04-07 23:42:30,796 - INFO - admin - 返回首页耗时: 173毫秒
+2025-04-07 23:42:30,796 - INFO - admin - Returned to index page successfully

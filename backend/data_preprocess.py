@@ -27,7 +27,7 @@ def treat(data_dir):
     5. 插值坏道
     6. 降采样
     7. 滤波处理
-    8. 独立成分分析（ICA）
+    8. ICA分析
     9. 重新参考
     10. 创建Epochs对象
     11. 保存处理后的数据
@@ -43,15 +43,26 @@ def treat(data_dir):
         # 检查是否已有处理好的FIF文件
         fif_files = [f for f in os.listdir(data_dir) if f.endswith('.fif')]
         if fif_files:
-            print("发现已预处理的FIF文件，直接进行保存")
-            for fif_file in fif_files:
-                fif_path = os.path.join(data_dir, fif_file)
-                epochs = mne.read_epochs(fif_path, preload=False)  # 使用内存映射
-                save_dir = os.path.join(data_dir, 'fif.fif')
-                epochs.save(save_dir, overwrite=True)
-            return True
+            print("发现已预处理的FIF文件，验证数据有效性")
+            fif_path = os.path.join(data_dir, fif_files[0])
+            try:
+                # 尝试读取并验证数据
+                epochs = mne.read_epochs(fif_path, preload=True)
+                if epochs.get_data().size == 0:
+                    print("FIF文件数据无效，重新进行预处理")
+                    # 删除无效的FIF文件
+                    os.remove(fif_path)
+                else:
+                    print("FIF文件数据有效，直接进行保存")
+                    save_dir = os.path.join(data_dir, 'fif.fif')
+                    epochs.save(save_dir, overwrite=True)
+                    return True
+            except Exception as e:
+                print(f"FIF文件验证失败: {str(e)}")
+                # 删除无效的FIF文件
+                os.remove(fif_path)
 
-        print("未发现FIF文件，开始预处理流程...")
+        print("开始预处理流程...")
         
         # 按优先级查找不同格式的脑电数据文件
         edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
@@ -63,7 +74,7 @@ def treat(data_dir):
         if edf_files:
             print("找到EDF文件，开始处理...")
             edf_path = os.path.join(data_dir, edf_files[0])
-            raw = read_raw_edf(edf_path, preload=False)  # 使用内存映射
+            raw = read_raw_edf(edf_path, preload=True)  # 直接加载到内存
             print(f"已加载EDF文件: {edf_path}")
         elif set_files:
             print("找到SET/FDT文件，开始处理...")
@@ -72,13 +83,13 @@ def treat(data_dir):
             # 尝试不同方式读取SET文件
             try:
                 print("尝试默认参数读取SET文件...")
-                raw = read_raw_eeglab(set_path, preload=False)  # 使用内存映射
+                raw = read_raw_eeglab(set_path, preload=True)  # 直接加载到内存
                 print("成功读取SET文件作为原始数据")
             except (TypeError, ValueError, RuntimeError) as e1:
                 print(f"默认参数读取失败: {str(e1)}")
                 try:
                     print("尝试使用ascii编码读取SET文件...")
-                    raw = read_raw_eeglab(set_path, preload=False, uint16_codec='latin1')
+                    raw = read_raw_eeglab(set_path, preload=True, uint16_codec='latin1')
                     print("使用ascii编码成功读取SET文件")
                 except (TypeError, ValueError, RuntimeError) as e2:
                     print(f"ascii编码读取失败: {str(e2)}")
@@ -151,7 +162,7 @@ def treat(data_dir):
         # 输出保留的通道
         remaining_channels = raw.ch_names
         print(f"保留的通道 ({len(remaining_channels)}个): {remaining_channels}")
-        print('11111111111111')
+
         # 设置电极位置
         try:
             montage = mne.channels.make_standard_montage("standard_1005")
@@ -177,7 +188,6 @@ def treat(data_dir):
 
         # 插值坏道
         print(raw.info['bads'])
-        raw.load_data()  # 此时才真正加载数据到内存
         raw.interpolate_bads()
 
         # 降采样到500Hz
@@ -186,7 +196,7 @@ def treat(data_dir):
         del raw  # 释放原始数据内存
 
         # 滤波处理，设置1-100Hz频段
-        raw_filtered = raw_resampled.copy().filter(l_freq=1, h_freq=100, n_jobs=2)  # 使用多线程
+        raw_filtered = raw_resampled.copy().filter(l_freq=1, h_freq=100, n_jobs=2)
         del raw_resampled
 
         # 独立成分分析（ICA）- 优化ICA计算
@@ -202,7 +212,6 @@ def treat(data_dir):
 
         # 基于平均通道重新参考
         raw_ref = raw_filtered.copy()
-        raw_ref.load_data()
         raw_ref.set_eeg_reference(ref_channels="average", projection=False)
         del raw_filtered
 
@@ -253,8 +262,13 @@ def treat(data_dir):
 
         del raw_ref
 
-        # 调整epochs形状
+        # 验证epochs数据的有效性
         epochs_data = epochs.get_data()
+        if epochs_data.size == 0:
+            print("生成的epochs数据无效")
+            return False
+
+        # 调整epochs形状
         if epochs_data.shape[2] == 1001:
             epochs_data = epochs_data[:, :, :-1]
         

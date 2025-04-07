@@ -96,7 +96,9 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
             ("时域特征-能量", "time_能量.png"),
             ("时域特征-差分", "time_差分.png"),
             ("时频域特征图", "frequency_wavelet.png"),
-            ("微分熵特征图", "differential_entropy.png")
+            ("微分熵特征图", "differential_entropy.png"),
+            ("血清指标分析", "serum_analysis.png"),
+            ("量表得分分析", "scale_analysis.png")
         ]
 
         # 连接Prev和Next按钮的点击事件

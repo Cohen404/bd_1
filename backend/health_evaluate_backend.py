@@ -283,8 +283,15 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         else:
             self.social_led_label.setStyleSheet(gray_style)
         
+        # 更新标签文本
+        self.ordinarystress_label.setText(f"普通应激 ({result.stress_score:.1f})")
+        self.depression_label.setText(f"抑郁 ({result.depression_score:.1f})")
+        self.anxiety_label.setText(f"焦虑 ({result.anxiety_score:.1f})")
+        self.social_label.setText(f"社交孤立 ({result.social_isolation_score:.1f})")
+        
         logging.info(f"Updated LED colors based on scores: stress={result.stress_score}, "
-                    f"depression={result.depression_score}, anxiety={result.anxiety_score}", extra={'username': self.username})
+                    f"depression={result.depression_score}, anxiety={result.anxiety_score}, "
+                    f"social_isolation={result.social_isolation_score}", extra={'username': self.username})
 
     def show_nav(self):
         """
@@ -393,14 +400,16 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 "Theta.png", "Alpha.png", "Beta.png", "Gamma.png",
                 "frequency_band_1.png", "frequency_band_2.png", "frequency_band_3.png", "frequency_band_4.png", "frequency_band_5.png",
                 "time_过零率.png", "time_方差.png", "time_能量.png", "time_差分.png",
-                "frequency_wavelet.png", "differential_entropy.png"
+                "frequency_wavelet.png", "differential_entropy.png",
+                "serum_analysis.png", "scale_analysis.png"
             ]
 
             image_names = [
                 "Theta波段功率", "Alpha波段功率", "Beta波段功率", "Gamma波段功率",
                 "均分频带1", "均分频带2", "均分频带3", "均分频带4", "均分频带5",
-                "域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
-                "时频域特征 - 小波变换", "微分熵"
+                "时域特征 - 过零率", "时域特征 - 方差", "时域特征 - 能量", "时域特征 - 差分",
+                "时频域特征 - 小波变换", "微分熵",
+                "血清指标分析", "量表得分分析"
             ]
 
             logging.info(f"Image list initialized with {len(self.image_list)} items.", extra={'username': self.username})
@@ -732,6 +741,20 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                     "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
                     "border-radius: 16px; border: 2px solid white; background: red"
                 )
+            
+            # 在第三个模型完成时立即计算并更新社交孤立分数
+            social_isolation_score = round((self.result_list[0] + self.result_list[1] + self.result_list[2]) / 20, 1)
+            self.social_label.setText(f"社交孤立 ({social_isolation_score})")
+            if social_isolation_score > 50:
+                self.social_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; background: red"
+                )
+            else:
+                self.social_led_label.setStyleSheet(
+                    "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
+                    "border-radius: 16px; border: 2px solid white; background: gray"
+                )
 
         if self.completed_models == 3:  # 如果所有模型都已评估完成
             if self.progress_dialog:
@@ -739,23 +762,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 self.timer.stop()  # 停止计时器
                 self.progress_dialog.close()
             os.remove(MODEL_STATUS_FILE)  # 删除status.txt文件
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
-            qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
-            finish_box.exec_()
-            if finish_box.clickedButton() == qyes:
-                self.status_label.setText("模型空闲")
             
             session = SessionClass()
             try:
-                # 计算社交孤立分数
-                social_isolation_score = round((self.result_list[0] + self.result_list[1] + self.result_list[2]) / 20, 1)
-                self.social_label.setText(f"社交孤立 ({social_isolation_score})")
-                if social_isolation_score > 50:
-                    self.social_led_label.setStyleSheet(
-                        "min-width: 30px; min-height: 30px; max-width: 30px; max-height: 30px; "
-                        "border-radius: 16px; border: 2px solid white; background: red"
-                    )
-
                 # 如果数据库中已经存在具有当前ID的数据，显示一个提示框询问用户是否要覆盖现有的数据
                 existing_result = session.query(Result).filter(Result.id == self.data_id).first()
                 if existing_result is not None:
@@ -798,6 +807,13 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 logging.error(traceback.format_exc())
             finally:
                 session.close()
+            
+            # 在保存完数据后显示完成提示
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "所有模型评估完成。")
+            qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+            finish_box.exec_()
+            if finish_box.clickedButton() == qyes:
+                self.status_label.setText("模型空闲")
             
             self.result_list = []
 
@@ -954,7 +970,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         ("时域特征 - 能量", "time_能量.png"),
                         ("时域特征 - 差分", "time_差分.png"),
                         ("时频域特征 - 小波变换", "frequency_wavelet.png"),
-                        ("微分熵", "differential_entropy.png")
+                        ("微分熵", "differential_entropy.png"),
+                        ("血清指标分析", "serum_analysis.png"),
+                        ("量表得分分析", "scale_analysis.png")
                     ]
 
                     for title, img_name in image_list:

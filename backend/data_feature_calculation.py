@@ -8,6 +8,7 @@ import seaborn as sns           # 导入seaborn库用于数据可视化
 import os
 import pandas as pd
 import logging
+import traceback
 
 # 设置绘图风格
 sns.set_style("whitegrid")      # 设置seaborn绘图的背景样式
@@ -393,6 +394,135 @@ def analyze_eeg_data(file_path):
     except Exception as e:
         print(f"分析过程中出现错误: {str(e)}")
         raise
+
+def plot_serum_data(data_path):
+    """
+    绘制血清数据的可视化图表
+    
+    参数:
+    - data_path: 数据路径
+    """
+    try:
+        # 读取血清数据
+        xq_path = os.path.join(data_path, 'xq.csv')
+        if not os.path.exists(xq_path):
+            logging.warning(f"血清数据文件不存在: {xq_path}")
+            return
+            
+        # 读取数据，第一行为表头
+        df = pd.read_csv(xq_path)
+        if len(df) < 1:
+            logging.warning("血清数据为空")
+            return
+            
+        # 处理数据，将特殊值和字符串转换为数值
+        values = []
+        for val in df.iloc[0].values:
+            try:
+                # 如果是字符串类型且包含"<"，取"<"后面的数值的一半
+                if isinstance(val, str) and '<' in val:
+                    num_val = float(val.replace('<', '')) / 2
+                    values.append(num_val)
+                else:
+                    values.append(float(val))
+            except (ValueError, TypeError):
+                # 如果无法转换为数值，使用0
+                values.append(0)
+                logging.warning(f"无法转换的值: {val}，使用0代替")
+        
+        # 创建柱状图
+        plt.figure(figsize=(15, 8))
+        bars = plt.bar(range(len(df.columns)), values)
+        plt.xticks(range(len(df.columns)), df.columns, rotation=45, ha='right')
+        plt.title('血清指标分析')
+        plt.xlabel('指标名称')
+        plt.ylabel('指标值')
+        
+        # 在柱子上添加数值标签
+        for bar, val, orig_val in zip(bars, values, df.iloc[0].values):
+            if isinstance(orig_val, str) and '<' in orig_val:
+                # 对于小于某值的情况，显示原始字符串
+                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(),
+                        orig_val, ha='center', va='bottom')
+            else:
+                # 对于普通数值，显示数值
+                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(),
+                        f'{val:.1f}', ha='center', va='bottom')
+        
+        plt.tight_layout()
+        
+        # 保存图片
+        save_plot(plt.gcf(), 'serum_analysis.png')
+        plt.close()
+        
+    except Exception as e:
+        logging.error(f"绘制血清数据图表时发生错误: {str(e)}")
+        logging.error(traceback.format_exc())
+
+def plot_scale_data(data_path):
+    """
+    绘制量表数据的可视化图表
+    
+    参数:
+    - data_path: 数据路径
+    """
+    try:
+        # 读取量表数据
+        lb_path = os.path.join(data_path, 'lb.csv')
+        if not os.path.exists(lb_path):
+            logging.warning(f"量表数据文件不存在: {lb_path}")
+            return
+            
+        # 读取数据，没有表头
+        df = pd.read_csv(lb_path, header=None)
+        if len(df) < 1:
+            logging.warning("量表数据为空")
+            return
+            
+        # 创建柱状图
+        plt.figure(figsize=(15, 8))
+        
+        # 创建x轴位置
+        x = np.arange(40)
+        
+        # 绘制柱状图，前20题为焦虑量表（蓝色），后20题为抑郁量表（橙色）
+        bars1 = plt.bar(x[:20], df.iloc[0, :20], color='#4B9CD3', label='焦虑量表')
+        bars2 = plt.bar(x[20:], df.iloc[0, 20:], color='#F4A460', label='抑郁量表')
+        
+        # 添加分隔线
+        plt.axvline(x=19.5, color='r', linestyle='--', alpha=0.3)
+        
+        # 设置标题和标签
+        plt.title('量表得分分析')
+        plt.xlabel('题目序号')
+        plt.ylabel('得分')
+        plt.legend()
+        
+        # 设置x轴刻度
+        plt.xticks(x, [str(i+1) for i in x], rotation=45)
+        
+        # 设置y轴范围（量表得分范围为1-5）
+        plt.ylim(0, 5.5)
+        
+        # 在柱子上添加数值标签
+        for bars in [bars1, bars2]:
+            for bar in bars:
+                height = bar.get_height()
+                plt.text(bar.get_x() + bar.get_width()/2., height,
+                        f'{height:.0f}', ha='center', va='bottom')
+        
+        # 添加网格线
+        plt.grid(True, axis='y', linestyle='--', alpha=0.3)
+        
+        plt.tight_layout()
+        
+        # 保存图片
+        save_plot(plt.gcf(), 'scale_analysis.png')
+        plt.close()
+        
+    except Exception as e:
+        logging.error(f"绘制量表数据图表时发生错误: {str(e)}")
+        logging.error(traceback.format_exc())
 
 # 如果需要，您可以在这里调用 analyze_eeg_data 函数
 # feature_df, feature_names = analyze_eeg_data('your_eeg_file.edf')

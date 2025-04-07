@@ -291,22 +291,18 @@ class Ui_MainWindow(object):
         font.setFamily("Microsoft YaHei")  # 微软雅黑
         self.status_label.setFont(font)
         self.tableWidget.setFont(font)
-        # self.life_time.setFont(font)
         self.ordinarystress_label.setFont(font)
         self.depression_label.setFont(font)
         self.anxiety_label.setFont(font)
-        # self.mechanical_label.setFont(font)
-        # self.life_label.setFont(font)
+        self.social_label.setFont(font)
         self.curve_label.setFont(font)
 
-        self.depression_label.setStyleSheet("font-size:25px;color:black")
-        self.ordinarystress_label.setStyleSheet("font-size:25px")
-        self.anxiety_label.setStyleSheet("font-size:25px")
-        self.social_label.setStyleSheet("font-size:25px")
-
-        # self.mechanical_label.setStyleSheet("font-size:25px")
-        # self.life_label.setStyleSheet("font-size:25px;color:black")
-        # self.life_time.setStyleSheet("color:black;font-size:18px;")
+        # 统一所有状态标签的样式
+        status_style = "font-size:25px;color:white"
+        self.depression_label.setStyleSheet(status_style)
+        self.ordinarystress_label.setStyleSheet(status_style)
+        self.anxiety_label.setStyleSheet(status_style)
+        self.social_label.setStyleSheet(status_style)
 
         # 表属性样式设计
 

@@ -193,15 +193,19 @@ class model_control_Controller(Ui_model_Control):
                     existing_model = session.query(Model).filter(Model.model_type == model_type).first()
 
                     if existing_model is not None:
-                        # 更新现有记录
-                        existing_model.model_path = target_path
-                        existing_model.create_time = datetime.now()
-                        logging.info(f"Updated existing model record for type {model_type_name}. New path: {target_path}")
-                    else:
+                        # 删除现有记录
+                        session.delete(existing_model)
+                        session.commit()
+                        # 重置序列计数器
+                        session.execute("SELECT setval('tb_model_id_seq', (SELECT MAX(id) FROM tb_model))")
+                        session.commit()
+                        
                         # 创建新记录
                         model = Model(model_type=model_type, model_path=target_path, create_time=datetime.now())
                         session.add(model)
                         logging.info(f"Added new model record for type {model_type_name}. Path: {target_path}")
+                    else:
+                        logging.warning(f"No model record found for type: {model_type_name}")
 
                     session.commit()
                     session.close()
