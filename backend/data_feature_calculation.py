@@ -9,11 +9,43 @@ import os
 import pandas as pd
 import logging
 import traceback
+import matplotlib.font_manager as fm
+import urllib.request
+import shutil
 
 # 设置绘图风格
 sns.set_style("whitegrid")      # 设置seaborn绘图的背景样式
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 设置中文显示
-plt.rcParams['axes.unicode_minus'] = False    # 用于正常显示负号
+
+# 设置中文字体
+def setup_chinese_font():
+    """设置中文字体"""
+    # 按优先级尝试不同的中文字体
+    chinese_fonts = ['STFangsong', 'FangSong', 'STSong', 'SimSun', 'Microsoft YaHei', 'SimHei']
+    
+    font_prop = None
+    for font_name in chinese_fonts:
+        try:
+            font_path = fm.findfont(fm.FontProperties(family=font_name))
+            if font_path is not None and os.path.exists(font_path):
+                font_prop = fm.FontProperties(family=font_name)
+                logging.info(f"使用字体: {font_name}")
+                break
+        except:
+            continue
+    
+    if font_prop is None:
+        logging.error("未找到合适的中文字体")
+        # 使用默认字体
+        font_prop = fm.FontProperties()
+    
+    # 设置全局字体
+    plt.rcParams['font.family'] = ['sans-serif']
+    plt.rcParams['axes.unicode_minus'] = False    # 用于正常显示负号
+    
+    return font_prop
+
+# 初始化中文字体
+chinese_font = setup_chinese_font()
 
 # 全局变量
 folder_path = ''
@@ -167,9 +199,9 @@ def plot_time_domain_features(features):
     for title in titles:
         plt.figure(figsize=(15, 5))
         plt.bar(channel_indices, [feature[title] for feature in features])
-        plt.title(title)
-        plt.xlabel('通道')
-        plt.ylabel(f'{title}值')
+        plt.title(title, fontproperties=chinese_font)
+        plt.xlabel('通道', fontproperties=chinese_font)
+        plt.ylabel(f'{title}值', fontproperties=chinese_font)
         save_plot(plt.gcf(), f'time_{title}.png')
         plt.close()
 
@@ -180,9 +212,9 @@ def plot_frequency_domain_features(features):
         plt.figure(figsize=(15, 5))
         avg_powers = [feature["均分频带"][idx] for feature in features]
         plt.bar(channel_indices, avg_powers)
-        plt.title(f'均分频带: {band_name}')
-        plt.xlabel('通道')
-        plt.ylabel('功率')
+        plt.title(f'均分频带: {band_name}', fontproperties=chinese_font)
+        plt.xlabel('通道', fontproperties=chinese_font)
+        plt.ylabel('功率', fontproperties=chinese_font)
         save_plot(plt.gcf(), f'frequency_band_{idx+1}.png')
         plt.close()
 
@@ -193,9 +225,9 @@ def plot_time_frequency_features(features):
         plt.subplot(2, 2, idx+1)
         energies = [feature[idx] for feature in features]
         plt.bar(channel_indices, energies)
-        plt.title(f'小波变换能量: Level {idx+1}')
-        plt.xlabel('通道')
-        plt.ylabel('能量')
+        plt.title(f'小波变换能量: Level {idx+1}', fontproperties=chinese_font)
+        plt.xlabel('通道', fontproperties=chinese_font)
+        plt.ylabel('能量', fontproperties=chinese_font)
     plt.tight_layout()
     save_plot(plt.gcf(), 'frequency_wavelet.png')
     plt.close()
@@ -205,9 +237,9 @@ def plot_differential_entropy(features):
     plt.figure(figsize=(15, 5))
     de_values = [feature["5频带微分熵"] for feature in features]
     plt.bar(channel_indices, de_values)
-    plt.title('微分熵')
-    plt.xlabel('通道')
-    plt.ylabel('微分熵值')
+    plt.title('微分熵', fontproperties=chinese_font)
+    plt.xlabel('通道', fontproperties=chinese_font)
+    plt.ylabel('微分熵值', fontproperties=chinese_font)
     save_plot(plt.gcf(), 'differential_entropy.png')
     plt.close()
 
@@ -217,9 +249,9 @@ def plot_theta_alpha_beta_gamma_powers(band_powers):
         plt.figure(figsize=(15, 5))
         powers = [channel[band] for channel in band_powers]
         plt.bar(range(len(powers)), powers)
-        plt.title(f'{band} 功率')
-        plt.xlabel('通道')
-        plt.ylabel('功率')
+        plt.title(f'{band} 功率', fontproperties=chinese_font)
+        plt.xlabel('通道', fontproperties=chinese_font)
+        plt.ylabel('功率', fontproperties=chinese_font)
         save_plot(plt.gcf(), f'{band}.png')
         plt.close()
 
@@ -447,21 +479,21 @@ def plot_serum_data(data_path):
                 labels.append(f"{custom_labels[label_index]}_{i//len(custom_labels)+1}")
             else:
                 labels.append(custom_labels[label_index])
-        plt.xticks(range(len(values)), labels, rotation=45, ha='right')
-        plt.title('血清指标分析')
-        plt.xlabel('指标名称')
-        plt.ylabel('指标值')
+        plt.xticks(range(len(values)), labels, rotation=45, ha='right', fontproperties=chinese_font)
+        plt.title('血清指标分析', fontproperties=chinese_font)
+        plt.xlabel('指标名称', fontproperties=chinese_font)
+        plt.ylabel('指标值', fontproperties=chinese_font)
         
         # 在柱子上添加数值标签
         for bar, val, orig_val in zip(bars, values, df.iloc[0].values):
             if isinstance(orig_val, str) and '<' in orig_val:
                 # 对于小于某值的情况，显示原始字符串
                 plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(),
-                        orig_val, ha='center', va='bottom')
+                        orig_val, ha='center', va='bottom', fontproperties=chinese_font)
             else:
                 # 对于普通数值，显示数值
                 plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(),
-                        f'{val:.1f}', ha='center', va='bottom')
+                        f'{val:.1f}', ha='center', va='bottom', fontproperties=chinese_font)
         
         plt.tight_layout()
         
@@ -507,10 +539,10 @@ def plot_scale_data(data_path):
         plt.axvline(x=19.5, color='r', linestyle='--', alpha=0.3)
         
         # 设置标题和标签
-        plt.title('量表得分分析')
-        plt.xlabel('题目序号')
-        plt.ylabel('得分')
-        plt.legend()
+        plt.title('量表得分分析', fontproperties=chinese_font)
+        plt.xlabel('题目序号', fontproperties=chinese_font)
+        plt.ylabel('得分', fontproperties=chinese_font)
+        plt.legend(prop=chinese_font)
         
         # 设置x轴刻度
         plt.xticks(x, [str(i+1) for i in x], rotation=45)
@@ -523,7 +555,7 @@ def plot_scale_data(data_path):
             for bar in bars:
                 height = bar.get_height()
                 plt.text(bar.get_x() + bar.get_width()/2., height,
-                        f'{height:.0f}', ha='center', va='bottom')
+                        f'{height:.0f}', ha='center', va='bottom', fontproperties=chinese_font)
         
         # 添加网格线
         plt.grid(True, axis='y', linestyle='--', alpha=0.3)

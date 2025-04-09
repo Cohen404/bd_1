@@ -10838,3 +10838,77 @@ AttributeError: module 'backend.data_feature_calculation' has no attribute 'plot
 2025-04-09 10:55:45,597 - INFO - admin - Deleted record with ID 23 from tb_data.
 2025-04-09 10:55:45,599 - INFO - admin - Deleted record with ID 23 from result table.
 2025-04-09 10:55:45,607 - INFO - admin - Data table refreshed successfully with 0 records
+2025-04-09 11:23:26,733 - INFO - 初始化登录界面...
+2025-04-09 11:23:26,737 - INFO - 开始预加载模型...
+2025-04-09 11:23:26,737 - INFO - 正在检查数据库中的模型信息...
+2025-04-09 11:23:26,745 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-09 11:23:26,745 - INFO - 模型文件存在，开始加载...
+2025-04-09 11:23:26,751 - INFO - 开始加载INT8量化模型...
+2025-04-09 11:23:26,753 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-09 11:23:26,756 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-09 11:23:26,806 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-09 11:23:26,809 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-09 11:23:26,810 - INFO - 模型加载成功并已放置在GPU上
+2025-04-09 11:23:26,810 - INFO - 成功预加载量化模型
+2025-04-09 11:23:31,963 - INFO - 未登录 - Opening user login page.
+2025-04-09 11:23:32,039 - INFO - admin - 打开Login页面
+2025-04-09 11:23:34,067 - INFO - admin - User logged in successfully
+2025-04-09 11:23:34,271 - INFO - admin - 打开Admin页面
+2025-04-09 11:23:37,679 - INFO - admin - Administrator admin: fetching all data records
+2025-04-09 11:23:37,680 - INFO - admin - Successfully displayed 0 data records
+2025-04-09 11:23:37,700 - INFO - admin - Opening health evaluation page. Time taken: 0.05 seconds
+2025-04-09 11:23:37,787 - INFO - admin - 打开Health Evaluate页面
+2025-04-09 11:23:39,175 - INFO - admin - 打开Admin页面
+2025-04-09 11:23:39,175 - INFO - admin - 返回首页耗时: 87毫秒
+2025-04-09 11:23:39,175 - INFO - admin - Returned to index page successfully
+2025-04-09 11:23:41,125 - INFO - admin - Data table refreshed successfully with 0 records
+2025-04-09 11:23:41,127 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-04-09 11:23:41,218 - INFO - admin - 打开Data View页面
+2025-04-09 11:23:58,207 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all/04231x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x
+2025-04-09 11:23:58,220 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x, Username: admin
+2025-04-09 11:23:59,619 - INFO - admin - Data table refreshed successfully with 1 records
+2025-04-09 11:24:02,372 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x
+2025-04-09 11:24:10,965 - INFO - admin - Data processing completed successfully
+2025-04-09 11:24:34,959 - INFO - admin - Button clicked in row 0, corresponding ID: 1
+2025-04-09 11:24:34,964 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x
+2025-04-09 11:24:36,999 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x\Theta.png
+2025-04-09 11:36:13,291 - INFO - 初始化登录界面...
+2025-04-09 11:36:13,295 - INFO - 开始预加载模型...
+2025-04-09 11:36:13,296 - INFO - 正在检查数据库中的模型信息...
+2025-04-09 11:36:13,303 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-09 11:36:13,305 - INFO - 模型文件存在，开始加载...
+2025-04-09 11:36:13,310 - INFO - 开始加载INT8量化模型...
+2025-04-09 11:36:13,313 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-09 11:36:13,315 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-09 11:36:13,354 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-09 11:36:13,356 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-09 11:36:13,357 - INFO - 模型加载成功并已放置在GPU上
+2025-04-09 11:36:13,358 - INFO - 成功预加载量化模型
+2025-04-09 11:36:16,661 - INFO - 未登录 - Opening user login page.
+2025-04-09 11:36:16,755 - INFO - admin - 打开Login页面
+2025-04-09 11:36:19,430 - INFO - admin - User logged in successfully
+2025-04-09 11:36:19,643 - INFO - admin - 打开Admin页面
+2025-04-09 11:36:21,041 - INFO - admin - Data table refreshed successfully with 1 records
+2025-04-09 11:36:21,042 - INFO - admin - Opening data view page. Time taken: 0.05 seconds
+2025-04-09 11:36:21,152 - INFO - admin - 打开Data View页面
+2025-04-09 11:36:30,934 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all/07353x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-09 11:36:30,943 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x, Username: admin
+2025-04-09 11:36:32,180 - INFO - admin - Data table refreshed successfully with 2 records
+2025-04-09 11:36:33,378 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-09 11:36:41,124 - INFO - admin - Data processing completed successfully
+2025-04-09 11:36:52,678 - INFO - admin - 打开Admin页面
+2025-04-09 11:36:52,678 - INFO - admin - Returned to index page successfully
+2025-04-09 11:36:54,403 - INFO - admin - Opening log management page. Time taken: 0.38 seconds
+2025-04-09 11:36:54,492 - INFO - admin - 打开Log Manage页面
+2025-04-09 11:37:06,135 - INFO - admin - 打开Admin页面
+2025-04-09 11:37:06,136 - INFO - admin - 返回首页耗时: 95毫秒
+2025-04-09 11:37:06,136 - INFO - admin - Returned to index page successfully
+2025-04-09 11:37:07,305 - INFO - admin - Data table refreshed successfully with 2 records
+2025-04-09 11:37:07,306 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-04-09 11:37:07,399 - INFO - admin - 打开Data View页面
+2025-04-09 11:37:11,502 - INFO - admin - Button clicked in row 1, corresponding ID: 2
+2025-04-09 11:37:11,505 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-09 11:37:11,528 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x\scale_analysis.png
+2025-04-09 11:37:16,370 - INFO - admin - Button clicked in row 1, corresponding ID: 2
+2025-04-09 11:37:16,374 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-09 11:37:16,393 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x\serum_analysis.png
