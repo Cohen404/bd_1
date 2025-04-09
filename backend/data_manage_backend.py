@@ -915,12 +915,12 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     progress_dialog.setValue(counter.value)
                     continue
                 
-                pool.apply_async(
-                    process_single_file, 
-                    args=(path,),
-                    callback=update_progress,
-                    error_callback=error_callback
-                )
+                # 顺序执行每个文件的预处理
+                try:
+                    process_single_file(path)
+                    update_progress(None)
+                except Exception as e:
+                    error_callback(e)
 
             # 关闭进程池
             pool.close()
@@ -1135,6 +1135,10 @@ def process_single_file(data_path):
         fif_path = os.path.join(data_path, fif_files[0])
         data_feature_calculation.analyze_eeg_data(fif_path)
         
+        # 添加血清和量表数据的可视化
+        data_feature_calculation.plot_serum_data(data_path)
+        data_feature_calculation.plot_scale_data(data_path)
+        
         return True
     except Exception as e:
         error_msg = f"处理文件 {data_path} 失败: {str(e)}\n{traceback.format_exc()}"
@@ -1173,8 +1177,9 @@ class ProcessingThread(QThread):
             
             # 血清和量表数据可视化 - 90-100%进度
             data_feature_calculation.plot_serum_data(self.data_path)
-            self.progress.emit(90)
             data_feature_calculation.plot_scale_data(self.data_path)
+            self.progress.emit(90)
+            data_feature_calculation.plot_serum_data(self.data_path)
             self.progress.emit(100)
 
             self.finished.emit()

@@ -417,7 +417,7 @@ def plot_serum_data(data_path):
             
         # 处理数据，将特殊值和字符串转换为数值
         values = []
-        for val in df.iloc[0].values:
+        for val in df.values.flatten():
             try:
                 # 如果是字符串类型且包含"<"，取"<"后面的数值的一半
                 if isinstance(val, str) and '<' in val:
@@ -432,8 +432,22 @@ def plot_serum_data(data_path):
         
         # 创建柱状图
         plt.figure(figsize=(15, 8))
-        bars = plt.bar(range(len(df.columns)), values)
-        plt.xticks(range(len(df.columns)), df.columns, rotation=45, ha='right')
+        bars = plt.bar(range(len(values)), values)
+        # 使用自定义的指标名称
+        custom_labels = [
+            "HCY", "E", "DA", "NE", "孕酮", "17-羟孕酮", "孕烯醇酮", "皮质醇",
+            "17-羟孕烯醇酮", "21-脱氧皮质醇", "可的松", "18-羟皮质醇", "18-氧皮质醇", "11-脱氧皮质醇"
+        ]
+        # 根据数据长度自适应标签
+        data_length = len(values)
+        labels = []
+        for i in range(data_length):
+            label_index = i % len(custom_labels)
+            if i >= len(custom_labels):
+                labels.append(f"{custom_labels[label_index]}_{i//len(custom_labels)+1}")
+            else:
+                labels.append(custom_labels[label_index])
+        plt.xticks(range(len(values)), labels, rotation=45, ha='right')
         plt.title('血清指标分析')
         plt.xlabel('指标名称')
         plt.ylabel('指标值')

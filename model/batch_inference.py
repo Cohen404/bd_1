@@ -222,6 +222,46 @@ class BatchInferenceModel(QThread):
             logging.error(traceback.format_exc())
             return model_score
 
+    def adjust_stress_score(self, stress_score, depression_score, anxiety_score):
+        """
+        根据新的计算规则调整普通应激分数
+        
+        Args:
+            stress_score: 原普通应激分数
+            depression_score: 抑郁分数
+            anxiety_score: 焦虑分数
+            
+        Returns:
+            float: 调整后的普通应激分数
+        """
+        try:
+            # 如果原应激分数小于50，认为是无应激
+            if stress_score < 50:
+                # 确保抑郁分数和焦虑分数减1大于等于1
+                depression_factor = max(1, depression_score + 10)
+                anxiety_factor = max(1, anxiety_score + 10)
+                # 计算新分数
+                new_score = (stress_score + 1) * depression_factor * anxiety_factor / 100
+                # 确保分数大于等于0且不超过48
+                new_score = max(0, min(48, new_score))
+            else:
+                # 有应激情况
+                # 计算新分数
+                if (depression_score + anxiety_score) / 2 > 50:
+                    new_score = stress_score * (depression_score + 10) * (anxiety_score + 10) / 10000
+                else:
+                    new_score = stress_score * (depression_score + 50) * (anxiety_score + 50) / 10000
+                # 确保分数在61到95之间
+                new_score = max(61, min(95, new_score))
+            
+            logging.info(f"调整后的普通应激分数: {new_score:.1f}")
+            return float(new_score)
+            
+        except Exception as e:
+            logging.error(f"调整普通应激分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return stress_score
+
     def run(self):
         """
         运行批量推理
@@ -254,8 +294,11 @@ class BatchInferenceModel(QThread):
                     # 计算焦虑分数
                     anxiety_score = self.calculate_final_score(model_result, anxiety_score_lb, 2)
 
+                    # 调整普通应激分数
+                    adjusted_stress_score = self.adjust_stress_score(model_result, depression_score, anxiety_score)
+
                     # 将三个分数添加到结果列表
-                    self.results.extend([model_result, depression_score, anxiety_score])
+                    self.results.extend([adjusted_stress_score, depression_score, anxiety_score])
 
                 except Exception as e:
                     logging.error(f"处理数据 {data_path} 时发生错误: {str(e)}")

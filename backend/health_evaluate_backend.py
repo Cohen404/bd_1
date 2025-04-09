@@ -1573,6 +1573,48 @@ class EvaluateThread(QThread):
             logging.error(traceback.format_exc())
             return model_score
 
+    def adjust_stress_score(self, stress_score, depression_score, anxiety_score):
+        """
+        根据新的计算规则调整普通应激分数
+        
+        Args:
+            stress_score: 原普通应激分数
+            depression_score: 抑郁分数
+            anxiety_score: 焦虑分数
+            
+        Returns:
+            float: 调整后的普通应激分数
+        """
+        try:
+            # 如果原应激分数小于50，认为是无应激
+            if stress_score < 50:
+                # 确保抑郁分数和焦虑分数减1大于等于1
+                depression_factor = max(1, depression_score + 10)
+                anxiety_factor = max(1, anxiety_score + 10)
+                # 计算新分数
+                new_score = (stress_score + 1) * depression_factor * anxiety_factor / 100
+                # 确保分数大于等于0
+                new_score = max(0, new_score)
+                new_score = min(48, new_score)
+            else:
+                # 有应激情况
+                # 计算新分数
+                if (depression_score+anxiety_score)/2>50:
+                    new_score = stress_score * (depression_score + 10) * (anxiety_score + 10) / 10000
+                else:
+                    new_score = stress_score * (depression_score + 50) * (anxiety_score + 50) / 10000
+                # 确保分数不超过95
+                new_score = min(95, new_score)
+                new_score = max(61, new_score)
+            
+            logging.info(f"调整后的普通应激分数: {new_score:.1f}")
+            return float(new_score)
+            
+        except Exception as e:
+            logging.error(f"调整普通应激分数时发生错误: {str(e)}")
+            logging.error(traceback.format_exc())
+            return stress_score
+
     def run(self):
         """
         运行评估线程
@@ -1594,20 +1636,25 @@ class EvaluateThread(QThread):
             model_result = model.predict() * 100
             model_result = float(min(95, max(0, model_result)))
             logging.info(f"第一个模型评估结果: {model_result}")
-            self._rule.emit(model_result)
-            self.current_type = 1
-
+            
             # 第二种类型：使用第一个模型的结果结合抑郁量表分数
             logging.info("计算第二个模型（抑郁）的结果")
             depression_score = self.calculate_final_score(model_result, self.depression_score_lb, 1)
             logging.info(f"抑郁评估结果: {depression_score}")
-            self._rule.emit(depression_score)
-            self.current_type = 2
-
+            
             # 第三种类型：使用第一个模型的结果结合焦虑量表分数
             logging.info("计算第三个模型（焦虑）的结果")
             anxiety_score = self.calculate_final_score(model_result, self.anxiety_score_lb, 2)
             logging.info(f"焦虑评估结果: {anxiety_score}")
+
+            # 调整普通应激分数
+            adjusted_stress_score = self.adjust_stress_score(model_result, depression_score, anxiety_score)
+            
+            # 按顺序发送结果
+            self._rule.emit(adjusted_stress_score)
+            self.current_type = 1
+            self._rule.emit(depression_score)
+            self.current_type = 2
             self._rule.emit(anxiety_score)
 
             # 发送完成信号
