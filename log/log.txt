@@ -10912,3 +10912,441 @@ AttributeError: module 'backend.data_feature_calculation' has no attribute 'plot
 2025-04-09 11:37:16,370 - INFO - admin - Button clicked in row 1, corresponding ID: 2
 2025-04-09 11:37:16,374 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
 2025-04-09 11:37:16,393 - INFO - admin - Successfully displayed image: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x\serum_analysis.png
+2025-04-10 11:30:31,506 - INFO - 初始化登录界面...
+2025-04-10 11:30:31,531 - INFO - 开始预加载模型...
+2025-04-10 11:30:31,531 - INFO - 正在检查数据库中的模型信息...
+2025-04-10 11:30:31,544 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-10 11:30:31,544 - INFO - 模型文件存在，开始加载...
+2025-04-10 11:30:31,552 - INFO - 开始加载INT8量化模型...
+2025-04-10 11:30:31,552 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-10 11:30:31,556 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-10 11:30:31,605 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-10 11:30:31,609 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-10 11:30:31,609 - INFO - 模型加载成功并已放置在GPU上
+2025-04-10 11:30:31,609 - INFO - 成功预加载量化模型
+2025-04-10 11:30:34,778 - INFO - 未登录 - Opening user login page.
+2025-04-10 11:30:34,867 - INFO - admin - 打开Login页面
+2025-04-10 11:30:37,561 - INFO - admin - User logged in successfully
+2025-04-10 11:30:37,800 - INFO - admin - 打开Admin页面
+2025-04-10 11:30:39,006 - INFO - admin - Data table refreshed successfully with 2 records
+2025-04-10 11:30:39,009 - INFO - admin - Opening data view page. Time taken: 0.08 seconds
+2025-04-10 11:30:39,114 - INFO - admin - 打开Data View页面
+2025-04-10 11:31:08,081 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all/230033 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\230033
+2025-04-10 11:31:08,092 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\230033, Username: admin
+2025-04-10 11:31:09,579 - INFO - admin - Data table refreshed successfully with 3 records
+2025-04-10 11:31:11,334 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\230033
+2025-04-10 11:31:26,402 - INFO - admin - Data processing completed successfully
+2025-04-10 11:31:35,593 - INFO - admin - 打开Admin页面
+2025-04-10 11:31:35,595 - INFO - admin - Returned to index page successfully
+2025-04-10 11:31:36,473 - INFO - admin - Administrator admin: fetching all data records
+2025-04-10 11:31:36,489 - INFO - admin - Successfully displayed 3 data records
+2025-04-10 11:31:36,512 - INFO - admin - Opening health evaluation page. Time taken: 0.07 seconds
+2025-04-10 11:31:36,623 - INFO - admin - 打开Health Evaluate页面
+2025-04-10 11:31:39,546 - INFO - admin - 量表分数计算完成 - 焦虑量表: 50.00, 抑郁量表: 57.50
+2025-04-10 11:31:39,546 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-10 11:31:40,400 - INFO - admin - Prediction result: 1.0
+2025-04-10 11:31:40,404 - INFO - admin - 第一个模型评估结果: 95.0
+2025-04-10 11:31:40,404 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-10 11:31:40,404 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 82.74528301886792
+2025-04-10 11:31:40,404 - INFO - admin - 抑郁评估结果: 82.74528301886792
+2025-04-10 11:31:40,404 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-10 11:31:40,404 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 80.58333333333334
+2025-04-10 11:31:40,404 - INFO - admin - 焦虑评估结果: 80.58333333333334
+2025-04-10 11:31:40,404 - INFO - admin - 调整后的普通应激分数: 79.8
+2025-04-10 11:31:40,424 - INFO - admin - Updated LED colors based on scores: stress=79.8, depression=82.7, anxiety=80.6, social_isolation=12.2
+2025-04-10 11:31:40,437 - INFO - admin - Updated LED colors based on scores: stress=79.8, depression=82.7, anxiety=80.6, social_isolation=12.2
+2025-04-10 11:31:40,453 - INFO - admin - 当前模型索引: 0
+2025-04-10 11:31:40,453 - INFO - admin - 第一个模型的结果: 79.8
+2025-04-10 11:31:40,453 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-10 11:39:00,879 - INFO - admin - 打开Admin页面
+2025-04-10 11:39:00,883 - INFO - admin - 返回首页耗时: 99毫秒
+2025-04-10 11:39:00,883 - INFO - admin - Returned to index page successfully
+2025-04-10 11:39:02,464 - INFO - admin - Successfully displayed 1 results in table
+2025-04-10 11:39:02,469 - INFO - admin - Opening results view page. Time taken: 0.13 seconds
+2025-04-10 11:39:02,568 - INFO - admin - 打开Results View页面
+2025-04-10 11:39:04,453 - INFO - admin - 打开Admin页面
+2025-04-10 11:39:04,455 - INFO - admin - 返回首页耗时: 49毫秒
+2025-04-10 11:39:04,455 - INFO - admin - Returned to index page successfully
+2025-04-10 11:39:06,258 - INFO - admin - Data table refreshed successfully with 3 records
+2025-04-10 11:39:06,258 - INFO - admin - Opening data view page. Time taken: 0.05 seconds
+2025-04-10 11:39:06,357 - INFO - admin - 打开Data View页面
+2025-04-10 11:43:44,609 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all/994594 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\994594
+2025-04-10 11:43:44,616 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\994594, Username: admin
+2025-04-10 11:43:45,747 - INFO - admin - Data table refreshed successfully with 4 records
+2025-04-10 11:43:46,999 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\994594
+2025-04-10 11:44:05,040 - INFO - admin - Data processing completed successfully
+2025-04-10 11:44:07,679 - INFO - admin - 打开Admin页面
+2025-04-10 11:44:07,683 - INFO - admin - Returned to index page successfully
+2025-04-10 11:44:11,709 - INFO - admin - Administrator admin: fetching all data records
+2025-04-10 11:44:11,734 - INFO - admin - Successfully displayed 4 data records
+2025-04-10 11:44:11,762 - INFO - admin - Opening health evaluation page. Time taken: 0.08 seconds
+2025-04-10 11:44:11,911 - INFO - admin - 打开Health Evaluate页面
+2025-04-10 11:44:14,992 - INFO - admin - 量表分数计算完成 - 焦虑量表: 41.00, 抑郁量表: 62.50
+2025-04-10 11:44:14,992 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-10 11:44:16,364 - INFO - admin - Prediction result: 1.0
+2025-04-10 11:44:16,376 - INFO - admin - 第一个模型评估结果: 95.0
+2025-04-10 11:44:16,376 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-10 11:44:16,376 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 87.4622641509434
+2025-04-10 11:44:16,380 - INFO - admin - 抑郁评估结果: 87.4622641509434
+2025-04-10 11:44:16,380 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-10 11:44:16,380 - INFO - admin - 焦虑量表分数 < 48，直接使用量表计算结果: 42.70833333333333
+2025-04-10 11:44:16,380 - INFO - admin - 焦虑评估结果: 42.70833333333333
+2025-04-10 11:44:16,381 - INFO - admin - 调整后的普通应激分数: 61.0
+2025-04-10 11:44:16,399 - INFO - admin - Updated LED colors based on scores: stress=61.0, depression=87.5, anxiety=42.7, social_isolation=9.6
+2025-04-10 11:44:16,405 - INFO - admin - Updated LED colors based on scores: stress=61.0, depression=87.5, anxiety=42.7, social_isolation=9.6
+2025-04-10 11:44:16,426 - INFO - admin - 当前模型索引: 0
+2025-04-10 11:44:16,426 - INFO - admin - 第一个模型的结果: 61.0
+2025-04-10 11:44:16,430 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-10 11:55:39,402 - INFO - admin - 打开Admin页面
+2025-04-10 11:55:39,406 - INFO - admin - 返回首页耗时: 144毫秒
+2025-04-10 11:55:39,408 - INFO - admin - Returned to index page successfully
+2025-04-10 11:55:40,457 - INFO - admin - Data table refreshed successfully with 4 records
+2025-04-10 11:55:40,460 - INFO - admin - Opening data view page. Time taken: 0.07 seconds
+2025-04-10 11:55:40,565 - INFO - admin - 打开Data View页面
+2025-04-10 11:56:00,773 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all/066070 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070
+2025-04-10 11:56:00,782 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070, Username: admin
+2025-04-10 11:56:03,218 - INFO - admin - Data table refreshed successfully with 5 records
+2025-04-10 11:56:04,431 - INFO - admin - Button clicked in row 4, corresponding ID: 5
+2025-04-10 11:56:04,434 - INFO - admin - Data path retrieved from database: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070
+2025-04-10 11:56:05,811 - ERROR - admin - Image file does not exist: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070\Theta.png
+2025-04-10 11:56:08,312 - INFO - admin - 打开Admin页面
+2025-04-10 11:56:08,312 - INFO - admin - Returned to index page successfully
+2025-04-10 11:56:09,489 - INFO - admin - Administrator admin: fetching all data records
+2025-04-10 11:56:09,517 - INFO - admin - Successfully displayed 5 data records
+2025-04-10 11:56:09,548 - INFO - admin - Opening health evaluation page. Time taken: 0.09 seconds
+2025-04-10 11:56:09,711 - INFO - admin - 打开Health Evaluate页面
+2025-04-10 11:56:13,195 - INFO - admin - 量表分数计算完成 - 焦虑量表: 28.00, 抑郁量表: 33.75
+2025-04-10 11:56:13,197 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-10 11:56:14,037 - INFO - admin - Prediction result: 0.0
+2025-04-10 11:56:14,039 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-10 11:56:14,039 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-10 11:56:14,040 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 31.839622641509436
+2025-04-10 11:56:14,040 - INFO - admin - 抑郁评估结果: 31.839622641509436
+2025-04-10 11:56:14,040 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-10 11:56:14,040 - INFO - admin - 焦虑量表分数 < 48，直接使用量表计算结果: 29.166666666666668
+2025-04-10 11:56:14,040 - INFO - admin - 焦虑评估结果: 29.166666666666668
+2025-04-10 11:56:14,040 - INFO - admin - 调整后的普通应激分数: 16.4
+2025-04-10 11:56:14,066 - INFO - admin - Updated LED colors based on scores: stress=16.4, depression=31.8, anxiety=29.2, social_isolation=3.9
+2025-04-10 11:56:14,070 - INFO - admin - Updated LED colors based on scores: stress=16.4, depression=31.8, anxiety=29.2, social_isolation=3.9
+2025-04-10 11:56:14,095 - INFO - admin - 当前模型索引: 0
+2025-04-10 11:56:14,095 - INFO - admin - 第一个模型的结果: 16.4
+2025-04-10 11:56:14,095 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-10 11:58:54,258 - INFO - 初始化登录界面...
+2025-04-10 11:58:54,262 - INFO - 开始预加载模型...
+2025-04-10 11:58:54,262 - INFO - 正在检查数据库中的模型信息...
+2025-04-10 11:58:54,271 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-10 11:58:54,271 - INFO - 模型文件存在，开始加载...
+2025-04-10 11:58:54,279 - INFO - 开始加载INT8量化模型...
+2025-04-10 11:58:54,279 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-10 11:58:54,284 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-10 11:58:54,336 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-10 11:58:54,341 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-10 11:58:54,341 - INFO - 模型加载成功并已放置在GPU上
+2025-04-10 11:58:54,341 - INFO - 成功预加载量化模型
+2025-04-10 11:58:56,499 - INFO - 未登录 - Opening user login page.
+2025-04-10 11:58:56,610 - INFO - admin - 打开Login页面
+2025-04-10 11:58:58,764 - INFO - admin - User logged in successfully
+2025-04-10 11:58:59,111 - INFO - admin - 打开Admin页面
+2025-04-10 11:59:00,778 - INFO - admin - Data table refreshed successfully with 5 records
+2025-04-10 11:59:00,778 - INFO - admin - Opening data view page. Time taken: 0.08 seconds
+2025-04-10 11:59:00,935 - INFO - admin - 打开Data View页面
+2025-04-10 11:59:02,540 - INFO - admin - 打开Admin页面
+2025-04-10 11:59:02,562 - INFO - admin - Returned to index page successfully
+2025-04-10 11:59:03,508 - INFO - admin - Administrator admin: fetching all data records
+2025-04-10 11:59:03,541 - INFO - admin - Successfully displayed 5 data records
+2025-04-10 11:59:03,570 - INFO - admin - Opening health evaluation page. Time taken: 0.10 seconds
+2025-04-10 11:59:03,708 - INFO - admin - 打开Health Evaluate页面
+2025-04-10 11:59:08,258 - INFO - admin - 打开Admin页面
+2025-04-10 11:59:08,262 - INFO - admin - 返回首页耗时: 155毫秒
+2025-04-10 11:59:08,262 - INFO - admin - Returned to index page successfully
+2025-04-10 11:59:09,263 - INFO - admin - Data table refreshed successfully with 5 records
+2025-04-10 11:59:09,264 - INFO - admin - Opening data view page. Time taken: 0.08 seconds
+2025-04-10 11:59:09,414 - INFO - admin - 打开Data View页面
+2025-04-10 11:59:10,762 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070
+2025-04-10 11:59:21,827 - INFO - admin - Data processing completed successfully
+2025-04-10 11:59:25,023 - INFO - admin - 打开Admin页面
+2025-04-10 11:59:25,024 - INFO - admin - Returned to index page successfully
+2025-04-10 11:59:25,915 - INFO - admin - Administrator admin: fetching all data records
+2025-04-10 11:59:25,943 - INFO - admin - Successfully displayed 5 data records
+2025-04-10 11:59:25,979 - INFO - admin - Opening health evaluation page. Time taken: 0.10 seconds
+2025-04-10 11:59:26,117 - INFO - admin - 打开Health Evaluate页面
+2025-04-10 11:59:28,927 - INFO - admin - 量表分数计算完成 - 焦虑量表: 28.00, 抑郁量表: 33.75
+2025-04-10 11:59:28,932 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-10 11:59:30,208 - INFO - admin - Prediction result: 0.0
+2025-04-10 11:59:30,214 - INFO - admin - 第一个模型评估结果: 0.0
+2025-04-10 11:59:30,215 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-10 11:59:30,215 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 31.839622641509436
+2025-04-10 11:59:30,215 - INFO - admin - 抑郁评估结果: 31.839622641509436
+2025-04-10 11:59:30,215 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-10 11:59:30,216 - INFO - admin - 焦虑量表分数 < 48，直接使用量表计算结果: 29.166666666666668
+2025-04-10 11:59:30,216 - INFO - admin - 焦虑评估结果: 29.166666666666668
+2025-04-10 11:59:30,216 - INFO - admin - 调整后的普通应激分数: 16.4
+2025-04-10 11:59:30,269 - INFO - admin - 当前模型索引: 0
+2025-04-10 11:59:30,269 - INFO - admin - 第一个模型的结果: 16.4
+2025-04-10 11:59:30,270 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间
+2025-04-10 11:59:31,577 - INFO - admin - Updated LED colors based on scores: stress=16.4, depression=31.8, anxiety=29.2, social_isolation=3.9
+2025-04-10 11:59:31,585 - INFO - admin - Updated LED colors based on scores: stress=16.4, depression=31.8, anxiety=29.2, social_isolation=3.9
+2025-04-10 11:59:42,178 - INFO - admin - 打开Admin页面
+2025-04-10 11:59:42,180 - INFO - admin - 返回首页耗时: 142毫秒
+2025-04-10 11:59:42,180 - INFO - admin - Returned to index page successfully
+2025-04-12 19:45:52,402 - INFO - 初始化登录界面...
+2025-04-12 19:45:52,428 - INFO - 开始预加载模型...
+2025-04-12 19:45:52,428 - INFO - 正在检查数据库中的模型信息...
+2025-04-12 19:45:52,441 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-12 19:45:52,443 - INFO - 模型文件存在，开始加载...
+2025-04-12 19:45:52,456 - INFO - 开始加载INT8量化模型...
+2025-04-12 19:45:52,458 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-12 19:45:52,461 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-12 19:45:52,550 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-12 19:45:52,553 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-12 19:45:52,554 - INFO - 模型加载成功并已放置在GPU上
+2025-04-12 19:45:52,554 - INFO - 成功预加载量化模型
+2025-04-12 19:45:54,572 - INFO - 未登录 - Opening user login page.
+2025-04-12 19:45:54,666 - INFO - admin - 打开Login页面
+2025-04-12 19:45:57,422 - INFO - admin - User logged in successfully
+2025-04-12 19:45:57,681 - INFO - admin - 打开Admin页面
+2025-04-12 19:45:58,598 - INFO - admin - Data table refreshed successfully with 5 records
+2025-04-12 19:45:58,602 - INFO - admin - Opening data view page. Time taken: 0.06 seconds
+2025-04-12 19:45:58,717 - INFO - admin - 打开Data View页面
+2025-04-12 19:46:04,274 - INFO - admin - Attempting to delete 5 records from the table.
+2025-04-12 19:46:04,294 - INFO - admin - Data path for ID 1: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x
+2025-04-12 19:46:04,307 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\04231x
+2025-04-12 19:46:04,310 - INFO - admin - Deleted record with ID 1 from tb_data.
+2025-04-12 19:46:04,315 - INFO - admin - Deleted record with ID 1 from result table.
+2025-04-12 19:46:04,317 - INFO - admin - Data path for ID 2: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-12 19:46:04,327 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07353x
+2025-04-12 19:46:04,329 - INFO - admin - Deleted record with ID 2 from tb_data.
+2025-04-12 19:46:04,331 - INFO - admin - Deleted record with ID 2 from result table.
+2025-04-12 19:46:04,332 - INFO - admin - Data path for ID 3: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\230033
+2025-04-12 19:46:04,343 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\230033
+2025-04-12 19:46:04,345 - INFO - admin - Deleted record with ID 3 from tb_data.
+2025-04-12 19:46:04,347 - INFO - admin - Deleted record with ID 3 from result table.
+2025-04-12 19:46:04,348 - INFO - admin - Data path for ID 4: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\994594
+2025-04-12 19:46:04,358 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\994594
+2025-04-12 19:46:04,360 - INFO - admin - Deleted record with ID 4 from tb_data.
+2025-04-12 19:46:04,361 - INFO - admin - Deleted record with ID 4 from result table.
+2025-04-12 19:46:04,362 - INFO - admin - Data path for ID 5: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070
+2025-04-12 19:46:04,371 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\066070
+2025-04-12 19:46:04,373 - INFO - admin - Deleted record with ID 5 from tb_data.
+2025-04-12 19:46:04,374 - INFO - admin - Deleted record with ID 5 from result table.
+2025-04-12 19:46:04,382 - INFO - admin - Data table refreshed successfully with 0 records
+2025-04-12 19:46:07,850 - INFO - admin - File selection cancelled
+2025-04-12 19:46:18,345 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\02719x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\02719x
+2025-04-12 19:46:18,362 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\02719x, Username: admin
+2025-04-12 19:46:18,363 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\033410 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\033410
+2025-04-12 19:46:18,367 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\033410, Username: admin
+2025-04-12 19:46:18,367 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\07173x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07173x
+2025-04-12 19:46:18,371 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\07173x, Username: admin
+2025-04-12 19:46:18,372 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\08129x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\08129x
+2025-04-12 19:46:18,376 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\08129x, Username: admin
+2025-04-12 19:46:18,377 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\084792 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\084792
+2025-04-12 19:46:18,380 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\084792, Username: admin
+2025-04-12 19:46:18,381 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\115036 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\115036
+2025-04-12 19:46:18,384 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\115036, Username: admin
+2025-04-12 19:46:18,387 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\115296 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\115296
+2025-04-12 19:46:18,390 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\115296, Username: admin
+2025-04-12 19:46:18,391 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\12567x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\12567x
+2025-04-12 19:46:18,394 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\12567x, Username: admin
+2025-04-12 19:46:18,395 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\127770 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\127770
+2025-04-12 19:46:18,399 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\127770, Username: admin
+2025-04-12 19:46:18,401 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\138436 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\138436
+2025-04-12 19:46:18,404 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\138436, Username: admin
+2025-04-12 19:46:18,405 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\163210 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\163210
+2025-04-12 19:46:18,409 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\163210, Username: admin
+2025-04-12 19:46:18,410 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\171213 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\171213
+2025-04-12 19:46:18,413 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\171213, Username: admin
+2025-04-12 19:46:18,415 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\171998 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\171998
+2025-04-12 19:46:18,419 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\171998, Username: admin
+2025-04-12 19:46:18,421 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\185338 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338
+2025-04-12 19:46:18,424 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338, Username: admin
+2025-04-12 19:46:18,425 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\225513 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\225513
+2025-04-12 19:46:18,429 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\225513, Username: admin
+2025-04-12 19:46:18,430 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\242818 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\242818
+2025-04-12 19:46:18,434 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\242818, Username: admin
+2025-04-12 19:46:18,435 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\25173x to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\25173x
+2025-04-12 19:46:18,439 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\25173x, Username: admin
+2025-04-12 19:46:18,440 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\273736 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\273736
+2025-04-12 19:46:18,444 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\273736, Username: admin
+2025-04-12 19:46:18,445 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\276433 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\276433
+2025-04-12 19:46:18,448 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\276433, Username: admin
+2025-04-12 19:46:18,450 - INFO - admin - Directory moved from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20 - 副本\287211 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\287211
+2025-04-12 19:46:18,453 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\287211, Username: admin
+2025-04-12 19:46:18,453 - INFO - admin - 批量上传完成 - 成功: 20个, 失败: 0个, 用时: 110毫秒
+2025-04-12 19:46:18,479 - INFO - admin - Data table refreshed successfully with 20 records
+2025-04-12 19:49:00,283 - INFO - admin - Data table refreshed successfully with 20 records
+2025-04-12 19:49:01,246 - INFO - admin - 打开Admin页面
+2025-04-12 19:49:01,248 - INFO - admin - Returned to index page successfully
+2025-04-12 19:49:01,805 - INFO - admin - Administrator admin: fetching all data records
+2025-04-12 19:49:01,838 - INFO - admin - Successfully displayed 20 data records
+2025-04-12 19:49:01,852 - INFO - admin - Opening health evaluation page. Time taken: 0.06 seconds
+2025-04-12 19:49:01,970 - INFO - admin - 打开Health Evaluate页面
+2025-04-12 19:49:04,784 - INFO - admin - 开始批量评估 - 选中数据量: 20个
+2025-04-12 19:49:04,800 - INFO - admin - 量表分数计算完成 - 焦虑量表: 33.00, 抑郁量表: 53.75
+2025-04-12 19:49:05,759 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:05,763 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 50.70754716981132
+2025-04-12 19:49:05,764 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 34.375
+2025-04-12 19:49:05,765 - INFO - admin - 调整后的普通应激分数: 26.9
+2025-04-12 19:49:05,768 - INFO - admin - 量表分数计算完成 - 焦虑量表: 25.00, 抑郁量表: 31.25
+2025-04-12 19:49:06,621 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:06,625 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 29.4811320754717
+2025-04-12 19:49:06,626 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 26.041666666666668
+2025-04-12 19:49:06,626 - INFO - admin - 调整后的普通应激分数: 14.2
+2025-04-12 19:49:06,630 - INFO - admin - 量表分数计算完成 - 焦虑量表: 21.00, 抑郁量表: 33.75
+2025-04-12 19:49:07,447 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:07,452 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 31.839622641509436
+2025-04-12 19:49:07,452 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 21.875
+2025-04-12 19:49:07,452 - INFO - admin - 调整后的普通应激分数: 13.3
+2025-04-12 19:49:07,460 - INFO - admin - 量表分数计算完成 - 焦虑量表: 25.00, 抑郁量表: 31.25
+2025-04-12 19:49:08,264 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:08,267 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 29.4811320754717
+2025-04-12 19:49:08,269 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 26.041666666666668
+2025-04-12 19:49:08,269 - INFO - admin - 调整后的普通应激分数: 14.2
+2025-04-12 19:49:08,282 - INFO - admin - 量表分数计算完成 - 焦虑量表: 51.00, 抑郁量表: 58.75
+2025-04-12 19:49:09,220 - INFO - admin - Prediction result: 1.0
+2025-04-12 19:49:09,229 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 83.9245283018868
+2025-04-12 19:49:09,229 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 81.625
+2025-04-12 19:49:09,230 - INFO - admin - 调整后的普通应激分数: 81.8
+2025-04-12 19:49:09,234 - INFO - admin - 量表分数计算完成 - 焦虑量表: 33.00, 抑郁量表: 40.00
+2025-04-12 19:49:10,040 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:10,046 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 37.735849056603776
+2025-04-12 19:49:10,046 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 34.375
+2025-04-12 19:49:10,046 - INFO - admin - 调整后的普通应激分数: 21.2
+2025-04-12 19:49:10,049 - INFO - admin - 量表分数计算完成 - 焦虑量表: 49.00, 抑郁量表: 51.25
+2025-04-12 19:49:10,880 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:10,885 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 48.34905660377358
+2025-04-12 19:49:10,886 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 51.041666666666664
+2025-04-12 19:49:10,886 - INFO - admin - 调整后的普通应激分数: 35.6
+2025-04-12 19:49:10,888 - INFO - admin - 量表分数计算完成 - 焦虑量表: 29.00, 抑郁量表: 50.00
+2025-04-12 19:49:11,722 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:11,726 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 47.16981132075472
+2025-04-12 19:49:11,726 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 30.208333333333332
+2025-04-12 19:49:11,726 - INFO - admin - 调整后的普通应激分数: 23.0
+2025-04-12 19:49:11,730 - INFO - admin - 量表分数计算完成 - 焦虑量表: 35.00, 抑郁量表: 45.00
+2025-04-12 19:49:12,553 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:12,559 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 42.45283018867924
+2025-04-12 19:49:12,559 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 36.45833333333333
+2025-04-12 19:49:12,559 - INFO - admin - 调整后的普通应激分数: 24.4
+2025-04-12 19:49:12,562 - INFO - admin - 量表分数计算完成 - 焦虑量表: 22.00, 抑郁量表: 37.50
+2025-04-12 19:49:13,369 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:13,375 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 35.37735849056604
+2025-04-12 19:49:13,375 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 22.916666666666664
+2025-04-12 19:49:13,375 - INFO - admin - 调整后的普通应激分数: 14.9
+2025-04-12 19:49:13,378 - INFO - admin - 量表分数计算完成 - 焦虑量表: 34.00, 抑郁量表: 37.50
+2025-04-12 19:49:14,190 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:14,195 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 35.37735849056604
+2025-04-12 19:49:14,195 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 35.41666666666667
+2025-04-12 19:49:14,195 - INFO - admin - 调整后的普通应激分数: 20.6
+2025-04-12 19:49:14,199 - INFO - admin - 量表分数计算完成 - 焦虑量表: 37.00, 抑郁量表: 41.25
+2025-04-12 19:49:15,008 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:15,013 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 38.91509433962264
+2025-04-12 19:49:15,014 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 38.54166666666667
+2025-04-12 19:49:15,014 - INFO - admin - 调整后的普通应激分数: 23.7
+2025-04-12 19:49:15,018 - INFO - admin - 量表分数计算完成 - 焦虑量表: 30.00, 抑郁量表: 50.00
+2025-04-12 19:49:15,829 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:15,835 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 47.16981132075472
+2025-04-12 19:49:15,836 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 31.25
+2025-04-12 19:49:15,836 - INFO - admin - 调整后的普通应激分数: 23.6
+2025-04-12 19:49:15,838 - INFO - admin - 量表分数计算完成 - 焦虑量表: 41.00, 抑郁量表: 60.00
+2025-04-12 19:49:16,781 - INFO - admin - Prediction result: 1.0
+2025-04-12 19:49:16,790 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 85.10377358490567
+2025-04-12 19:49:16,792 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 42.70833333333333
+2025-04-12 19:49:16,792 - INFO - admin - 调整后的普通应激分数: 61.0
+2025-04-12 19:49:16,795 - INFO - admin - 量表分数计算完成 - 焦虑量表: 30.00, 抑郁量表: 35.00
+2025-04-12 19:49:17,612 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:17,617 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 33.0188679245283
+2025-04-12 19:49:17,618 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 31.25
+2025-04-12 19:49:17,618 - INFO - admin - 调整后的普通应激分数: 17.7
+2025-04-12 19:49:17,622 - INFO - admin - 量表分数计算完成 - 焦虑量表: 37.00, 抑郁量表: 43.75
+2025-04-12 19:49:18,445 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:18,449 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 41.27358490566038
+2025-04-12 19:49:18,450 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 38.54166666666667
+2025-04-12 19:49:18,450 - INFO - admin - 调整后的普通应激分数: 24.9
+2025-04-12 19:49:18,454 - INFO - admin - 量表分数计算完成 - 焦虑量表: 31.00, 抑郁量表: 35.00
+2025-04-12 19:49:19,268 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:19,274 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 33.0188679245283
+2025-04-12 19:49:19,274 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 32.29166666666667
+2025-04-12 19:49:19,274 - INFO - admin - 调整后的普通应激分数: 18.2
+2025-04-12 19:49:19,278 - INFO - admin - 量表分数计算完成 - 焦虑量表: 25.00, 抑郁量表: 43.75
+2025-04-12 19:49:20,082 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:20,086 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 41.27358490566038
+2025-04-12 19:49:20,086 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 26.041666666666668
+2025-04-12 19:49:20,086 - INFO - admin - 调整后的普通应激分数: 18.5
+2025-04-12 19:49:20,089 - INFO - admin - 量表分数计算完成 - 焦虑量表: 32.00, 抑郁量表: 38.75
+2025-04-12 19:49:20,913 - INFO - admin - Prediction result: 0.0
+2025-04-12 19:49:20,917 - INFO - admin - 抑郁量表分数 < 53，使用量表计算结果: 36.556603773584904
+2025-04-12 19:49:20,917 - INFO - admin - 焦虑量表分数 < 48，使用量表计算结果: 33.33333333333333
+2025-04-12 19:49:20,918 - INFO - admin - 调整后的普通应激分数: 20.2
+2025-04-12 19:49:20,921 - INFO - admin - 量表分数计算完成 - 焦虑量表: 51.00, 抑郁量表: 70.00
+2025-04-12 19:49:21,864 - INFO - admin - Prediction result: 1.0
+2025-04-12 19:49:21,873 - INFO - admin - 抑郁量表分数 >= 53，结合模型分数计算: 94.5377358490566
+2025-04-12 19:49:21,873 - INFO - admin - 焦虑量表分数 >= 48，结合模型分数计算: 81.625
+2025-04-12 19:49:21,873 - INFO - admin - 调整后的普通应激分数: 91.0
+2025-04-12 19:49:21,892 - INFO - admin - 添加ID 1 的新评估结果 - 应激: 26.9, 抑郁: 50.7, 焦虑: 34.4, 社交孤立: 5.6
+2025-04-12 19:49:21,899 - INFO - admin - 添加ID 2 的新评估结果 - 应激: 14.2, 抑郁: 29.5, 焦虑: 26.0, 社交孤立: 3.5
+2025-04-12 19:49:21,901 - INFO - admin - 添加ID 3 的新评估结果 - 应激: 13.3, 抑郁: 31.8, 焦虑: 21.9, 社交孤立: 3.4
+2025-04-12 19:49:21,902 - INFO - admin - 添加ID 4 的新评估结果 - 应激: 14.2, 抑郁: 29.5, 焦虑: 26.0, 社交孤立: 3.5
+2025-04-12 19:49:21,904 - INFO - admin - 添加ID 5 的新评估结果 - 应激: 81.8, 抑郁: 83.9, 焦虑: 81.6, 社交孤立: 12.4
+2025-04-12 19:49:21,905 - INFO - admin - 添加ID 6 的新评估结果 - 应激: 21.2, 抑郁: 37.7, 焦虑: 34.4, 社交孤立: 4.7
+2025-04-12 19:49:21,906 - INFO - admin - 添加ID 7 的新评估结果 - 应激: 35.6, 抑郁: 48.3, 焦虑: 51.0, 社交孤立: 6.7
+2025-04-12 19:49:21,908 - INFO - admin - 添加ID 8 的新评估结果 - 应激: 23.0, 抑郁: 47.2, 焦虑: 30.2, 社交孤立: 5.0
+2025-04-12 19:49:21,909 - INFO - admin - 添加ID 9 的新评估结果 - 应激: 24.4, 抑郁: 42.5, 焦虑: 36.5, 社交孤立: 5.2
+2025-04-12 19:49:21,910 - INFO - admin - 添加ID 10 的新评估结果 - 应激: 14.9, 抑郁: 35.4, 焦虑: 22.9, 社交孤立: 3.7
+2025-04-12 19:49:21,911 - INFO - admin - 添加ID 11 的新评估结果 - 应激: 20.6, 抑郁: 35.4, 焦虑: 35.4, 社交孤立: 4.6
+2025-04-12 19:49:21,912 - INFO - admin - 添加ID 12 的新评估结果 - 应激: 23.7, 抑郁: 38.9, 焦虑: 38.5, 社交孤立: 5.1
+2025-04-12 19:49:21,913 - INFO - admin - 添加ID 13 的新评估结果 - 应激: 23.6, 抑郁: 47.2, 焦虑: 31.2, 社交孤立: 5.1
+2025-04-12 19:49:21,915 - INFO - admin - 添加ID 14 的新评估结果 - 应激: 61.0, 抑郁: 85.1, 焦虑: 42.7, 社交孤立: 9.4
+2025-04-12 19:49:21,916 - INFO - admin - 添加ID 15 的新评估结果 - 应激: 17.7, 抑郁: 33.0, 焦虑: 31.2, 社交孤立: 4.1
+2025-04-12 19:49:21,917 - INFO - admin - 添加ID 16 的新评估结果 - 应激: 24.9, 抑郁: 41.3, 焦虑: 38.5, 社交孤立: 5.2
+2025-04-12 19:49:21,918 - INFO - admin - 添加ID 17 的新评估结果 - 应激: 18.2, 抑郁: 33.0, 焦虑: 32.3, 社交孤立: 4.2
+2025-04-12 19:49:21,919 - INFO - admin - 添加ID 18 的新评估结果 - 应激: 18.5, 抑郁: 41.3, 焦虑: 26.0, 社交孤立: 4.3
+2025-04-12 19:49:21,920 - INFO - admin - 添加ID 19 的新评估结果 - 应激: 20.2, 抑郁: 36.6, 焦虑: 33.3, 社交孤立: 4.5
+2025-04-12 19:49:21,922 - INFO - admin - 添加ID 20 的新评估结果 - 应激: 91.0, 抑郁: 94.5, 焦虑: 81.6, 社交孤立: 13.4
+2025-04-12 19:49:21,924 - INFO - admin - 批量评估完成 - 总耗时: 13.14秒, 成功处理: 20/20 条数据
+2025-04-12 19:49:23,570 - INFO - admin - Administrator admin: fetching all data records
+2025-04-12 19:49:23,610 - INFO - admin - Successfully displayed 20 data records
+2025-04-12 19:49:24,378 - INFO - admin - 打开Admin页面
+2025-04-12 19:49:24,378 - INFO - admin - 返回首页耗时: 89毫秒
+2025-04-12 19:49:24,378 - INFO - admin - Returned to index page successfully
+2025-04-12 19:49:25,582 - INFO - admin - Successfully displayed 20 results in table
+2025-04-12 19:49:25,586 - INFO - admin - Opening results view page. Time taken: 0.10 seconds
+2025-04-12 19:49:25,725 - INFO - admin - 打开Results View页面
+2025-04-12 20:01:45,949 - INFO - admin - Results exported to Excel: C:/Users/WangZ/Desktop/评估结果.xlsx
+2025-04-12 20:15:47,456 - INFO - admin - 打开Admin页面
+2025-04-12 20:15:47,456 - INFO - admin - 返回首页耗时: 68毫秒
+2025-04-12 20:15:47,457 - INFO - admin - Returned to index page successfully
+2025-04-12 20:15:48,257 - INFO - admin - Data table refreshed successfully with 20 records
+2025-04-12 20:15:48,261 - INFO - admin - Opening data view page. Time taken: 0.04 seconds
+2025-04-12 20:15:48,388 - INFO - admin - 打开Data View页面
+2025-04-12 20:15:51,877 - INFO - admin - Attempting to delete record with ID 14 from the table.
+2025-04-12 20:15:51,880 - INFO - admin - Data path for ID 14: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338
+2025-04-12 20:15:51,912 - INFO - admin - Deleted folder at path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338
+2025-04-12 20:15:51,915 - INFO - admin - Deleted record with ID 14 from tb_data.
+2025-04-12 20:15:51,916 - INFO - admin - Deleted record with ID 14 from result table.
+2025-04-12 20:15:52,662 - INFO - admin - Removed row 13 from table.
+2025-04-12 20:16:01,372 - INFO - admin - Directory copied from D:/work/东华/项目/2023/301/changhang/start/数据/测试数据/试用数据/all_20/185338 to D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338
+2025-04-12 20:16:01,377 - INFO - admin - Data uploaded successfully. Path: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338, Username: admin
+2025-04-12 20:16:02,191 - INFO - admin - Data table refreshed successfully with 20 records
+2025-04-12 20:16:03,402 - INFO - admin - Started processing data from: D:\work\东华\项目\2023\301\changhang\start\codenew\bj_health_manage\data\185338
+2025-04-12 20:16:19,242 - INFO - admin - Data processing completed successfully
+2025-04-12 20:16:44,550 - INFO - admin - 打开Admin页面
+2025-04-12 20:16:44,550 - INFO - admin - Returned to index page successfully
+2025-04-12 20:16:45,388 - INFO - admin - Administrator admin: fetching all data records
+2025-04-12 20:16:45,419 - INFO - admin - Successfully displayed 20 data records
+2025-04-12 20:16:45,430 - INFO - admin - Opening health evaluation page. Time taken: 0.05 seconds
+2025-04-12 20:16:45,544 - INFO - admin - 打开Health Evaluate页面
+2025-04-12 20:17:08,400 - INFO - admin - 量表分数计算完成 - 焦虑量表: 32.00, 抑郁量表: 41.25
+2025-04-12 20:17:08,402 - INFO - admin - 开始第一个模型（普通应激）的评估
+2025-04-12 20:17:09,467 - INFO - admin - Prediction result: 1.0
+2025-04-12 20:17:09,477 - INFO - admin - 第一个模型评估结果: 95.0
+2025-04-12 20:17:09,477 - INFO - admin - 计算第二个模型（抑郁）的结果
+2025-04-12 20:17:09,477 - INFO - admin - 抑郁量表分数 < 53，直接使用量表计算结果: 38.91509433962264
+2025-04-12 20:17:09,479 - INFO - admin - 抑郁评估结果: 38.91509433962264
+2025-04-12 20:17:09,479 - INFO - admin - 计算第三个模型（焦虑）的结果
+2025-04-12 20:17:09,479 - INFO - admin - 焦虑量表分数 < 48，直接使用量表计算结果: 33.33333333333333
+2025-04-12 20:17:09,479 - INFO - admin - 焦虑评估结果: 33.33333333333333
+2025-04-12 20:17:09,479 - INFO - admin - 调整后的普通应激分数: 70.4
+2025-04-12 20:17:09,502 - INFO - admin - Updated LED colors based on scores: stress=70.4, depression=38.9, anxiety=33.3, social_isolation=7.1
+2025-04-12 20:17:09,506 - INFO - admin - Updated LED colors based on scores: stress=70.4, depression=38.9, anxiety=33.3, social_isolation=7.1
+2025-04-12 20:17:09,529 - INFO - admin - 当前模型索引: 0
+2025-04-12 20:17:09,529 - INFO - admin - 第一个模型的结果: 70.4
+2025-04-12 20:17:09,531 - INFO - admin - 状态文件不存在，使用当前时间作为评估时间

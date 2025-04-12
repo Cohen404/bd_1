@@ -834,13 +834,24 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 try:
                     data1 = session.query(Data).filter(Data.id == id).first()
                     if data1 is None:
-                        QMessageBox.warning(self, "警告", "据不存在，无法进行评估。")
+                        QMessageBox.warning(self, "警告", "数据不存在，无法进行评估。")
                         return  # 如果数据不存在，直接返回，不进入评估状态
                     self.data_path = data1.data_path
                     
                     if not os.path.exists(self.data_path):
                         QMessageBox.warning(self, "警告", f"数据路径不存在: {self.data_path}")
                         return  # 如果数据路径不存在，直接返回
+
+                    # 检查是否存在fif文件
+                    fif_exists = False
+                    for file in os.listdir(self.data_path):
+                        if file.endswith('.fif'):
+                            fif_exists = True
+                            break
+                    
+                    if not fif_exists:
+                        QMessageBox.warning(self, "警告", "数据未经过预处理，请先进行数据预处理后再评估。")
+                        return
 
                     model_0 = session.query(Model).filter(Model.model_type == 0).first()
                     model_1 = session.query(Model).filter(Model.model_type == 1).first()
