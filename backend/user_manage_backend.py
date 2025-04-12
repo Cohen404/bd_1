@@ -206,8 +206,11 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             layout.addRow("角色:", role_combo)
             
             # 按钮
-            buttons = QDialogButtonBox(
-                QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+            buttons = QDialogButtonBox()
+            ok_button = QPushButton("确定")
+            cancel_button = QPushButton("取消")
+            buttons.addButton(ok_button, QDialogButtonBox.AcceptRole)
+            buttons.addButton(cancel_button, QDialogButtonBox.RejectRole)
             buttons.accepted.connect(dialog.accept)
             buttons.rejected.connect(dialog.reject)
             layout.addRow(buttons)
@@ -335,35 +338,49 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
         # 验证必填项
         if not username:
             logging.warning("Attempted to add user with empty username")
-            QMessageBox.warning(self, "输入错误", "用户名为必填项，请输入用户名！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "用户名为必填项，请输入用户名！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
         if not password:
             logging.warning("Attempted to add user with empty password")
-            QMessageBox.warning(self, "输入错误", "密码为必填项，请输入密码！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "密码为必填项，请输入密码！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
 
         # 验证电话号码格式
         if phone and not validate_phone(phone):
             logging.warning(f"Attempted to add user with invalid phone format: {phone}")
-            QMessageBox.warning(self, "输入错误", "电话号码格式不正确，只能包含数字、加号、减号、空格和括号！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "电话号码格式不正确，只能包含数字、加号、减号、空格和括号！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
         
         # 检查输入长度
         if len(username) > 30:
             logging.warning(f"Attempted to add user with username too long: {len(username)} chars")
-            QMessageBox.warning(self, "输入错误", "用户名长度不能超过30个字符！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "用户名长度不能超过30个字符！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
         if len(password) > 30:
             logging.warning("Attempted to add user with password too long")
-            QMessageBox.warning(self, "输入错误", "密码长度不能超过30个字符！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "密码长度不能超过30个字符！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
         if email and len(email) > 30:
             logging.warning(f"Attempted to add user with email too long: {len(email)} chars")
-            QMessageBox.warning(self, "输入错误", "邮箱长度不能超过30个字符！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "邮箱长度不能超过30个字符！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
         if phone and len(phone) > 30:
             logging.warning(f"Attempted to add user with phone too long: {len(phone)} chars")
-            QMessageBox.warning(self, "输入错误", "电话长度不能超过30个字符！")
+            msg_box = QMessageBox(QMessageBox.Warning, "输入错误", "电话长度不能超过30个字符！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
 
         session = SessionClass()
@@ -372,14 +389,18 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             role_permissions = session.query(RolePermission).filter_by(role_id=user_type).all()
             if not role_permissions:
                 logging.error(f"No permissions found for role: {user_type}")
-                QMessageBox.warning(self, "错误", f"角色 {user_type} 未配置权限，请先在角色管理中配置权限！")
+                msg_box = QMessageBox(QMessageBox.Warning, "错误", f"角色 {user_type} 未配置权限，请先在角色管理中配置权限！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
 
             # 检查用户名是否已存在
             existing_user = session.query(User).filter(User.username == username).first()
             if existing_user:
                 logging.warning(f"Attempted to create user with duplicate username: {username}")
-                QMessageBox.warning(self, "用户名重复", "该用户名已被使用，请更换其他用户名！")
+                msg_box = QMessageBox(QMessageBox.Warning, "用户名重复", "该用户名已被使用，请更换其他用户名！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
 
             # 对密码进行SHA256加密
@@ -416,12 +437,16 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             
             self.show_table()
             logging.info(f"New user added: {username} (type: {user_type}) with {len(role_permissions)} permissions")
-            QMessageBox.information(self, "成功", "用户添加成功！")
+            msg_box = QMessageBox(QMessageBox.Information, "成功", "用户添加成功！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             
         except Exception as e:
             session.rollback()
             logging.error(f"Error adding new user '{username}': {str(e)}")
-            QMessageBox.critical(self, "错误", f"添加用户失败：{str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"添加用户失败：{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
         finally:
             session.close()
 
@@ -432,19 +457,18 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
             user = session.query(User).filter(User.user_id == user_id).first()
             if not user:
                 logging.warning(f"Attempted to delete non-existent user with ID: {user_id}")
-                QMessageBox.warning(self, "警告", "用户不存在！")
+                msg_box = QMessageBox(QMessageBox.Warning, "警告", "用户不存在！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
 
             # 显示确认对话框
-            reply = QMessageBox.question(
-                self, 
-                '确认删除', 
-                f'确定要删除用户 "{user.username}" 吗？\n此操作不可恢复！',
-                QMessageBox.Yes | QMessageBox.No,
-                QMessageBox.No
-            )
+            confirm_box = QMessageBox(QMessageBox.Question, "确认删除", f'确定要删除用户 "{user.username}" 吗？\n此操作不可恢复！')
+            yes_button = confirm_box.addButton("确定", QMessageBox.YesRole)
+            no_button = confirm_box.addButton("取消", QMessageBox.NoRole)
+            confirm_box.exec_()
 
-            if reply == QMessageBox.Yes:
+            if confirm_box.clickedButton() == yes_button:
                 # 先删除用户-角色关联
                 session.query(UserRole).filter_by(user_id=user_id).delete()
                 # 再删除用户
@@ -452,7 +476,9 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
                 session.commit()
                 
                 logging.info(f"User deleted successfully: {user.username} (ID: {user_id})")
-                QMessageBox.information(self, "成功", "用户删除成功！")
+                msg_box = QMessageBox(QMessageBox.Information, "成功", "用户删除成功！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 self.show_table()
             else:
                 logging.info(f"User deletion cancelled for: {user.username} (ID: {user_id})")
@@ -460,7 +486,9 @@ class User_Manage_WindowActions(user_manage_UI.Ui_MainWindow, QMainWindow):
         except Exception as e:
             session.rollback()
             logging.error(f"Error deleting user {user_id}: {str(e)}")
-            QMessageBox.critical(self, "错误", f"删除用户失败：{str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"删除用户失败：{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
         finally:
             session.close()
 

@@ -167,15 +167,21 @@ class change_pwd_Controller(QWidget):
 
         # 验证输入
         if not all([old_pwd, new_pwd, confirm_pwd]):
-            QMessageBox.warning(self, "错误", "所有字段都必须填写！")
+            msg_box = QMessageBox(QMessageBox.Warning, "错误", "所有字段都必须填写！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
 
         if new_pwd != confirm_pwd:
-            QMessageBox.warning(self, "错误", "新密码和确认密码不匹配！")
+            msg_box = QMessageBox(QMessageBox.Warning, "错误", "新密码和确认密码不匹配！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
 
         if old_pwd == new_pwd:
-            QMessageBox.warning(self, "错误", "新密码不能与旧密码相同！")
+            msg_box = QMessageBox(QMessageBox.Warning, "错误", "新密码不能与旧密码相同！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return
 
         # 对密码进行SHA256加密
@@ -195,7 +201,9 @@ class change_pwd_Controller(QWidget):
             ).first()
 
             if not user:
-                QMessageBox.warning(self, "错误", "旧密码不正确！")
+                msg_box = QMessageBox(QMessageBox.Warning, "错误", "旧密码不正确！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 logging.warning(f"Password change failed for user '{current_user_id}': incorrect old password")
                 return
 
@@ -204,8 +212,9 @@ class change_pwd_Controller(QWidget):
             user.updated_at = datetime.now()
             session.commit()
 
-            QMessageBox.information(self, "成功", "密码修改成功！")
-            logging.info(f"Password changed successfully for user '{user.username}'")
+            msg_box = QMessageBox(QMessageBox.Information, "成功", "密码修改成功！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
 
             # 清空输入框
             self.old_pwd.clear()

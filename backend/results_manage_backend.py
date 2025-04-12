@@ -255,7 +255,9 @@ class Results_View_WindowActions(results_manage_UI.Ui_MainWindow, QMainWindow):
         except Exception as e:
             logging.error(f"Error getting current user: {str(e)}")
             print(f"获取用户信息时出错: {str(e)}")
-            QMessageBox.critical(self, "错误", f"获取当前用户信息失败：{str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"获取当前用户信息失败：{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             return None, False
 
     def show_nav(self):

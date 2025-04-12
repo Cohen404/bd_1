@@ -80,7 +80,9 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
             # 验证输入不为空
             if not username or not password:
                 logging.warning("Login attempt with empty username or password", extra={'username': "未登录"})
-                QMessageBox.warning(self, "警告", "用户名和密码不能为空")
+                msg_box = QMessageBox(QMessageBox.Warning, "警告", "用户名和密码不能为空")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
 
             # 对密码进行SHA256加密
@@ -133,14 +135,18 @@ class Login_WindowActions(login_UI.Ui_MainWindow, QMainWindow):
                     self.close()
                 else:
                     logging.warning(f"Failed login attempt", extra={'username': f"未登录(尝试用户名:{username})"})
-                    QMessageBox.warning(self, "警告", "用户名或密码错误")
+                    msg_box = QMessageBox(QMessageBox.Warning, "警告", "用户名或密码错误")
+                    msg_box.addButton("确定", QMessageBox.AcceptRole)
+                    msg_box.exec_()
 
             finally:
                 session.close()
 
         except Exception as e:
             logging.error(f"Login error: {str(e)}", extra={'username': "未登录"})
-            QMessageBox.critical(self, "错误", f"登录时发生错误：{str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"登录时发生错误：{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
 
     def return_index(self):
         """

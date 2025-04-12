@@ -255,33 +255,41 @@ class RoleManageWindowActions(role_manage_UI.Ui_MainWindow, QMainWindow):
             QMessageBox.critical(self, "错误", f"加载角色权限失败：\n{str(e)}\n\n详细错误：\n{error_stack}")
                 
     def save_permissions(self):
-        """保存权限设置"""
+        """保存角色权限设置"""
         try:
             role_id = self.roleComboBox.currentData()
             if not role_id:
+                msg_box = QMessageBox(QMessageBox.Warning, "警告", "请先选择一个角色！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
                 
             # 删除原有权限
             self.session.query(RolePermission).filter_by(role_id=role_id).delete()
             
-            # 添加新的权限
+            # 添加新权限
             for i in range(self.checkboxLayout.count()):
                 checkbox = self.checkboxLayout.itemAt(i).widget()
                 if checkbox and checkbox.isChecked():
                     permission_id = checkbox.property('permission_id')
-                    role_permission = RolePermission(role_id=role_id, permission_id=permission_id)
+                    role_permission = RolePermission(
+                        role_id=role_id,
+                        permission_id=permission_id
+                    )
                     self.session.add(role_permission)
-                    
-            # 提交更改
+            
             self.session.commit()
-            logging.info(f"Permissions saved for role {role_id}")
-            QMessageBox.information(self, "成功", "权限设置已保存")
+            msg_box = QMessageBox(QMessageBox.Information, "成功", "权限设置已保存！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             
         except Exception as e:
             self.session.rollback()
             error_stack = traceback.format_exc()
             logging.error(f"Error saving permissions: {str(e)}\n{error_stack}")
-            QMessageBox.critical(self, "错误", f"保存失败：\n{str(e)}\n\n详细错误：\n{error_stack}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"保存权限设置失败：\n{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
             
     def return_to_user_manage(self):
         """返回用户管理界面"""

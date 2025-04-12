@@ -394,6 +394,9 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
         self.update_service_whitelist()
         
         logging.info(f"{self.username} - Added IP {ip} to whitelist")
+        msg_box = QMessageBox(QMessageBox.Information, "成功", "IP地址已添加到白名单！")
+        msg_box.addButton("确定", QMessageBox.AcceptRole)
+        msg_box.exec_()
 
     def remove_ip_from_whitelist(self, item):
         """
@@ -414,6 +417,9 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
             self.update_service_whitelist()
             
             logging.info(f"{self.username} - Removed IP {ip} from whitelist")
+            msg_box = QMessageBox(QMessageBox.Information, "成功", "IP地址已从白名单中删除！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
 
     def refresh_ip_list(self):
         """刷新IP白名单显示"""
@@ -470,11 +476,15 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
                 """)
                 
                 logging.info(f"{self.username} - Started upload service")
-                QMessageBox.information(self, "成功", "上传服务已启动")
+                msg_box = QMessageBox(QMessageBox.Information, "成功", "上传服务已开启！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 
             except Exception as e:
                 logging.error(f"{self.username} - Failed to start upload service: {str(e)}")
-                QMessageBox.critical(self, "错误", f"启动上传服务失败：{str(e)}")
+                msg_box = QMessageBox(QMessageBox.Critical, "错误", f"启动上传服务失败：{str(e)}")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 self.upload_service_process = None
                 
         else:
@@ -499,11 +509,15 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
                 """)
                 
                 logging.info(f"{self.username} - Stopped upload service")
-                QMessageBox.information(self, "成功", "上传服务已关闭")
+                msg_box = QMessageBox(QMessageBox.Information, "成功", "上传服务已关闭！")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 
             except Exception as e:
                 logging.error(f"{self.username} - Failed to stop upload service: {str(e)}")
-                QMessageBox.critical(self, "错误", f"关闭上传服务失败：{str(e)}")
+                msg_box = QMessageBox(QMessageBox.Critical, "错误", f"关闭上传服务失败：{str(e)}")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
 
     def closeEvent(self, event):
         """
@@ -588,7 +602,10 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
                 progress.close()
                 if success:
                     logging.info(f"System backup created successfully: {backup_filename}")
-                    QMessageBox.information(self, "备份成功", f"系统备份已完成！\n备份文件位置：{message}")
+                    # 弹出确认框
+                    finish_box = QMessageBox(QMessageBox.Information, "提示", "系统参数备份完成。")
+                    qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                    finish_box.exec_()
                 else:
                     logging.error(f"Backup failed: {message}")
                     QMessageBox.critical(self, "备份失败", f"备份过程中发生错误：{message}")
@@ -659,9 +676,10 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
                 progress.close()
                 if success:
                     logging.info("System restored successfully")
-                    QMessageBox.information(self, "恢复成功", "系统恢复已完成！系统将退出到登录界面。")
-                    # 退出到登录界面
-                    self.logout_and_return_to_login()
+                    # 弹出确认框
+                    finish_box = QMessageBox(QMessageBox.Information, "提示", "系统参数恢复完成。")
+                    qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                    finish_box.exec_()
                 else:
                     logging.error(f"Restore failed: {message}")
                     QMessageBox.critical(self, "恢复失败", f"恢复过程中发生错误：{message}")
@@ -847,12 +865,16 @@ class ParamControl(Ui_param_Control.Ui_param_Control, QWidget):
 
             session.commit()
             logging.info("Database transaction committed successfully.")
-            QMessageBox.information(self, "成功", "参数保存成功！")
+            msg_box = QMessageBox(QMessageBox.Information, "成功", "系统参数保存成功！")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
 
         except Exception as e:
             session.rollback()
             logging.error(f"Failed to save parameters: {e}")
-            QMessageBox.critical(self, "错误", f"保存参数时发生错误：{str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", f"保存系统参数失败：{str(e)}")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
         finally:
             session.close()
             logging.info("Database session closed.")

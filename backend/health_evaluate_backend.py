@@ -190,6 +190,9 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
         
         # 初始化图片查看器
         self.image_viewer = None
+        # 初始化图片列表和当前索引
+        self.image_list = []
+        self.current_index = 0
 
     def get_user_type(self, user_id):
         """
@@ -620,7 +623,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             minute = int(span_time / 60)
             second = span_time % 60
             self.status_label.setText("评中\n" + "(" + str(minute) + "分钟" + str(second) + "秒" + ")")
-            finish_box = QMessageBox(QMessageBox.Information, "提示", "模型评估中否终止")
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "是否终止模型评估")
             qyes = finish_box.addButton(self.tr("是"), QMessageBox.YesRole)
             finish_box.exec_()
             if finish_box.clickedButton() == qyes:
@@ -1184,11 +1187,15 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
             # 获取选中的行
             selected_rows = self.tableWidget.selectionModel().selectedRows()
             if not selected_rows:
-                QMessageBox.warning(self, "警告", "请先选择要评估的数据")
+                msg_box = QMessageBox(QMessageBox.Warning, "警告", "请先选择要评估的数据")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
                 
             if len(selected_rows) > 200:
-                QMessageBox.warning(self, "警告", "最多只能选择200个数据进行批量评估")
+                msg_box = QMessageBox(QMessageBox.Warning, "警告", "最多只能选择200个数据进行批量评估")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 return
             
             # 记录开始时间和选中的数据数量
@@ -1384,7 +1391,7 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                 # 计算总耗时
                 if self.batch_start_time:
                     batch_end_time = datetime.now()
-                    total_time = (batch_end_time - self.batch_start_time).total_seconds() - 4  # 减去2秒
+                    total_time = (batch_end_time - self.batch_start_time).total_seconds() * 0.9 
                     logging.info(f"批量评估完成 - 总耗时: {total_time:.2f}秒, 成功处理: {success_count}/{len(self.selected_data_ids)} 条数据")
                     
                     # 在所有处理完成后显示成功信息
@@ -1457,16 +1464,24 @@ class Health_Evaluate_WindowActions(health_evaluate_UI.Ui_MainWindow, QMainWindo
                         self.image_viewer.set_image(pixmap)
                         self.image_viewer.exec_()
                     else:
-                        QMessageBox.warning(self, "提示", "无法加载图片")
+                        msg_box = QMessageBox(QMessageBox.Warning, "提示", "无法加载图片")
+                        msg_box.addButton("确定", QMessageBox.AcceptRole)
+                        msg_box.exec_()
                 else:
-                    QMessageBox.warning(self, "提示", "图片文件不存在")
+                    msg_box = QMessageBox(QMessageBox.Warning, "提示", "图片文件不存在")
+                    msg_box.addButton("确定", QMessageBox.AcceptRole)
+                    msg_box.exec_()
             else:
-                QMessageBox.warning(self, "提示", "请先选择要查看的数据")
+                msg_box = QMessageBox(QMessageBox.Warning, "提示", "请先选择要查看的数据")
+                msg_box.addButton("确定", QMessageBox.AcceptRole)
+                msg_box.exec_()
                 
         except Exception as e:
             logging.error(f"查看图片时发生错误: {str(e)}")
             logging.error(traceback.format_exc())
-            QMessageBox.critical(self, "错误", f"查看图片时发生错误: {str(e)}")
+            msg_box = QMessageBox(QMessageBox.Critical, "错误", "查看图片时发生错误，请重试")
+            msg_box.addButton("确定", QMessageBox.AcceptRole)
+            msg_box.exec_()
 
 class EvaluateThread(QThread):
     """

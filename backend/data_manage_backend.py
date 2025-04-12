@@ -172,6 +172,9 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         # 连接批量删除按钮
         self.batch_delete_pushButton.clicked.connect(self.handle_batch_delete)
 
+        # 连接删除所有数据按钮的信号
+        self.delete_all_pushButton.clicked.connect(self.delete_all_data)
+
     def get_user_type(self, user_id):
         """
         获取用户类型
@@ -333,7 +336,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             session.commit()
             
             logging.info(f"Data uploaded successfully. Path: {target_dir}, Username: {user.username}")
-            QMessageBox.information(self, "提示", "数据上传成功！")
+            # 弹出确认框
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导入完成。")
+            qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+            finish_box.exec_()
             
             # 刷新表格显示
             self.show_table()
@@ -441,26 +447,45 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
         feature_type = self.channel_comboBox.currentText()
         
         if feature_type == "Theta/Alpha/Beta/Gamma功率":
-            wave_choice, ok = QInputDialog.getItem(self, "选择波段", "请选择要查看的波段：", 
-                                                   ["Theta", "Alpha", "Beta", "Gamma"], 0, False)
-            if ok and wave_choice:
+            dialog = QMessageBox(QMessageBox.Question, "选择波段", "请选择要查看的波段：")
+            dialog.addButton("确定", QMessageBox.AcceptRole)
+            dialog.addButton("取消", QMessageBox.RejectRole)
+            wave_options = ["Theta", "Alpha", "Beta", "Gamma"]
+            wave_choice = QInputDialog()
+            wave_choice.setWindowTitle("选择波段")
+            wave_choice.setLabelText("请选择要查看的波段：")
+            wave_choice.setComboBoxItems(wave_options)
+            wave_choice.setOkButtonText("确定")
+            wave_choice.setCancelButtonText("取消")
+            if wave_choice.exec_() == QInputDialog.Accepted:
+                wave_choice = wave_choice.textValue()
                 image_path = os.path.join(self.data_path, f'{wave_choice}.png')
                 image_name = f"{wave_choice}波段功率"
             else:
                 return
         elif feature_type == "均分频带":
-            band_choice, ok = QInputDialog.getItem(self, "选择频带", "请选择要查看的频带：", 
-                                                   ["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"], 0, False)
-            if ok and band_choice:
+            band_choice = QInputDialog()
+            band_choice.setWindowTitle("选择频带")
+            band_choice.setLabelText("请选择要查看的频带：")
+            band_choice.setComboBoxItems(["Band 1", "Band 2", "Band 3", "Band 4", "Band 5"])
+            band_choice.setOkButtonText("确定")
+            band_choice.setCancelButtonText("取消")
+            if band_choice.exec_() == QInputDialog.Accepted:
+                band_choice = band_choice.textValue()
                 band_number = int(band_choice.split()[-1])
                 image_path = os.path.join(self.data_path, f'frequency_band_{band_number}.png')
                 image_name = f"均分频带 {band_number}"
             else:
                 return
         elif feature_type == "时域特征":
-            time_feature_choice, ok = QInputDialog.getItem(self, "选择时域特征", "请选择要查看的时域特征：", 
-                                                           ["过零率", "方差", "能量", "差分"], 0, False)
-            if ok and time_feature_choice:
+            time_feature = QInputDialog()
+            time_feature.setWindowTitle("选择时域特征")
+            time_feature.setLabelText("请选择要查看的时域特征：")
+            time_feature.setComboBoxItems(["过零率", "方差", "能量", "差分"])
+            time_feature.setOkButtonText("确定")
+            time_feature.setCancelButtonText("取消")
+            if time_feature.exec_() == QInputDialog.Accepted:
+                time_feature_choice = time_feature.textValue()
                 image_path = os.path.join(self.data_path, f'time_{time_feature_choice}.png')
                 image_name = f"时域特征 - {time_feature_choice}"
             else:
@@ -547,12 +572,12 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             id = self.tableWidget.item(row, 0).text()  # 获取当前行数据的ID值
             
             # 添加确认对话框
-            reply = QMessageBox.question(self, '确认删除', 
-                                       '确定要删除这条数据吗？此操作不可恢复。',
-                                       QMessageBox.Yes | QMessageBox.No,
-                                       QMessageBox.No)
+            box = QMessageBox(QMessageBox.Question, "确认删除", "确定要删除这条数据吗？此操作不可恢复。")
+            yes_button = box.addButton("是", QMessageBox.YesRole)
+            no_button = box.addButton("否", QMessageBox.NoRole)
+            box.exec_()
             
-            if reply == QMessageBox.No:
+            if box.clickedButton() == no_button:
                 logging.info(f"User cancelled deletion of record with ID {id}")
                 return
             
@@ -590,8 +615,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                     session.commit()
                     logging.info(f"Deleted record with ID {id} from result table.")
                     
-                    # 显示删除成功提示
-                    QMessageBox.information(self, "成功", "数据已成功删除")
+                    # 弹出确认框
+                    finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导出完成。")
+                    qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                    finish_box.exec_()
                 else:
                     logging.warning(f"No data found with ID {id}.")
             except Exception as e:
@@ -709,7 +736,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
     def processing_completed(self):
         """处理完成后的回调"""
         logging.info("Data processing completed successfully")
-        QMessageBox.information(self, "成功", "数据预处理和特征提取已完成")
+        # 弹出确认框
+        finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导入完成。")
+        qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        finish_box.exec_()
 
     # 添加处理错误的回调函数
     def processing_error(self, error_msg):
@@ -812,7 +842,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             # 刷新表格显示
             self.show_table()
             
-            QMessageBox.information(self, "完成", f"批量上传完成\n成功: {success_count}个\n失败: {failed_count}个")
+            # 弹出确认框
+            finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导入完成。")
+            qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+            finish_box.exec_()
 
         except Exception as e:
             error_msg = f"批量上传失败: {str(e)}"
@@ -949,7 +982,7 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 error_msg = "\n".join(error_list)
                 QMessageBox.warning(self, "警告", f"部分文件处理失败:\n{error_msg}\n总用时: {total_time}秒")
             else:
-                QMessageBox.information(self, "成功", f"批量预处理完成\n总用时: {total_time}秒")
+                QMessageBox.information(self, "成功", f"批量预处理完成\n总用时: {total_time}秒", QMessageBox.Ok * "确认")
 
             # 刷新表格显示
             self.show_table()
@@ -983,8 +1016,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
             # 更新选择计数
             self.update_selection_count()
             
-            # 显示提示信息
-            QMessageBox.information(self, "提示", f"已选择前{rows_to_select}条数据")
+            # 显示选择数据提示
+            msg_box = QMessageBox(QMessageBox.Information, "提示", f"已选择前{rows_to_select}条数据")
+            msg_box.addButton("确认", QMessageBox.AcceptRole)
+            msg_box.exec_()
             
         except Exception as e:
             error_msg = f"选择前200条数据时出错: {str(e)}\n{traceback.format_exc()}"
@@ -1019,12 +1054,12 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 return
 
             # 添加确认对话框
-            reply = QMessageBox.question(self, '确认删除', 
-                                       f'确定要删除这{len(selected_rows)}条数据吗？此操作不可恢复。',
-                                       QMessageBox.Yes | QMessageBox.No,
-                                       QMessageBox.No)
+            box = QMessageBox(QMessageBox.Question, "确认删除", f"确定要删除这{len(selected_rows)}条数据吗？此操作不可恢复。")
+            yes_button = box.addButton("是", QMessageBox.YesRole)
+            no_button = box.addButton("否", QMessageBox.NoRole)
+            box.exec_()
             
-            if reply == QMessageBox.No:
+            if box.clickedButton() == no_button:
                 logging.info("User cancelled batch deletion")
                 return
             
@@ -1085,11 +1120,10 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
                 # 刷新表格显示
                 self.show_table()
 
-                # 显示最终删除结果
-                if failed_count == 0:
-                    QMessageBox.information(self, "成功", f"成功删除{deleted_count}条数据")
-                else:
-                    QMessageBox.warning(self, "完成", f"删除完成\n成功：{deleted_count}条\n失败：{failed_count}条")
+                # 弹出确认框
+                finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导出完成。")
+                qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                finish_box.exec_()
 
             except Exception as e:
                 logging.error(f"Error occurred while deleting records: {str(e)}")
@@ -1103,6 +1137,94 @@ class Data_View_WindowActions(data_manage_UI.Ui_MainWindow, QMainWindow):
 
         except Exception as e:
             error_msg = f"批量删除失败: {str(e)}\n{traceback.format_exc()}"
+            logging.error(error_msg)
+            QMessageBox.critical(self, "错误", error_msg)
+
+    def delete_all_data(self):
+        """
+        删除所有数据的处理函数
+        """
+        try:
+            # 确认删除
+            box = QMessageBox(QMessageBox.Question, "确认删除", "确定要删除所有数据吗？此操作不可恢复。")
+            yes_button = box.addButton("是", QMessageBox.YesRole)
+            no_button = box.addButton("否", QMessageBox.NoRole)
+            box.exec_()
+            
+            if box.clickedButton() == no_button:
+                logging.info("User cancelled deletion of all data")
+                return
+
+            # 开始数据库会话
+            session = SessionClass()
+            try:
+                # 获取所有数据记录
+                all_data = session.query(Data).all()
+                total_count = len(all_data)
+
+                if total_count == 0:
+                    QMessageBox.information(self, "提示", "没有数据可以删除")
+                    return
+
+                # 创建进度对话框
+                progress = QProgressDialog("正在删除数据...", None, 0, total_count, self)
+                progress.setWindowModality(Qt.WindowModal)
+                progress.setWindowTitle("删除中")
+                progress.show()
+
+                deleted_count = 0
+                failed_count = 0
+
+                for i, data in enumerate(all_data):
+                    progress.setValue(i)
+                    if progress.wasCanceled():
+                        break
+
+                    try:
+                        path = data.data_path
+                        logging.info(f"Deleting data at path: {path}")
+
+                        # 检查数据路径是否存在
+                        if os.path.exists(path):
+                            # 删除对应的文件夹
+                            shutil.rmtree(path)
+                            logging.info(f"Deleted folder at path: {path}")
+
+                        # 删除result表中对应数据
+                        session.query(Result).filter(Result.id == data.id).delete()
+                        deleted_count += 1
+                    except Exception as e:
+                        logging.error(f"Error deleting data with ID {data.id}: {str(e)}")
+                        failed_count += 1
+                        continue
+
+                # 删除所有数据记录
+                session.query(Data).delete()
+                session.commit()
+                
+                progress.setValue(total_count)
+
+                # 刷新表格显示
+                self.show_table()
+
+                # 弹出确认框
+                finish_box = QMessageBox(QMessageBox.Information, "提示", "数据导出完成。")
+                qyes = finish_box.addButton(self.tr("确定"), QMessageBox.YesRole)
+                finish_box.exec_()
+
+            except Exception as e:
+                session.rollback()
+                logging.error(f"Error occurred while deleting all records: {str(e)}")
+                QMessageBox.critical(self, "错误", f"删除记录时发生错误: {str(e)}")
+            finally:
+                session.close()
+
+            # 重置选中的数据
+            self.selected_data = set()
+            self.update_selection_count()
+
+        except Exception as e:
+            error_msg = f"删除所有数据失败: {str(e)}\n{traceback.format_exc()}"
             logging.error(error_msg)
             QMessageBox.critical(self, "错误", error_msg)
 

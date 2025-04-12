@@ -120,6 +120,13 @@ class Ui_MainWindow(object):
         self.batch_delete_pushButton.setObjectName("batch_delete_pushButton")
         self.button_layout.addWidget(self.batch_delete_pushButton)
 
+        # 添加删除所有数据按钮
+        self.delete_all_pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.delete_all_pushButton.setFixedSize(120, 50)
+        self.delete_all_pushButton.setStyleSheet("background-color: #ff6b6b;font-size: 18px;border-radius:12px")
+        self.delete_all_pushButton.setObjectName("delete_all_pushButton")
+        self.button_layout.addWidget(self.delete_all_pushButton)
+
         # 添加选择数量显示标签
         self.selection_count_label = QtWidgets.QLabel(self.centralwidget)
         self.selection_count_label.setStyleSheet("font-size: 14px; color: #333; margin-top: 10px;")
@@ -251,6 +258,7 @@ class Ui_MainWindow(object):
         self.batch_upload_pushButton.setText(_translate("MainWindow", "批量上传"))
         self.batch_preprocess_pushButton.setText(_translate("MainWindow", "批量预处理"))
         self.batch_delete_pushButton.setText(_translate("MainWindow", "批量删除"))
+        self.delete_all_pushButton.setText(_translate("MainWindow", "删除所有数据"))
         self.select_top_200_button.setText(_translate("MainWindow", "选择前200条"))
 
         font = QFont()
