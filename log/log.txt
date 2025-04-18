@@ -12057,3 +12057,27 @@ AttributeError: 'Health_Evaluate_WindowActions' object has no attribute 'image_l
 2025-04-12 21:43:18,398 - INFO - admin - 打开Admin页面
 2025-04-12 21:43:18,398 - INFO - admin - 返回首页耗时: 91毫秒
 2025-04-12 21:43:18,398 - INFO - admin - Returned to index page successfully
+2025-04-12 21:44:00,548 - INFO - 初始化登录界面...
+2025-04-12 21:44:00,548 - INFO - 开始预加载模型...
+2025-04-12 21:44:00,548 - INFO - 正在检查数据库中的模型信息...
+2025-04-12 21:44:00,557 - INFO - 找到模型信息: model_type=0, path=./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-12 21:44:00,557 - INFO - 模型文件存在，开始加载...
+2025-04-12 21:44:00,563 - INFO - 开始加载INT8量化模型...
+2025-04-12 21:44:00,563 - WARNING - 未检测到可用GPU，将使用CPU进行推理
+2025-04-12 21:44:00,566 - INFO - 开始加载模型文件: ./model/yingji/subject-1_yingji_quantized.tflite
+2025-04-12 21:44:00,607 - INFO - 模型输入shape: [   1    1   59 1000], 类型: <class 'numpy.int8'>
+2025-04-12 21:44:00,607 - INFO - 模型输出shape: [1 2], 类型: <class 'numpy.int8'>
+2025-04-12 21:44:00,611 - INFO - 模型加载成功并已放置在GPU上
+2025-04-12 21:44:00,611 - INFO - 成功预加载量化模型
+2025-04-12 21:44:12,419 - INFO - 未登录 - Opening user login page.
+2025-04-12 21:44:12,508 - INFO - admin - 打开Login页面
+2025-04-12 21:44:15,036 - INFO - admin - User logged in successfully
+2025-04-12 21:44:15,246 - INFO - admin - 打开Admin页面
+2025-04-12 21:44:16,739 - INFO - admin - Data table refreshed successfully with 17 records
+2025-04-12 21:44:16,739 - INFO - admin - Opening data view page. Time taken: 0.05 seconds
+2025-04-12 21:44:16,876 - INFO - admin - 打开Data View页面
+2025-04-12 21:44:44,769 - INFO - admin - User cancelled deletion of all data
+2025-04-12 21:44:47,065 - INFO - admin - 打开Admin页面
+2025-04-12 21:44:47,065 - INFO - admin - Returned to index page successfully
+2025-04-12 21:44:47,737 - INFO - admin - Opening password change page. Time taken: 0.00 seconds
+2025-04-12 21:44:47,814 - INFO - admin - 打开Change Pwd页面

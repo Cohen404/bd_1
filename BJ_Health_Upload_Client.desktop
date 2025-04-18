@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=BJ Health Upload Client
+Comment=Launch BJ Health Upload Client
+Exec=/home/jupiter/health_manage/run_upload_client.sh
+Icon=/home/jupiter/health_manage/client_icon.png
+Terminal=false
+Categories=Application;
