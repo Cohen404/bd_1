@@ -1,0 +1,2033 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "北京健康评估系统API",
+    "description": "北京健康评估系统的后端API接口",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/token": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "用户登录接口，获取访问令牌",
+        "operationId": "login_for_access_token",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "用户名或密码错误"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "用户登录接口，简化版",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "用户名或密码错误"
+          }
+        }
+      }
+    },
+    "/api/users/": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "创建新用户",
+        "operationId": "create_user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "用户创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "用户名已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "get": {
+        "tags": ["用户管理"],
+        "summary": "获取用户列表",
+        "operationId": "read_users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "跳过的记录数",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "返回的最大记录数",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取用户列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "tags": ["用户管理"],
+        "summary": "获取当前用户信息",
+        "operationId": "read_user_me",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取当前用户信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}": {
+      "get": {
+        "tags": ["用户管理"],
+        "summary": "获取特定用户信息",
+        "operationId": "read_user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取用户信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      },
+      "put": {
+        "tags": ["用户管理"],
+        "summary": "更新用户信息",
+        "operationId": "update_user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功更新用户信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "用户名已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["用户管理"],
+        "summary": "删除用户",
+        "operationId": "delete_user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除用户"
+          },
+          "400": {
+            "description": "不能删除当前登录的管理员账户"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "用户不存在"
+          }
+        }
+      }
+    },
+    "/api/data/": {
+      "post": {
+        "tags": ["数据管理"],
+        "summary": "上传数据文件",
+        "operationId": "create_data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personnel_id": {
+                    "type": "string"
+                  },
+                  "personnel_name": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["personnel_id", "personnel_name", "file"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "数据上传成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Data"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          }
+        }
+      },
+      "get": {
+        "tags": ["数据管理"],
+        "summary": "获取数据列表",
+        "operationId": "read_data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "跳过的记录数",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "返回的最大记录数",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          },
+          {
+            "name": "personnel_id",
+            "in": "query",
+            "description": "按人员ID筛选",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "personnel_name",
+            "in": "query",
+            "description": "按人员名称筛选",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取数据列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Data"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          }
+        }
+      }
+    },
+    "/api/data/{data_id}": {
+      "get": {
+        "tags": ["数据管理"],
+        "summary": "获取特定数据",
+        "operationId": "read_data_by_id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "data_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取数据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Data"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "数据不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["数据管理"],
+        "summary": "删除数据",
+        "operationId": "delete_data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "data_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除数据"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "数据不存在"
+          }
+        }
+      }
+    },
+    "/api/models/": {
+      "post": {
+        "tags": ["模型管理"],
+        "summary": "上传模型文件",
+        "operationId": "create_model",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model_type": {
+                    "type": "integer",
+                    "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["model_type", "file"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "模型上传成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "无效的模型类型"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "get": {
+        "tags": ["模型管理"],
+        "summary": "获取模型列表",
+        "operationId": "read_models",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取模型列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Model"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/api/models/{model_id}": {
+      "get": {
+        "tags": ["模型管理"],
+        "summary": "获取特定模型",
+        "operationId": "read_model",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取模型",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "模型不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["模型管理"],
+        "summary": "删除模型",
+        "operationId": "delete_model",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除模型"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "模型不存在"
+          }
+        }
+      }
+    },
+    "/api/health/evaluate": {
+      "post": {
+        "tags": ["健康评估"],
+        "summary": "对指定数据进行健康评估",
+        "operationId": "evaluate_health",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthEvaluateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "评估成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "404": {
+            "description": "数据不存在"
+          },
+          "500": {
+            "description": "评估过程中出错"
+          }
+        }
+      }
+    },
+    "/api/health/batch-evaluate": {
+      "post": {
+        "tags": ["健康评估"],
+        "summary": "批量健康评估",
+        "operationId": "batch_evaluate_health",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchHealthEvaluateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "批量评估任务已启动",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Result"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "数据不存在"
+          },
+          "500": {
+            "description": "评估过程中出错"
+          }
+        }
+      }
+    },
+    "/api/health/reports/{result_id}": {
+      "get": {
+        "tags": ["健康评估"],
+        "summary": "获取评估报告",
+        "operationId": "get_evaluate_report",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "result_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取评估报告",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "结果不存在"
+          }
+        }
+      }
+    },
+    "/api/results/": {
+      "get": {
+        "tags": ["结果管理"],
+        "summary": "获取结果列表",
+        "operationId": "read_results",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "跳过的记录数",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "返回的最大记录数",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          },
+          {
+            "name": "personnel_id",
+            "in": "query",
+            "description": "按人员ID筛选",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "personnel_name",
+            "in": "query",
+            "description": "按人员名称筛选",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取结果列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Result"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          }
+        }
+      }
+    },
+    "/api/results/{result_id}": {
+      "get": {
+        "tags": ["结果管理"],
+        "summary": "获取特定结果",
+        "operationId": "read_result",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "result_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "结果不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["结果管理"],
+        "summary": "删除结果",
+        "operationId": "delete_result",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "result_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除结果"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "结果不存在"
+          }
+        }
+      }
+    },
+    "/api/results/{result_id}/report": {
+      "get": {
+        "tags": ["结果管理"],
+        "summary": "获取结果报告",
+        "operationId": "read_result_report",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "result_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取结果报告",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "report_content": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "结果或报告不存在"
+          }
+        }
+      }
+    },
+    "/api/roles/": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "创建新角色",
+        "operationId": "create_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "角色创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "角色名已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "get": {
+        "tags": ["角色管理"],
+        "summary": "获取角色列表",
+        "operationId": "read_roles",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取角色列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/api/roles/{role_id}": {
+      "get": {
+        "tags": ["角色管理"],
+        "summary": "获取特定角色",
+        "operationId": "read_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取角色",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "角色不存在"
+          }
+        }
+      },
+      "put": {
+        "tags": ["角色管理"],
+        "summary": "更新角色",
+        "operationId": "update_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功更新角色",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "角色名已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "角色不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["角色管理"],
+        "summary": "删除角色",
+        "operationId": "delete_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除角色"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "角色不存在"
+          }
+        }
+      }
+    },
+    "/api/roles/{role_id}/permissions": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "为角色添加权限",
+        "operationId": "add_permission_to_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RolePermissionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功添加权限",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "权限已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "角色或权限不存在"
+          }
+        }
+      }
+    },
+    "/api/roles/{role_id}/permissions/{permission_id}": {
+      "delete": {
+        "tags": ["角色管理"],
+        "summary": "从角色中移除权限",
+        "operationId": "remove_permission_from_role",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "role_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "permission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功移除权限"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "角色、权限或角色权限关系不存在"
+          }
+        }
+      }
+    },
+    "/api/parameters/": {
+      "post": {
+        "tags": ["参数管理"],
+        "summary": "创建新系统参数",
+        "operationId": "create_parameter",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParameterCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "参数创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数名已存在"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "get": {
+        "tags": ["参数管理"],
+        "summary": "获取系统参数列表",
+        "operationId": "read_parameters",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取参数列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Parameter"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/api/parameters/{param_id}": {
+      "get": {
+        "tags": ["参数管理"],
+        "summary": "获取特定系统参数",
+        "operationId": "read_parameter",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "param_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取参数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "参数不存在"
+          }
+        }
+      },
+      "put": {
+        "tags": ["参数管理"],
+        "summary": "更新系统参数",
+        "operationId": "update_parameter",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "param_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParameterUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "成功更新参数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "参数不存在"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["参数管理"],
+        "summary": "删除系统参数",
+        "operationId": "delete_parameter",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "param_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功删除参数"
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          },
+          "404": {
+            "description": "参数不存在"
+          }
+        }
+      }
+    },
+    "/api/logs/": {
+      "get": {
+        "tags": ["日志管理"],
+        "summary": "获取系统日志",
+        "operationId": "read_logs",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "开始日期（格式：YYYY-MM-DD）",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "结束日期（格式：YYYY-MM-DD）",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "按用户名筛选",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "description": "按日志级别筛选（INFO, WARNING, ERROR, DEBUG）",
+            "schema": {
+              "type": "string",
+              "enum": ["INFO", "WARNING", "ERROR", "DEBUG"]
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "跳过的记录数",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "返回的最大记录数",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取日志列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "level": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未经授权"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Token": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "token_type": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["username", "password"]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "user_type": {
+            "type": "integer"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "create_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        }
+      },
+      "UserCreate": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "user_type": {
+            "type": "integer"
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": ["username", "password", "fullname", "email", "user_type"]
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "user_type": {
+            "type": "integer"
+          },
+          "is_active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          }
+        }
+      },
+      "RoleCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["name"]
+      },
+      "RoleUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Permission": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "RolePermissionCreate": {
+        "type": "object",
+        "properties": {
+          "permission_id": {
+            "type": "integer"
+          }
+        },
+        "required": ["permission_id"]
+      },
+      "Data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "personnel_id": {
+            "type": "string"
+          },
+          "personnel_name": {
+            "type": "string"
+          },
+          "file_path": {
+            "type": "string"
+          },
+          "file_type": {
+            "type": "string"
+          },
+          "upload_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "upload_user": {
+            "type": "string"
+          }
+        }
+      },
+      "DataCreate": {
+        "type": "object",
+        "properties": {
+          "personnel_id": {
+            "type": "string"
+          },
+          "personnel_name": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": ["personnel_id", "personnel_name", "file"]
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "model_type": {
+            "type": "integer",
+            "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+          },
+          "model_path": {
+            "type": "string"
+          },
+          "upload_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "upload_user": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ModelCreate": {
+        "type": "object",
+        "properties": {
+          "model_type": {
+            "type": "integer",
+            "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+          },
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": ["model_type", "file"]
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "data_id": {
+            "type": "integer"
+          },
+          "personnel_id": {
+            "type": "string"
+          },
+          "personnel_name": {
+            "type": "string"
+          },
+          "evaluate_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evaluate_user": {
+            "type": "string"
+          },
+          "stress_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "depression_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "anxiety_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "social_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "report_path": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultCreate": {
+        "type": "object",
+        "properties": {
+          "data_id": {
+            "type": "integer"
+          },
+          "personnel_id": {
+            "type": "string"
+          },
+          "personnel_name": {
+            "type": "string"
+          },
+          "stress_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "depression_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "anxiety_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "social_score": {
+            "type": "number",
+            "format": "float"
+          },
+          "report_path": {
+            "type": "string"
+          }
+        },
+        "required": ["data_id", "personnel_id", "personnel_name"]
+      },
+      "Parameter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ParameterCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "value"]
+      },
+      "ParameterUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "HealthEvaluateRequest": {
+        "type": "object",
+        "properties": {
+          "data_id": {
+            "type": "integer"
+          }
+        },
+        "required": ["data_id"]
+      },
+      "BatchHealthEvaluateRequest": {
+        "type": "object",
+        "properties": {
+          "data_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": ["data_ids"]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+} 
