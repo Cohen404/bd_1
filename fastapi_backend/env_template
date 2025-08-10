@@ -1,0 +1,23 @@
+# 数据库配置
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_NAME=bj_health_db
+# 建议: 生产环境使用专门的应用用户，如: bj_health_user
+# 开发环境可以直接使用postgres超级用户
+DB_USER=postgres
+DB_PASS=tj654478
+
+# JWT配置
+SECRET_KEY=rjD66zC6e4h58TuPFa3peppOjsUc1dprKtCIVNds4cQ
+ACCESS_TOKEN_EXPIRE_MINUTES=1440
+
+# 安全配置
+BCRYPT_ROUNDS=12
+
+# 其他配置
+DEBUG=false
+LOG_LEVEL=INFO
+
+# PostgreSQL超级用户配置（仅用于初始化）
+POSTGRES_SUPERUSER=postgres
+POSTGRES_SUPERUSER_PASSWORD=postgres_admin_password 

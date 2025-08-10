@@ -1,0 +1,147 @@
+2025-08-04 12:26:45 - __main__ - INFO - 系统 - 开始PostgreSQL安装和配置...
+2025-08-04 12:26:45 - __main__ - INFO - 系统 - 开始在macOS上安装PostgreSQL...
+2025-08-04 12:26:45 - __main__ - INFO - 系统 - 未找到Homebrew，正在安装...
+2025-08-04 12:26:45 - __main__ - INFO - 系统 - 正在安装Homebrew...
+2025-08-04 12:26:45 - __main__ - INFO - 系统 - 执行命令: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-04 12:52:36 - __main__ - ERROR - 系统 - 命令执行超时: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-04 12:52:36 - __main__ - ERROR - 系统 - Homebrew安装失败
+2025-08-04 12:52:36 - __main__ - ERROR - 系统 - macOS上PostgreSQL安装失败
+2025-08-04 13:52:13 - __main__ - INFO - 系统 - 开始PostgreSQL安装和配置...
+2025-08-04 13:52:13 - __main__ - INFO - 系统 - 开始在macOS上安装PostgreSQL...
+2025-08-04 13:52:13 - __main__ - INFO - 系统 - 未找到Homebrew，正在安装...
+2025-08-04 13:52:13 - __main__ - INFO - 系统 - 正在安装Homebrew...
+2025-08-04 13:52:13 - __main__ - INFO - 系统 - 执行命令: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-04 14:02:13 - __main__ - ERROR - 系统 - 命令执行超时: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-04 14:02:13 - __main__ - ERROR - 系统 - Homebrew安装失败
+2025-08-04 14:02:13 - __main__ - ERROR - 系统 - macOS上PostgreSQL安装失败
+2025-08-04 14:40:52 - __main__ - INFO - 系统 - 开始PostgreSQL安装和配置...
+2025-08-04 14:40:52 - __main__ - INFO - 系统 - 开始在macOS上安装PostgreSQL...
+2025-08-04 14:40:52 - __main__ - INFO - 系统 - 未找到Homebrew，正在安装...
+2025-08-04 14:40:52 - __main__ - INFO - 系统 - 正在安装Homebrew...
+2025-08-04 14:40:52 - __main__ - INFO - 系统 - 执行命令: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-04 14:42:11 - __main__ - INFO - 系统 - 安装过程被用户中断
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - 开始PostgreSQL数据库建立和初始化...
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - .env文件已创建/更新: /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/.env
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - PostgreSQL未安装，开始安装...
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - 开始在macOS上安装PostgreSQL...
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - 正在安装Homebrew...
+2025-08-11 03:46:44 - __main__ - INFO - 系统 - 执行命令: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2025-08-11 03:48:23 - __main__ - INFO - 系统 - Homebrew安装成功
+2025-08-11 03:48:23 - __main__ - INFO - 系统 - 更新Homebrew...
+2025-08-11 03:48:23 - __main__ - INFO - 系统 - 执行命令: brew update
+2025-08-11 03:48:26 - __main__ - INFO - 系统 - 执行命令: brew list postgresql@14
+2025-08-11 03:48:28 - __main__ - INFO - 系统 - PostgreSQL@14已安装
+2025-08-11 03:48:28 - __main__ - INFO - 系统 - 启动PostgreSQL服务...
+2025-08-11 03:48:28 - __main__ - INFO - 系统 - 执行命令: brew services start postgresql@14
+2025-08-11 03:48:30 - __main__ - INFO - 系统 - PostgreSQL服务 postgresql@14 启动成功
+2025-08-11 03:48:35 - __main__ - INFO - 系统 - 等待PostgreSQL服务启动...
+2025-08-11 03:48:45 - __main__ - INFO - 系统 - 创建数据库 bj_health_db 和用户 postgres...
+2025-08-11 03:48:45 - __main__ - INFO - 系统 - 执行命令: psql -d postgres -c 
+DO $$ 
+BEGIN 
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'postgres') THEN
+        CREATE USER postgres WITH PASSWORD 'tj654478';
+        RAISE NOTICE '用户 postgres 已创建';
+    ELSE
+        ALTER USER postgres WITH PASSWORD 'tj654478';
+        RAISE NOTICE '用户 postgres 已存在，密码已更新';
+    END IF;
+END
+$$;
+
+2025-08-11 03:48:45 - __main__ - ERROR - 系统 - 执行命令时发生异常 psql -d postgres -c 
+DO $$ 
+BEGIN 
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'postgres') THEN
+        CREATE USER postgres WITH PASSWORD 'tj654478';
+        RAISE NOTICE '用户 postgres 已创建';
+    ELSE
+        ALTER USER postgres WITH PASSWORD 'tj654478';
+        RAISE NOTICE '用户 postgres 已存在，密码已更新';
+    END IF;
+END
+$$;
+: [Errno 2] No such file or directory: 'psql'
+2025-08-11 03:48:45 - __main__ - ERROR - 系统 - 创建用户失败: [Errno 2] No such file or directory: 'psql'
+2025-08-11 03:48:45 - __main__ - ERROR - 系统 - 数据库和用户创建失败
+2025-08-11 03:58:14 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 03:58:14 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 03:58:14 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 03:58:41 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 03:58:41 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 03:58:41 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 03:58:41 - __main__ - ERROR - 系统 - 创建初始数据失败: (psycopg2.errors.UndefinedTable) relation "tb_role" does not exist
+LINE 2: FROM tb_role 
+             ^
+
+[SQL: SELECT tb_role.role_id AS tb_role_role_id, tb_role.role_name AS tb_role_role_name, tb_role.description AS tb_role_description, tb_role.created_at AS tb_role_created_at 
+FROM tb_role 
+WHERE tb_role.role_name = %(role_name_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'role_name_1': 'admin', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-08-11 03:59:22 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 03:59:22 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 03:59:22 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 03:59:22 - __main__ - ERROR - 系统 - 创建初始数据失败: (psycopg2.errors.UndefinedTable) relation "tb_role" does not exist
+LINE 2: FROM tb_role 
+             ^
+
+[SQL: SELECT tb_role.role_id AS tb_role_role_id, tb_role.role_name AS tb_role_role_name, tb_role.description AS tb_role_description, tb_role.created_at AS tb_role_created_at 
+FROM tb_role 
+WHERE tb_role.role_name = %(role_name_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'role_name_1': 'admin', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-08-11 04:07:56 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 04:07:56 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:07:56 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 04:08:31 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 04:08:31 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:08:31 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 04:08:31 - __main__ - ERROR - 系统 - 创建初始数据失败: (psycopg2.errors.UndefinedTable) relation "tb_role" does not exist
+LINE 2: FROM tb_role 
+             ^
+
+[SQL: SELECT tb_role.role_id AS tb_role_role_id, tb_role.role_name AS tb_role_role_name, tb_role.description AS tb_role_description, tb_role.created_at AS tb_role_created_at 
+FROM tb_role 
+WHERE tb_role.role_name = %(role_name_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'role_name_1': 'admin', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-08-11 04:08:54 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:10:04 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 04:10:04 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:10:04 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 04:10:05 - __main__ - ERROR - 系统 - 创建初始数据失败: (psycopg2.errors.UndefinedTable) relation "tb_role" does not exist
+LINE 2: FROM tb_role 
+             ^
+
+[SQL: SELECT tb_role.role_id AS tb_role_role_id, tb_role.role_name AS tb_role_role_name, tb_role.description AS tb_role_description, tb_role.created_at AS tb_role_created_at 
+FROM tb_role 
+WHERE tb_role.role_name = %(role_name_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'role_name_1': 'admin', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-08-11 04:10:24 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 开始初始化数据库表...
+2025-08-11 04:10:55 - root - INFO - 系统 - 数据库表已创建
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 数据库表初始化完成
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建管理员角色
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建普通用户角色
+2025-08-11 04:10:55 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建默认管理员用户: admin/admin123
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: user_read
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: user_write
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: data_read
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: data_write
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: model_read
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: model_write
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: result_read
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: result_write
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 创建权限: admin_all
+2025-08-11 04:10:55 - __main__ - INFO - 系统 - 初始数据创建完成

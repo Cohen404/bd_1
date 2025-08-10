@@ -27,6 +27,8 @@ def get_db():
 # 初始化数据库
 def init_db():
     try:
+        # 导入模型以确保Base.metadata知道所有表
+        import models
         # 创建所有表
         Base.metadata.create_all(bind=engine)
         logging.info("数据库表已创建")

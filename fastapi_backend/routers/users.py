@@ -3,19 +3,15 @@ from sqlalchemy.orm import Session
 from typing import List
 import logging
 import uuid
-import hashlib
 from datetime import datetime
 
 from database import get_db
 import models as db_models
 import schemas
-from auth import get_current_user, check_admin_permission
+from auth import get_current_user, check_admin_permission, hash_password
 
 router = APIRouter()
-
-def hash_password(password: str) -> str:
-    """对密码进行SHA256哈希处理"""
-    return hashlib.sha256(password.encode()).hexdigest()
+logger = logging.getLogger(__name__)
 
 @router.post("/", response_model=schemas.User)
 async def create_user(
@@ -26,35 +22,44 @@ async def create_user(
     """
     创建新用户
     """
-    # 检查用户名是否已存在
-    db_user = db.query(db_models.User).filter(db_models.User.username == user.username).first()
-    if db_user:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="用户名已存在"
+    try:
+        # 检查用户名是否已存在
+        db_user = db.query(db_models.User).filter(db_models.User.username == user.username).first()
+        if db_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="用户名已存在"
+            )
+        
+        # 生成用户ID
+        user_id = str(uuid.uuid4())
+        
+        # 创建新用户
+        db_user = db_models.User(
+            user_id=user_id,
+            username=user.username,
+            password=hash_password(user.password),  # 使用安全的密码哈希
+            email=user.email,
+            phone=user.phone,
+            user_type=user.user_type,
+            created_at=datetime.now()
         )
-    
-    # 生成用户ID
-    user_id = str(uuid.uuid4())
-    
-    # 创建新用户
-    db_user = db_models.User(
-        user_id=user_id,
-        username=user.username,
-        password=hash_password(user.password),
-        email=user.email,
-        phone=user.phone,
-        user_type=user.user_type,
-        created_at=datetime.now()
-    )
-    
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    
-    logging.info(f"管理员{current_user.username}创建了新用户: {user.username}")
-    
-    return db_user
+        
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        
+        logger.info(f"用户 {user.username} 创建成功，操作者：{current_user.username}")
+        return db_user
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"创建用户失败: {e}")
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="创建用户失败"
+        )
 
 @router.get("/", response_model=List[schemas.User])
 async def read_users(

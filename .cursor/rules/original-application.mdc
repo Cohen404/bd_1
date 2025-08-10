@@ -1,0 +1,6 @@
+---
+description: 需要参考在oritinal_application目录中原来代码的时候使用这个规则
+globs: 
+alwaysApply: false
+---
+original_application目录中的代码是之前的应用，不要做任何修改，只参考他的功能代码。现在这个项目是要把这个应用从窗口应用程序改成前后端分离的web程序的。

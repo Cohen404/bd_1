@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+后端运行环境在 fastapi_backend/venv 中

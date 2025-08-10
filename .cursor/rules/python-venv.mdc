@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+python环境在fastapi_backend目录的venv/bin/activate中，要激活，并且如果安装了新的包，一定要在fastapi_backend目录中的requirements.txt中加上，并且要有版本号
