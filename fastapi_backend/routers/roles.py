@@ -7,7 +7,7 @@ from datetime import datetime
 from database import get_db
 import models as db_models
 import schemas
-from auth import check_admin_permission
+from auth import check_admin_permission, get_current_user
 
 router = APIRouter()
 
@@ -145,6 +145,35 @@ async def delete_role(
     logging.info(f"管理员{current_user.username}删除了角色ID: {role_id}")
     
     return None
+
+@router.get("/{role_id}/permissions", response_model=List[schemas.Permission])
+async def get_role_permissions(
+    role_id: int,
+    current_user = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    获取角色的所有权限
+    """
+    # 检查角色是否存在
+    role = db.query(db_models.Role).filter(db_models.Role.role_id == role_id).first()
+    if role is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{role_id}的角色不存在"
+        )
+    
+    # 获取角色的所有权限
+    permissions = db.query(db_models.Permission).join(
+        db_models.RolePermission,
+        db_models.Permission.permission_id == db_models.RolePermission.permission_id
+    ).filter(
+        db_models.RolePermission.role_id == role_id
+    ).all()
+    
+    logging.info(f"用户{current_user.username}获取了角色ID {role_id} 的权限列表")
+    
+    return permissions
 
 @router.post("/{role_id}/permissions", response_model=schemas.RolePermission)
 async def add_permission_to_role(
