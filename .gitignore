@@ -95,3 +95,4 @@ actions/
 output.txt
 .VSCodeCounter/
 tmp/
+node_modules/

@@ -223,3 +223,16 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2025-08-11 12:36:04 - root - INFO - 系统 - 用户admin获取了角色ID 1 的权限列表
 2025-08-11 12:36:50 - root - INFO - 系统 - User admin logged in successfully
 2025-08-11 12:37:00 - root - INFO - 系统 - User admin logged in successfully
+2025-08-12 14:37:21 - matplotlib.font_manager - WARNING - 系统 - findfont: Font family ['STFangsong'] not found. Falling back to DejaVu Sans.
+2025-08-12 14:37:21 - root - INFO - 系统 - 使用字体: STFangsong
+2025-08-12 14:37:21 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-12 14:37:21 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-12 14:37:21 - root - INFO - 系统 - User admin logged in successfully
+2025-08-12 17:20:39 - routers.users - INFO - 系统 - 用户 user 创建成功，操作者：admin
+2025-08-12 17:20:57 - root - INFO - 系统 - User user logged in successfully
+2025-08-12 17:21:10 - root - WARNING - 系统 - Failed login attempt for username: admin
+2025-08-12 17:21:14 - root - INFO - 系统 - User admin logged in successfully
