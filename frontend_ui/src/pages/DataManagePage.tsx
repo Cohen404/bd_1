@@ -9,12 +9,25 @@ import {
   BarChart3,
   CheckSquare,
   Square,
-  AlertTriangle
+  AlertTriangle,
+  Image,
+  RefreshCw,
+  Download,
+  FileImage,
+  ArrowLeft,
+  ArrowRight,
+  ZoomIn,
+  Play,
+  CheckCircle,
+  Clock,
+  XCircle
 } from 'lucide-react';
 import { apiClient } from '@/utils/api';
-import { Data } from '@/types';
+import { Data, PreprocessProgress } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
 import toast from 'react-hot-toast';
+import ProgressBar from '@/components/Common/ProgressBar';
+import ProgressModal from '@/components/Common/ProgressModal';
 
 const DataManagePage: React.FC = () => {
   const [dataList, setDataList] = useState<Data[]>([]);
@@ -22,14 +35,33 @@ const DataManagePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
+  const [batchUploadModalVisible, setBatchUploadModalVisible] = useState(false);
+  const [imageViewerVisible, setImageViewerVisible] = useState(false);
+  const [preprocessingModalVisible, setPreprocessingModalVisible] = useState(false);
   const [visualizationType, setVisualizationType] = useState('differential_entropy');
   const [showVisualization, setShowVisualization] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [batchUploading, setBatchUploading] = useState(false);
+  const [preprocessing, setPreprocessing] = useState(false);
+  const [currentImageData, setCurrentImageData] = useState<{
+    dataId: number;
+    images: any[];
+    currentIndex: number;
+  } | null>(null);
   const [formData, setFormData] = useState({
     personnel_id: '',
     personnel_name: '',
     file: null as File | null
   });
+  const [batchFiles, setBatchFiles] = useState<FileList | null>(null);
+  const [preprocessingProgress, setPreprocessingProgress] = useState<{
+    [key: number]: { status: string; message: string }
+  }>({});
+  const [progressModalVisible, setProgressModalVisible] = useState(false);
+  const [progressDataIds, setProgressDataIds] = useState<number[]>([]);
+  const [dataProgressMap, setDataProgressMap] = useState<{[key: number]: PreprocessProgress}>({});
+  const [processingStartTimes, setProcessingStartTimes] = useState<{[key: number]: number}>({});
+  const [simulatedProgress, setSimulatedProgress] = useState<{[key: number]: number}>({});
 
   // 可视化指标选项
   const visualizationOptions = [
@@ -38,6 +70,26 @@ const DataManagePage: React.FC = () => {
     { value: 'theta_alpha_beta_gamma_powers', label: 'Theta Alpha Beta Gamma Powers' },
     { value: 'time_domain_features', label: 'Time Domain Features' },
     { value: 'time_frequency_features', label: 'Time Frequency Features' }
+  ];
+
+  // 图像类型选项
+  const imageTypes = [
+    { key: 'theta', label: 'Theta功率特征图' },
+    { key: 'alpha', label: 'Alpha功率特征图' },
+    { key: 'beta', label: 'Beta功率特征图' },
+    { key: 'gamma', label: 'Gamma功率特征图' },
+    { key: 'frequency_band_1', label: '均分频带1特征图' },
+    { key: 'frequency_band_2', label: '均分频带2特征图' },
+    { key: 'frequency_band_3', label: '均分频带3特征图' },
+    { key: 'frequency_band_4', label: '均分频带4特征图' },
+    { key: 'frequency_band_5', label: '均分频带5特征图' },
+    { key: 'time_zero_crossing', label: '时域特征-过零率' },
+    { key: 'time_variance', label: '时域特征-方差' },
+    { key: 'time_energy', label: '时域特征-能量' },
+    { key: 'time_difference', label: '时域特征-差分' },
+    { key: 'frequency_wavelet', label: '时频域特征图' },
+    { key: 'differential_entropy', label: '微分熵特征图' },
+    { key: 'serum_analysis', label: '血清指标分析' }
   ];
 
   // 获取数据列表
@@ -54,9 +106,99 @@ const DataManagePage: React.FC = () => {
     }
   };
 
+  // 获取状态图标和颜色
+  const getStatusIcon = (processingStatus: string, featureStatus: string) => {
+    if (processingStatus === 'failed' || featureStatus === 'failed') {
+      return <XCircle className="h-4 w-4 text-red-500" />;
+    } else if (processingStatus === 'completed' && featureStatus === 'completed') {
+      return <CheckCircle className="h-4 w-4 text-green-500" />;
+    } else if (processingStatus === 'processing' || featureStatus === 'processing') {
+      return <Play className="h-4 w-4 text-blue-500 animate-spin" />;
+    } else {
+      return <Clock className="h-4 w-4 text-gray-400" />;
+    }
+  };
+
+  // 获取状态文本
+  const getStatusText = (processingStatus: string, featureStatus: string) => {
+    if (processingStatus === 'failed' || featureStatus === 'failed') {
+      return '处理失败';
+    } else if (processingStatus === 'completed' && featureStatus === 'completed') {
+      return '已完成';
+    } else if (processingStatus === 'completed' && featureStatus === 'processing') {
+      return '特征提取中';
+    } else if (processingStatus === 'processing') {
+      return '预处理中';
+    } else {
+      return '待处理';
+    }
+  };
+
+  // 计算进度百分比（支持模拟进度）
+  const getProgressPercentage = (dataId: number, processingStatus: string, featureStatus: string) => {
+    // 如果真正完成了，返回100%
+    if (processingStatus === 'completed' && featureStatus === 'completed') {
+      return 100;
+    }
+    
+    // 如果失败了，返回0
+    if (processingStatus === 'failed' || featureStatus === 'failed') {
+      return 0;
+    }
+    
+    // 如果还是pending，返回0
+    if (processingStatus === 'pending') {
+      return 0;
+    }
+    
+    // 如果正在处理中，计算模拟进度
+    if (processingStatus === 'processing' || featureStatus === 'processing') {
+      // 记录开始时间
+      if (!processingStartTimes[dataId]) {
+        const newStartTimes = { ...processingStartTimes };
+        newStartTimes[dataId] = Date.now();
+        setProcessingStartTimes(newStartTimes);
+        return 0;
+      }
+      
+      const elapsed = (Date.now() - processingStartTimes[dataId]) / 1000; // 转换为秒
+      const maxTime = 60; // 60秒
+      const maxProgress = 99; // 最大99%
+      
+      // 使用指数增长模拟，前期快，后期慢
+      const progress = Math.min(maxProgress, maxProgress * (1 - Math.exp(-elapsed / (maxTime / 3))));
+      
+      const simulated = Math.round(progress);
+      
+      // 更新模拟进度状态
+      setSimulatedProgress(prev => ({ ...prev, [dataId]: simulated }));
+      
+      return simulated;
+    }
+    
+    return 0;
+  };
+
   useEffect(() => {
     fetchData();
   }, [searchTerm]);
+
+  // 定期更新进度（用于显示模拟进度）
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // 检查是否有正在处理的数据
+      const hasProcessing = dataList.some(item => 
+        item.processing_status === 'processing' || item.feature_status === 'processing'
+      );
+      
+      if (hasProcessing) {
+        // 强制重新渲染以更新进度条
+        setDataList(prev => [...prev]);
+      }
+    }, 1000); // 每秒更新一次
+    
+    return () => clearInterval(interval);
+  }, [dataList]);
 
   // 选择/取消选择项目
   const toggleSelection = (dataId: number) => {
@@ -70,10 +212,16 @@ const DataManagePage: React.FC = () => {
   };
 
   // 选择前200条
-  const selectTop200 = () => {
-    const top200 = dataList.slice(0, 200).map(item => item.id);
-    setSelectedItems(new Set(top200));
-    toast.success(`已选择前${Math.min(200, dataList.length)}条数据`);
+  const selectTop200 = async () => {
+    try {
+      const response = await apiClient.getTop200Data();
+      const top200Ids = response.map((item: Data) => item.id);
+      setSelectedItems(new Set(top200Ids));
+      toast.success(`已选择前${top200Ids.length}条数据`);
+    } catch (error) {
+      console.error('获取前200条数据失败:', error);
+      toast.error('获取前200条数据失败');
+    }
   };
 
   // 全选/取消全选
@@ -112,6 +260,79 @@ const DataManagePage: React.FC = () => {
     }
   };
 
+  // 批量上传文件
+  const handleBatchUpload = async () => {
+    if (!batchFiles || batchFiles.length === 0) {
+      toast.error('请选择要上传的文件');
+      return;
+    }
+
+    try {
+      setBatchUploading(true);
+      const formData = new FormData();
+      
+      Array.from(batchFiles).forEach((file) => {
+        formData.append('files', file);
+      });
+
+      const response = await apiClient.batchUploadData(formData);
+      
+      if (response.success_count > 0) {
+        toast.success(`成功上传 ${response.success_count} 个文件`);
+      }
+      
+      if (response.failed_count > 0) {
+        toast.error(`${response.failed_count} 个文件上传失败`);
+        // 显示具体错误信息
+        response.errors?.forEach((error: string) => {
+          console.error('上传错误:', error);
+        });
+      }
+      
+      setBatchUploadModalVisible(false);
+      setBatchFiles(null);
+      fetchData();
+    } catch (error) {
+      console.error('批量上传失败:', error);
+      toast.error('批量上传失败');
+    } finally {
+      setBatchUploading(false);
+    }
+  };
+
+  // 批量预处理
+  const handleBatchPreprocess = async () => {
+    if (selectedItems.size === 0) {
+      toast.error('请先选择要预处理的数据');
+      return;
+    }
+
+    try {
+      setPreprocessing(true);
+      
+      const selectedIds = Array.from(selectedItems);
+      setProgressDataIds(selectedIds);
+      setProgressModalVisible(true);
+
+      // 启动批量预处理
+      const response = await apiClient.batchPreprocessData({ data_ids: selectedIds });
+      
+      toast.success(`批量预处理已启动，请查看进度窗口监控处理状态`);
+      
+      // 刷新数据列表以获取最新状态
+      setTimeout(() => {
+        fetchData();
+      }, 1000);
+
+    } catch (error) {
+      console.error('批量预处理失败:', error);
+      toast.error('批量预处理失败');
+      setProgressModalVisible(false);
+    } finally {
+      setPreprocessing(false);
+    }
+  };
+
   // 批量删除
   const handleBatchDelete = async () => {
     if (selectedItems.size === 0) {
@@ -125,13 +346,41 @@ const DataManagePage: React.FC = () => {
 
     try {
       const selectedIds = Array.from(selectedItems);
-      await Promise.all(selectedIds.map(id => apiClient.deleteData(id)));
-      toast.success(`已删除${selectedIds.length}条数据`);
+      const response = await apiClient.batchDeleteData({ data_ids: selectedIds });
+      toast.success(response.message || `已删除${selectedIds.length}条数据`);
       setSelectedItems(new Set());
       fetchData();
     } catch (error) {
       console.error('批量删除失败:', error);
       toast.error('批量删除失败');
+    }
+  };
+
+  // 单个数据预处理
+  const handlePreprocessSingle = async (dataId: number, fileName: string) => {
+    if (!window.confirm(`确定要预处理"${fileName}"吗？这将进行特征提取和图片生成。`)) {
+      return;
+    }
+
+    try {
+      // 显示单个数据的进度窗口
+      setProgressDataIds([dataId]);
+      setProgressModalVisible(true);
+
+      // 启动预处理
+      const result = await apiClient.preprocessData(dataId);
+      
+      toast.success('数据预处理已启动，请查看进度窗口监控处理状态');
+      
+      // 刷新数据列表以获取最新状态
+      setTimeout(() => {
+        fetchData();
+      }, 1000);
+
+    } catch (error) {
+      console.error('数据预处理失败:', error);
+      toast.error('数据预处理失败');
+      setProgressModalVisible(false);
     }
   };
 
@@ -149,6 +398,41 @@ const DataManagePage: React.FC = () => {
       console.error('删除数据失败:', error);
       toast.error('删除数据失败');
     }
+  };
+
+  // 查看数据图像
+  const handleViewImages = async (dataId: number) => {
+    try {
+      const images = await apiClient.getDataImages(dataId);
+      setCurrentImageData({
+        dataId,
+        images,
+        currentIndex: 0
+      });
+      setImageViewerVisible(true);
+    } catch (error) {
+      console.error('获取图像列表失败:', error);
+      toast.error('获取图像列表失败');
+    }
+  };
+
+  // 切换图像
+  const navigateImage = (direction: 'prev' | 'next') => {
+    if (!currentImageData) return;
+    
+    const { images, currentIndex } = currentImageData;
+    let newIndex = currentIndex;
+    
+    if (direction === 'prev') {
+      newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+    } else {
+      newIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+    }
+    
+    setCurrentImageData({
+      ...currentImageData,
+      currentIndex: newIndex
+    });
   };
 
   // 过滤数据
@@ -187,7 +471,14 @@ const DataManagePage: React.FC = () => {
             className="btn btn-primary flex items-center space-x-2"
           >
             <Upload className="h-4 w-4" />
-            <span>上传</span>
+            <span>单个上传</span>
+          </button>
+          <button
+            onClick={() => setBatchUploadModalVisible(true)}
+            className="btn btn-secondary flex items-center space-x-2"
+          >
+            <Upload className="h-4 w-4" />
+            <span>批量上传</span>
           </button>
           <button
             onClick={selectTop200}
@@ -197,10 +488,11 @@ const DataManagePage: React.FC = () => {
             <span>选择前200条</span>
           </button>
           <button
-            onClick={() => toast('批量预处理功能正在开发中', { icon: '🔧' })}
-            className="btn btn-secondary flex items-center space-x-2"
+            onClick={handleBatchPreprocess}
+            disabled={selectedItems.size === 0 || preprocessing}
+            className="btn btn-secondary flex items-center space-x-2 disabled:opacity-50"
           >
-            <Settings className="h-4 w-4" />
+            {preprocessing ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Settings className="h-4 w-4" />}
             <span>批量预处理</span>
           </button>
           <button
@@ -219,7 +511,7 @@ const DataManagePage: React.FC = () => {
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
           <div className="flex items-center justify-between">
             <span className="text-blue-700 font-medium">
-              已选择: {selectedItems.size}/{Math.min(200, filteredData.length)}
+              已选择: {selectedItems.size}/{filteredData.length}
             </span>
             <button
               onClick={() => setSelectedItems(new Set())}
@@ -277,6 +569,9 @@ const DataManagePage: React.FC = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         上传信息
                       </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        处理状态
+                      </th>
                       <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                         操作
                       </th>
@@ -322,14 +617,41 @@ const DataManagePage: React.FC = () => {
                             </div>
                           </div>
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              {getStatusIcon(item.processing_status, item.feature_status)}
+                              <span className="text-sm text-gray-700">
+                                {getStatusText(item.processing_status, item.feature_status)}
+                              </span>
+                            </div>
+                                                         <div className="w-24">
+                               <ProgressBar
+                                 progress={getProgressPercentage(item.id, item.processing_status, item.feature_status)}
+                                 status={item.processing_status === 'failed' || item.feature_status === 'failed' ? 'failed' : 
+                                        item.processing_status === 'completed' && item.feature_status === 'completed' ? 'completed' : 
+                                        item.processing_status === 'processing' || item.feature_status === 'processing' ? 'processing' : 'pending'}
+                                 size="small"
+                                 showIcon={false}
+                               />
+                             </div>
+                          </div>
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <div className="flex items-center justify-end space-x-2">
                             <button
-                              onClick={() => toast('查看功能正在开发中', { icon: '👁️' })}
-                              className="text-blue-600 hover:text-blue-700"
-                              title="查看详情"
+                              onClick={() => handlePreprocessSingle(item.id, item.personnel_name)}
+                              className="text-green-600 hover:text-green-700"
+                              title="预处理"
                             >
-                              <Eye className="h-4 w-4" />
+                              <Settings className="h-4 w-4" />
+                            </button>
+                            <button
+                              onClick={() => handleViewImages(item.id)}
+                              className="text-blue-600 hover:text-blue-700"
+                              title="查看图像"
+                            >
+                              <Image className="h-4 w-4" />
                             </button>
                             <button
                               onClick={() => handleDeleteSingle(item.id, item.personnel_name)}
@@ -432,11 +754,11 @@ const DataManagePage: React.FC = () => {
                 <label className="label">数据文件 *</label>
                 <input
                   type="file"
-                  accept=".csv,.xlsx,.xls"
+                  accept=".zip"
                   className="input"
                   onChange={(e) => setFormData({ ...formData, file: e.target.files?.[0] || null })}
                 />
-                <p className="text-xs text-gray-500 mt-1">支持格式：CSV、Excel文件</p>
+                <p className="text-xs text-gray-500 mt-1">支持格式：ZIP压缩包（包含数据文件）</p>
               </div>
             </div>
 
@@ -462,6 +784,181 @@ const DataManagePage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* 批量上传模态框 */}
+      {batchUploadModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">批量上传数据文件</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="label">选择多个文件 *</label>
+                <input
+                  type="file"
+                  multiple
+                  accept=".zip"
+                  className="input"
+                  onChange={(e) => setBatchFiles(e.target.files)}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  支持格式：ZIP压缩包，文件名格式：人员ID_姓名.zip
+                </p>
+                {batchFiles && (
+                  <p className="text-sm text-blue-600 mt-2">
+                    已选择 {batchFiles.length} 个文件
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => {
+                  setBatchUploadModalVisible(false);
+                  setBatchFiles(null);
+                }}
+                className="btn btn-secondary"
+                disabled={batchUploading}
+              >
+                取消
+              </button>
+              <button
+                onClick={handleBatchUpload}
+                className="btn btn-primary"
+                disabled={batchUploading}
+              >
+                {batchUploading ? '上传中...' : '批量上传'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 预处理进度模态框 */}
+      {preprocessingModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">批量预处理进度</h2>
+            
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {Object.entries(preprocessingProgress).map(([dataId, progress]) => (
+                <div key={dataId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <span className="text-sm font-medium">数据ID: {dataId}</span>
+                  <div className="flex items-center space-x-2">
+                    {progress.status === 'pending' && (
+                      <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
+                    )}
+                    {progress.status === 'completed' && (
+                      <CheckSquare className="h-4 w-4 text-green-500" />
+                    )}
+                    {progress.status === 'failed' && (
+                      <AlertTriangle className="h-4 w-4 text-red-500" />
+                    )}
+                    <span className="text-xs text-gray-600">{progress.message}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setPreprocessingModalVisible(false)}
+                className="btn btn-primary"
+                disabled={preprocessing}
+              >
+                {preprocessing ? '处理中...' : '关闭'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 图像查看器模态框 */}
+      {imageViewerVisible && currentImageData && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">
+                数据ID: {currentImageData.dataId} - 图像查看器
+              </h2>
+              <button
+                onClick={() => setImageViewerVisible(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            
+            {currentImageData.images.length > 0 ? (
+              <div className="space-y-4">
+                {/* 图像导航 */}
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-600">
+                    {currentImageData.currentIndex + 1} / {currentImageData.images.length}
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => navigateImage('prev')}
+                      className="btn btn-secondary flex items-center space-x-1"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      <span>上一张</span>
+                    </button>
+                    <button
+                      onClick={() => navigateImage('next')}
+                      className="btn btn-secondary flex items-center space-x-1"
+                    >
+                      <span>下一张</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+                
+                {/* 当前图像信息 */}
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <h3 className="font-medium text-gray-900">
+                    {currentImageData.images[currentImageData.currentIndex]?.description}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    文件名: {currentImageData.images[currentImageData.currentIndex]?.image_name}
+                  </p>
+                </div>
+                
+                {/* 图像显示区域 */}
+                <div className="flex justify-center bg-gray-100 rounded-lg p-4">
+                  <img
+                    src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
+                    alt={currentImageData.images[currentImageData.currentIndex]?.description}
+                    className="max-w-full max-h-96 object-contain rounded-lg shadow-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+';
+                    }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <FileImage className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-500">该数据暂无可用图像</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 进度监控弹窗 */}
+      <ProgressModal
+        visible={progressModalVisible}
+        onClose={() => {
+          setProgressModalVisible(false);
+          setProgressDataIds([]);
+          fetchData(); // 关闭时刷新数据以获取最新状态
+        }}
+        dataIds={progressDataIds}
+        title={progressDataIds.length > 1 ? '批量预处理进度' : '数据预处理进度'}
+      />
     </div>
   );
 };

@@ -83,6 +83,8 @@ class Data(Base):
     personnel_name = Column(String(255), nullable=False, comment='人员姓名')
     user_id = Column(String(64), ForeignKey('tb_user.user_id'), nullable=False, comment='关联用户ID')
     upload_time = Column(DateTime, default=datetime.now, comment='上传时间')
+    processing_status = Column(String(20), nullable=False, default='pending', comment='预处理状态: pending/processing/completed/failed')
+    feature_status = Column(String(20), nullable=False, default='pending', comment='特征提取状态: pending/processing/completed/failed')
     
     # 关系
     user = relationship("User", back_populates="data")

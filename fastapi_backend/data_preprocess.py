@@ -65,8 +65,29 @@ def treat(data_dir):
         print("开始预处理流程...")
         
         # 按优先级查找不同格式的脑电数据文件
-        edf_files = [f for f in os.listdir(data_dir) if f.endswith('.edf')]
-        set_files = [f for f in os.listdir(data_dir) if f.endswith('.set')]
+        edf_files = []
+        set_files = []
+        
+        # 先在当前目录查找
+        for f in os.listdir(data_dir):
+            if f.endswith('.edf'):
+                edf_files.append(f)
+            elif f.endswith('.set'):
+                set_files.append(f)
+        
+        # 如果当前目录没有找到，搜索子目录
+        if not edf_files and not set_files:
+            for item in os.listdir(data_dir):
+                item_path = os.path.join(data_dir, item)
+                if os.path.isdir(item_path):
+                    try:
+                        for f in os.listdir(item_path):
+                            if f.endswith('.edf'):
+                                edf_files.append(os.path.join(item, f))
+                            elif f.endswith('.set'):
+                                set_files.append(os.path.join(item, f))
+                    except PermissionError:
+                        continue
 
         raw = None
         
@@ -196,7 +217,7 @@ def treat(data_dir):
         del raw  # 释放原始数据内存
 
         # 滤波处理，设置1-100Hz频段
-        raw_filtered = raw_resampled.copy().filter(l_freq=1, h_freq=100, n_jobs=2)
+        raw_filtered = raw_resampled.copy().filter(l_freq=1, h_freq=100)
         del raw_resampled
 
         # 独立成分分析（ICA）- 优化ICA计算
@@ -274,7 +295,7 @@ def treat(data_dir):
         
         # 只取最后108个epochs
         data = epochs_data[-108::, :, :]
-        print(data.shape)
+        logging.info(f"最终数据形状: {data.shape}")
         del epochs_data
 
         # 保存处理后的数据

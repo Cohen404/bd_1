@@ -120,6 +120,8 @@ class DataUpdate(BaseModel):
 class Data(DataBase):
     id: int
     upload_time: datetime
+    processing_status: str
+    feature_status: str
 
     class Config:
         orm_mode = True
@@ -228,3 +230,69 @@ class HealthEvaluateRequest(BaseModel):
 # 批量健康评估请求模型
 class BatchHealthEvaluateRequest(BaseModel):
     data_ids: List[int] 
+
+# 批量预处理请求模型
+class BatchPreprocessRequest(BaseModel):
+    data_ids: List[int]
+
+# 预处理进度响应模型
+class PreprocessProgress(BaseModel):
+    data_id: int
+    personnel_name: str
+    processing_status: str
+    feature_status: str
+    progress_percentage: int
+    message: str
+
+# 预处理状态更新模型
+class StatusUpdate(BaseModel):
+    data_id: int
+    processing_status: Optional[str] = None
+    feature_status: Optional[str] = None
+
+# 批量删除请求模型
+class BatchDeleteRequest(BaseModel):
+    data_ids: List[int]
+
+# 批量上传响应模型
+class BatchUploadResponse(BaseModel):
+    success_count: int
+    failed_count: int
+    uploaded_data: List[Data]
+    errors: List[str]
+
+# 图像信息模型
+class ImageInfo(BaseModel):
+    image_type: str
+    image_name: str
+    image_path: str
+    description: Optional[str] = None
+
+# 图像查看请求模型
+class ImageViewRequest(BaseModel):
+    data_id: int
+    image_type: str
+
+# 结果导出请求模型
+class ResultExportRequest(BaseModel):
+    result_ids: List[int]
+    export_format: str = "excel"  # excel, csv, pdf
+
+# LED状态模型
+class LEDStatus(BaseModel):
+    stress_led: str  # "red", "gray"
+    depression_led: str
+    anxiety_led: str
+    social_led: str
+    stress_score: float
+    depression_score: float
+    anxiety_score: float
+    social_isolation_score: float
+
+# 评估状态模型
+class EvaluationStatus(BaseModel):
+    data_id: int
+    status: str  # "pending", "processing", "completed", "failed"
+    progress: float  # 0.0 to 1.0
+    message: Optional[str] = None
+    result_id: Optional[int] = None 

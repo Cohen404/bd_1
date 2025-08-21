@@ -67,12 +67,29 @@ export interface Data {
   personnel_name: string;
   user_id: string;
   upload_time: string;
+  processing_status: 'pending' | 'processing' | 'completed' | 'failed';
+  feature_status: 'pending' | 'processing' | 'completed' | 'failed';
 }
 
 export interface DataCreate {
   personnel_id: string;
   personnel_name: string;
   file: File;
+}
+
+// 预处理进度类型
+export interface PreprocessProgress {
+  data_id: number;
+  personnel_name: string;
+  processing_status: string;
+  feature_status: string;
+  progress_percentage: number;
+  message: string;
+}
+
+// 批量预处理请求类型
+export interface BatchPreprocessRequest {
+  data_ids: number[];
 }
 
 // 健康评估结果类型

@@ -133,12 +133,41 @@ class API {
     return response.data;
   }
 
+  async getTop200Data() {
+    const response = await api.get('/data/top-200');
+    return response.data;
+  }
+
   async uploadData(formData: FormData) {
-    const response = await api.post('/data/upload', formData, {
+    const response = await api.post('/data/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data;
+  }
+
+  async batchUploadData(formData: FormData) {
+    const response = await api.post('/data/batch-upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+
+  async preprocessData(dataId: number) {
+    const response = await api.post(`/data/${dataId}/preprocess`);
+    return response.data;
+  }
+
+  async batchPreprocessData(data: { data_ids: number[] }) {
+    const response = await api.post('/data/batch-preprocess', data);
+    return response.data;
+  }
+
+  async batchDeleteData(data: { data_ids: number[] }) {
+    const response = await api.delete('/data/batch-delete', { data });
     return response.data;
   }
 
@@ -149,6 +178,27 @@ class API {
 
   async getDataById(dataId: number) {
     const response = await api.get(`/data/${dataId}`);
+    return response.data;
+  }
+
+  async getDataImages(dataId: number) {
+    const response = await api.get(`/health/images/${dataId}`);
+    return response.data;
+  }
+
+  // 预处理进度相关
+  async getDataProgress(dataId: number) {
+    const response = await api.get(`/data/progress/single/${dataId}`);
+    return response.data;
+  }
+
+  async getBatchProgress(dataIds: number[]) {
+    const response = await api.get(`/data/progress?data_ids=${dataIds.join(',')}`);
+    return response.data;
+  }
+
+  async updateDataStatus(dataId: number, data: { processing_status?: string; feature_status?: string }) {
+    const response = await api.put(`/data/status/${dataId}`, data);
     return response.data;
   }
 

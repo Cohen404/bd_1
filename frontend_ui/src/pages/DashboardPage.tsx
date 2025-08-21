@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Activity, 
@@ -8,68 +8,153 @@ import {
   TrendingUp,
   Users,
   Clock,
-  CheckCircle
+  CheckCircle,
+  AlertTriangle,
+  BarChart3,
+  RefreshCw,
+  FileText,
+  Settings,
+  HardDrive,
+  Monitor
 } from 'lucide-react';
+import { apiClient } from '@/utils/api';
+import toast from 'react-hot-toast';
+
+interface DashboardStats {
+  data_count: number;
+  evaluation_count: number;
+  result_count: number;
+  model_count: number;
+  user_count: number;
+  recent_evaluations: number;
+  high_risk_count: number;
+  avg_scores: {
+    stress: number;
+    depression: number;
+    anxiety: number;
+    social: number;
+  };
+}
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [systemStatus, setSystemStatus] = useState({
+    models_ready: false,
+    database_connected: true,
+    services_running: true
+  });
 
-  const stats = [
-    {
-      title: '我的数据',
-      value: '12',
-      icon: Database,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      trend: '+2 本月'
-    },
-    {
-      title: '评估次数',
-      value: '8',
-      icon: Activity,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      trend: '+3 本月'
-    },
-    {
-      title: '完成报告',
-      value: '6',
-      icon: FileBarChart,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      trend: '+1 本月'
-    },
-    {
-      title: '最新评分',
-      value: '82',
-      icon: Brain,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
-      trend: '健康状态'
+  // 获取仪表板统计数据
+  const fetchDashboardStats = async () => {
+    try {
+      setLoading(true);
+      
+      // 并行获取各种统计数据
+      const [dataResponse, resultsResponse, modelsResponse, usersResponse] = 
+        await Promise.all([
+          apiClient.get('/data/'),
+          apiClient.get('/results/'),
+          apiClient.get('/models/'),
+          apiClient.get('/users/')
+        ]);
+
+      const dataList = Array.isArray(dataResponse) ? dataResponse : dataResponse?.items || [];
+      const resultsList = Array.isArray(resultsResponse) ? resultsResponse : resultsResponse?.items || [];
+      const modelsList = Array.isArray(modelsResponse) ? modelsResponse : modelsResponse?.items || [];
+      const usersList = Array.isArray(usersResponse) ? usersResponse : usersResponse?.items || [];
+
+      // 计算最近7天的评估数量
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const recentEvaluations = resultsList.filter((result: any) => 
+        new Date(result.result_time) >= sevenDaysAgo
+      ).length;
+
+      // 计算高风险数量
+      const highRiskCount = resultsList.filter((result: any) => 
+        result.stress_score >= 50 || 
+        result.depression_score >= 50 || 
+        result.anxiety_score >= 50 || 
+        result.social_isolation_score >= 50
+      ).length;
+
+      // 计算平均分数
+      const avgScores = resultsList.length > 0 ? {
+        stress: resultsList.reduce((sum: number, r: any) => sum + r.stress_score, 0) / resultsList.length,
+        depression: resultsList.reduce((sum: number, r: any) => sum + r.depression_score, 0) / resultsList.length,
+        anxiety: resultsList.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / resultsList.length,
+        social: resultsList.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / resultsList.length,
+      } : {
+        stress: 0,
+        depression: 0,
+        anxiety: 0,
+        social: 0
+      };
+
+      setStats({
+        data_count: dataList.length,
+        evaluation_count: resultsList.length,
+        result_count: resultsList.length,
+        model_count: modelsList.length,
+        user_count: usersList.length,
+        recent_evaluations: recentEvaluations,
+        high_risk_count: highRiskCount,
+        avg_scores: avgScores
+      });
+
+      // 检查系统状态
+      setSystemStatus({
+        models_ready: modelsList.length > 0,
+        database_connected: true,
+        services_running: true
+      });
+
+    } catch (error) {
+      console.error('获取仪表板数据失败:', error);
+      toast.error('获取仪表板数据失败');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  useEffect(() => {
+    fetchDashboardStats();
+    
+    // 每30秒刷新一次数据
+    const interval = setInterval(fetchDashboardStats, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 获取风险等级样式
+  const getRiskStyle = (score: number) => {
+    if (score >= 50) return { color: 'text-red-600', bg: 'bg-red-50' };
+    if (score >= 30) return { color: 'text-yellow-600', bg: 'bg-yellow-50' };
+    return { color: 'text-green-600', bg: 'bg-green-50' };
+  };
 
   const recentActivities = [
     {
       id: 1,
       type: 'evaluation',
       title: '完成健康评估',
-      description: '对数据集 subject_001.csv 进行了应激评估',
-      time: '2小时前'
+      description: `最近完成了${stats?.recent_evaluations || 0}次评估`,
+      time: '实时数据'
     },
     {
       id: 2,
       type: 'upload',
-      title: '数据上传成功',
-      description: '上传了新的数据文件 subject_002.csv',
-      time: '4小时前'
+      title: '数据管理',
+      description: `当前共有${stats?.data_count || 0}个数据文件`,
+      time: '实时数据'
     },
     {
       id: 3,
       type: 'report',
-      title: '报告生成完成',
-      description: '健康评估报告已生成并可下载',
-      time: '1天前'
+      title: '结果分析',
+      description: `已生成${stats?.result_count || 0}份评估报告`,
+      time: '实时数据'
     }
   ];
 
@@ -95,6 +180,13 @@ const DashboardPage: React.FC = () => {
       description: '查看评估结果',
       path: '/result-manage',
       primary: false
+    },
+    {
+      title: '模型管理',
+      icon: Brain,
+      description: '管理AI模型',
+      path: '/model-manage',
+      primary: false
     }
   ];
 
@@ -111,34 +203,132 @@ const DashboardPage: React.FC = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary-600 border-t-transparent"></div>
+        <span className="ml-3 text-gray-500">加载数据中...</span>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* 欢迎信息 */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">控制台</h1>
-        <p className="text-gray-600 mt-1">欢迎使用北京健康评估系统</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">控制台</h1>
+          <p className="text-gray-600 mt-1">欢迎使用北京健康评估系统</p>
+        </div>
+        <button
+          onClick={fetchDashboardStats}
+          disabled={loading}
+          className="btn btn-secondary flex items-center space-x-2"
+        >
+          <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+          <span>刷新数据</span>
+        </button>
       </div>
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const IconComponent = stat.icon;
-          return (
-            <div key={index} className="card p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
-                  <p className="text-sm text-gray-500 mt-1">{stat.trend}</p>
-                </div>
-                <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                  <IconComponent className={`h-6 w-6 ${stat.color}`} />
-                </div>
-              </div>
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">数据文件</p>
+              <p className="text-2xl font-bold text-gray-900 mt-2">{stats?.data_count || 0}</p>
+              <p className="text-sm text-gray-500 mt-1">可用数据</p>
             </div>
-          );
-        })}
+            <div className="p-3 rounded-full bg-blue-50">
+              <Database className="h-6 w-6 text-blue-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">评估次数</p>
+              <p className="text-2xl font-bold text-gray-900 mt-2">{stats?.evaluation_count || 0}</p>
+              <p className="text-sm text-gray-500 mt-1">总评估数</p>
+            </div>
+            <div className="p-3 rounded-full bg-green-50">
+              <Activity className="h-6 w-6 text-green-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">评估报告</p>
+              <p className="text-2xl font-bold text-gray-900 mt-2">{stats?.result_count || 0}</p>
+              <p className="text-sm text-gray-500 mt-1">已生成报告</p>
+            </div>
+            <div className="p-3 rounded-full bg-purple-50">
+              <FileBarChart className="h-6 w-6 text-purple-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">AI模型</p>
+              <p className="text-2xl font-bold text-gray-900 mt-2">{stats?.model_count || 0}</p>
+              <p className="text-sm text-gray-500 mt-1">可用模型</p>
+            </div>
+            <div className="p-3 rounded-full bg-orange-50">
+              <Brain className="h-6 w-6 text-orange-600" />
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* 健康状态概览 */}
+      {stats && stats.avg_scores && (
+        <div className="card p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">平均健康指标</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className={`p-4 rounded-lg ${getRiskStyle(stats.avg_scores.stress).bg}`}>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">平均应激水平</span>
+                <Activity className="h-5 w-5 text-gray-600" />
+              </div>
+              <p className={`text-2xl font-bold mt-2 ${getRiskStyle(stats.avg_scores.stress).color}`}>
+                {stats.avg_scores.stress.toFixed(1)}
+              </p>
+            </div>
+            <div className={`p-4 rounded-lg ${getRiskStyle(stats.avg_scores.depression).bg}`}>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">平均抑郁水平</span>
+                <Brain className="h-5 w-5 text-gray-600" />
+              </div>
+              <p className={`text-2xl font-bold mt-2 ${getRiskStyle(stats.avg_scores.depression).color}`}>
+                {stats.avg_scores.depression.toFixed(1)}
+              </p>
+            </div>
+            <div className={`p-4 rounded-lg ${getRiskStyle(stats.avg_scores.anxiety).bg}`}>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">平均焦虑水平</span>
+                <AlertTriangle className="h-5 w-5 text-gray-600" />
+              </div>
+              <p className={`text-2xl font-bold mt-2 ${getRiskStyle(stats.avg_scores.anxiety).color}`}>
+                {stats.avg_scores.anxiety.toFixed(1)}
+              </p>
+            </div>
+            <div className={`p-4 rounded-lg ${getRiskStyle(stats.avg_scores.social).bg}`}>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">平均社交孤立</span>
+                <Users className="h-5 w-5 text-gray-600" />
+              </div>
+              <p className={`text-2xl font-bold mt-2 ${getRiskStyle(stats.avg_scores.social).color}`}>
+                {stats.avg_scores.social.toFixed(1)}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 最近活动 */}
@@ -203,19 +393,57 @@ const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 系统提示 */}
-      <div className="card p-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center">
-            <Brain className="h-4 w-4 text-blue-600" />
+      {/* 系统状态 */}
+      <div className="card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900">系统状态</h2>
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <span className="text-sm text-gray-600">系统正常运行</span>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-900">
-              系统运行正常
-            </p>
-            <p className="text-xs text-gray-500">
-              所有健康评估模型已就绪，可以开始评估
-            </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+              <Brain className="h-4 w-4 text-green-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">
+                AI模型状态
+              </p>
+              <p className="text-xs text-gray-500">
+                {systemStatus.models_ready ? '模型已就绪，可以开始评估' : '模型未就绪'}
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+              <Database className="h-4 w-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">
+                数据库连接
+              </p>
+              <p className="text-xs text-gray-500">
+                {systemStatus.database_connected ? '数据库连接正常' : '数据库连接异常'}
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+              <Monitor className="h-4 w-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900">
+                服务状态
+              </p>
+              <p className="text-xs text-gray-500">
+                {systemStatus.services_running ? '所有服务运行正常' : '部分服务异常'}
+              </p>
+            </div>
           </div>
         </div>
       </div>

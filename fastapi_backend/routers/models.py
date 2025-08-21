@@ -1,10 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile, Form
 from sqlalchemy.orm import Session
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 import logging
 import os
 import shutil
 from datetime import datetime
+import zipfile
+import io
+import json
+import glob
 
 from database import get_db
 import models as db_models
@@ -53,18 +57,17 @@ async def create_model(
     with open(model_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
-    # 创建standarder目录并创建空的std_{i}.pkl文件
-    standarder_dir = os.path.join(model_type_dir, "standarder")
-    os.makedirs(standarder_dir, exist_ok=True)
-    
-    # 如果已存在此类型的模型，则更新
+    # 如果存在旧模型，删除旧文件并更新记录
     if existing_model:
-        # 尝试删除旧模型文件，但不强制
+        # 备份旧模型
+        if os.path.exists(existing_model.model_path):
+            backup_filename = f"backup_{os.path.basename(existing_model.model_path)}"
+            backup_path = os.path.join(model_type_dir, backup_filename)
         try:
-            if os.path.exists(existing_model.model_path):
-                os.remove(existing_model.model_path)
+                shutil.move(existing_model.model_path, backup_path)
+                logging.info(f"旧模型已备份到: {backup_path}")
         except Exception as e:
-            logging.warning(f"删除旧模型文件时出错: {str(e)}")
+                logging.warning(f"备份旧模型失败: {str(e)}")
         
         # 更新模型记录
         existing_model.model_path = model_path
@@ -72,8 +75,7 @@ async def create_model(
         db.commit()
         db.refresh(existing_model)
         
-        logging.info(f"管理员{current_user.username}更新了{MODEL_TYPE_NAMES[model_type]}")
-        
+        logging.info(f"更新了模型类型 {model_type} 的模型文件")
         return existing_model
     else:
         # 创建新模型记录
@@ -87,19 +89,26 @@ async def create_model(
         db.commit()
         db.refresh(db_model)
         
-        logging.info(f"管理员{current_user.username}创建了{MODEL_TYPE_NAMES[model_type]}")
-        
+        logging.info(f"上传了新的模型类型 {model_type}")
         return db_model
 
 @router.get("/", response_model=List[schemas.Model])
 async def read_models(
+    skip: int = 0,
+    limit: int = 100,
+    model_type: Optional[int] = None,
     current_user = Depends(check_admin_permission),
     db: Session = Depends(get_db)
 ):
     """
     获取模型列表
     """
-    models = db.query(db_models.Model).all()
+    query = db.query(db_models.Model)
+    
+    if model_type is not None:
+        query = query.filter(db_models.Model.model_type == model_type)
+    
+    models = query.order_by(db_models.Model.create_time.desc()).offset(skip).limit(limit).all()
     return models
 
 @router.get("/{model_id}", response_model=schemas.Model)
@@ -111,42 +120,324 @@ async def read_model(
     """
     获取特定模型
     """
-    db_model = db.query(db_models.Model).filter(db_models.Model.id == model_id).first()
-    if db_model is None:
+    model = db.query(db_models.Model).filter(db_models.Model.id == model_id).first()
+    
+    if not model:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="模型不存在"
+            detail=f"ID为{model_id}的模型不存在"
         )
     
-    return db_model
+    return model
 
-@router.delete("/{model_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{model_id}")
 async def delete_model(
     model_id: int,
     current_user = Depends(check_admin_permission),
     db: Session = Depends(get_db)
 ):
     """
-    删除模型
+    删除特定模型
     """
-    db_model = db.query(db_models.Model).filter(db_models.Model.id == model_id).first()
-    if db_model is None:
+    model = db.query(db_models.Model).filter(db_models.Model.id == model_id).first()
+    
+    if not model:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="模型不存在"
+            detail=f"ID为{model_id}的模型不存在"
         )
     
-    # 尝试删除模型文件，但不强制
-    try:
-        if os.path.exists(db_model.model_path):
-            os.remove(db_model.model_path)
-    except Exception as e:
-        logging.warning(f"删除模型文件时出错: {str(e)}")
+    # 删除模型文件
+    if os.path.exists(model.model_path):
+        try:
+            os.remove(model.model_path)
+        except Exception as e:
+            logging.warning(f"删除模型文件失败: {str(e)}")
     
-    # 删除模型记录
-    db.delete(db_model)
+    # 删除数据库记录
+    db.delete(model)
     db.commit()
     
-    logging.info(f"管理员{current_user.username}删除了模型ID: {model_id}")
+    return {"message": f"模型ID {model_id} 删除成功"}
+
+@router.get("/export/{model_id}")
+async def export_model(
+    model_id: int,
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    导出模型文件
+    """
+    from fastapi.responses import FileResponse
     
-    return None 
+    model = db.query(db_models.Model).filter(db_models.Model.id == model_id).first()
+    
+    if not model:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{model_id}的模型不存在"
+        )
+    
+    if not os.path.exists(model.model_path):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="模型文件不存在"
+        )
+    
+    # 生成导出文件名
+    model_type_name = MODEL_TYPE_NAMES.get(model.model_type, f"类型{model.model_type}")
+    export_filename = f"{model_type_name}_{model.create_time.strftime('%Y%m%d_%H%M%S')}.keras"
+    
+    return FileResponse(
+        path=model.model_path,
+        media_type="application/octet-stream",
+        filename=export_filename
+    )
+
+@router.post("/export-all")
+async def export_all_models(
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    导出所有模型文件为ZIP包
+    """
+    models = db.query(db_models.Model).all()
+    
+    if not models:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="没有找到任何模型"
+        )
+    
+    # 创建ZIP文件
+    output = io.BytesIO()
+    
+    with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for model in models:
+            if os.path.exists(model.model_path):
+                model_type_name = MODEL_TYPE_NAMES.get(model.model_type, f"类型{model.model_type}")
+                zip_filename = f"{model_type_name}_{model.create_time.strftime('%Y%m%d_%H%M%S')}.keras"
+                zipf.write(model.model_path, zip_filename)
+    
+    output.seek(0)
+    filename = f"所有模型_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip"
+    
+    from fastapi import Response
+    return Response(
+        content=output.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": f"attachment; filename={filename}"}
+    )
+
+@router.get("/status/check")
+async def check_model_status(
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    检查所有模型的状态
+    """
+    models = db.query(db_models.Model).all()
+    status_info = {
+        "total_models": len(models),
+        "available_models": 0,
+        "missing_models": 0,
+        "model_details": []
+    }
+    
+    for model in models:
+        model_type_name = MODEL_TYPE_NAMES.get(model.model_type, f"类型{model.model_type}")
+        file_exists = os.path.exists(model.model_path)
+        file_size = 0
+        
+        if file_exists:
+            try:
+                file_size = os.path.getsize(model.model_path)
+                status_info["available_models"] += 1
+            except Exception:
+                file_exists = False
+        
+        if not file_exists:
+            status_info["missing_models"] += 1
+        
+        model_detail = {
+            "id": model.id,
+            "model_type": model.model_type,
+            "model_type_name": model_type_name,
+            "model_path": model.model_path,
+            "create_time": model.create_time.isoformat(),
+            "file_exists": file_exists,
+            "file_size_mb": round(file_size / (1024 * 1024), 2) if file_exists else 0,
+            "status": "可用" if file_exists else "文件缺失"
+        }
+        
+        status_info["model_details"].append(model_detail)
+    
+    return status_info
+
+@router.get("/versions/{model_type}")
+async def get_model_versions(
+    model_type: int,
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    获取特定类型模型的版本历史（包括备份文件）
+    """
+    # 验证模型类型
+    if model_type not in MODEL_TYPE_NAMES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"无效的模型类型: {model_type}"
+        )
+    
+    # 获取当前模型
+    current_model = db.query(db_models.Model).filter(db_models.Model.model_type == model_type).first()
+    
+    # 查找备份文件
+    model_type_dir = os.path.join(MODEL_DIR, str(model_type))
+    versions = []
+    
+    if current_model:
+        versions.append({
+            "id": current_model.id,
+            "version": "当前版本",
+            "create_time": current_model.create_time.isoformat(),
+            "file_path": current_model.model_path,
+            "file_exists": os.path.exists(current_model.model_path),
+            "file_size_mb": round(os.path.getsize(current_model.model_path) / (1024 * 1024), 2) if os.path.exists(current_model.model_path) else 0,
+            "is_current": True
+        })
+    
+    # 查找备份文件
+    if os.path.exists(model_type_dir):
+        backup_files = glob.glob(os.path.join(model_type_dir, "backup_*.keras"))
+        
+        for backup_file in sorted(backup_files, reverse=True):
+            try:
+                file_stat = os.stat(backup_file)
+                versions.append({
+                    "id": None,
+                    "version": f"备份版本_{os.path.basename(backup_file)}",
+                    "create_time": datetime.fromtimestamp(file_stat.st_mtime).isoformat(),
+                    "file_path": backup_file,
+                    "file_exists": True,
+                    "file_size_mb": round(file_stat.st_size / (1024 * 1024), 2),
+                    "is_current": False
+                })
+            except Exception as e:
+                logging.warning(f"读取备份文件信息失败: {str(e)}")
+    
+    return {
+        "model_type": model_type,
+        "model_type_name": MODEL_TYPE_NAMES[model_type],
+        "versions": versions
+    }
+
+@router.post("/restore/{model_type}")
+async def restore_model_version(
+    model_type: int,
+    backup_filename: str = Form(...),
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    恢复模型的备份版本
+    """
+    # 验证模型类型
+    if model_type not in MODEL_TYPE_NAMES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"无效的模型类型: {model_type}"
+        )
+    
+    # 构建备份文件路径
+    model_type_dir = os.path.join(MODEL_DIR, str(model_type))
+    backup_path = os.path.join(model_type_dir, backup_filename)
+    
+    if not os.path.exists(backup_path):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"备份文件不存在: {backup_filename}"
+        )
+    
+    # 获取当前模型记录
+    current_model = db.query(db_models.Model).filter(db_models.Model.model_type == model_type).first()
+    
+    if not current_model:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"模型类型 {model_type} 的记录不存在"
+        )
+    
+    try:
+        # 备份当前模型文件
+        if os.path.exists(current_model.model_path):
+            current_backup_name = f"backup_current_{datetime.now().strftime('%Y%m%d_%H%M%S')}.keras"
+            current_backup_path = os.path.join(model_type_dir, current_backup_name)
+            shutil.copy2(current_model.model_path, current_backup_path)
+        
+        # 恢复备份文件到当前位置
+        shutil.copy2(backup_path, current_model.model_path)
+        
+        # 更新数据库记录
+        current_model.create_time = datetime.now()
+        db.commit()
+        
+        logging.info(f"用户 {current_user.username} 恢复了模型类型 {model_type} 的备份版本: {backup_filename}")
+        
+        return {
+            "message": f"成功恢复模型类型 {model_type} 的备份版本",
+            "restored_from": backup_filename,
+            "current_backup_created": current_backup_name if os.path.exists(current_model.model_path) else None
+        }
+        
+    except Exception as e:
+        logging.error(f"恢复模型备份失败: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"恢复模型备份失败: {str(e)}"
+        )
+
+@router.get("/performance/info")
+async def get_model_performance_info(
+    current_user = Depends(check_admin_permission),
+    db: Session = Depends(get_db)
+):
+    """
+    获取模型性能信息（模拟数据，实际应用中可以从模型训练记录中获取）
+    """
+    models = db.query(db_models.Model).all()
+    performance_info = []
+    
+    for model in models:
+        model_type_name = MODEL_TYPE_NAMES.get(model.model_type, f"类型{model.model_type}")
+        
+        # 模拟性能数据（实际应用中应该从训练记录或配置文件中读取）
+        performance_data = {
+            "id": model.id,
+            "model_type": model.model_type,
+            "model_type_name": model_type_name,
+            "create_time": model.create_time.isoformat(),
+            "file_exists": os.path.exists(model.model_path),
+            "accuracy": {
+                "training": round(0.85 + (model.id % 10) * 0.01, 3),  # 模拟数据
+                "validation": round(0.80 + (model.id % 8) * 0.01, 3),  # 模拟数据
+                "test": round(0.75 + (model.id % 6) * 0.015, 3)  # 模拟数据
+            },
+            "loss": {
+                "training": round(0.25 - (model.id % 5) * 0.01, 4),  # 模拟数据
+                "validation": round(0.30 - (model.id % 4) * 0.01, 4)  # 模拟数据
+            },
+            "training_epochs": 50 + (model.id % 20),  # 模拟数据
+            "model_size_mb": round(os.path.getsize(model.model_path) / (1024 * 1024), 2) if os.path.exists(model.model_path) else 0
+        }
+        
+        performance_info.append(performance_data)
+    
+    return {
+        "model_count": len(models),
+        "performance_data": performance_info
+    } 

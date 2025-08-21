@@ -19,28 +19,55 @@ sns.set_style("whitegrid")      # 设置seaborn绘图的背景样式
 # 设置中文字体
 def setup_chinese_font():
     """设置中文字体"""
-    # 按优先级尝试不同的中文字体
-    chinese_fonts = ['STFangsong', 'FangSong', 'STSong', 'SimSun', 'Microsoft YaHei', 'SimHei']
+    import warnings
+    import platform
+    
+    # 根据操作系统选择不同的字体优先级
+    system = platform.system()
+    if system == "Darwin":  # macOS
+        chinese_fonts = ['PingFang SC', 'Heiti SC', 'STHeiti', 'Arial Unicode MS']
+    elif system == "Windows":
+        chinese_fonts = ['Microsoft YaHei', 'SimHei', 'SimSun', 'STSong']
+    else:  # Linux
+        chinese_fonts = ['DejaVu Sans', 'WenQuanYi Micro Hei', 'WenQuanYi Zen Hei']
     
     font_prop = None
-    for font_name in chinese_fonts:
-        try:
-            font_path = fm.findfont(fm.FontProperties(family=font_name))
-            if font_path is not None and os.path.exists(font_path):
-                font_prop = fm.FontProperties(family=font_name)
-                logging.info(f"使用字体: {font_name}")
-                break
-        except:
-            continue
+    
+    # 临时禁用matplotlib字体警告
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        
+        for font_name in chinese_fonts:
+            try:
+                # 检查字体是否可用
+                font_families = [f.name for f in fm.fontManager.ttflist]
+                if font_name in font_families:
+                    font_prop = fm.FontProperties(family=font_name)
+                    logging.info(f"使用字体: {font_name}")
+                    break
+                else:
+                    # 尝试使用findfont查找类似字体
+                    font_path = fm.findfont(fm.FontProperties(family=font_name), fallback_to_default=False)
+                    if font_path and os.path.exists(font_path) and 'default' not in font_path.lower():
+                        font_prop = fm.FontProperties(family=font_name)
+                        logging.info(f"使用字体: {font_name}")
+                        break
+            except Exception:
+                continue
     
     if font_prop is None:
-        logging.error("未找到合适的中文字体")
-        # 使用默认字体
+        logging.warning("未找到合适的中文字体，使用默认字体")
+        # 设置matplotlib使用默认字体并禁用中文显示警告
+        plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
+        plt.rcParams['axes.unicode_minus'] = False
         font_prop = fm.FontProperties()
+    else:
+        # 设置matplotlib全局字体
+        plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
+        plt.rcParams['axes.unicode_minus'] = False
     
     # 设置全局字体
     plt.rcParams['font.family'] = ['sans-serif']
-    plt.rcParams['axes.unicode_minus'] = False    # 用于正常显示负号
     
     return font_prop
 
@@ -161,7 +188,6 @@ def approximate_entropy(U, m, r):
         return (N - m + 1.0)**-1 * sum(np.log(C))
 
     N = len(U)
-    print(4)
     return abs(_phi(m+1) - _phi(m))
 
 def sample_entropy(U, m, r):
@@ -173,15 +199,18 @@ def sample_entropy(U, m, r):
         x = np.array([U[i:i+m] for i in range(N - m + 1)])
         count = np.sum(np.abs(x[:, np.newaxis] - x).max(axis=2) <= r, axis=1)
         return np.sum(count) - (N - m + 1)
-    print(1)
+    
     return -np.log(_phi(m+1) / _phi(m))
 
 def ar_coefficients(U, lags):
     """计算自回归模型系数"""
-    model = AutoReg(U, lags=lags)
-    model_fit = model.fit()
-    print(4)
-    return model_fit.params
+    try:
+        model = AutoReg(U, lags=lags)
+        model_fit = model.fit()
+        return model_fit.params
+    except Exception as e:
+        logging.warning(f"AR系数计算失败: {str(e)}")
+        return np.zeros(lags + 1)  # 返回零数组作为默认值
 
 def extract_time_frequency_features(channel_data):
     """提取时频域特征。"""
@@ -255,11 +284,12 @@ def plot_theta_alpha_beta_gamma_powers(band_powers):
         save_plot(plt.gcf(), f'{band}.png')
         plt.close()
 
-def print_time_domain_features(features):#打印时域特征
+def print_time_domain_features(features):
+    """打印时域特征"""
     for idx, feature in enumerate(features):
-        print(f"通道 {idx + 1}:")#通道数
-        for key, value in feature.items():#遍历字典
-            print(f"  {key}: {value}")#打印键值对
+        print(f"通道 {idx + 1}:")
+        for key, value in feature.items():
+            print(f"  {key}: {value}")
         print("----------")
 
 def print_frequency_domain_features(features):
@@ -362,15 +392,40 @@ def analyze_eeg_data(file_path):
             'Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'
         ]
         
+        # 先检查当前目录
         all_images_exist = all(os.path.exists(os.path.join(data_dir, img)) for img in required_images)
         
+        # 如果当前目录没有图片，检查子目录
+        if not all_images_exist:
+            for item in os.listdir(data_dir):
+                item_path = os.path.join(data_dir, item)
+                if os.path.isdir(item_path):
+                    sub_images_exist = all(os.path.exists(os.path.join(item_path, img)) for img in required_images)
+                    if sub_images_exist:
+                        all_images_exist = True
+                        # 更新folder_path为子目录
+                        folder_path = item_path
+                        break
+        
+        # 检查fif文件路径
+        fif_file_path = None
+        if file_path.endswith('.fif'):
+            fif_file_path = file_path
+        else:
+            # 在数据目录中查找fif文件
+            fif_files = [f for f in os.listdir(data_dir) if f.endswith('.fif')]
+            if fif_files:
+                fif_file_path = os.path.join(data_dir, fif_files[0])
+        
         # 如果是fif文件且所有图片都存在，直接返回
-        if file_path.endswith('.fif') and all_images_exist:
-            logging.info(f"File {file_path} is already processed with visualizations")
+        if fif_file_path and all_images_exist:
+            logging.info(f"File {fif_file_path} is already processed with visualizations")
             return True
 
         # 加载和预处理数据
-        data1, eeg_data = load_preprocess_data(file_path)
+        # 如果有fif文件，使用fif文件，否则使用传入的文件路径
+        actual_file_path = fif_file_path if fif_file_path else file_path
+        data1, eeg_data = load_preprocess_data(actual_file_path)
 
         # 如果数据是3D的（epochs数据），取平均值转换为2D
         if len(eeg_data.shape) == 3:
@@ -390,7 +445,7 @@ def analyze_eeg_data(file_path):
         theta_alpha_beta_gamma_powers = [extract_theta_alpha_beta_gamma_powers(channel, sfreq) for channel in eeg_data]
 
         # 如果不是fif文件，则保存特征到CSV
-        if not file_path.endswith('.fif'):
+        if not actual_file_path.endswith('.fif'):
             # 创建特征DataFrame
             feature_df, feature_names = create_feature_dataframe(
                 time_domain_features, 
@@ -402,14 +457,14 @@ def analyze_eeg_data(file_path):
             # 保存DataFrame到CSV文件
             csv_path = os.path.join(folder_path, 'eeg_features.csv')
             feature_df.to_csv(csv_path)
-            print(f"特征已保存到: {csv_path}")
+            logging.info(f"特征已保存到: {csv_path}")
 
             # 保存特征名称到文本文件
             feature_names_path = os.path.join(folder_path, 'feature_names.txt')
             with open(feature_names_path, 'w') as f:
                 for name in feature_names:
                     f.write(f"{name}\n")
-            print(f"特征名称已保存到: {feature_names_path}")
+            logging.info(f"特征名称已保存到: {feature_names_path}")
 
         # 如果图片不完整，则生成可视化图像
         if not all_images_exist:
@@ -419,12 +474,12 @@ def analyze_eeg_data(file_path):
             plot_differential_entropy(frequency_domain_features)
             plot_theta_alpha_beta_gamma_powers(theta_alpha_beta_gamma_powers)
         
-        if not file_path.endswith('.fif'):
+        if not actual_file_path.endswith('.fif'):
             return feature_df, feature_names
         return True
         
     except Exception as e:
-        print(f"分析过程中出现错误: {str(e)}")
+        logging.error(f"分析过程中出现错误: {str(e)}")
         raise
 
 def plot_serum_data(data_path):

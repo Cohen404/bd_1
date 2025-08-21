@@ -10,7 +10,20 @@ import {
   Eye,
   ChevronLeft,
   ChevronRight,
-  FileText
+  FileText,
+  CheckSquare,
+  Square,
+  BarChart3,
+  PieChart,
+  TrendingUp,
+  Users,
+  Clock,
+  Activity,
+  AlertTriangle,
+  ExternalLink,
+  Printer,
+  FileImage,
+  X
 } from 'lucide-react';
 import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
@@ -29,12 +42,30 @@ interface FilterState {
   userId: string;
   dateStart: string;
   dateEnd: string;
+  minStressScore: string;
+  maxStressScore: string;
+  minDepressionScore: string;
+  maxDepressionScore: string;
+}
+
+interface Statistics {
+  total_count: number;
+  avg_stress_score: number;
+  avg_depression_score: number;
+  avg_anxiety_score: number;
+  avg_social_isolation_score: number;
+  high_risk_count: number;
+  high_risk_percentage: number;
+  recent_count: number;
 }
 
 const ResultManagePage: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
+  const [filteredResults, setFilteredResults] = useState<Result[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
+  const [selectedResults, setSelectedResults] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [exporting, setExporting] = useState(false);
   const [currentStatus, setCurrentStatus] = useState<HealthStatus>({
     stress: 0,
     depression: 0,
@@ -43,20 +74,41 @@ const ResultManagePage: React.FC = () => {
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showVisualization, setShowVisualization] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [showStatistics, setShowStatistics] = useState(false);
+  const [pdfViewerVisible, setPdfViewerVisible] = useState(false);
+  const [currentPdfUrl, setCurrentPdfUrl] = useState<string>('');
+  const [statistics, setStatistics] = useState<Statistics | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     userType: 'all',
     userId: 'all',
     dateStart: '',
-    dateEnd: ''
+    dateEnd: '',
+    minStressScore: '',
+    maxStressScore: '',
+    minDepressionScore: '',
+    maxDepressionScore: ''
   });
 
   // 获取结果列表
   const fetchResults = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getResults();
+      const params: any = {};
+      
+      // 添加筛选参数
+      if (filters.userId !== 'all') params.user_id = filters.userId;
+      if (filters.dateStart) params.start_date = filters.dateStart;
+      if (filters.dateEnd) params.end_date = filters.dateEnd;
+      if (filters.minStressScore) params.min_stress_score = parseFloat(filters.minStressScore);
+      if (filters.maxStressScore) params.max_stress_score = parseFloat(filters.maxStressScore);
+      if (filters.minDepressionScore) params.min_depression_score = parseFloat(filters.minDepressionScore);
+      if (filters.maxDepressionScore) params.max_depression_score = parseFloat(filters.maxDepressionScore);
+      
+      const response = await apiClient.get('/results/', { params });
       const resultList = Array.isArray(response) ? response : response?.items || [];
       setResults(resultList);
+      setFilteredResults(resultList);
       
       // 获取最新结果作为当前状态
       if (resultList.length > 0) {
@@ -79,52 +131,119 @@ const ResultManagePage: React.FC = () => {
   // 获取用户列表
   const fetchUsers = async () => {
     try {
-      const response = await apiClient.getUsers();
-      setUsers(Array.isArray(response) ? response : response?.items || []);
+      const response = await apiClient.get('/results/users/list');
+      setUsers(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('获取用户列表失败:', error);
+    }
+  };
+
+  // 获取统计信息
+  const fetchStatistics = async () => {
+    try {
+      const params: any = {};
+      if (filters.dateStart) params.start_date = filters.dateStart;
+      if (filters.dateEnd) params.end_date = filters.dateEnd;
+      
+      const response = await apiClient.get('/results/summary/statistics', { params });
+      setStatistics(response);
+    } catch (error) {
+      console.error('获取统计信息失败:', error);
     }
   };
 
   useEffect(() => {
     fetchResults();
     fetchUsers();
-  }, []);
+    fetchStatistics();
+  }, [filters]);
 
-  // 应用筛选
-  const applyFilters = () => {
-    let filtered = [...results];
-    
-    // 用户类型筛选
-    if (filters.userType !== 'all') {
-      const targetUserType = filters.userType === 'admin' ? 'admin' : 'user';
-      const userIdsOfType = users
-        .filter(user => user.user_type === targetUserType)
-        .map(user => user.user_id);
-      filtered = filtered.filter(result => userIdsOfType.includes(result.user_id));
+  // 选择/取消选择结果
+  const toggleResultSelection = (resultId: number) => {
+    const newSelected = new Set(selectedResults);
+    if (newSelected.has(resultId)) {
+      newSelected.delete(resultId);
+    } else {
+      newSelected.add(resultId);
     }
-    
-    // 特定用户筛选
-    if (filters.userId !== 'all') {
-      filtered = filtered.filter(result => result.user_id === filters.userId);
+    setSelectedResults(newSelected);
+  };
+
+  // 全选/取消全选
+  const toggleSelectAll = () => {
+    if (selectedResults.size === filteredResults.length) {
+      setSelectedResults(new Set());
+    } else {
+      setSelectedResults(new Set(filteredResults.map(result => result.id)));
     }
-    
-    // 日期范围筛选
-    if (filters.dateStart) {
-      filtered = filtered.filter(result => 
-        new Date(result.result_time) >= new Date(filters.dateStart)
-      );
+  };
+
+  // 导出结果
+  const handleExport = async (format: 'excel' | 'csv' | 'pdf') => {
+    if (selectedResults.size === 0) {
+      toast.error('请先选择要导出的结果');
+      return;
     }
-    
-    if (filters.dateEnd) {
-      const endDate = new Date(filters.dateEnd);
-      endDate.setHours(23, 59, 59, 999); // 包含整天
-      filtered = filtered.filter(result => 
-        new Date(result.result_time) <= endDate
-      );
+
+    try {
+      setExporting(true);
+      
+      const response = await apiClient.post('/results/export', {
+        result_ids: Array.from(selectedResults),
+        export_format: format
+      }, {
+        responseType: 'blob'
+      });
+
+      // 创建下载链接
+      const blob = new Blob([response], {
+        type: format === 'excel' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' :
+              format === 'csv' ? 'text/csv' : 'application/zip'
+      });
+      
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+      const extension = format === 'excel' ? 'xlsx' : format === 'csv' ? 'csv' : 'zip';
+      link.download = `评估结果_${timestamp}.${extension}`;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      toast.success(`${format.toUpperCase()} 导出成功`);
+    } catch (error) {
+      console.error('导出失败:', error);
+      toast.error('导出失败');
+    } finally {
+      setExporting(false);
     }
-    
-    return filtered;
+  };
+
+  // 查看PDF报告
+  const handleViewReport = async (resultId: number) => {
+    try {
+      const pdfUrl = `/api/results/report/${resultId}`;
+      setCurrentPdfUrl(pdfUrl);
+      setPdfViewerVisible(true);
+    } catch (error) {
+      console.error('查看报告失败:', error);
+      toast.error('查看报告失败');
+    }
+  };
+
+  // 重新生成报告
+  const handleRegenerateReport = async (resultId: number) => {
+    try {
+      const response = await apiClient.post(`/results/regenerate-report/${resultId}`);
+      toast.success(response.message || '报告重新生成成功');
+    } catch (error) {
+      console.error('重新生成报告失败:', error);
+      toast.error('重新生成报告失败');
+    }
   };
 
   // 重置筛选
@@ -133,213 +252,143 @@ const ResultManagePage: React.FC = () => {
       userType: 'all',
       userId: 'all',
       dateStart: '',
-      dateEnd: ''
+      dateEnd: '',
+      minStressScore: '',
+      maxStressScore: '',
+      minDepressionScore: '',
+      maxDepressionScore: ''
     });
-  };
-
-  // 导出结果
-  const exportResults = () => {
-    const filteredResults = applyFilters();
-    const csvContent = "data:text/csv;charset=utf-8," + 
-      "ID,用户名,评估时间,普通应激,抑郁,焦虑,社交孤立\n" +
-      filteredResults.map(result => {
-        const user = users.find(u => u.user_id === result.user_id);
-        return `"${result.id}","${user?.username || '未知用户'}","${formatDateTime(result.result_time)}","${(result.stress_score * 100).toFixed(1)}%","${(result.depression_score * 100).toFixed(1)}%","${(result.anxiety_score * 100).toFixed(1)}%","${(result.social_isolation_score * 100).toFixed(1)}%"`;
-      }).join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `评估结果_${new Date().toISOString().split('T')[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success('结果导出成功');
   };
 
   // 获取状态颜色和标签
   const getStatusInfo = (score: number) => {
-    let color = 'bg-green-500';
-    let textColor = 'text-green-600';
-    
-    if (score >= 0.7) {
-      color = 'bg-red-500';
-      textColor = 'text-red-600';
-    } else if (score >= 0.4) {
-      color = 'bg-yellow-500';
-      textColor = 'text-yellow-600';
-    }
-    
-    return { color, textColor, percentage: (score * 100).toFixed(1) };
+    if (score >= 50) return { level: '高风险', color: 'text-red-600', bgColor: 'bg-red-50' };
+    if (score >= 30) return { level: '中等风险', color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
+    return { level: '正常', color: 'text-green-600', bgColor: 'bg-green-50' };
   };
-
-  const filteredResults = applyFilters();
 
   return (
     <div className="space-y-6">
       {/* 页面标题 */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">结果管理</h1>
-        <p className="text-gray-600 mt-1">查看和管理健康评估结果，导出评估报告</p>
+        <p className="text-gray-600 mt-1">查看和管理健康评估结果，导出报告数据</p>
       </div>
 
-      {/* 顶部状态显示区域 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 当前评估结果 */}
-        <div className="card p-6 bg-primary-50">
-          <h2 className="text-lg font-semibold text-gray-900 text-center mb-6">当前评估结果</h2>
-          
-          <div className="space-y-4">
-            {/* 普通应激 */}
-            <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div 
-                  className={`w-6 h-6 rounded-full border-2 border-white ${getStatusInfo(currentStatus.stress).color}`}
-                />
-                <span className="font-medium">普通应激</span>
+      {/* 统计信息卡片 */}
+      {statistics && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="card p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">总评估数</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.total_count}</p>
               </div>
-              <span className={`font-bold ${getStatusInfo(currentStatus.stress).textColor}`}>
-                {getStatusInfo(currentStatus.stress).percentage}%
-              </span>
+              <div className="p-3 rounded-full bg-blue-50">
+                <BarChart3 className="h-6 w-6 text-blue-600" />
+              </div>
             </div>
-
-            {/* 抑郁状态 */}
-            <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div 
-                  className={`w-6 h-6 rounded-full border-2 border-white ${getStatusInfo(currentStatus.depression).color}`}
-                />
-                <span className="font-medium">抑郁状态</span>
+          </div>
+          <div className="card p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">高风险比例</p>
+                <p className="text-2xl font-bold text-red-600 mt-2">{statistics.high_risk_percentage}%</p>
+                <p className="text-sm text-gray-500 mt-1">{statistics.high_risk_count} 人</p>
               </div>
-              <span className={`font-bold ${getStatusInfo(currentStatus.depression).textColor}`}>
-                {getStatusInfo(currentStatus.depression).percentage}%
-              </span>
+              <div className="p-3 rounded-full bg-red-50">
+                <AlertTriangle className="h-6 w-6 text-red-600" />
+              </div>
             </div>
-
-            {/* 焦虑状态 */}
-            <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div 
-                  className={`w-6 h-6 rounded-full border-2 border-white ${getStatusInfo(currentStatus.anxiety).color}`}
-                />
-                <span className="font-medium">焦虑状态</span>
+          </div>
+          <div className="card p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">平均应激分数</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.avg_stress_score}</p>
               </div>
-              <span className={`font-bold ${getStatusInfo(currentStatus.anxiety).textColor}`}>
-                {getStatusInfo(currentStatus.anxiety).percentage}%
-              </span>
+              <div className="p-3 rounded-full bg-purple-50">
+                <Activity className="h-6 w-6 text-purple-600" />
+              </div>
             </div>
-
-            {/* 社交孤立 */}
-            <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div 
-                  className={`w-6 h-6 rounded-full border-2 border-white ${getStatusInfo(currentStatus.social_isolation).color}`}
-                />
-                <span className="font-medium">社交孤立</span>
+          </div>
+          <div className="card p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">最近7天</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.recent_count}</p>
+                <p className="text-sm text-gray-500 mt-1">新增评估</p>
               </div>
-              <span className={`font-bold ${getStatusInfo(currentStatus.social_isolation).textColor}`}>
-                {getStatusInfo(currentStatus.social_isolation).percentage}%
-              </span>
+              <div className="p-3 rounded-full bg-green-50">
+                <TrendingUp className="h-6 w-6 text-green-600" />
+              </div>
             </div>
           </div>
         </div>
+      )}
 
-        {/* 数据可视化 */}
-        <div className="card p-6 bg-primary-50">
-          <h2 className="text-lg font-semibold text-gray-900 text-center mb-4">数据可视化</h2>
-          
-          {/* EEG特征图显示区域 */}
-          <div className="bg-white rounded-lg p-4 min-h-[200px] flex items-center justify-center border-2 border-dashed border-gray-300 mb-4">
-            {showVisualization ? (
-              <div className="text-center">
-                <FileBarChart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                <p className="text-sm text-gray-500">EEG特征图显示</p>
-                <p className="text-xs text-gray-400 mt-1">图像 {currentImageIndex + 1} / 5</p>
-              </div>
-            ) : (
-              <div className="text-center">
-                <FileBarChart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                <p className="text-sm text-gray-500">点击查看EEG特征图</p>
-              </div>
-            )}
-          </div>
-
-          {/* 图像切换按钮 */}
-          <div className="flex items-center justify-center space-x-2 mb-4">
+      {/* 操作栏 */}
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        {/* 搜索和筛选 */}
+        <div className="flex items-center space-x-3">
             <button
-              onClick={() => setCurrentImageIndex(Math.max(0, currentImageIndex - 1))}
-              disabled={currentImageIndex === 0 || !showVisualization}
-              className="p-2 text-gray-600 hover:text-gray-800 disabled:opacity-50"
+            onClick={() => setShowFilters(!showFilters)}
+            className="btn btn-secondary flex items-center space-x-2"
             >
-              <ChevronLeft className="h-4 w-4" />
+            <Filter className="h-4 w-4" />
+            <span>筛选</span>
             </button>
-            <span className="text-sm text-gray-600">上一张</span>
-            
-            <span className="text-sm text-gray-600 mx-4">下一张</span>
-            
-            <button
-              onClick={() => setCurrentImageIndex(Math.min(4, currentImageIndex + 1))}
-              disabled={currentImageIndex === 4 || !showVisualization}
-              className="p-2 text-gray-600 hover:text-gray-800 disabled:opacity-50"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-
           <button 
-            className="btn btn-primary w-full flex items-center justify-center space-x-2"
-            onClick={() => setShowVisualization(!showVisualization)}
+            onClick={resetFilters}
+            className="btn btn-secondary flex items-center space-x-2"
           >
-            <Eye className="h-4 w-4" />
-            <span>图片查看</span>
+            <RefreshCw className="h-4 w-4" />
+            <span>重置</span>
           </button>
-        </div>
       </div>
 
-      {/* 历史评估结果 */}
-      <div className="card">
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">历史评估结果</h2>
-            <div className="flex space-x-2">
+        {/* 导出操作 */}
+        <div className="flex items-center space-x-2">
+          {selectedResults.size > 0 && (
+            <span className="text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+              已选择 {selectedResults.size} 项
+            </span>
+          )}
               <button
-                onClick={fetchResults}
-                className="btn btn-secondary flex items-center space-x-2"
-                disabled={loading}
+            onClick={() => handleExport('excel')}
+            disabled={selectedResults.size === 0 || exporting}
+            className="btn btn-secondary flex items-center space-x-2 disabled:opacity-50"
               >
-                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-                <span>刷新</span>
+            <Download className="h-4 w-4" />
+            <span>导出Excel</span>
               </button>
               <button
-                onClick={exportResults}
-                className="btn btn-primary flex items-center space-x-2"
+            onClick={() => handleExport('csv')}
+            disabled={selectedResults.size === 0 || exporting}
+            className="btn btn-secondary flex items-center space-x-2 disabled:opacity-50"
               >
                 <Download className="h-4 w-4" />
-                <span>导出结果</span>
+            <span>导出CSV</span>
+          </button>
+          <button
+            onClick={() => handleExport('pdf')}
+            disabled={selectedResults.size === 0 || exporting}
+            className="btn btn-primary flex items-center space-x-2 disabled:opacity-50"
+          >
+            <FileText className="h-4 w-4" />
+            <span>导出PDF包</span>
               </button>
             </div>
           </div>
 
-          {/* 筛选区域 */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-              {/* 用户类型筛选 */}
-              <div>
-                <label className="label">用户类型:</label>
-                <select
-                  className="input"
-                  value={filters.userType}
-                  onChange={(e) => setFilters({ ...filters, userType: e.target.value })}
-                >
-                  <option value="all">全部</option>
-                  <option value="admin">管理员</option>
-                  <option value="user">普通用户</option>
-                </select>
-              </div>
-
+      {/* 高级筛选面板 */}
+      {showFilters && (
+        <div className="card p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">高级筛选</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* 用户筛选 */}
               <div>
-                <label className="label">用户:</label>
+              <label className="label">用户筛选</label>
                 <select
                   className="input"
                   value={filters.userId}
@@ -348,15 +397,15 @@ const ResultManagePage: React.FC = () => {
                   <option value="all">全部用户</option>
                   {users.map(user => (
                     <option key={user.user_id} value={user.user_id}>
-                      {user.username}
+                    {user.username} ({user.user_type})
                     </option>
                   ))}
                 </select>
               </div>
 
-              {/* 开始日期 */}
+            {/* 日期范围 */}
               <div>
-                <label className="label">开始日期:</label>
+              <label className="label">开始日期</label>
                 <input
                   type="date"
                   className="input"
@@ -364,10 +413,8 @@ const ResultManagePage: React.FC = () => {
                   onChange={(e) => setFilters({ ...filters, dateStart: e.target.value })}
                 />
               </div>
-
-              {/* 结束日期 */}
               <div>
-                <label className="label">结束日期:</label>
+              <label className="label">结束日期</label>
                 <input
                   type="date"
                   className="input"
@@ -375,27 +422,33 @@ const ResultManagePage: React.FC = () => {
                   onChange={(e) => setFilters({ ...filters, dateEnd: e.target.value })}
                 />
               </div>
-            </div>
 
-            <div className="flex justify-end space-x-2">
-              <button
-                onClick={resetFilters}
-                className="btn btn-secondary"
-              >
-                重置
-              </button>
-              <button
-                onClick={() => {/* 筛选已自动应用 */}}
-                className="btn btn-primary"
-              >
-                应用筛选
-              </button>
+            {/* 分数范围 */}
+            <div>
+              <label className="label">应激分数范围</label>
+              <div className="flex space-x-2">
+                <input
+                  type="number"
+                  placeholder="最小值"
+                  className="input"
+                  value={filters.minStressScore}
+                  onChange={(e) => setFilters({ ...filters, minStressScore: e.target.value })}
+                />
+                <input
+                  type="number"
+                  placeholder="最大值"
+                  className="input"
+                  value={filters.maxStressScore}
+                  onChange={(e) => setFilters({ ...filters, maxStressScore: e.target.value })}
+                />
+            </div>
             </div>
           </div>
         </div>
+      )}
 
-        {/* 结果表格 */}
-        <div className="overflow-x-auto">
+      {/* 结果列表 */}
+      <div className="card overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
@@ -404,32 +457,36 @@ const ResultManagePage: React.FC = () => {
           ) : filteredResults.length === 0 ? (
             <div className="text-center py-8">
               <FileBarChart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500">暂无评估结果数据</p>
+            <p className="text-gray-500">暂无评估结果</p>
             </div>
           ) : (
+          <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <button
+                      onClick={toggleSelectAll}
+                      className="flex items-center space-x-2 hover:text-gray-700"
+                    >
+                      {selectedResults.size === filteredResults.length && filteredResults.length > 0 ? 
+                        <CheckSquare className="h-4 w-4" /> : 
+                        <Square className="h-4 w-4" />
+                      }
+                      <span>选择</span>
+                    </button>
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     ID
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    用户名
+                    评估分数
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    状态
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     评估时间
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    普通应激
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    抑郁
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    焦虑
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    社交孤立
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     操作
@@ -437,103 +494,134 @@ const ResultManagePage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredResults.map((result) => {
-                  const user = users.find(u => u.user_id === result.user_id);
-                  
-                  return (
+                {filteredResults.map((result) => (
                     <tr key={result.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => toggleResultSelection(result.id)}
+                        className="text-primary-600 hover:text-primary-700"
+                      >
+                        {selectedResults.has(result.id) ? 
+                          <CheckSquare className="h-4 w-4" /> : 
+                          <Square className="h-4 w-4" />
+                        }
+                      </button>
+                    </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {result.id}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <User className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="text-sm font-medium text-gray-900">
-                            {user?.username || '未知用户'}
+                      <div className="text-xs space-y-1">
+                        <div className="flex justify-between">
+                          <span>应激:</span>
+                          <span className={getStatusInfo(result.stress_score).color}>
+                            {result.stress_score.toFixed(1)}
                           </span>
                         </div>
+                        <div className="flex justify-between">
+                          <span>抑郁:</span>
+                          <span className={getStatusInfo(result.depression_score).color}>
+                            {result.depression_score.toFixed(1)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>焦虑:</span>
+                          <span className={getStatusInfo(result.anxiety_score).color}>
+                            {result.anxiety_score.toFixed(1)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>社交:</span>
+                          <span className={getStatusInfo(result.social_isolation_score).color}>
+                            {result.social_isolation_score.toFixed(1)}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {(() => {
+                        const maxScore = Math.max(
+                          result.stress_score,
+                          result.depression_score,
+                          result.anxiety_score,
+                          result.social_isolation_score
+                        );
+                        const status = getStatusInfo(maxScore);
+                        return (
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${status.bgColor} ${status.color}`}>
+                            {status.level}
+                          </span>
+                        );
+                      })()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {formatDateTime(result.result_time)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          result.stress_score >= 0.7 ? 'bg-red-100 text-red-800' :
-                          result.stress_score >= 0.4 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {(result.stress_score * 100).toFixed(1)}%
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          result.depression_score >= 0.7 ? 'bg-red-100 text-red-800' :
-                          result.depression_score >= 0.4 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {(result.depression_score * 100).toFixed(1)}%
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          result.anxiety_score >= 0.7 ? 'bg-red-100 text-red-800' :
-                          result.anxiety_score >= 0.4 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {(result.anxiety_score * 100).toFixed(1)}%
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          result.social_isolation_score >= 0.7 ? 'bg-red-100 text-red-800' :
-                          result.social_isolation_score >= 0.4 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {(result.social_isolation_score * 100).toFixed(1)}%
-                        </span>
-                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
                           <button
-                            onClick={() => toast('查看详情功能正在开发中', { icon: '👁️' })}
+                          onClick={() => handleViewReport(result.id)}
                             className="text-blue-600 hover:text-blue-700"
-                            title="查看详情"
+                          title="查看报告"
                           >
                             <Eye className="h-4 w-4" />
                           </button>
                           <button
-                            onClick={async () => {
-                              try {
-                                await apiClient.getResultReport(result.id);
-                                toast.success('报告下载成功');
-                              } catch (error) {
-                                toast.error('报告下载失败');
-                              }
-                            }}
+                          onClick={() => handleRegenerateReport(result.id)}
                             className="text-green-600 hover:text-green-700"
+                          title="重新生成报告"
+                        >
+                          <RefreshCw className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleExport('pdf')}
+                          className="text-purple-600 hover:text-purple-700"
                             title="下载报告"
                           >
-                            <FileText className="h-4 w-4" />
+                          <Download className="h-4 w-4" />
                           </button>
                         </div>
                       </td>
                     </tr>
-                  );
-                })}
+                ))}
               </tbody>
             </table>
-          )}
-        </div>
-
-        {/* 显示筛选结果数量 */}
-        {filteredResults.length !== results.length && (
-          <div className="p-4 bg-blue-50 border-t border-blue-200">
-            <p className="text-sm text-blue-700">
-              筛选显示 {filteredResults.length} 条结果，共 {results.length} 条记录
-            </p>
           </div>
         )}
       </div>
+
+      {/* PDF查看器模态框 */}
+      {pdfViewerVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-6xl mx-4 h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold text-gray-900">评估报告查看器</h2>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => window.open(currentPdfUrl, '_blank')}
+                  className="btn btn-secondary flex items-center space-x-2"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  <span>新窗口打开</span>
+                </button>
+                <button
+                  onClick={() => setPdfViewerVisible(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 p-4">
+              <iframe
+                src={currentPdfUrl}
+                className="w-full h-full border border-gray-300 rounded-lg"
+                title="PDF Report Viewer"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
