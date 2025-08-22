@@ -11,10 +11,14 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// 请求拦截器 - 已移除认证token
+// 请求拦截器 - 添加认证token
 api.interceptors.request.use(
   (config) => {
-    // 认证已移除，无需添加token
+    // 添加认证token
+    const token = Cookies.get('access_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -31,8 +35,17 @@ api.interceptors.response.use(
     const { response } = error;
     
     if (response?.status === 401) {
-      // 认证已移除，401错误直接显示错误信息
-      toast.error('请求失败：未授权');
+      // 认证失败，清除本地数据并跳转到登录页
+      toast.error('登录已过期，请重新登录');
+      Cookies.remove('access_token');
+      Cookies.remove('user_info');
+      
+      // 延迟跳转，确保清除操作完成
+      setTimeout(() => {
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      }, 100);
     } else if (response?.status === 403) {
       toast.error('权限不足，无法访问该资源');
     } else if (response?.status === 404) {

@@ -27,10 +27,12 @@ const ProtectedRoute: React.FC<{
   }
 
   if (!user) {
+    console.log('用户未登录，重定向到登录页');
     return <Navigate to="/login" replace />;
   }
 
   if (requireAdmin && user.user_type !== 'admin') {
+    console.log('权限不足，重定向到仪表板');
     return <Navigate to="/dashboard" replace />;
   }
 
@@ -51,7 +53,7 @@ const App: React.FC = () => {
         path="/login" 
         element={
           user ? (
-            <Navigate to="/dashboard" replace />
+            <Navigate to={user.user_type === 'admin' ? '/admin' : '/dashboard'} replace />
           ) : (
             <LoginPage />
           )

@@ -17,7 +17,11 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginRequest) => {
     try {
-      await login(data);
+      const success = await login(data);
+      if (success) {
+        // 登录成功，useAuth hook会处理跳转
+        console.log('登录成功，等待跳转...');
+      }
     } catch (error) {
       console.error('登录失败:', error);
     }

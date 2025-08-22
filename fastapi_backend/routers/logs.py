@@ -8,7 +8,7 @@ import re
 
 from database import get_db
 import schemas
-from auth import check_admin_permission
+# from auth import check_admin_permission  # 认证已移除
 from config import LOG_FILE
 
 router = APIRouter()
@@ -20,7 +20,7 @@ async def read_logs(
     username: Optional[str] = None,
     level: Optional[str] = None,
     limit: int = 1000,
-    current_user = Depends(check_admin_permission)
+    # current_user = Depends(check_admin_permission)  # 认证已移除
 ):
     """
     获取日志列表

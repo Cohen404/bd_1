@@ -30,7 +30,7 @@ async def read_results(
     max_stress_score: Optional[float] = Query(None, description="最大应激分数"),
     min_depression_score: Optional[float] = Query(None, description="最小抑郁分数"),
     max_depression_score: Optional[float] = Query(None, description="最大抑郁分数"),
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -38,15 +38,13 @@ async def read_results(
     """
     query = db.query(db_models.Result)
     
-    # 普通用户只能查看自己的结果
-    if current_user.user_type != "admin":
-        query = query.filter(db_models.Result.user_id == current_user.user_id)
+    # 认证已移除，返回所有结果
     
     # 根据参数过滤
     if data_id:
         query = query.filter(db_models.Result.data_id == data_id)
     
-    if user_id and current_user.user_type == "admin":
+    if user_id:
         query = query.filter(db_models.Result.user_id == user_id)
     
     # 日期范围过滤
@@ -88,7 +86,7 @@ async def read_results(
 @router.get("/{result_id}", response_model=schemas.Result)
 async def read_result(
     result_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -102,19 +100,14 @@ async def read_result(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and result.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此结果"
-        )
+    # 认证已移除，返回所有结果
     
     return result
 
 @router.delete("/{result_id}")
 async def delete_result(
     result_id: int,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -144,7 +137,7 @@ async def delete_result(
 @router.post("/export")
 async def export_results(
     request: schemas.ResultExportRequest,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -258,7 +251,7 @@ async def export_results(
 @router.get("/report/{result_id}")
 async def view_report(
     result_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -297,7 +290,7 @@ async def view_report(
 async def get_result_statistics(
     start_date: Optional[str] = Query(None, description="开始日期 (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="结束日期 (YYYY-MM-DD)"),
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -375,7 +368,7 @@ async def get_result_statistics(
 
 @router.get("/users/list")
 async def get_result_users(
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -399,7 +392,7 @@ async def get_result_users(
 @router.post("/regenerate-report/{result_id}")
 async def regenerate_report(
     result_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """

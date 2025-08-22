@@ -35,6 +35,10 @@ export const useAuth = (): UseAuthReturn => {
       // 检查本地是否有认证信息
       if (!isAuthenticated()) {
         setUser(null);
+        // 如果当前不在登录页，则跳转到登录页
+        if (window.location.pathname !== '/login') {
+          navigate('/login', { replace: true });
+        }
         return false;
       }
 
@@ -49,6 +53,11 @@ export const useAuth = (): UseAuthReturn => {
       removeToken();
       removeCurrentUser();
       setUser(null);
+      
+      // 如果当前不在登录页，则跳转到登录页
+      if (window.location.pathname !== '/login') {
+        navigate('/login', { replace: true });
+      }
       return false;
     } finally {
       setIsLoading(false);
@@ -80,12 +89,15 @@ export const useAuth = (): UseAuthReturn => {
         
         toast.success('登录成功');
         
-        // 根据用户类型跳转到不同页面
-        if (response.user_type === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/dashboard');
-        }
+        // 使用setTimeout确保状态更新完成后再跳转
+        setTimeout(() => {
+          // 根据用户类型跳转到不同页面
+          if (response.user_type === 'admin') {
+            navigate('/admin', { replace: true });
+          } else {
+            navigate('/dashboard', { replace: true });
+          }
+        }, 100);
         
         return true;
       }

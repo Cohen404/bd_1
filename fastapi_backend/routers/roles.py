@@ -7,14 +7,14 @@ from datetime import datetime
 from database import get_db
 import models as db_models
 import schemas
-from auth import check_admin_permission, get_current_user
+# from auth import check_admin_permission, get_current_user  # 认证已移除
 
 router = APIRouter()
 
 @router.post("/", response_model=schemas.Role)
 async def create_role(
     role: schemas.RoleCreate,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -39,7 +39,7 @@ async def create_role(
     db.commit()
     db.refresh(db_role)
     
-    logging.info(f"管理员{current_user.username}创建了角色: {role.role_name}")
+    logging.info(f"系统创建了角色: {role.role_name}")  # 认证已移除
     
     return db_role
 
@@ -47,7 +47,7 @@ async def create_role(
 async def read_roles(
     skip: int = 0,
     limit: int = 100,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -59,7 +59,7 @@ async def read_roles(
 @router.get("/{role_id}", response_model=schemas.Role)
 async def read_role(
     role_id: int,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -78,7 +78,7 @@ async def read_role(
 async def update_role(
     role_id: int,
     role: schemas.RoleUpdate,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -112,14 +112,14 @@ async def update_role(
     db.commit()
     db.refresh(db_role)
     
-    logging.info(f"管理员{current_user.username}更新了角色ID: {role_id}")
+    logging.info(f"系统更新了角色ID: {role_id}")  # 认证已移除
     
     return db_role
 
 @router.delete("/{role_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_role(
     role_id: int,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -142,14 +142,14 @@ async def delete_role(
     db.delete(db_role)
     db.commit()
     
-    logging.info(f"管理员{current_user.username}删除了角色ID: {role_id}")
+    logging.info(f"系统删除了角色ID: {role_id}")  # 认证已移除
     
     return None
 
 @router.get("/{role_id}/permissions", response_model=List[schemas.Permission])
 async def get_role_permissions(
     role_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -171,7 +171,7 @@ async def get_role_permissions(
         db_models.RolePermission.role_id == role_id
     ).all()
     
-    logging.info(f"用户{current_user.username}获取了角色ID {role_id} 的权限列表")
+    logging.info(f"系统获取了角色ID {role_id} 的权限列表")  # 认证已移除
     
     return permissions
 
@@ -179,7 +179,7 @@ async def get_role_permissions(
 async def add_permission_to_role(
     role_id: int,
     permission: schemas.RolePermissionCreate,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -223,7 +223,7 @@ async def add_permission_to_role(
     db.commit()
     db.refresh(db_role_permission)
     
-    logging.info(f"管理员{current_user.username}为角色ID {role_id} 添加了权限ID {permission.permission_id}")
+    logging.info(f"系统为角色ID {role_id} 添加了权限ID {permission.permission_id}")  # 认证已移除
     
     return db_role_permission
 
@@ -231,7 +231,7 @@ async def add_permission_to_role(
 async def remove_permission_from_role(
     role_id: int,
     permission_id: int,
-    current_user = Depends(check_admin_permission),
+    # # current_user = Depends(check_admin_permission),  # 认证已移除  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -253,6 +253,6 @@ async def remove_permission_from_role(
     db.delete(db_role_permission)
     db.commit()
     
-    logging.info(f"管理员{current_user.username}从角色ID {role_id} 移除了权限ID {permission_id}")
+    logging.info(f"系统从角色ID {role_id} 移除了权限ID {permission_id}")  # 认证已移除
     
     return None 

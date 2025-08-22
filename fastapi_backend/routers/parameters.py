@@ -7,14 +7,14 @@ from datetime import datetime
 from database import get_db
 import models as db_models
 import schemas
-from auth import check_admin_permission
+# from auth import check_admin_permission  # 认证已移除
 
 router = APIRouter()
 
 @router.post("/", response_model=schemas.Parameter)
 async def create_parameter(
     parameter: schemas.ParameterCreate,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -55,7 +55,7 @@ async def read_parameters(
     skip: int = 0,
     limit: int = 100,
     param_type: Optional[str] = None,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -75,7 +75,7 @@ async def read_parameters(
 @router.get("/{param_id}", response_model=schemas.Parameter)
 async def read_parameter(
     param_id: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -94,7 +94,7 @@ async def read_parameter(
 async def update_parameter(
     param_id: int,
     parameter: schemas.ParameterUpdate,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -150,7 +150,7 @@ async def update_parameter(
 @router.delete("/{param_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_parameter(
     param_id: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """

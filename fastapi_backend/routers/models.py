@@ -13,7 +13,7 @@ import glob
 from database import get_db
 import models as db_models
 import schemas
-from auth import check_admin_permission
+# from auth import check_admin_permission  # 认证已移除
 from config import MODEL_DIR
 
 router = APIRouter()
@@ -29,7 +29,7 @@ MODEL_TYPE_NAMES = {
 async def create_model(
     model_type: int = Form(...),
     file: UploadFile = File(...),
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -97,7 +97,7 @@ async def read_models(
     skip: int = 0,
     limit: int = 100,
     model_type: Optional[int] = None,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -114,7 +114,7 @@ async def read_models(
 @router.get("/{model_id}", response_model=schemas.Model)
 async def read_model(
     model_id: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -133,7 +133,7 @@ async def read_model(
 @router.delete("/{model_id}")
 async def delete_model(
     model_id: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -163,7 +163,7 @@ async def delete_model(
 @router.get("/export/{model_id}")
 async def export_model(
     model_id: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -197,7 +197,7 @@ async def export_model(
 
 @router.post("/export-all")
 async def export_all_models(
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -233,7 +233,7 @@ async def export_all_models(
 
 @router.get("/status/check")
 async def check_model_status(
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -280,7 +280,7 @@ async def check_model_status(
 @router.get("/versions/{model_type}")
 async def get_model_versions(
     model_type: int,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -340,7 +340,7 @@ async def get_model_versions(
 async def restore_model_version(
     model_type: int,
     backup_filename: str = Form(...),
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -403,7 +403,7 @@ async def restore_model_version(
 
 @router.get("/performance/info")
 async def get_model_performance_info(
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
