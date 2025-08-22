@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新窗口测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .test-image {
+            max-width: 300px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+            transition: box-shadow 0.3s;
+        }
+        .test-image:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>新窗口打开功能测试</h1>
+    
+    <h2>测试1: 按钮点击</h2>
+    <button class="test-button" onclick="testButtonPopup()">点击测试新窗口</button>
+    
+    <h2>测试2: 图片点击</h2>
+    <img 
+        src="/api/health/image/7/theta" 
+        alt="测试图片" 
+        class="test-image"
+        onclick="testImagePopup(this.src)"
+        onerror="this.style.display='none'; document.getElementById('error-msg').style.display='block';"
+    />
+    <div id="error-msg" style="display:none; color:red;">图片加载失败</div>
+    
+    <h2>测试3: 不同的窗口参数</h2>
+    <button class="test-button" onclick="testDifferentParams()">大窗口测试</button>
+    <button class="test-button" onclick="testSmallWindow()">小窗口测试</button>
+    
+    <h2>浏览器检查</h2>
+    <p>如果新窗口没有打开，请检查：</p>
+    <ul>
+        <li>浏览器是否阻止了弹窗（通常在地址栏会有图标提示）</li>
+        <li>按F12打开开发者工具，查看控制台是否有错误</li>
+        <li>确保允许该网站弹窗</li>
+    </ul>
+    
+    <script>
+        function testButtonPopup() {
+            console.log('测试按钮点击...');
+            try {
+                const newWindow = window.open('/api/health/image/7/alpha', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                if (!newWindow) {
+                    alert('弹窗被阻止，请在浏览器设置中允许弹窗');
+                } else {
+                    console.log('新窗口打开成功');
+                }
+            } catch (e) {
+                console.error('打开新窗口失败:', e);
+                alert('打开新窗口失败: ' + e.message);
+            }
+        }
+        
+        function testImagePopup(src) {
+            console.log('测试图片点击:', src);
+            try {
+                const newWindow = window.open(src, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                if (!newWindow) {
+                    alert('弹窗被阻止，请在浏览器设置中允许弹窗');
+                } else {
+                    console.log('图片新窗口打开成功');
+                }
+            } catch (e) {
+                console.error('打开图片新窗口失败:', e);
+                alert('打开图片新窗口失败: ' + e.message);
+            }
+        }
+        
+        function testDifferentParams() {
+            console.log('测试大窗口...');
+            window.open('/api/health/image/7/beta', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+        
+        function testSmallWindow() {
+            console.log('测试小窗口...');
+            window.open('/api/health/image/7/gamma', '_blank', 'width=400,height=300,scrollbars=yes,resizable=yes');
+        }
+        
+        // 页面加载完成后的检查
+        window.onload = function() {
+            console.log('测试页面加载完成');
+            console.log('window.open 是否可用:', typeof window.open === 'function');
+        };
+    </script>
+</body>
+</html> 

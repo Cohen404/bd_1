@@ -11,7 +11,7 @@ import tempfile
 from database import get_db
 import models as db_models
 import schemas
-from auth import get_current_user, check_permission
+# from auth import get_current_user, check_permission  # 认证已移除
 from config import DATA_DIR
 
 router = APIRouter()
@@ -21,7 +21,7 @@ async def create_data(
     personnel_id: str = Form(...),
     personnel_name: str = Form(...),
     file: UploadFile = File(...),
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -76,9 +76,9 @@ async def create_data(
         db_data = db_models.Data(
             personnel_id=personnel_id,
             data_path=data_dir,
-            upload_user=1 if current_user.user_type == "admin" else 0,
+            upload_user=1,  # 认证已移除，默认为管理员
             personnel_name=personnel_name,
-            user_id=current_user.user_id,
+            user_id="72f220b7-f583-4034-8f44-08b5986c2835",  # 认证已移除，默认为admin用户ID
             upload_time=datetime.now()
         )
         
@@ -86,7 +86,7 @@ async def create_data(
         db.commit()
         db.refresh(db_data)
         
-        logging.info(f"用户{current_user.username}上传了ZIP数据: {personnel_id}")
+        logging.info(f"管理员上传了ZIP数据: {personnel_id}")  # 认证已移除
         
         return db_data
         
@@ -114,7 +114,7 @@ async def read_data(
     limit: int = 100,
     personnel_id: Optional[str] = None,
     personnel_name: Optional[str] = None,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -123,8 +123,8 @@ async def read_data(
     query = db.query(db_models.Data)
     
     # 普通用户只能查看自己上传的数据
-    if current_user.user_type != "admin":
-        query = query.filter(db_models.Data.user_id == current_user.user_id)
+    # if current_user.user_type != "admin":  # 认证已移除
+        # query = query.filter(db_models.Data.user_id == current_user.user_id)  # 认证已移除
     
     # 根据参数过滤
     if personnel_id:
@@ -140,7 +140,7 @@ async def read_data(
 
 @router.get("/top-200", response_model=List[schemas.Data])
 async def get_top_200_data(
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -149,8 +149,8 @@ async def get_top_200_data(
     query = db.query(db_models.Data)
     
     # 普通用户只能查看自己上传的数据
-    if current_user.user_type != "admin":
-        query = query.filter(db_models.Data.user_id == current_user.user_id)
+    # if current_user.user_type != "admin":  # 认证已移除
+        # query = query.filter(db_models.Data.user_id == current_user.user_id)  # 认证已移除
     
     # 按上传时间降序获取前200条数据
     data = query.order_by(db_models.Data.upload_time.desc()).limit(200).all()
@@ -161,7 +161,7 @@ async def get_top_200_data(
 @router.get("/progress")
 async def get_batch_progress(
     data_ids: str,  # 逗号分隔的ID列表
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -204,14 +204,14 @@ async def get_batch_progress(
     
     data_list = db.query(db_models.Data).filter(db_models.Data.id.in_(id_list)).all()
     
-    # 权限检查
-    if current_user.user_type != "admin":
-        for data in data_list:
-            if data.user_id != current_user.user_id:
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"没有权限查看数据ID: {data.id}"
-                )
+    # 权限检查 - 认证已移除
+    # if current_user.user_type != "admin":
+    #     for data in data_list:
+    #         if data.user_id != current_user.user_id:
+    #             raise HTTPException(
+    #                 status_code=status.HTTP_403_FORBIDDEN,
+    #                 detail=f"没有权限查看数据ID: {data.id}"
+    #             )
     
     results = []
     for data in data_list:
@@ -252,7 +252,7 @@ async def get_batch_progress(
 @router.get("/progress/single/{data_id}")
 async def get_data_progress(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -266,7 +266,7 @@ async def get_data_progress(
         )
     
     # 普通用户只能查看自己的数据
-    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+    # if current_user.user_type != "admin" and data.user_id != current_user.user_id:  # 认证已移除
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="没有权限查看此数据"
@@ -308,7 +308,7 @@ async def get_data_progress(
 async def update_data_status(
     data_id: int,
     request: schemas.StatusUpdate,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -339,7 +339,7 @@ async def update_data_status(
 @router.get("/{data_id}", response_model=schemas.Data)
 async def read_data_by_id(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -353,7 +353,7 @@ async def read_data_by_id(
         )
     
     # 普通用户只能查看自己上传的数据
-    if current_user.user_type != "admin" and db_data.user_id != current_user.user_id:
+    # if current_user.user_type != "admin" and db_data.user_id != current_user.user_id:  # 认证已移除
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="没有权限查看此数据"
@@ -364,7 +364,7 @@ async def read_data_by_id(
 @router.delete("/{data_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_data(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -378,7 +378,7 @@ async def delete_data(
         )
     
     # 普通用户只能删除自己上传的数据
-    if current_user.user_type != "admin" and db_data.user_id != current_user.user_id:
+    # if current_user.user_type != "admin" and db_data.user_id != current_user.user_id:  # 认证已移除
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="没有权限删除此数据"
@@ -398,14 +398,14 @@ async def delete_data(
     except Exception as e:
         logging.warning(f"删除数据目录时出错: {str(e)}")
     
-    logging.info(f"用户{current_user.username}删除了数据ID: {data_id}")
+    logging.info(f"管理员删除了数据ID: {data_id}")  # 认证已移除
     
     return None
 
 @router.post("/batch-upload", response_model=schemas.BatchUploadResponse)
 async def batch_upload_data(
     files: List[UploadFile] = File(...),
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -493,9 +493,9 @@ async def batch_upload_data(
                 db_data = db_models.Data(
                     personnel_id=personnel_id,
                     data_path=data_dir,
-                    upload_user=1 if current_user.user_type == "admin" else 0,
+                    upload_user=1,  # 认证已移除，默认为管理员
                     personnel_name=personnel_name,
-                    user_id=current_user.user_id,
+                    user_id="72f220b7-f583-4034-8f44-08b5986c2835",  # 认证已移除，默认为admin用户ID
                     upload_time=datetime.now()
                 )
                 
@@ -506,7 +506,7 @@ async def batch_upload_data(
                 uploaded_data.append(db_data)
                 success_count += 1
                 
-                logging.info(f"用户{current_user.username}批量上传了ZIP数据: {personnel_id}")
+                logging.info(f"管理员批量上传了ZIP数据: {personnel_id}")  # 认证已移除
                 
             except zipfile.BadZipFile:
                 errors.append(f"{file.filename}: 无效的ZIP文件")
@@ -526,7 +526,7 @@ async def batch_upload_data(
             errors.append(f"{file.filename}: 处理失败 - {str(e)}")
             failed_count += 1
     
-    logging.info(f"用户{current_user.username}批量上传完成: 成功{success_count}个, 失败{failed_count}个")
+    logging.info(f"管理员批量上传完成: 成功{success_count}个, 失败{failed_count}个")  # 认证已移除
     
     return schemas.BatchUploadResponse(
         success_count=success_count,
@@ -538,7 +538,7 @@ async def batch_upload_data(
 @router.delete("/batch-delete")
 async def batch_delete_data(
     request: schemas.BatchDeleteRequest,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -553,14 +553,14 @@ async def batch_delete_data(
     # 查询要删除的数据
     data_list = db.query(db_models.Data).filter(db_models.Data.id.in_(request.data_ids)).all()
     
-    # 普通用户只能删除自己上传的数据
-    if current_user.user_type != "admin":
-        for data in data_list:
-            if data.user_id != current_user.user_id:
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"没有权限删除数据ID: {data.id}"
-                )
+    # 普通用户只能删除自己上传的数据 - 认证已移除
+    # if current_user.user_type != "admin":
+    #     for data in data_list:
+    #         if data.user_id != current_user.user_id:
+    #             raise HTTPException(
+    #                 status_code=status.HTTP_403_FORBIDDEN,
+    #                 detail=f"没有权限删除数据ID: {data.id}"
+    #             )
     
     deleted_count = 0
     errors = []
@@ -588,7 +588,7 @@ async def batch_delete_data(
     if deleted_count > 0:
         db.commit()
     
-    logging.info(f"用户{current_user.username}批量删除了{deleted_count}条数据")
+    logging.info(f"管理员批量删除了{deleted_count}条数据")  # 认证已移除
     
     if errors:
         raise HTTPException(
@@ -601,7 +601,7 @@ async def batch_delete_data(
 @router.post("/{data_id}/preprocess")
 async def preprocess_single_data(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -619,7 +619,7 @@ async def preprocess_single_data(
         )
     
     # 普通用户只能预处理自己上传的数据
-    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+    # if current_user.user_type != "admin" and data.user_id != current_user.user_id:  # 认证已移除
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="没有权限预处理此数据"
@@ -697,7 +697,7 @@ async def preprocess_single_data(
                 data.feature_status = "completed"
                 db.commit()
         
-        logging.info(f"用户{current_user.username}完成了数据ID {data_id} 的预处理")
+        logging.info(f"管理员完成了数据ID {data_id} 的预处理")  # 认证已移除
         
         return {
             "data_id": data_id,
@@ -718,7 +718,7 @@ async def preprocess_single_data(
 @router.post("/batch-preprocess")
 async def batch_preprocess_data(
     request: schemas.BatchPreprocessRequest,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -743,14 +743,14 @@ async def batch_preprocess_data(
             detail=f"以下数据ID不存在: {missing_ids}"
         )
     
-    # 权限检查：普通用户只能预处理自己的数据
-    if current_user.user_type != "admin":
-        for data in data_list:
-            if data.user_id != current_user.user_id:
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"您没有权限预处理数据ID: {data.id}"
-                )
+    # 权限检查：普通用户只能预处理自己的数据 - 认证已移除
+    # if current_user.user_type != "admin":
+    #     for data in data_list:
+    #         if data.user_id != current_user.user_id:
+    #             raise HTTPException(
+    #                 status_code=status.HTTP_403_FORBIDDEN,
+    #                 detail=f"您没有权限预处理数据ID: {data.id}"
+    #             )
     
     def process_single_data(data):
         """处理单个数据的预处理"""
@@ -861,7 +861,7 @@ async def batch_preprocess_data(
     success_count = sum(1 for result in results if result['success'])
     failed_count = len(results) - success_count
     
-    logging.info(f"用户{current_user.username}完成批量预处理，成功{success_count}个，失败{failed_count}个")
+    logging.info(f"管理员完成批量预处理，成功{success_count}个，失败{failed_count}个")  # 认证已移除
     
     return {
         "message": f"批量预处理完成，成功{success_count}个，失败{failed_count}个",

@@ -2525,3 +2525,509 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2025-08-21 17:10:45 - root - INFO - 系统 - 用户admin上传了ZIP数据: 2
 2025-08-21 17:11:03 - root - INFO - 系统 - 最终数据形状: (108, 59, 1000)
 2025-08-21 17:11:04 - root - INFO - 系统 - 用户admin完成了数据ID 7 的预处理
+2025-08-21 17:15:19 - root - INFO - 系统 - User admin logged in successfully
+2025-08-21 17:15:56 - root - INFO - 系统 - User admin logged in successfully
+2025-08-21 17:42:03 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-21 17:42:03 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-21 17:42:04 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-21 17:45:05 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-21 17:45:40 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-21 17:45:53 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-21 17:48:40 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:07:02 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:07:19 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:07:51 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:07:51 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:07:51 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:07:54 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:07:54 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:07:54 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:07:59 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 09:08:00 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:11:38 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:11:38 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:11:38 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:11:42 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:11:42 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:11:42 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:11:45 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 09:11:46 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:12:15 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:13:24 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:13:24 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:13:24 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:33:36 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:33:36 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:33:36 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:33:43 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:33:48 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:33:48 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:33:48 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:34:44 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:34:44 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:34:44 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:34:48 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:34:48 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:34:48 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:38:33 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:38:34 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:38:34 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:38:37 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:38:37 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:38:37 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:38:42 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 408, in view_image
+    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+NameError: name 'current_user' is not defined
+2025-08-22 09:38:42 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 350, in get_data_images
+    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+NameError: name 'current_user' is not defined
+2025-08-22 09:38:42 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 408, in view_image
+    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+NameError: name 'current_user' is not defined
+2025-08-22 09:38:42 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 408, in view_image
+    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+NameError: name 'current_user' is not defined
+2025-08-22 09:38:42 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 408, in view_image
+    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
+NameError: name 'current_user' is not defined
+2025-08-22 09:41:45 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:41:45 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:41:45 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:41:48 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:41:48 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:41:48 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:42:18 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/data.py", line 126, in read_data
+    if current_user.user_type != "admin":
+NameError: name 'current_user' is not defined
+2025-08-22 09:42:41 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/data.py", line 126, in read_data
+    if current_user.user_type != "admin":
+NameError: name 'current_user' is not defined
+2025-08-22 09:44:22 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:44:22 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:44:22 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:50:17 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:50:17 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:50:17 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 09:50:23 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 09:50:23 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:50:24 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:50:25 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 09:50:38 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 09:50:38 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 09:50:38 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:15:35 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:15:35 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:15:35 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 10:16:30 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:16:30 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:16:30 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 10:16:33 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:16:33 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:16:33 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:17:26 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 10:17:26 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 10:17:28 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 10:18:21 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:18:21 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:18:21 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:18:44 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:18:44 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:18:44 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:18:56 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:18:56 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:18:56 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 10:19:00 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 10:19:00 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:19:00 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 10:19:09 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 10:19:09 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 10:19:09 - main - ERROR - 系统 - 未处理的异常: 1 validation error for User
+email
+  value is not a valid email address: The part after the @-sign is a special-use or reserved name that cannot be used with email. [type=value_error, input_value='admin@system.local', input_type=str]
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/users.py", line 84, in read_user_me
+    return User(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for User
+email
+  value is not a valid email address: The part after the @-sign is a special-use or reserved name that cannot be used with email. [type=value_error, input_value='admin@system.local', input_type=str]
+2025-08-22 11:16:29 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:16:29 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:29:25 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:29:25 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:29:44 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:29:44 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:29:44 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 11:29:47 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:29:47 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:29:47 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:03 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 11:30:03 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 11:30:30 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:30:30 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:30 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:39 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:30:39 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:39 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 11:30:42 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:30:42 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:42 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:30:58 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 11:30:58 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 11:30:59 - main - ERROR - 系统 - 未处理的异常: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/data.py", line 126, in read_data
+    if current_user.user_type != "admin":
+NameError: name 'current_user' is not defined
+2025-08-22 11:33:22 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:33:22 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:33:22 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:33:31 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:33:31 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:33:31 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 11:33:34 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:33:34 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:33:34 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:33:52 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 11:33:52 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 11:44:01 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:44:01 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:44:01 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 11:44:28 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:44:28 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:44:28 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 11:44:31 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 11:44:31 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:44:31 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 11:44:51 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 11:44:52 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 13:25:26 - root - INFO - 系统 - 数据ID 7 已经预处理完成（存在所有特征图片）
+2025-08-22 13:25:26 - root - ERROR - 系统 - 预处理数据ID 7 失败: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/data.py", line 700, in preprocess_single_data
+    logging.info(f"用户{current_user.username}完成了数据ID {data_id} 的预处理")
+NameError: name 'current_user' is not defined
+
+2025-08-22 13:25:45 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 13:25:52 - root - INFO - 系统 - 数据ID 7 已经预处理完成（存在所有特征图片）
+2025-08-22 13:25:52 - root - ERROR - 系统 - 预处理数据ID 7 失败: name 'current_user' is not defined
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/data.py", line 700, in preprocess_single_data
+    logging.info(f"用户{current_user.username}完成了数据ID {data_id} 的预处理")
+NameError: name 'current_user' is not defined
+
+2025-08-22 13:26:07 - root - ERROR - 系统 - 处理ZIP文件时发生错误: (psycopg2.errors.ForeignKeyViolation) insert or update on table "tb_data" violates foreign key constraint "tb_data_user_id_fkey"
+DETAIL:  Key (user_id)=(admin) is not present in table "tb_user".
+
+[SQL: INSERT INTO tb_data (personnel_id, data_path, upload_user, personnel_name, user_id, upload_time, processing_status, feature_status) VALUES (%(personnel_id)s, %(data_path)s, %(upload_user)s, %(personnel_name)s, %(user_id)s, %(upload_time)s, %(processing_status)s, %(feature_status)s) RETURNING tb_data.id]
+[parameters: {'personnel_id': '3', 'data_path': '/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/3', 'upload_user': 1, 'personnel_name': '3', 'user_id': 'admin', 'upload_time': datetime.datetime(2025, 8, 22, 13, 26, 7, 277279), 'processing_status': 'pending', 'feature_status': 'pending'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-08-22 13:27:12 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:12 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:12 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:19 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:19 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:19 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:26 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:26 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:26 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:32 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:32 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:32 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:38 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:38 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:38 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:44 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:44 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:45 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:52 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:27:52 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:27:52 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:07 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:28:07 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:07 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:36 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:28:36 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:36 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:44 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:28:44 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:44 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:53 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:28:53 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:53 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 13:28:56 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:28:56 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:56 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:29:06 - root - INFO - 系统 - 数据ID 7 已经预处理完成（存在所有特征图片）
+2025-08-22 13:29:06 - root - INFO - 系统 - 管理员完成了数据ID 7 的预处理
+2025-08-22 13:37:08 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:37:08 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:37:08 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 13:37:58 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:37:58 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:37:58 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 13:38:01 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:38:01 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:38:01 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:38:41 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 13:38:41 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 13:38:54 - root - INFO - 系统 - 管理员上传了ZIP数据: 3
+2025-08-22 13:39:08 - root - INFO - 系统 - 最终数据形状: (108, 59, 1000)
+2025-08-22 13:39:10 - root - INFO - 系统 - 管理员完成了数据ID 9 的预处理
+2025-08-22 13:43:47 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 13:44:26 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 13:44:26 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:44:26 - main - INFO - 系统 - 所有路由模块加载成功

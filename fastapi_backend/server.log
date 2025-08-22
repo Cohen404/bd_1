@@ -1,0 +1,59 @@
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:317: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_type" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_path" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+2025-08-22 13:28:53 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_type" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+2025-08-22 13:28:53 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:53 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+INFO:     Will watch for changes in these directories: ['/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [75998] using StatReload
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:317: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_type" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_path" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+2025-08-22 13:28:56 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/pydantic/_internal/_fields.py:128: UserWarning: Field "model_type" has conflict with protected namespace "model_".
+
+You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
+  warnings.warn(
+2025-08-22 13:28:56 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 13:28:56 - main - INFO - 系统 - 所有路由模块加载成功
+INFO:     Started server process [76007]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:50160 - "GET /api/data HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:50160 - "GET /api/data/ HTTP/1.1" 200 OK
+2025-08-22 13:29:06 - root - INFO - 系统 - 数据ID 7 已经预处理完成（存在所有特征图片）
+2025-08-22 13:29:06 - root - INFO - 系统 - 管理员完成了数据ID 7 的预处理
+INFO:     127.0.0.1:50162 - "POST /api/data/7/preprocess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50163 - "GET /api/data/progress/single/7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50851 - "GET /api/health/images/7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50882 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50883 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50885 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50886 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50887 - "GET /api/data/?search= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50889 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50891 - "GET /api/data/?search= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50893 - "GET /api/users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50895 - "GET /api/users/me HTTP/1.1" 200 OK

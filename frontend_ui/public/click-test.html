@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .clickable-area {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px dashed #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        .clickable-area:hover {
+            border-color: #1d4ed8;
+            background: #eff6ff;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fecaca; color: #991b1b; }
+        .info { background: #dbeafe; color: #1e40af; }
+    </style>
+</head>
+<body>
+    <h1>🔧 点击功能测试</h1>
+    
+    <div class="test-container">
+        <h2>测试1: 基本点击功能</h2>
+        <div class="clickable-area" id="test1" onclick="testBasicClick()">
+            <p>点击这个区域测试基本功能</p>
+            <p style="font-size: 12px; color: #666;">应该看到手指指针并能点击</p>
+        </div>
+        <div id="status1" class="status info">等待点击...</div>
+    </div>
+    
+    <div class="test-container">
+        <h2>测试2: 图片点击功能</h2>
+        <div class="clickable-area" onclick="testImageClick()">
+            <img src="/api/health/image/7/theta" 
+                 style="max-width: 200px; border-radius: 4px;"
+                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+'"
+                 alt="测试图片" />
+            <p style="font-size: 12px; color: #666;">点击图片在新窗口打开</p>
+        </div>
+        <div id="status2" class="status info">等待点击...</div>
+    </div>
+    
+    <div class="test-container">
+        <h2>测试3: 多种图片类型</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div class="clickable-area" onclick="testImageType('alpha')" style="text-align: center; min-width: 120px;">
+                <p style="margin: 0;">Alpha波</p>
+                <small>点击测试</small>
+            </div>
+            <div class="clickable-area" onclick="testImageType('beta')" style="text-align: center; min-width: 120px;">
+                <p style="margin: 0;">Beta波</p>
+                <small>点击测试</small>
+            </div>
+            <div class="clickable-area" onclick="testImageType('gamma')" style="text-align: center; min-width: 120px;">
+                <p style="margin: 0;">Gamma波</p>
+                <small>点击测试</small>
+            </div>
+        </div>
+        <div id="status3" class="status info">等待点击...</div>
+    </div>
+    
+    <div class="test-container">
+        <h2>🔍 调试信息</h2>
+        <div id="debug-info" style="background: #f1f5f9; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;">
+            <div>User Agent: <span id="user-agent"></span></div>
+            <div>Window.open available: <span id="window-open-check"></span></div>
+            <div>Current URL: <span id="current-url"></span></div>
+        </div>
+    </div>
+    
+    <script>
+        // 初始化调试信息
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('window-open-check').textContent = typeof window.open === 'function' ? 'Yes' : 'No';
+        document.getElementById('current-url').textContent = window.location.href;
+        
+        function updateStatus(id, message, type = 'info') {
+            const element = document.getElementById(id);
+            element.textContent = message;
+            element.className = `status ${type}`;
+        }
+        
+        function testBasicClick() {
+            console.log('基本点击测试被触发');
+            updateStatus('status1', '✅ 点击事件成功触发!', 'success');
+            
+            try {
+                const newWindow = window.open('about:blank', '_blank', 'width=400,height=300');
+                if (newWindow) {
+                    newWindow.document.write('<h1>测试成功!</h1><p>点击功能正常工作</p>');
+                    updateStatus('status1', '✅ 新窗口打开成功!', 'success');
+                    setTimeout(() => newWindow.close(), 3000);
+                } else {
+                    updateStatus('status1', '⚠️ 新窗口被阻止，请允许弹窗', 'error');
+                }
+            } catch (e) {
+                updateStatus('status1', '❌ 错误: ' + e.message, 'error');
+            }
+        }
+        
+        function testImageClick() {
+            console.log('图片点击测试被触发');
+            updateStatus('status2', '✅ 图片点击事件成功触发!', 'success');
+            
+            try {
+                const imageUrl = '/api/health/image/7/theta';
+                const newWindow = window.open(imageUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                if (newWindow) {
+                    updateStatus('status2', '✅ 图片新窗口打开成功!', 'success');
+                } else {
+                    updateStatus('status2', '⚠️ 图片新窗口被阻止，请允许弹窗', 'error');
+                }
+            } catch (e) {
+                updateStatus('status2', '❌ 错误: ' + e.message, 'error');
+            }
+        }
+        
+        function testImageType(type) {
+            console.log(`${type}图片点击测试被触发`);
+            updateStatus('status3', `✅ ${type}图片点击事件成功触发!`, 'success');
+            
+            try {
+                const imageUrl = `/api/health/image/7/${type}`;
+                const newWindow = window.open(imageUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                if (newWindow) {
+                    updateStatus('status3', `✅ ${type}图片新窗口打开成功!`, 'success');
+                } else {
+                    updateStatus('status3', `⚠️ ${type}图片新窗口被阻止，请允许弹窗`, 'error');
+                }
+            } catch (e) {
+                updateStatus('status3', `❌ 错误: ${e.message}`, 'error');
+            }
+        }
+        
+        // 页面加载完成后的检查
+        window.onload = function() {
+            console.log('点击测试页面加载完成');
+            console.log('所有功能已就绪');
+        };
+    </script>
+</body>
+</html> 

@@ -12,7 +12,7 @@ import glob
 from database import get_db, SessionLocal
 import models as db_models
 import schemas
-from auth import get_current_user, check_permission
+# from auth import get_current_user, check_permission  # 认证已移除
 from model_inference import EegModel, BatchInferenceModel, ResultProcessor
 from data_preprocess import treat
 from data_feature_calculation import analyze_eeg_data, plot_serum_data, plot_scale_data
@@ -43,7 +43,7 @@ IMAGE_TYPES = {
 @router.post("/evaluate", response_model=schemas.Result)
 async def evaluate_health(
     request: schemas.HealthEvaluateRequest,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -105,13 +105,16 @@ async def evaluate_health(
         result_processor = ResultProcessor(data_path, final_scores)
         report_path = result_processor.generate_report()
         
+        # 获取数据相关的用户信息
+        data_record = db.query(db_models.Data).filter(db_models.Data.id == request.data_id).first()
+        
         # 保存结果到数据库
         result = db_models.Result(
             stress_score=final_scores['stress_score'],
             depression_score=final_scores['depression_score'],
             anxiety_score=final_scores['anxiety_score'],
             social_isolation_score=final_scores['social_isolation_score'],
-            user_id=current_user.user_id,
+            user_id=data_record.user_id if data_record and data_record.user_id else "system",  # 使用数据的用户ID或系统默认值
             data_id=request.data_id,
             report_path=report_path,
             result_time=datetime.now()
@@ -121,7 +124,7 @@ async def evaluate_health(
         db.commit()
         db.refresh(result)
         
-        logging.info(f"用户 {current_user.username} 完成了数据ID {request.data_id} 的健康评估")
+        logging.info(f"系统完成了数据ID {request.data_id} 的健康评估")
         
         return result
     
@@ -136,7 +139,7 @@ async def evaluate_health(
 async def batch_evaluate_health(
     request: schemas.BatchHealthEvaluateRequest,
     background_tasks: BackgroundTasks,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -150,21 +153,14 @@ async def batch_evaluate_health(
             detail="部分数据ID不存在"
         )
     
-    # 权限检查：普通用户只能评估自己的数据
-    if current_user.user_type != "admin":
-        for data in data_list:
-            if data.user_id != current_user.user_id:
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"您没有权限评估数据ID: {data.id}"
-                )
+    # 权限检查已移除 - 无需认证即可进行批量评估
     
     # 启动后台批量评估任务
     background_tasks.add_task(
         perform_batch_evaluation,
         request.data_ids,
-        current_user.user_id,
-        current_user.username
+        "system",  # 使用系统用户ID
+        "系统"     # 使用系统用户名
     )
     
     return {
@@ -259,7 +255,7 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
 @router.get("/reports/{result_id}", response_model=schemas.Result)
 async def get_evaluate_report(
     result_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -273,12 +269,7 @@ async def get_evaluate_report(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 检查权限
-    if result.user_id != current_user.user_id and current_user.user_type != "admin":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="没有权限查看此报告"
-        )
+    # 权限检查已移除 - 无需认证即可查看报告
     
     # 如果报告不存在，生成报告
     if not result.report_path or not os.path.exists(result.report_path):
@@ -295,7 +286,7 @@ async def get_evaluate_report(
 @router.get("/led-status/{result_id}", response_model=schemas.LEDStatus)
 async def get_led_status(
     result_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -308,12 +299,7 @@ async def get_led_status(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and result.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此结果"
-        )
+    # 权限检查已移除 - 无需认证即可查看LED状态
     
     # 根据分数确定LED状态
     def get_led_color(score: float) -> str:
@@ -333,7 +319,7 @@ async def get_led_status(
 @router.get("/images/{data_id}", response_model=List[schemas.ImageInfo])
 async def get_data_images(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -346,12 +332,7 @@ async def get_data_images(
             detail=f"ID为{data_id}的数据不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此数据"
-        )
+    # 权限检查已移除 - 无需认证即可访问图片列表
     
     images = []
     data_path = data.data_path
@@ -389,7 +370,7 @@ async def get_data_images(
 async def view_image(
     data_id: int,
     image_type: str,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -404,12 +385,7 @@ async def view_image(
             detail=f"ID为{data_id}的数据不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此数据"
-        )
+    # 权限检查已移除 - 无需认证即可访问图片
     
     # 检查图像类型是否有效
     if image_type not in IMAGE_TYPES:
@@ -449,7 +425,7 @@ async def view_image(
 @router.get("/status/{data_id}", response_model=schemas.EvaluationStatus)
 async def get_evaluation_status(
     data_id: int,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -462,12 +438,7 @@ async def get_evaluation_status(
             detail=f"ID为{data_id}的数据不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and data.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此数据"
-        )
+    # 权限检查已移除 - 无需认证即可访问
     
     # 检查是否有评估结果
     result = db.query(db_models.Result).filter(db_models.Result.data_id == data_id).first()

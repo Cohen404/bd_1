@@ -580,15 +580,34 @@ const HealthEvaluatePage: React.FC = () => {
                 
                 {/* 图像显示区域 */}
                 <div className="flex justify-center bg-gray-100 rounded-lg p-4">
-                  <img
-                    src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
-                    alt={currentImageData.images[currentImageData.currentIndex]?.description}
-                    className="max-w-full max-h-96 object-contain rounded-lg shadow-lg"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+';
+                  <div 
+                    className="relative group cursor-pointer"
+                    onClick={() => {
+                      console.log('健康评估页面图片点击事件触发');
+                      const imageUrl = `/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`;
+                      console.log('打开图片URL:', imageUrl);
+                      const newWindow = window.open(imageUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                      if (!newWindow) {
+                        alert('弹窗被浏览器阻止，请允许弹窗后重试');
+                      }
                     }}
-                  />
+                  >
+                    <img
+                      src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
+                      alt={currentImageData.images[currentImageData.currentIndex]?.description}
+                      className="max-w-full max-h-96 object-contain rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+';
+                      }}
+                    />
+                    {/* 悬停提示 */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30 rounded-lg pointer-events-none">
+                      <div className="bg-white px-3 py-1 rounded text-sm font-medium shadow-lg">
+                        点击在新窗口打开
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (

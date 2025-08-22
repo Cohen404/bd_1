@@ -43,6 +43,8 @@ const DataManagePage: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [batchUploading, setBatchUploading] = useState(false);
   const [preprocessing, setPreprocessing] = useState(false);
+  const [selectedDataId, setSelectedDataId] = useState<number | null>(null);
+  const [visualizationImage, setVisualizationImage] = useState<string | null>(null);
   const [currentImageData, setCurrentImageData] = useState<{
     dataId: number;
     images: any[];
@@ -63,13 +65,24 @@ const DataManagePage: React.FC = () => {
   const [processingStartTimes, setProcessingStartTimes] = useState<{[key: number]: number}>({});
   const [simulatedProgress, setSimulatedProgress] = useState<{[key: number]: number}>({});
 
-  // 可视化指标选项
+  // 可视化指标选项（使用具体的图片类型）
   const visualizationOptions = [
-    { value: 'differential_entropy', label: 'Differential Entropy' },
-    { value: 'frequency_domain_features', label: 'Frequency Domain Features' },
-    { value: 'theta_alpha_beta_gamma_powers', label: 'Theta Alpha Beta Gamma Powers' },
-    { value: 'time_domain_features', label: 'Time Domain Features' },
-    { value: 'time_frequency_features', label: 'Time Frequency Features' }
+    { value: 'differential_entropy', label: '微分熵特征图' },
+    { value: 'theta', label: 'Theta功率特征图' },
+    { value: 'alpha', label: 'Alpha功率特征图' },
+    { value: 'beta', label: 'Beta功率特征图' },
+    { value: 'gamma', label: 'Gamma功率特征图' },
+    { value: 'frequency_band_1', label: '均分频带1特征图' },
+    { value: 'frequency_band_2', label: '均分频带2特征图' },
+    { value: 'frequency_band_3', label: '均分频带3特征图' },
+    { value: 'frequency_band_4', label: '均分频带4特征图' },
+    { value: 'frequency_band_5', label: '均分频带5特征图' },
+    { value: 'time_zero_crossing', label: '时域特征-过零率' },
+    { value: 'time_variance', label: '时域特征-方差' },
+    { value: 'time_energy', label: '时域特征-能量' },
+    { value: 'time_difference', label: '时域特征-差分' },
+    { value: 'frequency_wavelet', label: '时频域特征图' },
+    { value: 'serum_analysis', label: '血清指标分析' }
   ];
 
   // 图像类型选项
@@ -416,6 +429,25 @@ const DataManagePage: React.FC = () => {
     }
   };
 
+  // 处理可视化显示
+  const handleVisualizationDisplay = () => {
+    if (!selectedDataId || !visualizationType) {
+      toast.error('请先选择数据和可视化类型');
+      return;
+    }
+    
+    const imageUrl = `/api/health/image/${selectedDataId}/${visualizationType}`;
+    setVisualizationImage(imageUrl);
+    setShowVisualization(true);
+  };
+
+  // 选择数据用于可视化
+  const handleSelectDataForVisualization = (dataId: number) => {
+    setSelectedDataId(dataId);
+    setVisualizationImage(null);
+    setShowVisualization(false);
+  };
+
   // 切换图像
   const navigateImage = (direction: 'prev' | 'next') => {
     if (!currentImageData) return;
@@ -634,7 +666,7 @@ const DataManagePage: React.FC = () => {
                                  size="small"
                                  showIcon={false}
                                />
-                             </div>
+                            </div>
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -652,6 +684,13 @@ const DataManagePage: React.FC = () => {
                               title="查看图像"
                             >
                               <Image className="h-4 w-4" />
+                            </button>
+                            <button
+                              onClick={() => handleSelectDataForVisualization(item.id)}
+                              className="text-purple-600 hover:text-purple-700"
+                              title="选择用于可视化"
+                            >
+                              <BarChart3 className="h-4 w-4" />
                             </button>
                             <button
                               onClick={() => handleDeleteSingle(item.id, item.personnel_name)}
@@ -677,6 +716,32 @@ const DataManagePage: React.FC = () => {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900 text-center">数据可视化</h3>
               
+              {/* 数据选择 */}
+              <div>
+                <label className="label">选择数据：</label>
+                <select
+                  className="input"
+                  value={selectedDataId || ''}
+                  onChange={(e) => {
+                    const dataId = e.target.value ? Number(e.target.value) : null;
+                    if (dataId) {
+                      handleSelectDataForVisualization(dataId);
+                    } else {
+                      setSelectedDataId(null);
+                      setVisualizationImage(null);
+                      setShowVisualization(false);
+                    }
+                  }}
+                >
+                  <option value="">请选择数据</option>
+                  {filteredData.map(item => (
+                    <option key={item.id} value={item.id}>
+                      {item.personnel_name} (ID: {item.id})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
               {/* 可视化指标选择 */}
               <div>
                 <label className="label">可视化指标选择：</label>
@@ -694,27 +759,64 @@ const DataManagePage: React.FC = () => {
               </div>
 
               {/* 可视化图表区域 */}
-              <div className="bg-white rounded-lg p-4 min-h-[200px] flex items-center justify-center border-2 border-dashed border-gray-300">
-                {showVisualization ? (
-                  <div className="text-center">
-                    <BarChart3 className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">图表显示区域</p>
-                    <p className="text-xs text-gray-400 mt-1">当前指标: {visualizationOptions.find(opt => opt.value === visualizationType)?.label}</p>
+              <div className="bg-white rounded-lg p-4 min-h-[300px] flex items-center justify-center border-2 border-dashed border-gray-300">
+                {showVisualization && visualizationImage ? (
+                  <div className="w-full h-full flex flex-col items-center">
+                    <div 
+                      className="relative group cursor-pointer"
+                      onClick={() => {
+                        console.log('可视化图片点击事件触发');
+                        console.log('打开可视化图片URL:', visualizationImage);
+                        if (visualizationImage) {
+                          const newWindow = window.open(visualizationImage, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                          if (!newWindow) {
+                            alert('弹窗被浏览器阻止，请允许弹窗后重试');
+                          }
+                        }
+                      }}
+                    >
+                      <img
+                        src={visualizationImage}
+                        alt={visualizationOptions.find(opt => opt.value === visualizationType)?.label}
+                        className="max-w-full max-h-64 object-contain rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+                        onLoad={() => {
+                          console.log('图片加载成功:', visualizationImage);
+                        }}
+                        onError={(e) => {
+                          console.error('图片加载失败:', visualizationImage);
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          toast.error('图片加载失败，请检查数据是否已预处理');
+                        }}
+                      />
+                      {/* 悬停提示 */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-20 rounded-lg pointer-events-none">
+                        <div className="bg-white px-3 py-1 rounded text-sm font-medium shadow-lg">
+                          点击在新窗口打开
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 text-center">
+                      {visualizationOptions.find(opt => opt.value === visualizationType)?.label}
+                    </p>
                   </div>
                 ) : (
                   <div className="text-center">
                     <Database className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">请选择数据查看可视化</p>
+                    <p className="text-sm text-gray-500">
+                      {selectedDataId ? '点击下方按钮查看可视化图片' : '请先选择数据和指标'}
+                    </p>
                   </div>
                 )}
               </div>
 
               <button 
                 className="btn btn-primary w-full flex items-center justify-center space-x-2"
-                onClick={() => setShowVisualization(!showVisualization)}
+                onClick={handleVisualizationDisplay}
+                disabled={!selectedDataId}
               >
                 <Eye className="h-4 w-4" />
-                <span>图片查看</span>
+                <span>显示图片</span>
               </button>
             </div>
           </div>
@@ -927,15 +1029,34 @@ const DataManagePage: React.FC = () => {
                 
                 {/* 图像显示区域 */}
                 <div className="flex justify-center bg-gray-100 rounded-lg p-4">
-                  <img
-                    src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
-                    alt={currentImageData.images[currentImageData.currentIndex]?.description}
-                    className="max-w-full max-h-96 object-contain rounded-lg shadow-lg"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+';
+                  <div 
+                    className="relative group cursor-pointer"
+                    onClick={() => {
+                      console.log('点击图片事件触发');
+                      const imageUrl = `/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`;
+                      console.log('打开图片URL:', imageUrl);
+                      const newWindow = window.open(imageUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+                      if (!newWindow) {
+                        alert('弹窗被浏览器阻止，请允许弹窗后重试');
+                      }
                     }}
-                  />
+                  >
+                    <img
+                      src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
+                      alt={currentImageData.images[currentImageData.currentIndex]?.description}
+                      className="max-w-full max-h-96 object-contain rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7lm77lg4/kuI3lrZjlnKg8L3RleHQ+PC9zdmc+';
+                      }}
+                    />
+                    {/* 悬停提示 */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30 rounded-lg pointer-events-none">
+                      <div className="bg-white px-3 py-1 rounded text-sm font-medium shadow-lg">
+                        点击在新窗口打开
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (

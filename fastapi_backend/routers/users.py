@@ -8,7 +8,8 @@ from datetime import datetime
 from database import get_db
 import models as db_models
 import schemas
-from auth import get_current_user, check_admin_permission, hash_password
+# from auth import get_current_user, check_admin_permission, hash_password  # 认证已移除
+from auth import hash_password
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -16,7 +17,7 @@ logger = logging.getLogger(__name__)
 @router.post("/", response_model=schemas.User)
 async def create_user(
     user: schemas.UserCreate,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -65,7 +66,7 @@ async def create_user(
 async def read_users(
     skip: int = 0,
     limit: int = 100,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -75,16 +76,27 @@ async def read_users(
     return users
 
 @router.get("/me", response_model=schemas.User)
-async def read_user_me(current_user = Depends(get_current_user)):
+async def read_user_me():
     """
-    获取当前用户信息
+    获取当前用户信息 - 认证已移除，返回默认管理员信息
     """
-    return current_user
+    from schemas import User
+    from datetime import datetime
+    return User(
+        user_id="admin",
+        username="admin", 
+        email="admin@example.com",
+        user_type="admin",
+        phone=None,
+        created_at=datetime(2024, 1, 1),
+        last_login=datetime(2024, 1, 1),
+        updated_at=None
+    )
 
 @router.get("/{user_id}", response_model=schemas.User)
 async def read_user(
     user_id: str,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -109,7 +121,7 @@ async def read_user(
 async def update_user(
     user_id: str,
     user: schemas.UserUpdate,
-    current_user = Depends(get_current_user),
+    # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
@@ -172,7 +184,7 @@ async def update_user(
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(
     user_id: str,
-    current_user = Depends(check_admin_permission),
+    # current_user = Depends(check_admin_permission),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
