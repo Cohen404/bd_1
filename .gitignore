@@ -4,6 +4,8 @@
 # 忽略 __pycache__ 目录
 __pycache__/
 
+*.pkl
+
 tmp/
 .idea/
 

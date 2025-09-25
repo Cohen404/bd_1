@@ -116,7 +116,7 @@ const HealthEvaluatePage: React.FC = () => {
   // 获取LED状态
   const fetchLEDStatus = async (resultId: number) => {
     try {
-      const response = await apiClient.get(`/health-evaluate/led-status/${resultId}`);
+      const response = await apiClient.get(`/health/led-status/${resultId}`);
       setLedStatus(response);
     } catch (error) {
       console.error('获取LED状态失败:', error);
@@ -165,7 +165,7 @@ const HealthEvaluatePage: React.FC = () => {
   const handleSingleEvaluate = async (dataId: number) => {
     try {
       setEvaluating(true);
-      const result = await apiClient.post('/health-evaluate/evaluate', { data_id: dataId });
+      const result = await apiClient.post('/health/evaluate', { data_id: dataId });
       
       // 更新当前状态
       setCurrentStatus({
@@ -214,7 +214,7 @@ const HealthEvaluatePage: React.FC = () => {
       setEvaluationProgress(initialProgress);
 
       // 启动批量评估
-      const response = await apiClient.post('/health-evaluate/batch-evaluate', { 
+      const response = await apiClient.post('/health/batch-evaluate', { 
         data_ids: selectedIds 
       });
       

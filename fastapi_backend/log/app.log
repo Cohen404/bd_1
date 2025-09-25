@@ -3239,3 +3239,100 @@ Traceback (most recent call last):
 NameError: name 'current_user' is not defined
 2025-08-22 14:07:18 - root - INFO - 系统 - User admin logged in successfully
 2025-08-22 14:07:21 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 14:51:36 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:51:36 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:51:36 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:21 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:52:21 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:21 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:42 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:52:42 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:42 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 14:52:45 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:52:45 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:45 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:52:50 - root - ERROR - 系统 - 分析过程中出现错误: 不支持的文件格式: 
+2025-08-22 14:52:50 - root - ERROR - 系统 - 健康评估失败: 不支持的文件格式: 
+2025-08-22 14:52:50 - root - ERROR - 系统 - Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 85, in evaluate_health
+    analyze_eeg_data(data_path)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data_feature_calculation.py", line 428, in analyze_eeg_data
+    data1, eeg_data = load_preprocess_data(actual_file_path)
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data_feature_calculation.py", line 152, in load_preprocess_data
+    raise NotImplementedError(f"不支持的文件格式: {ext}")
+NotImplementedError: 不支持的文件格式: 
+
+2025-08-22 14:53:43 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:53:43 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:53:43 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:53:47 - root - INFO - 系统 - File /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/2/fif.fif is already processed with visualizations
+2025-08-22 14:53:48 - root - ERROR - 系统 - 错误：数据库中未找到类型为0的模型
+2025-08-22 14:53:48 - root - ERROR - 系统 - 健康评估失败: 
+2025-08-22 14:53:48 - root - ERROR - 系统 - Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/routers/health_evaluate.py", line 106, in evaluate_health
+    raise HTTPException(
+fastapi.exceptions.HTTPException
+
+2025-08-22 14:55:18 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:55:18 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:18 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:35 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:55:35 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:35 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:49 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:55:49 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:50 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:58 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:55:58 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:55:59 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:56:03 - root - INFO - 系统 - File /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/2/fif.fif is already processed with visualizations
+2025-08-22 14:56:04 - root - INFO - 系统 - 成功加载TFLite模型: /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/model/yingji/subject-1_yingji_quantized.tflite
+2025-08-22 14:56:34 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:56:34 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:56:34 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 14:56:37 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 14:56:37 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 14:56:37 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:04 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 16:40:04 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:04 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 16:40:08 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 16:40:08 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:08 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:15 - root - INFO - 系统 - File /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/3/fif.fif is already processed with visualizations
+2025-08-22 16:40:15 - root - INFO - 系统 - 成功加载TFLite模型: /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/model/yingji/subject-1_yingji_quantized.tflite
+2025-08-22 16:40:56 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 16:40:56 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:56 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 16:40:59 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 16:40:59 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 16:40:59 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 19:00:52 - passlib.handlers.bcrypt - WARNING - 系统 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/venv/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-08-22 19:00:53 - root - INFO - 系统 - User admin logged in successfully
+2025-08-22 19:00:59 - root - INFO - 系统 - File /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/3/fif.fif is already processed with visualizations
+2025-08-22 19:00:59 - root - INFO - 系统 - 成功加载TFLite模型: /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/model/yingji/subject-1_yingji_quantized.tflite
+2025-08-22 19:01:23 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 19:01:23 - __main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 19:01:23 - __main__ - INFO - 系统 - 启动北京健康评估系统API服务器
+2025-08-22 19:01:26 - root - INFO - 系统 - 使用字体: Arial Unicode MS
+2025-08-22 19:01:26 - __mp_main__ - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 19:01:26 - main - INFO - 系统 - 所有路由模块加载成功
+2025-08-22 19:01:28 - root - INFO - 系统 - File /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/data/3/fif.fif is already processed with visualizations
+2025-08-22 19:01:29 - root - INFO - 系统 - 成功加载TFLite模型: /Users/mac/work/东华/项目/2024/装备部/start/code/bj_health_csq/fastapi_backend/model/yingji/subject-1_yingji_quantized.tflite
+2025-09-24 14:31:10 - __main__ - INFO - 系统 - 开始PostgreSQL Windows安装和配置...
+2025-09-24 14:31:10 - __main__ - INFO - 系统 - Windows版本: 10.0.19045
+2025-09-24 14:31:10 - __main__ - INFO - 系统 - .env文件已存在
+2025-09-24 14:31:10 - __main__ - INFO - 系统 - 开始在Windows上安装PostgreSQL...
+2025-09-24 14:31:11 - __main__ - INFO - 系统 - 正在下载: https://get.enterprisedb.com/postgresql/postgresql-14.9-1-windows-x64.exe
+2025-09-24 14:31:47 - __main__ - INFO - 系统 - 下载完成: postgresql-14.9-1-windows-x64.exe
+2025-09-24 14:31:47 - __main__ - INFO - 系统 - 正在安装PostgreSQL...
+2025-09-24 14:31:47 - __main__ - INFO - 系统 - 执行命令: postgresql-14.9-1-windows-x64.exe --mode unattended --superpassword tj654478 --servicename postgresql --serviceaccount postgres --servicepassword tj654478 --serverport 5432
+2025-09-24 14:32:08 - __main__ - ERROR - 系统 - 命令执行失败: postgresql-14.9-1-windows-x64.exe --mode unattended --superpassword tj654478 --servicename postgresql --serviceaccount postgres --servicepassword tj654478 --serverport 5432
+2025-09-24 14:32:08 - __main__ - ERROR - 系统 - 错误输出: 
+2025-09-24 14:32:08 - __main__ - ERROR - 系统 - PostgreSQL安装失败
+2025-09-24 14:32:08 - __main__ - ERROR - 系统 - 安装输出: 
+2025-09-24 14:32:08 - __main__ - ERROR - 系统 - Windows上PostgreSQL安装失败
