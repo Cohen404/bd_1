@@ -22,9 +22,11 @@ import {
   Info,
   Zap
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// import { apiClient } from '@/utils/api'; // 注释后端API调用
 import { Model } from '@/types';
 import { formatDateTime, formatFileSize } from '@/utils/helpers';
+import { ModelStorage, ModelFormData } from '@/utils/model-storage';
+import { validateModel, validateFileUpload, getModelTypeName, getModelTypeOptions } from '@/utils/model-validation';
 import toast from 'react-hot-toast';
 
 interface ModelStatus {
@@ -96,12 +98,14 @@ const ModelManagePage: React.FC = () => {
     3: "社交孤立评估模型"
   };
 
-  // 获取模型列表
+  // 获取模型列表 - 纯前端实现
   const fetchModels = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getModels();
-      setModels(Array.isArray(response) ? response : response?.items || []);
+      // 初始化示例数据（如果不存在）
+      ModelStorage.initializeSampleData();
+      const response = ModelStorage.getAllModels();
+      setModels(response);
     } catch (error) {
       console.error('获取模型列表失败:', error);
       toast.error('获取模型列表失败');
@@ -110,10 +114,10 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 获取模型状态
+  // 获取模型状态 - 纯前端实现
   const fetchModelStatus = async () => {
     try {
-      const response = await apiClient.get('/models/status/check');
+      const response = ModelStorage.getModelStatus();
       setModelStatus(response);
     } catch (error) {
       console.error('获取模型状态失败:', error);
@@ -121,11 +125,11 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 获取模型版本
+  // 获取模型版本 - 纯前端实现
   const fetchModelVersions = async (modelType: number) => {
     try {
-      const response = await apiClient.get(`/models/versions/${modelType}`);
-      setModelVersions(response.versions || []);
+      const response = ModelStorage.getModelVersions(modelType);
+      setModelVersions(response);
       setSelectedModelType(modelType);
       setShowVersions(true);
     } catch (error) {
@@ -134,11 +138,11 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 获取模型性能信息
+  // 获取模型性能信息 - 纯前端实现
   const fetchModelPerformance = async () => {
     try {
-      const response = await apiClient.get('/models/performance/info');
-      setModelPerformance(response.performance_data || []);
+      const response = ModelStorage.getModelPerformance();
+      setModelPerformance(response);
     } catch (error) {
       console.error('获取模型性能信息失败:', error);
       toast.error('获取模型性能信息失败');
@@ -149,24 +153,21 @@ const ModelManagePage: React.FC = () => {
     fetchModels();
   }, []);
 
-  // 上传模型文件
+  // 上传模型文件 - 纯前端实现
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // 检查文件类型
-    if (!file.name.endsWith('.keras') && !file.name.endsWith('.h5') && !file.name.endsWith('.pt')) {
-      toast.error('请选择有效的模型文件（.keras, .h5, .pt）');
+    // 验证文件
+    const fileErrors = validateFileUpload(file);
+    if (fileErrors.length > 0) {
+      fileErrors.forEach(error => toast.error(error));
       return;
     }
 
     try {
       setUploading(true);
       setUploadProgress(0);
-
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('model_type', selectedUploadType.toString());
 
       // 模拟上传进度
       const progressTimer = setInterval(() => {
@@ -179,11 +180,29 @@ const ModelManagePage: React.FC = () => {
         });
       }, 200);
 
-      await apiClient.post('/models/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      // 创建模型数据
+      const modelData: ModelFormData = {
+        model_type: selectedUploadType,
+        model_name: file.name.replace(/\.[^/.]+$/, ""), // 移除扩展名
+        description: `上传的${getModelTypeName(selectedUploadType)}文件`,
+        file_name: file.name,
+        file_size: file.size
+      };
+
+      // 验证模型数据
+      const validationErrors = validateModel(modelData);
+      if (validationErrors.length > 0) {
+        validationErrors.forEach(error => toast.error(error));
+        setUploading(false);
+        setUploadProgress(0);
+        return;
+      }
+
+      // 模拟上传延迟
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // 添加到本地存储
+      ModelStorage.addModel(modelData);
       
       clearInterval(progressTimer);
       setUploadProgress(100);
@@ -207,7 +226,7 @@ const ModelManagePage: React.FC = () => {
     event.target.value = '';
   };
 
-  // 删除模型
+  // 删除模型 - 纯前端实现
   const handleDelete = async (modelId: number, modelType: number) => {
     const modelTypeName = modelTypes[modelType as keyof typeof modelTypes] || '未知类型';
     
@@ -216,73 +235,90 @@ const ModelManagePage: React.FC = () => {
     }
 
     try {
-      await apiClient.delete(`/models/${modelId}`);
-      toast.success('模型删除成功');
-      fetchModels();
+      const success = ModelStorage.deleteModel(modelId);
+      if (success) {
+        toast.success('模型删除成功');
+        fetchModels();
+      } else {
+        toast.error('模型不存在或删除失败');
+      }
     } catch (error) {
       console.error('删除模型失败:', error);
       toast.error('删除模型失败');
     }
   };
 
-  // 导出单个模型
+  // 导出单个模型 - 纯前端实现（模拟）
   const handleExportModel = async (modelId: number) => {
     try {
-      const response = await apiClient.get(`/models/export/${modelId}`, {
-        responseType: 'blob'
-      });
+      const model = ModelStorage.getModelById(modelId);
+      if (!model) {
+        toast.error('模型不存在');
+        return;
+      }
 
-      const url = window.URL.createObjectURL(new Blob([response]));
+      // 模拟导出文件
+      const exportData = {
+        id: model.id,
+        model_type: model.model_type,
+        model_path: model.model_path,
+        create_time: model.create_time,
+        export_time: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `model_${modelId}_${new Date().toISOString().slice(0, 10)}.keras`;
+      link.download = `model_${modelId}_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      toast.success('模型导出成功');
+      toast.success('模型信息导出成功');
     } catch (error) {
       console.error('导出模型失败:', error);
       toast.error('导出模型失败');
     }
   };
 
-  // 导出所有模型
+  // 导出所有模型 - 纯前端实现（模拟）
   const handleExportAllModels = async () => {
     try {
-      const response = await apiClient.post('/models/export-all', {}, {
-        responseType: 'blob'
-      });
+      const allModels = ModelStorage.getAllModels();
+      const exportData = {
+        models: allModels,
+        export_time: new Date().toISOString(),
+        total_count: allModels.length
+      };
 
-      const url = window.URL.createObjectURL(new Blob([response]));
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `all_models_${new Date().toISOString().slice(0, 10)}.zip`;
+      link.download = `all_models_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      toast.success('所有模型导出成功');
+      toast.success('所有模型信息导出成功');
     } catch (error) {
       console.error('导出所有模型失败:', error);
       toast.error('导出所有模型失败');
     }
   };
 
-  // 恢复模型版本
+  // 恢复模型版本 - 纯前端实现（模拟）
   const handleRestoreVersion = async (modelType: number, backupFilename: string) => {
     if (!window.confirm(`确定要恢复到此版本吗？当前版本将被备份。`)) {
       return;
     }
 
     try {
-      const formData = new FormData();
-      formData.append('backup_filename', backupFilename);
-
-      await apiClient.post(`/models/restore/${modelType}`, formData);
-      toast.success('模型版本恢复成功');
+      // 模拟版本恢复
+      toast.success('模型版本恢复成功（模拟）');
       fetchModels();
       fetchModelVersions(modelType);
     } catch (error) {
@@ -291,12 +327,10 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 过滤模型
-  const filteredModels = models.filter(model => {
-    const modelTypeName = modelTypes[model.model_type as keyof typeof modelTypes] || '';
-    return modelTypeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-           model.model_path.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  // 过滤模型 - 使用存储类的搜索功能
+  const filteredModels = searchTerm 
+    ? ModelStorage.searchModels(searchTerm)
+    : models;
 
   return (
     <div className="space-y-6">

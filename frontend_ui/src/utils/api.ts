@@ -250,30 +250,30 @@ class API {
     return response.data;
   }
 
-  // 模型管理
-  async getModels(params?: { page?: number; size?: number }) {
-    const response = await api.get('/models/', { params });
-    return response.data;
-  }
+  // 模型管理 - 已改为纯前端实现，使用localStorage存储
+  // async getModels(params?: { page?: number; size?: number }) {
+  //   const response = await api.get('/models/', { params });
+  //   return response.data;
+  // }
 
-  async uploadModel(formData: FormData) {
-    const response = await api.post('/models/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  }
+  // async uploadModel(formData: FormData) {
+  //   const response = await api.post('/models/upload', formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data',
+  //     },
+  //   });
+  //   return response.data;
+  // }
 
-  async deleteModel(modelId: number) {
-    const response = await api.delete(`/models/${modelId}`);
-    return response.data;
-  }
+  // async deleteModel(modelId: number) {
+  //   const response = await api.delete(`/models/${modelId}`);
+  //   return response.data;
+  // }
 
-  async getModelById(modelId: number) {
-    const response = await api.get(`/models/${modelId}`);
-    return response.data;
-  }
+  // async getModelById(modelId: number) {
+  //   const response = await api.get(`/models/${modelId}`);
+  //   return response.data;
+  // }
 
   // 参数管理 - 纯前端版本，使用localStorage存储
   async getParameters(params?: { page?: number; size?: number }) {
