@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, LoginRequest } from '@/types';
-import { apiClient } from '@/utils/api';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
 import {
   getCurrentUser,
   setCurrentUser,
@@ -10,7 +12,9 @@ import {
   removeCurrentUser,
   isAuthenticated,
 } from '@/utils/auth';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, User as LocalUser } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 
 export interface UseAuthReturn {
   user: User | null;
@@ -32,7 +36,8 @@ export const useAuth = (): UseAuthReturn => {
     try {
       setIsLoading(true);
       
-      // 检查本地是否有用户信息
+      // ===== 纯前端演示模式 - 特殊标记 =====
+      // 检查本地是否有用户信息，不需要后端验证
       const currentUser = getCurrentUser();
       if (!currentUser) {
         setUser(null);
@@ -46,8 +51,9 @@ export const useAuth = (): UseAuthReturn => {
       // 直接使用本地存储的用户信息
       setUser(currentUser);
       return true;
+      // ============================================
       
-      /* 原有的API验证代码（已注释）
+      /* 原有的API验证代码（已注释 - 纯前端演示模式）
       // 检查本地是否有认证信息
       if (!isAuthenticated()) {
         setUser(null);
@@ -86,62 +92,59 @@ export const useAuth = (): UseAuthReturn => {
     try {
       setIsLoading(true);
       
-      // 硬编码的登录逻辑
+      // ===== 纯前端演示模式 - 特殊标记 =====
+      // 使用localStorage进行用户认证
       const { username, password } = credentials;
       
-      // 检查管理员账号
-      if (username === 'admin' && password === 'admin123') {
-        // 构建管理员用户信息
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取用户数据
+      const users = LocalStorageManager.get<LocalUser[]>(STORAGE_KEYS.USERS, []);
+      const account = users.find(
+        user => user.username === username && user.password === password
+      );
+      
+      if (account) {
+        // 更新最后登录时间
+        DataOperations.updateUserLastLogin(account.username);
+        
+        // 添加登录日志
+        DataOperations.addLog('USER_LOGIN', 'AUTH_MODULE', `用户 ${account.username} 登录成功`, account.username, account.id.toString());
+        
+        // 构建用户信息（转换为前端User类型）
         const userData: User = {
-          user_id: 'admin-001',
-          username: 'admin',
-          user_type: 'admin',
-          created_at: new Date().toISOString(),
+          user_id: account.id.toString(),
+          username: account.username,
+          user_type: account.role,
+          created_at: account.created_at,
         };
         
-        // 保存用户信息（不需要真实的token）
+        // 保存用户信息
         setUser(userData);
         setCurrentUser(userData);
         
-        toast.success('管理员登录成功');
+        toast.success(`${account.role === 'admin' ? '管理员' : '用户'}登录成功`);
         
-        // 跳转到管理员页面
+        // 根据用户类型跳转到不同页面
         setTimeout(() => {
-          navigate('/admin', { replace: true });
+          if (account.role === 'admin') {
+            navigate('/admin', { replace: true });
+          } else {
+            navigate('/dashboard', { replace: true });
+          }
         }, 100);
         
         return true;
+      } else {
+        // 添加登录失败日志
+        DataOperations.addLog('LOGIN_FAILED', 'AUTH_MODULE', `用户 ${username} 登录失败`, 'system', '0');
+        toast.error('用户名或密码错误');
+        return false;
       }
+      // ============================================
       
-      // 检查普通用户账号
-      if (username === 'user' && password === 'user123') {
-        // 构建普通用户信息
-        const userData: User = {
-          user_id: 'user-001',
-          username: 'user',
-          user_type: 'user',
-          created_at: new Date().toISOString(),
-        };
-        
-        // 保存用户信息（不需要真实的token）
-        setUser(userData);
-        setCurrentUser(userData);
-        
-        toast.success('用户登录成功');
-        
-        // 跳转到用户页面
-        setTimeout(() => {
-          navigate('/dashboard', { replace: true });
-        }, 100);
-        
-        return true;
-      }
-      
-      // 如果用户名密码不匹配，显示错误信息
-      toast.error('用户名或密码错误');
-      return false;
-      
-      /* 原有的API调用代码（已注释）
+      /* 原有的API调用代码（已注释 - 纯前端演示模式）
       const response = await apiClient.login(credentials);
       
       if (response.access_token) {
@@ -188,6 +191,11 @@ export const useAuth = (): UseAuthReturn => {
 
   // 登出
   const logout = () => {
+    // 添加登出日志
+    if (user) {
+      DataOperations.addLog('USER_LOGOUT', 'AUTH_MODULE', `用户 ${user.username} 登出`, user.username, user.user_id);
+    }
+    
     removeToken();
     removeCurrentUser();
     setUser(null);
@@ -207,12 +215,7 @@ export const useAuth = (): UseAuthReturn => {
   // 初始化时检查认证状态
   useEffect(() => {
     const initAuth = async () => {
-      const currentUser = getCurrentUser();
-      if (currentUser) {
-        setUser(currentUser);
-      }
-      
-      // 验证认证状态
+      // 直接进行认证检查，不要预先设置用户状态
       await checkAuth();
     };
     

@@ -25,6 +25,7 @@ import {
 import { apiClient } from '@/utils/api';
 import { Model } from '@/types';
 import { formatDateTime, formatFileSize } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 interface ModelStatus {
@@ -96,12 +97,35 @@ const ModelManagePage: React.FC = () => {
     3: "社交孤立评估模型"
   };
 
-  // 获取模型列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取模型列表（从localStorage读取）
   const fetchModels = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getModels();
-      setModels(Array.isArray(response) ? response : response?.items || []);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 模拟API调用延迟
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // 从localStorage获取模型数据
+      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 转换为前端Model类型（如果需要的话）
+      const convertedModels: Model[] = modelsList.map(model => ({
+        id: model.id,
+        model_type: model.id % 4, // 将id映射到0-3的模型类型
+        model_path: `/models/${model.name.toLowerCase().replace(/\s+/g, '_')}_${model.version}.pkl`,
+        create_time: model.created_at,
+        update_time: model.created_at,
+        status: model.status === '已部署' ? 'active' : 'inactive',
+        version: model.version,
+        accuracy: model.accuracy,
+        description: model.description
+      }));
+      
+      setModels(convertedModels);
     } catch (error) {
       console.error('获取模型列表失败:', error);
       toast.error('获取模型列表失败');
@@ -109,23 +133,73 @@ const ModelManagePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
-  // 获取模型状态
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取模型状态（从localStorage读取）
   const fetchModelStatus = async () => {
     try {
-      const response = await apiClient.get('/models/status/check');
-      setModelStatus(response);
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取模型数据
+      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 计算模型状态
+      const totalModels = modelsList.length;
+      const availableModels = modelsList.filter(model => model.status === '已部署').length;
+      const missingModels = totalModels - availableModels;
+      
+      // 生成模型详情
+      const modelDetails = modelsList.map((model, index) => ({
+        id: model.id,
+        model_type: index % 4,
+        model_path: `/models/${model.name.toLowerCase().replace(/\s+/g, '_')}_${model.version}.pkl`,
+        status: model.status === '已部署' ? 'available' : 'missing',
+        version: model.version,
+        accuracy: model.accuracy,
+        last_updated: model.created_at
+      }));
+      
+      const status: ModelStatus = {
+        total_models: totalModels,
+        available_models: availableModels,
+        missing_models: missingModels,
+        model_details: modelDetails
+      };
+      
+      setModelStatus(status);
     } catch (error) {
       console.error('获取模型状态失败:', error);
       toast.error('获取模型状态失败');
     }
   };
+  // ============================================
 
-  // 获取模型版本
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取模型版本（从localStorage读取）
   const fetchModelVersions = async (modelType: number) => {
     try {
-      const response = await apiClient.get(`/models/versions/${modelType}`);
-      setModelVersions(response.versions || []);
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取模型数据
+      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 根据模型类型过滤并生成版本信息
+      const filteredModels = modelsList.filter((_, index) => index % 4 === modelType);
+      
+      const versions: ModelVersion[] = filteredModels.map(model => ({
+        id: model.id,
+        version: model.version,
+        created_at: model.created_at,
+        status: model.status === '已部署' ? 'active' : 'inactive',
+        accuracy: model.accuracy,
+        description: model.description,
+        file_size: Math.floor(Math.random() * 100) + 50 // 模拟文件大小
+      }));
+      
+      setModelVersions(versions);
       setSelectedModelType(modelType);
       setShowVersions(true);
     } catch (error) {
@@ -133,17 +207,39 @@ const ModelManagePage: React.FC = () => {
       toast.error('获取模型版本失败');
     }
   };
+  // ============================================
 
-  // 获取模型性能信息
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取模型性能信息（从localStorage读取）
   const fetchModelPerformance = async () => {
     try {
-      const response = await apiClient.get('/models/performance/info');
-      setModelPerformance(response.performance_data || []);
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取模型数据
+      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 生成性能数据
+      const performanceData: ModelPerformance[] = modelsList.map((model, index) => ({
+        model_id: model.id,
+        model_name: model.name,
+        model_type: index % 4,
+        accuracy: model.accuracy,
+        precision: model.accuracy - 0.02 + Math.random() * 0.04, // 模拟精度
+        recall: model.accuracy - 0.01 + Math.random() * 0.02, // 模拟召回率
+        f1_score: model.accuracy - 0.015 + Math.random() * 0.03, // 模拟F1分数
+        training_time_hours: Math.floor(Math.random() * 48) + 12, // 模拟训练时间
+        training_epochs: Math.floor(Math.random() * 100) + 50, // 模拟训练轮数
+        model_size_mb: Math.floor(Math.random() * 200) + 50 // 模拟模型大小
+      }));
+      
+      setModelPerformance(performanceData);
     } catch (error) {
       console.error('获取模型性能信息失败:', error);
       toast.error('获取模型性能信息失败');
     }
   };
+  // ============================================
 
   useEffect(() => {
     fetchModels();

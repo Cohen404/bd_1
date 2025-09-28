@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import Layout from '@/components/Layout/Layout';
@@ -14,6 +14,7 @@ import ModelManagePage from '@/pages/ModelManagePage';
 import ParameterManagePage from '@/pages/ParameterManagePage';
 import LogManagePage from '@/pages/LogManagePage';
 import Loading from '@/components/Common/Loading';
+import { initializeDemoData } from '@/utils/localStorage';
 
 // 受保护的路由组件
 const ProtectedRoute: React.FC<{ 
@@ -41,6 +42,11 @@ const ProtectedRoute: React.FC<{
 
 const App: React.FC = () => {
   const { user, isLoading } = useAuth();
+
+  // 初始化演示数据
+  useEffect(() => {
+    initializeDemoData();
+  }, []);
 
   if (isLoading) {
     return <Loading />;

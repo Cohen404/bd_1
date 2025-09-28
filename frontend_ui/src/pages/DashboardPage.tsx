@@ -17,8 +17,12 @@ import {
   HardDrive,
   Monitor
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 
 interface DashboardStats {
   data_count: number;
@@ -46,7 +50,80 @@ const DashboardPage: React.FC = () => {
     services_running: true
   });
 
-  // 获取仪表板统计数据
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取仪表板统计数据（从localStorage读取真实数据）
+  const fetchDashboardStats = async () => {
+    try {
+      setLoading(true);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 模拟API调用延迟
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // 从localStorage获取真实数据
+      const dataList = LocalStorageManager.get(STORAGE_KEYS.DATA, []);
+      const resultsList = LocalStorageManager.get(STORAGE_KEYS.RESULTS, []);
+      const modelsList = LocalStorageManager.get(STORAGE_KEYS.MODELS, []);
+      const usersList = LocalStorageManager.get(STORAGE_KEYS.USERS, []);
+
+      // 计算最近7天的评估数量
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const recentEvaluations = resultsList.filter((result: any) => 
+        new Date(result.result_time) >= sevenDaysAgo
+      ).length;
+
+      // 计算高风险数量
+      const highRiskCount = resultsList.filter((result: any) => 
+        result.stress_score >= 50 || 
+        result.depression_score >= 50 || 
+        result.anxiety_score >= 50 || 
+        result.social_isolation_score >= 50
+      ).length;
+
+      // 计算平均分数
+      const avgScores = resultsList.length > 0 ? {
+        stress: resultsList.reduce((sum: number, r: any) => sum + r.stress_score, 0) / resultsList.length,
+        depression: resultsList.reduce((sum: number, r: any) => sum + r.depression_score, 0) / resultsList.length,
+        anxiety: resultsList.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / resultsList.length,
+        social: resultsList.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / resultsList.length,
+      } : {
+        stress: 0,
+        depression: 0,
+        anxiety: 0,
+        social: 0
+      };
+
+      setStats({
+        data_count: dataList.length,
+        evaluation_count: resultsList.length,
+        result_count: resultsList.length,
+        model_count: modelsList.length,
+        user_count: usersList.length,
+        recent_evaluations: recentEvaluations,
+        high_risk_count: highRiskCount,
+        avg_scores: avgScores
+      });
+
+      // 检查系统状态
+      setSystemStatus({
+        models_ready: modelsList.length > 0,
+        database_connected: true,
+        services_running: true
+      });
+
+    } catch (error) {
+      console.error('获取仪表板数据失败:', error);
+      toast.error('获取仪表板数据失败');
+    } finally {
+      setLoading(false);
+    }
+  };
+  // ============================================
+  
+  /* 原有的API调用代码（已注释 - 纯前端演示模式）
   const fetchDashboardStats = async () => {
     try {
       setLoading(true);
@@ -118,6 +195,7 @@ const DashboardPage: React.FC = () => {
       setLoading(false);
     }
   };
+  */
 
   useEffect(() => {
     fetchDashboardStats();
@@ -185,7 +263,7 @@ const DashboardPage: React.FC = () => {
       title: '模型管理',
       icon: Brain,
       description: '管理AI模型',
-      path: '/model-manage',
+      path: '/admin/model-manage',
       primary: false
     }
   ];

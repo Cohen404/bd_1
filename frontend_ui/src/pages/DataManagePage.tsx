@@ -9,23 +9,24 @@ import {
   BarChart3,
   CheckSquare,
   Square,
-  AlertTriangle,
   Image,
   RefreshCw,
-  Download,
   FileImage,
   ArrowLeft,
   ArrowRight,
-  ZoomIn,
   Play,
   CheckCircle,
   Clock,
   XCircle
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
-import { Data, PreprocessProgress } from '@/types';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
+import { Data } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 import ProgressBar from '@/components/Common/ProgressBar';
 import ProgressModal from '@/components/Common/ProgressModal';
 
@@ -56,14 +57,9 @@ const DataManagePage: React.FC = () => {
     file: null as File | null
   });
   const [batchFiles, setBatchFiles] = useState<FileList | null>(null);
-  const [preprocessingProgress, setPreprocessingProgress] = useState<{
-    [key: number]: { status: string; message: string }
-  }>({});
   const [progressModalVisible, setProgressModalVisible] = useState(false);
   const [progressDataIds, setProgressDataIds] = useState<number[]>([]);
-  const [dataProgressMap, setDataProgressMap] = useState<{[key: number]: PreprocessProgress}>({});
   const [processingStartTimes, setProcessingStartTimes] = useState<{[key: number]: number}>({});
-  const [simulatedProgress, setSimulatedProgress] = useState<{[key: number]: number}>({});
 
   // 可视化指标选项（使用具体的图片类型）
   const visualizationOptions = [
@@ -105,12 +101,34 @@ const DataManagePage: React.FC = () => {
     { key: 'serum_analysis', label: '血清指标分析' }
   ];
 
-  // 获取数据列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取数据列表（从localStorage读取）
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getData({ search: searchTerm });
-      setDataList(Array.isArray(response) ? response : response?.items || []);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取数据
+      const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 转换为前端Data类型
+      const convertedData: Data[] = dataItems.map(item => ({
+        id: item.id,
+        personnel_id: item.name.split('_')[0] || 'unknown',
+        personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
+        data_path: item.file_path,
+        upload_time: item.upload_time,
+        upload_user: typeof item.uploader === 'string' ? parseInt(item.uploader) || 1 : item.uploader,
+        user_id: typeof item.uploader === 'string' ? item.uploader : String(item.uploader),
+        processing_status: item.status === '已处理' ? 'completed' : 
+                          item.status === '处理中' ? 'processing' : 'pending',
+        feature_status: item.status === '已处理' ? 'completed' : 
+                       item.status === '处理中' ? 'processing' : 'pending'
+      }));
+      
+      setDataList(convertedData);
     } catch (error) {
       console.error('获取数据列表失败:', error);
       toast.error('获取数据列表失败');
@@ -118,6 +136,7 @@ const DataManagePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
   // 获取状态图标和颜色
   const getStatusIcon = (processingStatus: string, featureStatus: string) => {
@@ -183,8 +202,7 @@ const DataManagePage: React.FC = () => {
       
       const simulated = Math.round(progress);
       
-      // 更新模拟进度状态
-      setSimulatedProgress(prev => ({ ...prev, [dataId]: simulated }));
+      // 更新模拟进度状态（已移除setSimulatedProgress，这里不需要更新状态）
       
       return simulated;
     }
@@ -224,11 +242,12 @@ const DataManagePage: React.FC = () => {
     setSelectedItems(newSelected);
   };
 
-  // 选择前200条
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 选择前200条（从localStorage读取）
   const selectTop200 = async () => {
     try {
-      const response = await apiClient.getTop200Data();
-      const top200Ids = response.map((item: Data) => item.id);
+      // 获取前200条数据
+      const top200Ids = dataList.slice(0, 200).map(item => item.id);
       setSelectedItems(new Set(top200Ids));
       toast.success(`已选择前${top200Ids.length}条数据`);
     } catch (error) {
@@ -236,6 +255,7 @@ const DataManagePage: React.FC = () => {
       toast.error('获取前200条数据失败');
     }
   };
+  // ============================================
 
   // 全选/取消全选
   const toggleSelectAll = () => {
@@ -246,7 +266,8 @@ const DataManagePage: React.FC = () => {
     }
   };
 
-  // 上传文件
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 上传文件（保存到localStorage）
   const handleUpload = async () => {
     if (!formData.file || !formData.personnel_id || !formData.personnel_name) {
       toast.error('请填写完整信息并选择文件');
@@ -255,12 +276,32 @@ const DataManagePage: React.FC = () => {
 
     try {
       setUploading(true);
-      const uploadFormData = new FormData();
-      uploadFormData.append('file', formData.file);
-      uploadFormData.append('personnel_id', formData.personnel_id);
-      uploadFormData.append('personnel_name', formData.personnel_name);
-
-      await apiClient.uploadData(uploadFormData);
+      
+      // 模拟上传延迟
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // 获取现有数据
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 创建新数据项
+      const newDataItem: DataItem = {
+        id: DataOperations.getNextId(existingData),
+        name: `${formData.personnel_id}_${formData.personnel_name}.csv`,
+        description: `用户 ${formData.personnel_name} 上传的数据文件`,
+        file_path: `/uploads/data/${formData.personnel_id}_${formData.personnel_name}.csv`,
+        file_size: formData.file.size,
+        upload_time: new Date().toISOString(),
+        uploader: 'user', // 这里应该从当前用户获取
+        status: '待处理'
+      };
+      
+      // 保存到localStorage
+      existingData.push(newDataItem);
+      LocalStorageManager.set(STORAGE_KEYS.DATA, existingData);
+      
+      // 添加日志
+      DataOperations.addLog('UPLOAD_DATA', 'DATA_MANAGEMENT', `用户上传数据文件: ${newDataItem.name}`, 'user', '1');
+      
       toast.success('数据上传成功！');
       setUploadModalVisible(false);
       setFormData({ personnel_id: '', personnel_name: '', file: null });
@@ -272,8 +313,10 @@ const DataManagePage: React.FC = () => {
       setUploading(false);
     }
   };
+  // ============================================
 
-  // 批量上传文件
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 批量上传文件（保存到localStorage）
   const handleBatchUpload = async () => {
     if (!batchFiles || batchFiles.length === 0) {
       toast.error('请选择要上传的文件');
@@ -282,24 +325,55 @@ const DataManagePage: React.FC = () => {
 
     try {
       setBatchUploading(true);
-      const formData = new FormData();
       
+      // 模拟上传延迟
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // 获取现有数据
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      let successCount = 0;
+      let failedCount = 0;
+      
+      // 处理每个文件
       Array.from(batchFiles).forEach((file) => {
-        formData.append('files', file);
+        try {
+          // 从文件名解析人员信息
+          const fileName = file.name.replace('.zip', '');
+          const parts = fileName.split('_');
+          const personnelName = parts[1] || fileName;
+          
+          // 创建新数据项
+          const newDataItem: DataItem = {
+            id: DataOperations.getNextId(existingData),
+            name: file.name,
+            description: `用户 ${personnelName} 批量上传的数据文件`,
+            file_path: `/uploads/data/${file.name}`,
+            file_size: file.size,
+            upload_time: new Date().toISOString(),
+            uploader: 'user',
+            status: '待处理'
+          };
+          
+          existingData.push(newDataItem);
+          successCount++;
+        } catch (error) {
+          console.error('处理文件失败:', file.name, error);
+          failedCount++;
+        }
       });
-
-      const response = await apiClient.batchUploadData(formData);
       
-      if (response.success_count > 0) {
-        toast.success(`成功上传 ${response.success_count} 个文件`);
+      // 保存到localStorage
+      LocalStorageManager.set(STORAGE_KEYS.DATA, existingData);
+      
+      // 添加日志
+      DataOperations.addLog('BATCH_UPLOAD', 'DATA_MANAGEMENT', `批量上传完成: 成功${successCount}个, 失败${failedCount}个`, 'user', '1');
+      
+      if (successCount > 0) {
+        toast.success(`成功上传 ${successCount} 个文件`);
       }
       
-      if (response.failed_count > 0) {
-        toast.error(`${response.failed_count} 个文件上传失败`);
-        // 显示具体错误信息
-        response.errors?.forEach((error: string) => {
-          console.error('上传错误:', error);
-        });
+      if (failedCount > 0) {
+        toast.error(`${failedCount} 个文件上传失败`);
       }
       
       setBatchUploadModalVisible(false);
@@ -312,8 +386,10 @@ const DataManagePage: React.FC = () => {
       setBatchUploading(false);
     }
   };
+  // ============================================
 
-  // 批量预处理
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 批量预处理（模拟处理）
   const handleBatchPreprocess = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要预处理的数据');
@@ -327,13 +403,22 @@ const DataManagePage: React.FC = () => {
       setProgressDataIds(selectedIds);
       setProgressModalVisible(true);
 
-      // 启动批量预处理
-      const response = await apiClient.batchPreprocessData({ data_ids: selectedIds });
-      
+      // 模拟批量预处理
       toast.success(`批量预处理已启动，请查看进度窗口监控处理状态`);
       
-      // 刷新数据列表以获取最新状态
+      // 模拟处理过程
       setTimeout(() => {
+        // 更新数据状态为处理中
+        const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+        const updatedData = existingData.map(item => {
+          if (selectedIds.includes(item.id)) {
+            return { ...item, status: '处理中' };
+          }
+          return item;
+        });
+        LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
+        
+        // 刷新数据列表
         fetchData();
       }, 1000);
 
@@ -345,8 +430,10 @@ const DataManagePage: React.FC = () => {
       setPreprocessing(false);
     }
   };
+  // ============================================
 
-  // 批量删除
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 批量删除（从localStorage删除）
   const handleBatchDelete = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要删除的数据');
@@ -359,8 +446,20 @@ const DataManagePage: React.FC = () => {
 
     try {
       const selectedIds = Array.from(selectedItems);
-      const response = await apiClient.batchDeleteData({ data_ids: selectedIds });
-      toast.success(response.message || `已删除${selectedIds.length}条数据`);
+      
+      // 获取现有数据
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 过滤掉选中的数据
+      const filteredData = existingData.filter(item => !selectedIds.includes(item.id));
+      
+      // 保存到localStorage
+      LocalStorageManager.set(STORAGE_KEYS.DATA, filteredData);
+      
+      // 添加日志
+      DataOperations.addLog('BATCH_DELETE_DATA', 'DATA_MANAGEMENT', `批量删除数据: ${selectedIds.length}条`, 'user', '1');
+      
+      toast.success(`已删除${selectedIds.length}条数据`);
       setSelectedItems(new Set());
       fetchData();
     } catch (error) {
@@ -368,8 +467,10 @@ const DataManagePage: React.FC = () => {
       toast.error('批量删除失败');
     }
   };
+  // ============================================
 
-  // 单个数据预处理
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 单个数据预处理（模拟处理）
   const handlePreprocessSingle = async (dataId: number, fileName: string) => {
     if (!window.confirm(`确定要预处理"${fileName}"吗？这将进行特征提取和图片生成。`)) {
       return;
@@ -380,13 +481,22 @@ const DataManagePage: React.FC = () => {
       setProgressDataIds([dataId]);
       setProgressModalVisible(true);
 
-      // 启动预处理
-      const result = await apiClient.preprocessData(dataId);
-      
+      // 模拟预处理
       toast.success('数据预处理已启动，请查看进度窗口监控处理状态');
       
-      // 刷新数据列表以获取最新状态
+      // 模拟处理过程
       setTimeout(() => {
+        // 更新数据状态为处理中
+        const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+        const updatedData = existingData.map(item => {
+          if (item.id === dataId) {
+            return { ...item, status: '处理中' };
+          }
+          return item;
+        });
+        LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
+        
+        // 刷新数据列表
         fetchData();
       }, 1000);
 
@@ -396,15 +506,28 @@ const DataManagePage: React.FC = () => {
       setProgressModalVisible(false);
     }
   };
+  // ============================================
 
-  // 删除单个数据
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 删除单个数据（从localStorage删除）
   const handleDeleteSingle = async (dataId: number, fileName: string) => {
     if (!window.confirm(`确定要删除"${fileName}"吗？此操作无法撤销。`)) {
       return;
     }
 
     try {
-      await apiClient.deleteData(dataId);
+      // 获取现有数据
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 过滤掉要删除的数据
+      const filteredData = existingData.filter(item => item.id !== dataId);
+      
+      // 保存到localStorage
+      LocalStorageManager.set(STORAGE_KEYS.DATA, filteredData);
+      
+      // 添加日志
+      DataOperations.addLog('DELETE_DATA', 'DATA_MANAGEMENT', `删除数据文件: ${fileName}`, 'user', '1');
+      
       toast.success('数据删除成功');
       fetchData();
     } catch (error) {
@@ -412,11 +535,19 @@ const DataManagePage: React.FC = () => {
       toast.error('删除数据失败');
     }
   };
+  // ============================================
 
-  // 查看数据图像
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 查看数据图像（使用演示数据）
   const handleViewImages = async (dataId: number) => {
     try {
-      const images = await apiClient.getDataImages(dataId);
+      // 模拟获取图像列表
+      const images = imageTypes.map((type) => ({
+        image_type: type.key,
+        image_name: `${type.key}.png`,
+        description: type.label
+      }));
+      
       setCurrentImageData({
         dataId,
         images,
@@ -428,18 +559,22 @@ const DataManagePage: React.FC = () => {
       toast.error('获取图像列表失败');
     }
   };
+  // ============================================
 
-  // 处理可视化显示
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 处理可视化显示（使用演示图片）
   const handleVisualizationDisplay = () => {
     if (!selectedDataId || !visualizationType) {
       toast.error('请先选择数据和可视化类型');
       return;
     }
     
-    const imageUrl = `/api/health/image/${selectedDataId}/${visualizationType}`;
+    // 使用演示图片URL
+    const imageUrl = `https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=${encodeURIComponent(visualizationOptions.find(opt => opt.value === visualizationType)?.label || '可视化图片')}`;
     setVisualizationImage(imageUrl);
     setShowVisualization(true);
   };
+  // ============================================
 
   // 选择数据用于可视化
   const handleSelectDataForVisualization = (dataId: number) => {
@@ -944,20 +1079,12 @@ const DataManagePage: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">批量预处理进度</h2>
             
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {Object.entries(preprocessingProgress).map(([dataId, progress]) => (
+              {progressDataIds.map((dataId) => (
                 <div key={dataId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <span className="text-sm font-medium">数据ID: {dataId}</span>
                   <div className="flex items-center space-x-2">
-                    {progress.status === 'pending' && (
-                      <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
-                    )}
-                    {progress.status === 'completed' && (
-                      <CheckSquare className="h-4 w-4 text-green-500" />
-                    )}
-                    {progress.status === 'failed' && (
-                      <AlertTriangle className="h-4 w-4 text-red-500" />
-                    )}
-                    <span className="text-xs text-gray-600">{progress.message}</span>
+                    <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
+                    <span className="text-xs text-gray-600">处理中...</span>
                   </div>
                 </div>
               ))}
@@ -1042,7 +1169,7 @@ const DataManagePage: React.FC = () => {
                     }}
                   >
                     <img
-                      src={`/api/health/image/${currentImageData.dataId}/${currentImageData.images[currentImageData.currentIndex]?.image_type}`}
+                      src={`https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=${encodeURIComponent(currentImageData.images[currentImageData.currentIndex]?.description || '演示图片')}`}
                       alt={currentImageData.images[currentImageData.currentIndex]?.description}
                       className="max-w-full max-h-96 object-contain rounded-lg shadow-lg hover:shadow-xl transition-shadow"
                       onError={(e) => {

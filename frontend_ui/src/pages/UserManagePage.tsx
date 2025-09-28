@@ -10,17 +10,14 @@ import {
   UserX,
   MoreHorizontal
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
-import { User, UserCreate, UserUpdate } from '@/types';
+import { UserAPI, User } from '@/utils/localStorage';
 import { formatDateTime } from '@/utils/helpers';
 import toast from 'react-hot-toast';
 
 interface UserFormData {
   username: string;
-  email: string;
-  phone: string;
   password: string;
-  user_type: 'admin' | 'user';
+  role: string;
 }
 
 const UserManagePage: React.FC = () => {
@@ -31,18 +28,16 @@ const UserManagePage: React.FC = () => {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [formData, setFormData] = useState<UserFormData>({
     username: '',
-    email: '',
-    phone: '',
     password: '',
-    user_type: 'user'
+    role: 'user'
   });
 
   // 获取用户列表
-  const fetchUsers = async () => {
+  const fetchUsers = () => {
     try {
       setLoading(true);
-      const response = await apiClient.getUsers({ search: searchTerm });
-      setUsers(Array.isArray(response) ? response : response?.items || []);
+      const response = UserAPI.getUsers({ search: searchTerm });
+      setUsers(response);
     } catch (error) {
       console.error('获取用户列表失败:', error);
       toast.error('获取用户列表失败');
@@ -59,10 +54,8 @@ const UserManagePage: React.FC = () => {
   const resetForm = () => {
     setFormData({
       username: '',
-      email: '',
-      phone: '',
       password: '',
-      user_type: 'user'
+      role: 'user'
     });
     setEditingUser(null);
   };
@@ -78,24 +71,26 @@ const UserManagePage: React.FC = () => {
     setEditingUser(user);
     setFormData({
       username: user.username,
-      email: user.email || '',
-      phone: user.phone || '',
       password: '',
-      user_type: user.user_type
+      role: user.role
     });
     setShowModal(true);
   };
 
   // 删除用户
-  const handleDelete = async (userId: string, username: string) => {
+  const handleDelete = (userId: number, username: string) => {
     if (!window.confirm(`确定要删除用户"${username}"吗？此操作无法撤销。`)) {
       return;
     }
 
     try {
-      await apiClient.deleteUser(userId);
-      toast.success('用户删除成功');
-      fetchUsers();
+      const success = UserAPI.deleteUser(userId);
+      if (success) {
+        toast.success('用户删除成功');
+        fetchUsers();
+      } else {
+        toast.error('删除用户失败');
+      }
     } catch (error) {
       console.error('删除用户失败:', error);
       toast.error('删除用户失败');
@@ -103,7 +98,7 @@ const UserManagePage: React.FC = () => {
   };
 
   // 保存用户
-  const handleSave = async () => {
+  const handleSave = () => {
     if (!formData.username.trim()) {
       toast.error('请输入用户名');
       return;
@@ -117,30 +112,31 @@ const UserManagePage: React.FC = () => {
     try {
       if (editingUser) {
         // 更新用户
-        const updateData: UserUpdate = {
+        const updateData: Partial<Omit<User, 'id' | 'created_at'>> = {
           username: formData.username,
-          email: formData.email || undefined,
-          phone: formData.phone || undefined,
-          user_type: formData.user_type
+          role: formData.role
         };
         
         if (formData.password.trim()) {
           updateData.password = formData.password;
         }
 
-        await apiClient.updateUser(editingUser.user_id, updateData);
-        toast.success('用户更新成功');
+        const updatedUser = UserAPI.updateUser(editingUser.id, updateData);
+        if (updatedUser) {
+          toast.success('用户更新成功');
+        } else {
+          toast.error('用户更新失败');
+          return;
+        }
       } else {
         // 创建用户
-        const createData: UserCreate = {
+        const createData: Omit<User, 'id' | 'created_at'> = {
           username: formData.username,
           password: formData.password,
-          email: formData.email || undefined,
-          phone: formData.phone || undefined,
-          user_type: formData.user_type
+          role: formData.role
         };
 
-        await apiClient.createUser(createData);
+        UserAPI.createUser(createData);
         toast.success('用户创建成功');
       }
 
@@ -156,7 +152,7 @@ const UserManagePage: React.FC = () => {
   // 过滤用户列表
   const filteredUsers = users.filter(user =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (user.email && user.email.toLowerCase().includes(searchTerm.toLowerCase()))
+    user.role.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -174,7 +170,7 @@ const UserManagePage: React.FC = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <input
             type="text"
-            placeholder="搜索用户名或邮箱..."
+            placeholder="搜索用户名或角色..."
             className="input pl-10"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -239,26 +235,19 @@ const UserManagePage: React.FC = () => {
                           <div className="text-sm font-medium text-gray-900">
                             {user.username}
                           </div>
-                          {user.email && (
-                            <div className="text-sm text-gray-500">
-                              {user.email}
-                            </div>
-                          )}
-                          {user.phone && (
-                            <div className="text-sm text-gray-500">
-                              {user.phone}
-                            </div>
-                          )}
+                          <div className="text-sm text-gray-500">
+                            ID: {user.id}
+                          </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        user.user_type === 'admin' 
+                        user.role === 'admin' 
                           ? 'bg-red-100 text-red-800' 
                           : 'bg-green-100 text-green-800'
                       }`}>
-                        {user.user_type === 'admin' ? '管理员' : '普通用户'}
+                        {user.role === 'admin' ? '管理员' : '普通用户'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -277,7 +266,7 @@ const UserManagePage: React.FC = () => {
                           <Edit className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => handleDelete(user.user_id, user.username)}
+                          onClick={() => handleDelete(user.id, user.username)}
                           className="text-red-600 hover:text-red-700"
                           title="删除"
                         >
@@ -314,28 +303,6 @@ const UserManagePage: React.FC = () => {
               </div>
 
               <div>
-                <label className="label">邮箱</label>
-                <input
-                  type="email"
-                  className="input"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="请输入邮箱"
-                />
-              </div>
-
-              <div>
-                <label className="label">手机号</label>
-                <input
-                  type="tel"
-                  className="input"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="请输入手机号"
-                />
-              </div>
-
-              <div>
                 <label className="label">密码 {!editingUser && '*'}</label>
                 <input
                   type="password"
@@ -347,11 +314,11 @@ const UserManagePage: React.FC = () => {
               </div>
 
               <div>
-                <label className="label">用户类型</label>
+                <label className="label">用户角色</label>
                 <select
                   className="input"
-                  value={formData.user_type}
-                  onChange={(e) => setFormData({ ...formData, user_type: e.target.value as 'admin' | 'user' })}
+                  value={formData.role}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                 >
                   <option value="user">普通用户</option>
                   <option value="admin">管理员</option>

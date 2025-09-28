@@ -25,10 +25,14 @@ import {
   FileImage,
   X
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 
 interface HealthStatus {
   stress: number;
@@ -90,29 +94,69 @@ const ResultManagePage: React.FC = () => {
     maxDepressionScore: ''
   });
 
-  // 获取结果列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取结果列表（从localStorage读取）
   const fetchResults = async () => {
     try {
       setLoading(true);
-      const params: any = {};
       
-      // 添加筛选参数
-      if (filters.userId !== 'all') params.user_id = filters.userId;
-      if (filters.dateStart) params.start_date = filters.dateStart;
-      if (filters.dateEnd) params.end_date = filters.dateEnd;
-      if (filters.minStressScore) params.min_stress_score = parseFloat(filters.minStressScore);
-      if (filters.maxStressScore) params.max_stress_score = parseFloat(filters.maxStressScore);
-      if (filters.minDepressionScore) params.min_depression_score = parseFloat(filters.minDepressionScore);
-      if (filters.maxDepressionScore) params.max_depression_score = parseFloat(filters.maxDepressionScore);
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
       
-      const response = await apiClient.get('/results/', { params });
-      const resultList = Array.isArray(response) ? response : response?.items || [];
-      setResults(resultList);
-      setFilteredResults(resultList);
+      // 从localStorage获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      
+      // 转换为前端Result类型
+      const convertedResults: Result[] = resultItems.map(item => ({
+        id: item.id,
+        user_id: item.user_id.toString(),
+        username: item.username,
+        result_time: item.result_time,
+        stress_score: item.stress_score,
+        depression_score: item.depression_score,
+        anxiety_score: item.anxiety_score,
+        social_isolation_score: item.social_isolation_score,
+        overall_risk_level: item.overall_risk_level,
+        recommendations: item.recommendations
+      }));
+      
+      // 应用筛选条件
+      let filtered = convertedResults;
+      
+      if (filters.userId !== 'all') {
+        filtered = filtered.filter(result => result.user_id === filters.userId);
+      }
+      
+      if (filters.dateStart) {
+        filtered = filtered.filter(result => new Date(result.result_time) >= new Date(filters.dateStart));
+      }
+      
+      if (filters.dateEnd) {
+        filtered = filtered.filter(result => new Date(result.result_time) <= new Date(filters.dateEnd));
+      }
+      
+      if (filters.minStressScore) {
+        filtered = filtered.filter(result => result.stress_score >= parseFloat(filters.minStressScore));
+      }
+      
+      if (filters.maxStressScore) {
+        filtered = filtered.filter(result => result.stress_score <= parseFloat(filters.maxStressScore));
+      }
+      
+      if (filters.minDepressionScore) {
+        filtered = filtered.filter(result => result.depression_score >= parseFloat(filters.minDepressionScore));
+      }
+      
+      if (filters.maxDepressionScore) {
+        filtered = filtered.filter(result => result.depression_score <= parseFloat(filters.maxDepressionScore));
+      }
+      
+      setResults(convertedResults);
+      setFilteredResults(filtered);
       
       // 获取最新结果作为当前状态
-      if (resultList.length > 0) {
-        const latest = resultList[0];
+      if (filtered.length > 0) {
+        const latest = filtered[0];
         setCurrentStatus({
           stress: latest.stress_score || 0,
           depression: latest.depression_score || 0,
@@ -127,30 +171,85 @@ const ResultManagePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
-  // 获取用户列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取用户列表（从localStorage读取）
   const fetchUsers = async () => {
     try {
-      const response = await apiClient.get('/results/users/list');
-      setUsers(Array.isArray(response) ? response : []);
+      // 从localStorage获取用户数据
+      const userItems = LocalStorageManager.get(STORAGE_KEYS.USERS, []);
+      
+      // 转换为前端User类型
+      const convertedUsers: UserType[] = userItems.map(user => ({
+        user_id: user.id.toString(),
+        username: user.username,
+        user_type: user.role,
+        created_at: user.created_at
+      }));
+      
+      setUsers(convertedUsers);
     } catch (error) {
       console.error('获取用户列表失败:', error);
     }
   };
+  // ============================================
 
-  // 获取统计信息
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取统计信息（从localStorage计算）
   const fetchStatistics = async () => {
     try {
-      const params: any = {};
-      if (filters.dateStart) params.start_date = filters.dateStart;
-      if (filters.dateEnd) params.end_date = filters.dateEnd;
+      // 从localStorage获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
       
-      const response = await apiClient.get('/results/summary/statistics', { params });
-      setStatistics(response);
+      // 应用日期筛选
+      let filteredResults = resultItems;
+      if (filters.dateStart) {
+        filteredResults = filteredResults.filter(result => new Date(result.result_time) >= new Date(filters.dateStart));
+      }
+      if (filters.dateEnd) {
+        filteredResults = filteredResults.filter(result => new Date(result.result_time) <= new Date(filters.dateEnd));
+      }
+      
+      // 计算统计信息
+      const totalCount = filteredResults.length;
+      const avgStressScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.stress_score, 0) / totalCount : 0;
+      const avgDepressionScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.depression_score, 0) / totalCount : 0;
+      const avgAnxietyScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.anxiety_score, 0) / totalCount : 0;
+      const avgSocialIsolationScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.social_isolation_score, 0) / totalCount : 0;
+      
+      // 计算高风险数量（任一指标 >= 50）
+      const highRiskCount = filteredResults.filter(result => 
+        result.stress_score >= 50 || 
+        result.depression_score >= 50 || 
+        result.anxiety_score >= 50 || 
+        result.social_isolation_score >= 50
+      ).length;
+      
+      // 计算最近7天的数量
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const recentCount = filteredResults.filter(result => 
+        new Date(result.result_time) >= sevenDaysAgo
+      ).length;
+      
+      const stats: Statistics = {
+        total_count: totalCount,
+        avg_stress_score: Math.round(avgStressScore * 100) / 100,
+        avg_depression_score: Math.round(avgDepressionScore * 100) / 100,
+        avg_anxiety_score: Math.round(avgAnxietyScore * 100) / 100,
+        avg_social_isolation_score: Math.round(avgSocialIsolationScore * 100) / 100,
+        high_risk_count: highRiskCount,
+        high_risk_percentage: totalCount > 0 ? Math.round((highRiskCount / totalCount) * 100) : 0,
+        recent_count: recentCount
+      };
+      
+      setStatistics(stats);
     } catch (error) {
       console.error('获取统计信息失败:', error);
     }
   };
+  // ============================================
 
   useEffect(() => {
     fetchResults();
@@ -178,7 +277,8 @@ const ResultManagePage: React.FC = () => {
     }
   };
 
-  // 导出结果
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 导出结果（纯前端导出）
   const handleExport = async (format: 'excel' | 'csv' | 'pdf') => {
     if (selectedResults.size === 0) {
       toast.error('请先选择要导出的结果');
@@ -188,33 +288,46 @@ const ResultManagePage: React.FC = () => {
     try {
       setExporting(true);
       
-      const response = await apiClient.post('/results/export', {
-        result_ids: Array.from(selectedResults),
-        export_format: format
-      }, {
-        responseType: 'blob'
-      });
-
-      // 创建下载链接
-      const blob = new Blob([response], {
-        type: format === 'excel' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' :
-              format === 'csv' ? 'text/csv' : 'application/zip'
-      });
+      // 获取选中的结果数据
+      const selectedResultsData = filteredResults.filter(result => selectedResults.has(result.id));
       
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      
-      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-      const extension = format === 'excel' ? 'xlsx' : format === 'csv' ? 'csv' : 'zip';
-      link.download = `评估结果_${timestamp}.${extension}`;
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-      
-      toast.success(`${format.toUpperCase()} 导出成功`);
+      if (format === 'csv') {
+        // 生成CSV内容
+        const headers = ['ID', '用户名', '评估时间', '应激分数', '抑郁分数', '焦虑分数', '社交孤立分数', '风险等级', '建议'];
+        const csvContent = [
+          headers.join(','),
+          ...selectedResultsData.map(result => [
+            result.id,
+            result.username,
+            result.result_time,
+            result.stress_score,
+            result.depression_score,
+            result.anxiety_score,
+            result.social_isolation_score,
+            result.overall_risk_level,
+            `"${result.recommendations}"`
+          ].join(','))
+        ].join('\n');
+        
+        // 创建下载链接
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+        link.download = `评估结果_${timestamp}.csv`;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        
+        toast.success('CSV 导出成功');
+      } else {
+        // 对于Excel和PDF，显示提示信息
+        toast('Excel和PDF导出功能在演示模式下暂不可用，请使用CSV格式');
+      }
     } catch (error) {
       console.error('导出失败:', error);
       toast.error('导出失败');
@@ -222,11 +335,14 @@ const ResultManagePage: React.FC = () => {
       setExporting(false);
     }
   };
+  // ============================================
 
-  // 查看PDF报告
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 查看PDF报告（使用演示PDF）
   const handleViewReport = async (resultId: number) => {
     try {
-      const pdfUrl = `/api/results/report/${resultId}`;
+      // 使用演示PDF URL
+      const pdfUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
       setCurrentPdfUrl(pdfUrl);
       setPdfViewerVisible(true);
     } catch (error) {
@@ -234,12 +350,13 @@ const ResultManagePage: React.FC = () => {
       toast.error('查看报告失败');
     }
   };
+  // ============================================
 
   // 重新生成报告
   const handleRegenerateReport = async (resultId: number) => {
     try {
-      const response = await apiClient.post(`/results/regenerate-report/${resultId}`);
-      toast.success(response.message || '报告重新生成成功');
+      // const response = await apiClient.post(`/results/regenerate-report/${resultId}`); // 注释掉API调用
+      toast.success('报告重新生成成功');
     } catch (error) {
       console.error('重新生成报告失败:', error);
       toast.error('重新生成报告失败');

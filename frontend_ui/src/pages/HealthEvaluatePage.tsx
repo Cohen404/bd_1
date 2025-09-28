@@ -19,10 +19,14 @@ import {
   Download,
   BarChart3
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
 import { Data, Result } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem, ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 
 interface HealthStatus {
   stress: number;
@@ -76,12 +80,34 @@ const HealthEvaluatePage: React.FC = () => {
   } | null>(null);
   const [currentResultId, setCurrentResultId] = useState<number | null>(null);
 
-  // 获取数据列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取数据列表（从localStorage读取）
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getData();
-      setDataList(Array.isArray(response) ? response : response?.items || []);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取数据
+      const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 转换为前端Data类型
+      const convertedData: Data[] = dataItems.map(item => ({
+        user_id: '1', // 添加缺失的user_id字段
+        id: item.id,
+        personnel_id: item.name.split('_')[0] || 'unknown',
+        personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
+        data_path: item.file_path,
+        upload_time: item.upload_time,
+        upload_user: item.uploader,
+        processing_status: item.status === '已处理' ? 'completed' : 
+                          item.status === '处理中' ? 'processing' : 'pending',
+        feature_status: item.status === '已处理' ? 'completed' : 
+                       item.status === '处理中' ? 'processing' : 'pending'
+      }));
+      
+      setDataList(convertedData);
     } catch (error) {
       console.error('获取数据列表失败:', error);
       toast.error('获取数据列表失败');
@@ -89,14 +115,18 @@ const HealthEvaluatePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
-  // 获取最新结果
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取最新结果（从localStorage读取）
   const fetchLatestResults = async () => {
     try {
-      const response = await apiClient.getResults({ size: 1 });
-      const results = Array.isArray(response) ? response : response?.items || [];
-      if (results.length > 0) {
-        const latest = results[0];
+      // 从localStorage获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      
+      if (resultItems.length > 0) {
+        // 获取最新的结果
+        const latest = resultItems[resultItems.length - 1];
         setCurrentStatus({
           stress: latest.stress_score || 0,
           depression: latest.depression_score || 0,
@@ -112,16 +142,35 @@ const HealthEvaluatePage: React.FC = () => {
       console.error('获取最新结果失败:', error);
     }
   };
+  // ============================================
 
-  // 获取LED状态
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取LED状态（使用演示数据）
   const fetchLEDStatus = async (resultId: number) => {
     try {
-      const response = await apiClient.get(`/health/led-status/${resultId}`);
-      setLedStatus(response);
+      // 从localStorage获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      const result = resultItems.find(r => r.id === resultId);
+      
+      if (result) {
+        // 生成LED状态数据
+        const ledStatus: LEDStatus = {
+          stress_led: result.stress_score >= 50 ? 'red' : result.stress_score >= 30 ? 'yellow' : 'green',
+          depression_led: result.depression_score >= 50 ? 'red' : result.depression_score >= 30 ? 'yellow' : 'green',
+          anxiety_led: result.anxiety_score >= 50 ? 'red' : result.anxiety_score >= 30 ? 'yellow' : 'green',
+          social_led: result.social_isolation_score >= 50 ? 'red' : result.social_isolation_score >= 30 ? 'yellow' : 'green',
+          stress_score: result.stress_score,
+          depression_score: result.depression_score,
+          anxiety_score: result.anxiety_score,
+          social_isolation_score: result.social_isolation_score
+        };
+        setLedStatus(ledStatus);
+      }
     } catch (error) {
       console.error('获取LED状态失败:', error);
     }
   };
+  // ============================================
 
   useEffect(() => {
     fetchData();
@@ -151,8 +200,8 @@ const HealthEvaluatePage: React.FC = () => {
   // 选择前200条
   const selectTop200 = async () => {
     try {
-      const response = await apiClient.getTop200Data();
-      const top200Ids = response.map((item: Data) => item.id);
+      // const response = await apiClient.getTop200Data(); // 注释掉API调用
+      const top200Ids = [1, 2, 3, 4, 5]; // 模拟前5条数据
       setSelectedItems(new Set(top200Ids));
       toast.success(`已选择前${top200Ids.length}条数据`);
     } catch (error) {
@@ -161,23 +210,67 @@ const HealthEvaluatePage: React.FC = () => {
     }
   };
 
-  // 单个评估
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 单个评估（保存到localStorage）
   const handleSingleEvaluate = async (dataId: number) => {
     try {
       setEvaluating(true);
-      const result = await apiClient.post('/health/evaluate', { data_id: dataId });
+      
+      // 模拟评估延迟
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // 生成模拟评估结果
+      const stressScore = Math.floor(Math.random() * 60) + 10; // 10-70
+      const depressionScore = Math.floor(Math.random() * 60) + 10; // 10-70
+      const anxietyScore = Math.floor(Math.random() * 60) + 10; // 10-70
+      const socialScore = Math.floor(Math.random() * 60) + 10; // 10-70
+      
+      // 确定风险等级
+      const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
+      const riskLevel = maxScore >= 50 ? '高风险' : maxScore >= 30 ? '中等风险' : '低风险';
+      
+      // 生成建议
+      const recommendations = maxScore >= 50 ? 
+        '建议立即寻求专业心理咨询，注意休息和放松' :
+        maxScore >= 30 ? 
+        '建议适当调整生活方式，保持积极心态' :
+        '保持良好的心理状态，继续当前的生活方式';
+      
+      // 获取现有结果数据
+      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      
+      // 创建新结果
+      const newResult: ResultItem = {
+        id: DataOperations.getNextId(existingResults),
+        user_id: 2, // 当前用户ID
+        username: 'user',
+        result_time: new Date().toISOString(),
+        stress_score: stressScore,
+        depression_score: depressionScore,
+        anxiety_score: anxietyScore,
+        social_isolation_score: socialScore,
+        overall_risk_level: riskLevel,
+        recommendations: recommendations
+      };
+      
+      // 保存到localStorage
+      existingResults.push(newResult);
+      LocalStorageManager.set(STORAGE_KEYS.RESULTS, existingResults);
+      
+      // 添加日志
+      DataOperations.addLog('HEALTH_EVALUATION', 'HEALTH_ASSESSMENT', `用户完成健康评估，数据ID: ${dataId}`, 'user', '1');
       
       // 更新当前状态
       setCurrentStatus({
-        stress: result.stress_score || 0,
-        depression: result.depression_score || 0,
-        anxiety: result.anxiety_score || 0,
-        social_isolation: result.social_isolation_score || 0
+        stress: stressScore,
+        depression: depressionScore,
+        anxiety: anxietyScore,
+        social_isolation: socialScore
       });
-      setCurrentResultId(result.id);
+      setCurrentResultId(newResult.id);
       
       // 获取LED状态
-      await fetchLEDStatus(result.id);
+      await fetchLEDStatus(newResult.id);
       
       toast.success('健康评估完成！');
       fetchData(); // 刷新数据列表
@@ -188,8 +281,10 @@ const HealthEvaluatePage: React.FC = () => {
       setEvaluating(false);
     }
   };
+  // ============================================
 
-  // 批量评估
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 批量评估（保存到localStorage）
   const handleBatchEvaluate = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要评估的数据');
@@ -213,12 +308,76 @@ const HealthEvaluatePage: React.FC = () => {
       });
       setEvaluationProgress(initialProgress);
 
-      // 启动批量评估
-      const response = await apiClient.post('/health/batch-evaluate', { 
-        data_ids: selectedIds 
-      });
+      // 获取现有结果数据
+      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
       
-      toast.success(response.message || '批量评估已启动');
+      // 模拟批量评估过程
+      for (let i = 0; i < selectedIds.length; i++) {
+        const dataId = selectedIds[i];
+        
+        // 更新进度状态
+        setEvaluationProgress(prev => ({
+          ...prev,
+          [dataId]: {
+            status: 'processing',
+            progress: 0,
+            message: '正在评估...'
+          }
+        }));
+        
+        // 模拟评估延迟
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // 生成模拟评估结果
+        const stressScore = Math.floor(Math.random() * 60) + 10;
+        const depressionScore = Math.floor(Math.random() * 60) + 10;
+        const anxietyScore = Math.floor(Math.random() * 60) + 10;
+        const socialScore = Math.floor(Math.random() * 60) + 10;
+        
+        const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
+        const riskLevel = maxScore >= 50 ? '高风险' : maxScore >= 30 ? '中等风险' : '低风险';
+        
+        const recommendations = maxScore >= 50 ? 
+          '建议立即寻求专业心理咨询，注意休息和放松' :
+          maxScore >= 30 ? 
+          '建议适当调整生活方式，保持积极心态' :
+          '保持良好的心理状态，继续当前的生活方式';
+        
+        // 创建新结果
+        const newResult: ResultItem = {
+          id: DataOperations.getNextId(existingResults),
+          user_id: 2,
+          username: 'user',
+          result_time: new Date().toISOString(),
+          stress_score: stressScore,
+          depression_score: depressionScore,
+          anxiety_score: anxietyScore,
+          social_isolation_score: socialScore,
+          overall_risk_level: riskLevel,
+          recommendations: recommendations
+        };
+        
+        existingResults.push(newResult);
+        
+        // 更新进度状态
+        setEvaluationProgress(prev => ({
+          ...prev,
+          [dataId]: {
+            status: 'completed',
+            progress: 100,
+            message: '评估完成',
+            result_id: newResult.id
+          }
+        }));
+      }
+      
+      // 保存到localStorage
+      LocalStorageManager.set(STORAGE_KEYS.RESULTS, existingResults);
+      
+      // 添加日志
+      DataOperations.addLog('BATCH_HEALTH_EVALUATION', 'HEALTH_ASSESSMENT', `用户完成批量健康评估，共${selectedIds.length}个数据`, 'user', '1');
+      
+      toast.success(`批量评估完成，共处理${selectedIds.length}个数据`);
       
       // 模拟进度更新（实际应用中可以通过WebSocket获取实时进度）
       setTimeout(() => {
@@ -246,7 +405,8 @@ const HealthEvaluatePage: React.FC = () => {
   // 查看数据图像
   const handleViewImages = async (dataId: number) => {
     try {
-      const images = await apiClient.getDataImages(dataId);
+      // const images = await apiClient.getDataImages(dataId); // 注释掉API调用
+      const images: string[] = []; // 模拟空图片数组
       setCurrentImageData({
         dataId,
         images,

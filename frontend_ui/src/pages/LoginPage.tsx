@@ -5,6 +5,11 @@ import { useForm } from 'react-hook-form';
 import { LoginRequest } from '@/types';
 import toast from 'react-hot-toast';
 
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 此文件已修改为纯前端演示模式，不需要后端API
+// 支持两个固定账户：admin/admin123 和 user/user123
+// ============================================
+
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
@@ -17,11 +22,14 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginRequest) => {
     try {
+      // ===== 纯前端演示模式 - 特殊标记 =====
+      // 直接调用修改后的login函数，不需要后端API
       const success = await login(data);
       if (success) {
         // 登录成功，useAuth hook会处理跳转
         console.log('登录成功，等待跳转...');
       }
+      // ============================================
     } catch (error) {
       console.error('登录失败:', error);
     }

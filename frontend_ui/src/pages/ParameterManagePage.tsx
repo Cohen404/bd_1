@@ -14,6 +14,7 @@ import { apiClient } from '@/utils/api';
 import { Parameter } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
 import toast from 'react-hot-toast';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
 
 interface ParameterFormData {
   param_name: string;
@@ -35,12 +36,33 @@ const ParameterManagePage: React.FC = () => {
     description: ''
   });
 
-  // 获取参数列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取参数列表（从localStorage读取）
   const fetchParameters = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getParameters();
-      setParameters(Array.isArray(response) ? response : response?.items || []);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取参数数据
+      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
+      
+      // 转换为API格式的Parameter类型
+      const apiParameters: Parameter[] = parametersList.map(param => ({
+        id: param.id,
+        param_name: param.name,
+        param_value: param.value,
+        param_type: getParamTypeFromValue(param.value),
+        description: param.description,
+        created_at: param.updated_at,
+        updated_at: param.updated_at
+      }));
+      
+      setParameters(apiParameters);
+      
+      // 模拟API调用延迟
+      await new Promise(resolve => setTimeout(resolve, 300));
     } catch (error) {
       console.error('获取参数列表失败:', error);
       toast.error('获取参数列表失败');
@@ -48,6 +70,15 @@ const ParameterManagePage: React.FC = () => {
       setLoading(false);
     }
   };
+  
+  // 根据参数值推断参数类型
+  const getParamTypeFromValue = (value: string): string => {
+    if (value === 'true' || value === 'false') return 'boolean';
+    if (!isNaN(Number(value)) && value !== '') return 'number';
+    if (value.startsWith('{') || value.startsWith('[')) return 'json';
+    return 'string';
+  };
+  // ============================================
 
   useEffect(() => {
     fetchParameters();
@@ -82,14 +113,23 @@ const ParameterManagePage: React.FC = () => {
     setShowModal(true);
   };
 
-  // 删除参数
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 删除参数（从localStorage删除）
   const handleDelete = async (paramId: number, paramName: string) => {
     if (!window.confirm(`确定要删除参数"${paramName}"吗？此操作无法撤销。`)) {
       return;
     }
 
     try {
-      await apiClient.deleteParameter(paramId);
+      // 从localStorage获取参数列表
+      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
+      
+      // 过滤掉要删除的参数
+      const updatedParameters = parametersList.filter(param => param.id !== paramId);
+      
+      // 保存更新后的参数列表
+      LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
+      
       toast.success('参数删除成功');
       fetchParameters();
     } catch (error) {
@@ -97,8 +137,10 @@ const ParameterManagePage: React.FC = () => {
       toast.error('删除参数失败');
     }
   };
+  // ============================================
 
-  // 保存参数
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 保存参数（保存到localStorage）
   const handleSave = async () => {
     if (!formData.param_name.trim()) {
       toast.error('请输入参数名称');
@@ -111,13 +153,37 @@ const ParameterManagePage: React.FC = () => {
     }
 
     try {
+      // 从localStorage获取参数列表
+      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
+      
       if (editingParam) {
         // 更新参数
-        await apiClient.updateParameter(editingParam.id, formData);
+        const updatedParameters = parametersList.map(param => 
+          param.id === editingParam.id 
+            ? {
+                ...param,
+                name: formData.param_name,
+                value: formData.param_value,
+                description: formData.description,
+                updated_at: new Date().toISOString()
+              }
+            : param
+        );
+        LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
         toast.success('参数更新成功');
       } else {
         // 创建参数
-        await apiClient.createParameter(formData);
+        const newId = Math.max(...parametersList.map(p => p.id), 0) + 1;
+        const newParameter = {
+          id: newId,
+          name: formData.param_name,
+          value: formData.param_value,
+          description: formData.description,
+          category: '自定义参数',
+          updated_at: new Date().toISOString()
+        };
+        const updatedParameters = [...parametersList, newParameter];
+        LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
         toast.success('参数创建成功');
       }
 
@@ -129,6 +195,7 @@ const ParameterManagePage: React.FC = () => {
       toast.error('保存参数失败');
     }
   };
+  // ============================================
 
   // 获取参数类型显示名称
   const getParamTypeDisplay = (paramType: string) => {
@@ -384,17 +451,17 @@ const ParameterManagePage: React.FC = () => {
       )}
 
       {/* 系统参数分类说明 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         <div className="card p-6">
           <div className="flex items-center space-x-3 mb-4">
             <Database className="h-6 w-6 text-blue-600" />
             <h3 className="text-lg font-semibold text-gray-900">系统配置</h3>
           </div>
           <div className="space-y-2 text-sm text-gray-600">
-            <p>• 数据库连接配置</p>
-            <p>• 文件存储路径设置</p>
-            <p>• API接口超时时间</p>
-            <p>• 系统运行模式配置</p>
+            <p>• 数据保留天数</p>
+            <p>• 文件上传大小限制</p>
+            <p>• API请求超时时间</p>
+            <p>• 批量处理数量限制</p>
           </div>
         </div>
 
@@ -405,9 +472,61 @@ const ParameterManagePage: React.FC = () => {
           </div>
           <div className="space-y-2 text-sm text-gray-600">
             <p>• JWT Token过期时间</p>
-            <p>• 密码复杂度要求</p>
+            <p>• 密码最小长度</p>
             <p>• 登录失败次数限制</p>
-            <p>• 会话超时设置</p>
+            <p>• 账户锁定时间</p>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <Settings className="h-6 w-6 text-purple-600" />
+            <h3 className="text-lg font-semibold text-gray-900">评估参数</h3>
+          </div>
+          <div className="space-y-2 text-sm text-gray-600">
+            <p>• 高风险评估阈值</p>
+            <p>• 中等风险评估阈值</p>
+            <p>• 各维度评估权重</p>
+            <p>• 综合评估算法参数</p>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <Database className="h-6 w-6 text-orange-600" />
+            <h3 className="text-lg font-semibold text-gray-900">数据库配置</h3>
+          </div>
+          <div className="space-y-2 text-sm text-gray-600">
+            <p>• 数据库连接池大小</p>
+            <p>• 查询超时时间</p>
+            <p>• 数据库备份频率</p>
+            <p>• 连接重试次数</p>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <RefreshCw className="h-6 w-6 text-indigo-600" />
+            <h3 className="text-lg font-semibold text-gray-900">日志配置</h3>
+          </div>
+          <div className="space-y-2 text-sm text-gray-600">
+            <p>• 日志级别设置</p>
+            <p>• 日志保留天数</p>
+            <p>• 日志文件最大大小</p>
+            <p>• 日志轮转策略</p>
+          </div>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <Settings className="h-6 w-6 text-pink-600" />
+            <h3 className="text-lg font-semibold text-gray-900">模型配置</h3>
+          </div>
+          <div className="space-y-2 text-sm text-gray-600">
+            <p>• 模型推理批处理大小</p>
+            <p>• 模型置信度阈值</p>
+            <p>• 模型更新检查频率</p>
+            <p>• 推理超时时间</p>
           </div>
         </div>
       </div>
