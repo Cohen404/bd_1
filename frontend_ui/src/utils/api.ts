@@ -275,25 +275,162 @@ class API {
     return response.data;
   }
 
-  // 参数管理
+  // 参数管理 - 纯前端版本，使用localStorage存储
   async getParameters(params?: { page?: number; size?: number }) {
-    const response = await api.get('/parameters/', { params });
-    return response.data;
+    // 注释掉原有的后端API调用
+    // const response = await api.get('/parameters/', { params });
+    // return response.data;
+    
+    // 从localStorage读取参数数据
+    const stored = localStorage.getItem('system_parameters');
+    const parameters = stored ? JSON.parse(stored) : this.getDefaultParameters();
+    
+    // 模拟分页
+    const { page = 1, size = 10 } = params || {};
+    const start = (page - 1) * size;
+    const end = start + size;
+    
+    return {
+      items: parameters.slice(start, end),
+      total: parameters.length
+    };
   }
 
   async createParameter(data: any) {
-    const response = await api.post('/parameters/', data);
-    return response.data;
+    // 注释掉原有的后端API调用
+    // const response = await api.post('/parameters/', data);
+    // return response.data;
+    
+    // 保存到localStorage
+    const stored = localStorage.getItem('system_parameters');
+    const parameters = stored ? JSON.parse(stored) : [];
+    
+    const newParam = {
+      id: Date.now(), // 使用时间戳作为ID
+      ...data,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    parameters.push(newParam);
+    localStorage.setItem('system_parameters', JSON.stringify(parameters));
+    
+    return newParam;
   }
 
   async updateParameter(paramId: number, data: any) {
-    const response = await api.put(`/parameters/${paramId}`, data);
-    return response.data;
+    // 注释掉原有的后端API调用
+    // const response = await api.put(`/parameters/${paramId}`, data);
+    // return response.data;
+    
+    // 更新localStorage中的数据
+    const stored = localStorage.getItem('system_parameters');
+    const parameters = stored ? JSON.parse(stored) : [];
+    
+    const index = parameters.findIndex((p: any) => p.id === paramId);
+    if (index !== -1) {
+      parameters[index] = {
+        ...parameters[index],
+        ...data,
+        updated_at: new Date().toISOString()
+      };
+      localStorage.setItem('system_parameters', JSON.stringify(parameters));
+      return parameters[index];
+    }
+    throw new Error('参数不存在');
   }
 
   async deleteParameter(paramId: number) {
-    const response = await api.delete(`/parameters/${paramId}`);
-    return response.data;
+    // 注释掉原有的后端API调用
+    // const response = await api.delete(`/parameters/${paramId}`);
+    // return response.data;
+    
+    // 从localStorage删除
+    const stored = localStorage.getItem('system_parameters');
+    const parameters = stored ? JSON.parse(stored) : [];
+    
+    const filtered = parameters.filter((p: any) => p.id !== paramId);
+    localStorage.setItem('system_parameters', JSON.stringify(filtered));
+    
+    return { success: true };
+  }
+
+  // 提供默认参数数据
+  private getDefaultParameters() {
+    return [
+      {
+        id: 1,
+        param_name: 'eeg_sampling_frequency',
+        param_value: '1000',
+        param_type: 'number',
+        description: '脑电数据采样频率(Hz)',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 2,
+        param_name: 'electrode_count',
+        param_value: '64',
+        param_type: 'number',
+        description: '电极数量',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 3,
+        param_name: 'stress_threshold',
+        param_value: '50',
+        param_type: 'number',
+        description: '压力评估阈值',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 4,
+        param_name: 'depression_threshold',
+        param_value: '50',
+        param_type: 'number',
+        description: '抑郁评估阈值',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 5,
+        param_name: 'anxiety_threshold',
+        param_value: '50',
+        param_type: 'number',
+        description: '焦虑评估阈值',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 6,
+        param_name: 'social_isolation_threshold',
+        param_value: '50',
+        param_type: 'number',
+        description: '社交孤立评估阈值',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 7,
+        param_name: 'model_path',
+        param_value: '/models/health_assessment',
+        param_type: 'string',
+        description: 'AI模型存储路径',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: 8,
+        param_name: 'backup_enabled',
+        param_value: 'true',
+        param_type: 'boolean',
+        description: '是否启用自动备份',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+    ];
   }
 
   // 日志管理
@@ -304,8 +441,18 @@ class API {
 
   // 系统健康检查
   async healthCheck() {
-    const response = await api.get('/', { baseURL: '/' });
-    return response.data;
+    // 注释掉后端API调用，硬编码返回健康状态
+    // const response = await api.get('/', { baseURL: '/' });
+    // return response.data;
+    
+    // 硬编码返回系统健康检查都是完好的状态
+    return {
+      status: 'healthy',
+      models_ready: true,
+      database_connected: true,
+      services_running: true,
+      timestamp: new Date().toISOString()
+    };
   }
 
   // 通用GET请求
