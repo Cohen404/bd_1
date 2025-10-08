@@ -29,6 +29,7 @@ import toast from 'react-hot-toast';
 // ============================================
 import ProgressBar from '@/components/Common/ProgressBar';
 import ProgressModal from '@/components/Common/ProgressModal';
+import EEGVisualization from '@/components/EEGVisualization';
 
 const DataManagePage: React.FC = () => {
   const [dataList, setDataList] = useState<Data[]>([]);
@@ -45,7 +46,6 @@ const DataManagePage: React.FC = () => {
   const [batchUploading, setBatchUploading] = useState(false);
   const [preprocessing, setPreprocessing] = useState(false);
   const [selectedDataId, setSelectedDataId] = useState<number | null>(null);
-  const [visualizationImage, setVisualizationImage] = useState<string | null>(null);
   const [currentImageData, setCurrentImageData] = useState<{
     dataId: number;
     images: any[];
@@ -562,24 +562,21 @@ const DataManagePage: React.FC = () => {
   // ============================================
 
   // ===== 纯前端演示模式 - 特殊标记 =====
-  // 处理可视化显示（使用演示图片）
+  // 处理可视化显示（使用EEG图表）
   const handleVisualizationDisplay = () => {
     if (!selectedDataId || !visualizationType) {
       toast.error('请先选择数据和可视化类型');
       return;
     }
     
-    // 使用演示图片URL
-    const imageUrl = `https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=${encodeURIComponent(visualizationOptions.find(opt => opt.value === visualizationType)?.label || '可视化图片')}`;
-    setVisualizationImage(imageUrl);
     setShowVisualization(true);
+    toast.success('正在显示EEG特征图表...');
   };
   // ============================================
 
   // 选择数据用于可视化
   const handleSelectDataForVisualization = (dataId: number) => {
     setSelectedDataId(dataId);
-    setVisualizationImage(null);
     setShowVisualization(false);
   };
 
@@ -690,167 +687,165 @@ const DataManagePage: React.FC = () => {
         </div>
       )}
 
-      {/* 主要内容区域 */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-        {/* 数据表格 - 占3列 */}
-        <div className="xl:col-span-3">
-          <div className="card overflow-hidden">
-            {loading ? (
-              <div className="flex items-center justify-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
-                <span className="ml-2 text-gray-500">加载中...</span>
-              </div>
-            ) : filteredData.length === 0 ? (
-              <div className="text-center py-8">
-                <Database className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">
-                  {searchTerm ? '未找到匹配的数据' : '暂无数据文件'}
-                </p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        <button
-                          onClick={toggleSelectAll}
-                          className="flex items-center space-x-2 hover:text-gray-700"
-                        >
-                          {selectedItems.size === filteredData.length ? 
-                            <CheckSquare className="h-4 w-4" /> : 
-                            <Square className="h-4 w-4" />
-                          }
-                          <span>选择</span>
-                        </button>
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        ID
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        人员信息
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        文件路径
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        上传信息
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        处理状态
-                      </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        操作
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredData.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <button
-                            onClick={() => toggleSelection(item.id)}
-                            className="text-primary-600 hover:text-primary-700"
-                          >
-                            {selectedItems.has(item.id) ? 
-                              <CheckSquare className="h-4 w-4" /> : 
-                              <Square className="h-4 w-4" />
-                            }
-                          </button>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {item.id}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div>
-                            <div className="text-sm font-medium text-gray-900">
-                              {item.personnel_name}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              ID: {item.personnel_id}
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm text-gray-900 max-w-xs truncate" title={item.data_path}>
-                            {item.data_path}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div>
-                            <div className="text-sm text-gray-900">用户{item.upload_user}</div>
-                            <div className="text-sm text-gray-500">
-                              {formatDateTime(item.upload_time)}
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="space-y-2">
-                            <div className="flex items-center space-x-2">
-                              {getStatusIcon(item.processing_status, item.feature_status)}
-                              <span className="text-sm text-gray-700">
-                                {getStatusText(item.processing_status, item.feature_status)}
-                              </span>
-                            </div>
-                                                         <div className="w-24">
-                               <ProgressBar
-                                 progress={getProgressPercentage(item.id, item.processing_status, item.feature_status)}
-                                 status={item.processing_status === 'failed' || item.feature_status === 'failed' ? 'failed' : 
-                                        item.processing_status === 'completed' && item.feature_status === 'completed' ? 'completed' : 
-                                        item.processing_status === 'processing' || item.feature_status === 'processing' ? 'processing' : 'pending'}
-                                 size="small"
-                                 showIcon={false}
-                               />
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <div className="flex items-center justify-end space-x-2">
-                            <button
-                              onClick={() => handlePreprocessSingle(item.id, item.personnel_name)}
-                              className="text-green-600 hover:text-green-700"
-                              title="预处理"
-                            >
-                              <Settings className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => handleViewImages(item.id)}
-                              className="text-blue-600 hover:text-blue-700"
-                              title="查看图像"
-                            >
-                              <Image className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => handleSelectDataForVisualization(item.id)}
-                              className="text-purple-600 hover:text-purple-700"
-                              title="选择用于可视化"
-                            >
-                              <BarChart3 className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => handleDeleteSingle(item.id, item.personnel_name)}
-                              className="text-red-600 hover:text-red-700"
-                              title="删除"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+      {/* 数据表格 */}
+      <div className="card overflow-hidden">
+        {loading ? (
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
+            <span className="ml-2 text-gray-500">加载中...</span>
           </div>
-        </div>
+        ) : filteredData.length === 0 ? (
+          <div className="text-center py-8">
+            <Database className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-500">
+              {searchTerm ? '未找到匹配的数据' : '暂无数据文件'}
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <button
+                      onClick={toggleSelectAll}
+                      className="flex items-center space-x-2 hover:text-gray-700"
+                    >
+                      {selectedItems.size === filteredData.length ? 
+                        <CheckSquare className="h-4 w-4" /> : 
+                        <Square className="h-4 w-4" />
+                      }
+                      <span>选择</span>
+                    </button>
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    人员信息
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    文件路径
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    上传信息
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    处理状态
+                  </th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    操作
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredData.map((item) => (
+                  <tr key={item.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => toggleSelection(item.id)}
+                        className="text-primary-600 hover:text-primary-700"
+                      >
+                        {selectedItems.has(item.id) ? 
+                          <CheckSquare className="h-4 w-4" /> : 
+                          <Square className="h-4 w-4" />
+                        }
+                      </button>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {item.id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {item.personnel_name}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ID: {item.personnel_id}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-900 max-w-xs truncate" title={item.data_path}>
+                        {item.data_path}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm text-gray-900">用户{item.upload_user}</div>
+                        <div className="text-sm text-gray-500">
+                          {formatDateTime(item.upload_time)}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          {getStatusIcon(item.processing_status, item.feature_status)}
+                          <span className="text-sm text-gray-700">
+                            {getStatusText(item.processing_status, item.feature_status)}
+                          </span>
+                        </div>
+                                                     <div className="w-24">
+                           <ProgressBar
+                             progress={getProgressPercentage(item.id, item.processing_status, item.feature_status)}
+                             status={item.processing_status === 'failed' || item.feature_status === 'failed' ? 'failed' : 
+                                    item.processing_status === 'completed' && item.feature_status === 'completed' ? 'completed' : 
+                                    item.processing_status === 'processing' || item.feature_status === 'processing' ? 'processing' : 'pending'}
+                             size="small"
+                             showIcon={false}
+                           />
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <div className="flex items-center justify-end space-x-2">
+                        <button
+                          onClick={() => handlePreprocessSingle(item.id, item.personnel_name)}
+                          className="text-green-600 hover:text-green-700"
+                          title="预处理"
+                        >
+                          <Settings className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleViewImages(item.id)}
+                          className="text-blue-600 hover:text-blue-700"
+                          title="查看图像"
+                        >
+                          <Image className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleSelectDataForVisualization(item.id)}
+                          className="text-purple-600 hover:text-purple-700"
+                          title="选择用于可视化"
+                        >
+                          <BarChart3 className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteSingle(item.id, item.personnel_name)}
+                          className="text-red-600 hover:text-red-700"
+                          title="删除"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
 
-        {/* 数据可视化 - 占1列 */}
-        <div className="xl:col-span-1">
-          <div className="card p-6 bg-primary-50">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 text-center">数据可视化</h3>
-              
+      {/* 数据可视化 */}
+      <div className="card p-6 bg-primary-50">
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900 text-center">数据可视化</h3>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* 数据选择和控制区域 */}
+            <div className="lg:col-span-1 space-y-4">
               {/* 数据选择 */}
               <div>
                 <label className="label">选择数据：</label>
@@ -863,7 +858,6 @@ const DataManagePage: React.FC = () => {
                       handleSelectDataForVisualization(dataId);
                     } else {
                       setSelectedDataId(null);
-                      setVisualizationImage(null);
                       setShowVisualization(false);
                     }
                   }}
@@ -893,66 +887,37 @@ const DataManagePage: React.FC = () => {
                 </select>
               </div>
 
-              {/* 可视化图表区域 */}
-              <div className="bg-white rounded-lg p-4 min-h-[300px] flex items-center justify-center border-2 border-dashed border-gray-300">
-                {showVisualization && visualizationImage ? (
-                  <div className="w-full h-full flex flex-col items-center">
-                    <div 
-                      className="relative group cursor-pointer"
-                      onClick={() => {
-                        console.log('可视化图片点击事件触发');
-                        console.log('打开可视化图片URL:', visualizationImage);
-                        if (visualizationImage) {
-                          const newWindow = window.open(visualizationImage, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
-                          if (!newWindow) {
-                            alert('弹窗被浏览器阻止，请允许弹窗后重试');
-                          }
-                        }
-                      }}
-                    >
-                      <img
-                        src={visualizationImage}
-                        alt={visualizationOptions.find(opt => opt.value === visualizationType)?.label}
-                        className="max-w-full max-h-64 object-contain rounded-lg shadow-sm hover:shadow-lg transition-shadow"
-                        onLoad={() => {
-                          console.log('图片加载成功:', visualizationImage);
-                        }}
-                        onError={(e) => {
-                          console.error('图片加载失败:', visualizationImage);
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          toast.error('图片加载失败，请检查数据是否已预处理');
-                        }}
-                      />
-                      {/* 悬停提示 */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-20 rounded-lg pointer-events-none">
-                        <div className="bg-white px-3 py-1 rounded text-sm font-medium shadow-lg">
-                          点击在新窗口打开
-                        </div>
-                      </div>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-2 text-center">
-                      {visualizationOptions.find(opt => opt.value === visualizationType)?.label}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <Database className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">
-                      {selectedDataId ? '点击下方按钮查看可视化图片' : '请先选择数据和指标'}
-                    </p>
-                  </div>
-                )}
-              </div>
-
               <button 
                 className="btn btn-primary w-full flex items-center justify-center space-x-2"
                 onClick={handleVisualizationDisplay}
                 disabled={!selectedDataId}
               >
                 <Eye className="h-4 w-4" />
-                <span>显示图片</span>
+                <span>显示图表</span>
               </button>
+            </div>
+
+            {/* 可视化图表区域 */}
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-lg p-4 min-h-[400px] border-2 border-dashed border-gray-300">
+                {showVisualization && selectedDataId ? (
+                  <div className="w-full h-full">
+                    <EEGVisualization 
+                      visualizationType={visualizationType} 
+                      dataId={selectedDataId}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center">
+                      <Database className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-500">
+                        {selectedDataId ? '点击下方按钮查看可视化图表' : '请先选择数据和指标'}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
