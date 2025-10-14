@@ -62,10 +62,10 @@ const generateRandomEEGData = () => {
 // 注意：mockData将在组件内部生成，确保每次渲染都有新的随机数据
 
 // 辅助函数：创建柱状图
-const BarChartComponent = ({ data, title, key, color }: {
+const BarChartComponent = ({ data, title, dataKey, color }: {
   data: any[];
   title: string;
-  key: string;
+  dataKey: string;
   color: string;
 }) => (
   <div className="mb-6">
@@ -77,7 +77,7 @@ const BarChartComponent = ({ data, title, key, color }: {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey={key} fill={color} />
+        <Bar dataKey={dataKey} fill={color} />
       </BarChart>
     </div>
   </div>
@@ -193,7 +193,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="Theta功率特征图"
-            key="Theta"
+            dataKey="Theta"
             color="#3498db"
           />
         );
@@ -203,7 +203,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="Alpha功率特征图"
-            key="Alpha"
+            dataKey="Alpha"
             color="#2ecc71"
           />
         );
@@ -213,7 +213,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="Beta功率特征图"
-            key="Beta"
+            dataKey="Beta"
             color="#e74c3c"
           />
         );
@@ -223,7 +223,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="Gamma功率特征图"
-            key="Gamma"
+            dataKey="Gamma"
             color="#f39c12"
           />
         );
@@ -233,7 +233,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="均分频带1特征图"
-            key="Band1"
+            dataKey="Band1"
             color="#9b59b6"
           />
         );
@@ -243,7 +243,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="均分频带2特征图"
-            key="Band2"
+            dataKey="Band2"
             color="#1abc9c"
           />
         );
@@ -253,7 +253,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="均分频带3特征图"
-            key="Band3"
+            dataKey="Band3"
             color="#f1c40f"
           />
         );
@@ -263,7 +263,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="均分频带4特征图"
-            key="Band4"
+            dataKey="Band4"
             color="#e67e22"
           />
         );
@@ -273,7 +273,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="均分频带5特征图"
-            key="Band5"
+            dataKey="Band5"
             color="#34495e"
           />
         );
@@ -283,7 +283,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="时域特征-过零率"
-            key="Zero"
+            dataKey="Zero"
             color="#8e44ad"
           />
         );
@@ -293,7 +293,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="时域特征-方差"
-            key="Variance"
+            dataKey="Variance"
             color="#d35400"
           />
         );
@@ -303,7 +303,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="时域特征-能量"
-            key="Energy"
+            dataKey="Energy"
             color="#27ae60"
           />
         );
@@ -313,7 +313,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
           <BarChartComponent
             data={channelData}
             title="时域特征-差分"
-            key="Diff"
+            dataKey="Diff"
             color="#1a535c"
           />
         );
