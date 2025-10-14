@@ -13,14 +13,7 @@ import {
   FileText,
   CheckSquare,
   Square,
-  BarChart3,
-  PieChart,
-  TrendingUp,
-  Users,
-  Clock,
   Trash2,
-  Activity,
-  AlertTriangle,
   ExternalLink,
   Printer,
   FileImage,
@@ -53,16 +46,6 @@ interface FilterState {
   maxDepressionScore: string;
 }
 
-interface Statistics {
-  total_count: number;
-  avg_stress_score: number;
-  avg_depression_score: number;
-  avg_anxiety_score: number;
-  avg_social_isolation_score: number;
-  high_risk_count: number;
-  high_risk_percentage: number;
-  recent_count: number;
-}
 
 const ResultManagePage: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
@@ -83,7 +66,6 @@ const ResultManagePage: React.FC = () => {
   const [showStatistics, setShowStatistics] = useState(false);
   const [pdfViewerVisible, setPdfViewerVisible] = useState(false);
   const [currentPdfUrl, setCurrentPdfUrl] = useState<string>('');
-  const [statistics, setStatistics] = useState<Statistics | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     userType: 'all',
     userId: 'all',
@@ -118,7 +100,9 @@ const ResultManagePage: React.FC = () => {
         anxiety_score: item.anxiety_score,
         social_isolation_score: item.social_isolation_score,
         overall_risk_level: item.overall_risk_level,
-        recommendations: item.recommendations
+        recommendations: item.recommendations,
+        personnel_id: item.personnel_id,
+        personnel_name: item.personnel_name
       }));
       
       // 应用筛选条件
@@ -196,66 +180,10 @@ const ResultManagePage: React.FC = () => {
   };
   // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取统计信息（从localStorage计算）
-  const fetchStatistics = async () => {
-    try {
-      // 从localStorage获取结果数据
-      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-      
-      // 应用日期筛选
-      let filteredResults = resultItems;
-      if (filters.dateStart) {
-        filteredResults = filteredResults.filter(result => new Date(result.result_time) >= new Date(filters.dateStart));
-      }
-      if (filters.dateEnd) {
-        filteredResults = filteredResults.filter(result => new Date(result.result_time) <= new Date(filters.dateEnd));
-      }
-      
-      // 计算统计信息
-      const totalCount = filteredResults.length;
-      const avgStressScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.stress_score, 0) / totalCount : 0;
-      const avgDepressionScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.depression_score, 0) / totalCount : 0;
-      const avgAnxietyScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.anxiety_score, 0) / totalCount : 0;
-      const avgSocialIsolationScore = totalCount > 0 ? filteredResults.reduce((sum, r) => sum + r.social_isolation_score, 0) / totalCount : 0;
-      
-      // 计算高风险数量（任一指标 >= 50）
-      const highRiskCount = filteredResults.filter(result => 
-        result.stress_score >= 50 || 
-        result.depression_score >= 50 || 
-        result.anxiety_score >= 50 || 
-        result.social_isolation_score >= 50
-      ).length;
-      
-      // 计算最近7天的数量
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      const recentCount = filteredResults.filter(result => 
-        new Date(result.result_time) >= sevenDaysAgo
-      ).length;
-      
-      const stats: Statistics = {
-        total_count: totalCount,
-        avg_stress_score: Math.round(avgStressScore * 100) / 100,
-        avg_depression_score: Math.round(avgDepressionScore * 100) / 100,
-        avg_anxiety_score: Math.round(avgAnxietyScore * 100) / 100,
-        avg_social_isolation_score: Math.round(avgSocialIsolationScore * 100) / 100,
-        high_risk_count: highRiskCount,
-        high_risk_percentage: totalCount > 0 ? Math.round((highRiskCount / totalCount) * 100) : 0,
-        recent_count: recentCount
-      };
-      
-      setStatistics(stats);
-    } catch (error) {
-      console.error('获取统计信息失败:', error);
-    }
-  };
-  // ============================================
 
   useEffect(() => {
     fetchResults();
     fetchUsers();
-    fetchStatistics();
   }, [filters]);
 
   // 选择/取消选择结果
@@ -280,7 +208,7 @@ const ResultManagePage: React.FC = () => {
 
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 导出结果（纯前端导出）
-  const handleExport = async (format: 'excel' | 'csv' | 'pdf') => {
+  const handleExport = async (format: 'excel' | 'pdf') => {
     if (selectedResults.size === 0) {
       toast.error('请先选择要导出的结果');
       return;
@@ -289,46 +217,8 @@ const ResultManagePage: React.FC = () => {
     try {
       setExporting(true);
       
-      // 获取选中的结果数据
-      const selectedResultsData = filteredResults.filter(result => selectedResults.has(result.id));
-      
-      if (format === 'csv') {
-        // 生成CSV内容
-        const headers = ['ID', '用户名', '评估时间', '应激分数', '抑郁分数', '焦虑分数', '社交孤立分数', '风险等级', '建议'];
-        const csvContent = [
-          headers.join(','),
-          ...selectedResultsData.map(result => [
-            result.id,
-            result.username,
-            result.result_time,
-            result.stress_score,
-            result.depression_score,
-            result.anxiety_score,
-            result.social_isolation_score,
-            result.overall_risk_level,
-            `"${result.recommendations}"`
-          ].join(','))
-        ].join('\n');
-        
-        // 创建下载链接
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        
-        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-        link.download = `评估结果_${timestamp}.csv`;
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-        
-        toast.success('CSV 导出成功');
-      } else {
-        // 对于Excel和PDF，显示提示信息
-        toast('Excel和PDF导出功能在演示模式下暂不可用，请使用CSV格式');
-      }
+      // 对于Excel和PDF，显示提示信息
+      toast('Excel和PDF导出功能在演示模式下暂不可用');
     } catch (error) {
       console.error('导出失败:', error);
       toast.error('导出失败');
@@ -426,57 +316,6 @@ const ResultManagePage: React.FC = () => {
         <p className="text-gray-600 mt-1">查看和管理健康评估结果，导出报告数据</p>
       </div>
 
-      {/* 统计信息卡片 */}
-      {statistics && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">总评估数</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.total_count}</p>
-              </div>
-              <div className="p-3 rounded-full bg-blue-50">
-                <BarChart3 className="h-6 w-6 text-blue-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">高风险比例</p>
-                <p className="text-2xl font-bold text-red-600 mt-2">{statistics.high_risk_percentage}%</p>
-                <p className="text-sm text-gray-500 mt-1">{statistics.high_risk_count} 人</p>
-              </div>
-              <div className="p-3 rounded-full bg-red-50">
-                <AlertTriangle className="h-6 w-6 text-red-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">平均应激分数</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.avg_stress_score}</p>
-              </div>
-              <div className="p-3 rounded-full bg-purple-50">
-                <Activity className="h-6 w-6 text-purple-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">最近7天</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.recent_count}</p>
-                <p className="text-sm text-gray-500 mt-1">新增评估</p>
-              </div>
-              <div className="p-3 rounded-full bg-green-50">
-                <TrendingUp className="h-6 w-6 text-green-600" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 操作栏 */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -513,14 +352,6 @@ const ResultManagePage: React.FC = () => {
             <Download className="h-4 w-4" />
             <span>导出Excel</span>
               </button>
-              <button
-            onClick={() => handleExport('csv')}
-            disabled={selectedResults.size === 0 || exporting}
-            className="btn btn-secondary flex items-center space-x-2 disabled:opacity-50"
-              >
-                <Download className="h-4 w-4" />
-            <span>导出CSV</span>
-          </button>
           <button
             onClick={() => handleExport('pdf')}
             disabled={selectedResults.size === 0 || exporting}
