@@ -35,62 +35,86 @@ async def create_model(
     """
     上传模型文件
     """
-    # 验证模型类型
-    if model_type not in MODEL_TYPE_NAMES:
+    try:
+        # 验证模型类型
+        if model_type not in MODEL_TYPE_NAMES:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"无效的模型类型: {model_type}"
+            )
+        
+        # 验证文件格式
+        allowed_extensions = ['.keras', '.h5', '.pt', '.pkl']
+        file_ext = os.path.splitext(file.filename)[1].lower()
+        if file_ext not in allowed_extensions:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"不支持的文件格式: {file_ext}，仅支持 {', '.join(allowed_extensions)}"
+            )
+        
+        # 创建模型类型目录
+        model_type_dir = os.path.join(MODEL_DIR, str(model_type))
+        os.makedirs(model_type_dir, exist_ok=True)
+        
+        # 检查是否已存在此类型的模型
+        existing_model = db.query(db_models.Model).filter(db_models.Model.model_type == model_type).first()
+        
+        # 保留原始文件名（使用上传的文件名）
+        model_filename = file.filename
+        model_path = os.path.join(model_type_dir, model_filename)
+        
+        # 保存文件
+        with open(model_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        logging.info(f"模型文件已保存: {model_path}")
+        
+        # 如果存在旧模型，备份旧文件并更新记录
+        if existing_model:
+            # 备份旧模型
+            if os.path.exists(existing_model.model_path) and existing_model.model_path != model_path:
+                backup_filename = f"backup_{datetime.now().strftime('%Y%m%d%H%M%S')}_{os.path.basename(existing_model.model_path)}"
+                backup_path = os.path.join(model_type_dir, backup_filename)
+                try:
+                    shutil.move(existing_model.model_path, backup_path)
+                    logging.info(f"旧模型已备份到: {backup_path}")
+                except Exception as e:
+                    logging.warning(f"备份旧模型失败: {str(e)}")
+                    import traceback
+                    logging.warning(traceback.format_exc())
+            
+            # 更新模型记录
+            existing_model.model_path = model_path
+            existing_model.create_time = datetime.now()
+            db.commit()
+            db.refresh(existing_model)
+            
+            logging.info(f"更新了模型类型 {model_type} 的模型文件，新路径: {model_path}")
+            return existing_model
+        else:
+            # 创建新模型记录
+            db_model = db_models.Model(
+                model_type=model_type,
+                model_path=model_path,
+                create_time=datetime.now()
+            )
+            
+            db.add(db_model)
+            db.commit()
+            db.refresh(db_model)
+            
+            logging.info(f"上传了新的模型类型 {model_type}，路径: {model_path}")
+            return db_model
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"上传模型失败: {str(e)}")
+        import traceback
+        logging.error(traceback.format_exc())
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"无效的模型类型: {model_type}"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"上传模型失败: {str(e)}"
         )
-    
-    # 创建模型类型目录
-    model_type_dir = os.path.join(MODEL_DIR, str(model_type))
-    os.makedirs(model_type_dir, exist_ok=True)
-    
-    # 检查是否已存在此类型的模型
-    existing_model = db.query(db_models.Model).filter(db_models.Model.model_type == model_type).first()
-    
-    # 生成文件名
-    model_filename = f"model_{model_type}_{datetime.now().strftime('%Y%m%d%H%M%S')}.keras"
-    model_path = os.path.join(model_type_dir, model_filename)
-    
-    # 保存文件
-    with open(model_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-    
-    # 如果存在旧模型，删除旧文件并更新记录
-    if existing_model:
-        # 备份旧模型
-        if os.path.exists(existing_model.model_path):
-            backup_filename = f"backup_{os.path.basename(existing_model.model_path)}"
-            backup_path = os.path.join(model_type_dir, backup_filename)
-        try:
-                shutil.move(existing_model.model_path, backup_path)
-                logging.info(f"旧模型已备份到: {backup_path}")
-        except Exception as e:
-                logging.warning(f"备份旧模型失败: {str(e)}")
-        
-        # 更新模型记录
-        existing_model.model_path = model_path
-        existing_model.create_time = datetime.now()
-        db.commit()
-        db.refresh(existing_model)
-        
-        logging.info(f"更新了模型类型 {model_type} 的模型文件")
-        return existing_model
-    else:
-        # 创建新模型记录
-        db_model = db_models.Model(
-            model_type=model_type,
-            model_path=model_path,
-            create_time=datetime.now()
-        )
-        
-        db.add(db_model)
-        db.commit()
-        db.refresh(db_model)
-        
-        logging.info(f"上传了新的模型类型 {model_type}")
-        return db_model
 
 @router.get("/", response_model=List[schemas.Model])
 async def read_models(

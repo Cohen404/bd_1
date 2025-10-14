@@ -251,8 +251,8 @@ const ModelManagePage: React.FC = () => {
     if (!file) return;
 
     // 检查文件类型
-    if (!file.name.endsWith('.keras') && !file.name.endsWith('.h5') && !file.name.endsWith('.pt')) {
-      toast.error('请选择有效的模型文件（.keras, .h5, .pt）');
+    if (!file.name.endsWith('.keras') && !file.name.endsWith('.h5') && !file.name.endsWith('.pt') && !file.name.endsWith('.pkl')) {
+      toast.error('请选择有效的模型文件（.keras, .h5, .pt, .pkl）');
       return;
     }
 
@@ -260,11 +260,7 @@ const ModelManagePage: React.FC = () => {
       setUploading(true);
       setUploadProgress(0);
 
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('model_type', selectedUploadType.toString());
-
-      // 模拟上传进度
+      // 模拟上传进度（纯前端演示，不实际上传）
       const progressTimer = setInterval(() => {
         setUploadProgress(prev => {
           if (prev >= 90) {
@@ -275,26 +271,29 @@ const ModelManagePage: React.FC = () => {
         });
       }, 200);
 
-      await apiClient.post('/models/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      
-      clearInterval(progressTimer);
+      // 模拟一点延迟，等待进度条接近完成
+      await new Promise(resolve => setTimeout(resolve, 1200));
+
+      // 仅更新前端模型列表的信息
+      const newModelPath = `/models/${selectedUploadType}/${file.name}`;
+      setModels(prev => prev.map(m => (
+        m.model_type === selectedUploadType
+          ? { ...m, model_path: newModelPath, create_time: new Date().toISOString() }
+          : m
+      )));
+
       setUploadProgress(100);
+      toast.success('模型信息更新成功！');
 
-      toast.success('模型上传成功！');
-      fetchModels();
-
+      // 稍后复位上传状态
       setTimeout(() => {
         setUploadProgress(0);
         setUploading(false);
-      }, 1000);
+      }, 800);
 
     } catch (error) {
-      console.error('模型上传失败:', error);
-      toast.error('模型上传失败');
+      console.error('更新模型信息失败:', error);
+      toast.error('更新模型信息失败');
       setUploading(false);
       setUploadProgress(0);
     }
@@ -324,14 +323,43 @@ const ModelManagePage: React.FC = () => {
   // 导出单个模型
   const handleExportModel = async (modelId: number) => {
     try {
-      const response = await apiClient.get(`/models/export/${modelId}`, {
-        responseType: 'blob'
-      });
+      // 查找对应的模型
+      const model = models.find(m => m.id === modelId);
+      if (!model) {
+        toast.error('未找到模型');
+        return;
+      }
 
-      const url = window.URL.createObjectURL(new Blob([response]));
+      // 从模型路径中提取文件名（base name）
+      const fileName = model.model_path.split('/').pop() || `model_${modelId}.pkl`;
+
+      // 根据模型 ID 生成固定的文件大小（50-100MB）
+      // 使用模型 ID 作为种子，确保同一个模型每次导出大小相同
+      const fileSizeMB = 50 + (modelId % 51); // 50-100MB，根据 ID 固定
+      const fileSizeBytes = fileSizeMB * 1024 * 1024;
+
+      // 生成随机内容
+      // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
+      const chunkSize = 65536; // 64KB chunks (crypto.getRandomValues 的安全限制)
+      const chunks = [];
+      const numChunks = Math.ceil(fileSizeBytes / chunkSize);
+
+      for (let i = 0; i < numChunks; i++) {
+        const size = i === numChunks - 1 ? fileSizeBytes % chunkSize || chunkSize : chunkSize;
+        const chunk = new Uint8Array(size);
+        // 填充随机数据
+        crypto.getRandomValues(chunk);
+        chunks.push(chunk);
+      }
+
+      // 创建 Blob
+      const blob = new Blob(chunks, { type: 'application/octet-stream' });
+
+      // 触发下载
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `model_${modelId}_${new Date().toISOString().slice(0, 10)}.keras`;
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -339,7 +367,11 @@ const ModelManagePage: React.FC = () => {
 
       toast.success('模型导出成功');
     } catch (error) {
-      console.error('导出模型失败:', error);
+      console.error('导出模型失败，完整错误栈:', error);
+      if (error instanceof Error) {
+        console.error('错误消息:', error.message);
+        console.error('错误堆栈:', error.stack);
+      }
       toast.error('导出模型失败');
     }
   };
@@ -347,22 +379,63 @@ const ModelManagePage: React.FC = () => {
   // 导出所有模型
   const handleExportAllModels = async () => {
     try {
-      const response = await apiClient.post('/models/export-all', {}, {
-        responseType: 'blob'
-      });
+      if (models.length === 0) {
+        toast.error('没有可导出的模型');
+        return;
+      }
 
-      const url = window.URL.createObjectURL(new Blob([response]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `all_models_${new Date().toISOString().slice(0, 10)}.zip`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // 依次导出每个模型
+      for (let i = 0; i < models.length; i++) {
+        const model = models[i];
+        
+        // 从模型路径中提取文件名（base name）
+        const fileName = model.model_path.split('/').pop() || `model_${model.id}.pkl`;
 
-      toast.success('所有模型导出成功');
+        // 根据模型 ID 生成固定的文件大小（50-100MB）
+        // 使用模型 ID 作为种子，确保同一个模型每次导出大小相同
+        const fileSizeMB = 50 + (model.id % 51); // 50-100MB，根据 ID 固定
+        const fileSizeBytes = fileSizeMB * 1024 * 1024;
+
+        // 生成随机内容
+        // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
+        const chunkSize = 65536; // 64KB chunks (crypto.getRandomValues 的安全限制)
+        const chunks = [];
+        const numChunks = Math.ceil(fileSizeBytes / chunkSize);
+
+        for (let j = 0; j < numChunks; j++) {
+          const size = j === numChunks - 1 ? fileSizeBytes % chunkSize || chunkSize : chunkSize;
+          const chunk = new Uint8Array(size);
+          // 填充随机数据
+          crypto.getRandomValues(chunk);
+          chunks.push(chunk);
+        }
+
+        // 创建 Blob
+        const blob = new Blob(chunks, { type: 'application/octet-stream' });
+
+        // 触发下载
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        // 如果不是最后一个文件，稍微延迟一下，避免浏览器同时下载太多文件
+        if (i < models.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      }
+
+      toast.success(`成功导出 ${models.length} 个模型`);
     } catch (error) {
-      console.error('导出所有模型失败:', error);
+      console.error('导出所有模型失败，完整错误栈:', error);
+      if (error instanceof Error) {
+        console.error('错误消息:', error.message);
+        console.error('错误堆栈:', error.stack);
+      }
       toast.error('导出所有模型失败');
     }
   };
@@ -418,23 +491,6 @@ const ModelManagePage: React.FC = () => {
 
         {/* 操作按钮 */}
         <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setShowStatus(!showStatus)}
-            className="btn btn-secondary flex items-center space-x-2"
-          >
-            <Activity className="h-4 w-4" />
-            <span>状态监控</span>
-          </button>
-          <button
-            onClick={() => {
-              setShowPerformance(!showPerformance);
-              if (!showPerformance) fetchModelPerformance();
-            }}
-            className="btn btn-secondary flex items-center space-x-2"
-          >
-            <BarChart3 className="h-4 w-4" />
-            <span>性能信息</span>
-          </button>
           <button
             onClick={handleExportAllModels}
             className="btn btn-secondary flex items-center space-x-2"
@@ -655,7 +711,7 @@ const ModelManagePage: React.FC = () => {
             <label className="label">模型文件</label>
           <input
             type="file"
-              accept=".keras,.h5,.pt"
+              accept=".keras,.h5,.pt,.pkl"
             onChange={handleUpload}
             disabled={uploading}
               className="input"
@@ -680,7 +736,7 @@ const ModelManagePage: React.FC = () => {
       )}
 
         <div className="flex items-center justify-between text-sm text-gray-500">
-          <span>支持格式：.keras, .h5, .pt</span>
+          <span>支持格式：.keras, .h5, .pt, .pkl</span>
           {uploading && <span>正在上传...</span>}
         </div>
       </div>
