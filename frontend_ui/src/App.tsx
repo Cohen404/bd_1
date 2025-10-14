@@ -59,7 +59,7 @@ const App: React.FC = () => {
         path="/login" 
         element={
           user ? (
-            <Navigate to={user.user_type === 'admin' ? '/admin' : '/dashboard'} replace />
+            <Navigate to="/dashboard" replace />
           ) : (
             <LoginPage />
           )

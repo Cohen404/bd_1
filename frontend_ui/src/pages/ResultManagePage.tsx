@@ -18,6 +18,7 @@ import {
   TrendingUp,
   Users,
   Clock,
+  Trash2,
   Activity,
   AlertTriangle,
   ExternalLink,
@@ -30,7 +31,7 @@ import {
 // import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, ResultItem } from '@/utils/localStorage';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, ResultItem, forceInitializeDemoData } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 // ============================================
 
@@ -178,7 +179,7 @@ const ResultManagePage: React.FC = () => {
   const fetchUsers = async () => {
     try {
       // 从localStorage获取用户数据
-      const userItems = LocalStorageManager.get(STORAGE_KEYS.USERS, []);
+      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
       
       // 转换为前端User类型
       const convertedUsers: UserType[] = userItems.map(user => ({
@@ -360,6 +361,39 @@ const ResultManagePage: React.FC = () => {
     } catch (error) {
       console.error('重新生成报告失败:', error);
       toast.error('重新生成报告失败');
+    }
+  };
+
+  // 删除结果记录
+  const handleDeleteResult = async (resultId: number) => {
+    if (!window.confirm('确定要删除这条评估结果吗？此操作不可撤销。')) {
+      return;
+    }
+
+    try {
+      // 从localStorage中删除结果
+      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      const updatedResults = existingResults.filter(result => result.id !== resultId);
+      
+      // 如果删除后没有结果了，清空结果数据
+      if (updatedResults.length === 0) {
+        LocalStorageManager.clearSpecificData('results');
+      } else {
+        LocalStorageManager.set(STORAGE_KEYS.RESULTS, updatedResults);
+      }
+      
+      // 重新获取数据
+      await fetchResults();
+      
+      // 从选中列表中移除
+      const newSelected = new Set(selectedResults);
+      newSelected.delete(resultId);
+      setSelectedResults(newSelected);
+      
+      toast.success('评估结果删除成功');
+    } catch (error) {
+      console.error('删除评估结果失败:', error);
+      toast.error('删除评估结果失败');
     }
   };
 
@@ -597,6 +631,9 @@ const ResultManagePage: React.FC = () => {
                     ID
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    人员信息
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     评估分数
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -626,6 +663,16 @@ const ResultManagePage: React.FC = () => {
                     </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {result.id}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {result.personnel_name || '未知人员'}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            ID: {result.personnel_id || 'unknown'}
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-xs space-y-1">
@@ -696,6 +743,13 @@ const ResultManagePage: React.FC = () => {
                             title="下载报告"
                           >
                           <Download className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteResult(result.id)}
+                            className="text-red-600 hover:text-red-700"
+                            title="删除记录"
+                          >
+                            <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
                       </td>

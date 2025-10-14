@@ -7,10 +7,8 @@ import { User, LoginRequest } from '@/types';
 import {
   getCurrentUser,
   setCurrentUser,
-  setToken,
   removeToken,
   removeCurrentUser,
-  isAuthenticated,
 } from '@/utils/auth';
 import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, User as LocalUser } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
@@ -116,7 +114,7 @@ export const useAuth = (): UseAuthReturn => {
         const userData: User = {
           user_id: account.id.toString(),
           username: account.username,
-          user_type: account.role,
+          user_type: account.role as 'admin' | 'user',
           created_at: account.created_at,
         };
         
@@ -128,11 +126,8 @@ export const useAuth = (): UseAuthReturn => {
         
         // 根据用户类型跳转到不同页面
         setTimeout(() => {
-          if (account.role === 'admin') {
-            navigate('/admin', { replace: true });
-          } else {
-            navigate('/dashboard', { replace: true });
-          }
+          // 所有用户都跳转到 dashboard
+          navigate('/dashboard', { replace: true });
         }, 100);
         
         return true;

@@ -258,13 +258,6 @@ const DashboardPage: React.FC = () => {
       description: '查看评估结果',
       path: '/result-manage',
       primary: false
-    },
-    {
-      title: '模型管理',
-      icon: Brain,
-      description: '管理AI模型',
-      path: '/admin/model-manage',
-      primary: false
     }
   ];
 

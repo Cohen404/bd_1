@@ -12,7 +12,8 @@ export const STORAGE_KEYS = {
   MODELS: 'demo_models',
   PARAMETERS: 'demo_parameters',
   LOGS: 'demo_logs',
-  CURRENT_USER: 'demo_current_user'
+  CURRENT_USER: 'demo_current_user',
+  DEMO_INITIALIZED: 'demo_initialized' // 标记是否已初始化演示数据
 } as const;
 
 // 数据类型定义
@@ -54,6 +55,8 @@ export interface ResultItem {
   social_isolation_score: number;
   overall_risk_level: string;
   recommendations: string;
+  personnel_id?: string;
+  personnel_name?: string;
 }
 
 export interface Model {
@@ -128,10 +131,36 @@ export class LocalStorageManager {
       this.remove(key);
     });
   }
+  
+  // 清空特定类型的数据（保留初始化标记）
+  static clearSpecificData(dataType: 'data' | 'results' | 'users' | 'logs'): void {
+    switch (dataType) {
+      case 'data':
+        this.remove(STORAGE_KEYS.DATA);
+        break;
+      case 'results':
+        this.remove(STORAGE_KEYS.RESULTS);
+        break;
+      case 'users':
+        this.remove(STORAGE_KEYS.USERS);
+        break;
+      case 'logs':
+        this.remove(STORAGE_KEYS.LOGS);
+        break;
+    }
+  }
 }
 
 // 初始化演示数据
 export const initializeDemoData = () => {
+  // 检查是否已经初始化过演示数据
+  const isInitialized = LocalStorageManager.get<boolean>(STORAGE_KEYS.DEMO_INITIALIZED, false);
+  
+  // 如果已经初始化过，不再自动初始化
+  if (isInitialized) {
+    return;
+  }
+  
   // 初始化用户数据
   const users = LocalStorageManager.get<User[]>(STORAGE_KEYS.USERS, []);
   if (users.length === 0) {
@@ -216,7 +245,10 @@ export const initializeDemoData = () => {
 
   // 初始化评估结果
   const results = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-  if (results.length === 0) {
+  // 检查是否有旧数据需要更新人员信息
+  const needsUpdate = results.some(result => !result.personnel_id || !result.personnel_name || result.personnel_id === 'unknown');
+  
+  if (results.length === 0 || needsUpdate) {
     const demoResults: ResultItem[] = [
       {
         id: 1,
@@ -228,7 +260,9 @@ export const initializeDemoData = () => {
         anxiety_score: 42,
         social_isolation_score: 25,
         overall_risk_level: '中等',
-        recommendations: '建议进行放松训练，适当增加社交活动'
+        recommendations: '建议进行放松训练，适当增加社交活动',
+        personnel_id: 'P001',
+        personnel_name: '张三'
       },
       {
         id: 2,
@@ -240,7 +274,9 @@ export const initializeDemoData = () => {
         anxiety_score: 35,
         social_isolation_score: 30,
         overall_risk_level: '中等',
-        recommendations: '建议寻求专业心理咨询，注意工作生活平衡'
+        recommendations: '建议寻求专业心理咨询，注意工作生活平衡',
+        personnel_id: 'P002',
+        personnel_name: '李四'
       },
       {
         id: 3,
@@ -252,10 +288,30 @@ export const initializeDemoData = () => {
         anxiety_score: 30,
         social_isolation_score: 20,
         overall_risk_level: '低',
-        recommendations: '保持良好的心理状态，继续当前的生活方式'
+        recommendations: '保持良好的心理状态，继续当前的生活方式',
+        personnel_id: 'P003',
+        personnel_name: '王五'
       }
     ];
-    LocalStorageManager.set(STORAGE_KEYS.RESULTS, demoResults);
+    
+    if (results.length === 0) {
+      // 如果没有数据，直接设置演示数据
+      LocalStorageManager.set(STORAGE_KEYS.RESULTS, demoResults);
+    } else {
+      // 如果有数据但需要更新，更新现有数据的人员信息
+      const updatedResults = results.map(result => {
+        const demoResult = demoResults.find(demo => demo.id === result.id);
+        if (demoResult) {
+          return {
+            ...result,
+            personnel_id: demoResult.personnel_id,
+            personnel_name: demoResult.personnel_name
+          };
+        }
+        return result;
+      });
+      LocalStorageManager.set(STORAGE_KEYS.RESULTS, updatedResults);
+    }
   }
 
   // 初始化AI模型
@@ -796,6 +852,17 @@ export const initializeDemoData = () => {
     ];
     LocalStorageManager.set(STORAGE_KEYS.LOGS, demoLogs);
   }
+  
+  // 标记演示数据已初始化
+  LocalStorageManager.set(STORAGE_KEYS.DEMO_INITIALIZED, true);
+};
+
+// 强制重新初始化演示数据
+export const forceInitializeDemoData = () => {
+  // 清除初始化标记
+  LocalStorageManager.remove(STORAGE_KEYS.DEMO_INITIALIZED);
+  // 重新初始化
+  initializeDemoData();
 };
 
 // 数据操作辅助函数
