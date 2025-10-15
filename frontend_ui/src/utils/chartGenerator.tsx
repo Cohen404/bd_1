@@ -5,41 +5,93 @@ import React from 'react';
 import html2canvas from 'html2canvas';
 import { ResultItem } from './localStorage';
 
-// 生成EEG数据的辅助函数（与EEGVisualization.tsx一致）
-const generateRandomEEGData = () => {
+// 伪随机数生成器 - 基于种子的线性同余生成器（与EEGVisualization.tsx一致）
+class SeededRandom {
+  private seed: number;
+
+  constructor(seed: number) {
+    this.seed = seed % 2147483647;
+    if (this.seed <= 0) this.seed += 2147483646;
+  }
+
+  // 生成 0-1 之间的伪随机数
+  next(): number {
+    this.seed = (this.seed * 16807) % 2147483647;
+    return (this.seed - 1) / 2147483646;
+  }
+
+  // 生成指定范围内的随机数
+  range(min: number, max: number): number {
+    return min + this.next() * (max - min);
+  }
+
+  // 生成指定范围内的随机整数
+  rangeInt(min: number, max: number): number {
+    return Math.floor(this.range(min, max + 1));
+  }
+}
+
+// 生成基于resultId的确定性EEG数据
+const generateRandomEEGData = (resultId: number) => {
   const channels = Array.from({ length: 8 }, (_, i) => `通道${i + 1}`);
   
-  const generateChannelData = (min: number, max: number, decimals: number = 2) => {
+  // 使用resultId作为基础种子
+  const baseSeed = resultId * 1000;
+  
+  // 为不同的数据类型创建不同的随机数生成器
+  const createRng = (offset: number) => new SeededRandom(baseSeed + offset);
+  
+  const generateChannelData = (min: number, max: number, decimals: number, seedOffset: number) => {
+    const rng = createRng(seedOffset);
     return channels.map((_, index) => {
       const baseValue = min + (max - min) * (index / (channels.length - 1)) * 0.7;
-      const randomVariation = (Math.random() - 0.5) * (max - min) * 0.15;
+      const randomVariation = (rng.next() - 0.5) * (max - min) * 0.15;
       const finalValue = Math.max(min, Math.min(max, baseValue + randomVariation));
       return parseFloat(finalValue.toFixed(decimals));
     });
   };
   
+  const generateIntChannelData = (baseMin: number, _baseMax: number, step: number, seedOffset: number) => {
+    const rng = createRng(seedOffset);
+    return channels.map((_, index) => {
+      const base = baseMin + index * step;
+      const variation = rng.rangeInt(-5, 5);
+      return Math.max(baseMin, base + variation);
+    });
+  };
+  
   return {
     channels,
-    thetaPower: generateChannelData(0.5, 2.5, 2),
-    alphaPower: generateChannelData(0.8, 3.2, 2),
-    betaPower: generateChannelData(0.3, 1.8, 2),
-    gammaPower: generateChannelData(0.1, 1.2, 2),
-    band1: generateChannelData(0.4, 2.0, 2),
-    band2: generateChannelData(0.6, 2.8, 2),
-    band3: generateChannelData(0.8, 3.5, 2),
-    band4: generateChannelData(1.0, 4.2, 2),
-    band5: generateChannelData(1.2, 5.0, 2),
-    zeroCrossings: channels.map((_, index) => Math.floor(10 + index * 4 + Math.random() * 10)),
-    variance: generateChannelData(0.1, 0.8, 3),
-    energy: channels.map((_, index) => Math.floor(50 + index * 30 + Math.random() * 50)),
-    diff: generateChannelData(0.2, 1.5, 2),
+    // 功率特征数据 - 使用更真实的EEG功率范围
+    thetaPower: generateChannelData(1.2, 4.8, 2, 100),
+    alphaPower: generateChannelData(2.5, 8.5, 2, 200),
+    betaPower: generateChannelData(0.8, 3.5, 2, 300),
+    gammaPower: generateChannelData(0.3, 1.8, 2, 400),
+    // 频带特征数据
+    band1: generateChannelData(1.0, 4.5, 2, 500),
+    band2: generateChannelData(1.8, 6.2, 2, 600),
+    band3: generateChannelData(2.2, 7.8, 2, 700),
+    band4: generateChannelData(1.5, 5.5, 2, 800),
+    band5: generateChannelData(0.8, 3.2, 2, 900),
+    // 时域特征数据
+    zeroCrossings: generateIntChannelData(25, 85, 8, 1000),
+    variance: generateChannelData(0.5, 2.5, 3, 1100),
+    energy: generateIntChannelData(100, 500, 50, 1200),
+    diff: generateChannelData(0.8, 3.5, 2, 1300),
     // 时频图（STFT）模拟数据
     timeFreq: {
-      x: Array.from({ length: 100 }, (_, i) => i * 0.01), // 时间 (秒)
-      y: Array.from({ length: 50 }, (_, i) => i * 0.5),   // 频率 (Hz)
-      z: Array.from({ length: 50 }, () =>
-        Array.from({ length: 100 }, () => Math.random() * 20 + 10)
-      ),
+      x: Array.from({ length: 100 }, (_, i) => i * 0.05), // 时间: 0-5秒
+      y: Array.from({ length: 50 }, (_, i) => i),   // 频率: 0-50 Hz
+      z: (() => {
+        const rng = createRng(1500);
+        return Array.from({ length: 50 }, (_, freqIdx) => {
+          const baseEnergy = 30 - (freqIdx / 50) * 20; // 30降到10
+          return Array.from({ length: 100 }, () => {
+            const variation = rng.range(-5, 8);
+            return Math.max(0, baseEnergy + variation);
+          });
+        });
+      })(),
     },
   };
 };
@@ -84,8 +136,8 @@ export class ChartGenerator {
   }
   
   // 生成综合脑电功率图
-  static async generateEEGChart(_result: ResultItem): Promise<string> {
-    const eegData = generateRandomEEGData();
+  static async generateEEGChart(result: ResultItem): Promise<string> {
+    const eegData = generateRandomEEGData(result.id);
     const chartData = eegData.channels.map((channel, index) => ({
       name: channel,
       Theta: eegData.thetaPower[index],
@@ -115,8 +167,8 @@ export class ChartGenerator {
   }
   
   // 生成时域特征图（新增）
-  static async generateTimeDomainChart(_result: ResultItem): Promise<string> {
-    const eegData = generateRandomEEGData();
+  static async generateTimeDomainChart(result: ResultItem): Promise<string> {
+    const eegData = generateRandomEEGData(result.id);
     const chartData = eegData.channels.map((channel, index) => ({
       name: channel,
       过零率: eegData.zeroCrossings[index],
@@ -145,8 +197,8 @@ export class ChartGenerator {
   }
   
   // 生成频带特征图（新增）
-  static async generateFrequencyBandChart(_result: ResultItem): Promise<string> {
-    const eegData = generateRandomEEGData();
+  static async generateFrequencyBandChart(result: ResultItem): Promise<string> {
+    const eegData = generateRandomEEGData(result.id);
     const chartData = eegData.channels.map((channel, index) => ({
       name: channel,
       Band1: eegData.band1[index],
@@ -177,8 +229,8 @@ export class ChartGenerator {
   }
   
   // 生成微分熵特征图（新增）
-  static async generateDiffEntropyChart(_result: ResultItem): Promise<string> {
-    const eegData = generateRandomEEGData();
+  static async generateDiffEntropyChart(result: ResultItem): Promise<string> {
+    const eegData = generateRandomEEGData(result.id);
     const chartData = eegData.channels.map((channel, index) => ({
       name: channel,
       微分熵: eegData.diff[index],
@@ -201,13 +253,15 @@ export class ChartGenerator {
   }
   
   // 生成血清图
-  static async generateSerumChart(_result: ResultItem): Promise<string> {
+  static async generateSerumChart(result: ResultItem): Promise<string> {
+    // 使用result.id生成确定性的血清数据
+    const rng = new SeededRandom(result.id * 1000 + 1400);
     const serumData = [
-      { name: 'CRP', value: 2.1 + Math.random() * 2, unit: 'mg/L' },
-      { name: 'IL-6', value: 3.4 + Math.random() * 2, unit: 'pg/mL' },
-      { name: 'TNF-α', value: 1.8 + Math.random() * 2, unit: 'pg/mL' },
-      { name: 'LDH', value: 4.2 + Math.random() * 2, unit: 'U/L' },
-      { name: 'CK', value: 2.9 + Math.random() * 2, unit: 'U/L' }
+      { name: 'CRP', value: parseFloat(rng.range(0.5, 15.0).toFixed(1)), unit: 'mg/L' },
+      { name: 'IL-6', value: parseFloat(rng.range(2.0, 50.0).toFixed(1)), unit: 'pg/mL' },
+      { name: 'TNF-α', value: parseFloat(rng.range(5.0, 80.0).toFixed(1)), unit: 'pg/mL' },
+      { name: 'LDH', value: parseFloat(rng.range(120.0, 350.0).toFixed(0)), unit: 'U/L' },
+      { name: 'CK', value: parseFloat(rng.range(30.0, 250.0).toFixed(0)), unit: 'U/L' }
     ];
     
     const SerumChartComponent = () => (
@@ -227,8 +281,8 @@ export class ChartGenerator {
   }
   
   // 生成时频域特征图（新增）
-  static async generateTimeFreqChart(_result: ResultItem): Promise<string> {
-    const eegData = generateRandomEEGData();
+  static async generateTimeFreqChart(result: ResultItem): Promise<string> {
+    const eegData = generateRandomEEGData(result.id);
     
     // 创建一个Canvas来绘制时频域热图
     const TimeFreqComponent = () => {
@@ -364,10 +418,12 @@ export class ChartGenerator {
   }
 
   // 生成量表图
-  static async generateScaleChart(_result: ResultItem): Promise<string> {
+  static async generateScaleChart(result: ResultItem): Promise<string> {
+    // 使用result.id生成确定性的量表数据
+    const rng = new SeededRandom(result.id * 1000 + 2000);
     const scaleData = Array.from({ length: 40 }, (_, i) => ({
       name: `题${i + 1}`,
-      score: Math.floor(Math.random() * 5) + 1
+      score: rng.rangeInt(1, 5)
     }));
     
     const ScaleChartComponent = () => (
@@ -390,36 +446,92 @@ export class ChartGenerator {
     return await this.renderChartToBase64(ScaleChartComponent, 750, 400);
   }
   
-  // 将React组件渲染为base64图片
+  // 将React组件渲染为base64图片 - 使用iframe隔离渲染
   private static async renderChartToBase64(
     Component: React.ComponentType, 
     width: number = 600, 
     height: number = 400
   ): Promise<string> {
-    return new Promise((resolve) => {
-      const tempDiv = document.createElement('div');
-      tempDiv.style.width = `${width}px`;
-      tempDiv.style.height = `${height}px`;
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.backgroundColor = '#ffffff';
-      tempDiv.style.padding = '10px';
-      document.body.appendChild(tempDiv);
+    return new Promise((resolve, reject) => {
+      // 创建隔离的iframe
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'absolute';
+      iframe.style.left = '-9999px';
+      iframe.style.top = '-9999px';
+      iframe.style.width = `${width}px`;
+      iframe.style.height = `${height}px`;
+      iframe.style.border = 'none';
+      document.body.appendChild(iframe);
       
-      const root = createRoot(tempDiv);
-      root.render(React.createElement(Component));
+      const cleanup = () => {
+        if (document.body.contains(iframe)) {
+          document.body.removeChild(iframe);
+        }
+      };
       
-      setTimeout(async () => {
-        const canvas = await html2canvas(tempDiv, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: '#ffffff'
-        });
-        
-        const base64 = canvas.toDataURL('image/png');
-        document.body.removeChild(tempDiv);
-        resolve(base64);
-      }, 1000);
+      iframe.onload = () => {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+          if (!iframeDoc) {
+            cleanup();
+            reject(new Error('无法访问iframe文档'));
+            return;
+          }
+          
+          // 在iframe中创建容器
+          const tempDiv = iframeDoc.createElement('div');
+          tempDiv.style.width = `${width}px`;
+          tempDiv.style.height = `${height}px`;
+          tempDiv.style.backgroundColor = '#ffffff';
+          tempDiv.style.padding = '10px';
+          tempDiv.style.boxSizing = 'border-box';
+          iframeDoc.body.appendChild(tempDiv);
+          
+          // 在iframe中渲染React组件
+          const root = createRoot(tempDiv);
+          root.render(React.createElement(Component));
+          
+          // 等待渲染完成后转换为图片
+          setTimeout(async () => {
+            try {
+              const canvas = await html2canvas(tempDiv, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+              });
+              
+              const base64 = canvas.toDataURL('image/png');
+              cleanup();
+              resolve(base64);
+            } catch (error) {
+              cleanup();
+              reject(error);
+            }
+          }, 1000);
+        } catch (error) {
+          cleanup();
+          reject(error);
+        }
+      };
+      
+      // 写入基本HTML结构
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (iframeDoc) {
+        iframeDoc.open();
+        iframeDoc.write(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8">
+              <style>
+                body { margin: 0; padding: 0; }
+              </style>
+            </head>
+            <body></body>
+          </html>
+        `);
+        iframeDoc.close();
+      }
     });
   }
 }

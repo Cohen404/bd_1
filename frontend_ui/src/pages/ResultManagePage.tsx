@@ -4,13 +4,10 @@ import {
   Download, 
   Filter, 
   RefreshCw, 
-  Eye,
   FileText,
   CheckSquare,
   Square,
-  Trash2,
-  ExternalLink,
-  X
+  Trash2
 } from 'lucide-react';
 // ===== 纯前端演示模式 - 特殊标记 =====
 // 注释掉后端API相关导入，使用localStorage存储
@@ -20,6 +17,7 @@ import { formatDateTime } from '@/utils/helpers';
 import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, ResultItem } from '@/utils/localStorage';
 import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
 import { ChartGenerator } from '@/utils/chartGenerator';
+import { ExcelExporter } from '@/utils/excelExporter';
 import toast from 'react-hot-toast';
 // ============================================
 
@@ -44,8 +42,6 @@ const ResultManagePage: React.FC = () => {
   const [exporting, setExporting] = useState(false);
   const [generatingReport, setGeneratingReport] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [pdfViewerVisible, setPdfViewerVisible] = useState(false);
-  const [currentPdfUrl, setCurrentPdfUrl] = useState<string>('');
   const [filters, setFilters] = useState<FilterState>({
     userType: 'all',
     userId: 'all',
@@ -238,8 +234,18 @@ const ResultManagePage: React.FC = () => {
         
         toast.success(`成功生成 ${selectedResults.size} 份报告！`);
       } else {
-        // 对于Excel，显示提示信息
-        toast('Excel导出功能在演示模式下暂不可用');
+        // Excel导出
+        toast('正在导出Excel...');
+        
+        // 获取选中的结果数据
+        const selectedResultsData = filteredResults.filter(result => 
+          selectedResults.has(result.id)
+        );
+        
+        // 调用Excel导出工具
+        ExcelExporter.exportResults(selectedResultsData, '心理健康评估结果');
+        
+        toast.success(`成功导出 ${selectedResults.size} 条记录到Excel！`);
       }
     } catch (error) {
       console.error('导出失败:', error);
@@ -323,31 +329,7 @@ const ResultManagePage: React.FC = () => {
       setGeneratingReport(false);
     }
   };
-
-  // 查看PDF报告（使用演示PDF）
-  const handleViewReport = async () => {
-    try {
-      // 使用演示PDF URL
-      const pdfUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-      setCurrentPdfUrl(pdfUrl);
-      setPdfViewerVisible(true);
-    } catch (error) {
-      console.error('查看报告失败:', error);
-      toast.error('查看报告失败');
-    }
-  };
   // ============================================
-
-  // 重新生成报告
-  const handleRegenerateReport = async (resultId: number) => {
-    try {
-      // 调用生成报告功能
-      await handleGenerateReport(resultId);
-    } catch (error) {
-      console.error('重新生成报告失败:', error);
-      toast.error('重新生成报告失败');
-    }
-  };
 
   // 删除结果记录
   const handleDeleteResult = async (resultId: number) => {
@@ -649,20 +631,6 @@ const ResultManagePage: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
-                          <button
-                          onClick={() => handleViewReport()}
-                            className="text-blue-600 hover:text-blue-700"
-                          title="查看报告"
-                          >
-                            <Eye className="h-4 w-4" />
-                          </button>
-                          <button
-                          onClick={() => handleRegenerateReport(result.id)}
-                            className="text-green-600 hover:text-green-700"
-                          title="重新生成报告"
-                        >
-                          <RefreshCw className="h-4 w-4" />
-                        </button>
                         <button
                           onClick={() => handleGenerateReport(result.id)}
                           disabled={generatingReport}
@@ -687,39 +655,6 @@ const ResultManagePage: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* PDF查看器模态框 */}
-      {pdfViewerVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-full max-w-6xl mx-4 h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-900">评估报告查看器</h2>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => window.open(currentPdfUrl, '_blank')}
-                  className="btn btn-secondary flex items-center space-x-2"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  <span>新窗口打开</span>
-                </button>
-                <button
-                  onClick={() => setPdfViewerVisible(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 p-4">
-              <iframe
-                src={currentPdfUrl}
-                className="w-full h-full border border-gray-300 rounded-lg"
-                title="PDF Report Viewer"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

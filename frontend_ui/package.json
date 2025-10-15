@@ -27,7 +27,8 @@
     "react-hot-toast": "^2.4.1",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.8.1",
-    "recharts": "^2.15.4"
+    "recharts": "^2.15.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

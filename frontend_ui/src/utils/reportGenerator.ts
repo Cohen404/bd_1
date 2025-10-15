@@ -474,18 +474,37 @@ export class ReportGenerator {
     `;
   }
   
-  // 生成PDF - 手动分页，每页单独渲染，避免图表被切割
+  // 生成PDF - 使用iframe隔离渲染，避免影响主页面
   static async generatePDF(htmlContent: string, filename: string): Promise<void> {
-    // 创建临时容器
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = htmlContent;
-    tempDiv.style.position = 'absolute';
-    tempDiv.style.left = '-9999px';
-    tempDiv.style.top = '-9999px';
-    tempDiv.style.width = '794px'; // A4宽度（210mm = 794px at 96dpi）
-    document.body.appendChild(tempDiv);
+    // 创建隔离的iframe
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px';
+    iframe.style.top = '-9999px';
+    iframe.style.width = '794px'; // A4宽度（210mm = 794px at 96dpi）
+    iframe.style.height = '1123px'; // A4高度（297mm = 1123px at 96dpi）
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
     
     try {
+      // 等待iframe加载完成
+      await new Promise<void>((resolve) => {
+        iframe.onload = () => resolve();
+        // 写入HTML内容到iframe
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (!iframeDoc) {
+          throw new Error('无法访问iframe文档');
+        }
+        iframeDoc.open();
+        iframeDoc.write(htmlContent);
+        iframeDoc.close();
+      });
+      
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!iframeDoc) {
+        throw new Error('无法访问iframe文档');
+      }
+      
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
@@ -493,7 +512,7 @@ export class ReportGenerator {
       });
       
       // 获取所有section（每个section是一页）
-      const sections = tempDiv.querySelectorAll('.section');
+      const sections = iframeDoc.querySelectorAll('.section');
       
       if (sections.length === 0) {
         throw new Error('未找到任何页面内容');
@@ -503,49 +522,28 @@ export class ReportGenerator {
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i] as HTMLElement;
         
-        // 为当前section创建独立容器
-        const pageDiv = document.createElement('div');
-        pageDiv.style.width = '794px';
-        pageDiv.style.minHeight = '1123px'; // A4高度（297mm = 1123px at 96dpi）
-        pageDiv.style.padding = '40px';
-        pageDiv.style.backgroundColor = 'white';
-        pageDiv.style.boxSizing = 'border-box';
-        pageDiv.innerHTML = section.outerHTML;
+        // 转换为Canvas（直接在iframe中渲染）
+        const canvas = await html2canvas(section, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          width: 794,
+          height: 1123,
+          windowWidth: 794,
+          windowHeight: 1123,
+          backgroundColor: '#ffffff'
+        });
         
-        // 临时添加到DOM
-        const tempPageDiv = document.createElement('div');
-        tempPageDiv.style.position = 'absolute';
-        tempPageDiv.style.left = '-9999px';
-        tempPageDiv.style.top = '-9999px';
-        tempPageDiv.appendChild(pageDiv);
-        document.body.appendChild(tempPageDiv);
-        
-        try {
-          // 转换为Canvas
-          const canvas = await html2canvas(pageDiv, {
-            scale: 2,
-            useCORS: true,
-            allowTaint: true,
-            width: 794,
-            height: 1123,
-            windowWidth: 794,
-            windowHeight: 1123
-          });
-          
-          // 添加到PDF
-          if (i > 0) {
-            pdf.addPage();
-          }
-          
-          const imgData = canvas.toDataURL('image/png');
-          const imgWidth = 210; // A4宽度（mm）
-          const imgHeight = 297; // A4高度（mm）
-          
-          pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-          
-        } finally {
-          document.body.removeChild(tempPageDiv);
+        // 添加到PDF
+        if (i > 0) {
+          pdf.addPage();
         }
+        
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = 210; // A4宽度（mm）
+        const imgHeight = 297; // A4高度（mm）
+        
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
       }
       
       // 下载PDF
@@ -555,7 +553,8 @@ export class ReportGenerator {
       console.error('PDF生成失败:', error);
       throw error;
     } finally {
-      document.body.removeChild(tempDiv);
+      // 清理iframe
+      document.body.removeChild(iframe);
     }
   }
   
