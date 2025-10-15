@@ -2,21 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { 
   FileBarChart, 
   Download, 
-  Search, 
   Filter, 
   RefreshCw, 
-  Calendar,
-  User,
   Eye,
-  ChevronLeft,
-  ChevronRight,
   FileText,
   CheckSquare,
   Square,
   Trash2,
   ExternalLink,
-  Printer,
-  FileImage,
   X
 } from 'lucide-react';
 // ===== 纯前端演示模式 - 特殊标记 =====
@@ -24,16 +17,12 @@ import {
 // import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, ResultItem, forceInitializeDemoData } from '@/utils/localStorage';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, ResultItem } from '@/utils/localStorage';
+import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
+import { ChartGenerator } from '@/utils/chartGenerator';
 import toast from 'react-hot-toast';
 // ============================================
 
-interface HealthStatus {
-  stress: number;
-  depression: number;
-  anxiety: number;
-  social_isolation: number;
-}
 
 interface FilterState {
   userType: string;
@@ -48,22 +37,13 @@ interface FilterState {
 
 
 const ResultManagePage: React.FC = () => {
-  const [results, setResults] = useState<Result[]>([]);
   const [filteredResults, setFilteredResults] = useState<Result[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [selectedResults, setSelectedResults] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState<HealthStatus>({
-    stress: 0,
-    depression: 0,
-    anxiety: 0,
-    social_isolation: 0
-  });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showVisualization, setShowVisualization] = useState(false);
+  const [generatingReport, setGeneratingReport] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [showStatistics, setShowStatistics] = useState(false);
   const [pdfViewerVisible, setPdfViewerVisible] = useState(false);
   const [currentPdfUrl, setCurrentPdfUrl] = useState<string>('');
   const [filters, setFilters] = useState<FilterState>({
@@ -136,19 +116,7 @@ const ResultManagePage: React.FC = () => {
         filtered = filtered.filter(result => result.depression_score <= parseFloat(filters.maxDepressionScore));
       }
       
-      setResults(convertedResults);
       setFilteredResults(filtered);
-      
-      // 获取最新结果作为当前状态
-      if (filtered.length > 0) {
-        const latest = filtered[0];
-        setCurrentStatus({
-          stress: latest.stress_score || 0,
-          depression: latest.depression_score || 0,
-          anxiety: latest.anxiety_score || 0,
-          social_isolation: latest.social_isolation_score || 0
-        });
-      }
     } catch (error) {
       console.error('获取结果列表失败:', error);
       toast.error('获取结果列表失败');
@@ -217,8 +185,62 @@ const ResultManagePage: React.FC = () => {
     try {
       setExporting(true);
       
-      // 对于Excel和PDF，显示提示信息
-      toast('Excel和PDF导出功能在演示模式下暂不可用');
+      if (format === 'pdf') {
+        // 批量生成报告
+        toast('正在批量生成报告...');
+        
+        const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+        const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
+        
+        for (const resultId of selectedResults) {
+          const resultItem = resultItems.find(item => item.id === resultId);
+          if (!resultItem) continue;
+          
+          const userItem = userItems.find(user => user.id === resultItem.user_id);
+          if (!userItem) continue;
+          
+          // 生成图表（包括新增的EEG相关图表和时频域图表）
+          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
+            ChartGenerator.generateEEGChart(resultItem),
+            ChartGenerator.generateTimeDomainChart(resultItem),
+            ChartGenerator.generateFrequencyBandChart(resultItem),
+            ChartGenerator.generateDiffEntropyChart(resultItem),
+            ChartGenerator.generateTimeFreqChart(resultItem),
+            ChartGenerator.generateSerumChart(resultItem)
+          ]);
+          
+          // 准备报告数据
+          const reportData: ReportData = {
+            result: resultItem,
+            user: {
+              username: userItem.username,
+              user_type: userItem.role
+            },
+            charts: {
+              eeg: eegChart,
+              timeDomain: timeDomainChart,
+              frequencyBand: frequencyBandChart,
+              diffEntropy: diffEntropyChart,
+              timeFreq: timeFreqChart,
+              serum: serumChart
+            }
+          };
+          
+          // 生成HTML内容
+          const htmlContent = ReportGenerator.createReportHTML(reportData);
+          
+          // 生成PDF文件名
+          const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+          
+          // 生成并下载PDF
+          await ReportGenerator.generatePDF(htmlContent, filename);
+        }
+        
+        toast.success(`成功生成 ${selectedResults.size} 份报告！`);
+      } else {
+        // 对于Excel，显示提示信息
+        toast('Excel导出功能在演示模式下暂不可用');
+      }
     } catch (error) {
       console.error('导出失败:', error);
       toast.error('导出失败');
@@ -229,8 +251,81 @@ const ResultManagePage: React.FC = () => {
   // ============================================
 
   // ===== 纯前端演示模式 - 特殊标记 =====
+  // 生成并下载报告
+  const handleGenerateReport = async (resultId: number) => {
+    try {
+      setGeneratingReport(true);
+      
+      // 获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      const resultItem = resultItems.find(item => item.id === resultId);
+      
+      if (!resultItem) {
+        toast.error('未找到评估结果');
+        return;
+      }
+      
+      // 获取用户数据
+      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
+      const userItem = userItems.find(user => user.id === resultItem.user_id);
+      
+      if (!userItem) {
+        toast.error('未找到用户信息');
+        return;
+      }
+      
+      toast('正在生成图表...');
+      
+      // 生成图表（包括新增的EEG相关图表和时频域图表）
+      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
+        ChartGenerator.generateEEGChart(resultItem),
+        ChartGenerator.generateTimeDomainChart(resultItem),
+        ChartGenerator.generateFrequencyBandChart(resultItem),
+        ChartGenerator.generateDiffEntropyChart(resultItem),
+        ChartGenerator.generateTimeFreqChart(resultItem),
+        ChartGenerator.generateSerumChart(resultItem)
+      ]);
+      
+      toast('正在生成报告...');
+      
+      // 准备报告数据
+      const reportData: ReportData = {
+        result: resultItem,
+        user: {
+          username: userItem.username,
+          user_type: userItem.role
+        },
+        charts: {
+          eeg: eegChart,
+          timeDomain: timeDomainChart,
+          frequencyBand: frequencyBandChart,
+          diffEntropy: diffEntropyChart,
+          timeFreq: timeFreqChart,
+          serum: serumChart
+        }
+      };
+      
+      // 生成HTML内容
+      const htmlContent = ReportGenerator.createReportHTML(reportData);
+      
+      // 生成PDF文件名
+      const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+      
+      // 生成并下载PDF
+      await ReportGenerator.generatePDF(htmlContent, filename);
+      
+      toast.success('报告生成成功！');
+      
+    } catch (error) {
+      console.error('生成报告失败:', error);
+      toast.error('生成报告失败');
+    } finally {
+      setGeneratingReport(false);
+    }
+  };
+
   // 查看PDF报告（使用演示PDF）
-  const handleViewReport = async (resultId: number) => {
+  const handleViewReport = async () => {
     try {
       // 使用演示PDF URL
       const pdfUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
@@ -246,8 +341,8 @@ const ResultManagePage: React.FC = () => {
   // 重新生成报告
   const handleRegenerateReport = async (resultId: number) => {
     try {
-      // const response = await apiClient.post(`/results/regenerate-report/${resultId}`); // 注释掉API调用
-      toast.success('报告重新生成成功');
+      // 调用生成报告功能
+      await handleGenerateReport(resultId);
     } catch (error) {
       console.error('重新生成报告失败:', error);
       toast.error('重新生成报告失败');
@@ -358,7 +453,7 @@ const ResultManagePage: React.FC = () => {
             className="btn btn-primary flex items-center space-x-2 disabled:opacity-50"
           >
             <FileText className="h-4 w-4" />
-            <span>导出PDF包</span>
+            <span>生成报告包</span>
               </button>
             </div>
           </div>
@@ -555,7 +650,7 @@ const ResultManagePage: React.FC = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
                           <button
-                          onClick={() => handleViewReport(result.id)}
+                          onClick={() => handleViewReport()}
                             className="text-blue-600 hover:text-blue-700"
                           title="查看报告"
                           >
@@ -569,12 +664,13 @@ const ResultManagePage: React.FC = () => {
                           <RefreshCw className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => handleExport('pdf')}
-                          className="text-purple-600 hover:text-purple-700"
-                            title="下载报告"
-                          >
-                          <Download className="h-4 w-4" />
-                          </button>
+                          onClick={() => handleGenerateReport(result.id)}
+                          disabled={generatingReport}
+                          className="text-purple-600 hover:text-purple-700 disabled:opacity-50"
+                          title="生成报告"
+                        >
+                          <FileText className="h-4 w-4" />
+                        </button>
                           <button
                             onClick={() => handleDeleteResult(result.id)}
                             className="text-red-600 hover:text-red-700"
