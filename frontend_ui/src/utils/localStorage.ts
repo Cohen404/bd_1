@@ -217,7 +217,7 @@ export const initializeDemoData = () => {
         file_size: 1024000,
         upload_time: '2024-01-15T10:30:00Z',
         uploader: 'admin',
-        status: '已处理'
+        status: '待处理'
       },
       {
         id: 2,
@@ -227,7 +227,7 @@ export const initializeDemoData = () => {
         file_size: 512000,
         upload_time: '2024-01-20T14:20:00Z',
         uploader: 'user',
-        status: '处理中'
+        status: '待处理'
       },
       {
         id: 3,
@@ -237,7 +237,7 @@ export const initializeDemoData = () => {
         file_size: 768000,
         upload_time: '2024-02-01T09:15:00Z',
         uploader: 'admin',
-        status: '已处理'
+        status: '待处理'
       }
     ];
     LocalStorageManager.set(STORAGE_KEYS.DATA, demoData);

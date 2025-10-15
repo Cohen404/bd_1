@@ -197,12 +197,13 @@ const DataManagePage: React.FC = () => {
       const maxTime = 60; // 60秒
       const maxProgress = 99; // 最大99%
       
-      // 使用指数增长模拟，前期快，后期慢
-      const progress = Math.min(maxProgress, maxProgress * (1 - Math.exp(-elapsed / (maxTime / 3))));
+      // 使用指数增长模拟，前期快，后期慢，加入随机波动
+      const baseProgress = maxProgress * (1 - Math.exp(-elapsed / (maxTime / 3)));
+      // 添加±5%的随机波动
+      const randomFactor = 1 + (Math.random() * 0.1 - 0.05);
+      const progress = Math.min(maxProgress, baseProgress * randomFactor);
       
       const simulated = Math.round(progress);
-      
-      // 更新模拟进度状态（已移除setSimulatedProgress，这里不需要更新状态）
       
       return simulated;
     }
@@ -400,32 +401,42 @@ const DataManagePage: React.FC = () => {
       setPreprocessing(true);
       
       const selectedIds = Array.from(selectedItems);
-      setProgressDataIds(selectedIds);
-      setProgressModalVisible(true);
 
-      // 模拟批量预处理
-      toast.success(`批量预处理已启动，请查看进度窗口监控处理状态`);
+      // 直接更新数据状态为处理中
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      const updatedData = existingData.map(item => {
+        if (selectedIds.includes(item.id)) {
+          return { ...item, status: '处理中' };
+        }
+        return item;
+      });
+      LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
       
-      // 模拟处理过程
-      setTimeout(() => {
-        // 更新数据状态为处理中
-        const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-        const updatedData = existingData.map(item => {
-          if (selectedIds.includes(item.id)) {
-            return { ...item, status: '处理中' };
-          }
-          return item;
-        });
-        LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
-        
-        // 刷新数据列表
-        fetchData();
-      }, 1000);
+      // 刷新数据列表
+      fetchData();
+      
+      // 模拟批量预处理
+      toast.success(`已开始预处理 ${selectedIds.length} 条数据`);
+      
+      // 模拟随机时间后完成处理（每个数据独立完成）
+      selectedIds.forEach(dataId => {
+        const randomDelay = Math.random() * 20000 + 10000; // 10-30秒随机完成
+        setTimeout(() => {
+          const currentData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+          const completedData = currentData.map(item => {
+            if (item.id === dataId) {
+              return { ...item, status: '已处理' };
+            }
+            return item;
+          });
+          LocalStorageManager.set(STORAGE_KEYS.DATA, completedData);
+          fetchData();
+        }, randomDelay);
+      });
 
     } catch (error) {
       console.error('批量预处理失败:', error);
       toast.error('批量预处理失败');
-      setProgressModalVisible(false);
     } finally {
       setPreprocessing(false);
     }
@@ -472,38 +483,40 @@ const DataManagePage: React.FC = () => {
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 单个数据预处理（模拟处理）
   const handlePreprocessSingle = async (dataId: number, fileName: string) => {
-    if (!window.confirm(`确定要预处理"${fileName}"吗？这将进行特征提取和图片生成。`)) {
-      return;
-    }
-
     try {
-      // 显示单个数据的进度窗口
-      setProgressDataIds([dataId]);
-      setProgressModalVisible(true);
-
-      // 模拟预处理
-      toast.success('数据预处理已启动，请查看进度窗口监控处理状态');
+      // 直接更新数据状态为处理中
+      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      const updatedData = existingData.map(item => {
+        if (item.id === dataId) {
+          return { ...item, status: '处理中' };
+        }
+        return item;
+      });
+      LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
       
-      // 模拟处理过程
+      // 刷新数据列表
+      fetchData();
+      
+      // 模拟预处理
+      toast.success(`已开始预处理"${fileName}"`);
+      
+      // 模拟随机时间后完成处理
+      const randomDelay = Math.random() * 20000 + 10000; // 10-30秒随机完成
       setTimeout(() => {
-        // 更新数据状态为处理中
-        const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-        const updatedData = existingData.map(item => {
+        const currentData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+        const completedData = currentData.map(item => {
           if (item.id === dataId) {
-            return { ...item, status: '处理中' };
+            return { ...item, status: '已处理' };
           }
           return item;
         });
-        LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
-        
-        // 刷新数据列表
+        LocalStorageManager.set(STORAGE_KEYS.DATA, completedData);
         fetchData();
-      }, 1000);
+      }, randomDelay);
 
     } catch (error) {
       console.error('数据预处理失败:', error);
       toast.error('数据预处理失败');
-      setProgressModalVisible(false);
     }
   };
   // ============================================
@@ -631,18 +644,11 @@ const DataManagePage: React.FC = () => {
         {/* 操作按钮组 */}
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => setUploadModalVisible(true)}
+            onClick={() => setBatchUploadModalVisible(true)}
             className="btn btn-primary flex items-center space-x-2"
           >
             <Upload className="h-4 w-4" />
-            <span>单个上传</span>
-          </button>
-          <button
-            onClick={() => setBatchUploadModalVisible(true)}
-            className="btn btn-secondary flex items-center space-x-2"
-          >
-            <Upload className="h-4 w-4" />
-            <span>批量上传</span>
+            <span>上传</span>
           </button>
           <button
             onClick={selectTop200}
@@ -806,13 +812,6 @@ const DataManagePage: React.FC = () => {
                           title="预处理"
                         >
                           <Settings className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleViewImages(item.id)}
-                          className="text-blue-600 hover:text-blue-700"
-                          title="查看图像"
-                        >
-                          <Image className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleSelectDataForVisualization(item.id)}
@@ -991,7 +990,7 @@ const DataManagePage: React.FC = () => {
       {batchUploadModalVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">批量上传数据文件</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">单个/批量上传数据文件</h2>
             
             <div className="space-y-4">
               <div>
@@ -1030,7 +1029,7 @@ const DataManagePage: React.FC = () => {
                 className="btn btn-primary"
                 disabled={batchUploading}
               >
-                {batchUploading ? '上传中...' : '批量上传'}
+                {batchUploading ? '上传中...' : '上传'}
               </button>
             </div>
           </div>
