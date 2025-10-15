@@ -2,17 +2,50 @@ import React, { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Plot from 'react-plotly.js';
 
-// 生成随机EEG数据的辅助函数
-const generateRandomEEGData = () => {
+// 伪随机数生成器 - 基于种子的线性同余生成器
+class SeededRandom {
+  private seed: number;
+
+  constructor(seed: number) {
+    this.seed = seed % 2147483647;
+    if (this.seed <= 0) this.seed += 2147483646;
+  }
+
+  // 生成 0-1 之间的伪随机数
+  next(): number {
+    this.seed = (this.seed * 16807) % 2147483647;
+    return (this.seed - 1) / 2147483646;
+  }
+
+  // 生成指定范围内的随机数
+  range(min: number, max: number): number {
+    return min + this.next() * (max - min);
+  }
+
+  // 生成指定范围内的随机整数
+  rangeInt(min: number, max: number): number {
+    return Math.floor(this.range(min, max + 1));
+  }
+}
+
+// 生成基于dataId和visualizationType的确定性EEG数据
+const generateRandomEEGData = (dataId: number, visualizationType: string) => {
   const channels = Array.from({ length: 8 }, (_, i) => `通道${i + 1}`);
   
+  // 根据dataId和visualizationType创建种子
+  const typeHash = visualizationType.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const baseSeed = dataId * 1000 + typeHash;
+  
+  // 为不同的数据类型创建不同的随机数生成器
+  const createRng = (offset: number) => new SeededRandom(baseSeed + offset);
+  
   // 生成更合理的EEG特征数据，确保每个通道都有明显不同的值
-  const generateChannelData = (min: number, max: number, decimals: number = 2) => {
+  const generateChannelData = (min: number, max: number, decimals: number, seedOffset: number) => {
+    const rng = createRng(seedOffset);
     return channels.map((_, index) => {
       // 为每个通道生成不同的基础值，确保数据有差异
-      // 使用更简单的算法，确保每个通道都有明显不同的值
       const baseValue = min + (max - min) * (index / (channels.length - 1)) * 0.7;
-      const randomVariation = (Math.random() - 0.5) * (max - min) * 0.15;
+      const randomVariation = (rng.next() - 0.5) * (max - min) * 0.15;
       const finalValue = Math.max(min, Math.min(max, baseValue + randomVariation));
       const result = parseFloat(finalValue.toFixed(decimals));
       
@@ -20,46 +53,81 @@ const generateRandomEEGData = () => {
     });
   };
   
+  // 生成整数型通道数据
+  const generateIntChannelData = (baseMin: number, baseMax: number, step: number, seedOffset: number) => {
+    const rng = createRng(seedOffset);
+    return channels.map((_, index) => {
+      const base = baseMin + index * step;
+      const variation = rng.rangeInt(-5, 5);
+      return Math.max(baseMin, base + variation);
+    });
+  };
+  
   const data = {
     channels,
-    // 功率特征数据 (μV²) - 更合理的范围，确保每个通道都有明显差异
-    thetaPower: generateChannelData(0.5, 2.5, 2),
-    alphaPower: generateChannelData(0.8, 3.2, 2),
-    betaPower: generateChannelData(0.3, 1.8, 2),
-    gammaPower: generateChannelData(0.1, 1.2, 2),
+    // 功率特征数据 (μV²) - 更真实的EEG功率范围
+    // Theta波段 (4-8Hz): 通常在放松或浅睡眠时较强
+    thetaPower: generateChannelData(1.2, 4.8, 2, 100),
+    // Alpha波段 (8-13Hz): 清醒放松状态，闭眼时增强
+    alphaPower: generateChannelData(2.5, 8.5, 2, 200),
+    // Beta波段 (13-30Hz): 清醒活跃思考状态
+    betaPower: generateChannelData(0.8, 3.5, 2, 300),
+    // Gamma波段 (30-100Hz): 高级认知处理
+    gammaPower: generateChannelData(0.3, 1.8, 2, 400),
     
-    // 频带特征数据
-    band1: generateChannelData(0.4, 2.0, 2),
-    band2: generateChannelData(0.6, 2.8, 2),
-    band3: generateChannelData(0.8, 3.5, 2),
-    band4: generateChannelData(1.0, 4.2, 2),
-    band5: generateChannelData(1.2, 5.0, 2),
+    // 频带特征数据 - 更真实的频带能量分布
+    band1: generateChannelData(1.0, 4.5, 2, 500),  // 低频段
+    band2: generateChannelData(1.8, 6.2, 2, 600),  // 中低频段
+    band3: generateChannelData(2.2, 7.8, 2, 700),  // 中频段
+    band4: generateChannelData(1.5, 5.5, 2, 800),  // 中高频段
+    band5: generateChannelData(0.8, 3.2, 2, 900),  // 高频段
     
-    // 时域特征数据 - 确保每个通道都有明显不同的值
-    zeroCrossings: channels.map((_, index) => Math.floor(10 + index * 4 + Math.random() * 10)), // 10-40次，递增趋势
-    variance: generateChannelData(0.1, 0.8, 3), // 方差
-    energy: channels.map((_, index) => Math.floor(50 + index * 30 + Math.random() * 50)), // 50-300，递增趋势
-    diff: generateChannelData(0.2, 1.5, 2), // 微分熵特征
+    // 时域特征数据 - 更真实的时域统计特征
+    zeroCrossings: generateIntChannelData(25, 85, 8, 1000), // 过零率: 25-85次
+    variance: generateChannelData(0.5, 2.5, 3, 1100), // 方差: 0.5-2.5 μV²
+    energy: generateIntChannelData(100, 500, 50, 1200), // 能量: 100-500 μV²
+    diff: generateChannelData(0.8, 3.5, 2, 1300), // 微分熵: 0.8-3.5
     
-    // 血清指标数据
+    // 血清指标数据 - 更真实的临床指标范围
     serum: ['CRP', 'IL-6', 'TNF-α', 'LDH', 'CK'],
-    serumValues: generateChannelData(0.5, 5.0, 1).slice(0, 5), // 取前5个值
+    serumValues: (() => {
+      // 为每个血清指标设置不同的真实范围
+      const crp = createRng(1400).range(0.5, 15.0);      // CRP: 0.5-15 mg/L
+      const il6 = createRng(1401).range(2.0, 50.0);      // IL-6: 2-50 pg/mL
+      const tnf = createRng(1402).range(5.0, 80.0);      // TNF-α: 5-80 pg/mL
+      const ldh = createRng(1403).range(120.0, 350.0);   // LDH: 120-350 U/L
+      const ck = createRng(1404).range(30.0, 250.0);     // CK: 30-250 U/L
+      return [
+        parseFloat(crp.toFixed(1)),
+        parseFloat(il6.toFixed(1)),
+        parseFloat(tnf.toFixed(1)),
+        parseFloat(ldh.toFixed(0)),
+        parseFloat(ck.toFixed(0))
+      ];
+    })(),
 
-    // 时频图（STFT）模拟数据
+    // 时频图（STFT）模拟数据 - 更真实的时频能量分布
     timeFreq: {
-      x: Array.from({ length: 100 }, (_, i) => i * 0.01), // 时间 (秒)
-      y: Array.from({ length: 50 }, (_, i) => i * 0.5),   // 频率 (Hz)
-      z: Array.from({ length: 50 }, () =>
-        Array.from({ length: 100 }, () => Math.random() * 20 + 10)
-      ),
+      x: Array.from({ length: 100 }, (_, i) => i * 0.05), // 时间: 0-5秒
+      y: Array.from({ length: 50 }, (_, i) => i),   // 频率: 0-50 Hz
+      z: (() => {
+        const rng = createRng(1500);
+        // 模拟更真实的时频能量分布，低频能量较高
+        return Array.from({ length: 50 }, (_, freqIdx) => {
+          // 频率越高，基础能量越低
+          const baseEnergy = 30 - (freqIdx / 50) * 20; // 30降到10
+          return Array.from({ length: 100 }, () => {
+            const variation = rng.range(-5, 8);
+            return Math.max(0, baseEnergy + variation);
+          });
+        });
+      })(),
     },
   };
   
   
   return data;
 };
-
-// 注意：mockData将在组件内部生成，确保每次渲染都有新的随机数据
 
 // 辅助函数：创建柱状图
 const BarChartComponent = ({ data, title, dataKey, color }: {
@@ -153,7 +221,8 @@ interface EEGVisualizationProps {
 
 const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, dataId }) => {
   // 使用useMemo缓存数据生成，只有当dataId或visualizationType变化时才重新生成
-  const mockData = useMemo(() => generateRandomEEGData(), [dataId, visualizationType]);
+  // 使用dataId和visualizationType作为种子，确保相同的输入产生相同的输出
+  const mockData = useMemo(() => generateRandomEEGData(dataId || 1, visualizationType), [dataId, visualizationType]);
   
   const channelData = useMemo(() => {
     const data = mockData.channels.map((channel, index) => ({

@@ -196,7 +196,7 @@ const ModelManagePage: React.FC = () => {
         status: model.status === '已部署' ? 'active' : 'inactive',
         accuracy: model.accuracy,
         description: model.description,
-        file_size: Math.floor(Math.random() * 100) + 50 // 模拟文件大小
+        file_size: parseFloat((Math.random() * 150 + 30).toFixed(2)) // 模拟文件大小，30-180MB，保留两位小数
       }));
       
       setModelVersions(versions);
@@ -225,12 +225,12 @@ const ModelManagePage: React.FC = () => {
         model_name: model.name,
         model_type: index % 4,
         accuracy: model.accuracy,
-        precision: model.accuracy - 0.02 + Math.random() * 0.04, // 模拟精度
-        recall: model.accuracy - 0.01 + Math.random() * 0.02, // 模拟召回率
-        f1_score: model.accuracy - 0.015 + Math.random() * 0.03, // 模拟F1分数
+        precision: parseFloat((model.accuracy - 0.02 + Math.random() * 0.04).toFixed(4)), // 模拟精度
+        recall: parseFloat((model.accuracy - 0.01 + Math.random() * 0.02).toFixed(4)), // 模拟召回率
+        f1_score: parseFloat((model.accuracy - 0.015 + Math.random() * 0.03).toFixed(4)), // 模拟F1分数
         training_time_hours: Math.floor(Math.random() * 48) + 12, // 模拟训练时间
         training_epochs: Math.floor(Math.random() * 100) + 50, // 模拟训练轮数
-        model_size_mb: Math.floor(Math.random() * 200) + 50 // 模拟模型大小
+        model_size_mb: parseFloat((Math.random() * 180 + 35).toFixed(2)) // 模拟模型大小，35-215MB，保留两位小数
       }));
       
       setModelPerformance(performanceData);
@@ -333,10 +333,12 @@ const ModelManagePage: React.FC = () => {
       // 从模型路径中提取文件名（base name）
       const fileName = model.model_path.split('/').pop() || `model_${modelId}.pkl`;
 
-      // 根据模型 ID 生成固定的文件大小（50-100MB）
-      // 使用模型 ID 作为种子，确保同一个模型每次导出大小相同
-      const fileSizeMB = 50 + (modelId % 51); // 50-100MB，根据 ID 固定
-      const fileSizeBytes = fileSizeMB * 1024 * 1024;
+      // 根据模型 ID 生成文件大小（35-215MB），使用模型 ID 作为随机种子
+      // 使用简单的伪随机算法，确保同一个模型每次导出大小相同但看起来随机
+      const seed = modelId * 9301 + 49297; // 简单的线性同余生成器
+      const random = (seed % 233280) / 233280; // 生成 0-1 之间的伪随机数
+      const fileSizeMB = parseFloat((35 + random * 180).toFixed(2)); // 35-215MB，保留两位小数
+      const fileSizeBytes = Math.floor(fileSizeMB * 1024 * 1024);
 
       // 生成随机内容
       // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
@@ -391,10 +393,12 @@ const ModelManagePage: React.FC = () => {
         // 从模型路径中提取文件名（base name）
         const fileName = model.model_path.split('/').pop() || `model_${model.id}.pkl`;
 
-        // 根据模型 ID 生成固定的文件大小（50-100MB）
-        // 使用模型 ID 作为种子，确保同一个模型每次导出大小相同
-        const fileSizeMB = 50 + (model.id % 51); // 50-100MB，根据 ID 固定
-        const fileSizeBytes = fileSizeMB * 1024 * 1024;
+        // 根据模型 ID 生成文件大小（35-215MB），使用模型 ID 作为随机种子
+        // 使用简单的伪随机算法，确保同一个模型每次导出大小相同但看起来随机
+        const seed = model.id * 9301 + 49297; // 简单的线性同余生成器
+        const random = (seed % 233280) / 233280; // 生成 0-1 之间的伪随机数
+        const fileSizeMB = parseFloat((35 + random * 180).toFixed(2)); // 35-215MB，保留两位小数
+        const fileSizeBytes = Math.floor(fileSizeMB * 1024 * 1024);
 
         // 生成随机内容
         // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
