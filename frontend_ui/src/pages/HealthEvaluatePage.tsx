@@ -4,7 +4,6 @@ import {
   CheckSquare, 
   Square, 
   RefreshCw,
-  Image,
   ArrowLeft,
   ArrowRight,
   FileImage,
@@ -269,23 +268,6 @@ const HealthEvaluatePage: React.FC = () => {
     }
   };
 
-  // 查看数据图像
-  const handleViewImages = async (dataId: number) => {
-    try {
-      // const images = await apiClient.getDataImages(dataId); // 注释掉API调用
-      const images: string[] = []; // 模拟空图片数组
-      setCurrentImageData({
-        dataId,
-        images,
-        currentIndex: 0
-      });
-      setImageViewerVisible(true);
-    } catch (error) {
-      console.error('获取图像列表失败:', error);
-      toast.error('获取图像列表失败');
-    }
-  };
-
   // 切换图像
   const navigateImage = (direction: 'prev' | 'next') => {
     if (!currentImageData) return;
@@ -473,9 +455,6 @@ const HealthEvaluatePage: React.FC = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     上传时间
                       </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        操作
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -512,17 +491,6 @@ const HealthEvaluatePage: React.FC = () => {
                         </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDateTime(item.upload_time)}
-                        </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex items-center justify-end space-x-2">
-                        <button
-                          onClick={() => handleViewImages(item.id)}
-                          className="text-blue-600 hover:text-blue-700"
-                          title="查看图像"
-                        >
-                          <Image className="h-4 w-4" />
-                        </button>
-                      </div>
                         </td>
                       </tr>
                     ))}
