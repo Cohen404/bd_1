@@ -25,7 +25,7 @@ import {
 import { apiClient } from '@/utils/api';
 import { Model } from '@/types';
 import { formatDateTime, formatFileSize } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, Model as LocalStorageModel } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 interface ModelStatus {
@@ -274,16 +274,59 @@ const ModelManagePage: React.FC = () => {
       // 模拟一点延迟，等待进度条接近完成
       await new Promise(resolve => setTimeout(resolve, 1200));
 
-      // 仅更新前端模型列表的信息
+      // 从 localStorage 获取当前模型列表
+      const modelsList = LocalStorageManager.get<LocalStorageModel[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 检查该类型的模型是否存在
+      const existingModelIndex = modelsList.findIndex(m => m.id === selectedUploadType);
+      
+      const now = new Date().toISOString();
+      
+      if (existingModelIndex !== -1) {
+        // 如果模型存在，更新它
+        modelsList[existingModelIndex] = {
+          ...modelsList[existingModelIndex],
+          created_at: now
+        };
+        toast.success('模型更新成功！');
+      } else {
+        // 如果模型不存在，创建新模型
+        const modelTypeName = modelTypes[selectedUploadType as keyof typeof modelTypes] || '未知类型';
+        const newModel: LocalStorageModel = {
+          id: selectedUploadType,
+          name: modelTypeName,
+          version: '1.0.0',
+          description: `新上传的${modelTypeName}模型`,
+          status: 'active',
+          created_at: now,
+          accuracy: 0.85 + Math.random() * 0.1 // 生成一个随机准确率
+        };
+        modelsList.push(newModel);
+        toast.success('模型添加成功！');
+      }
+      
+      // 保存到 localStorage
+      LocalStorageManager.set(STORAGE_KEYS.MODELS, modelsList);
+      
+      // 更新前端状态
       const newModelPath = `/models/${selectedUploadType}/${file.name}`;
-      setModels(prev => prev.map(m => (
-        m.model_type === selectedUploadType
-          ? { ...m, model_path: newModelPath, create_time: new Date().toISOString() }
-          : m
-      )));
+      setModels(prev => {
+        const updated = prev.filter(m => m.model_type !== selectedUploadType);
+        const modelTypeName = modelTypes[selectedUploadType as keyof typeof modelTypes] || '未知类型';
+        updated.push({
+          id: selectedUploadType,
+          model_type: selectedUploadType,
+          model_name: modelTypeName,
+          model_path: newModelPath,
+          version: existingModelIndex !== -1 ? (prev.find(m => m.model_type === selectedUploadType)?.version || '1.0.0') : '1.0.0',
+          create_time: now,
+          model_size: file.size,
+          status: 'active'
+        });
+        return updated;
+      });
 
       setUploadProgress(100);
-      toast.success('模型信息更新成功！');
 
       // 稍后复位上传状态
       setTimeout(() => {
@@ -302,6 +345,7 @@ const ModelManagePage: React.FC = () => {
     event.target.value = '';
   };
 
+  // ===== 纯前端演示模式 - 特殊标记 =====
   // 删除模型
   const handleDelete = async (modelId: number, modelType: number) => {
     const modelTypeName = modelTypes[modelType as keyof typeof modelTypes] || '未知类型';
@@ -311,14 +355,29 @@ const ModelManagePage: React.FC = () => {
     }
 
     try {
-      await apiClient.delete(`/models/${modelId}`);
+      // 从 localStorage 获取当前模型列表
+      const modelsList = LocalStorageManager.get<LocalStorageModel[]>(STORAGE_KEYS.MODELS, []);
+      
+      // 从列表中删除指定的模型
+      const updatedModelsList = modelsList.filter(model => model.id !== modelId);
+      
+      // 保存更新后的列表到 localStorage
+      LocalStorageManager.set(STORAGE_KEYS.MODELS, updatedModelsList);
+      
+      // 从前端状态中删除该模型
+      setModels(prevModels => prevModels.filter(model => model.id !== modelId));
+      
       toast.success('模型删除成功');
-      fetchModels();
     } catch (error) {
-      console.error('删除模型失败:', error);
+      console.error('删除模型失败，完整错误栈:', error);
+      if (error instanceof Error) {
+        console.error('错误消息:', error.message);
+        console.error('错误堆栈:', error.stack);
+      }
       toast.error('删除模型失败');
     }
   };
+  // ============================================
 
   // 导出单个模型
   const handleExportModel = async (modelId: number) => {
@@ -603,13 +662,6 @@ const ModelManagePage: React.FC = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button
-                            onClick={() => fetchModelVersions(detail.model_type)}
-                            className="text-blue-600 hover:text-blue-700 mr-2"
-                            title="查看版本"
-                          >
-                            <History className="h-4 w-4" />
-                          </button>
                         </td>
                       </tr>
                     ))}
@@ -815,21 +867,14 @@ const ModelManagePage: React.FC = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
                           <button
-                          onClick={() => fetchModelVersions(model.model_type)}
-                            className="text-blue-600 hover:text-blue-700"
-                          title="查看版本"
-                        >
-                          <History className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleExportModel(model.id)}
-                          className="text-green-600 hover:text-green-700"
-                          title="导出模型"
+                            onClick={() => handleExportModel(model.id)}
+                            className="text-green-600 hover:text-green-700"
+                            title="导出模型"
                           >
                             <Download className="h-4 w-4" />
                           </button>
                           <button
-                          onClick={() => handleDelete(model.id, model.model_type)}
+                            onClick={() => handleDelete(model.id, model.model_type)}
                             className="text-red-600 hover:text-red-700"
                             title="删除"
                           >
