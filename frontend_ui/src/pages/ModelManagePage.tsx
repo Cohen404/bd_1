@@ -22,7 +22,7 @@ import {
   Info,
   Zap
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// import { apiClient } from '@/utils/api'; // 注释后端API调用
 import { Model } from '@/types';
 import { formatDateTime, formatFileSize } from '@/utils/helpers';
 import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, Model as LocalStorageModel } from '@/utils/localStorage';
@@ -245,7 +245,7 @@ const ModelManagePage: React.FC = () => {
     fetchModels();
   }, []);
 
-  // 上传模型文件
+  // 上传模型文件 - 纯前端实现
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -379,7 +379,7 @@ const ModelManagePage: React.FC = () => {
   };
   // ============================================
 
-  // 导出单个模型
+  // 导出单个模型 - 纯前端实现（模拟）
   const handleExportModel = async (modelId: number) => {
     try {
       // 查找对应的模型
@@ -426,7 +426,7 @@ const ModelManagePage: React.FC = () => {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      toast.success('模型导出成功');
+      toast.success('模型信息导出成功');
     } catch (error) {
       console.error('导出模型失败，完整错误栈:', error);
       if (error instanceof Error) {
@@ -437,7 +437,7 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 导出所有模型
+  // 导出所有模型 - 纯前端实现（模拟）
   const handleExportAllModels = async () => {
     try {
       if (models.length === 0) {
@@ -503,18 +503,15 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 恢复模型版本
+  // 恢复模型版本 - 纯前端实现（模拟）
   const handleRestoreVersion = async (modelType: number, backupFilename: string) => {
     if (!window.confirm(`确定要恢复到此版本吗？当前版本将被备份。`)) {
       return;
     }
 
     try {
-      const formData = new FormData();
-      formData.append('backup_filename', backupFilename);
-
-      await apiClient.post(`/models/restore/${modelType}`, formData);
-      toast.success('模型版本恢复成功');
+      // 模拟版本恢复
+      toast.success('模型版本恢复成功（模拟）');
       fetchModels();
       fetchModelVersions(modelType);
     } catch (error) {
@@ -523,12 +520,10 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 过滤模型
-  const filteredModels = models.filter(model => {
-    const modelTypeName = modelTypes[model.model_type as keyof typeof modelTypes] || '';
-    return modelTypeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-           model.model_path.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  // 过滤模型 - 使用存储类的搜索功能
+  const filteredModels = searchTerm 
+    ? ModelStorage.searchModels(searchTerm)
+    : models;
 
   return (
     <div className="space-y-6">
