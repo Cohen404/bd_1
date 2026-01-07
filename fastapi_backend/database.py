@@ -5,7 +5,7 @@ from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS
 import logging
 
 # 创建数据库连接URL
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = "postgresql://postgres:tj654478@127.0.0.1:5432/bj_health_db"
 
 # 创建引擎
 engine = create_engine(DATABASE_URL)

@@ -100,9 +100,14 @@ export interface Result {
   anxiety_score: number;
   social_isolation_score: number;
   user_id: string;
+  username: string;
   data_id?: number;
   report_path?: string;
   result_time: string;
+  overall_risk_level: string;
+  recommendations: string;
+  personnel_id?: string;
+  personnel_name?: string;
 }
 
 export interface HealthEvaluateRequest {

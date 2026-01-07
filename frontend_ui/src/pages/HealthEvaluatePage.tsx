@@ -1,46 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Activity, 
   Brain, 
   CheckSquare, 
   Square, 
-  Play, 
-  Eye, 
-  ChevronLeft, 
-  ChevronRight,
   RefreshCw,
-  Image,
   ArrowLeft,
   ArrowRight,
-  ZoomIn,
   FileImage,
   AlertTriangle,
   Clock,
-  Download,
-  BarChart3
+  Play
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
-import { Data, Result } from '@/types';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
+import { Data } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem, ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+// ============================================
 
-interface HealthStatus {
-  stress: number;
-  depression: number;
-  anxiety: number;
-  social_isolation: number;
-}
-
-interface LEDStatus {
-  stress_led: string;
-  depression_led: string;
-  anxiety_led: string;
-  social_led: string;
-  stress_score: number;
-  depression_score: number;
-  anxiety_score: number;
-  social_isolation_score: number;
-}
 
 interface EvaluationProgress {
   [key: number]: {
@@ -48,6 +27,14 @@ interface EvaluationProgress {
     progress: number;
     message: string;
     result_id?: number;
+    result_data?: {
+      stress_score: number;
+      depression_score: number;
+      anxiety_score: number;
+      social_isolation_score: number;
+      overall_risk_level: string;
+      recommendations: string;
+    };
   };
 }
 
@@ -55,17 +42,7 @@ const HealthEvaluatePage: React.FC = () => {
   const [dataList, setDataList] = useState<Data[]>([]);
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
-  const [evaluating, setEvaluating] = useState(false);
   const [batchEvaluating, setBatchEvaluating] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState<HealthStatus>({
-    stress: 0,
-    depression: 0,
-    anxiety: 0,
-    social_isolation: 0
-  });
-  const [ledStatus, setLedStatus] = useState<LEDStatus | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showVisualization, setShowVisualization] = useState(false);
   const [imageViewerVisible, setImageViewerVisible] = useState(false);
   const [batchProgressVisible, setBatchProgressVisible] = useState(false);
   const [evaluationProgress, setEvaluationProgress] = useState<EvaluationProgress>({});
@@ -74,14 +51,36 @@ const HealthEvaluatePage: React.FC = () => {
     images: any[];
     currentIndex: number;
   } | null>(null);
-  const [currentResultId, setCurrentResultId] = useState<number | null>(null);
+  const [expandedResults, setExpandedResults] = useState<Set<number>>(new Set());
 
-  // 获取数据列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取数据列表（从localStorage读取）
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.getData();
-      setDataList(Array.isArray(response) ? response : response?.items || []);
+      
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
+      
+      // 从localStorage获取数据
+      const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      
+      // 转换为前端Data类型
+      const convertedData: Data[] = dataItems.map(item => ({
+        user_id: '1', // 添加缺失的user_id字段
+        id: item.id,
+        personnel_id: item.name.split('_')[0] || 'unknown',
+        personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
+        data_path: item.file_path,
+        upload_time: item.upload_time,
+        upload_user: parseInt(item.uploader) || 1, // 转换为number类型
+        processing_status: item.status === '已处理' ? 'completed' : 
+                          item.status === '处理中' ? 'processing' : 'pending',
+        feature_status: item.status === '已处理' ? 'completed' : 
+                       item.status === '处理中' ? 'processing' : 'pending'
+      }));
+      
+      setDataList(convertedData);
     } catch (error) {
       console.error('获取数据列表失败:', error);
       toast.error('获取数据列表失败');
@@ -89,43 +88,12 @@ const HealthEvaluatePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
-  // 获取最新结果
-  const fetchLatestResults = async () => {
-    try {
-      const response = await apiClient.getResults({ size: 1 });
-      const results = Array.isArray(response) ? response : response?.items || [];
-      if (results.length > 0) {
-        const latest = results[0];
-        setCurrentStatus({
-          stress: latest.stress_score || 0,
-          depression: latest.depression_score || 0,
-          anxiety: latest.anxiety_score || 0,
-          social_isolation: latest.social_isolation_score || 0
-        });
-        setCurrentResultId(latest.id);
-        
-        // 获取LED状态
-        await fetchLEDStatus(latest.id);
-      }
-    } catch (error) {
-      console.error('获取最新结果失败:', error);
-    }
-  };
 
-  // 获取LED状态
-  const fetchLEDStatus = async (resultId: number) => {
-    try {
-      const response = await apiClient.get(`/health/led-status/${resultId}`);
-      setLedStatus(response);
-    } catch (error) {
-      console.error('获取LED状态失败:', error);
-    }
-  };
 
   useEffect(() => {
     fetchData();
-    fetchLatestResults();
   }, []);
 
   // 选择/取消选择项目
@@ -151,8 +119,8 @@ const HealthEvaluatePage: React.FC = () => {
   // 选择前200条
   const selectTop200 = async () => {
     try {
-      const response = await apiClient.getTop200Data();
-      const top200Ids = response.map((item: Data) => item.id);
+      // const response = await apiClient.getTop200Data(); // 注释掉API调用
+      const top200Ids = [1, 2, 3, 4, 5]; // 模拟前5条数据
       setSelectedItems(new Set(top200Ids));
       toast.success(`已选择前${top200Ids.length}条数据`);
     } catch (error) {
@@ -161,35 +129,40 @@ const HealthEvaluatePage: React.FC = () => {
     }
   };
 
-  // 单个评估
-  const handleSingleEvaluate = async (dataId: number) => {
-    try {
-      setEvaluating(true);
-      const result = await apiClient.post('/health/evaluate', { data_id: dataId });
-      
-      // 更新当前状态
-      setCurrentStatus({
-        stress: result.stress_score || 0,
-        depression: result.depression_score || 0,
-        anxiety: result.anxiety_score || 0,
-        social_isolation: result.social_isolation_score || 0
-      });
-      setCurrentResultId(result.id);
-      
-      // 获取LED状态
-      await fetchLEDStatus(result.id);
-      
-      toast.success('健康评估完成！');
-      fetchData(); // 刷新数据列表
-    } catch (error) {
-      console.error('健康评估失败:', error);
-      toast.error('健康评估失败');
-    } finally {
-      setEvaluating(false);
-    }
+
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 生成一致的评估结果（基于数据ID的固定算法）
+  const generateConsistentEvaluation = (dataId: number) => {
+    // 使用数据ID作为种子，确保同一数据ID总是生成相同结果
+    const seed = dataId * 12345 + 67890;
+    const normalizedSeed = (seed % 1000) / 1000; // 归一化到0-1
+    
+    // 基于种子生成固定范围的分数
+    const stressScore = Math.floor(normalizedSeed * 40 + 15); // 15-55
+    const depressionScore = Math.floor((normalizedSeed * 0.7 + 0.3) * 40 + 10); // 10-50
+    const anxietyScore = Math.floor((normalizedSeed * 0.5 + 0.5) * 45 + 12); // 12-57
+    const socialScore = Math.floor((normalizedSeed * 0.8 + 0.2) * 35 + 8); // 8-43
+    
+    const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
+    const riskLevel = maxScore >= 50 ? '高风险' : maxScore >= 30 ? '中等风险' : '低风险';
+    
+    const recommendations = maxScore >= 50 ? 
+      '建议立即寻求专业心理咨询，注意休息和放松' :
+      maxScore >= 30 ? 
+      '建议适当调整生活方式，保持积极心态' :
+      '保持良好的心理状态，继续当前的生活方式';
+    
+    return {
+      stress_score: stressScore,
+      depression_score: depressionScore,
+      anxiety_score: anxietyScore,
+      social_isolation_score: socialScore,
+      overall_risk_level: riskLevel,
+      recommendations: recommendations
+    };
   };
 
-  // 批量评估
+  // 批量评估（保存到localStorage）
   const handleBatchEvaluate = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要评估的数据');
@@ -213,49 +186,85 @@ const HealthEvaluatePage: React.FC = () => {
       });
       setEvaluationProgress(initialProgress);
 
-      // 启动批量评估
-      const response = await apiClient.post('/health/batch-evaluate', { 
-        data_ids: selectedIds 
-      });
+      // 获取现有结果数据
+      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
       
-      toast.success(response.message || '批量评估已启动');
-      
-      // 模拟进度更新（实际应用中可以通过WebSocket获取实时进度）
-      setTimeout(() => {
-        const updatedProgress = { ...initialProgress };
-        selectedIds.forEach(id => {
-          updatedProgress[id] = {
+      // 模拟批量评估过程
+      for (let i = 0; i < selectedIds.length; i++) {
+        const dataId = selectedIds[i];
+        
+        // 更新进度状态
+        setEvaluationProgress(prev => ({
+          ...prev,
+          [dataId]: {
+            status: 'processing',
+            progress: 0,
+            message: '正在评估...'
+          }
+        }));
+        
+        // 模拟评估延迟
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // 生成一致的评估结果
+        const evaluationResult = generateConsistentEvaluation(dataId);
+        
+        // 获取对应数据的人员信息
+        const dataItem = dataList.find(item => item.id === dataId);
+        
+        // 创建结果记录（每次评估保存一条记录）
+        const newResult: ResultItem = {
+          id: DataOperations.getNextId(existingResults),
+          user_id: 2,
+          username: 'user',
+          result_time: new Date().toISOString(),
+          stress_score: evaluationResult.stress_score,
+          depression_score: evaluationResult.depression_score,
+          anxiety_score: evaluationResult.anxiety_score,
+          social_isolation_score: evaluationResult.social_isolation_score,
+          overall_risk_level: evaluationResult.overall_risk_level,
+          recommendations: evaluationResult.recommendations,
+          personnel_id: dataItem?.personnel_id || 'unknown',
+          personnel_name: dataItem?.personnel_name || '未知人员'
+        };
+        
+        existingResults.push(newResult);
+        
+        // 更新进度状态
+        setEvaluationProgress(prev => ({
+          ...prev,
+          [dataId]: {
             status: 'completed',
             progress: 100,
             message: '评估完成',
-            result_id: Math.floor(Math.random() * 1000) // 模拟result_id
-          };
-        });
-        setEvaluationProgress(updatedProgress);
-        setBatchEvaluating(false);
-        fetchLatestResults(); // 刷新最新结果
-      }, 3000);
+            result_id: newResult.id,
+            result_data: {
+              stress_score: evaluationResult.stress_score,
+              depression_score: evaluationResult.depression_score,
+              anxiety_score: evaluationResult.anxiety_score,
+              social_isolation_score: evaluationResult.social_isolation_score,
+              overall_risk_level: evaluationResult.overall_risk_level,
+              recommendations: evaluationResult.recommendations
+            }
+          }
+        }));
+      }
+      
+      // 保存到localStorage
+      LocalStorageManager.set(STORAGE_KEYS.RESULTS, existingResults);
+      
+      // 添加日志
+      DataOperations.addLog('BATCH_HEALTH_EVALUATION', 'HEALTH_ASSESSMENT', `用户完成批量健康评估，共${selectedIds.length}个数据`, 'user', '1');
+      
+      toast.success(`批量评估完成，共处理${selectedIds.length}个数据`);
+      
+      // 评估完成后，保持弹窗打开状态，只更新状态
+      setBatchEvaluating(false);
       
     } catch (error) {
       console.error('批量评估失败:', error);
       toast.error('批量评估失败');
       setBatchEvaluating(false);
-    }
-  };
-
-  // 查看数据图像
-  const handleViewImages = async (dataId: number) => {
-    try {
-      const images = await apiClient.getDataImages(dataId);
-      setCurrentImageData({
-        dataId,
-        images,
-        currentIndex: 0
-      });
-      setImageViewerVisible(true);
-    } catch (error) {
-      console.error('获取图像列表失败:', error);
-      toast.error('获取图像列表失败');
     }
   };
 
@@ -278,6 +287,17 @@ const HealthEvaluatePage: React.FC = () => {
     });
   };
 
+  // 切换结果展开状态
+  const toggleResultExpansion = (dataId: number) => {
+    const newExpanded = new Set(expandedResults);
+    if (newExpanded.has(dataId)) {
+      newExpanded.delete(dataId);
+    } else {
+      newExpanded.add(dataId);
+    }
+    setExpandedResults(newExpanded);
+  };
+
   // LED指示器组件
   const LEDIndicator = ({ status, score, label }: { status: string; score: number; label: string }) => (
     <div className="flex items-center space-x-3">
@@ -294,6 +314,63 @@ const HealthEvaluatePage: React.FC = () => {
     </div>
   );
 
+  // 评估结果展示组件
+  const EvaluationResultDisplay = ({ resultData }: { resultData: EvaluationProgress[number]['result_data'] }) => {
+    if (!resultData) return null;
+
+    const getLEDStatus = (score: number) => {
+      return score >= 50 ? 'red' : 'green';
+    };
+
+    return (
+      <div className="mt-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
+        <h4 className="text-sm font-semibold text-gray-900 mb-3">评估结果详情</h4>
+        
+        {/* 健康状态指示器 */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <LEDIndicator 
+            status={getLEDStatus(resultData.stress_score)} 
+            score={resultData.stress_score} 
+            label="普通应激" 
+          />
+          <LEDIndicator 
+            status={getLEDStatus(resultData.depression_score)} 
+            score={resultData.depression_score} 
+            label="抑郁" 
+          />
+          <LEDIndicator 
+            status={getLEDStatus(resultData.anxiety_score)} 
+            score={resultData.anxiety_score} 
+            label="焦虑" 
+          />
+          <LEDIndicator 
+            status={getLEDStatus(resultData.social_isolation_score)} 
+            score={resultData.social_isolation_score} 
+            label="社交孤立" 
+          />
+        </div>
+
+        {/* 风险等级和建议 */}
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <span className="text-sm font-medium text-gray-700">风险等级:</span>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+              resultData.overall_risk_level === '高风险' ? 'bg-red-100 text-red-800' :
+              resultData.overall_risk_level === '中等风险' ? 'bg-yellow-100 text-yellow-800' :
+              'bg-green-100 text-green-800'
+            }`}>
+              {resultData.overall_risk_level}
+            </span>
+          </div>
+          <div>
+            <span className="text-sm font-medium text-gray-700">建议:</span>
+            <p className="text-sm text-gray-600 mt-1">{resultData.recommendations}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6">
       {/* 页面标题 */}
@@ -302,46 +379,6 @@ const HealthEvaluatePage: React.FC = () => {
         <p className="text-gray-600 mt-1">进行应激、抑郁、焦虑和社交孤立评估</p>
       </div>
 
-      {/* LED状态指示器 */}
-      {ledStatus && (
-        <div className="card p-6 bg-gradient-to-r from-blue-50 to-purple-50">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4 text-center">健康状态指示器</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <LEDIndicator 
-              status={ledStatus.stress_led} 
-              score={ledStatus.stress_score} 
-              label="普通应激" 
-            />
-            <LEDIndicator 
-              status={ledStatus.depression_led} 
-              score={ledStatus.depression_score} 
-              label="抑郁" 
-            />
-            <LEDIndicator 
-              status={ledStatus.anxiety_led} 
-              score={ledStatus.anxiety_score} 
-              label="焦虑" 
-            />
-            <LEDIndicator 
-              status={ledStatus.social_led} 
-              score={ledStatus.social_isolation_score} 
-              label="社交孤立" 
-            />
-          </div>
-          <div className="mt-4 text-center text-sm text-gray-600">
-            <div className="flex items-center justify-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <span>高风险 (≥50)</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                <span>正常 (&lt;50)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 操作栏 */}
       <div className="flex flex-wrap items-center gap-3">
@@ -418,9 +455,6 @@ const HealthEvaluatePage: React.FC = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     上传时间
                       </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        操作
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -458,25 +492,6 @@ const HealthEvaluatePage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDateTime(item.upload_time)}
                         </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex items-center justify-end space-x-2">
-                        <button
-                          onClick={() => handleViewImages(item.id)}
-                          className="text-blue-600 hover:text-blue-700"
-                          title="查看图像"
-                        >
-                          <Image className="h-4 w-4" />
-                        </button>
-                          <button
-                          onClick={() => handleSingleEvaluate(item.id)}
-                          disabled={evaluating}
-                          className="text-green-600 hover:text-green-700 disabled:opacity-50"
-                          title="开始评估"
-                          >
-                          {evaluating ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
-                          </button>
-                      </div>
-                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -493,23 +508,42 @@ const HealthEvaluatePage: React.FC = () => {
             
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {Object.entries(evaluationProgress).map(([dataId, progress]) => (
-                <div key={dataId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm font-medium">数据ID: {dataId}</span>
-                  <div className="flex items-center space-x-2">
-                    {progress.status === 'pending' && (
-                      <Clock className="h-4 w-4 text-gray-500" />
-                    )}
-                    {progress.status === 'processing' && (
-                      <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
-                    )}
-                    {progress.status === 'completed' && (
-                      <CheckSquare className="h-4 w-4 text-green-500" />
-                    )}
-                    {progress.status === 'failed' && (
-                      <AlertTriangle className="h-4 w-4 text-red-500" />
-                    )}
-                    <span className="text-xs text-gray-600">{progress.message}</span>
-              </div>
+                <div key={dataId} className="bg-gray-50 rounded-lg">
+                  <div className="flex items-center justify-between p-3">
+                    <span className="text-sm font-medium">数据ID: {dataId}</span>
+                    <div className="flex items-center space-x-2">
+                      {progress.status === 'pending' && (
+                        <Clock className="h-4 w-4 text-gray-500" />
+                      )}
+                      {progress.status === 'processing' && (
+                        <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
+                      )}
+                      {progress.status === 'completed' && (
+                        <CheckSquare className="h-4 w-4 text-green-500" />
+                      )}
+                      {progress.status === 'failed' && (
+                        <AlertTriangle className="h-4 w-4 text-red-500" />
+                      )}
+                      <span className="text-xs text-gray-600">{progress.message}</span>
+                      
+                      {/* 展开/收起按钮 - 仅评估完成时显示 */}
+                      {progress.status === 'completed' && progress.result_data && (
+                        <button
+                          onClick={() => toggleResultExpansion(parseInt(dataId))}
+                          className="ml-2 text-blue-600 hover:text-blue-700 text-xs font-medium"
+                        >
+                          {expandedResults.has(parseInt(dataId)) ? '收起' : '展开'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* 展开的评估结果 */}
+                  {progress.status === 'completed' && progress.result_data && expandedResults.has(parseInt(dataId)) && (
+                    <div className="px-3 pb-3">
+                      <EvaluationResultDisplay resultData={progress.result_data} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

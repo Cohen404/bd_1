@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { LoginRequest } from '@/types';
 import toast from 'react-hot-toast';
 
+
+
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
@@ -19,7 +21,6 @@ const LoginPage: React.FC = () => {
     try {
       const success = await login(data);
       if (success) {
-        // 登录成功，useAuth hook会处理跳转
         console.log('登录成功，等待跳转...');
       }
     } catch (error) {
@@ -124,15 +125,6 @@ const LoginPage: React.FC = () => {
               </button>
             </div>
           </form>
-
-          {/* 默认账号提示 */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h4 className="text-sm font-medium text-blue-900 mb-2">默认登录账号：</h4>
-            <div className="text-sm text-blue-800 space-y-1">
-              <p><span className="font-medium">管理员：</span>admin / admin123</p>
-              <p><span className="font-medium">普通用户：</span>user / user123</p>
-            </div>
-          </div>
         </div>
 
         {/* 版权信息 */}

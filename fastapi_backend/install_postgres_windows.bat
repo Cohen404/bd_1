@@ -15,32 +15,6 @@ if %errorLevel% == 0 (
     pause >nul
 )
 
-echo.
-echo 步骤 1: 检查PostgreSQL是否已安装...
-psql --version >nul 2>&1
-if %errorLevel% == 0 (
-    echo PostgreSQL 已安装
-    goto :create_env
-) else (
-    echo PostgreSQL 未安装，开始安装...
-)
-
-echo.
-echo 步骤 2: 下载并安装PostgreSQL...
-echo 正在下载PostgreSQL 14.9...
-powershell -Command "& {Invoke-WebRequest -Uri 'https://get.enterprisedb.com/postgresql/postgresql-14.9-1-windows-x64.exe' -OutFile 'postgresql-installer.exe'}"
-
-if not exist "postgresql-installer.exe" (
-    echo 下载失败，请检查网络连接
-    pause
-    exit /b 1
-)
-
-echo 正在安装PostgreSQL...
-postgresql-installer.exe --mode unattended --superpassword tj654478 --servicename postgresql --serviceaccount postgres --servicepassword tj654478 --serverport 5432
-
-echo 等待安装完成...
-timeout /t 30 /nobreak >nul
 
 echo 启动PostgreSQL服务...
 net start postgresql

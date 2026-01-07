@@ -2,40 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { 
   FileBarChart, 
   Download, 
-  Search, 
   Filter, 
   RefreshCw, 
-  Calendar,
-  User,
-  Eye,
-  ChevronLeft,
-  ChevronRight,
   FileText,
   CheckSquare,
   Square,
-  BarChart3,
-  PieChart,
-  TrendingUp,
-  Users,
-  Clock,
-  Activity,
-  AlertTriangle,
-  ExternalLink,
-  Printer,
-  FileImage,
-  X
+  Trash2
 } from 'lucide-react';
-import { apiClient } from '@/utils/api';
+// ===== 纯前端演示模式 - 特殊标记 =====
+// 注释掉后端API相关导入，使用localStorage存储
+// import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, ResultItem } from '@/utils/localStorage';
+import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
+import { ChartGenerator } from '@/utils/chartGenerator';
+import { ExcelExporter } from '@/utils/excelExporter';
 import toast from 'react-hot-toast';
+// ============================================
 
-interface HealthStatus {
-  stress: number;
-  depression: number;
-  anxiety: number;
-  social_isolation: number;
-}
 
 interface FilterState {
   userType: string;
@@ -48,37 +33,15 @@ interface FilterState {
   maxDepressionScore: string;
 }
 
-interface Statistics {
-  total_count: number;
-  avg_stress_score: number;
-  avg_depression_score: number;
-  avg_anxiety_score: number;
-  avg_social_isolation_score: number;
-  high_risk_count: number;
-  high_risk_percentage: number;
-  recent_count: number;
-}
 
 const ResultManagePage: React.FC = () => {
-  const [results, setResults] = useState<Result[]>([]);
   const [filteredResults, setFilteredResults] = useState<Result[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [selectedResults, setSelectedResults] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState<HealthStatus>({
-    stress: 0,
-    depression: 0,
-    anxiety: 0,
-    social_isolation: 0
-  });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showVisualization, setShowVisualization] = useState(false);
+  const [generatingReport, setGeneratingReport] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [showStatistics, setShowStatistics] = useState(false);
-  const [pdfViewerVisible, setPdfViewerVisible] = useState(false);
-  const [currentPdfUrl, setCurrentPdfUrl] = useState<string>('');
-  const [statistics, setStatistics] = useState<Statistics | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     userType: 'all',
     userId: 'all',
@@ -90,36 +53,66 @@ const ResultManagePage: React.FC = () => {
     maxDepressionScore: ''
   });
 
-  // 获取结果列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取结果列表（从localStorage读取）
   const fetchResults = async () => {
     try {
       setLoading(true);
-      const params: any = {};
       
-      // 添加筛选参数
-      if (filters.userId !== 'all') params.user_id = filters.userId;
-      if (filters.dateStart) params.start_date = filters.dateStart;
-      if (filters.dateEnd) params.end_date = filters.dateEnd;
-      if (filters.minStressScore) params.min_stress_score = parseFloat(filters.minStressScore);
-      if (filters.maxStressScore) params.max_stress_score = parseFloat(filters.maxStressScore);
-      if (filters.minDepressionScore) params.min_depression_score = parseFloat(filters.minDepressionScore);
-      if (filters.maxDepressionScore) params.max_depression_score = parseFloat(filters.maxDepressionScore);
+      // 初始化演示数据（如果还没有）
+      initializeDemoData();
       
-      const response = await apiClient.get('/results/', { params });
-      const resultList = Array.isArray(response) ? response : response?.items || [];
-      setResults(resultList);
-      setFilteredResults(resultList);
+      // 从localStorage获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
       
-      // 获取最新结果作为当前状态
-      if (resultList.length > 0) {
-        const latest = resultList[0];
-        setCurrentStatus({
-          stress: latest.stress_score || 0,
-          depression: latest.depression_score || 0,
-          anxiety: latest.anxiety_score || 0,
-          social_isolation: latest.social_isolation_score || 0
-        });
+      // 转换为前端Result类型
+      const convertedResults: Result[] = resultItems.map(item => ({
+        id: item.id,
+        user_id: item.user_id.toString(),
+        username: item.username,
+        result_time: item.result_time,
+        stress_score: item.stress_score,
+        depression_score: item.depression_score,
+        anxiety_score: item.anxiety_score,
+        social_isolation_score: item.social_isolation_score,
+        overall_risk_level: item.overall_risk_level,
+        recommendations: item.recommendations,
+        personnel_id: item.personnel_id,
+        personnel_name: item.personnel_name
+      }));
+      
+      // 应用筛选条件
+      let filtered = convertedResults;
+      
+      if (filters.userId !== 'all') {
+        filtered = filtered.filter(result => result.user_id === filters.userId);
       }
+      
+      if (filters.dateStart) {
+        filtered = filtered.filter(result => new Date(result.result_time) >= new Date(filters.dateStart));
+      }
+      
+      if (filters.dateEnd) {
+        filtered = filtered.filter(result => new Date(result.result_time) <= new Date(filters.dateEnd));
+      }
+      
+      if (filters.minStressScore) {
+        filtered = filtered.filter(result => result.stress_score >= parseFloat(filters.minStressScore));
+      }
+      
+      if (filters.maxStressScore) {
+        filtered = filtered.filter(result => result.stress_score <= parseFloat(filters.maxStressScore));
+      }
+      
+      if (filters.minDepressionScore) {
+        filtered = filtered.filter(result => result.depression_score >= parseFloat(filters.minDepressionScore));
+      }
+      
+      if (filters.maxDepressionScore) {
+        filtered = filtered.filter(result => result.depression_score <= parseFloat(filters.maxDepressionScore));
+      }
+      
+      setFilteredResults(filtered);
     } catch (error) {
       console.error('获取结果列表失败:', error);
       toast.error('获取结果列表失败');
@@ -127,35 +120,34 @@ const ResultManagePage: React.FC = () => {
       setLoading(false);
     }
   };
+  // ============================================
 
-  // 获取用户列表
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 获取用户列表（从localStorage读取）
   const fetchUsers = async () => {
     try {
-      const response = await apiClient.get('/results/users/list');
-      setUsers(Array.isArray(response) ? response : []);
+      // 从localStorage获取用户数据
+      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
+      
+      // 转换为前端User类型
+      const convertedUsers: UserType[] = userItems.map(user => ({
+        user_id: user.id.toString(),
+        username: user.username,
+        user_type: user.role,
+        created_at: user.created_at
+      }));
+      
+      setUsers(convertedUsers);
     } catch (error) {
       console.error('获取用户列表失败:', error);
     }
   };
+  // ============================================
 
-  // 获取统计信息
-  const fetchStatistics = async () => {
-    try {
-      const params: any = {};
-      if (filters.dateStart) params.start_date = filters.dateStart;
-      if (filters.dateEnd) params.end_date = filters.dateEnd;
-      
-      const response = await apiClient.get('/results/summary/statistics', { params });
-      setStatistics(response);
-    } catch (error) {
-      console.error('获取统计信息失败:', error);
-    }
-  };
 
   useEffect(() => {
     fetchResults();
     fetchUsers();
-    fetchStatistics();
   }, [filters]);
 
   // 选择/取消选择结果
@@ -178,8 +170,9 @@ const ResultManagePage: React.FC = () => {
     }
   };
 
-  // 导出结果
-  const handleExport = async (format: 'excel' | 'csv' | 'pdf') => {
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 导出结果（纯前端导出）
+  const handleExport = async (format: 'excel' | 'pdf') => {
     if (selectedResults.size === 0) {
       toast.error('请先选择要导出的结果');
       return;
@@ -188,33 +181,72 @@ const ResultManagePage: React.FC = () => {
     try {
       setExporting(true);
       
-      const response = await apiClient.post('/results/export', {
-        result_ids: Array.from(selectedResults),
-        export_format: format
-      }, {
-        responseType: 'blob'
-      });
-
-      // 创建下载链接
-      const blob = new Blob([response], {
-        type: format === 'excel' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' :
-              format === 'csv' ? 'text/csv' : 'application/zip'
-      });
-      
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      
-      const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-      const extension = format === 'excel' ? 'xlsx' : format === 'csv' ? 'csv' : 'zip';
-      link.download = `评估结果_${timestamp}.${extension}`;
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-      
-      toast.success(`${format.toUpperCase()} 导出成功`);
+      if (format === 'pdf') {
+        // 批量生成报告
+        toast('正在批量生成报告...');
+        
+        const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+        const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
+        
+        for (const resultId of selectedResults) {
+          const resultItem = resultItems.find(item => item.id === resultId);
+          if (!resultItem) continue;
+          
+          const userItem = userItems.find(user => user.id === resultItem.user_id);
+          if (!userItem) continue;
+          
+          // 生成图表（包括新增的EEG相关图表和时频域图表）
+          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
+            ChartGenerator.generateEEGChart(resultItem),
+            ChartGenerator.generateTimeDomainChart(resultItem),
+            ChartGenerator.generateFrequencyBandChart(resultItem),
+            ChartGenerator.generateDiffEntropyChart(resultItem),
+            ChartGenerator.generateTimeFreqChart(resultItem),
+            ChartGenerator.generateSerumChart(resultItem)
+          ]);
+          
+          // 准备报告数据
+          const reportData: ReportData = {
+            result: resultItem,
+            user: {
+              username: userItem.username,
+              user_type: userItem.role
+            },
+            charts: {
+              eeg: eegChart,
+              timeDomain: timeDomainChart,
+              frequencyBand: frequencyBandChart,
+              diffEntropy: diffEntropyChart,
+              timeFreq: timeFreqChart,
+              serum: serumChart
+            }
+          };
+          
+          // 生成HTML内容
+          const htmlContent = ReportGenerator.createReportHTML(reportData);
+          
+          // 生成PDF文件名
+          const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+          
+          // 生成并下载PDF
+          await ReportGenerator.generatePDF(htmlContent, filename);
+        }
+        
+        toast.success(`成功生成 ${selectedResults.size} 份报告！`);
+      } else {
+        // Excel导出
+        toast('正在导出Excel...');
+        
+        // 获取选中的结果数据
+        const selectedResultsData = filteredResults.filter(result => 
+          selectedResults.has(result.id)
+        );
+        
+        // 调用Excel导出工具
+        ExcelExporter.exportResults(selectedResultsData, '心理健康评估结果');
+        
+        toast.success(`成功导出 ${selectedResults.size} 条记录到Excel！`);
+      }
     } catch (error) {
       console.error('导出失败:', error);
       toast.error('导出失败');
@@ -222,27 +254,113 @@ const ResultManagePage: React.FC = () => {
       setExporting(false);
     }
   };
+  // ============================================
 
-  // 查看PDF报告
-  const handleViewReport = async (resultId: number) => {
+  // ===== 纯前端演示模式 - 特殊标记 =====
+  // 生成并下载报告
+  const handleGenerateReport = async (resultId: number) => {
     try {
-      const pdfUrl = `/api/results/report/${resultId}`;
-      setCurrentPdfUrl(pdfUrl);
-      setPdfViewerVisible(true);
+      setGeneratingReport(true);
+      
+      // 获取结果数据
+      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      const resultItem = resultItems.find(item => item.id === resultId);
+      
+      if (!resultItem) {
+        toast.error('未找到评估结果');
+        return;
+      }
+      
+      // 获取用户数据
+      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
+      const userItem = userItems.find(user => user.id === resultItem.user_id);
+      
+      if (!userItem) {
+        toast.error('未找到用户信息');
+        return;
+      }
+      
+      toast('正在生成图表...');
+      
+      // 生成图表（包括新增的EEG相关图表和时频域图表）
+      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
+        ChartGenerator.generateEEGChart(resultItem),
+        ChartGenerator.generateTimeDomainChart(resultItem),
+        ChartGenerator.generateFrequencyBandChart(resultItem),
+        ChartGenerator.generateDiffEntropyChart(resultItem),
+        ChartGenerator.generateTimeFreqChart(resultItem),
+        ChartGenerator.generateSerumChart(resultItem)
+      ]);
+      
+      toast('正在生成报告...');
+      
+      // 准备报告数据
+      const reportData: ReportData = {
+        result: resultItem,
+        user: {
+          username: userItem.username,
+          user_type: userItem.role
+        },
+        charts: {
+          eeg: eegChart,
+          timeDomain: timeDomainChart,
+          frequencyBand: frequencyBandChart,
+          diffEntropy: diffEntropyChart,
+          timeFreq: timeFreqChart,
+          serum: serumChart
+        }
+      };
+      
+      // 生成HTML内容
+      const htmlContent = ReportGenerator.createReportHTML(reportData);
+      
+      // 生成PDF文件名
+      const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+      
+      // 生成并下载PDF
+      await ReportGenerator.generatePDF(htmlContent, filename);
+      
+      toast.success('报告生成成功！');
+      
     } catch (error) {
-      console.error('查看报告失败:', error);
-      toast.error('查看报告失败');
+      console.error('生成报告失败:', error);
+      toast.error('生成报告失败');
+    } finally {
+      setGeneratingReport(false);
     }
   };
+  // ============================================
 
-  // 重新生成报告
-  const handleRegenerateReport = async (resultId: number) => {
+  // 删除结果记录
+  const handleDeleteResult = async (resultId: number) => {
+    if (!window.confirm('确定要删除这条评估结果吗？此操作不可撤销。')) {
+      return;
+    }
+
     try {
-      const response = await apiClient.post(`/results/regenerate-report/${resultId}`);
-      toast.success(response.message || '报告重新生成成功');
+      // 从localStorage中删除结果
+      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      const updatedResults = existingResults.filter(result => result.id !== resultId);
+      
+      // 如果删除后没有结果了，清空结果数据
+      if (updatedResults.length === 0) {
+        LocalStorageManager.clearSpecificData('results');
+      } else {
+        LocalStorageManager.set(STORAGE_KEYS.RESULTS, updatedResults);
+      }
+      
+      // 重新获取数据
+      await fetchResults();
+      
+      // 从选中列表中移除
+      const newSelected = new Set(selectedResults);
+      newSelected.delete(resultId);
+      setSelectedResults(newSelected);
+      
+      toast.success('评估结果删除成功');
     } catch (error) {
-      console.error('重新生成报告失败:', error);
-      toast.error('重新生成报告失败');
+      console.error('删除评估结果失败:', error);
+      toast.error('删除评估结果失败');
     }
   };
 
@@ -275,57 +393,6 @@ const ResultManagePage: React.FC = () => {
         <p className="text-gray-600 mt-1">查看和管理健康评估结果，导出报告数据</p>
       </div>
 
-      {/* 统计信息卡片 */}
-      {statistics && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">总评估数</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.total_count}</p>
-              </div>
-              <div className="p-3 rounded-full bg-blue-50">
-                <BarChart3 className="h-6 w-6 text-blue-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">高风险比例</p>
-                <p className="text-2xl font-bold text-red-600 mt-2">{statistics.high_risk_percentage}%</p>
-                <p className="text-sm text-gray-500 mt-1">{statistics.high_risk_count} 人</p>
-              </div>
-              <div className="p-3 rounded-full bg-red-50">
-                <AlertTriangle className="h-6 w-6 text-red-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">平均应激分数</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.avg_stress_score}</p>
-              </div>
-              <div className="p-3 rounded-full bg-purple-50">
-                <Activity className="h-6 w-6 text-purple-600" />
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">最近7天</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{statistics.recent_count}</p>
-                <p className="text-sm text-gray-500 mt-1">新增评估</p>
-              </div>
-              <div className="p-3 rounded-full bg-green-50">
-                <TrendingUp className="h-6 w-6 text-green-600" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 操作栏 */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -362,21 +429,13 @@ const ResultManagePage: React.FC = () => {
             <Download className="h-4 w-4" />
             <span>导出Excel</span>
               </button>
-              <button
-            onClick={() => handleExport('csv')}
-            disabled={selectedResults.size === 0 || exporting}
-            className="btn btn-secondary flex items-center space-x-2 disabled:opacity-50"
-              >
-                <Download className="h-4 w-4" />
-            <span>导出CSV</span>
-          </button>
           <button
             onClick={() => handleExport('pdf')}
             disabled={selectedResults.size === 0 || exporting}
             className="btn btn-primary flex items-center space-x-2 disabled:opacity-50"
           >
             <FileText className="h-4 w-4" />
-            <span>导出PDF包</span>
+            <span>生成报告包</span>
               </button>
             </div>
           </div>
@@ -480,6 +539,9 @@ const ResultManagePage: React.FC = () => {
                     ID
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    人员信息
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     评估分数
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -509,6 +571,16 @@ const ResultManagePage: React.FC = () => {
                     </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {result.id}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div>
+                          <div className="text-sm font-medium text-gray-900">
+                            {result.personnel_name || '未知人员'}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            ID: {result.personnel_id || 'unknown'}
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-xs space-y-1">
@@ -559,26 +631,20 @@ const ResultManagePage: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
-                          <button
-                          onClick={() => handleViewReport(result.id)}
-                            className="text-blue-600 hover:text-blue-700"
-                          title="查看报告"
-                          >
-                            <Eye className="h-4 w-4" />
-                          </button>
-                          <button
-                          onClick={() => handleRegenerateReport(result.id)}
-                            className="text-green-600 hover:text-green-700"
-                          title="重新生成报告"
-                        >
-                          <RefreshCw className="h-4 w-4" />
-                        </button>
                         <button
-                          onClick={() => handleExport('pdf')}
-                          className="text-purple-600 hover:text-purple-700"
-                            title="下载报告"
+                          onClick={() => handleGenerateReport(result.id)}
+                          disabled={generatingReport}
+                          className="text-purple-600 hover:text-purple-700 disabled:opacity-50"
+                          title="生成报告"
+                        >
+                          <FileText className="h-4 w-4" />
+                        </button>
+                          <button
+                            onClick={() => handleDeleteResult(result.id)}
+                            className="text-red-600 hover:text-red-700"
+                            title="删除记录"
                           >
-                          <Download className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
                       </td>
@@ -589,39 +655,6 @@ const ResultManagePage: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* PDF查看器模态框 */}
-      {pdfViewerVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-full max-w-6xl mx-4 h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-900">评估报告查看器</h2>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => window.open(currentPdfUrl, '_blank')}
-                  className="btn btn-secondary flex items-center space-x-2"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  <span>新窗口打开</span>
-                </button>
-                <button
-                  onClick={() => setPdfViewerVisible(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 p-4">
-              <iframe
-                src={currentPdfUrl}
-                className="w-full h-full border border-gray-300 rounded-lg"
-                title="PDF Report Viewer"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
