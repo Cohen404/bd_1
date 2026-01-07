@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, LoginRequest } from '@/types';
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 注释掉后端API相关导入，使用localStorage存储
-// import { apiClient } from '@/utils/api';
+import { apiClient } from '@/utils/api';
 import {
   getCurrentUser,
   setCurrentUser,
@@ -12,9 +10,7 @@ import {
   setToken,
   isAuthenticated,
 } from '@/utils/auth';
-import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, User as LocalUser } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
-// ============================================
 
 export interface UseAuthReturn {
   user: User | null;
@@ -118,11 +114,6 @@ export const useAuth = (): UseAuthReturn => {
 
   // 登出
   const logout = () => {
-    // 添加登出日志
-    if (user) {
-      DataOperations.addLog('USER_LOGOUT', 'AUTH_MODULE', `用户 ${user.username} 登出`, user.username, user.user_id);
-    }
-    
     removeToken();
     removeCurrentUser();
     setUser(null);
