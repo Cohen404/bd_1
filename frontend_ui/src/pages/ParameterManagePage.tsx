@@ -8,11 +8,16 @@ import {
   Save,
   RefreshCw,
   Database,
-  Shield
+  Shield,
+  Download,
+  Upload,
+  RotateCcw
 } from 'lucide-react';
 import { apiClient } from '@/utils/api';
 import { Parameter } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
+import { ParameterStorage } from '@/utils/parameter-storage';
+import { validateParameter, validateParameterName } from '@/utils/parameter-validation';
 import toast from 'react-hot-toast';
 import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
 
@@ -80,8 +85,26 @@ const ParameterManagePage: React.FC = () => {
   };
   // ============================================
 
+  // 初始化默认参数数据
+  const initializeDefaultParameters = () => {
+    try {
+      const stored = localStorage.getItem('system_parameters');
+      if (!stored) {
+        const defaultParams = ParameterStorage.getDefaultParameters();
+        ParameterStorage.saveParameters(defaultParams);
+        setParameters(defaultParams);
+        toast.success('已初始化默认参数数据');
+      }
+    } catch (error) {
+      console.error('初始化默认参数失败:', error);
+      toast.error('初始化默认参数失败');
+    }
+  };
+
   useEffect(() => {
     fetchParameters();
+    // 初始化默认参数数据
+    initializeDefaultParameters();
   }, []);
 
   // 重置表单
@@ -142,13 +165,22 @@ const ParameterManagePage: React.FC = () => {
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 保存参数（保存到localStorage）
   const handleSave = async () => {
-    if (!formData.param_name.trim()) {
-      toast.error('请输入参数名称');
+    // 使用验证工具验证参数
+    const validationErrors = validateParameter(formData);
+    if (validationErrors.length > 0) {
+      validationErrors.forEach(error => toast.error(error));
       return;
     }
 
-    if (!formData.param_value.trim()) {
-      toast.error('请输入参数值');
+    // 验证参数名称是否重复
+    const nameErrors = validateParameterName(
+      formData.param_name, 
+      formData.param_type, 
+      parameters, 
+      editingParam?.id
+    );
+    if (nameErrors.length > 0) {
+      nameErrors.forEach(error => toast.error(error));
       return;
     }
 
@@ -215,6 +247,67 @@ const ParameterManagePage: React.FC = () => {
     (param.description && param.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
+  // 导出参数
+  const handleExport = () => {
+    try {
+      const jsonData = ParameterStorage.exportParameters();
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `system_parameters_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success('参数导出成功');
+    } catch (error) {
+      console.error('导出参数失败:', error);
+      toast.error('导出参数失败');
+    }
+  };
+
+  // 导入参数
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const jsonData = e.target?.result as string;
+        const success = ParameterStorage.importParameters(jsonData);
+        if (success) {
+          toast.success('参数导入成功');
+          fetchParameters();
+        } else {
+          toast.error('参数导入失败，请检查文件格式');
+        }
+      } catch (error) {
+        console.error('导入参数失败:', error);
+        toast.error('导入参数失败');
+      }
+    };
+    reader.readAsText(file);
+    
+    // 清空input值，允许重复选择同一文件
+    event.target.value = '';
+  };
+
+  // 重置为默认参数
+  const handleReset = () => {
+    if (window.confirm('确定要重置为默认参数吗？此操作将清除所有现有参数。')) {
+      try {
+        ParameterStorage.resetToDefault();
+        toast.success('已重置为默认参数');
+        fetchParameters();
+      } catch (error) {
+        console.error('重置参数失败:', error);
+        toast.error('重置参数失败');
+      }
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* 页面标题 */}
@@ -246,6 +339,30 @@ const ParameterManagePage: React.FC = () => {
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
             <span>刷新</span>
+          </button>
+          <button
+            onClick={handleExport}
+            className="btn btn-secondary flex items-center space-x-2"
+          >
+            <Download className="h-4 w-4" />
+            <span>导出</span>
+          </button>
+          <label className="btn btn-secondary flex items-center space-x-2 cursor-pointer">
+            <Upload className="h-4 w-4" />
+            <span>导入</span>
+            <input
+              type="file"
+              accept=".json"
+              onChange={handleImport}
+              className="hidden"
+            />
+          </label>
+          <button
+            onClick={handleReset}
+            className="btn btn-secondary flex items-center space-x-2"
+          >
+            <RotateCcw className="h-4 w-4" />
+            <span>重置</span>
           </button>
           <button
             onClick={handleAdd}
