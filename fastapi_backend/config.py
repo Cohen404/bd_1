@@ -2,8 +2,8 @@ import os
 import logging
 from dotenv import load_dotenv
 
-# 加载环境变量
-load_dotenv()
+# 加载环境变量 - 指定UTF-8编码
+load_dotenv(encoding='utf-8')
 
 # 获取项目根目录的绝对路径
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
