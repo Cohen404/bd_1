@@ -19,10 +19,13 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginRequest) => {
     try {
+      // ===== 纯前端演示模式 - 特殊标记 =====
+      // 直接调用修改后的login函数，不需要后端API
       const success = await login(data);
       if (success) {
         console.log('登录成功，等待跳转...');
       }
+      // ============================================
     } catch (error) {
       console.error('登录失败:', error);
     }
