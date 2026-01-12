@@ -22,21 +22,24 @@ def add_models_to_database():
         # 创建数据库会话
         db = SessionLocal()
         
+        # 获取项目根目录路径
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
         # 定义模型列表
         models_to_add = [
             {
                 'model_type': 0,  # 普通应激模型
-                'model_path': r'c:\myProgramme\bd_1\fastapi_backend\model\yingji\subject-1_yingji_quantized.tflite',
+                'model_path': os.path.join(project_root, 'original_application', 'model', 'yingji', 'subject-1_yingji_quantized.tflite'),
                 'description': '普通应激模型（INT8量化）'
             },
             {
                 'model_type': 1,  # 抑郁评估模型
-                'model_path': r'c:\myProgramme\bd_1\fastapi_backend\model\yiyu\subject-1 yiyu.keras',
+                'model_path': os.path.join(project_root, 'original_application', 'model', 'yiyu', 'subject-1 yiyu.keras'),
                 'description': '抑郁评估模型'
             },
             {
                 'model_type': 2,  # 焦虑评估模型
-                'model_path': r'c:\myProgramme\bd_1\fastapi_backend\model\jiaolv\subject-1jiaolv.keras',
+                'model_path': os.path.join(project_root, 'original_application', 'model', 'jiaolv', 'subject-1jiaolv.keras'),
                 'description': '焦虑评估模型'
             }
         ]

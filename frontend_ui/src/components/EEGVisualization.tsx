@@ -30,7 +30,7 @@ class SeededRandom {
 
 // 生成基于dataId和visualizationType的确定性EEG数据
 const generateRandomEEGData = (dataId: number, visualizationType: string) => {
-  const channels = Array.from({ length: 8 }, (_, i) => `通道${i + 1}`);
+  const channels = Array.from({ length: 16 }, (_, i) => `通道${i + 1}`);
   
   // 根据dataId和visualizationType创建种子
   const typeHash = visualizationType.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
