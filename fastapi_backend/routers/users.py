@@ -83,6 +83,72 @@ async def read_user_me(current_user = Depends(get_current_user)):
     """
     return current_user
 
+@router.get("/stats", response_model=schemas.AdminStats)
+async def get_admin_stats(
+    # current_user = Depends(check_admin_permission),  # 认证已移除
+    db: Session = Depends(get_db)
+):
+    """
+    获取管理员统计数据
+    """
+    try:
+        # 统计用户数量
+        total_users = db.query(db_models.User).count()
+        
+        # 统计角色数量
+        total_roles = db.query(db_models.Role).count()
+        
+        # 统计模型数量
+        total_models = db.query(db_models.Model).count()
+        
+        # 统计日志数量（从日志文件）
+        total_logs = 0
+        recent_activities = 0
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "r", encoding="utf-8") as f:
+                logs = f.readlines()
+                total_logs = len(logs)
+                
+                # 计算最近24小时的活动数量
+                one_day_ago = datetime.now() - timedelta(days=1)
+                for log in logs:
+                    try:
+                        log_time_str = log.split(" - ")[0]
+                        log_time = datetime.strptime(log_time_str, "%Y-%m-%d %H:%M:%S,%f")
+                        if log_time >= one_day_ago:
+                            recent_activities += 1
+                    except (ValueError, IndexError):
+                        continue
+        
+        # 计算系统健康度（基于数据完整性）
+        total_data = db.query(db_models.Data).count()
+        total_results = db.query(db_models.Result).count()
+        
+        system_health = min(100,
+            (20 if total_models > 0 else 0) +
+            (20 if total_data > 0 else 0) +
+            (20 if total_results > 0 else 0) +
+            (20 if total_users > 0 else 0) +
+            (20 if total_logs > 0 else 0)
+        )
+        
+        admin_stats = schemas.AdminStats(
+            totalUsers=total_users,
+            totalRoles=total_roles,
+            totalModels=total_models,
+            totalLogs=total_logs,
+            systemHealth=system_health,
+            recentActivities=recent_activities
+        )
+        
+        return admin_stats
+    except Exception as e:
+        logger.error(f"获取统计数据失败: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"获取统计数据失败: {str(e)}"
+        )
+
 @router.get("/{user_id}", response_model=schemas.User)
 async def read_user(
     user_id: str,
@@ -176,69 +242,3 @@ async def delete_user(
     logging.info(f"删除了用户: {db_user.username}")
     
     return None
-
-@router.get("/stats", response_model=schemas.AdminStats)
-async def get_admin_stats(
-    # current_user = Depends(check_admin_permission),  # 认证已移除
-    db: Session = Depends(get_db)
-):
-    """
-    获取管理员统计数据
-    """
-    try:
-        # 统计用户数量
-        total_users = db.query(db_models.User).count()
-        
-        # 统计角色数量
-        total_roles = db.query(db_models.Role).count()
-        
-        # 统计模型数量
-        total_models = db.query(db_models.Model).count()
-        
-        # 统计日志数量（从日志文件）
-        total_logs = 0
-        recent_activities = 0
-        if os.path.exists(LOG_FILE):
-            with open(LOG_FILE, "r", encoding="utf-8") as f:
-                logs = f.readlines()
-                total_logs = len(logs)
-                
-                # 计算最近24小时的活动数量
-                one_day_ago = datetime.now() - timedelta(days=1)
-                for log in logs:
-                    try:
-                        log_time_str = log.split(" - ")[0]
-                        log_time = datetime.strptime(log_time_str, "%Y-%m-%d %H:%M:%S,%f")
-                        if log_time >= one_day_ago:
-                            recent_activities += 1
-                    except (ValueError, IndexError):
-                        continue
-        
-        # 计算系统健康度（基于数据完整性）
-        total_data = db.query(db_models.Data).count()
-        total_results = db.query(db_models.Result).count()
-        
-        system_health = min(100,
-            (20 if total_models > 0 else 0) +
-            (20 if total_data > 0 else 0) +
-            (20 if total_results > 0 else 0) +
-            (20 if total_users > 0 else 0) +
-            (20 if total_logs > 0 else 0)
-        )
-        
-        admin_stats = schemas.AdminStats(
-            totalUsers=total_users,
-            totalRoles=total_roles,
-            totalModels=total_models,
-            totalLogs=total_logs,
-            systemHealth=system_health,
-            recentActivities=recent_activities
-        )
-        
-        return admin_stats
-    except Exception as e:
-        logger.error(f"获取统计数据失败: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"获取统计数据失败: {str(e)}"
-        )
