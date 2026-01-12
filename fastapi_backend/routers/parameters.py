@@ -46,7 +46,7 @@ async def create_parameter(
     db.commit()
     db.refresh(db_param)
     
-    logging.info(f"管理员{current_user.username}创建了参数: {parameter.param_name}")
+    logging.info(f"创建了参数: {parameter.param_name}")
     
     return db_param
 
@@ -143,7 +143,7 @@ async def update_parameter(
     db.commit()
     db.refresh(db_param)
     
-    logging.info(f"管理员{current_user.username}更新了参数ID: {param_id}")
+    logging.info(f"更新了参数ID: {param_id}")
     
     return db_param
 
@@ -167,6 +167,6 @@ async def delete_parameter(
     db.delete(db_param)
     db.commit()
     
-    logging.info(f"管理员{current_user.username}删除了参数ID: {param_id}")
+    logging.info(f"删除了参数ID: {param_id}")
     
     return None 

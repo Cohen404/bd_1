@@ -3,12 +3,14 @@ from sqlalchemy.orm import Session
 from typing import List
 import logging
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
+import os
 
 from database import get_db
 import models as db_models
 import schemas
 from auth import get_current_user, check_admin_permission, hash_password
+from config import LOG_FILE
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -49,7 +51,7 @@ async def create_user(
         db.commit()
         db.refresh(db_user)
         
-        logger.info(f"用户 {user.username} 创建成功，操作者：{current_user.username}")
+        logger.info(f"用户 {user.username} 创建成功")
         return db_user
     except HTTPException:
         raise
@@ -90,13 +92,6 @@ async def read_user(
     """
     获取特定用户信息
     """
-    # 检查权限，普通用户只能查看自己的信息
-    if current_user.user_type != "admin" and current_user.user_id != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="没有权限查看其他用户的信息"
-        )
-    
     db_user = db.query(db_models.User).filter(db_models.User.user_id == user_id).first()
     if db_user is None:
         raise HTTPException(
@@ -115,20 +110,6 @@ async def update_user(
     """
     更新用户信息
     """
-    # 检查权限，普通用户只能更新自己的信息
-    if current_user.user_type != "admin" and current_user.user_id != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="没有权限更新其他用户的信息"
-        )
-    
-    # 普通用户不能修改自己的用户类型
-    if current_user.user_type != "admin" and user.user_type is not None:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="没有权限修改用户类型"
-        )
-    
     db_user = db.query(db_models.User).filter(db_models.User.user_id == user_id).first()
     if db_user is None:
         raise HTTPException(
@@ -159,7 +140,7 @@ async def update_user(
     if user.phone is not None:
         db_user.phone = user.phone
     
-    if user.user_type is not None and current_user.user_type == "admin":
+    if user.user_type is not None:
         db_user.user_type = user.user_type
     
     db_user.updated_at = datetime.now()
@@ -185,13 +166,6 @@ async def delete_user(
             detail="用户不存在"
         )
     
-    # 管理员不能删除自己
-    if db_user.user_id == current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="不能删除当前登录的管理员账户"
-        )
-    
     # 删除相关的用户角色关联
     db.query(db_models.UserRole).filter(db_models.UserRole.user_id == user_id).delete()
     
@@ -199,6 +173,72 @@ async def delete_user(
     db.delete(db_user)
     db.commit()
     
-    logging.info(f"管理员{current_user.username}删除了用户: {db_user.username}")
+    logging.info(f"删除了用户: {db_user.username}")
     
-    return None 
+    return None
+
+@router.get("/stats", response_model=schemas.AdminStats)
+async def get_admin_stats(
+    # current_user = Depends(check_admin_permission),  # 认证已移除
+    db: Session = Depends(get_db)
+):
+    """
+    获取管理员统计数据
+    """
+    try:
+        # 统计用户数量
+        total_users = db.query(db_models.User).count()
+        
+        # 统计角色数量
+        total_roles = db.query(db_models.Role).count()
+        
+        # 统计模型数量
+        total_models = db.query(db_models.Model).count()
+        
+        # 统计日志数量（从日志文件）
+        total_logs = 0
+        recent_activities = 0
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "r", encoding="utf-8") as f:
+                logs = f.readlines()
+                total_logs = len(logs)
+                
+                # 计算最近24小时的活动数量
+                one_day_ago = datetime.now() - timedelta(days=1)
+                for log in logs:
+                    try:
+                        log_time_str = log.split(" - ")[0]
+                        log_time = datetime.strptime(log_time_str, "%Y-%m-%d %H:%M:%S,%f")
+                        if log_time >= one_day_ago:
+                            recent_activities += 1
+                    except (ValueError, IndexError):
+                        continue
+        
+        # 计算系统健康度（基于数据完整性）
+        total_data = db.query(db_models.Data).count()
+        total_results = db.query(db_models.Result).count()
+        
+        system_health = min(100,
+            (20 if total_models > 0 else 0) +
+            (20 if total_data > 0 else 0) +
+            (20 if total_results > 0 else 0) +
+            (20 if total_users > 0 else 0) +
+            (20 if total_logs > 0 else 0)
+        )
+        
+        admin_stats = schemas.AdminStats(
+            totalUsers=total_users,
+            totalRoles=total_roles,
+            totalModels=total_models,
+            totalLogs=total_logs,
+            systemHealth=system_health,
+            recentActivities=recent_activities
+        )
+        
+        return admin_stats
+    except Exception as e:
+        logger.error(f"获取统计数据失败: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"获取统计数据失败: {str(e)}"
+        )

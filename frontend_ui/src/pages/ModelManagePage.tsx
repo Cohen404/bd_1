@@ -22,10 +22,9 @@ import {
   Info,
   Zap
 } from 'lucide-react';
-// import { apiClient } from '@/utils/api'; // 注释后端API调用
+import { apiClient } from '@/utils/api';
 import { Model } from '@/types';
 import { formatDateTime, formatFileSize } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, Model as LocalStorageModel } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 interface ModelStatus {
@@ -97,35 +96,11 @@ const ModelManagePage: React.FC = () => {
     3: "社交孤立评估模型"
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取模型列表（从localStorage读取）
   const fetchModels = async () => {
     try {
       setLoading(true);
-      
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 模拟API调用延迟
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // 从localStorage获取模型数据
-      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 转换为前端Model类型（如果需要的话）
-      const convertedModels: Model[] = modelsList.map(model => ({
-        id: model.id,
-        model_type: model.id % 4, // 将id映射到0-3的模型类型
-        model_path: `/models/${model.name.toLowerCase().replace(/\s+/g, '_')}_${model.version}.pkl`,
-        create_time: model.created_at,
-        update_time: model.created_at,
-        status: model.status === '已部署' ? 'active' : 'inactive',
-        version: model.version,
-        accuracy: model.accuracy,
-        description: model.description
-      }));
-      
-      setModels(convertedModels);
+      const response = await apiClient.getModels();
+      setModels(response);
     } catch (error) {
       console.error('获取模型列表失败:', error);
       toast.error('获取模型列表失败');
@@ -133,73 +108,21 @@ const ModelManagePage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取模型状态（从localStorage读取）
   const fetchModelStatus = async () => {
     try {
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 从localStorage获取模型数据
-      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 计算模型状态
-      const totalModels = modelsList.length;
-      const availableModels = modelsList.filter(model => model.status === '已部署').length;
-      const missingModels = totalModels - availableModels;
-      
-      // 生成模型详情
-      const modelDetails = modelsList.map((model, index) => ({
-        id: model.id,
-        model_type: index % 4,
-        model_path: `/models/${model.name.toLowerCase().replace(/\s+/g, '_')}_${model.version}.pkl`,
-        status: model.status === '已部署' ? 'available' : 'missing',
-        version: model.version,
-        accuracy: model.accuracy,
-        last_updated: model.created_at
-      }));
-      
-      const status: ModelStatus = {
-        total_models: totalModels,
-        available_models: availableModels,
-        missing_models: missingModels,
-        model_details: modelDetails
-      };
-      
-      setModelStatus(status);
+      const response = await apiClient.getModelStatus();
+      setModelStatus(response);
     } catch (error) {
       console.error('获取模型状态失败:', error);
       toast.error('获取模型状态失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取模型版本（从localStorage读取）
   const fetchModelVersions = async (modelType: number) => {
     try {
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 从localStorage获取模型数据
-      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 根据模型类型过滤并生成版本信息
-      const filteredModels = modelsList.filter((_, index) => index % 4 === modelType);
-      
-      const versions: ModelVersion[] = filteredModels.map(model => ({
-        id: model.id,
-        version: model.version,
-        created_at: model.created_at,
-        status: model.status === '已部署' ? 'active' : 'inactive',
-        accuracy: model.accuracy,
-        description: model.description,
-        file_size: parseFloat((Math.random() * 150 + 30).toFixed(2)) // 模拟文件大小，30-180MB，保留两位小数
-      }));
-      
-      setModelVersions(versions);
+      const response = await apiClient.getModelVersions(modelType);
+      setModelVersions(response.versions || []);
       setSelectedModelType(modelType);
       setShowVersions(true);
     } catch (error) {
@@ -207,51 +130,29 @@ const ModelManagePage: React.FC = () => {
       toast.error('获取模型版本失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取模型性能信息（从localStorage读取）
   const fetchModelPerformance = async () => {
     try {
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 从localStorage获取模型数据
-      const modelsList = LocalStorageManager.get<Model[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 生成性能数据
-      const performanceData: ModelPerformance[] = modelsList.map((model, index) => ({
-        model_id: model.id,
-        model_name: model.name,
-        model_type: index % 4,
-        accuracy: model.accuracy,
-        precision: parseFloat((model.accuracy - 0.02 + Math.random() * 0.04).toFixed(4)), // 模拟精度
-        recall: parseFloat((model.accuracy - 0.01 + Math.random() * 0.02).toFixed(4)), // 模拟召回率
-        f1_score: parseFloat((model.accuracy - 0.015 + Math.random() * 0.03).toFixed(4)), // 模拟F1分数
-        training_time_hours: Math.floor(Math.random() * 48) + 12, // 模拟训练时间
-        training_epochs: Math.floor(Math.random() * 100) + 50, // 模拟训练轮数
-        model_size_mb: parseFloat((Math.random() * 180 + 35).toFixed(2)) // 模拟模型大小，35-215MB，保留两位小数
-      }));
-      
-      setModelPerformance(performanceData);
+      const response = await apiClient.getModelPerformance();
+      setModelPerformance(response.performance_data || []);
     } catch (error) {
       console.error('获取模型性能信息失败:', error);
       toast.error('获取模型性能信息失败');
     }
   };
-  // ============================================
 
   useEffect(() => {
     fetchModels();
   }, []);
 
-  // 上传模型文件 - 纯前端实现
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // 检查文件类型
-    if (!file.name.endsWith('.keras') && !file.name.endsWith('.h5') && !file.name.endsWith('.pt') && !file.name.endsWith('.pkl')) {
+    const fileExt = file.name.split('.').pop()?.toLowerCase();
+    const allowedExtensions = ['keras', 'h5', 'pt', 'pkl'];
+    
+    if (!fileExt || !allowedExtensions.includes(fileExt)) {
       toast.error('请选择有效的模型文件（.keras, .h5, .pt, .pkl）');
       return;
     }
@@ -260,93 +161,43 @@ const ModelManagePage: React.FC = () => {
       setUploading(true);
       setUploadProgress(0);
 
-      // 模拟上传进度（纯前端演示，不实际上传）
-      const progressTimer = setInterval(() => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('model_type', selectedUploadType.toString());
+
+      const progressInterval = setInterval(() => {
         setUploadProgress(prev => {
           if (prev >= 90) {
-            clearInterval(progressTimer);
+            clearInterval(progressInterval);
             return 90;
           }
           return prev + 10;
         });
       }, 200);
 
-      // 模拟一点延迟，等待进度条接近完成
-      await new Promise(resolve => setTimeout(resolve, 1200));
+      await apiClient.uploadModel(formData);
 
-      // 从 localStorage 获取当前模型列表
-      const modelsList = LocalStorageManager.get<LocalStorageModel[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 检查该类型的模型是否存在
-      const existingModelIndex = modelsList.findIndex(m => m.id === selectedUploadType);
-      
-      const now = new Date().toISOString();
-      
-      if (existingModelIndex !== -1) {
-        // 如果模型存在，更新它
-        modelsList[existingModelIndex] = {
-          ...modelsList[existingModelIndex],
-          created_at: now
-        };
-        toast.success('模型更新成功！');
-      } else {
-        // 如果模型不存在，创建新模型
-        const modelTypeName = modelTypes[selectedUploadType as keyof typeof modelTypes] || '未知类型';
-        const newModel: LocalStorageModel = {
-          id: selectedUploadType,
-          name: modelTypeName,
-          version: '1.0.0',
-          description: `新上传的${modelTypeName}模型`,
-          status: 'active',
-          created_at: now,
-          accuracy: 0.85 + Math.random() * 0.1 // 生成一个随机准确率
-        };
-        modelsList.push(newModel);
-        toast.success('模型添加成功！');
-      }
-      
-      // 保存到 localStorage
-      LocalStorageManager.set(STORAGE_KEYS.MODELS, modelsList);
-      
-      // 更新前端状态
-      const newModelPath = `/models/${selectedUploadType}/${file.name}`;
-      setModels(prev => {
-        const updated = prev.filter(m => m.model_type !== selectedUploadType);
-        const modelTypeName = modelTypes[selectedUploadType as keyof typeof modelTypes] || '未知类型';
-        updated.push({
-          id: selectedUploadType,
-          model_type: selectedUploadType,
-          model_name: modelTypeName,
-          model_path: newModelPath,
-          version: existingModelIndex !== -1 ? (prev.find(m => m.model_type === selectedUploadType)?.version || '1.0.0') : '1.0.0',
-          create_time: now,
-          model_size: file.size,
-          status: 'active'
-        });
-        return updated;
-      });
-
+      clearInterval(progressInterval);
       setUploadProgress(100);
 
-      // 稍后复位上传状态
+      toast.success('模型上传成功');
+      fetchModels();
+
       setTimeout(() => {
         setUploadProgress(0);
         setUploading(false);
       }, 800);
 
     } catch (error) {
-      console.error('更新模型信息失败:', error);
-      toast.error('更新模型信息失败');
+      console.error('上传模型失败:', error);
+      toast.error('上传模型失败');
       setUploading(false);
       setUploadProgress(0);
     }
 
-    // 重置文件输入
     event.target.value = '';
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 删除模型
   const handleDelete = async (modelId: number, modelType: number) => {
     const modelTypeName = modelTypes[modelType as keyof typeof modelTypes] || '未知类型';
     
@@ -355,89 +206,41 @@ const ModelManagePage: React.FC = () => {
     }
 
     try {
-      // 从 localStorage 获取当前模型列表
-      const modelsList = LocalStorageManager.get<LocalStorageModel[]>(STORAGE_KEYS.MODELS, []);
-      
-      // 从列表中删除指定的模型
-      const updatedModelsList = modelsList.filter(model => model.id !== modelId);
-      
-      // 保存更新后的列表到 localStorage
-      LocalStorageManager.set(STORAGE_KEYS.MODELS, updatedModelsList);
-      
-      // 从前端状态中删除该模型
+      await apiClient.deleteModel(modelId);
       setModels(prevModels => prevModels.filter(model => model.id !== modelId));
-      
       toast.success('模型删除成功');
     } catch (error) {
-      console.error('删除模型失败，完整错误栈:', error);
-      if (error instanceof Error) {
-        console.error('错误消息:', error.message);
-        console.error('错误堆栈:', error.stack);
-      }
+      console.error('删除模型失败:', error);
       toast.error('删除模型失败');
     }
   };
-  // ============================================
 
-  // 导出单个模型 - 纯前端实现（模拟）
   const handleExportModel = async (modelId: number) => {
     try {
-      // 查找对应的模型
       const model = models.find(m => m.id === modelId);
       if (!model) {
         toast.error('未找到模型');
         return;
       }
 
-      // 从模型路径中提取文件名（base name）
-      const fileName = model.model_path.split('/').pop() || `model_${modelId}.pkl`;
-
-      // 根据模型 ID 生成文件大小（35-215MB），使用模型 ID 作为随机种子
-      // 使用简单的伪随机算法，确保同一个模型每次导出大小相同但看起来随机
-      const seed = modelId * 9301 + 49297; // 简单的线性同余生成器
-      const random = (seed % 233280) / 233280; // 生成 0-1 之间的伪随机数
-      const fileSizeMB = parseFloat((35 + random * 180).toFixed(2)); // 35-215MB，保留两位小数
-      const fileSizeBytes = Math.floor(fileSizeMB * 1024 * 1024);
-
-      // 生成随机内容
-      // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
-      const chunkSize = 65536; // 64KB chunks (crypto.getRandomValues 的安全限制)
-      const chunks = [];
-      const numChunks = Math.ceil(fileSizeBytes / chunkSize);
-
-      for (let i = 0; i < numChunks; i++) {
-        const size = i === numChunks - 1 ? fileSizeBytes % chunkSize || chunkSize : chunkSize;
-        const chunk = new Uint8Array(size);
-        // 填充随机数据
-        crypto.getRandomValues(chunk);
-        chunks.push(chunk);
-      }
-
-      // 创建 Blob
-      const blob = new Blob(chunks, { type: 'application/octet-stream' });
-
-      // 触发下载
+      const blob = await apiClient.exportModel(modelId);
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
+      const fileName = model.model_path.split('/').pop() || `model_${modelId}.keras`;
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      toast.success('模型信息导出成功');
+      toast.success('模型导出成功');
     } catch (error) {
-      console.error('导出模型失败，完整错误栈:', error);
-      if (error instanceof Error) {
-        console.error('错误消息:', error.message);
-        console.error('错误堆栈:', error.stack);
-      }
+      console.error('导出模型失败:', error);
       toast.error('导出模型失败');
     }
   };
 
-  // 导出所有模型 - 纯前端实现（模拟）
   const handleExportAllModels = async () => {
     try {
       if (models.length === 0) {
@@ -445,73 +248,32 @@ const ModelManagePage: React.FC = () => {
         return;
       }
 
-      // 依次导出每个模型
-      for (let i = 0; i < models.length; i++) {
-        const model = models[i];
-        
-        // 从模型路径中提取文件名（base name）
-        const fileName = model.model_path.split('/').pop() || `model_${model.id}.pkl`;
-
-        // 根据模型 ID 生成文件大小（35-215MB），使用模型 ID 作为随机种子
-        // 使用简单的伪随机算法，确保同一个模型每次导出大小相同但看起来随机
-        const seed = model.id * 9301 + 49297; // 简单的线性同余生成器
-        const random = (seed % 233280) / 233280; // 生成 0-1 之间的伪随机数
-        const fileSizeMB = parseFloat((35 + random * 180).toFixed(2)); // 35-215MB，保留两位小数
-        const fileSizeBytes = Math.floor(fileSizeMB * 1024 * 1024);
-
-        // 生成随机内容
-        // crypto.getRandomValues 有最大限制（通常是 65536 字节），所以使用较小的块
-        const chunkSize = 65536; // 64KB chunks (crypto.getRandomValues 的安全限制)
-        const chunks = [];
-        const numChunks = Math.ceil(fileSizeBytes / chunkSize);
-
-        for (let j = 0; j < numChunks; j++) {
-          const size = j === numChunks - 1 ? fileSizeBytes % chunkSize || chunkSize : chunkSize;
-          const chunk = new Uint8Array(size);
-          // 填充随机数据
-          crypto.getRandomValues(chunk);
-          chunks.push(chunk);
-        }
-
-        // 创建 Blob
-        const blob = new Blob(chunks, { type: 'application/octet-stream' });
-
-        // 触发下载
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-
-        // 如果不是最后一个文件，稍微延迟一下，避免浏览器同时下载太多文件
-        if (i < models.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 500));
-        }
-      }
+      const blob = await apiClient.exportAllModels();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      const fileName = `所有模型_${new Date().toISOString().slice(0, 10)}.zip`;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
 
       toast.success(`成功导出 ${models.length} 个模型`);
     } catch (error) {
-      console.error('导出所有模型失败，完整错误栈:', error);
-      if (error instanceof Error) {
-        console.error('错误消息:', error.message);
-        console.error('错误堆栈:', error.stack);
-      }
+      console.error('导出所有模型失败:', error);
       toast.error('导出所有模型失败');
     }
   };
 
-  // 恢复模型版本 - 纯前端实现（模拟）
   const handleRestoreVersion = async (modelType: number, backupFilename: string) => {
     if (!window.confirm(`确定要恢复到此版本吗？当前版本将被备份。`)) {
       return;
     }
 
     try {
-      // 模拟版本恢复
-      toast.success('模型版本恢复成功（模拟）');
+      await apiClient.restoreModelVersion(modelType, backupFilename);
+      toast.success('模型版本恢复成功');
       fetchModels();
       fetchModelVersions(modelType);
     } catch (error) {
@@ -520,9 +282,12 @@ const ModelManagePage: React.FC = () => {
     }
   };
 
-  // 过滤模型 - 使用存储类的搜索功能
   const filteredModels = searchTerm 
-    ? ModelStorage.searchModels(searchTerm)
+    ? models.filter(model => {
+        const modelTypeName = modelTypes[model.model_type as keyof typeof modelTypes] || '未知类型';
+        return modelTypeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               model.model_path.toLowerCase().includes(searchTerm.toLowerCase());
+      })
     : models;
 
   return (

@@ -231,15 +231,10 @@ export interface SearchFilters {
 
 // 日志类型
 export interface LogEntry {
-  id: number;
-  user_id: string;
+  timestamp: string;
+  level: string;
   username: string;
-  action: string;
-  resource: string;
-  details?: string;
-  ip_address?: string;
-  user_agent?: string;
-  created_at: string;
+  message: string;
 }
 
 // 通用状态类型

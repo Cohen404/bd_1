@@ -295,4 +295,13 @@ class EvaluationStatus(BaseModel):
     status: str  # "pending", "processing", "completed", "failed"
     progress: float  # 0.0 to 1.0
     message: Optional[str] = None
-    result_id: Optional[int] = None 
+    result_id: Optional[int] = None
+
+# 管理员统计模型
+class AdminStats(BaseModel):
+    totalUsers: int
+    totalRoles: int
+    totalModels: int
+    totalLogs: int
+    systemHealth: int
+    recentActivities: int 

@@ -10,44 +10,49 @@ import {
   CheckCircle,
   XCircle
 } from 'lucide-react';
-import { LocalStorageManager, STORAGE_KEYS, Role as LocalRole, DataOperations } from '@/utils/localStorage';
+import { apiClient } from '@/utils/api';
+import { Role, Permission } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
 import toast from 'react-hot-toast';
 
 interface RoleFormData {
-  name: string;
+  role_name: string;
   description: string;
-}
-
-interface Permission {
-  id: number;
-  name: string;
-  description: string;
-  resource: string;
-  action: string;
 }
 
 const RoleManagePage: React.FC = () => {
-  const [roles, setRoles] = useState<LocalRole[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [showPermissionsModal, setShowPermissionsModal] = useState(false);
-  const [editingRole, setEditingRole] = useState<LocalRole | null>(null);
-  const [selectedRole, setSelectedRole] = useState<LocalRole | null>(null);
-  const [rolePermissions, setRolePermissions] = useState<string[]>([]);
+  const [editingRole, setEditingRole] = useState<Role | null>(null);
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+  const [rolePermissions, setRolePermissions] = useState<Permission[]>([]);
   const [formData, setFormData] = useState<RoleFormData>({
-    name: '',
+    role_name: '',
     description: ''
   });
 
-  // 获取角色列表
+  const [pagination, setPagination] = useState({
+    page: 1,
+    size: 10,
+    total: 0
+  });
+
   const fetchRoles = async () => {
     try {
       setLoading(true);
-      const roles = LocalStorageManager.get<LocalRole[]>(STORAGE_KEYS.ROLES, []);
-      setRoles(roles);
+      const response = await apiClient.getRoles({
+        page: pagination.page,
+        size: pagination.size
+      });
+      setRoles(response.items || response);
+      setPagination(prev => ({
+        ...prev,
+        total: response.total || response.length
+      }));
     } catch (error) {
       console.error('获取角色列表失败:', error);
       toast.error('获取角色列表失败');
@@ -56,19 +61,18 @@ const RoleManagePage: React.FC = () => {
     }
   };
 
-  // 获取权限列表
   const fetchPermissions = async () => {
     try {
-      // 权限数据
       const mockPermissions: Permission[] = [
-        { id: 1, name: '用户管理', description: '管理系统用户', resource: 'user', action: 'manage' },
-        { id: 2, name: '角色管理', description: '管理用户角色', resource: 'role', action: 'manage' },
-        { id: 3, name: '数据管理', description: '管理数据文件', resource: 'data', action: 'manage' },
-        { id: 4, name: '结果管理', description: '管理评估结果', resource: 'result', action: 'manage' },
-        { id: 5, name: '模型管理', description: '管理AI模型', resource: 'model', action: 'manage' },
-        { id: 6, name: '应激评估', description: '执行健康评估', resource: 'evaluation', action: 'execute' },
-        { id: 7, name: '参数管理', description: '管理系统参数', resource: 'parameter', action: 'manage' },
-        { id: 8, name: '日志管理', description: '查看系统日志', resource: 'log', action: 'view' },
+        { permission_id: 1, permission_name: 'user_read', description: '用户信息读取', resource: 'user', action: 'read' },
+        { permission_id: 2, permission_name: 'user_write', description: '用户信息修改', resource: 'user', action: 'write' },
+        { permission_id: 3, permission_name: 'data_read', description: '数据读取', resource: 'data', action: 'read' },
+        { permission_id: 4, permission_name: 'data_write', description: '数据修改', resource: 'data', action: 'write' },
+        { permission_id: 5, permission_name: 'model_read', description: '模型读取', resource: 'model', action: 'read' },
+        { permission_id: 6, permission_name: 'model_write', description: '模型修改', resource: 'model', action: 'write' },
+        { permission_id: 7, permission_name: 'result_read', description: '结果读取', resource: 'result', action: 'read' },
+        { permission_id: 8, permission_name: 'result_write', description: '结果修改', resource: 'result', action: 'write' },
+        { permission_id: 9, permission_name: 'admin_all', description: '系统管理', resource: 'system', action: 'admin' },
       ];
       setPermissions(mockPermissions);
     } catch (error) {
@@ -76,12 +80,10 @@ const RoleManagePage: React.FC = () => {
     }
   };
 
-  // 获取角色权限
   const fetchRolePermissions = async (roleId: number) => {
     try {
-      const roles = LocalStorageManager.get<LocalRole[]>(STORAGE_KEYS.ROLES, []);
-      const role = roles.find(r => r.id === roleId);
-      setRolePermissions(role ? role.permissions : []);
+      const response = await apiClient.getRolePermissions(roleId);
+      setRolePermissions(response);
     } catch (error) {
       console.error('获取角色权限失败:', error);
       setRolePermissions([]);
@@ -91,12 +93,11 @@ const RoleManagePage: React.FC = () => {
   useEffect(() => {
     fetchRoles();
     fetchPermissions();
-  }, []);
+  }, [pagination.page, pagination.size]);
 
-  // 重置表单
   const resetForm = () => {
     setFormData({
-      name: '',
+      role_name: '',
       description: ''
     });
     setEditingRole(null);
@@ -108,37 +109,28 @@ const RoleManagePage: React.FC = () => {
     setShowModal(true);
   };
 
-  // 打开编辑角色模态框
-  const handleEdit = (role: LocalRole) => {
+  const handleEdit = (role: Role) => {
     setEditingRole(role);
     setFormData({
-      name: role.name,
+      role_name: role.role_name,
       description: role.description || ''
     });
     setShowModal(true);
   };
 
-  // 查看角色权限
-  const handleViewPermissions = async (role: LocalRole) => {
+  const handleViewPermissions = async (role: Role) => {
     setSelectedRole(role);
-    await fetchRolePermissions(role.id);
+    await fetchRolePermissions(role.role_id);
     setShowPermissionsModal(true);
   };
 
-  // 删除角色
   const handleDelete = async (roleId: number, roleName: string) => {
     if (!window.confirm(`确定要删除角色"${roleName}"吗？此操作无法撤销。`)) {
       return;
     }
 
     try {
-      const roles = LocalStorageManager.get<LocalRole[]>(STORAGE_KEYS.ROLES, []);
-      const updatedRoles = roles.filter(role => role.id !== roleId);
-      LocalStorageManager.set(STORAGE_KEYS.ROLES, updatedRoles);
-      
-      // 添加日志
-      DataOperations.addLog('DELETE_ROLE', 'ROLE_MANAGEMENT', `角色"${roleName}"被删除`, 'admin', '1');
-      
+      await apiClient.deleteRole(roleId);
       toast.success('角色删除成功');
       fetchRoles();
     } catch (error) {
@@ -147,45 +139,24 @@ const RoleManagePage: React.FC = () => {
     }
   };
 
-  // 保存角色
   const handleSave = async () => {
-    if (!formData.name.trim()) {
+    if (!formData.role_name.trim()) {
       toast.error('请输入角色名称');
       return;
     }
 
     try {
-      const roles = LocalStorageManager.get<LocalRole[]>(STORAGE_KEYS.ROLES, []);
-      
       if (editingRole) {
-        // 更新角色
-        const updatedRoles = roles.map(role => 
-          role.id === editingRole.id 
-            ? { ...role, name: formData.name, description: formData.description }
-            : role
-        );
-        LocalStorageManager.set(STORAGE_KEYS.ROLES, updatedRoles);
-        
-        // 添加日志
-        DataOperations.addLog('UPDATE_ROLE', 'ROLE_MANAGEMENT', `角色"${formData.name}"被更新`, 'admin', '1');
-        
+        await apiClient.updateRole(editingRole.role_id, {
+          role_name: formData.role_name,
+          description: formData.description
+        });
         toast.success('角色更新成功');
       } else {
-        // 创建角色
-        const newRole: LocalRole = {
-          id: DataOperations.getNextId(roles),
-          name: formData.name,
-          description: formData.description,
-          permissions: [], // 新角色默认无权限
-          created_at: new Date().toISOString()
-        };
-        
-        roles.push(newRole);
-        LocalStorageManager.set(STORAGE_KEYS.ROLES, roles);
-        
-        // 添加日志
-        DataOperations.addLog('CREATE_ROLE', 'ROLE_MANAGEMENT', `角色"${formData.name}"被创建`, 'admin', '1');
-        
+        await apiClient.createRole({
+          role_name: formData.role_name,
+          description: formData.description
+        });
         toast.success('角色创建成功');
       }
 
@@ -198,15 +169,13 @@ const RoleManagePage: React.FC = () => {
     }
   };
 
-  // 过滤角色列表
   const filteredRoles = roles.filter(role =>
-    role.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    role.role_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (role.description && role.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  // 检查角色是否有某个权限
-  const hasPermission = (permissionKey: string) => {
-    return rolePermissions.includes(permissionKey);
+  const hasPermission = (permissionName: string) => {
+    return rolePermissions.some(p => p.permission_name === permissionName);
   };
 
   return (
@@ -276,7 +245,7 @@ const RoleManagePage: React.FC = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredRoles.map((role) => (
-                  <tr key={role.id} className="hover:bg-gray-50">
+                  <tr key={role.role_id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
@@ -284,7 +253,7 @@ const RoleManagePage: React.FC = () => {
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {role.name}
+                            {role.role_name}
                           </div>
                         </div>
                       </div>
@@ -314,7 +283,7 @@ const RoleManagePage: React.FC = () => {
                           <Edit className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => handleDelete(role.id, role.name)}
+                          onClick={() => handleDelete(role.role_id, role.role_name)}
                           className="text-red-600 hover:text-red-700"
                           title="删除"
                         >
@@ -344,8 +313,8 @@ const RoleManagePage: React.FC = () => {
                 <input
                   type="text"
                   className="input"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  value={formData.role_name}
+                  onChange={(e) => setFormData({ ...formData, role_name: e.target.value })}
                   placeholder="请输入角色名称"
                 />
               </div>
@@ -397,23 +366,21 @@ const RoleManagePage: React.FC = () => {
 
             <div className="space-y-3">
               {permissions.map((permission) => {
-                // 将权限映射到localStorage中的权限键
-                const permissionKey = `${permission.resource}_${permission.action}`;
                 return (
                   <div
-                    key={permission.id}
+                    key={permission.permission_id}
                     className="flex items-center justify-between p-3 border rounded-lg"
                   >
                     <div className="flex-1">
                       <div className="font-medium text-gray-900">
-                        {permission.name}
+                        {permission.description}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {permission.description}
+                        {permission.permission_name}
                       </div>
                     </div>
                     <div className="flex items-center">
-                      {hasPermission(permissionKey) ? (
+                      {hasPermission(permission.permission_name) ? (
                         <CheckCircle className="h-5 w-5 text-green-500" />
                       ) : (
                         <XCircle className="h-5 w-5 text-gray-300" />

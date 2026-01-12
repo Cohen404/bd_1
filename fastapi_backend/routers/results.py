@@ -152,15 +152,6 @@ async def export_results(
             detail="没有找到要导出的结果"
         )
     
-    # 权限检查：普通用户只能导出自己的结果
-    if current_user.user_type != "admin":
-        for result in results:
-            if result.user_id != current_user.user_id:
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail=f"您没有权限导出结果ID: {result.id}"
-                )
-    
     # 准备导出数据
     export_data = []
     for result in results:
@@ -267,13 +258,6 @@ async def view_report(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and result.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限查看此报告"
-        )
-    
     if not result.report_path or not os.path.exists(result.report_path):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -297,10 +281,6 @@ async def get_result_statistics(
     获取结果统计信息
     """
     query = db.query(db_models.Result)
-    
-    # 普通用户只能查看自己的统计
-    if current_user.user_type != "admin":
-        query = query.filter(db_models.Result.user_id == current_user.user_id)
     
     # 日期范围过滤
     if start_date:
@@ -406,13 +386,6 @@ async def regenerate_report(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 权限检查
-    if current_user.user_type != "admin" and result.user_id != current_user.user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="您没有权限重新生成此报告"
-        )
-    
     # 获取关联的数据
     data = db.query(db_models.Data).filter(db_models.Data.id == result.data_id).first()
     if not data:
@@ -444,7 +417,7 @@ async def regenerate_report(
         result.report_path = new_report_path
         db.commit()
         
-        logging.info(f"用户 {current_user.username} 重新生成了结果ID {result_id} 的报告")
+        logging.info(f"重新生成了结果ID {result_id} 的报告")
         
         return {"message": "报告重新生成成功", "report_path": new_report_path}
         

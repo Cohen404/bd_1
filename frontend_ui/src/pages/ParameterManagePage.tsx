@@ -16,10 +16,8 @@ import {
 import { apiClient } from '@/utils/api';
 import { Parameter } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { ParameterStorage } from '@/utils/parameter-storage';
 import { validateParameter, validateParameterName } from '@/utils/parameter-validation';
 import toast from 'react-hot-toast';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
 
 interface ParameterFormData {
   param_name: string;
@@ -41,33 +39,11 @@ const ParameterManagePage: React.FC = () => {
     description: ''
   });
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取参数列表（从localStorage读取）
   const fetchParameters = async () => {
     try {
       setLoading(true);
-      
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 从localStorage获取参数数据
-      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
-      
-      // 转换为API格式的Parameter类型
-      const apiParameters: Parameter[] = parametersList.map(param => ({
-        id: param.id,
-        param_name: param.name,
-        param_value: param.value,
-        param_type: getParamTypeFromValue(param.value),
-        description: param.description,
-        created_at: param.updated_at,
-        updated_at: param.updated_at
-      }));
-      
-      setParameters(apiParameters);
-      
-      // 模拟API调用延迟
-      await new Promise(resolve => setTimeout(resolve, 300));
+      const response = await apiClient.getParameters();
+      setParameters(response.items || response);
     } catch (error) {
       console.error('获取参数列表失败:', error);
       toast.error('获取参数列表失败');
@@ -75,36 +51,9 @@ const ParameterManagePage: React.FC = () => {
       setLoading(false);
     }
   };
-  
-  // 根据参数值推断参数类型
-  const getParamTypeFromValue = (value: string): string => {
-    if (value === 'true' || value === 'false') return 'boolean';
-    if (!isNaN(Number(value)) && value !== '') return 'number';
-    if (value.startsWith('{') || value.startsWith('[')) return 'json';
-    return 'string';
-  };
-  // ============================================
-
-  // 初始化默认参数数据
-  const initializeDefaultParameters = () => {
-    try {
-      const stored = localStorage.getItem('system_parameters');
-      if (!stored) {
-        const defaultParams = ParameterStorage.getDefaultParameters();
-        ParameterStorage.saveParameters(defaultParams);
-        setParameters(defaultParams);
-        toast.success('已初始化默认参数数据');
-      }
-    } catch (error) {
-      console.error('初始化默认参数失败:', error);
-      toast.error('初始化默认参数失败');
-    }
-  };
 
   useEffect(() => {
     fetchParameters();
-    // 初始化默认参数数据
-    initializeDefaultParameters();
   }, []);
 
   // 重置表单
@@ -136,23 +85,13 @@ const ParameterManagePage: React.FC = () => {
     setShowModal(true);
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 删除参数（从localStorage删除）
   const handleDelete = async (paramId: number, paramName: string) => {
     if (!window.confirm(`确定要删除参数"${paramName}"吗？此操作无法撤销。`)) {
       return;
     }
 
     try {
-      // 从localStorage获取参数列表
-      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
-      
-      // 过滤掉要删除的参数
-      const updatedParameters = parametersList.filter(param => param.id !== paramId);
-      
-      // 保存更新后的参数列表
-      LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
-      
+      await apiClient.deleteParameter(paramId);
       toast.success('参数删除成功');
       fetchParameters();
     } catch (error) {
@@ -160,19 +99,14 @@ const ParameterManagePage: React.FC = () => {
       toast.error('删除参数失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 保存参数（保存到localStorage）
   const handleSave = async () => {
-    // 使用验证工具验证参数
     const validationErrors = validateParameter(formData);
     if (validationErrors.length > 0) {
       validationErrors.forEach(error => toast.error(error));
       return;
     }
 
-    // 验证参数名称是否重复
     const nameErrors = validateParameterName(
       formData.param_name, 
       formData.param_type, 
@@ -185,37 +119,11 @@ const ParameterManagePage: React.FC = () => {
     }
 
     try {
-      // 从localStorage获取参数列表
-      const parametersList = LocalStorageManager.get<any[]>(STORAGE_KEYS.PARAMETERS, []);
-      
       if (editingParam) {
-        // 更新参数
-        const updatedParameters = parametersList.map(param => 
-          param.id === editingParam.id 
-            ? {
-                ...param,
-                name: formData.param_name,
-                value: formData.param_value,
-                description: formData.description,
-                updated_at: new Date().toISOString()
-              }
-            : param
-        );
-        LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
+        await apiClient.updateParameter(editingParam.id, formData);
         toast.success('参数更新成功');
       } else {
-        // 创建参数
-        const newId = Math.max(...parametersList.map(p => p.id), 0) + 1;
-        const newParameter = {
-          id: newId,
-          name: formData.param_name,
-          value: formData.param_value,
-          description: formData.description,
-          category: '自定义参数',
-          updated_at: new Date().toISOString()
-        };
-        const updatedParameters = [...parametersList, newParameter];
-        LocalStorageManager.set(STORAGE_KEYS.PARAMETERS, updatedParameters);
+        await apiClient.createParameter(formData);
         toast.success('参数创建成功');
       }
 
@@ -227,7 +135,6 @@ const ParameterManagePage: React.FC = () => {
       toast.error('保存参数失败');
     }
   };
-  // ============================================
 
   // 获取参数类型显示名称
   const getParamTypeDisplay = (paramType: string) => {
@@ -247,10 +154,9 @@ const ParameterManagePage: React.FC = () => {
     (param.description && param.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  // 导出参数
   const handleExport = () => {
     try {
-      const jsonData = ParameterStorage.exportParameters();
+      const jsonData = JSON.stringify(parameters, null, 2);
       const blob = new Blob([jsonData], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -267,45 +173,48 @@ const ParameterManagePage: React.FC = () => {
     }
   };
 
-  // 导入参数
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const jsonData = e.target?.result as string;
-        const success = ParameterStorage.importParameters(jsonData);
-        if (success) {
-          toast.success('参数导入成功');
-          fetchParameters();
-        } else {
-          toast.error('参数导入失败，请检查文件格式');
+        const importedParams = JSON.parse(jsonData);
+        
+        if (!Array.isArray(importedParams)) {
+          toast.error('参数导入失败，文件格式不正确');
+          return;
         }
+
+        for (const param of importedParams) {
+          try {
+            await apiClient.createParameter({
+              param_name: param.param_name,
+              param_value: param.param_value,
+              param_type: param.param_type,
+              description: param.description
+            });
+          } catch (error) {
+            console.error('导入参数失败:', param, error);
+          }
+        }
+
+        toast.success('参数导入成功');
+        fetchParameters();
       } catch (error) {
         console.error('导入参数失败:', error);
-        toast.error('导入参数失败');
+        toast.error('导入参数失败，请检查文件格式');
       }
     };
     reader.readAsText(file);
     
-    // 清空input值，允许重复选择同一文件
     event.target.value = '';
   };
 
-  // 重置为默认参数
   const handleReset = () => {
-    if (window.confirm('确定要重置为默认参数吗？此操作将清除所有现有参数。')) {
-      try {
-        ParameterStorage.resetToDefault();
-        toast.success('已重置为默认参数');
-        fetchParameters();
-      } catch (error) {
-        console.error('重置参数失败:', error);
-        toast.error('重置参数失败');
-      }
-    }
+    toast.info('重置功能暂不可用，请手动删除参数');
   };
 
   return (

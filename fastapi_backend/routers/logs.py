@@ -69,17 +69,21 @@ async def read_logs(
         logs = f.readlines()
     
     # 日志正则表达式匹配模式
-    log_pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) - (\w+) - ([^-]+) - (.*)"
+    log_pattern = r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(?:,\d{3})?) - (\w+(?:\.\w+)*) - (\w+) - ([^-]+) - (.*)"
     
     # 过滤日志
     filtered_logs = []
     for log in logs:
         match = re.match(log_pattern, log)
         if match:
-            log_datetime_str, log_level, log_username, log_message = match.groups()
+            log_datetime_str, log_module, log_level, log_username, log_message = match.groups()
             
             try:
-                log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
+                # 处理时间戳，兼容有无毫秒的情况
+                if ',' in log_datetime_str:
+                    log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S,%f")
+                else:
+                    log_datetime = datetime.strptime(log_datetime_str, "%Y-%m-%d %H:%M:%S")
                 
                 # 根据条件过滤
                 if start_datetime and log_datetime < start_datetime:

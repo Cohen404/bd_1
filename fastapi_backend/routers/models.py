@@ -410,7 +410,7 @@ async def restore_model_version(
         current_model.create_time = datetime.now()
         db.commit()
         
-        logging.info(f"用户 {current_user.username} 恢复了模型类型 {model_type} 的备份版本: {backup_filename}")
+        logging.info(f"恢复了模型类型 {model_type} 的备份版本: {backup_filename}")
         
         return {
             "message": f"成功恢复模型类型 {model_type} 的备份版本",

@@ -16,9 +16,8 @@ import {
   TrendingUp,
   Clock
 } from 'lucide-react';
+import { apiClient } from '@/utils/api';
 import { LogEntry } from '@/types';
-import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, LogItem, initializeDemoData } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 const LogManagePage: React.FC = () => {
@@ -29,37 +28,37 @@ const LogManagePage: React.FC = () => {
   const [filterAction, setFilterAction] = useState('all');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取日志列表（从localStorage读取）
   const fetchLogs = async () => {
     try {
       setLoading(true);
-      console.log('开始获取日志数据...');
+      const params: any = {
+        limit: 1000
+      };
       
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      console.log('演示数据初始化完成');
+      if (dateRange.start) {
+        params.start_date = dateRange.start;
+      }
       
-      // 从localStorage获取日志数据
-      const logsList = LocalStorageManager.get<LogItem[]>(STORAGE_KEYS.LOGS, []);
-      console.log('从localStorage获取到的日志数据:', logsList);
+      if (dateRange.end) {
+        params.end_date = dateRange.end;
+      }
       
-      // 验证和清理日志数据
-      const convertedLogs: LogEntry[] = logsList.map((log, index) => ({
-        id: log.id || index,
-        user_id: log.user_id || '',
-        username: log.username || '未知用户',
-        action: log.action || 'UNKNOWN',
-        resource: log.resource || '',
-        details: log.details || '',
-        ip_address: log.ip_address || '',
-        user_agent: log.user_agent || '',
-        created_at: log.created_at || new Date().toISOString()
-      }));
-      console.log('转换后的日志数据:', convertedLogs);
+      if (searchTerm) {
+        params.username = searchTerm;
+      }
       
-      setLogs(convertedLogs);
-      console.log('日志数据设置完成，数量:', convertedLogs.length);
+      if (filterLevel !== 'all') {
+        const levelMap: Record<string, string> = {
+          'info': 'INFO',
+          'success': 'INFO',
+          'warning': 'WARNING',
+          'error': 'ERROR'
+        };
+        params.level = levelMap[filterLevel] || 'INFO';
+      }
+      
+      const response = await apiClient.getLogs(params);
+      setLogs(response);
     } catch (error) {
       console.error('获取日志列表失败:', error);
       toast.error('获取日志列表失败');
@@ -67,63 +66,63 @@ const LogManagePage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
   useEffect(() => {
     fetchLogs();
-  }, []);
+  }, [dateRange, searchTerm, filterLevel]);
 
-  // 获取操作类型图标和颜色
-  const getActionIcon = (action: string) => {
-    switch (action) {
-      case 'LOGIN':
-        return { icon: User, color: 'text-green-600', bg: 'bg-green-100' };
-      case 'LOGOUT':
-        return { icon: User, color: 'text-gray-600', bg: 'bg-gray-100' };
-      case 'CREATE_USER':
-      case 'UPDATE_USER':
-      case 'DELETE_USER':
-        return { icon: User, color: 'text-blue-600', bg: 'bg-blue-100' };
-      case 'HEALTH_EVALUATE':
-        return { icon: Activity, color: 'text-purple-600', bg: 'bg-purple-100' };
-      case 'UPLOAD_DATA':
-      case 'DELETE_DATA':
-        return { icon: FileText, color: 'text-orange-600', bg: 'bg-orange-100' };
-      case 'VIEW_DATA':
-        return { icon: FileText, color: 'text-blue-600', bg: 'bg-blue-100' };
-      case 'EXPORT_DATA':
-        return { icon: Download, color: 'text-green-600', bg: 'bg-green-100' };
-      case 'CREATE_MODEL':
-      case 'UPDATE_MODEL':
-      case 'DELETE_MODEL':
-        return { icon: BarChart3, color: 'text-orange-600', bg: 'bg-orange-100' };
-      case 'RUN_EVALUATION':
-        return { icon: TrendingUp, color: 'text-purple-600', bg: 'bg-purple-100' };
-      case 'VIEW_RESULT':
-        return { icon: BarChart3, color: 'text-blue-600', bg: 'bg-blue-100' };
-      case 'EXPORT_RESULT':
-        return { icon: Download, color: 'text-green-600', bg: 'bg-green-100' };
-      case 'ERROR':
-        return { icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' };
-      default:
-        return { icon: Info, color: 'text-gray-600', bg: 'bg-gray-100' };
+  const getActionIcon = (message: string) => {
+    const upperMessage = message.toUpperCase();
+    
+    if (upperMessage.includes('LOGIN')) {
+      return { icon: User, color: 'text-green-600', bg: 'bg-green-100' };
     }
+    if (upperMessage.includes('LOGOUT')) {
+      return { icon: User, color: 'text-gray-600', bg: 'bg-gray-100' };
+    }
+    if (upperMessage.includes('CREATE') || upperMessage.includes('UPDATE') || upperMessage.includes('DELETE')) {
+      return { icon: User, color: 'text-blue-600', bg: 'bg-blue-100' };
+    }
+    if (upperMessage.includes('EVALUATE')) {
+      return { icon: Activity, color: 'text-purple-600', bg: 'bg-purple-100' };
+    }
+    if (upperMessage.includes('UPLOAD') || upperMessage.includes('DELETE')) {
+      return { icon: FileText, color: 'text-orange-600', bg: 'bg-orange-100' };
+    }
+    if (upperMessage.includes('VIEW')) {
+      return { icon: FileText, color: 'text-blue-600', bg: 'bg-blue-100' };
+    }
+    if (upperMessage.includes('EXPORT')) {
+      return { icon: Download, color: 'text-green-600', bg: 'bg-green-100' };
+    }
+    if (upperMessage.includes('MODEL')) {
+      return { icon: BarChart3, color: 'text-orange-600', bg: 'bg-orange-100' };
+    }
+    if (upperMessage.includes('RUN')) {
+      return { icon: TrendingUp, color: 'text-purple-600', bg: 'bg-purple-100' };
+    }
+    if (upperMessage.includes('RESULT')) {
+      return { icon: BarChart3, color: 'text-blue-600', bg: 'bg-blue-100' };
+    }
+    if (upperMessage.includes('ERROR')) {
+      return { icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' };
+    }
+    return { icon: Info, color: 'text-gray-600', bg: 'bg-gray-100' };
   };
 
-  // 获取日志级别
-  const getLogLevel = (action: string) => {
-    if (action.includes('ERROR') || action.includes('DELETE')) return 'error';
-    if (action.includes('CREATE') || action.includes('UPDATE')) return 'warning';
-    if (action.includes('LOGIN') || action.includes('EVALUATE')) return 'success';
+  const getLogLevel = (level: string) => {
+    const upperLevel = level.toUpperCase();
+    if (upperLevel === 'ERROR' || upperLevel === 'CRITICAL') return 'error';
+    if (upperLevel === 'WARNING') return 'warning';
+    if (upperLevel === 'INFO') return 'success';
     return 'info';
   };
 
-  // 导出日志
   const handleExportLogs = () => {
     const csvContent = "data:text/csv;charset=utf-8," + 
-      "时间,用户,操作,资源,详情,IP地址,浏览器\n" +
+      "时间,用户,级别,消息\n" +
       filteredLogs.map(log => 
-        `"${formatDateTime(log.created_at)}","${log.username || '未知用户'}","${log.action}","${log.resource}","${log.details || ''}","${log.ip_address || ''}","${log.user_agent || ''}"`
+        `"${log.timestamp}","${log.username}","${log.level}","${log.message}"`
       ).join("\n");
 
     const encodedUri = encodeURI(csvContent);
@@ -136,7 +135,6 @@ const LogManagePage: React.FC = () => {
     toast.success('日志导出成功');
   };
 
-  // 导出JSON格式日志
   const handleExportLogsJSON = () => {
     const jsonContent = JSON.stringify(filteredLogs, null, 2);
     const blob = new Blob([jsonContent], { type: 'application/json' });
@@ -160,46 +158,28 @@ const LogManagePage: React.FC = () => {
     toast.success('过滤器已清除');
   };
 
-  // 过滤日志列表
   const filteredLogs = logs.filter(log => {
-    const matchesSearch = !searchTerm || (
-      (log.username && log.username.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (log.action && log.action.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (log.resource && log.resource.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (log.details && log.details.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
-
-    const matchesLevel = filterLevel === 'all' || getLogLevel(log.action) === filterLevel;
-    const matchesAction = filterAction === 'all' || log.action === filterAction;
-    
-    // 日期范围过滤
-    let matchesDateRange = true;
-    if (dateRange.start && dateRange.end) {
-      const logDate = new Date(log.created_at);
-      const startDate = new Date(dateRange.start);
-      const endDate = new Date(dateRange.end);
-      endDate.setHours(23, 59, 59, 999); // 包含结束日期的整天
-      matchesDateRange = logDate >= startDate && logDate <= endDate;
-    } else if (dateRange.start) {
-      const logDate = new Date(log.created_at);
-      const startDate = new Date(dateRange.start);
-      matchesDateRange = logDate >= startDate;
-    } else if (dateRange.end) {
-      const logDate = new Date(log.created_at);
-      const endDate = new Date(dateRange.end);
-      endDate.setHours(23, 59, 59, 999);
-      matchesDateRange = logDate <= endDate;
-    }
-
-    return matchesSearch && matchesLevel && matchesAction && matchesDateRange;
+    const matchesAction = filterAction === 'all' || log.message.includes(filterAction);
+    return matchesAction;
   });
 
-  // 获取所有操作类型
-  const actionTypes = Array.from(new Set(logs.map(log => log.action)));
-
-  // 添加调试信息
-  console.log('LogManagePage render - logs:', logs.length, 'loading:', loading);
-  console.log('filteredLogs:', filteredLogs.length);
+  const actionTypes = Array.from(new Set(logs.map(log => {
+    const upperMessage = log.message.toUpperCase();
+    if (upperMessage.includes('LOGIN')) return 'LOGIN';
+    if (upperMessage.includes('LOGOUT')) return 'LOGOUT';
+    if (upperMessage.includes('CREATE')) return 'CREATE';
+    if (upperMessage.includes('UPDATE')) return 'UPDATE';
+    if (upperMessage.includes('DELETE')) return 'DELETE';
+    if (upperMessage.includes('EVALUATE')) return 'EVALUATE';
+    if (upperMessage.includes('UPLOAD')) return 'UPLOAD';
+    if (upperMessage.includes('VIEW')) return 'VIEW';
+    if (upperMessage.includes('EXPORT')) return 'EXPORT';
+    if (upperMessage.includes('MODEL')) return 'MODEL';
+    if (upperMessage.includes('RUN')) return 'RUN';
+    if (upperMessage.includes('RESULT')) return 'RESULT';
+    if (upperMessage.includes('ERROR')) return 'ERROR';
+    return 'OTHER';
+  })));
 
   return (
     <div className="space-y-6">
@@ -207,8 +187,6 @@ const LogManagePage: React.FC = () => {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">日志管理</h1>
         <p className="text-gray-600 mt-1">查看系统操作日志和审计记录</p>
-        <p className="text-sm text-red-500 mt-2">调试信息: 日志数量 = {logs.length}, 加载状态 = {loading ? '加载中' : '已完成'}</p>
-        <p className="text-sm text-blue-500 mt-1">过滤后日志数量 = {filteredLogs.length}</p>
       </div>
 
       {/* 操作栏 */}
@@ -337,9 +315,9 @@ const LogManagePage: React.FC = () => {
               <CheckCircle className="h-6 w-6 text-green-600" />
             </div>
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-600">成功操作</p>
+              <p className="text-sm font-medium text-gray-600">INFO级别</p>
               <p className="text-lg font-bold text-gray-900">
-                {logs.filter(log => getLogLevel(log.action) === 'success').length}
+                {logs.filter(log => log.level.toUpperCase() === 'INFO').length}
               </p>
             </div>
           </div>
@@ -351,9 +329,9 @@ const LogManagePage: React.FC = () => {
               <AlertTriangle className="h-6 w-6 text-yellow-600" />
             </div>
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-600">警告操作</p>
+              <p className="text-sm font-medium text-gray-600">WARNING级别</p>
               <p className="text-lg font-bold text-gray-900">
-                {logs.filter(log => getLogLevel(log.action) === 'warning').length}
+                {logs.filter(log => log.level.toUpperCase() === 'WARNING').length}
               </p>
             </div>
           </div>
@@ -365,9 +343,9 @@ const LogManagePage: React.FC = () => {
               <XCircle className="h-6 w-6 text-red-600" />
             </div>
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-600">错误操作</p>
+              <p className="text-sm font-medium text-gray-600">ERROR级别</p>
               <p className="text-lg font-bold text-gray-900">
-                {logs.filter(log => getLogLevel(log.action) === 'error').length}
+                {logs.filter(log => log.level.toUpperCase() === 'ERROR' || log.level.toUpperCase() === 'CRITICAL').length}
               </p>
             </div>
           </div>
@@ -384,7 +362,23 @@ const LogManagePage: React.FC = () => {
           </div>
           <div className="space-y-3">
             {actionTypes.slice(0, 8).map(action => {
-              const count = logs.filter(log => log.action === action).length;
+              const count = logs.filter(log => {
+                const upperMessage = log.message.toUpperCase();
+                if (action === 'LOGIN') return upperMessage.includes('LOGIN');
+                if (action === 'LOGOUT') return upperMessage.includes('LOGOUT');
+                if (action === 'CREATE') return upperMessage.includes('CREATE');
+                if (action === 'UPDATE') return upperMessage.includes('UPDATE');
+                if (action === 'DELETE') return upperMessage.includes('DELETE');
+                if (action === 'EVALUATE') return upperMessage.includes('EVALUATE');
+                if (action === 'UPLOAD') return upperMessage.includes('UPLOAD');
+                if (action === 'VIEW') return upperMessage.includes('VIEW');
+                if (action === 'EXPORT') return upperMessage.includes('EXPORT');
+                if (action === 'MODEL') return upperMessage.includes('MODEL');
+                if (action === 'RUN') return upperMessage.includes('RUN');
+                if (action === 'RESULT') return upperMessage.includes('RESULT');
+                if (action === 'ERROR') return upperMessage.includes('ERROR');
+                return false;
+              }).length;
               const percentage = logs.length > 0 ? (count / logs.length * 100).toFixed(1) : 0;
               return (
                 <div key={action} className="flex items-center justify-between">
@@ -414,7 +408,7 @@ const LogManagePage: React.FC = () => {
             {Array.from(new Set(logs.map(log => log.username).filter(Boolean))).slice(0, 6).map(username => {
               const userLogs = logs.filter(log => log.username === username);
               const recentLogs = userLogs.filter(log => {
-                const logDate = new Date(log.created_at);
+                const logDate = new Date(log.timestamp);
                 const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
                 return logDate >= oneDayAgo;
               });
@@ -445,11 +439,11 @@ const LogManagePage: React.FC = () => {
           {Array.from({ length: 24 }, (_, hour) => {
             try {
               const hourLogs = logs.filter(log => {
-                const logDate = new Date(log.created_at);
+                const logDate = new Date(log.timestamp);
                 return logDate.getHours() === hour;
               });
               const maxCount = Math.max(...Array.from({ length: 24 }, (_, h) => 
-                logs.filter(log => new Date(log.created_at).getHours() === h).length
+                logs.filter(log => new Date(log.timestamp).getHours() === h).length
               ));
               const height = maxCount > 0 ? (hourLogs.length / maxCount * 100) : 0;
               
@@ -499,11 +493,11 @@ const LogManagePage: React.FC = () => {
         ) : (
           <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto custom-scrollbar">
             {filteredLogs.map((log) => {
-              const actionInfo = getActionIcon(log.action);
-              const level = getLogLevel(log.action);
+              const actionInfo = getActionIcon(log.message);
+              const level = getLogLevel(log.level);
               
               return (
-                <div key={log.id} className="p-4 hover:bg-gray-50">
+                <div key={log.timestamp} className="p-4 hover:bg-gray-50">
                   <div className="flex items-start space-x-3">
                     <div className={`p-2 rounded-lg ${actionInfo.bg} flex-shrink-0`}>
                       <actionInfo.icon className={`h-4 w-4 ${actionInfo.color}`} />
@@ -521,27 +515,17 @@ const LogManagePage: React.FC = () => {
                             level === 'success' ? 'bg-green-100 text-green-800' :
                             'bg-blue-100 text-blue-800'
                           }`}>
-                            {log.action}
-                          </span>
-                          <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                            {log.resource}
+                            {log.level}
                           </span>
                         </div>
                         <p className="text-sm text-gray-500">
-                          {formatDateTime(log.created_at)}
+                          {log.timestamp}
                         </p>
                       </div>
                       
                       <p className="mt-1 text-sm text-gray-600">
-                        {log.details}
+                        {log.message}
                       </p>
-                      
-                      <div className="mt-2 flex items-center text-xs text-gray-400 space-x-4">
-                        <span>IP: {log.ip_address}</span>
-                        <span title={log.user_agent}>
-                          浏览器: {log.user_agent?.split(' ')[0]}
-                        </span>
-                      </div>
                     </div>
                   </div>
                 </div>

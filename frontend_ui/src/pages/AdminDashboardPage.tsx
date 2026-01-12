@@ -11,13 +11,8 @@ import {
   CheckCircle,
   RefreshCw
 } from 'lucide-react';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
+import { apiClient } from '@/utils/api';
 import toast from 'react-hot-toast';
-
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 此文件已修改为纯前端演示模式，使用localStorage存储
-// 提供管理员控制台的演示数据
-// ============================================
 
 interface AdminStats {
   totalUsers: number;
@@ -33,53 +28,11 @@ const AdminDashboardPage: React.FC = () => {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取管理员仪表板统计数据（从localStorage读取真实数据）
   const fetchAdminStats = async () => {
     try {
       setLoading(true);
-      
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 模拟API调用延迟
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // 从localStorage获取真实数据
-      const users = LocalStorageManager.get(STORAGE_KEYS.USERS, []);
-      const roles = LocalStorageManager.get(STORAGE_KEYS.ROLES, []);
-      const models = LocalStorageManager.get(STORAGE_KEYS.MODELS, []);
-      const logs = LocalStorageManager.get(STORAGE_KEYS.LOGS, []);
-      const data = LocalStorageManager.get(STORAGE_KEYS.DATA, []);
-      const results = LocalStorageManager.get(STORAGE_KEYS.RESULTS, []);
-
-      // 计算最近活动数量（最近24小时）
-      const oneDayAgo = new Date();
-      oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-      const recentActivities = logs.filter((log: any) => 
-        new Date(log.timestamp) >= oneDayAgo
-      ).length;
-
-      // 计算系统健康度（基于数据完整性）
-      const systemHealth = Math.min(100, 
-        (models.length > 0 ? 20 : 0) + 
-        (data.length > 0 ? 20 : 0) + 
-        (results.length > 0 ? 20 : 0) + 
-        (users.length > 0 ? 20 : 0) + 
-        (logs.length > 0 ? 20 : 0)
-      );
-
-      const adminStats: AdminStats = {
-        totalUsers: users.length,
-        totalRoles: roles.length,
-        totalModels: models.length,
-        totalLogs: logs.length,
-        systemHealth: systemHealth,
-        recentActivities: recentActivities
-      };
-
+      const adminStats = await apiClient.getAdminStats();
       setStats(adminStats);
-
     } catch (error) {
       console.error('获取管理员数据失败:', error);
       toast.error('获取管理员数据失败');
@@ -87,7 +40,6 @@ const AdminDashboardPage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
   useEffect(() => {
     fetchAdminStats();
