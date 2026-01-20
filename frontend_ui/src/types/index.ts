@@ -108,6 +108,7 @@ export interface Result {
   recommendations: string;
   personnel_id?: string;
   personnel_name?: string;
+  active_learned?: boolean;
 }
 
 export interface HealthEvaluateRequest {

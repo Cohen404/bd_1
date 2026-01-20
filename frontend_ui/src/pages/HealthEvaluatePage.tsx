@@ -18,6 +18,24 @@ import { Data } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
 import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem, ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
+
+interface PersonnelSubData {
+  id: number;
+  data_path: string;
+  upload_time: string;
+  period: string;
+  stress_score?: number;
+  depression_score?: number;
+  anxiety_score?: number;
+  social_isolation_score?: number;
+  overall_risk_level?: string;
+  recommendations?: string;
+}
+
+interface PersonnelData extends Data {
+  subData: PersonnelSubData[];
+  expanded: boolean;
+}
 // ============================================
 
 
@@ -39,7 +57,7 @@ interface EvaluationProgress {
 }
 
 const HealthEvaluatePage: React.FC = () => {
-  const [dataList, setDataList] = useState<Data[]>([]);
+  const [dataList, setDataList] = useState<PersonnelData[]>([]);
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
   const [batchEvaluating, setBatchEvaluating] = useState(false);
@@ -52,6 +70,66 @@ const HealthEvaluatePage: React.FC = () => {
     currentIndex: number;
   } | null>(null);
   const [expandedResults, setExpandedResults] = useState<Set<number>>(new Set());
+  const [activeLearningVisible, setActiveLearningVisible] = useState(false);
+  const [activeLearningProgress, setActiveLearningProgress] = useState(0);
+  const [activeLearningPersonnelName, setActiveLearningPersonnelName] = useState('');
+  const [activeLearnedPersonnel, setActiveLearnedPersonnel] = useState<Set<number>>(new Set());
+
+  const generateMockSubData = (personnelId: number, baseUploadTime: string): PersonnelSubData[] => {
+    const subData: PersonnelSubData[] = [];
+    
+    const periods = [
+      { name: '晨起', hour: 7, label: 'morning' },
+      { name: '上午', hour: 10, label: 'forenoon' },
+      { name: '午间', hour: 12, label: 'noon' },
+      { name: '下午', hour: 15, label: 'afternoon' },
+      { name: '傍晚', hour: 18, label: 'evening' },
+      { name: '夜间', hour: 21, label: 'night' }
+    ];
+    
+    const baseDate = new Date(baseUploadTime);
+    const dateStr = baseDate.toISOString().split('T')[0];
+    
+    for (let i = 0; i < periods.length; i++) {
+      const period = periods[i];
+      const seed = personnelId * 1000 + i;
+      const normalizedSeed = (seed % 1000) / 1000;
+      
+      const stressScore = Math.min(100, Math.max(0, Math.floor(normalizedSeed * 60 + 20 + (Math.random() * 10 - 5))));
+      const depressionScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.6 + 0.2) * 50 + 15 + (Math.random() * 8 - 4))));
+      const anxietyScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.5 + 0.3) * 55 + 18 + (Math.random() * 10 - 5))));
+      const socialScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.7 + 0.2) * 40 + 12 + (Math.random() * 8 - 4))));
+      
+      const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
+      const riskLevel = maxScore >= 70 ? '高风险' : maxScore >= 45 ? '中等风险' : '低风险';
+      
+      const recommendations = maxScore >= 70 ? 
+        '建议立即寻求专业心理咨询，进行心理干预治疗，注意休息和放松，避免过度劳累' :
+        maxScore >= 45 ? 
+        '建议适当调整生活方式，保持积极心态，增加社交活动，必要时咨询心理医生' :
+        '保持良好的心理状态，继续当前的生活方式，定期进行心理健康监测';
+      
+      const uploadDate = new Date(baseDate);
+      uploadDate.setHours(period.hour, Math.floor(Math.random() * 30), 0);
+      
+      const fileName = `health_monitor_${personnelId}_${dateStr}_${period.label}_${String(Math.floor(Math.random() * 9000) + 1000)}.csv`;
+      
+      subData.push({
+        id: personnelId * 100 + i,
+        data_path: `/data/health/${fileName}`,
+        upload_time: uploadDate.toISOString(),
+        period: period.name,
+        stress_score: stressScore,
+        depression_score: depressionScore,
+        anxiety_score: anxietyScore,
+        social_isolation_score: socialScore,
+        overall_risk_level: riskLevel,
+        recommendations: recommendations
+      });
+    }
+    
+    return subData;
+  };
 
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 获取数据列表（从localStorage读取）
@@ -59,26 +137,34 @@ const HealthEvaluatePage: React.FC = () => {
     try {
       setLoading(true);
       
-      // 初始化演示数据（如果还没有）
       initializeDemoData();
       
-      // 从localStorage获取数据
       const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
       
-      // 转换为前端Data类型
-      const convertedData: Data[] = dataItems.map(item => ({
-        user_id: '1', // 添加缺失的user_id字段
-        id: item.id,
-        personnel_id: item.name.split('_')[0] || 'unknown',
-        personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
-        data_path: item.file_path,
-        upload_time: item.upload_time,
-        upload_user: parseInt(item.uploader) || 1, // 转换为number类型
-        processing_status: item.status === '已处理' ? 'completed' : 
-                          item.status === '处理中' ? 'processing' : 'pending',
-        feature_status: item.status === '已处理' ? 'completed' : 
-                       item.status === '处理中' ? 'processing' : 'pending'
-      }));
+      const learnedPersonnel = LocalStorageManager.get<number[]>('active_learned_personnel', []);
+      setActiveLearnedPersonnel(new Set(learnedPersonnel));
+      
+      const convertedData: PersonnelData[] = dataItems.map(item => {
+        const uploadDate = new Date(item.upload_time);
+        const dateStr = uploadDate.toISOString().split('T')[0];
+        const fileName = `health_summary_${item.id}_${dateStr}_${String(Math.floor(Math.random() * 9000) + 1000)}.csv`;
+        
+        return {
+          user_id: '1',
+          id: item.id,
+          personnel_id: item.name.split('_')[0] || 'unknown',
+          personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
+          data_path: `/data/health/${item.id}/${fileName}`,
+          upload_time: item.upload_time,
+          upload_user: parseInt(item.uploader) || 1,
+          processing_status: item.status === '已处理' ? 'completed' : 
+                            item.status === '处理中' ? 'processing' : 'pending',
+          feature_status: item.status === '已处理' ? 'completed' : 
+                         item.status === '处理中' ? 'processing' : 'pending',
+          subData: generateMockSubData(item.id, item.upload_time),
+          expanded: false
+        };
+      });
       
       setDataList(convertedData);
     } catch (error) {
@@ -96,7 +182,40 @@ const HealthEvaluatePage: React.FC = () => {
     fetchData();
   }, []);
 
-  // 选择/取消选择项目
+  const toggleExpand = (dataId: number) => {
+    setDataList(prev => prev.map(item => 
+      item.id === dataId ? { ...item, expanded: !item.expanded } : item
+    ));
+  };
+
+  const handleActiveLearning = (personnelId: number, personnelName: string) => {
+    setActiveLearningPersonnelName(personnelName);
+    setActiveLearningVisible(true);
+    setActiveLearningProgress(0);
+    
+    const duration = Math.random() * 2000 + 3000;
+    const interval = 50;
+    const steps = duration / interval;
+    const progressIncrement = 100 / steps;
+    
+    let currentProgress = 0;
+    const timer = setInterval(() => {
+      currentProgress += progressIncrement;
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(timer);
+        
+        const newLearned = new Set(activeLearnedPersonnel);
+        newLearned.add(personnelId);
+        setActiveLearnedPersonnel(newLearned);
+        LocalStorageManager.set('active_learned_personnel', Array.from(newLearned));
+        
+        toast.success(`${personnelName} 的主动学习已完成`);
+      }
+      setActiveLearningProgress(currentProgress);
+    }, interval);
+  };
+
   const toggleSelection = (dataId: number) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(dataId)) {
@@ -132,25 +251,33 @@ const HealthEvaluatePage: React.FC = () => {
 
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 生成一致的评估结果（基于数据ID的固定算法）
-  const generateConsistentEvaluation = (dataId: number) => {
-    // 使用数据ID作为种子，确保同一数据ID总是生成相同结果
+  const generateConsistentEvaluation = (dataId: number, isLearned: boolean) => {
     const seed = dataId * 12345 + 67890;
-    const normalizedSeed = (seed % 1000) / 1000; // 归一化到0-1
+    const normalizedSeed = (seed % 1000) / 1000;
     
-    // 基于种子生成固定范围的分数
-    const stressScore = Math.floor(normalizedSeed * 40 + 15); // 15-55
-    const depressionScore = Math.floor((normalizedSeed * 0.7 + 0.3) * 40 + 10); // 10-50
-    const anxietyScore = Math.floor((normalizedSeed * 0.5 + 0.5) * 45 + 12); // 12-57
-    const socialScore = Math.floor((normalizedSeed * 0.8 + 0.2) * 35 + 8); // 8-43
+    let stressScore = Math.min(100, Math.max(0, Math.floor(normalizedSeed * 60 + 20)));
+    let depressionScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.6 + 0.2) * 50 + 15)));
+    let anxietyScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.5 + 0.3) * 55 + 18)));
+    let socialScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.7 + 0.2) * 40 + 12)));
+    
+    if (!isLearned) {
+      const deviation = 0.05 + Math.random() * 0.05;
+      const deviationFactor = 1 + (Math.random() > 0.5 ? deviation : -deviation);
+      
+      stressScore = Math.min(100, Math.max(0, Math.floor(stressScore * deviationFactor)));
+      depressionScore = Math.min(100, Math.max(0, Math.floor(depressionScore * deviationFactor)));
+      anxietyScore = Math.min(100, Math.max(0, Math.floor(anxietyScore * deviationFactor)));
+      socialScore = Math.min(100, Math.max(0, Math.floor(socialScore * deviationFactor)));
+    }
     
     const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
-    const riskLevel = maxScore >= 50 ? '高风险' : maxScore >= 30 ? '中等风险' : '低风险';
+    const riskLevel = maxScore >= 70 ? '高风险' : maxScore >= 45 ? '中等风险' : '低风险';
     
-    const recommendations = maxScore >= 50 ? 
-      '建议立即寻求专业心理咨询，注意休息和放松' :
-      maxScore >= 30 ? 
-      '建议适当调整生活方式，保持积极心态' :
-      '保持良好的心理状态，继续当前的生活方式';
+    const recommendations = maxScore >= 70 ? 
+      '建议立即寻求专业心理咨询，进行心理干预治疗，注意休息和放松，避免过度劳累' :
+      maxScore >= 45 ? 
+      '建议适当调整生活方式，保持积极心态，增加社交活动，必要时咨询心理医生' :
+      '保持良好的心理状态，继续当前的生活方式，定期进行心理健康监测';
     
     return {
       stress_score: stressScore,
@@ -206,13 +333,13 @@ const HealthEvaluatePage: React.FC = () => {
         // 模拟评估延迟
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        // 生成一致的评估结果
-        const evaluationResult = generateConsistentEvaluation(dataId);
-        
-        // 获取对应数据的人员信息
         const dataItem = dataList.find(item => item.id === dataId);
+        const personnelId = dataItem?.personnel_id || 'unknown';
+        const isLearned = activeLearnedPersonnel.has(dataId);
         
-        // 创建结果记录（每次评估保存一条记录）
+        // 生成一致的评估结果
+        const evaluationResult = generateConsistentEvaluation(dataId, isLearned);
+        
         const newResult: ResultItem = {
           id: DataOperations.getNextId(existingResults),
           user_id: 2,
@@ -224,8 +351,9 @@ const HealthEvaluatePage: React.FC = () => {
           social_isolation_score: evaluationResult.social_isolation_score,
           overall_risk_level: evaluationResult.overall_risk_level,
           recommendations: evaluationResult.recommendations,
-          personnel_id: dataItem?.personnel_id || 'unknown',
-          personnel_name: dataItem?.personnel_name || '未知人员'
+          personnel_id: personnelId,
+          personnel_name: dataItem?.personnel_name || '未知人员',
+          active_learned: isLearned
         };
         
         existingResults.push(newResult);
@@ -455,25 +583,29 @@ const HealthEvaluatePage: React.FC = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     上传时间
                       </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    个性化学习
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {dataList.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <button
-                            onClick={() => toggleSelection(item.id)}
-                            className="text-primary-600 hover:text-primary-700"
-                          >
-                            {selectedItems.has(item.id) ? 
-                              <CheckSquare className="h-4 w-4" /> : 
-                              <Square className="h-4 w-4" />
-                            }
-                          </button>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {item.id}
-                        </td>
+                      <React.Fragment key={item.id}>
+                        <tr className="hover:bg-gray-50 cursor-pointer" onClick={() => toggleExpand(item.id)}>
+                          <td className="px-6 py-4 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+                            <button
+                              onClick={() => toggleSelection(item.id)}
+                              className="text-primary-600 hover:text-primary-700"
+                            >
+                              {selectedItems.has(item.id) ? 
+                                <CheckSquare className="h-4 w-4" /> : 
+                                <Square className="h-4 w-4" />
+                              }
+                            </button>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {item.id}
+                          </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">
@@ -492,7 +624,110 @@ const HealthEvaluatePage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDateTime(item.upload_time)}
                         </td>
+                    <td className="px-6 py-4 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+                      {activeLearnedPersonnel.has(item.id) ? (
+                        <div className="flex items-center space-x-2">
+                          <button
+                            disabled
+                            className="btn btn-secondary text-xs px-3 py-1 opacity-50 cursor-not-allowed"
+                          >
+                            已学习
+                          </button>
+                          <button
+                            onClick={() => handleActiveLearning(item.id, item.personnel_name)}
+                            className="btn btn-primary text-xs px-3 py-1"
+                          >
+                            重新学习
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleActiveLearning(item.id, item.personnel_name)}
+                          className="btn btn-primary text-xs px-3 py-1"
+                        >
+                          主动学习
+                        </button>
+                      )}
+                        </td>
                       </tr>
+                      {item.expanded && (
+                        <tr>
+                          <td colSpan={6} className="px-6 py-4 bg-gray-50">
+                            <div className="space-y-3">
+                              <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                                {item.personnel_name} 的各时间段数据
+                              </h4>
+                              <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-100">
+                                  <tr>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      时间段
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      文件路径
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      上传时间
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      应激
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      抑郁
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      焦虑
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      社交孤立
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      风险等级
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                  {item.subData.map((subItem) => (
+                                    <tr key={subItem.id} className="hover:bg-gray-100">
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.period}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-600">
+                                        {subItem.data_path}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-600">
+                                        {formatDateTime(subItem.upload_time)}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.stress_score?.toFixed(1) || '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.depression_score?.toFixed(1) || '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.anxiety_score?.toFixed(1) || '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.social_isolation_score?.toFixed(1) || '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm">
+                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                          subItem.overall_risk_level === '高风险' ? 'bg-red-100 text-red-800' :
+                                          subItem.overall_risk_level === '中等风险' ? 'bg-yellow-100 text-yellow-800' :
+                                          'bg-green-100 text-green-800'
+                                        }`}>
+                                          {subItem.overall_risk_level || '-'}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                      </React.Fragment>
                     ))}
                   </tbody>
                 </table>
@@ -555,6 +790,49 @@ const HealthEvaluatePage: React.FC = () => {
                 disabled={batchEvaluating}
               >
                 {batchEvaluating ? '评估中...' : '关闭'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 主动学习进度模态框 */}
+      {activeLearningVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">主动学习进行中</h2>
+            
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 mb-2">
+                正在为 <span className="font-semibold text-gray-900">{activeLearningPersonnelName}</span> 进行主动学习...
+              </p>
+            </div>
+            
+            <div className="mb-4">
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div 
+                  className="bg-blue-600 h-4 rounded-full transition-all duration-100 ease-linear"
+                  style={{ width: `${activeLearningProgress}%` }}
+                />
+              </div>
+              <div className="flex justify-between mt-2">
+                <span className="text-xs text-gray-500">0%</span>
+                <span className="text-sm font-medium text-gray-900">
+                  {Math.round(activeLearningProgress)}%
+                </span>
+                <span className="text-xs text-gray-500">100%</span>
+              </div>
+            </div>
+            
+            <div className="flex justify-end">
+              <button
+                onClick={() => setActiveLearningVisible(false)}
+                disabled={activeLearningProgress < 100}
+                className={`btn btn-secondary text-sm px-4 py-2 ${
+                  activeLearningProgress < 100 ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                取消
               </button>
             </div>
           </div>

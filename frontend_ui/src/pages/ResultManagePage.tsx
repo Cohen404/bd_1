@@ -59,13 +59,10 @@ const ResultManagePage: React.FC = () => {
     try {
       setLoading(true);
       
-      // 初始化演示数据（如果还没有）
       initializeDemoData();
       
-      // 从localStorage获取结果数据
       const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
       
-      // 转换为前端Result类型
       const convertedResults: Result[] = resultItems.map(item => ({
         id: item.id,
         user_id: item.user_id.toString(),
@@ -78,7 +75,8 @@ const ResultManagePage: React.FC = () => {
         overall_risk_level: item.overall_risk_level,
         recommendations: item.recommendations,
         personnel_id: item.personnel_id,
-        personnel_name: item.personnel_name
+        personnel_name: item.personnel_name,
+        active_learned: item.active_learned
       }));
       
       // 应用筛选条件
@@ -550,6 +548,9 @@ const ResultManagePage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     评估时间
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    主动学习
+                  </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     操作
                   </th>
@@ -628,6 +629,17 @@ const ResultManagePage: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {formatDateTime(result.result_time)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {result.active_learned ? (
+                          <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                            ✓ 已学习
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600">
+                            未学习
+                          </span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-end space-x-2">
