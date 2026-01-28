@@ -1,54 +1,54 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo 一键启动后端和前端服务
+echo Start Backend and Frontend Services
 echo ========================================
 echo.
 
-REM 设置项目根目录
+REM Set project root directory
 set PROJECT_ROOT=D:\Code\bd_1
 
-REM 后端目录
+REM Backend directory
 set BACKEND_DIR=%PROJECT_ROOT%\fastapi_backend
 
-REM 前端目录
+REM Frontend directory
 set FRONTEND_DIR=%PROJECT_ROOT%\frontend_ui
 
-REM Conda环境名称
+REM Conda environment name
 set CONDA_ENV=bd
 
-echo [1/2] 启动后端服务...
-echo 后端路径: %BACKEND_DIR%
-echo Conda环境: %CONDA_ENV%
+echo [1/2] Starting backend service...
+echo Backend path: %BACKEND_DIR%
+echo Conda env: %CONDA_ENV%
 echo.
 
-REM 在新窗口中启动后端
-start "FastAPI后端" cmd /k "cd /d %BACKEND_DIR% && conda activate %CONDA_ENV% && echo 后端服务启动中... && uvicorn main:app --reload"
+REM Start backend in new window
+start "FastAPI Backend" cmd /k "cd /d %BACKEND_DIR% && conda activate %CONDA_ENV% && echo Starting backend service... && uvicorn main:app --reload"
 
-echo 后端服务已在新窗口中启动...
+echo Backend service started in new window...
 echo.
 
 timeout /t 3 /nobreak >nul
 
-echo [2/2] 启动前端服务...
-echo 前端路径: %FRONTEND_DIR%
+echo [2/2] Starting frontend service...
+echo Frontend path: %FRONTEND_DIR%
 echo.
 
-REM 在新窗口中启动前端
-start "前端UI" cmd /k "cd /d %FRONTEND_DIR% && echo 前端服务启动中... && npm run dev"
+REM Start frontend in new window
+start "Frontend UI" cmd /k "cd /d %FRONTEND_DIR% && echo Starting frontend service... && npm run dev"
 
-echo 前端服务已在新窗口中启动...
+echo Frontend service started in new window...
 echo.
 
 echo ========================================
-echo 所有服务已启动完成！
+echo All services started successfully!
 echo ========================================
 echo.
-echo 后端服务: http://localhost:8000
-echo 后端API文档: http://localhost:8000/docs
-echo 前端服务: 请查看前端窗口中的地址
+echo Backend service: http://localhost:8000
+echo Backend API docs: http://localhost:8000/docs
+echo Frontend service: Check frontend window for address
 echo.
-echo 提示: 关闭服务请关闭对应的窗口
+echo Tip: Close services by closing corresponding windows
 echo.
 
 pause
