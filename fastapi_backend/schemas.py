@@ -197,7 +197,7 @@ class Parameter(ParameterBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # 系统参数相关模型
 class SystemParamBase(BaseModel):

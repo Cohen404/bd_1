@@ -50,7 +50,7 @@ async def create_parameter(
     
     return db_param
 
-@router.get("/", response_model=List[schemas.Parameter])
+@router.get("/")
 async def read_parameters(
     skip: int = 0,
     limit: int = 100,

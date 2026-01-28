@@ -17,12 +17,8 @@ import {
   HardDrive,
   Monitor
 } from 'lucide-react';
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 注释掉后端API相关导入，使用localStorage存储
-// import { apiClient } from '@/utils/api';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData } from '@/utils/localStorage';
+import { apiClient } from '@/utils/api';
 import toast from 'react-hot-toast';
-// ============================================
 
 interface DashboardStats {
   data_count: number;
@@ -50,97 +46,22 @@ const DashboardPage: React.FC = () => {
     services_running: true
   });
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取仪表板统计数据（从localStorage读取真实数据）
-  const fetchDashboardStats = async () => {
-    try {
-      setLoading(true);
-      
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 模拟API调用延迟
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // 从localStorage获取真实数据
-      const dataList = LocalStorageManager.get(STORAGE_KEYS.DATA, []);
-      const resultsList = LocalStorageManager.get(STORAGE_KEYS.RESULTS, []);
-      const modelsList = LocalStorageManager.get(STORAGE_KEYS.MODELS, []);
-      const usersList = LocalStorageManager.get(STORAGE_KEYS.USERS, []);
-
-      // 计算最近7天的评估数量
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      const recentEvaluations = resultsList.filter((result: any) => 
-        new Date(result.result_time) >= sevenDaysAgo
-      ).length;
-
-      // 计算高风险数量
-      const highRiskCount = resultsList.filter((result: any) => 
-        result.stress_score >= 50 || 
-        result.depression_score >= 50 || 
-        result.anxiety_score >= 50 || 
-        result.social_isolation_score >= 50
-      ).length;
-
-      // 计算平均分数
-      const avgScores = resultsList.length > 0 ? {
-        stress: resultsList.reduce((sum: number, r: any) => sum + r.stress_score, 0) / resultsList.length,
-        depression: resultsList.reduce((sum: number, r: any) => sum + r.depression_score, 0) / resultsList.length,
-        anxiety: resultsList.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / resultsList.length,
-        social: resultsList.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / resultsList.length,
-      } : {
-        stress: 0,
-        depression: 0,
-        anxiety: 0,
-        social: 0
-      };
-
-      setStats({
-        data_count: dataList.length,
-        evaluation_count: resultsList.length,
-        result_count: resultsList.length,
-        model_count: modelsList.length,
-        user_count: usersList.length,
-        recent_evaluations: recentEvaluations,
-        high_risk_count: highRiskCount,
-        avg_scores: avgScores
-      });
-
-      // 检查系统状态
-      setSystemStatus({
-        models_ready: modelsList.length > 0,
-        database_connected: true,
-        services_running: true
-      });
-
-    } catch (error) {
-      console.error('获取仪表板数据失败:', error);
-      toast.error('获取仪表板数据失败');
-    } finally {
-      setLoading(false);
-    }
-  };
-  // ============================================
-  
-  /* 原有的API调用代码（已注释 - 纯前端演示模式）
+  // 获取仪表板统计数据（从后端API获取真实数据）
   const fetchDashboardStats = async () => {
     try {
       setLoading(true);
       
       // 并行获取各种统计数据
-      const [dataResponse, resultsResponse, modelsResponse, usersResponse] = 
+      const [dataResponse, resultsResponse, modelsResponse] = 
         await Promise.all([
-          apiClient.get('/data/'),
-          apiClient.get('/results/'),
-          apiClient.get('/models/'),
-          apiClient.get('/users/')
+          apiClient.getData(),
+          apiClient.getResults(),
+          apiClient.getModels()
         ]);
 
       const dataList = Array.isArray(dataResponse) ? dataResponse : dataResponse?.items || [];
       const resultsList = Array.isArray(resultsResponse) ? resultsResponse : resultsResponse?.items || [];
       const modelsList = Array.isArray(modelsResponse) ? modelsResponse : modelsResponse?.items || [];
-      const usersList = Array.isArray(usersResponse) ? usersResponse : usersResponse?.items || [];
 
       // 计算最近7天的评估数量
       const sevenDaysAgo = new Date();
@@ -157,12 +78,13 @@ const DashboardPage: React.FC = () => {
         result.social_isolation_score >= 50
       ).length;
 
-      // 计算平均分数
-      const avgScores = resultsList.length > 0 ? {
-        stress: resultsList.reduce((sum: number, r: any) => sum + r.stress_score, 0) / resultsList.length,
-        depression: resultsList.reduce((sum: number, r: any) => sum + r.depression_score, 0) / resultsList.length,
-        anxiety: resultsList.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / resultsList.length,
-        social: resultsList.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / resultsList.length,
+      // 计算平均分数（只使用前50条数据）
+      const recentResults = resultsList.slice(0, 50);
+      const avgScores = recentResults.length > 0 ? {
+        stress: recentResults.reduce((sum: number, r: any) => sum + r.stress_score, 0) / recentResults.length,
+        depression: recentResults.reduce((sum: number, r: any) => sum + r.depression_score, 0) / recentResults.length,
+        anxiety: recentResults.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / recentResults.length,
+        social: recentResults.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / recentResults.length,
       } : {
         stress: 0,
         depression: 0,
@@ -175,7 +97,7 @@ const DashboardPage: React.FC = () => {
         evaluation_count: resultsList.length,
         result_count: resultsList.length,
         model_count: modelsList.length,
-        user_count: usersList.length,
+        user_count: 0, // 用户数据暂时设为0，因为API可能没有提供
         recent_evaluations: recentEvaluations,
         high_risk_count: highRiskCount,
         avg_scores: avgScores
@@ -195,7 +117,6 @@ const DashboardPage: React.FC = () => {
       setLoading(false);
     }
   };
-  */
 
   useEffect(() => {
     fetchDashboardStats();

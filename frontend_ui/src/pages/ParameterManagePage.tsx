@@ -32,6 +32,8 @@ const ParameterManagePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingParam, setEditingParam] = useState<Parameter | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deletingParam, setDeletingParam] = useState<{ id: number; name: string } | null>(null);
   const [formData, setFormData] = useState<ParameterFormData>({
     param_name: '',
     param_value: '',
@@ -86,18 +88,28 @@ const ParameterManagePage: React.FC = () => {
   };
 
   const handleDelete = async (paramId: number, paramName: string) => {
-    if (!window.confirm(`确定要删除参数"${paramName}"吗？此操作无法撤销。`)) {
-      return;
-    }
+    setDeletingParam({ id: paramId, name: paramName });
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!deletingParam) return;
 
     try {
-      await apiClient.deleteParameter(paramId);
+      await apiClient.deleteParameter(deletingParam.id);
       toast.success('参数删除成功');
       fetchParameters();
+      setShowDeleteConfirm(false);
+      setDeletingParam(null);
     } catch (error) {
       console.error('删除参数失败:', error);
       toast.error('删除参数失败');
     }
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setDeletingParam(null);
   };
 
   const handleSave = async () => {
@@ -470,6 +482,48 @@ const ParameterManagePage: React.FC = () => {
               >
                 <Save className="h-4 w-4" />
                 <span>{editingParam ? '更新' : '创建'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 删除确认弹窗 */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                <Trash2 className="h-6 w-6 text-red-600" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">确认删除</h2>
+                <p className="text-sm text-gray-500">此操作无法撤销</p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-gray-700">
+                确定要删除参数 <span className="font-semibold text-gray-900">"{deletingParam?.name}"</span> 吗？
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                删除后该参数将无法恢复，请谨慎操作。
+              </p>
+            </div>
+
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={cancelDelete}
+                className="btn btn-secondary"
+              >
+                取消
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="btn btn-danger flex items-center space-x-2"
+              >
+                <Trash2 className="h-4 w-4" />
+                <span>确认删除</span>
               </button>
             </div>
           </div>
