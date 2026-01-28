@@ -452,7 +452,7 @@ export class ReportGenerator {
                 <h2 class="section-title">💡 综合评估与建议</h2>
                 <div class="recommendation-box">
                   <h3>总体风险等级</h3>
-                  <p><strong style="font-size: 18px; color: #667eea;">${result.overall_risk_level}</strong></p>
+                  <p><strong style="font-size: 18px; color: #667eea;">${this.calculateOverallRiskLevel(result)}</strong></p>
                 </div>
                 <div class="recommendation-box" style="margin-top: 20px;">
                   <h3>专业建议</h3>
@@ -568,5 +568,18 @@ export class ReportGenerator {
     if (score >= 50) return '高风险';
     if (score >= 30) return '中等风险';
     return '正常';
+  }
+  
+  private static calculateOverallRiskLevel(result: ResultItem): string {
+    const averageScore = (
+      result.stress_score + 
+      result.depression_score + 
+      result.anxiety_score + 
+      result.social_isolation_score
+    ) / 4;
+    
+    if (averageScore >= 50) return '高风险';
+    if (averageScore >= 30) return '中等风险';
+    return '低风险';
   }
 }

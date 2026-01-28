@@ -19,16 +19,13 @@ import {
   Clock,
   XCircle
 } from 'lucide-react';
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 注释掉后端API相关导入，使用localStorage存储
-// import { apiClient } from '@/utils/api';
+import { apiClient } from '@/utils/api';
 import { Data } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
-// ============================================
 import ProgressBar from '@/components/Common/ProgressBar';
 import ProgressModal from '@/components/Common/ProgressModal';
+import ConfirmDialog from '@/components/Common/ConfirmDialog';
 import EEGVisualization from '@/components/EEGVisualization';
 
 const DataManagePage: React.FC = () => {
@@ -60,6 +57,9 @@ const DataManagePage: React.FC = () => {
   const [progressModalVisible, setProgressModalVisible] = useState(false);
   const [progressDataIds, setProgressDataIds] = useState<number[]>([]);
   const [processingStartTimes, setProcessingStartTimes] = useState<{[key: number]: number}>({});
+  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<{id: number, name: string} | null>(null);
+  const [batchDeleteConfirmVisible, setBatchDeleteConfirmVisible] = useState(false);
 
   // 可视化指标选项（使用具体的图片类型）
   const visualizationOptions = [
@@ -101,34 +101,13 @@ const DataManagePage: React.FC = () => {
     { key: 'serum_analysis', label: '血清指标分析' }
   ];
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取数据列表（从localStorage读取）
+  // 获取数据列表（从后端API读取）
   const fetchData = async () => {
     try {
       setLoading(true);
       
-      // 初始化演示数据（如果还没有）
-      initializeDemoData();
-      
-      // 从localStorage获取数据
-      const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      
-      // 转换为前端Data类型
-      const convertedData: Data[] = dataItems.map(item => ({
-        id: item.id,
-        personnel_id: item.name.split('_')[0] || 'unknown',
-        personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
-        data_path: item.file_path,
-        upload_time: item.upload_time,
-        upload_user: typeof item.uploader === 'string' ? parseInt(item.uploader) || 1 : item.uploader,
-        user_id: typeof item.uploader === 'string' ? item.uploader : String(item.uploader),
-        processing_status: item.status === '已处理' ? 'completed' : 
-                          item.status === '处理中' ? 'processing' : 'pending',
-        feature_status: item.status === '已处理' ? 'completed' : 
-                       item.status === '处理中' ? 'processing' : 'pending'
-      }));
-      
-      setDataList(convertedData);
+      const response = await apiClient.getData();
+      setDataList(response.items || response);
     } catch (error) {
       console.error('获取数据列表失败:', error);
       toast.error('获取数据列表失败');
@@ -136,7 +115,6 @@ const DataManagePage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
   // 获取状态图标和颜色
   const getStatusIcon = (processingStatus: string, featureStatus: string) => {
@@ -194,7 +172,7 @@ const DataManagePage: React.FC = () => {
       }
       
       const elapsed = (Date.now() - processingStartTimes[dataId]) / 1000; // 转换为秒
-      const maxTime = 60; // 60秒
+      const maxTime = 4; // 4秒（3-5秒的中间值）
       const maxProgress = 99; // 最大99%
       
       // 使用指数增长模拟，前期快，后期慢，加入随机波动
@@ -243,12 +221,11 @@ const DataManagePage: React.FC = () => {
     setSelectedItems(newSelected);
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 选择前200条（从localStorage读取）
+  // 选择前200条（从后端API读取）
   const selectTop200 = async () => {
     try {
-      // 获取前200条数据
-      const top200Ids = dataList.slice(0, 200).map(item => item.id);
+      const response = await apiClient.getTop200Data();
+      const top200Ids = response.items.map((item: Data) => item.id);
       setSelectedItems(new Set(top200Ids));
       toast.success(`已选择前${top200Ids.length}条数据`);
     } catch (error) {
@@ -256,7 +233,6 @@ const DataManagePage: React.FC = () => {
       toast.error('获取前200条数据失败');
     }
   };
-  // ============================================
 
   // 全选/取消全选
   const toggleSelectAll = () => {
@@ -267,8 +243,7 @@ const DataManagePage: React.FC = () => {
     }
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 上传文件（保存到localStorage）
+  // 上传文件（调用后端API）
   const handleUpload = async () => {
     if (!formData.file || !formData.personnel_id || !formData.personnel_name) {
       toast.error('请填写完整信息并选择文件');
@@ -278,30 +253,14 @@ const DataManagePage: React.FC = () => {
     try {
       setUploading(true);
       
-      // 模拟上传延迟
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // 创建FormData
+      const formDataToSend = new FormData();
+      formDataToSend.append('file', formData.file);
+      formDataToSend.append('personnel_id', formData.personnel_id);
+      formDataToSend.append('personnel_name', formData.personnel_name);
       
-      // 获取现有数据
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      
-      // 创建新数据项
-      const newDataItem: DataItem = {
-        id: DataOperations.getNextId(existingData),
-        name: `${formData.personnel_id}_${formData.personnel_name}.csv`,
-        description: `用户 ${formData.personnel_name} 上传的数据文件`,
-        file_path: `/uploads/data/${formData.personnel_id}_${formData.personnel_name}.csv`,
-        file_size: formData.file.size,
-        upload_time: new Date().toISOString(),
-        uploader: 'user', // 这里应该从当前用户获取
-        status: '待处理'
-      };
-      
-      // 保存到localStorage
-      existingData.push(newDataItem);
-      LocalStorageManager.set(STORAGE_KEYS.DATA, existingData);
-      
-      // 添加日志
-      DataOperations.addLog('UPLOAD_DATA', 'DATA_MANAGEMENT', `用户上传数据文件: ${newDataItem.name}`, 'user', '1');
+      // 调用后端API上传
+      await apiClient.uploadData(formDataToSend);
       
       toast.success('数据上传成功！');
       setUploadModalVisible(false);
@@ -314,10 +273,8 @@ const DataManagePage: React.FC = () => {
       setUploading(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 批量上传文件（保存到localStorage）
+  // 批量上传文件（调用后端API）
   const handleBatchUpload = async () => {
     if (!batchFiles || batchFiles.length === 0) {
       toast.error('请选择要上传的文件');
@@ -327,54 +284,27 @@ const DataManagePage: React.FC = () => {
     try {
       setBatchUploading(true);
       
-      // 模拟上传延迟
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // 获取现有数据
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      let successCount = 0;
-      let failedCount = 0;
-      
-      // 处理每个文件
+      // 创建FormData
+      const formDataToSend = new FormData();
       Array.from(batchFiles).forEach((file) => {
-        try {
-          // 从文件名解析人员信息
-          const fileName = file.name.replace('.zip', '');
-          const parts = fileName.split('_');
-          const personnelName = parts[1] || fileName;
-          
-          // 创建新数据项
-          const newDataItem: DataItem = {
-            id: DataOperations.getNextId(existingData),
-            name: file.name,
-            description: `用户 ${personnelName} 批量上传的数据文件`,
-            file_path: `/uploads/data/${file.name}`,
-            file_size: file.size,
-            upload_time: new Date().toISOString(),
-            uploader: 'user',
-            status: '待处理'
-          };
-          
-          existingData.push(newDataItem);
-          successCount++;
-        } catch (error) {
-          console.error('处理文件失败:', file.name, error);
-          failedCount++;
-        }
+        formDataToSend.append('files', file);
       });
       
-      // 保存到localStorage
-      LocalStorageManager.set(STORAGE_KEYS.DATA, existingData);
+      // 调用后端API批量上传
+      const response = await apiClient.batchUploadData(formDataToSend);
       
-      // 添加日志
-      DataOperations.addLog('BATCH_UPLOAD', 'DATA_MANAGEMENT', `批量上传完成: 成功${successCount}个, 失败${failedCount}个`, 'user', '1');
-      
-      if (successCount > 0) {
-        toast.success(`成功上传 ${successCount} 个文件`);
+      if (response.failed_count > 0) {
+        // 如果有失败，显示错误信息
+        if (response.errors && response.errors.length > 0) {
+          response.errors.forEach((error: string) => {
+            console.error('上传错误:', error);
+            toast.error(error);
+          });
+        }
       }
       
-      if (failedCount > 0) {
-        toast.error(`${failedCount} 个文件上传失败`);
+      if (response.success_count > 0) {
+        toast.success(`成功上传 ${response.success_count} 个文件`);
       }
       
       setBatchUploadModalVisible(false);
@@ -387,10 +317,8 @@ const DataManagePage: React.FC = () => {
       setBatchUploading(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 批量预处理（模拟处理）
+  // 批量预处理（调用后端API）
   const handleBatchPreprocess = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要预处理的数据');
@@ -401,39 +329,17 @@ const DataManagePage: React.FC = () => {
       setPreprocessing(true);
       
       const selectedIds = Array.from(selectedItems);
-
-      // 直接更新数据状态为处理中
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      const updatedData = existingData.map(item => {
-        if (selectedIds.includes(item.id)) {
-          return { ...item, status: '处理中' };
-        }
-        return item;
-      });
-      LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
       
-      // 刷新数据列表
-      fetchData();
+      // 调用后端API批量预处理
+      await apiClient.batchPreprocessData({ data_ids: selectedIds });
       
-      // 模拟批量预处理
       toast.success(`已开始预处理 ${selectedIds.length} 条数据`);
       
-      // 模拟随机时间后完成处理（每个数据独立完成）
-      selectedIds.forEach(dataId => {
-        const randomDelay = Math.random() * 20000 + 10000; // 10-30秒随机完成
-        setTimeout(() => {
-          const currentData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-          const completedData = currentData.map(item => {
-            if (item.id === dataId) {
-              return { ...item, status: '已处理' };
-            }
-            return item;
-          });
-          LocalStorageManager.set(STORAGE_KEYS.DATA, completedData);
-          fetchData();
-        }, randomDelay);
-      });
-
+      // 打开进度模态框
+      setProgressDataIds(selectedIds);
+      setProgressModalVisible(true);
+      
+      fetchData();
     } catch (error) {
       console.error('批量预处理失败:', error);
       toast.error('批量预处理失败');
@@ -441,129 +347,84 @@ const DataManagePage: React.FC = () => {
       setPreprocessing(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 批量删除（从localStorage删除）
+  // 批量删除（调用后端API）
   const handleBatchDelete = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要删除的数据');
       return;
     }
 
-    if (!window.confirm(`确定要删除选中的${selectedItems.size}条数据吗？此操作无法撤销。`)) {
-      return;
-    }
+    setBatchDeleteConfirmVisible(true);
+  };
 
+  const confirmBatchDelete = async () => {
     try {
       const selectedIds = Array.from(selectedItems);
       
-      // 获取现有数据
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      
-      // 过滤掉选中的数据
-      const filteredData = existingData.filter(item => !selectedIds.includes(item.id));
-      
-      // 保存到localStorage
-      LocalStorageManager.set(STORAGE_KEYS.DATA, filteredData);
-      
-      // 添加日志
-      DataOperations.addLog('BATCH_DELETE_DATA', 'DATA_MANAGEMENT', `批量删除数据: ${selectedIds.length}条`, 'user', '1');
+      // 调用后端API批量删除
+      await apiClient.batchDeleteData({ data_ids: selectedIds });
       
       toast.success(`已删除${selectedIds.length}条数据`);
       setSelectedItems(new Set());
+      setBatchDeleteConfirmVisible(false);
       fetchData();
     } catch (error) {
       console.error('批量删除失败:', error);
       toast.error('批量删除失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 单个数据预处理（模拟处理）
+  // 单个数据预处理（调用后端API）
   const handlePreprocessSingle = async (dataId: number, fileName: string) => {
     try {
-      // 直接更新数据状态为处理中
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      const updatedData = existingData.map(item => {
-        if (item.id === dataId) {
-          return { ...item, status: '处理中' };
-        }
-        return item;
-      });
-      LocalStorageManager.set(STORAGE_KEYS.DATA, updatedData);
+      // 调用后端API预处理
+      await apiClient.preprocessData(dataId);
       
-      // 刷新数据列表
-      fetchData();
-      
-      // 模拟预处理
       toast.success(`已开始预处理"${fileName}"`);
       
-      // 模拟随机时间后完成处理
-      const randomDelay = Math.random() * 20000 + 10000; // 10-30秒随机完成
-      setTimeout(() => {
-        const currentData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-        const completedData = currentData.map(item => {
-          if (item.id === dataId) {
-            return { ...item, status: '已处理' };
-          }
-          return item;
-        });
-        LocalStorageManager.set(STORAGE_KEYS.DATA, completedData);
-        fetchData();
-      }, randomDelay);
-
+      // 打开进度模态框
+      setProgressDataIds([dataId]);
+      setProgressModalVisible(true);
+      
+      fetchData();
     } catch (error) {
       console.error('数据预处理失败:', error);
       toast.error('数据预处理失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 删除单个数据（从localStorage删除）
+  // 删除单个数据（调用后端API）
   const handleDeleteSingle = async (dataId: number, fileName: string) => {
-    if (!window.confirm(`确定要删除"${fileName}"吗？此操作无法撤销。`)) {
-      return;
-    }
+    setDeleteTarget({ id: dataId, name: fileName });
+    setDeleteConfirmVisible(true);
+  };
+
+  const confirmDeleteSingle = async () => {
+    if (!deleteTarget) return;
 
     try {
-      // 获取现有数据
-      const existingData = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
-      
-      // 过滤掉要删除的数据
-      const filteredData = existingData.filter(item => item.id !== dataId);
-      
-      // 保存到localStorage
-      LocalStorageManager.set(STORAGE_KEYS.DATA, filteredData);
-      
-      // 添加日志
-      DataOperations.addLog('DELETE_DATA', 'DATA_MANAGEMENT', `删除数据文件: ${fileName}`, 'user', '1');
+      // 调用后端API删除
+      await apiClient.deleteData(deleteTarget.id);
       
       toast.success('数据删除成功');
+      setDeleteConfirmVisible(false);
+      setDeleteTarget(null);
       fetchData();
     } catch (error) {
       console.error('删除数据失败:', error);
       toast.error('删除数据失败');
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 查看数据图像（使用演示数据）
+  // 查看数据图像（调用后端API）
   const handleViewImages = async (dataId: number) => {
     try {
-      // 模拟获取图像列表
-      const images = imageTypes.map((type) => ({
-        image_type: type.key,
-        image_name: `${type.key}.png`,
-        description: type.label
-      }));
+      const response = await apiClient.getDataImages(dataId);
       
       setCurrentImageData({
         dataId,
-        images,
+        images: response.images || [],
         currentIndex: 0
       });
       setImageViewerVisible(true);
@@ -572,13 +433,28 @@ const DataManagePage: React.FC = () => {
       toast.error('获取图像列表失败');
     }
   };
-  // ============================================
 
   // ===== 纯前端演示模式 - 特殊标记 =====
   // 处理可视化显示（使用EEG图表）
   const handleVisualizationDisplay = () => {
-    if (!selectedDataId || !visualizationType) {
-      toast.error('请先选择数据和可视化类型');
+    if (!selectedDataId) {
+      toast.error('请先选择数据');
+      return;
+    }
+    
+    const data = dataList.find(item => item.id === selectedDataId);
+    if (!data) {
+      toast.error('找不到选中的数据');
+      return;
+    }
+    
+    if (data.processing_status !== 'completed' || data.feature_status !== 'completed') {
+      toast.error('该数据尚未完成预处理，无法查看可视化');
+      return;
+    }
+    
+    if (!visualizationType) {
+      toast.error('请选择可视化类型');
       return;
     }
     
@@ -589,8 +465,13 @@ const DataManagePage: React.FC = () => {
 
   // 选择数据用于可视化
   const handleSelectDataForVisualization = (dataId: number) => {
-    setSelectedDataId(dataId);
-    setShowVisualization(false);
+    const data = dataList.find(item => item.id === dataId);
+    if (data && data.processing_status === 'completed' && data.feature_status === 'completed') {
+      setSelectedDataId(dataId);
+      setShowVisualization(false);
+    } else {
+      toast.error('该数据尚未完成预处理，无法查看可视化');
+    }
   };
 
   // 切换图像
@@ -815,8 +696,13 @@ const DataManagePage: React.FC = () => {
                         </button>
                         <button
                           onClick={() => handleSelectDataForVisualization(item.id)}
-                          className="text-purple-600 hover:text-purple-700"
-                          title="选择用于可视化"
+                          className={item.processing_status === 'completed' && item.feature_status === 'completed' 
+                            ? 'text-purple-600 hover:text-purple-700' 
+                            : 'text-gray-400 cursor-not-allowed'}
+                          title={item.processing_status === 'completed' && item.feature_status === 'completed' 
+                            ? '选择用于可视化' 
+                            : '需要先完成预处理'}
+                          disabled={!(item.processing_status === 'completed' && item.feature_status === 'completed')}
                         >
                           <BarChart3 className="h-4 w-4" />
                         </button>
@@ -1170,6 +1056,33 @@ const DataManagePage: React.FC = () => {
         }}
         dataIds={progressDataIds}
         title={progressDataIds.length > 1 ? '批量预处理进度' : '数据预处理进度'}
+      />
+
+      {/* 单个删除确认对话框 */}
+      <ConfirmDialog
+        visible={deleteConfirmVisible}
+        title="确认删除"
+        message={`确定要删除"${deleteTarget?.name}"吗？\n此操作无法撤销。`}
+        confirmText="删除"
+        cancelText="取消"
+        type="danger"
+        onConfirm={confirmDeleteSingle}
+        onCancel={() => {
+          setDeleteConfirmVisible(false);
+          setDeleteTarget(null);
+        }}
+      />
+
+      {/* 批量删除确认对话框 */}
+      <ConfirmDialog
+        visible={batchDeleteConfirmVisible}
+        title="确认批量删除"
+        message={`确定要删除选中的 ${selectedItems.size} 条数据吗？\n此操作无法撤销。`}
+        confirmText="删除"
+        cancelText="取消"
+        type="danger"
+        onConfirm={confirmBatchDelete}
+        onCancel={() => setBatchDeleteConfirmVisible(false)}
       />
     </div>
   );

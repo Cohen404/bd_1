@@ -81,6 +81,16 @@ async def read_results(
     # 分页并获取结果
     results = query.order_by(db_models.Result.result_time.desc()).offset(skip).limit(limit).all()
     
+    # 为每个结果补充人员信息
+    for result in results:
+        if not result.personnel_id or not result.personnel_name:
+            # 从关联的Data表获取人员信息
+            if result.data_id:
+                data = db.query(db_models.Data).filter(db_models.Data.id == result.data_id).first()
+                if data:
+                    result.personnel_id = data.personnel_id
+                    result.personnel_name = data.personnel_name
+    
     return results
 
 @router.get("/{result_id}", response_model=schemas.Result)
@@ -100,7 +110,13 @@ async def read_result(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 认证已移除，返回所有结果
+    # 补充人员信息
+    if not result.personnel_id or not result.personnel_name:
+        if result.data_id:
+            data = db.query(db_models.Data).filter(db_models.Data.id == result.data_id).first()
+            if data:
+                result.personnel_id = data.personnel_id
+                result.personnel_name = data.personnel_name
     
     return result
 
@@ -162,15 +178,16 @@ async def export_results(
         export_data.append({
             "结果ID": result.id,
             "数据ID": result.data_id,
-            "人员ID": data.personnel_id if data else "",
-            "人员姓名": data.personnel_name if data else "",
+            "人员ID": data.personnel_id if data else result.personnel_id,
+            "人员姓名": data.personnel_name if data else result.personnel_name,
             "评估用户": user.username if user else "",
             "应激评分": result.stress_score,
             "抑郁评分": result.depression_score,
             "焦虑评分": result.anxiety_score,
             "社交孤立评分": result.social_isolation_score,
             "评估时间": result.result_time.strftime("%Y-%m-%d %H:%M:%S"),
-            "报告路径": result.report_path or ""
+            "报告路径": result.report_path or "",
+            "主动学习": "是" if result.active_learned else "否"
         })
     
     # 根据导出格式处理

@@ -49,7 +49,7 @@ api.interceptors.response.use(
     } else if (response?.status === 403) {
       toast.error('权限不足，无法访问该资源');
     } else if (response?.status === 404) {
-      toast.error('请求的资源不存在');
+      console.log('请求的资源不存在:', response.config?.url);
     } else if (response?.status === 422) {
       const detail = response.data?.detail;
       if (Array.isArray(detail)) {
@@ -179,7 +179,7 @@ class API {
   }
 
   async batchDeleteData(data: { data_ids: number[] }) {
-    const response = await api.delete('/data/batch-delete', { data });
+    const response = await api.post('/data/batch-delete', data);
     return response.data;
   }
 
@@ -222,6 +222,11 @@ class API {
 
   async batchEvaluateHealth(data: { data_ids: number[] }) {
     const response = await api.post('/health/batch-evaluate', data);
+    return response.data;
+  }
+
+  async getDataResult(dataId: number) {
+    const response = await api.get(`/health/data/${dataId}/result`);
     return response.data;
   }
 

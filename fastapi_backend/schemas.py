@@ -124,7 +124,7 @@ class Data(DataBase):
     feature_status: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # 结果相关模型
 class ResultBase(BaseModel):
@@ -135,6 +135,9 @@ class ResultBase(BaseModel):
     user_id: str
     data_id: Optional[int] = None
     report_path: Optional[str] = None
+    personnel_id: Optional[str] = None
+    personnel_name: Optional[str] = None
+    active_learned: bool = False
 
 class ResultCreate(ResultBase):
     pass

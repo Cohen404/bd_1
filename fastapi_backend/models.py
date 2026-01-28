@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -85,6 +85,8 @@ class Data(Base):
     upload_time = Column(DateTime, default=datetime.now, comment='上传时间')
     processing_status = Column(String(20), nullable=False, default='pending', comment='预处理状态: pending/processing/completed/failed')
     feature_status = Column(String(20), nullable=False, default='pending', comment='特征提取状态: pending/processing/completed/failed')
+    has_result = Column(Boolean, default=False, comment='是否有评估结果')
+    active_learned = Column(Boolean, default=False, comment='是否进行过主动学习')
     
     # 关系
     user = relationship("User", back_populates="data")
@@ -103,6 +105,9 @@ class Result(Base):
     report_path = Column(String(255), nullable=True, comment='报告路径')
     user_id = Column(String(64), ForeignKey('tb_user.user_id'), nullable=False, comment='关联用户ID')
     data_id = Column(Integer, ForeignKey('tb_data.id'), nullable=True, comment='关联数据ID')
+    personnel_id = Column(String(64), nullable=True, comment='人员ID')
+    personnel_name = Column(String(255), nullable=True, comment='人员姓名')
+    active_learned = Column(Boolean, default=False, comment='是否进行过主动学习')
     
     # 关系
     user = relationship("User", back_populates="results")

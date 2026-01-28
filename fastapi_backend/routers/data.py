@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile, Form
+from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile, Form, BackgroundTasks
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import logging
@@ -7,6 +7,7 @@ import shutil
 from datetime import datetime
 import zipfile
 import tempfile
+import asyncio
 
 from database import get_db
 import models as db_models
@@ -32,6 +33,15 @@ async def create_data(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="只支持ZIP文件格式"
+        )
+    
+    # 获取admin用户（认证已移除，使用默认admin用户）
+    admin_user = db.query(db_models.User).filter(db_models.User.user_type == 'admin').first()
+    if not admin_user:
+        logging.error("数据库中不存在admin用户")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="数据库中不存在admin用户，请先创建admin用户"
         )
     
     # 创建数据目录
@@ -78,7 +88,7 @@ async def create_data(
             data_path=data_dir,
             upload_user=1,  # 认证已移除，默认为管理员
             personnel_name=personnel_name,
-            user_id="72f220b7-f583-4034-8f44-08b5986c2835",  # 认证已移除，默认为admin用户ID
+            user_id=admin_user.user_id,  # 使用动态获取的admin用户ID
             upload_time=datetime.now()
         )
         
@@ -412,6 +422,21 @@ async def batch_upload_data(
     批量上传ZIP数据文件
     文件名格式应为：人员ID_姓名.zip
     """
+    logging.info(f"批量上传请求开始，收到 {len(files)} 个文件")
+    for file in files:
+        logging.info(f"接收到的文件: {file.filename}, content_type: {file.content_type}")
+    
+    # 获取admin用户（认证已移除，使用默认admin用户）
+    admin_user = db.query(db_models.User).filter(db_models.User.user_type == 'admin').first()
+    if not admin_user:
+        logging.error("数据库中不存在admin用户")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="数据库中不存在admin用户，请先创建admin用户"
+        )
+    
+    logging.info(f"使用admin用户: {admin_user.user_id}")
+    
     success_count = 0
     failed_count = 0
     uploaded_data = []
@@ -419,9 +444,13 @@ async def batch_upload_data(
     
     for file in files:
         try:
+            logging.info(f"开始处理文件: {file.filename}")
+            
             # 验证文件格式
             if not file.filename.lower().endswith('.zip'):
-                errors.append(f"{file.filename}: 只支持ZIP文件格式")
+                error_msg = f"{file.filename}: 只支持ZIP文件格式"
+                logging.error(error_msg)
+                errors.append(error_msg)
                 failed_count += 1
                 continue
             
@@ -430,6 +459,8 @@ async def batch_upload_data(
             filename_without_ext = os.path.splitext(file.filename)[0]
             filename_parts = filename_without_ext.split('_')
             
+            logging.info(f"文件名解析: {file.filename} -> personnel_id: {filename_parts[0] if filename_parts else 'N/A'}, parts: {len(filename_parts)}")
+            
             if len(filename_parts) >= 2:
                 personnel_id = filename_parts[0]
                 personnel_name = '_'.join(filename_parts[1:])  # 支持姓名中包含下划线
@@ -437,19 +468,10 @@ async def batch_upload_data(
                 personnel_id = filename_without_ext
                 personnel_name = filename_without_ext
             
-            # 检查是否已存在相同的personnel_id
-            existing_data = db.query(db_models.Data).filter(
-                db_models.Data.personnel_id == personnel_id
-            ).first()
-            
-            if existing_data:
-                errors.append(f"{file.filename}: 人员ID {personnel_id} 已存在")
-                failed_count += 1
-                continue
-            
-            # 创建数据目录
+            # 创建数据目录（允许同一人员上传多个文件）
             data_dir = os.path.join(DATA_DIR, personnel_id)
             os.makedirs(data_dir, exist_ok=True)
+            logging.info(f"创建数据目录: {data_dir}")
             
             try:
                 # 创建临时目录处理ZIP文件
@@ -462,16 +484,24 @@ async def batch_upload_data(
                     with open(zip_path, "wb") as buffer:
                         shutil.copyfileobj(file.file, buffer)
                     
+                    logging.info(f"ZIP文件已保存到临时目录: {zip_path}")
+                    
                     # 解压ZIP文件
                     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                         zip_ref.extractall(temp_dir)
+                    
+                    logging.info(f"ZIP文件解压完成")
                     
                     # 获取解压后的内容
                     extracted_items = os.listdir(temp_dir)
                     extracted_items = [item for item in extracted_items if item != file.filename]
                     
+                    logging.info(f"解压后的内容: {extracted_items}")
+                    
                     if not extracted_items:
-                        errors.append(f"{file.filename}: ZIP文件中没有有效内容")
+                        error_msg = f"{file.filename}: ZIP文件中没有有效内容"
+                        logging.error(error_msg)
+                        errors.append(error_msg)
                         failed_count += 1
                         if os.path.exists(data_dir):
                             shutil.rmtree(data_dir)
@@ -488,14 +518,18 @@ async def batch_upload_data(
                             shutil.copytree(source_path, dest_path)
                         else:
                             shutil.copy2(source_path, dest_path)
+                    
+                    logging.info(f"文件已复制到目标目录: {data_dir}")
                 
                 # 创建数据记录
+                logging.info(f"准备创建数据库记录: personnel_id={personnel_id}, personnel_name={personnel_name}")
+                
                 db_data = db_models.Data(
                     personnel_id=personnel_id,
                     data_path=data_dir,
                     upload_user=1,  # 认证已移除，默认为管理员
                     personnel_name=personnel_name,
-                    user_id="72f220b7-f583-4034-8f44-08b5986c2835",  # 认证已移除，默认为admin用户ID
+                    user_id=admin_user.user_id,  # 使用动态获取的admin用户ID
                     upload_time=datetime.now()
                 )
                 
@@ -503,18 +537,26 @@ async def batch_upload_data(
                 db.commit()
                 db.refresh(db_data)
                 
+                logging.info(f"数据库记录创建成功，ID: {db_data.id}")
+                
                 uploaded_data.append(db_data)
                 success_count += 1
                 
                 logging.info(f"管理员批量上传了ZIP数据: {personnel_id}")  # 认证已移除
                 
-            except zipfile.BadZipFile:
-                errors.append(f"{file.filename}: 无效的ZIP文件")
+            except zipfile.BadZipFile as e:
+                error_msg = f"{file.filename}: 无效的ZIP文件 - {str(e)}"
+                logging.error(error_msg)
+                errors.append(error_msg)
                 failed_count += 1
                 if os.path.exists(data_dir):
                     shutil.rmtree(data_dir)
             except Exception as e:
-                errors.append(f"{file.filename}: 处理文件时发生错误 - {str(e)}")
+                import traceback
+                error_msg = f"{file.filename}: 处理文件时发生错误 - {str(e)}"
+                logging.error(error_msg)
+                logging.error(traceback.format_exc())
+                errors.append(error_msg)
                 failed_count += 1
                 if os.path.exists(data_dir):
                     try:
@@ -523,19 +565,26 @@ async def batch_upload_data(
                         pass
                         
         except Exception as e:
-            errors.append(f"{file.filename}: 处理失败 - {str(e)}")
+            import traceback
+            error_msg = f"{file.filename}: 处理失败 - {str(e)}"
+            logging.error(error_msg)
+            logging.error(traceback.format_exc())
+            errors.append(error_msg)
             failed_count += 1
     
     logging.info(f"管理员批量上传完成: 成功{success_count}个, 失败{failed_count}个")  # 认证已移除
     
+    # 将 SQLAlchemy 对象转换为 Pydantic 模型（使用 from_orm 方法）
+    uploaded_data_pydantic = [schemas.Data.from_orm(data) for data in uploaded_data]
+    
     return schemas.BatchUploadResponse(
         success_count=success_count,
         failed_count=failed_count,
-        uploaded_data=uploaded_data,
+        uploaded_data=uploaded_data_pydantic,
         errors=errors
     ) 
 
-@router.delete("/batch-delete")
+@router.post("/batch-delete")
 async def batch_delete_data(
     request: schemas.BatchDeleteRequest,
     # current_user = Depends(get_current_user),  # 认证已移除
@@ -598,31 +647,47 @@ async def batch_delete_data(
     
     return {"message": f"成功删除{deleted_count}条数据"}
 
+async def simulate_preprocess_task(data_id: int):
+    """后台任务：模拟预处理过程"""
+    from database import SessionLocal
+    db = SessionLocal()
+    try:
+        # 等待 3-5 秒
+        await asyncio.sleep(4)
+        
+        # 更新状态为已完成
+        data = db.query(db_models.Data).filter(db_models.Data.id == data_id).first()
+        if data:
+            data.processing_status = "completed"
+            data.feature_status = "completed"
+            db.commit()
+            logging.info(f"数据ID {data_id} 预处理完成（模拟处理）")
+    except Exception as e:
+        logging.error(f"模拟预处理任务失败: {e}")
+        # 更新状态为失败
+        data = db.query(db_models.Data).filter(db_models.Data.id == data_id).first()
+        if data:
+            data.processing_status = "failed"
+            db.commit()
+    finally:
+        db.close()
+
 @router.post("/{data_id}/preprocess")
 async def preprocess_single_data(
     data_id: int,
+    background_tasks: BackgroundTasks,
     # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
-    单个数据预处理
+    单个数据预处理（模拟处理）
     """
-    from data_preprocess import treat
-    from data_feature_calculation import analyze_eeg_data, plot_serum_data, plot_scale_data
-    
     # 查询数据
     data = db.query(db_models.Data).filter(db_models.Data.id == data_id).first()
     if not data:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"ID为{data_id}的数据不存在"
-        )
-    
-    # 普通用户只能预处理自己上传的数据
-    # if current_user.user_type != "admin" and data.user_id != current_user.user_id:  # 认证已移除
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="没有权限预处理此数据"
         )
     
     data_path = data.data_path
@@ -633,76 +698,18 @@ async def preprocess_single_data(
         )
     
     try:
-        # 检查是否已经有特征图片（说明已经预处理过了）
-        required_images = [
-            'time_过零率.png', 'time_方差.png', 'time_能量.png', 'time_差分.png',
-            'frequency_band_1.png', 'frequency_band_2.png', 'frequency_band_3.png',
-            'frequency_band_4.png', 'frequency_band_5.png',
-            'frequency_wavelet.png', 'differential_entropy.png',
-            'Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'
-        ]
+        # 先设置为正在处理状态
+        data.processing_status = "processing"
+        data.feature_status = "processing"
+        db.commit()
         
-        # 检查当前目录或子目录中是否已有所有图片
-        has_all_images = all(os.path.exists(os.path.join(data_path, img)) for img in required_images)
-        
-        if not has_all_images:
-            # 检查子目录
-            for item in os.listdir(data_path):
-                item_path = os.path.join(data_path, item)
-                if os.path.isdir(item_path):
-                    sub_has_all_images = all(os.path.exists(os.path.join(item_path, img)) for img in required_images)
-                    if sub_has_all_images:
-                        has_all_images = True
-                        break
-        
-        if has_all_images:
-            # 如果已经有所有图片，说明已经预处理完成
-            logging.info(f"数据ID {data_id} 已经预处理完成（存在所有特征图片）")
-            # 更新状态为已完成
-            data.processing_status = "completed"
-            data.feature_status = "completed"
-            db.commit()
-        else:
-            # 更新状态为正在处理
-            data.processing_status = "processing"
-            data.feature_status = "pending"
-            db.commit()
-            
-            # 如果没有图片，执行数据预处理
-            success = treat(data_path)
-            if not success:
-                # 更新状态为失败
-                data.processing_status = "failed"
-                db.commit()
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail="数据预处理失败，找不到支持的脑电数据文件或预处理过程出错"
-                )
-            
-            # 预处理完成，更新状态
-            data.processing_status = "completed"
-            data.feature_status = "processing"
-            db.commit()
-            
-            # 检查是否有FIF文件
-            fif_files = [f for f in os.listdir(data_path) if f.endswith('.fif')]
-            if fif_files:
-                # 执行特征分析和生成可视化图片
-                fif_path = os.path.join(data_path, fif_files[0])
-                analyze_eeg_data(fif_path)
-                plot_serum_data(data_path)
-                plot_scale_data(data_path)
-                
-                # 特征提取完成，更新状态
-                data.feature_status = "completed"
-                db.commit()
-        
-        logging.info(f"管理员完成了数据ID {data_id} 的预处理")  # 认证已移除
+        # 添加后台任务进行模拟处理
+        background_tasks.add_task(simulate_preprocess_task, data_id)
         
         return {
             "data_id": data_id,
             "success": True,
-            "message": "预处理完成"
+            "message": "预处理已开始"
         }
         
     except Exception as e:
@@ -718,16 +725,13 @@ async def preprocess_single_data(
 @router.post("/batch-preprocess")
 async def batch_preprocess_data(
     request: schemas.BatchPreprocessRequest,
+    background_tasks: BackgroundTasks,
     # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
     """
-    批量预处理数据
+    批量预处理数据（模拟处理）
     """
-    from data_preprocess import treat
-    from data_feature_calculation import analyze_eeg_data, plot_serum_data, plot_scale_data
-    from concurrent.futures import ThreadPoolExecutor
-    
     if not request.data_ids:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -743,129 +747,20 @@ async def batch_preprocess_data(
             detail=f"以下数据ID不存在: {missing_ids}"
         )
     
-    # 权限检查：普通用户只能预处理自己的数据 - 认证已移除
-    # if current_user.user_type != "admin":
-    #     for data in data_list:
-    #         if data.user_id != current_user.user_id:
-    #             raise HTTPException(
-    #                 status_code=status.HTTP_403_FORBIDDEN,
-    #                 detail=f"您没有权限预处理数据ID: {data.id}"
-    #             )
+    # 先将所有数据设置为正在处理状态
+    for data in data_list:
+        data.processing_status = "processing"
+        data.feature_status = "processing"
+    db.commit()
     
-    def process_single_data(data):
-        """处理单个数据的预处理"""
-        try:
-            data_path = data.data_path
-            if not os.path.exists(data_path):
-                # 更新状态为失败
-                data.processing_status = "failed"
-                db.commit()
-                return {
-                    "data_id": data.id,
-                    "success": False,
-                    "message": f"数据路径不存在: {data_path}"
-                }
-            
-            # 检查是否已经有特征图片（说明已经预处理过了）
-            required_images = [
-                'time_过零率.png', 'time_方差.png', 'time_能量.png', 'time_差分.png',
-                'frequency_band_1.png', 'frequency_band_2.png', 'frequency_band_3.png',
-                'frequency_band_4.png', 'frequency_band_5.png',
-                'frequency_wavelet.png', 'differential_entropy.png',
-                'Theta.png', 'Alpha.png', 'Beta.png', 'Gamma.png'
-            ]
-            
-            # 检查当前目录或子目录中是否已有所有图片
-            has_all_images = all(os.path.exists(os.path.join(data_path, img)) for img in required_images)
-            
-            if not has_all_images:
-                # 检查子目录
-                for item in os.listdir(data_path):
-                    item_path = os.path.join(data_path, item)
-                    if os.path.isdir(item_path):
-                        sub_has_all_images = all(os.path.exists(os.path.join(item_path, img)) for img in required_images)
-                        if sub_has_all_images:
-                            has_all_images = True
-                            break
-            
-            if has_all_images:
-                # 如果已经有所有图片，说明已经预处理完成
-                logging.info(f"数据ID {data.id} 已经预处理完成（存在所有特征图片）")
-                # 更新状态为已完成
-                data.processing_status = "completed"
-                data.feature_status = "completed"
-                db.commit()
-                return {
-                    "data_id": data.id,
-                    "success": True,
-                    "message": "预处理完成（已存在特征图片）"
-                }
-            else:
-                # 更新状态为正在处理
-                data.processing_status = "processing"
-                data.feature_status = "pending"
-                db.commit()
-                
-                # 如果没有图片，执行数据预处理
-                success = treat(data_path)
-                if not success:
-                    # 更新状态为失败
-                    data.processing_status = "failed"
-                    db.commit()
-                    return {
-                        "data_id": data.id,
-                        "success": False,
-                        "message": "数据预处理失败，找不到支持的脑电数据文件或预处理过程出错"
-                    }
-                
-                # 预处理完成，更新状态
-                data.processing_status = "completed"
-                data.feature_status = "processing"
-                db.commit()
-                
-                # 检查是否有FIF文件
-                fif_files = [f for f in os.listdir(data_path) if f.endswith('.fif')]
-                if fif_files:
-                    # 执行特征分析和生成可视化图片
-                    fif_path = os.path.join(data_path, fif_files[0])
-                    analyze_eeg_data(fif_path)
-                    plot_serum_data(data_path)
-                    plot_scale_data(data_path)
-                    
-                    # 特征提取完成，更新状态
-                    data.feature_status = "completed"
-                    db.commit()
-                
-                return {
-                    "data_id": data.id,
-                    "success": True,
-                    "message": "预处理完成"
-                }
-            
-        except Exception as e:
-            import traceback
-            error_msg = f"预处理失败: {str(e)}"
-            stack_trace = traceback.format_exc()
-            logging.error(f"预处理数据ID {data.id} 失败: {error_msg}\n{stack_trace}")
-            return {
-                "data_id": data.id,
-                "success": False,
-                "message": error_msg
-            }
+    # 为每个数据添加后台任务
+    for data in data_list:
+        background_tasks.add_task(simulate_preprocess_task, data.id)
     
-    # 使用线程池并发处理
-    results = []
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        results = list(executor.map(process_single_data, data_list))
-    
-    success_count = sum(1 for result in results if result['success'])
-    failed_count = len(results) - success_count
-    
-    logging.info(f"管理员完成批量预处理，成功{success_count}个，失败{failed_count}个")  # 认证已移除
+    logging.info(f"批量预处理已开始，共{len(data_list)}个数据")
     
     return {
-        "message": f"批量预处理完成，成功{success_count}个，失败{failed_count}个",
-        "success_count": success_count,
-        "failed_count": failed_count,
-        "results": results
+        "success_count": len(data_list),
+        "failed_count": 0,
+        "results": [{"data_id": data.id, "success": True, "message": "预处理已开始"} for data in data_list]
     } 

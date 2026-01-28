@@ -11,12 +11,9 @@ import {
   Clock,
   Play
 } from 'lucide-react';
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 注释掉后端API相关导入，使用localStorage存储
-// import { apiClient } from '@/utils/api';
+import { apiClient } from '@/utils/api';
 import { Data } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, DataOperations, initializeDemoData, DataItem, ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 interface PersonnelSubData {
@@ -30,13 +27,13 @@ interface PersonnelSubData {
   social_isolation_score?: number;
   overall_risk_level?: string;
   recommendations?: string;
+  selected?: boolean;
 }
 
 interface PersonnelData extends Data {
   subData: PersonnelSubData[];
   expanded: boolean;
 }
-// ============================================
 
 
 interface EvaluationProgress {
@@ -73,100 +70,112 @@ const HealthEvaluatePage: React.FC = () => {
   const [activeLearningVisible, setActiveLearningVisible] = useState(false);
   const [activeLearningProgress, setActiveLearningProgress] = useState(0);
   const [activeLearningPersonnelName, setActiveLearningPersonnelName] = useState('');
-  const [activeLearnedPersonnel, setActiveLearnedPersonnel] = useState<Set<number>>(new Set());
+  const [activeLearnedPersonnel, setActiveLearnedPersonnel] = useState<Set<string>>(new Set());
 
-  const generateMockSubData = (personnelId: number, baseUploadTime: string): PersonnelSubData[] => {
-    const subData: PersonnelSubData[] = [];
-    
-    const periods = [
-      { name: '晨起', hour: 7, label: 'morning' },
-      { name: '上午', hour: 10, label: 'forenoon' },
-      { name: '午间', hour: 12, label: 'noon' },
-      { name: '下午', hour: 15, label: 'afternoon' },
-      { name: '傍晚', hour: 18, label: 'evening' },
-      { name: '夜间', hour: 21, label: 'night' }
-    ];
-    
-    const baseDate = new Date(baseUploadTime);
-    const dateStr = baseDate.toISOString().split('T')[0];
-    
-    for (let i = 0; i < periods.length; i++) {
-      const period = periods[i];
-      const seed = personnelId * 1000 + i;
-      const normalizedSeed = (seed % 1000) / 1000;
-      
-      const stressScore = Math.min(100, Math.max(0, Math.floor(normalizedSeed * 60 + 20 + (Math.random() * 10 - 5))));
-      const depressionScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.6 + 0.2) * 50 + 15 + (Math.random() * 8 - 4))));
-      const anxietyScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.5 + 0.3) * 55 + 18 + (Math.random() * 10 - 5))));
-      const socialScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.7 + 0.2) * 40 + 12 + (Math.random() * 8 - 4))));
-      
-      const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
-      const riskLevel = maxScore >= 70 ? '高风险' : maxScore >= 45 ? '中等风险' : '低风险';
-      
-      const recommendations = maxScore >= 70 ? 
-        '建议立即寻求专业心理咨询，进行心理干预治疗，注意休息和放松，避免过度劳累' :
-        maxScore >= 45 ? 
-        '建议适当调整生活方式，保持积极心态，增加社交活动，必要时咨询心理医生' :
-        '保持良好的心理状态，继续当前的生活方式，定期进行心理健康监测';
-      
-      const uploadDate = new Date(baseDate);
-      uploadDate.setHours(period.hour, Math.floor(Math.random() * 30), 0);
-      
-      const fileName = `health_monitor_${personnelId}_${dateStr}_${period.label}_${String(Math.floor(Math.random() * 9000) + 1000)}.csv`;
-      
-      subData.push({
-        id: personnelId * 100 + i,
-        data_path: `/data/health/${fileName}`,
-        upload_time: uploadDate.toISOString(),
-        period: period.name,
-        stress_score: stressScore,
-        depression_score: depressionScore,
-        anxiety_score: anxietyScore,
-        social_isolation_score: socialScore,
-        overall_risk_level: riskLevel,
-        recommendations: recommendations
-      });
-    }
-    
-    return subData;
-  };
-
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取数据列表（从localStorage读取）
+  // 获取数据列表（从后端API获取已完成处理的数据）
   const fetchData = async () => {
     try {
       setLoading(true);
       
-      initializeDemoData();
+      // 从后端API获取数据
+      const response = await apiClient.getData();
+      const allData = response.items || response;
       
-      const dataItems = LocalStorageManager.get<DataItem[]>(STORAGE_KEYS.DATA, []);
+      // 过滤出已完成处理的数据
+      const completedData = allData.filter((item: Data) => 
+        item.processing_status === 'completed' && item.feature_status === 'completed'
+      );
       
-      const learnedPersonnel = LocalStorageManager.get<number[]>('active_learned_personnel', []);
-      setActiveLearnedPersonnel(new Set(learnedPersonnel));
+      // 按 personnel_id 分组
+      const groupedData = new Map<string, Data[]>();
+      completedData.forEach((item: Data) => {
+        if (!groupedData.has(item.personnel_id)) {
+          groupedData.set(item.personnel_id, []);
+        }
+        groupedData.get(item.personnel_id)!.push(item);
+      });
       
-      const convertedData: PersonnelData[] = dataItems.map(item => {
-        const uploadDate = new Date(item.upload_time);
-        const dateStr = uploadDate.toISOString().split('T')[0];
-        const fileName = `health_summary_${item.id}_${dateStr}_${String(Math.floor(Math.random() * 9000) + 1000)}.csv`;
+      // 转换为 PersonnelData 格式，每个用户ID作为一个条目
+      const convertedData: PersonnelData[] = Array.from(groupedData.entries()).map(([personnelId, items]) => {
+        const firstItem = items[0];
+        
+        // 将同一用户ID的所有数据记录转换为子数据
+        const subData: PersonnelSubData[] = items.map((item, index) => {
+          const periods = ['晨起', '上午', '午间', '下午', '傍晚', '夜间'];
+          const period = periods[index % periods.length];
+          
+          return {
+            id: item.id,
+            data_path: item.data_path,
+            upload_time: item.upload_time,
+            period: period,
+            stress_score: undefined,
+            depression_score: undefined,
+            anxiety_score: undefined,
+            social_isolation_score: undefined,
+            overall_risk_level: undefined,
+            recommendations: undefined
+          };
+        });
         
         return {
-          user_id: '1',
-          id: item.id,
-          personnel_id: item.name.split('_')[0] || 'unknown',
-          personnel_name: item.name.split('_')[1]?.replace('.csv', '') || item.name,
-          data_path: `/data/health/${item.id}/${fileName}`,
-          upload_time: item.upload_time,
-          upload_user: parseInt(item.uploader) || 1,
-          processing_status: item.status === '已处理' ? 'completed' : 
-                            item.status === '处理中' ? 'processing' : 'pending',
-          feature_status: item.status === '已处理' ? 'completed' : 
-                         item.status === '处理中' ? 'processing' : 'pending',
-          subData: generateMockSubData(item.id, item.upload_time),
+          ...firstItem,
+          subData: subData,
           expanded: false
         };
       });
       
       setDataList(convertedData);
+      
+      // 获取每个数据的评估结果（静默处理，不显示错误）
+      for (const item of convertedData) {
+        for (const subItem of item.subData) {
+          try {
+            const result = await apiClient.getDataResult(subItem.id);
+            if (result) {
+              setDataList(prev => prev.map(dataItem => {
+                if (dataItem.id === item.id) {
+                  return {
+                    ...dataItem,
+                    subData: dataItem.subData.map(sub => {
+                      if (sub.id === subItem.id) {
+                        return {
+                          ...sub,
+                          stress_score: result.stress_score,
+                          depression_score: result.depression_score,
+                          anxiety_score: result.anxiety_score,
+                          social_isolation_score: result.social_isolation_score,
+                          overall_risk_level: result.stress_score >= 70 ? '高风险' : 
+                                            result.stress_score >= 45 ? '中等风险' : '低风险',
+                          recommendations: '保持良好的心理状态'
+                        };
+                      }
+                      return sub;
+                    })
+                  };
+                }
+                return dataItem;
+              }));
+            }
+          } catch (error) {
+            // 静默处理404错误，不显示错误提示
+            console.log(`数据ID ${subItem.id} 暂无评估结果`);
+          }
+        }
+      }
+      
+      // 获取已学习的人员列表
+      try {
+        const learnedResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/active-learning/all-learned-personnel`);
+        if (learnedResponse.ok) {
+          const learnedData = await learnedResponse.json();
+          const learnedPersonnelIds = new Set<string>(learnedData.personnel.map((p: any) => p.personnel_id));
+          setActiveLearnedPersonnel(learnedPersonnelIds);
+        }
+      } catch (error) {
+        console.error('获取已学习人员列表失败:', error);
+      }
+      
     } catch (error) {
       console.error('获取数据列表失败:', error);
       toast.error('获取数据列表失败');
@@ -174,12 +183,19 @@ const HealthEvaluatePage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
 
 
   useEffect(() => {
     fetchData();
+    
+    // 组件卸载时清理定时器
+    return () => {
+      if ((window as any).evaluationCheckInterval) {
+        clearInterval((window as any).evaluationCheckInterval);
+        (window as any).evaluationCheckInterval = null;
+      }
+    };
   }, []);
 
   const toggleExpand = (dataId: number) => {
@@ -188,35 +204,93 @@ const HealthEvaluatePage: React.FC = () => {
     ));
   };
 
-  const handleActiveLearning = (personnelId: number, personnelName: string) => {
-    setActiveLearningPersonnelName(personnelName);
-    setActiveLearningVisible(true);
-    setActiveLearningProgress(0);
-    
-    const duration = Math.random() * 2000 + 3000;
-    const interval = 50;
-    const steps = duration / interval;
-    const progressIncrement = 100 / steps;
-    
-    let currentProgress = 0;
-    const timer = setInterval(() => {
-      currentProgress += progressIncrement;
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        clearInterval(timer);
-        
-        const newLearned = new Set(activeLearnedPersonnel);
-        newLearned.add(personnelId);
-        setActiveLearnedPersonnel(newLearned);
-        LocalStorageManager.set('active_learned_personnel', Array.from(newLearned));
-        
-        toast.success(`${personnelName} 的主动学习已完成`);
+  const handleActiveLearning = async (personnelId: string, personnelName: string) => {
+    try {
+      setActiveLearningPersonnelName(personnelName);
+      setActiveLearningVisible(true);
+      setActiveLearningProgress(0);
+      
+      const duration = Math.random() * 2000 + 3000;
+      const interval = 50;
+      const steps = duration / interval;
+      const progressIncrement = 100 / steps;
+      
+      let currentProgress = 0;
+      const timer = setInterval(() => {
+        currentProgress += progressIncrement;
+        if (currentProgress >= 100) {
+          currentProgress = 100;
+          clearInterval(timer);
+          
+          setActiveLearningProgress(100);
+        }
+        setActiveLearningProgress(currentProgress);
+      }, interval);
+      
+      await new Promise(resolve => setTimeout(resolve, duration));
+      
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/active-learning/mark-as-learned`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ personnel_id: personnelId })
+      });
+      
+      if (!response.ok) {
+        throw new Error('标记主动学习失败');
       }
-      setActiveLearningProgress(currentProgress);
-    }, interval);
+      
+      const result = await response.json();
+      
+      const newLearned = new Set(activeLearnedPersonnel);
+      newLearned.add(personnelId);
+      setActiveLearnedPersonnel(newLearned);
+      
+      toast.success(`${personnelName} 的主动学习已完成`);
+      
+    } catch (error) {
+      console.error('主动学习失败:', error);
+      toast.error('主动学习失败，请重试');
+    } finally {
+      setActiveLearningVisible(false);
+      setActiveLearningProgress(0);
+    }
   };
 
   const toggleSelection = (dataId: number) => {
+    const newSelected = new Set(selectedItems);
+    if (newSelected.has(dataId)) {
+      newSelected.delete(dataId);
+    } else {
+      newSelected.add(dataId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  // 切换主项选择（同时选择/取消所有子数据）
+  const toggleItemSelection = (dataId: number) => {
+    const item = dataList.find(d => d.id === dataId);
+    if (!item) return;
+
+    const newSelected = new Set(selectedItems);
+    const isSelected = newSelected.has(dataId);
+
+    if (isSelected) {
+      // 取消选择主项和所有子数据
+      newSelected.delete(dataId);
+      item.subData.forEach(sub => newSelected.delete(sub.id));
+    } else {
+      // 选择主项和所有子数据
+      newSelected.add(dataId);
+      item.subData.forEach(sub => newSelected.add(sub.id));
+    }
+
+    setSelectedItems(newSelected);
+  };
+
+  // 切换子数据选择
+  const toggleSubDataSelection = (dataId: number) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(dataId)) {
       newSelected.delete(dataId);
@@ -231,15 +305,37 @@ const HealthEvaluatePage: React.FC = () => {
     if (selectedItems.size === dataList.length && dataList.length > 0) {
       setSelectedItems(new Set());
     } else {
-      setSelectedItems(new Set(dataList.map(item => item.id)));
+      const allIds: number[] = [];
+      dataList.forEach(item => {
+        allIds.push(item.id);
+        item.subData.forEach(subItem => {
+          allIds.push(subItem.id);
+        });
+      });
+      setSelectedItems(new Set(allIds));
     }
   };
 
   // 选择前200条
   const selectTop200 = async () => {
     try {
-      // const response = await apiClient.getTop200Data(); // 注释掉API调用
-      const top200Ids = [1, 2, 3, 4, 5]; // 模拟前5条数据
+      const response = await apiClient.getTop200Data();
+      const top200Data = response.items || response;
+      
+      // 过滤出已完成处理的数据
+      const completedData = top200Data.filter((item: Data) => 
+        item.processing_status === 'completed' && item.feature_status === 'completed'
+      );
+      
+      // 按 personnel_id 分组，只取每组的第一条
+      const groupedData = new Map<string, number>();
+      completedData.forEach((item: Data) => {
+        if (!groupedData.has(item.personnel_id)) {
+          groupedData.set(item.personnel_id, item.id);
+        }
+      });
+      
+      const top200Ids = Array.from(groupedData.values());
       setSelectedItems(new Set(top200Ids));
       toast.success(`已选择前${top200Ids.length}条数据`);
     } catch (error) {
@@ -289,7 +385,7 @@ const HealthEvaluatePage: React.FC = () => {
     };
   };
 
-  // 批量评估（保存到localStorage）
+  // 批量评估（调用后端API）
   const handleBatchEvaluate = async () => {
     if (selectedItems.size === 0) {
       toast.error('请先选择要评估的数据');
@@ -313,81 +409,79 @@ const HealthEvaluatePage: React.FC = () => {
       });
       setEvaluationProgress(initialProgress);
 
-      // 获取现有结果数据
-      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
+      // 调用后端API批量评估
+      await apiClient.batchEvaluateHealth({ data_ids: selectedIds });
       
-      // 模拟批量评估过程
-      for (let i = 0; i < selectedIds.length; i++) {
-        const dataId = selectedIds[i];
-        
-        // 更新进度状态
+      // 更新进度状态为处理中
+      selectedIds.forEach(id => {
         setEvaluationProgress(prev => ({
           ...prev,
-          [dataId]: {
+          [id]: {
             status: 'processing',
-            progress: 0,
+            progress: 50,
             message: '正在评估...'
           }
         }));
-        
-        // 模拟评估延迟
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const dataItem = dataList.find(item => item.id === dataId);
-        const personnelId = dataItem?.personnel_id || 'unknown';
-        const isLearned = activeLearnedPersonnel.has(dataId);
-        
-        // 生成一致的评估结果
-        const evaluationResult = generateConsistentEvaluation(dataId, isLearned);
-        
-        const newResult: ResultItem = {
-          id: DataOperations.getNextId(existingResults),
-          user_id: 2,
-          username: 'user',
-          result_time: new Date().toISOString(),
-          stress_score: evaluationResult.stress_score,
-          depression_score: evaluationResult.depression_score,
-          anxiety_score: evaluationResult.anxiety_score,
-          social_isolation_score: evaluationResult.social_isolation_score,
-          overall_risk_level: evaluationResult.overall_risk_level,
-          recommendations: evaluationResult.recommendations,
-          personnel_id: personnelId,
-          personnel_name: dataItem?.personnel_name || '未知人员',
-          active_learned: isLearned
-        };
-        
-        existingResults.push(newResult);
-        
-        // 更新进度状态
-        setEvaluationProgress(prev => ({
-          ...prev,
-          [dataId]: {
-            status: 'completed',
-            progress: 100,
-            message: '评估完成',
-            result_id: newResult.id,
-            result_data: {
-              stress_score: evaluationResult.stress_score,
-              depression_score: evaluationResult.depression_score,
-              anxiety_score: evaluationResult.anxiety_score,
-              social_isolation_score: evaluationResult.social_isolation_score,
-              overall_risk_level: evaluationResult.overall_risk_level,
-              recommendations: evaluationResult.recommendations
+      });
+      
+      toast.success(`已启动 ${selectedIds.length} 个数据的批量评估任务`);
+      
+      // 定期查询评估结果
+      const checkResults = setInterval(async () => {
+        try {
+          // 查询每个选中数据的评估结果
+          const newProgress = { ...evaluationProgress };
+          let allCompleted = true;
+          let completedCount = 0;
+          
+          for (const dataId of selectedIds) {
+            try {
+              // 尝试获取评估结果
+              const result = await apiClient.getDataResult(dataId);
+              
+              if (result) {
+                newProgress[dataId] = {
+                  status: 'completed',
+                  progress: 100,
+                  message: '评估完成',
+                  result_data: {
+                    stress_score: result.stress_score,
+                    depression_score: result.depression_score,
+                    anxiety_score: result.anxiety_score,
+                    social_isolation_score: result.social_isolation_score,
+                    overall_risk_level: result.stress_score >= 70 ? '高风险' : 
+                                      result.stress_score >= 45 ? '中等风险' : '低风险',
+                    recommendations: '保持良好的心理状态'
+                  }
+                };
+                completedCount++;
+              } else {
+                allCompleted = false;
+              }
+            } catch (error) {
+              // 如果获取失败，说明评估还未完成
+              allCompleted = false;
             }
           }
-        }));
-      }
+          
+          setEvaluationProgress(newProgress);
+          
+          // 如果全部完成，停止轮询
+          if (allCompleted) {
+            clearInterval(checkResults);
+            setBatchEvaluating(false);
+            toast.success(`批量评估完成，共处理${completedCount}个数据`);
+            
+            // 刷新数据列表以更新评估结果
+            fetchData();
+          }
+        } catch (error) {
+          console.error('查询评估结果失败:', error);
+        }
+      }, 3000); // 每3秒查询一次
       
-      // 保存到localStorage
-      LocalStorageManager.set(STORAGE_KEYS.RESULTS, existingResults);
-      
-      // 添加日志
-      DataOperations.addLog('BATCH_HEALTH_EVALUATION', 'HEALTH_ASSESSMENT', `用户完成批量健康评估，共${selectedIds.length}个数据`, 'user', '1');
-      
-      toast.success(`批量评估完成，共处理${selectedIds.length}个数据`);
-      
-      // 评估完成后，保持弹窗打开状态，只更新状态
-      setBatchEvaluating(false);
+      // 保存定时器ID以便清理
+      (window as any).evaluationCheckInterval = checkResults;
       
     } catch (error) {
       console.error('批量评估失败:', error);
@@ -572,13 +666,7 @@ const HealthEvaluatePage: React.FC = () => {
                     </button>
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        ID
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     人员信息
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    文件路径
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     上传时间
@@ -594,7 +682,7 @@ const HealthEvaluatePage: React.FC = () => {
                         <tr className="hover:bg-gray-50 cursor-pointer" onClick={() => toggleExpand(item.id)}>
                           <td className="px-6 py-4 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                             <button
-                              onClick={() => toggleSelection(item.id)}
+                              onClick={() => toggleItemSelection(item.id)}
                               className="text-primary-600 hover:text-primary-700"
                             >
                               {selectedItems.has(item.id) ? 
@@ -602,9 +690,6 @@ const HealthEvaluatePage: React.FC = () => {
                                 <Square className="h-4 w-4" />
                               }
                             </button>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {item.id}
                           </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
@@ -616,16 +701,11 @@ const HealthEvaluatePage: React.FC = () => {
                         </div>
                       </div>
                         </td>
-                    <td className="px-6 py-4">
-                          <div className="text-sm text-gray-900 max-w-xs truncate" title={item.data_path}>
-                            {item.data_path}
-                          </div>
-                        </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDateTime(item.upload_time)}
                         </td>
                     <td className="px-6 py-4 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
-                      {activeLearnedPersonnel.has(item.id) ? (
+                      {activeLearnedPersonnel.has(item.personnel_id) ? (
                         <div className="flex items-center space-x-2">
                           <button
                             disabled
@@ -634,7 +714,7 @@ const HealthEvaluatePage: React.FC = () => {
                             已学习
                           </button>
                           <button
-                            onClick={() => handleActiveLearning(item.id, item.personnel_name)}
+                            onClick={() => handleActiveLearning(item.personnel_id, item.personnel_name)}
                             className="btn btn-primary text-xs px-3 py-1"
                           >
                             重新学习
@@ -642,7 +722,7 @@ const HealthEvaluatePage: React.FC = () => {
                         </div>
                       ) : (
                         <button
-                          onClick={() => handleActiveLearning(item.id, item.personnel_name)}
+                          onClick={() => handleActiveLearning(item.personnel_id, item.personnel_name)}
                           className="btn btn-primary text-xs px-3 py-1"
                         >
                           主动学习
@@ -652,7 +732,7 @@ const HealthEvaluatePage: React.FC = () => {
                       </tr>
                       {item.expanded && (
                         <tr>
-                          <td colSpan={6} className="px-6 py-4 bg-gray-50">
+                          <td colSpan={4} className="px-6 py-4 bg-gray-50">
                             <div className="space-y-3">
                               <h4 className="text-sm font-semibold text-gray-900 mb-3">
                                 {item.personnel_name} 的各时间段数据
@@ -661,10 +741,7 @@ const HealthEvaluatePage: React.FC = () => {
                                 <thead className="bg-gray-100">
                                   <tr>
                                     <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                      时间段
-                                    </th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                      文件路径
+                                      选择
                                     </th>
                                     <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                                       上传时间
@@ -690,12 +767,20 @@ const HealthEvaluatePage: React.FC = () => {
                                   {item.subData.map((subItem) => (
                                     <tr key={subItem.id} className="hover:bg-gray-100">
                                       <td className="px-4 py-2 text-sm text-gray-900">
-                                        {subItem.period}
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleSubDataSelection(subItem.id);
+                                          }}
+                                          className="text-primary-600 hover:text-primary-700"
+                                        >
+                                          {selectedItems.has(subItem.id) ? 
+                                            <CheckSquare className="h-4 w-4" /> : 
+                                            <Square className="h-4 w-4" />
+                                          }
+                                        </button>
                                       </td>
-                                      <td className="px-4 py-2 text-sm text-gray-600">
-                                        {subItem.data_path}
-                                      </td>
-                                      <td className="px-4 py-2 text-sm text-gray-600">
+                                      <td className="px-4 py-2 text-sm text-gray-900">
                                         {formatDateTime(subItem.upload_time)}
                                       </td>
                                       <td className="px-4 py-2 text-sm text-gray-900">
@@ -785,7 +870,14 @@ const HealthEvaluatePage: React.FC = () => {
 
             <div className="flex justify-end mt-6">
               <button
-                onClick={() => setBatchProgressVisible(false)}
+                onClick={() => {
+                  // 清理定时器
+                  if ((window as any).evaluationCheckInterval) {
+                    clearInterval((window as any).evaluationCheckInterval);
+                    (window as any).evaluationCheckInterval = null;
+                  }
+                  setBatchProgressVisible(false);
+                }}
                 className="btn btn-primary"
                 disabled={batchEvaluating}
               >

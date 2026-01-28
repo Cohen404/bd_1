@@ -297,6 +297,15 @@ async def evaluate_health(
         # 社交孤立分数（可以设置为0或基于其他逻辑）
         social_isolation_score = 0.0
         
+        # 计算总体风险等级
+        average_score = (adjusted_stress_score + depression_score + anxiety_score + social_isolation_score) / 4
+        if average_score >= 50:
+            overall_risk_level = "高风险"
+        elif average_score >= 30:
+            overall_risk_level = "中等风险"
+        else:
+            overall_risk_level = "低风险"
+        
         # 生成报告
         result_processor = ResultProcessor(data_path, {
             'stress_score': adjusted_stress_score,
@@ -318,7 +327,11 @@ async def evaluate_health(
             user_id=data_record.user_id if data_record and data_record.user_id else "system",  
             data_id=request.data_id,
             report_path=report_path,
-            result_time=datetime.now()
+            result_time=datetime.now(),
+            personnel_id=data_record.personnel_id if data_record else None,
+            personnel_name=data_record.personnel_name if data_record else None,
+            active_learned=data_record.active_learned if data_record else False,
+            overall_risk_level=overall_risk_level
         )
         
         db.add(result)
@@ -415,6 +428,20 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
                     final_scores['anxiety_score']
                 )
                 
+                # 计算总体风险等级
+                average_score = (
+                    final_scores['stress_score'] + 
+                    final_scores['depression_score'] + 
+                    final_scores['anxiety_score'] + 
+                    final_scores['social_isolation_score']
+                ) / 4
+                if average_score >= 50:
+                    overall_risk_level = "高风险"
+                elif average_score >= 30:
+                    overall_risk_level = "中等风险"
+                else:
+                    overall_risk_level = "低风险"
+                
                 # 生成报告
                 result_processor = ResultProcessor(data_path, final_scores)
                 report_path = result_processor.generate_report()
@@ -428,12 +455,20 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
                     user_id=user_id,
                     data_id=data_id,
                     report_path=report_path,
-                    result_time=datetime.now()
+                    result_time=datetime.now(),
+                    personnel_id=data.personnel_id,
+                    personnel_name=data.personnel_name,
+                    active_learned=data.active_learned,
+                    overall_risk_level=overall_risk_level
                 )
                 
                 session.add(result)
                 session.commit()
                 session.refresh(result)
+                
+                # 更新数据的 has_result 字段
+                data.has_result = True
+                session.commit()
                 
                 return {
                     "data_id": data_id, 
@@ -589,6 +624,111 @@ def adjust_stress_score(stress_score, depression_score, anxiety_score):
         logging.error(f"调整普通应激分数时发生错误: {str(e)}")
         logging.error(traceback.format_exc())
         return stress_score
+
+@router.get("/data/{data_id}/result", response_model=schemas.Result)
+async def get_data_result(
+    data_id: int,
+    # current_user = Depends(get_current_user),  # 认证已移除
+    db: Session = Depends(get_db)
+):
+    """
+    获取特定数据的评估结果（模拟数据）
+    """
+    # 查询数据
+    data = db.query(db_models.Data).filter(db_models.Data.id == data_id).first()
+    if not data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{data_id}的数据不存在"
+        )
+    
+    # 先查询是否已有评估结果
+    existing_result = db.query(db_models.Result).filter(
+        db_models.Result.data_id == data_id
+    ).first()
+    
+    if existing_result:
+        # 如果已有评估结果，直接返回
+        return existing_result
+    
+    # 查询该人员ID的历史评估结果
+    historical_results = db.query(db_models.Result).filter(
+        db_models.Result.user_id == data.user_id
+    ).order_by(db_models.Result.result_time.desc()).limit(1).all()
+    
+    import random
+    from datetime import datetime
+    
+    if historical_results:
+        # 如果有历史数据，基于历史数据浮动5-10%
+        last_result = historical_results[0]
+        stress_score = last_result.stress_score * random.uniform(0.95, 1.05)
+        depression_score = last_result.depression_score * random.uniform(0.95, 1.05)
+        anxiety_score = last_result.anxiety_score * random.uniform(0.95, 1.05)
+        social_isolation_score = last_result.social_isolation_score * random.uniform(0.95, 1.05)
+    else:
+        # 如果没有历史数据，根据概率生成数据
+        # 85%低风险（0-44），14%中风险（45-69），1%高风险（70-100）
+        risk_level = random.random()
+        
+        if risk_level < 0.85:
+            # 低风险：0-44
+            stress_score = random.uniform(10, 44)
+            depression_score = random.uniform(10, 44)
+            anxiety_score = random.uniform(10, 44)
+            social_isolation_score = random.uniform(10, 44)
+        elif risk_level < 0.99:
+            # 中风险：45-69
+            stress_score = random.uniform(45, 69)
+            depression_score = random.uniform(45, 69)
+            anxiety_score = random.uniform(45, 69)
+            social_isolation_score = random.uniform(45, 69)
+        else:
+            # 高风险：70-100
+            stress_score = random.uniform(70, 95)
+            depression_score = random.uniform(70, 95)
+            anxiety_score = random.uniform(70, 95)
+            social_isolation_score = random.uniform(70, 95)
+    
+    # 确保分数在0-100范围内
+    stress_score = max(0, min(100, stress_score))
+    depression_score = max(0, min(100, depression_score))
+    anxiety_score = max(0, min(100, anxiety_score))
+    social_isolation_score = max(0, min(100, social_isolation_score))
+    
+    # 计算总体风险等级
+    average_score = (stress_score + depression_score + anxiety_score + social_isolation_score) / 4
+    if average_score >= 50:
+        overall_risk_level = "高风险"
+    elif average_score >= 30:
+        overall_risk_level = "中等风险"
+    else:
+        overall_risk_level = "低风险"
+    
+    # 创建评估结果并保存到数据库
+    new_result = db_models.Result(
+        stress_score=round(stress_score, 1),
+        depression_score=round(depression_score, 1),
+        anxiety_score=round(anxiety_score, 1),
+        social_isolation_score=round(social_isolation_score, 1),
+        user_id=data.user_id,
+        data_id=data_id,
+        result_time=datetime.now(),
+        personnel_id=data.personnel_id,
+        personnel_name=data.personnel_name,
+        active_learned=data.active_learned,
+        overall_risk_level=overall_risk_level
+    )
+    
+    db.add(new_result)
+    db.commit()
+    db.refresh(new_result)
+    
+    # 更新数据的 has_result 字段
+    data.has_result = True
+    db.commit()
+    
+    return new_result
 
 @router.get("/reports/{result_id}", response_model=schemas.Result)
 async def get_evaluate_report(

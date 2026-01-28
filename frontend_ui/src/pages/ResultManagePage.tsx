@@ -9,17 +9,13 @@ import {
   Square,
   Trash2
 } from 'lucide-react';
-// ===== 纯前端演示模式 - 特殊标记 =====
-// 注释掉后端API相关导入，使用localStorage存储
-// import { apiClient } from '@/utils/api';
+import { apiClient } from '@/utils/api';
 import { Result, User as UserType } from '@/types';
 import { formatDateTime } from '@/utils/helpers';
-import { LocalStorageManager, STORAGE_KEYS, initializeDemoData, ResultItem } from '@/utils/localStorage';
 import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
 import { ChartGenerator } from '@/utils/chartGenerator';
 import { ExcelExporter } from '@/utils/excelExporter';
 import toast from 'react-hot-toast';
-// ============================================
 
 
 interface FilterState {
@@ -53,34 +49,16 @@ const ResultManagePage: React.FC = () => {
     maxDepressionScore: ''
   });
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取结果列表（从localStorage读取）
+  // 获取结果列表（从后端API获取）
   const fetchResults = async () => {
     try {
       setLoading(true);
       
-      initializeDemoData();
-      
-      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-      
-      const convertedResults: Result[] = resultItems.map(item => ({
-        id: item.id,
-        user_id: item.user_id.toString(),
-        username: item.username,
-        result_time: item.result_time,
-        stress_score: item.stress_score,
-        depression_score: item.depression_score,
-        anxiety_score: item.anxiety_score,
-        social_isolation_score: item.social_isolation_score,
-        overall_risk_level: item.overall_risk_level,
-        recommendations: item.recommendations,
-        personnel_id: item.personnel_id,
-        personnel_name: item.personnel_name,
-        active_learned: item.active_learned
-      }));
+      // 从后端API获取结果
+      const results = await apiClient.getResults();
       
       // 应用筛选条件
-      let filtered = convertedResults;
+      let filtered = results;
       
       if (filters.userId !== 'all') {
         filtered = filtered.filter(result => result.user_id === filters.userId);
@@ -118,29 +96,16 @@ const ResultManagePage: React.FC = () => {
       setLoading(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 获取用户列表（从localStorage读取）
+  // 获取用户列表（从后端API获取）
   const fetchUsers = async () => {
     try {
-      // 从localStorage获取用户数据
-      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
-      
-      // 转换为前端User类型
-      const convertedUsers: UserType[] = userItems.map(user => ({
-        user_id: user.id.toString(),
-        username: user.username,
-        user_type: user.role,
-        created_at: user.created_at
-      }));
-      
-      setUsers(convertedUsers);
+      const users = await apiClient.getUsers();
+      setUsers(users);
     } catch (error) {
       console.error('获取用户列表失败:', error);
     }
   };
-  // ============================================
 
 
   useEffect(() => {
@@ -168,8 +133,7 @@ const ResultManagePage: React.FC = () => {
     }
   };
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
-  // 导出结果（纯前端导出）
+  // 导出结果（使用后端API）
   const handleExport = async (format: 'excel' | 'pdf') => {
     if (selectedResults.size === 0) {
       toast.error('请先选择要导出的结果');
@@ -183,32 +147,26 @@ const ResultManagePage: React.FC = () => {
         // 批量生成报告
         toast('正在批量生成报告...');
         
-        const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-        const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
-        
         for (const resultId of selectedResults) {
-          const resultItem = resultItems.find(item => item.id === resultId);
-          if (!resultItem) continue;
+          const result = filteredResults.find(r => r.id === resultId);
+          if (!result) continue;
           
-          const userItem = userItems.find(user => user.id === resultItem.user_id);
-          if (!userItem) continue;
-          
-          // 生成图表（包括新增的EEG相关图表和时频域图表）
+          // 生成图表
           const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
-            ChartGenerator.generateEEGChart(resultItem),
-            ChartGenerator.generateTimeDomainChart(resultItem),
-            ChartGenerator.generateFrequencyBandChart(resultItem),
-            ChartGenerator.generateDiffEntropyChart(resultItem),
-            ChartGenerator.generateTimeFreqChart(resultItem),
-            ChartGenerator.generateSerumChart(resultItem)
+            ChartGenerator.generateEEGChart(result),
+            ChartGenerator.generateTimeDomainChart(result),
+            ChartGenerator.generateFrequencyBandChart(result),
+            ChartGenerator.generateDiffEntropyChart(result),
+            ChartGenerator.generateTimeFreqChart(result),
+            ChartGenerator.generateSerumChart(result)
           ]);
           
           // 准备报告数据
           const reportData: ReportData = {
-            result: resultItem,
+            result: result,
             user: {
-              username: userItem.username,
-              user_type: userItem.role
+              username: result.username || '未知',
+              user_type: 'user'
             },
             charts: {
               eeg: eegChart,
@@ -224,7 +182,7 @@ const ResultManagePage: React.FC = () => {
           const htmlContent = ReportGenerator.createReportHTML(reportData);
           
           // 生成PDF文件名
-          const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+          const filename = `心理健康评估报告_${result.personnel_name || '未知'}_${new Date(result.result_time).toLocaleDateString('zh-CN')}.pdf`;
           
           // 生成并下载PDF
           await ReportGenerator.generatePDF(htmlContent, filename);
@@ -252,52 +210,40 @@ const ResultManagePage: React.FC = () => {
       setExporting(false);
     }
   };
-  // ============================================
 
-  // ===== 纯前端演示模式 - 特殊标记 =====
   // 生成并下载报告
   const handleGenerateReport = async (resultId: number) => {
     try {
       setGeneratingReport(true);
       
       // 获取结果数据
-      const resultItems = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-      const resultItem = resultItems.find(item => item.id === resultId);
+      const result = filteredResults.find(r => r.id === resultId);
       
-      if (!resultItem) {
+      if (!result) {
         toast.error('未找到评估结果');
-        return;
-      }
-      
-      // 获取用户数据
-      const userItems = LocalStorageManager.get<any[]>(STORAGE_KEYS.USERS, []);
-      const userItem = userItems.find(user => user.id === resultItem.user_id);
-      
-      if (!userItem) {
-        toast.error('未找到用户信息');
         return;
       }
       
       toast('正在生成图表...');
       
-      // 生成图表（包括新增的EEG相关图表和时频域图表）
+      // 生成图表
       const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
-        ChartGenerator.generateEEGChart(resultItem),
-        ChartGenerator.generateTimeDomainChart(resultItem),
-        ChartGenerator.generateFrequencyBandChart(resultItem),
-        ChartGenerator.generateDiffEntropyChart(resultItem),
-        ChartGenerator.generateTimeFreqChart(resultItem),
-        ChartGenerator.generateSerumChart(resultItem)
+        ChartGenerator.generateEEGChart(result),
+        ChartGenerator.generateTimeDomainChart(result),
+        ChartGenerator.generateFrequencyBandChart(result),
+        ChartGenerator.generateDiffEntropyChart(result),
+        ChartGenerator.generateTimeFreqChart(result),
+        ChartGenerator.generateSerumChart(result)
       ]);
       
       toast('正在生成报告...');
       
       // 准备报告数据
       const reportData: ReportData = {
-        result: resultItem,
+        result: result,
         user: {
-          username: userItem.username,
-          user_type: userItem.role
+          username: result.username || '未知',
+          user_type: 'user'
         },
         charts: {
           eeg: eegChart,
@@ -313,7 +259,7 @@ const ResultManagePage: React.FC = () => {
       const htmlContent = ReportGenerator.createReportHTML(reportData);
       
       // 生成PDF文件名
-      const filename = `心理健康评估报告_${resultItem.personnel_name || '未知'}_${new Date(resultItem.result_time).toLocaleDateString('zh-CN')}.pdf`;
+      const filename = `心理健康评估报告_${result.personnel_name || '未知'}_${new Date(result.result_time).toLocaleDateString('zh-CN')}.pdf`;
       
       // 生成并下载PDF
       await ReportGenerator.generatePDF(htmlContent, filename);
@@ -327,7 +273,6 @@ const ResultManagePage: React.FC = () => {
       setGeneratingReport(false);
     }
   };
-  // ============================================
 
   // 删除结果记录
   const handleDeleteResult = async (resultId: number) => {
@@ -336,16 +281,8 @@ const ResultManagePage: React.FC = () => {
     }
 
     try {
-      // 从localStorage中删除结果
-      const existingResults = LocalStorageManager.get<ResultItem[]>(STORAGE_KEYS.RESULTS, []);
-      const updatedResults = existingResults.filter(result => result.id !== resultId);
-      
-      // 如果删除后没有结果了，清空结果数据
-      if (updatedResults.length === 0) {
-        LocalStorageManager.clearSpecificData('results');
-      } else {
-        LocalStorageManager.set(STORAGE_KEYS.RESULTS, updatedResults);
-      }
+      // 调用后端API删除结果
+      await apiClient.deleteResult(resultId);
       
       // 重新获取数据
       await fetchResults();

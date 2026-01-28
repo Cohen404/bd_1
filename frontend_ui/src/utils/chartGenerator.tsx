@@ -33,7 +33,7 @@ class SeededRandom {
 
 // 生成基于resultId的确定性EEG数据
 const generateRandomEEGData = (resultId: number) => {
-  const channels = Array.from({ length: 8 }, (_, i) => `通道${i + 1}`);
+  const channels = Array.from({ length: 16 }, (_, i) => `通道${i + 1}`);
   
   // 使用resultId作为基础种子
   const baseSeed = resultId * 1000;

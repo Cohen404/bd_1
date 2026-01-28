@@ -24,7 +24,7 @@ const ProgressModal: React.FC<ProgressModalProps> = ({
   const [simulatedProgress, setSimulatedProgress] = useState<{[key: number]: number}>({});
   const startTimeRef = useRef<{[key: number]: number}>({});
 
-  // 计算模拟进度（60秒内从0%增长到99%）
+  // 计算模拟进度（3-5秒内从0%增长到99%）
   const calculateSimulatedProgress = (dataId: number, actualStatus: string, actualFeatureStatus: string) => {
     // 如果真正完成了，返回100%
     if (actualStatus === 'completed' && actualFeatureStatus === 'completed') {
@@ -49,7 +49,7 @@ const ProgressModal: React.FC<ProgressModalProps> = ({
       }
       
       const elapsed = (Date.now() - startTimeRef.current[dataId]) / 1000; // 转换为秒
-      const maxTime = 60; // 60秒
+      const maxTime = 4; // 4秒（3-5秒的中间值）
       const maxProgress = 99; // 最大99%
       
       // 使用指数增长模拟，前期快，后期慢
