@@ -152,13 +152,12 @@ const ResultManagePage: React.FC = () => {
           if (!result) continue;
           
           // 生成图表
-          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
+          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
             ChartGenerator.generateEEGChart(result),
             ChartGenerator.generateTimeDomainChart(result),
             ChartGenerator.generateFrequencyBandChart(result),
             ChartGenerator.generateDiffEntropyChart(result),
-            ChartGenerator.generateTimeFreqChart(result),
-            ChartGenerator.generateSerumChart(result)
+            ChartGenerator.generateTimeFreqChart(result)
           ]);
           
           // 准备报告数据
@@ -173,8 +172,7 @@ const ResultManagePage: React.FC = () => {
               timeDomain: timeDomainChart,
               frequencyBand: frequencyBandChart,
               diffEntropy: diffEntropyChart,
-              timeFreq: timeFreqChart,
-              serum: serumChart
+              timeFreq: timeFreqChart
             }
           };
           
