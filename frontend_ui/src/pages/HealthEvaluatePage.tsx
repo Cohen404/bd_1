@@ -86,13 +86,14 @@ const HealthEvaluatePage: React.FC = () => {
         item.processing_status === 'completed' && item.feature_status === 'completed'
       );
       
-      // 按 personnel_id 分组
+      // 按 personnel_id 分组（确保 personnel_id 为字符串类型）
       const groupedData = new Map<string, Data[]>();
       completedData.forEach((item: Data) => {
-        if (!groupedData.has(item.personnel_id)) {
-          groupedData.set(item.personnel_id, []);
+        const personnelIdStr = String(item.personnel_id);
+        if (!groupedData.has(personnelIdStr)) {
+          groupedData.set(personnelIdStr, []);
         }
-        groupedData.get(item.personnel_id)!.push(item);
+        groupedData.get(personnelIdStr)!.push({ ...item, personnel_id: personnelIdStr });
       });
       
       // 转换为 PersonnelData 格式，每个用户ID作为一个条目
@@ -166,10 +167,11 @@ const HealthEvaluatePage: React.FC = () => {
       
       // 获取已学习的人员列表
       try {
-        const learnedResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/active-learning/all-learned-personnel`);
+        const learnedResponse = await fetch('/api/active-learning/all-learned-personnel');
         if (learnedResponse.ok) {
           const learnedData = await learnedResponse.json();
-          const learnedPersonnelIds = new Set<string>(learnedData.personnel.map((p: any) => p.personnel_id));
+          // 确保 personnel_id 为字符串类型
+          const learnedPersonnelIds = new Set<string>(learnedData.personnel.map((p: any) => String(p.personnel_id)));
           setActiveLearnedPersonnel(learnedPersonnelIds);
         }
       } catch (error) {
@@ -229,7 +231,7 @@ const HealthEvaluatePage: React.FC = () => {
       
       await new Promise(resolve => setTimeout(resolve, duration));
       
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/active-learning/mark-as-learned`, {
+      const response = await fetch('/api/active-learning/mark-as-learned', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -237,11 +239,16 @@ const HealthEvaluatePage: React.FC = () => {
         body: JSON.stringify({ personnel_id: personnelId })
       });
       
+      console.log('主动学习 API 响应状态:', response.status, response.statusText);
+      
       if (!response.ok) {
-        throw new Error('标记主动学习失败');
+        const errorData = await response.json().catch(() => ({ detail: response.statusText }));
+        console.error('主动学习 API 错误:', errorData);
+        throw new Error(errorData.detail || '标记主动学习失败');
       }
       
       const result = await response.json();
+      console.log('主动学习 API 成功响应:', result);
       
       const newLearned = new Set(activeLearnedPersonnel);
       newLearned.add(personnelId);
@@ -251,7 +258,8 @@ const HealthEvaluatePage: React.FC = () => {
       
     } catch (error) {
       console.error('主动学习失败:', error);
-      toast.error('主动学习失败，请重试');
+      const errorMessage = error instanceof Error ? error.message : '主动学习失败，请重试';
+      toast.error(errorMessage);
     } finally {
       setActiveLearningVisible(false);
       setActiveLearningProgress(0);
