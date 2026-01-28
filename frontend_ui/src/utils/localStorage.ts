@@ -58,6 +58,8 @@ export interface ResultItem {
   personnel_id?: string;
   personnel_name?: string;
   active_learned?: boolean;
+  blood_oxygen?: number;
+  blood_pressure?: string;
 }
 
 export interface Model {

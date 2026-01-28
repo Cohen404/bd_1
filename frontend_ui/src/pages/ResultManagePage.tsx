@@ -15,6 +15,7 @@ import { formatDateTime } from '@/utils/helpers';
 import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
 import { ChartGenerator } from '@/utils/chartGenerator';
 import { ExcelExporter } from '@/utils/excelExporter';
+import { ResultItem } from '@/utils/localStorage';
 import toast from 'react-hot-toast';
 
 
@@ -55,7 +56,7 @@ const ResultManagePage: React.FC = () => {
       setLoading(true);
       
       // 从后端API获取结果
-      const results = await apiClient.getResults();
+      const results = await apiClient.getResults() as Result[];
       
       // 应用筛选条件
       let filtered = results;
@@ -152,17 +153,18 @@ const ResultManagePage: React.FC = () => {
           if (!result) continue;
           
           // 生成图表
+          const resultItem = toResultItem(result);
           const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
-            ChartGenerator.generateEEGChart(result),
-            ChartGenerator.generateTimeDomainChart(result),
-            ChartGenerator.generateFrequencyBandChart(result),
-            ChartGenerator.generateDiffEntropyChart(result),
-            ChartGenerator.generateTimeFreqChart(result)
+            ChartGenerator.generateEEGChart(resultItem),
+            ChartGenerator.generateTimeDomainChart(resultItem),
+            ChartGenerator.generateFrequencyBandChart(resultItem),
+            ChartGenerator.generateDiffEntropyChart(resultItem),
+            ChartGenerator.generateTimeFreqChart(resultItem)
           ]);
           
           // 准备报告数据
           const reportData: ReportData = {
-            result: result,
+            result: resultItem,
             user: {
               username: result.username || '未知',
               user_type: 'user'
@@ -225,20 +227,20 @@ const ResultManagePage: React.FC = () => {
       toast('正在生成图表...');
       
       // 生成图表
-      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, serumChart] = await Promise.all([
-        ChartGenerator.generateEEGChart(result),
-        ChartGenerator.generateTimeDomainChart(result),
-        ChartGenerator.generateFrequencyBandChart(result),
-        ChartGenerator.generateDiffEntropyChart(result),
-        ChartGenerator.generateTimeFreqChart(result),
-        ChartGenerator.generateSerumChart(result)
+      const resultItem = toResultItem(result);
+      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
+        ChartGenerator.generateEEGChart(resultItem),
+        ChartGenerator.generateTimeDomainChart(resultItem),
+        ChartGenerator.generateFrequencyBandChart(resultItem),
+        ChartGenerator.generateDiffEntropyChart(resultItem),
+        ChartGenerator.generateTimeFreqChart(resultItem)
       ]);
       
       toast('正在生成报告...');
       
       // 准备报告数据
       const reportData: ReportData = {
-        result: result,
+        result: resultItem,
         user: {
           username: result.username || '未知',
           user_type: 'user'
@@ -248,8 +250,7 @@ const ResultManagePage: React.FC = () => {
           timeDomain: timeDomainChart,
           frequencyBand: frequencyBandChart,
           diffEntropy: diffEntropyChart,
-          timeFreq: timeFreqChart,
-          serum: serumChart
+          timeFreq: timeFreqChart
         }
       };
       
@@ -318,7 +319,13 @@ const ResultManagePage: React.FC = () => {
     return { level: '正常', color: 'text-green-600', bgColor: 'bg-green-50' };
   };
 
+  const toResultItem = (result: Result): ResultItem => ({
+    ...result,
+    user_id: Number(result.user_id)
+  });
+
   return (
+    <>
     <div className="space-y-6">
       {/* 页面标题 */}
       <div>
@@ -484,6 +491,9 @@ const ResultManagePage: React.FC = () => {
                     评估时间
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    血氧血压
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     主动学习
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -566,6 +576,22 @@ const ResultManagePage: React.FC = () => {
                         {formatDateTime(result.result_time)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-xs space-y-1">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-gray-500">血氧:</span>
+                            <span className="text-gray-900">
+                              {result.blood_oxygen ? result.blood_oxygen.toFixed(1) + '%' : '-'}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-gray-500">血压:</span>
+                            <span className="text-gray-900">
+                              {result.blood_pressure || '-'}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
                         {result.active_learned ? (
                           <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                             ✓ 已学习
@@ -586,13 +612,13 @@ const ResultManagePage: React.FC = () => {
                         >
                           <FileText className="h-4 w-4" />
                         </button>
-                          <button
-                            onClick={() => handleDeleteResult(result.id)}
-                            className="text-red-600 hover:text-red-700"
-                            title="删除记录"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                        <button
+                          onClick={() => handleDeleteResult(result.id)}
+                          className="text-red-600 hover:text-red-700"
+                          title="删除记录"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
                         </div>
                       </td>
                     </tr>
@@ -603,6 +629,7 @@ const ResultManagePage: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

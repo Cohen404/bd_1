@@ -337,6 +337,14 @@ export class ReportGenerator {
                     <label>评估时间</label>
                     <value>${new Date(result.result_time).toLocaleString('zh-CN')}</value>
                   </div>
+                  <div class="info-item">
+                    <label>血氧饱和度</label>
+                    <value>${result.blood_oxygen ? result.blood_oxygen.toFixed(1) + '%' : '-'}</value>
+                  </div>
+                  <div class="info-item">
+                    <label>血压</label>
+                    <value>${result.blood_pressure || '-'}</value>
+                  </div>
                 </div>
               </div>
               

@@ -9,7 +9,6 @@ import {
   BarChart3,
   CheckSquare,
   Square,
-  Image,
   RefreshCw,
   FileImage,
   ArrowLeft,
@@ -17,7 +16,8 @@ import {
   Play,
   CheckCircle,
   Clock,
-  XCircle
+  XCircle,
+  Heart
 } from 'lucide-react';
 import { apiClient } from '@/utils/api';
 import { Data } from '@/types';
@@ -60,6 +60,10 @@ const DataManagePage: React.FC = () => {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<{id: number, name: string} | null>(null);
   const [batchDeleteConfirmVisible, setBatchDeleteConfirmVisible] = useState(false);
+  const [bloodModalVisible, setBloodModalVisible] = useState(false);
+  const [editingDataId, setEditingDataId] = useState<number | null>(null);
+  const [bloodOxygen, setBloodOxygen] = useState('');
+  const [bloodPressure, setBloodPressure] = useState('');
 
   // 可视化指标选项（使用具体的图片类型）
   const visualizationOptions = [
@@ -415,6 +419,56 @@ const DataManagePage: React.FC = () => {
     }
   };
 
+  // 打开血氧血压输入弹窗
+  const handleOpenBloodModal = async (dataId: number) => {
+    try {
+      // 获取该数据对应的评估结果
+      const result = await apiClient.getDataResult(dataId);
+      
+      setEditingDataId(dataId);
+      setBloodOxygen(result.blood_oxygen ? result.blood_oxygen.toString() : '');
+      setBloodPressure(result.blood_pressure || '');
+      setBloodModalVisible(true);
+    } catch (error) {
+      console.error('获取评估结果失败:', error);
+      toast.error('该数据尚未进行健康评估，无法输入血氧血压');
+    }
+  };
+
+  // 保存血氧血压
+  const handleSaveBloodData = async () => {
+    if (!editingDataId) return;
+
+    try {
+      console.log('开始保存血氧血压，dataId:', editingDataId);
+      
+      // 获取该数据对应的评估结果
+      const result = await apiClient.getDataResult(editingDataId);
+      console.log('获取到的结果:', result);
+      
+      // 调用后端API更新结果
+      await apiClient.updateResult(result.id, {
+        blood_oxygen: bloodOxygen ? parseFloat(bloodOxygen) : null,
+        blood_pressure: bloodPressure || null
+      });
+      console.log('更新成功');
+      
+      // 刷新数据列表
+      await fetchData();
+      
+      // 关闭弹窗
+      setBloodModalVisible(false);
+      setEditingDataId(null);
+      setBloodOxygen('');
+      setBloodPressure('');
+      
+      toast.success('血氧血压保存成功');
+    } catch (error) {
+      console.error('保存血氧血压失败:', error);
+      toast.error('保存血氧血压失败');
+    }
+  };
+
   // 查看数据图像（调用后端API）
   const handleViewImages = async (dataId: number) => {
     try {
@@ -499,6 +553,7 @@ const DataManagePage: React.FC = () => {
   );
 
   return (
+    <>
     <div className="space-y-6">
       {/* 页面标题 */}
       <div>
@@ -703,6 +758,13 @@ const DataManagePage: React.FC = () => {
                           disabled={!(item.processing_status === 'completed' && item.feature_status === 'completed')}
                         >
                           <BarChart3 className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleOpenBloodModal(item.id)}
+                          className="text-red-500 hover:text-red-600"
+                          title="血氧血压"
+                        >
+                          <Heart className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteSingle(item.id, item.personnel_name)}
@@ -1082,7 +1144,65 @@ const DataManagePage: React.FC = () => {
         onConfirm={confirmBatchDelete}
         onCancel={() => setBatchDeleteConfirmVisible(false)}
       />
+
+      {/* 血氧血压输入弹窗 */}
+      {bloodModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">输入血氧血压</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="label">血氧饱和度 (%)</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="100"
+                  className="input"
+                  value={bloodOxygen}
+                  onChange={(e) => setBloodOxygen(e.target.value)}
+                  placeholder="请输入血氧饱和度，如：98.5"
+                />
+              </div>
+              
+              <div>
+                <label className="label">血压 (mmHg)</label>
+                <input
+                  type="text"
+                  className="input"
+                  value={bloodPressure}
+                  onChange={(e) => setBloodPressure(e.target.value)}
+                  placeholder="请输入血压，格式：收缩压/舒张压，如：120/80"
+                />
+                <p className="text-xs text-gray-500 mt-1">格式示例：120/80</p>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => {
+                  setBloodModalVisible(false);
+                  setEditingDataId(null);
+                  setBloodOxygen('');
+                  setBloodPressure('');
+                }}
+                className="btn btn-secondary"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleSaveBloodData}
+                className="btn btn-primary"
+              >
+                保存
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+    </>
   );
 };
 

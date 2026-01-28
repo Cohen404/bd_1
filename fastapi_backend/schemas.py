@@ -138,6 +138,8 @@ class ResultBase(BaseModel):
     personnel_id: Optional[str] = None
     personnel_name: Optional[str] = None
     active_learned: bool = False
+    blood_oxygen: Optional[float] = None
+    blood_pressure: Optional[str] = None
 
 class ResultCreate(ResultBase):
     pass
@@ -148,6 +150,8 @@ class ResultUpdate(BaseModel):
     anxiety_score: Optional[float] = None
     social_isolation_score: Optional[float] = None
     report_path: Optional[str] = None
+    blood_oxygen: Optional[float] = None
+    blood_pressure: Optional[str] = None
 
 class Result(ResultBase):
     id: int

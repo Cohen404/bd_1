@@ -7,7 +7,8 @@
 4. add_data_active_learned_field.py - 添加 active_learned 字段到 tb_data 表
 5. add_result_overall_risk_level.py - 添加 overall_risk_level 字段到 tb_result 表
 6. update_result_overall_risk_level.py - 更新已有结果记录的总体风险等级
-7. init_parameters_defaults.py - 初始化系统参数的默认值
+7. add_blood_oxygen_pressure.py - 添加 blood_oxygen, blood_pressure 字段到 tb_result 表
+8. init_parameters_defaults.py - 初始化系统参数的默认值
 
 运行方式: python -m migrations.run_all_migrations
 """
@@ -24,6 +25,7 @@ MIGRATIONS = [
     ("添加 active_learned 字段到 tb_data 表", "add_data_active_learned_field"),
     ("添加 overall_risk_level 字段到 tb_result 表", "add_result_overall_risk_level"),
     ("更新已有结果记录的总体风险等级", "update_result_overall_risk_level"),
+    ("添加 blood_oxygen, blood_pressure 字段到 tb_result 表", "add_blood_oxygen_pressure"),
     ("初始化系统参数的默认值", "init_parameters_defaults"),
 ]
 

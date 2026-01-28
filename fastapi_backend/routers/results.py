@@ -150,6 +150,36 @@ async def delete_result(
     
     return {"message": f"结果ID {result_id} 删除成功"}
 
+@router.put("/{result_id}")
+async def update_result(
+    result_id: int,
+    blood_oxygen: Optional[float] = None,
+    blood_pressure: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    """
+    更新结果（血氧、血压等）
+    """
+    result = db.query(db_models.Result).filter(db_models.Result.id == result_id).first()
+    
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{result_id}的结果不存在"
+        )
+    
+    # 更新字段
+    if blood_oxygen is not None:
+        result.blood_oxygen = blood_oxygen
+    
+    if blood_pressure is not None:
+        result.blood_pressure = blood_pressure
+    
+    db.commit()
+    db.refresh(result)
+    
+    return result
+
 @router.post("/export")
 async def export_results(
     request: schemas.ResultExportRequest,

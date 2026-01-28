@@ -253,6 +253,13 @@ class API {
     return response.data;
   }
 
+  async updateResult(resultId: number, data: any) {
+    const response = await api.put(`/results/${resultId}`, null, {
+      params: data
+    });
+    return response.data;
+  }
+
   async getResultReport(resultId: number) {
     const response = await api.get(`/results/${resultId}/report`, {
       responseType: 'blob'

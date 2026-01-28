@@ -27,6 +27,8 @@ interface PersonnelSubData {
   social_isolation_score?: number;
   overall_risk_level?: string;
   recommendations?: string;
+  blood_oxygen?: number;
+  blood_pressure?: string;
   selected?: boolean;
 }
 
@@ -148,7 +150,9 @@ const HealthEvaluatePage: React.FC = () => {
                           social_isolation_score: result.social_isolation_score,
                           overall_risk_level: result.stress_score >= 70 ? '高风险' : 
                                             result.stress_score >= 45 ? '中等风险' : '低风险',
-                          recommendations: '保持良好的心理状态'
+                          recommendations: '保持良好的心理状态',
+                          blood_oxygen: result.blood_oxygen,
+                          blood_pressure: result.blood_pressure
                         };
                       }
                       return sub;
@@ -759,6 +763,12 @@ const HealthEvaluatePage: React.FC = () => {
                                       焦虑
                                     </th>
                                     <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      血氧
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                      血压
+                                    </th>
+                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                                       风险等级
                                     </th>
                                   </tr>
@@ -791,6 +801,12 @@ const HealthEvaluatePage: React.FC = () => {
                                       </td>
                                       <td className="px-4 py-2 text-sm text-gray-900">
                                         {subItem.anxiety_score?.toFixed(1) || '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.blood_oxygen ? subItem.blood_oxygen.toFixed(1) + '%' : '-'}
+                                      </td>
+                                      <td className="px-4 py-2 text-sm text-gray-900">
+                                        {subItem.blood_pressure || '-'}
                                       </td>
                                       <td className="px-4 py-2 text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${

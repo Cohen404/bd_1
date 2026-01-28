@@ -109,6 +109,8 @@ class Result(Base):
     personnel_name = Column(String(255), nullable=True, comment='人员姓名')
     active_learned = Column(Boolean, default=False, comment='是否进行过主动学习')
     overall_risk_level = Column(String(20), nullable=True, default='低风险', comment='总体风险等级：低风险/中等风险/高风险')
+    blood_oxygen = Column(Float, nullable=True, comment='血氧饱和度(%)')
+    blood_pressure = Column(String(20), nullable=True, comment='血压(mmHg)，格式：收缩压/舒张压')
     
     # 关系
     user = relationship("User", back_populates="results")
