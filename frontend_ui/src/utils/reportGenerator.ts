@@ -463,7 +463,7 @@ export class ReportGenerator {
           </div>
           
           <div class="footer">
-            <p>本报告由心理健康评估系统自动生成</p>
+            <p>本报告由急进高原新兵心理应激多模态神经生理监测预警系统自动生成</p>
             <p style="margin-top: 10px; font-size: 12px;">
               报告内容仅供参考，具体诊断请咨询专业医疗机构
             </p>

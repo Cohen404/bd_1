@@ -2,7 +2,7 @@
   "name": "bj-health-frontend",
   "version": "1.0.0",
   "type": "module",
-  "description": "北京健康评估系统前端界面",
+  "description": "急进高原新兵心理应激多模态神经生理监测预警系统前端界面",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

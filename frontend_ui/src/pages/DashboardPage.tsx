@@ -210,7 +210,7 @@ const DashboardPage: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">控制台</h1>
-          <p className="text-gray-600 mt-1">欢迎使用北京健康评估系统</p>
+          <p className="text-gray-600 mt-1">欢迎使用急进高原新兵心理应激多模态神经生理监测预警系统</p>
         </div>
         <button
           onClick={fetchDashboardStats}

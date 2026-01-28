@@ -14,8 +14,8 @@ logger = logging.getLogger(__name__)
 
 # 创建FastAPI应用
 app = FastAPI(
-    title="北京健康评估系统API",
-    description="北京健康评估系统的后端API接口",
+    title="急进高原新兵心理应激多模态神经生理监测预警系统API",
+    description="急进高原新兵心理应激多模态神经生理监测预警系统的后端API接口",
     version="1.0.0"
 )
 
@@ -52,7 +52,7 @@ except ImportError as e:
 @app.get("/")
 async def root():
     """根路径接口"""
-    return {"message": "欢迎使用北京健康评估系统API", "status": "running"}
+    return {"message": "欢迎使用急进高原新兵心理应激多模态神经生理监测预警系统API", "status": "running"}
 
 @app.get("/health")
 async def health_check():
@@ -70,5 +70,5 @@ async def global_exception_handler(request, exc):
     return {"detail": "内部服务器错误", "status_code": 500}
 
 if __name__ == "__main__":
-    logger.info("启动北京健康评估系统API服务器")
+    logger.info("启动急进高原新兵心理应激多模态神经生理监测预警系统API服务器")
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True) 

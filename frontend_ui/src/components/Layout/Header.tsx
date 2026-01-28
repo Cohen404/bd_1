@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           
           <div>
             <h1 className="text-xl font-bold text-gray-900">
-              北京健康评估系统
+              急进高原新兵心理应激多模态神经生理监测预警系统
             </h1>
             <p className="text-sm text-gray-500">
               {formatDateTime(new Date().toISOString())}

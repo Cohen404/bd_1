@@ -89,10 +89,10 @@ def install_postgres_windows():
         return True
     
     # 下载安装程序
-    if not os.path.exists(installer_name):
-        if not download_file(postgres_url, installer_name):
-            logger.error("PostgreSQL安装程序下载失败")
-            return False
+    # if not os.path.exists(installer_name):
+    #     if not download_file(postgres_url, installer_name):
+    #         logger.error("PostgreSQL安装程序下载失败")
+    #         return False
     
     # 静默安装PostgreSQL
     logger.info("正在安装PostgreSQL...")

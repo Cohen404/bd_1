@@ -1,4 +1,4 @@
-# 北京健康评估系统 - FastAPI后端依赖包
+# 急进高原新兵心理应激多模态神经生理监测预警系统 - FastAPI后端依赖包
 # 适用于Windows系统 + Python 3.8+
 # 安装命令: pip install -r requirements.txt
 

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "北京健康评估系统API",
-    "description": "北京健康评估系统的后端API接口",
+    "title": "急进高原新兵心理应激多模态神经生理监测预警系统API",
+    "description": "急进高原新兵心理应激多模态神经生理监测预警系统的后端API接口",
     "version": "1.0.0"
   },
   "paths": {

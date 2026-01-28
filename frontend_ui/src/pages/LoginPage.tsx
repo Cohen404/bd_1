@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
             <Brain className="h-10 w-10 text-white" />
           </div>
           <h2 className="mt-6 text-3xl font-bold text-gray-900">
-            北京健康评估系统
+            急进高原新兵心理应激多模态神经生理监测预警系统
           </h2>
           <p className="mt-2 text-sm text-gray-600">
             基于EEG数据的心理健康评估平台
@@ -130,7 +130,7 @@ const LoginPage: React.FC = () => {
         {/* 版权信息 */}
         <div className="text-center">
           <p className="text-xs text-gray-500">
-            © 2024 北京健康评估系统 v1.0.0
+            © 2024 急进高原新兵心理应激多模态神经生理监测预警系统 v1.0.0
           </p>
         </div>
       </div>
