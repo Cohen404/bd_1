@@ -114,11 +114,6 @@ export class ChartGenerator {
         subject: '焦虑',
         A: result.anxiety_score,
         fullMark: 100
-      },
-      {
-        subject: '社交孤立',
-        A: result.social_isolation_score,
-        fullMark: 100
       }
     ];
     
@@ -250,34 +245,6 @@ export class ChartGenerator {
     );
     
     return await this.renderChartToBase64(DiffEntropyComponent, 750, 400);
-  }
-  
-  // 生成血清图
-  static async generateSerumChart(result: ResultItem): Promise<string> {
-    // 使用result.id生成确定性的血清数据
-    const rng = new SeededRandom(result.id * 1000 + 1400);
-    const serumData = [
-      { name: 'CRP', value: parseFloat(rng.range(0.5, 15.0).toFixed(1)), unit: 'mg/L' },
-      { name: 'IL-6', value: parseFloat(rng.range(2.0, 50.0).toFixed(1)), unit: 'pg/mL' },
-      { name: 'TNF-α', value: parseFloat(rng.range(5.0, 80.0).toFixed(1)), unit: 'pg/mL' },
-      { name: 'LDH', value: parseFloat(rng.range(120.0, 350.0).toFixed(0)), unit: 'U/L' },
-      { name: 'CK', value: parseFloat(rng.range(30.0, 250.0).toFixed(0)), unit: 'U/L' }
-    ];
-    
-    const SerumChartComponent = () => (
-      <BarChart width={700} height={350} data={serumData}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-        <XAxis dataKey="name" tick={{ fill: '#333', fontSize: 12 }} />
-        <YAxis tick={{ fill: '#666' }} label={{ value: '浓度', angle: -90, position: 'insideLeft', style: { fill: '#333' } }} />
-        <Tooltip 
-          contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px' }}
-        />
-        <Legend wrapperStyle={{ paddingTop: '10px' }} />
-        <Bar dataKey="value" fill="#FF6B6B" name="血清指标" />
-      </BarChart>
-    );
-    
-    return await this.renderChartToBase64(SerumChartComponent, 750, 400);
   }
   
   // 生成时频域特征图（新增）

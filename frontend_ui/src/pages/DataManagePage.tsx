@@ -77,8 +77,7 @@ const DataManagePage: React.FC = () => {
     { value: 'time_variance', label: '时域特征-方差' },
     { value: 'time_energy', label: '时域特征-能量' },
     { value: 'time_difference', label: '时域特征-差分' },
-    { value: 'frequency_wavelet', label: '时频域特征图' },
-    { value: 'serum_analysis', label: '血清指标分析' }
+    { value: 'frequency_wavelet', label: '时频域特征图' }
   ];
 
   // 图像类型选项
@@ -97,8 +96,7 @@ const DataManagePage: React.FC = () => {
     { key: 'time_energy', label: '时域特征-能量' },
     { key: 'time_difference', label: '时域特征-差分' },
     { key: 'frequency_wavelet', label: '时频域特征图' },
-    { key: 'differential_entropy', label: '微分熵特征图' },
-    { key: 'serum_analysis', label: '血清指标分析' }
+    { key: 'differential_entropy', label: '微分熵特征图' }
   ];
 
   // 获取数据列表（从后端API读取）

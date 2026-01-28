@@ -338,7 +338,6 @@
     stress_score: number;          // 应激分数
     depression_score: number;      // 抑郁分数
     anxiety_score: number;         // 焦虑分数
-    social_isolation_score: number; // 社交孤立分数
   }
   ```
 - **使用场景**: 对单个数据进行健康评估
@@ -593,12 +592,11 @@ API响应拦截器会自动处理以下错误状态码：
 
 ## 健康评估分数
 
-健康评估结果包含四个维度的分数：
+健康评估结果包含三个维度的分数：
 
 - `stress_score`: 应激分数 (0-100)
 - `depression_score`: 抑郁分数 (0-100)
 - `anxiety_score`: 焦虑分数 (0-100)
-- `social_isolation_score`: 社交孤立分数 (0-100)
 
 ## 模型类型
 
@@ -607,7 +605,6 @@ API响应拦截器会自动处理以下错误状态码：
 - 0: 普通应激模型
 - 1: 抑郁评估模型
 - 2: 焦虑评估模型
-- 3: 社交孤立评估模型
 
 ## 用户类型
 

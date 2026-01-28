@@ -269,8 +269,7 @@ export class ModelStorage {
     const modelTypes = {
       0: "普通应激模型",
       1: "抑郁评估模型", 
-      2: "焦虑评估模型",
-      3: "社交孤立评估模型"
+      2: "焦虑评估模型"
     };
     return modelTypes[modelType as keyof typeof modelTypes] || "未知模型";
   }

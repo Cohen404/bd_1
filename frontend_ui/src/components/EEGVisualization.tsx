@@ -88,24 +88,6 @@ const generateRandomEEGData = (dataId: number, visualizationType: string) => {
     energy: generateIntChannelData(100, 500, 50, 1200), // 能量: 100-500 μV²
     diff: generateChannelData(0.8, 3.5, 2, 1300), // 微分熵: 0.8-3.5
     
-    // 血清指标数据 - 更真实的临床指标范围
-    serum: ['CRP', 'IL-6', 'TNF-α', 'LDH', 'CK'],
-    serumValues: (() => {
-      // 为每个血清指标设置不同的真实范围
-      const crp = createRng(1400).range(0.5, 15.0);      // CRP: 0.5-15 mg/L
-      const il6 = createRng(1401).range(2.0, 50.0);      // IL-6: 2-50 pg/mL
-      const tnf = createRng(1402).range(5.0, 80.0);      // TNF-α: 5-80 pg/mL
-      const ldh = createRng(1403).range(120.0, 350.0);   // LDH: 120-350 U/L
-      const ck = createRng(1404).range(30.0, 250.0);     // CK: 30-250 U/L
-      return [
-        parseFloat(crp.toFixed(1)),
-        parseFloat(il6.toFixed(1)),
-        parseFloat(tnf.toFixed(1)),
-        parseFloat(ldh.toFixed(0)),
-        parseFloat(ck.toFixed(0))
-      ];
-    })(),
-
     // 时频图（STFT）模拟数据 - 更真实的时频能量分布
     timeFreq: {
       x: Array.from({ length: 100 }, (_, i) => i * 0.05), // 时间: 0-5秒
@@ -181,22 +163,6 @@ const TimeFreqChart = ({ timeFreq }: { timeFreq: any }) => {
   );
 };
 
-// 血清指标图
-const SerumChart = ({ serumData }: { serumData: any[] }) => (
-  <div className="mb-6">
-    <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center">血清指标分析</h3>
-    <div className="bg-white p-4 rounded-lg border">
-      <BarChart data={serumData} width={500} height={250}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Bar dataKey="value" fill="#FF6B6B" />
-      </BarChart>
-    </div>
-  </div>
-);
-
 // 微分熵特征图
 const DiffEntropyChart = ({ data }: { data: any[] }) => (
   <div className="mb-6">
@@ -245,12 +211,6 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
     
     return data;
   }, [mockData, visualizationType]);
-
-  // 生成血清数据
-  const serumData = useMemo(() => mockData.serum.map((label, i) => ({ 
-    name: label, 
-    value: mockData.serumValues[i] 
-  })), [mockData]);
 
   const renderVisualization = () => {
     switch (visualizationType) {
@@ -389,9 +349,6 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ visualizationType, 
       
       case 'frequency_wavelet':
         return <TimeFreqChart timeFreq={mockData.timeFreq} />;
-      
-      case 'serum_analysis':
-        return <SerumChart serumData={serumData} />;
       
       default:
         return (

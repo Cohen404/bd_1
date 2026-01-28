@@ -412,14 +412,6 @@ export const initializeDemoData = () => {
         category: '评估参数',
         updated_at: '2024-01-01T00:00:00Z'
       },
-      {
-        id: 7,
-        name: '评估权重_社交孤立',
-        value: '0.2',
-        description: '社交孤立评估在综合评估中的权重',
-        category: '评估参数',
-        updated_at: '2024-01-01T00:00:00Z'
-      },
       
       // 系统配置
       {

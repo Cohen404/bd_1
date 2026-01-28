@@ -75,20 +75,6 @@ const TimeFreqChart = () => {
   );
 };
 
-// 血清指标图
-const SerumChart = () => (
-  <div style={{ margin: '20px 0' }}>
-    <h3>血清指标分析</h3>
-    <BarChart data={mockData.serum.map((label, i) => ({ name: label, value: mockData.serumValues[i] }))} width={600} height={300}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Bar dataKey="value" fill="#FF6B6B" />
-    </BarChart>
-  </div>
-);
-
 // 微分熵特征图
 const DiffEntropyChart = () => (
   <div style={{ margin: '20px 0' }}>
@@ -210,9 +196,6 @@ const EEGFeatureCharts = () => {
 
       {/* 时频图 */}
       <TimeFreqChart />
-
-      {/* 血清指标 */}
-      <SerumChart />
 
       {/* 微分熵 */}
       <DiffEntropyChart />

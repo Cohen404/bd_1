@@ -158,8 +158,8 @@ export const validateModelType = (modelType: number): string[] => {
   
   if (modelType === undefined || modelType === null) {
     errors.push('请选择模型类型');
-  } else if (![0, 1, 2, 3].includes(modelType)) {
-    errors.push('模型类型无效，请选择：普通应激模型、抑郁评估模型、焦虑评估模型或社交孤立评估模型');
+  } else if (![0, 1, 2].includes(modelType)) {
+    errors.push('模型类型无效，请选择：普通应激模型、抑郁评估模型或焦虑评估模型');
   }
   
   return errors;
@@ -185,8 +185,7 @@ export const getModelTypeName = (modelType: number): string => {
   const modelTypes = {
     0: "普通应激模型",
     1: "抑郁评估模型", 
-    2: "焦虑评估模型",
-    3: "社交孤立评估模型"
+    2: "焦虑评估模型"
   };
   return modelTypes[modelType as keyof typeof modelTypes] || "未知模型";
 };
@@ -198,8 +197,7 @@ export const getModelTypeOptions = () => {
   return [
     { value: 0, label: "普通应激模型" },
     { value: 1, label: "抑郁评估模型" },
-    { value: 2, label: "焦虑评估模型" },
-    { value: 3, label: "社交孤立评估模型" }
+    { value: 2, label: "焦虑评估模型" }
   ];
 };
 

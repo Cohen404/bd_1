@@ -125,15 +125,6 @@ export class ParameterStorage {
         updated_at: new Date().toISOString()
       },
       {
-        id: 6,
-        param_name: 'social_isolation_threshold',
-        param_value: '50',
-        param_type: 'number',
-        description: '社交孤立评估阈值',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      },
-      {
         id: 7,
         param_name: 'model_path',
         param_value: '/models/health_assessment',

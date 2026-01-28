@@ -309,15 +309,6 @@ const DashboardPage: React.FC = () => {
                 {stats.avg_scores.anxiety.toFixed(1)}
               </p>
             </div>
-            <div className={`p-4 rounded-lg ${getRiskStyle(stats.avg_scores.social).bg}`}>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">平均社交孤立</span>
-                <Users className="h-5 w-5 text-gray-600" />
-              </div>
-              <p className={`text-2xl font-bold mt-2 ${getRiskStyle(stats.avg_scores.social).color}`}>
-                {stats.avg_scores.social.toFixed(1)}
-              </p>
-            </div>
           </div>
         </div>
       )}

@@ -122,7 +122,6 @@ export const getScoreTypeName = (type: string): string => {
     stress_score: '应激评分',
     depression_score: '抑郁评分',
     anxiety_score: '焦虑评分',
-    social_isolation_score: '社交孤立评分',
   };
   return names[type] || type;
 };
@@ -132,7 +131,6 @@ export const transformHealthScoresToChartData = (scores: {
   stress_score: number;
   depression_score: number;
   anxiety_score: number;
-  social_isolation_score: number;
 }): ChartData[] => {
   return [
     {
@@ -149,11 +147,6 @@ export const transformHealthScoresToChartData = (scores: {
       name: '焦虑',
       value: scores.anxiety_score,
       level: getScoreLevel(scores.anxiety_score),
-    },
-    {
-      name: '社交孤立',
-      value: scores.social_isolation_score,
-      level: getScoreLevel(scores.social_isolation_score),
     },
   ];
 };

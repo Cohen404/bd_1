@@ -15,7 +15,6 @@ export interface ReportData {
     frequencyBand: string;   // 频带特征图base64
     diffEntropy: string;     // 微分熵特征图base64
     timeFreq: string;        // 时频域特征图base64
-    serum: string;           // 血清图base64
   };
 }
 
@@ -359,11 +358,6 @@ export class ReportGenerator {
                     <div class="score-value">${result.anxiety_score.toFixed(1)}</div>
                     <span class="score-label">${this.getRiskLevel(result.anxiety_score)}</span>
                   </div>
-                  <div class="score-card ${this.getRiskClass(result.social_isolation_score)}">
-                    <div class="score-card-title">社交孤立评分</div>
-                    <div class="score-value">${result.social_isolation_score.toFixed(1)}</div>
-                    <span class="score-label">${this.getRiskLevel(result.social_isolation_score)}</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -432,21 +426,7 @@ export class ReportGenerator {
               </div>
             </div>
             
-            <!-- 第5页：血清指标分析 -->
-            <div class="section">
-              <div class="section-content">
-                <h2 class="section-title">🔬 血清指标分析</h2>
-                <div class="chart-container">
-                  <div class="chart-title">炎症标志物检测</div>
-                  <img src="${charts.serum}" alt="血清图" style="max-height: 600px; object-fit: contain;" />
-                  <p style="color: #666; font-size: 13px; margin-top: 10px;">
-                    包括CRP、IL-6、TNF-α、LDH、CK等炎症相关指标
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- 第6页：综合评估与建议 -->
+            <!-- 第5页：综合评估与建议 -->
             <div class="section">
               <div class="section-content">
                 <h2 class="section-title">💡 综合评估与建议</h2>

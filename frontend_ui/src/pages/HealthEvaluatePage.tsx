@@ -573,11 +573,6 @@ const HealthEvaluatePage: React.FC = () => {
             score={resultData.anxiety_score} 
             label="焦虑" 
           />
-          <LEDIndicator 
-            status={getLEDStatus(resultData.social_isolation_score)} 
-            score={resultData.social_isolation_score} 
-            label="社交孤立" 
-          />
         </div>
 
         {/* 风险等级和建议 */}
@@ -606,7 +601,7 @@ const HealthEvaluatePage: React.FC = () => {
       {/* 页面标题 */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">健康评估</h1>
-        <p className="text-gray-600 mt-1">进行应激、抑郁、焦虑和社交孤立评估</p>
+        <p className="text-gray-600 mt-1">进行应激、抑郁和焦虑评估</p>
       </div>
 
 
@@ -764,9 +759,6 @@ const HealthEvaluatePage: React.FC = () => {
                                       焦虑
                                     </th>
                                     <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                      社交孤立
-                                    </th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                                       风险等级
                                     </th>
                                   </tr>
@@ -799,9 +791,6 @@ const HealthEvaluatePage: React.FC = () => {
                                       </td>
                                       <td className="px-4 py-2 text-sm text-gray-900">
                                         {subItem.anxiety_score?.toFixed(1) || '-'}
-                                      </td>
-                                      <td className="px-4 py-2 text-sm text-gray-900">
-                                        {subItem.social_isolation_score?.toFixed(1) || '-'}
                                       </td>
                                       <td className="px-4 py-2 text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
