@@ -8,6 +8,7 @@ import pandas as pd
 import io
 import zipfile
 from pathlib import Path
+import base64
 
 from database import get_db
 import models as db_models
@@ -17,6 +18,92 @@ from model_inference import ResultProcessor
 from config import RESULTS_DIR
 
 router = APIRouter()
+
+IMAGES_DIR = Path(__file__).resolve().parents[1] / "images"
+MD5_DIR = Path(__file__).resolve().parents[1] / "md5"
+MD5_MAPPING_FILE = MD5_DIR / "data.txt"
+
+def load_md5_mapping():
+    """
+    读取MD5映射文件，返回 md5 -> (file_id, stress, depression, anxiety)
+    file_id是文件名第一个_前的id（如"2_yky.zip"中的"2"）
+    """
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    if not MD5_MAPPING_FILE.exists():
+        MD5_MAPPING_FILE.write_text("", encoding="utf-8")
+    
+    mapping = {}
+    try:
+        lines = MD5_MAPPING_FILE.read_text(encoding="utf-8").splitlines()
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            parts = [p.strip() for p in line.split(",")]
+            if len(parts) != 5:
+                continue
+            md5_value = parts[0]
+            file_id = parts[1]
+            try:
+                scores = (float(parts[2]), float(parts[3]), float(parts[4]))
+                mapping[md5_value] = (file_id, scores[0], scores[1], scores[2])
+            except ValueError:
+                continue
+    except Exception as e:
+        logging.error(f"读取MD5映射文件失败: {str(e)}")
+    return mapping
+
+def get_image_for_md5(md5_value: str) -> Optional[str]:
+    """
+    根据MD5值获取对应的图片（base64编码）
+    直接使用file_id匹配图片，如file_id为"2"则匹配"2.jpg"
+    """
+    try:
+        mapping = load_md5_mapping()
+        
+        # 查找该MD5对应的file_id
+        file_id = None
+        if md5_value in mapping:
+            file_id = mapping[md5_value][0]
+        
+        if not file_id:
+            return None
+        
+        # 直接使用file_id匹配图片
+        image_path = IMAGES_DIR / f"{file_id}.jpg"
+        
+        if not image_path.exists():
+            return None
+        
+        # 读取图片并转换为base64
+        with open(image_path, "rb") as f:
+            image_data = f.read()
+            return base64.b64encode(image_data).decode('utf-8')
+        
+    except Exception as e:
+        logging.error(f"获取用户图片失败: {str(e)}")
+        return None
+
+def get_image_for_file_id(file_id: str) -> Optional[str]:
+    """
+    根据file_id直接获取对应的图片（base64编码）
+    用于旧数据（没有md5）的情况
+    """
+    try:
+        # 直接使用file_id匹配图片
+        image_path = IMAGES_DIR / f"{file_id}.jpg"
+        
+        if not image_path.exists():
+            return None
+        
+        # 读取图片并转换为base64
+        with open(image_path, "rb") as f:
+            image_data = f.read()
+            return base64.b64encode(image_data).decode('utf-8')
+        
+    except Exception as e:
+        logging.error(f"获取用户图片失败: {str(e)}")
+        return None
 
 @router.get("/", response_model=List[schemas.Result])
 async def read_results(
@@ -470,4 +557,31 @@ async def regenerate_report(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"重新生成报告失败: {str(e)}"
-        ) 
+        )
+
+@router.get("/user-image/{result_id}")
+async def get_user_image(
+    result_id: int,
+    db: Session = Depends(get_db)
+):
+    """
+    根据结果ID获取用户对应的图片
+    """
+    result = db.query(db_models.Result).filter(db_models.Result.id == result_id).first()
+    
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{result_id}的结果不存在"
+        )
+    
+    # 直接使用result_id匹配图片
+    image_base64 = get_image_for_file_id(str(result_id))
+    
+    if not image_base64:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="未找到对应的图片"
+        )
+    
+    return {"image": f"data:image/jpeg;base64,{image_base64}"} 

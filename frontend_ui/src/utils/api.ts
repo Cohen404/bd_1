@@ -269,6 +269,11 @@ class API {
     return response.data;
   }
 
+  async getUserImage(resultId: number) {
+    const response = await api.get(`/results/user-image/${resultId}`);
+    return response.data;
+  }
+
   // 模型管理
   async getModels(params?: { page?: number; size?: number; model_type?: number }) {
     const response = await api.get('/models/', { params });

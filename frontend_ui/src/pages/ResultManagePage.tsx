@@ -162,6 +162,16 @@ const ResultManagePage: React.FC = () => {
           const result = (await fetchLatestResult(resultId)) || filteredResults.find(r => r.id === resultId);
           if (!result) continue;
           
+          // 获取用户图片
+          let userImage: string | undefined;
+          try {
+            const imageData = await apiClient.getUserImage(resultId);
+            userImage = imageData.image;
+          } catch (error) {
+            console.warn('获取用户图片失败:', error);
+            userImage = undefined;
+          }
+          
           // 生成图表
           const resultItem = toResultItem(result);
           const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
@@ -179,6 +189,7 @@ const ResultManagePage: React.FC = () => {
               username: result.username || '未知',
               user_type: 'user'
             },
+            userImage: userImage,
             charts: {
               eeg: eegChart,
               timeDomain: timeDomainChart,
@@ -236,6 +247,18 @@ const ResultManagePage: React.FC = () => {
       
       toast('正在生成图表...');
       
+      // 获取用户图片
+      let userImage: string | undefined;
+      try {
+        const imageData = await apiClient.getUserImage(resultId);
+        userImage = imageData.image;
+        console.log('用户图片获取成功');
+      } catch (error) {
+        console.warn('获取用户图片失败:', error);
+        userImage = undefined;
+      }
+      
+      console.log('开始生成图表...');
       // 生成图表
       const resultItem = toResultItem(result);
       const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
@@ -245,6 +268,7 @@ const ResultManagePage: React.FC = () => {
         ChartGenerator.generateDiffEntropyChart(resultItem),
         ChartGenerator.generateTimeFreqChart(resultItem)
       ]);
+      console.log('图表生成完成');
       
       toast('正在生成报告...');
       
@@ -255,6 +279,7 @@ const ResultManagePage: React.FC = () => {
           username: result.username || '未知',
           user_type: 'user'
         },
+        userImage: userImage,
         charts: {
           eeg: eegChart,
           timeDomain: timeDomainChart,

@@ -1,4 +1,12 @@
 from sqlalchemy import text
+
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
 from database import SessionLocal
 
 db = SessionLocal()

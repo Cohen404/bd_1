@@ -9,6 +9,7 @@ export interface ReportData {
     username: string;
     user_type: string;
   };
+  userImage?: string;       // 用户心率图片base64
   charts: {
     eeg: string;             // 脑电功率图base64
     timeDomain: string;      // 时域特征图base64
@@ -21,7 +22,7 @@ export interface ReportData {
 export class ReportGenerator {
   // 生成报告HTML模板
   static createReportHTML(data: ReportData): string {
-    const { result, user, charts } = data;
+    const { result, user, userImage, charts } = data;
     
     return `
       <!DOCTYPE html>
@@ -361,71 +362,23 @@ export class ReportGenerator {
               </div>
             </div>
             
-            <!-- 第2页：脑电信号分析（脑电功率频谱 + 时域特征） -->
-            <div class="section">
-              <div class="section-content" style="padding: 20px;">
-                <h2 class="section-title" style="margin-bottom: 15px;">🧠 脑电信号（EEG）分析</h2>
-                <div class="charts-grid" style="gap: 15px;">
-                  <div class="chart-container" style="margin: 10px 0; padding: 15px;">
-                    <div class="chart-title" style="margin-bottom: 10px; font-size: 16px;">脑电功率频谱分析</div>
-                    <img src="${charts.eeg}" alt="脑电功率图" style="max-height: 380px; object-fit: contain;" />
-                    <p style="color: #666; font-size: 12px; margin-top: 8px;">
-                      展示各通道的Theta、Alpha、Beta、Gamma波功率分布
-                    </p>
-                  </div>
-                  
-                  <div class="chart-container" style="margin: 10px 0; padding: 15px;">
-                    <div class="chart-title" style="margin-bottom: 10px; font-size: 16px;">时域特征分析</div>
-                    <img src="${charts.timeDomain}" alt="时域特征图" style="max-height: 380px; object-fit: contain;" />
-                    <p style="color: #666; font-size: 12px; margin-top: 8px;">
-                      包括过零率、方差、能量、差分等时域特征指标
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- 第3页：脑电信号分析（频带特征 + 微分熵） -->
-            <div class="section">
-              <div class="section-content" style="padding: 20px;">
-                <h2 class="section-title" style="margin-bottom: 15px;">🧠 脑电信号（EEG）分析（续）</h2>
-                <div class="charts-grid" style="gap: 15px;">
-                  <div class="chart-container" style="margin: 10px 0; padding: 15px;">
-                    <div class="chart-title" style="margin-bottom: 10px; font-size: 16px;">频带特征分析</div>
-                    <img src="${charts.frequencyBand}" alt="频带特征图" style="max-height: 380px; object-fit: contain;" />
-                    <p style="color: #666; font-size: 12px; margin-top: 8px;">
-                      展示各频带的能量分布情况
-                    </p>
-                  </div>
-                  
-                  <div class="chart-container" style="margin: 10px 0; padding: 15px;">
-                    <div class="chart-title" style="margin-bottom: 10px; font-size: 16px;">微分熵特征分析</div>
-                    <img src="${charts.diffEntropy}" alt="微分熵图" style="max-height: 380px; object-fit: contain;" />
-                    <p style="color: #666; font-size: 12px; margin-top: 8px;">
-                      微分熵反映信号的复杂度和不确定性
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- 第4页：时频域特征分析 -->
+            <!-- 第2页：心率监测图片 -->
             <div class="section">
               <div class="section-content">
-                <h2 class="section-title">🧠 脑电信号（EEG）分析（续）</h2>
+                <h2 class="section-title">❤️ 心率监测分析</h2>
                 <div class="charts-grid">
                   <div class="chart-container">
-                    <div class="chart-title">时频域特征分析</div>
-                    <img src="${charts.timeFreq}" alt="时频域特征图" style="max-height: 600px; object-fit: contain;" />
-                    <p style="color: #666; font-size: 13px; margin-top: 10px;">
-                      展示信号在时间和频率域的联合分布特征
+                    <div class="chart-title">心率与导联信息</div>
+                    ${userImage ? `<img src="${userImage}" alt="心率监测图片" style="max-height: 600px; object-fit: contain; width: 100%;" />` : '<p style="color: #999; text-align: center; padding: 40px;">暂无心率监测图片</p>'}
+                    <p style="color: #666; font-size: 13px; margin-top: 10px; text-align: center;">
+                      包含心率数值、导联信息及心率波形图
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <!-- 第5页：综合评估与建议 -->
+            <!-- 第3页：综合评估与建议 -->
             <div class="section">
               <div class="section-content">
                 <h2 class="section-title">💡 综合评估与建议</h2>
@@ -497,9 +450,12 @@ export class ReportGenerator {
         throw new Error('未找到任何页面内容');
       }
       
+      console.log(`找到 ${sections.length} 个section`);
+      
       // 逐页渲染
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i] as HTMLElement;
+        console.log(`正在渲染第 ${i + 1} 页...`);
         
         // 转换为Canvas（直接在iframe中渲染）
         const canvas = await html2canvas(section, {
@@ -513,6 +469,8 @@ export class ReportGenerator {
           backgroundColor: '#ffffff'
         });
         
+        console.log(`第 ${i + 1} 页canvas生成完成`);
+        
         // 添加到PDF
         if (i > 0) {
           pdf.addPage();
@@ -523,6 +481,7 @@ export class ReportGenerator {
         const imgHeight = 297; // A4高度（mm）
         
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        console.log(`第 ${i + 1} 页添加到PDF完成`);
       }
       
       // 下载PDF
