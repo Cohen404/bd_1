@@ -21,8 +21,7 @@ router = APIRouter()
 MODEL_TYPE_NAMES = {
     0: "普通应激模型",
     1: "抑郁评估模型",
-    2: "焦虑评估模型",
-    3: "社交孤立评估模型"
+    2: "焦虑评估模型"
 }
 
 @router.post("/", response_model=schemas.Model)

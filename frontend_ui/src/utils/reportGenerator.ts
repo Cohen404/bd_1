@@ -200,15 +200,6 @@ export class ReportGenerator {
             color: #e74c3c;
           }
           
-          .risk-medium { 
-            color: #f39c12;
-          }
-          
-          .risk-medium .score-label {
-            background: #fff3e0;
-            color: #f39c12;
-          }
-          
           .risk-low { 
             color: #27ae60;
           }
@@ -548,26 +539,22 @@ export class ReportGenerator {
   
   private static getRiskClass(score: number): string {
     if (score >= 50) return 'risk-high';
-    if (score >= 30) return 'risk-medium';
     return 'risk-low';
   }
   
   private static getRiskLevel(score: number): string {
     if (score >= 50) return '高风险';
-    if (score >= 30) return '中等风险';
-    return '正常';
+    return '低风险';
   }
   
   private static calculateOverallRiskLevel(result: ResultItem): string {
     const averageScore = (
       result.stress_score + 
       result.depression_score + 
-      result.anxiety_score + 
-      result.social_isolation_score
-    ) / 4;
+      result.anxiety_score
+    ) / 3;
     
     if (averageScore >= 50) return '高风险';
-    if (averageScore >= 30) return '中等风险';
     return '低风险';
   }
 }

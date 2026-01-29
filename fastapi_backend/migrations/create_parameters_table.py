@@ -68,8 +68,7 @@ def create_parameters_table():
             ('min_password_length', '6', 'number', '密码最小长度'),
             ('login_max_attempts', '5', 'number', '登录失败最大次数'),
             ('account_lock_time', '30', 'number', '账户锁定时间（分钟）'),
-            ('high_risk_threshold', '70', 'number', '高风险评估阈值'),
-            ('medium_risk_threshold', '45', 'number', '中等风险评估阈值'),
+            ('high_risk_threshold', '50', 'number', '高风险评估阈值'),
             ('log_retention_days', '30', 'number', '日志保留天数'),
             ('log_max_size', '104857600', 'number', '日志文件最大大小（字节）')
         """)

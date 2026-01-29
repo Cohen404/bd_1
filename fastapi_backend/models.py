@@ -101,14 +101,13 @@ class Result(Base):
     stress_score = Column(Float, nullable=False, comment='0-100,0不普通应激，100普通应激')
     depression_score = Column(Float, nullable=False, comment='0-100,0不抑郁，100抑郁')
     anxiety_score = Column(Float, nullable=False, comment='0-100,0不焦虑，100焦虑')
-    social_isolation_score = Column(Float, nullable=False, comment='0-100,0不社交孤立，100社交孤立')
     report_path = Column(String(255), nullable=True, comment='报告路径')
     user_id = Column(String(64), ForeignKey('tb_user.user_id'), nullable=False, comment='关联用户ID')
     data_id = Column(Integer, ForeignKey('tb_data.id'), nullable=True, comment='关联数据ID')
     personnel_id = Column(String(64), nullable=True, comment='人员ID')
     personnel_name = Column(String(255), nullable=True, comment='人员姓名')
     active_learned = Column(Boolean, default=False, comment='是否进行过主动学习')
-    overall_risk_level = Column(String(20), nullable=True, default='低风险', comment='总体风险等级：低风险/中等风险/高风险')
+    overall_risk_level = Column(String(20), nullable=True, default='低风险', comment='总体风险等级：低风险/高风险')
     blood_oxygen = Column(Float, nullable=True, comment='血氧饱和度(%)')
     blood_pressure = Column(String(20), nullable=True, comment='血压(mmHg)，格式：收缩压/舒张压')
     
@@ -121,7 +120,7 @@ class Model(Base):
     __tablename__ = 'tb_model'
     
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    model_type = Column(Integer, comment='0普通应激模型，1抑郁评估模型，2焦虑评估模型，3社交孤立评估模型')
+    model_type = Column(Integer, comment='0普通应激模型，1抑郁评估模型，2焦虑评估模型')
     model_path = Column(String(255), comment='模型路径')
     create_time = Column(DateTime, default=datetime.now, comment='创建时间')
 

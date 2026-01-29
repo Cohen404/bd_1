@@ -16,8 +16,7 @@ def update_result_overall_risk_level():
         update_sql = text("""
             UPDATE tb_result
             SET overall_risk_level = CASE
-                WHEN (stress_score + depression_score + anxiety_score + social_isolation_score) / 4 >= 50 THEN '高风险'
-                WHEN (stress_score + depression_score + anxiety_score + social_isolation_score) / 4 >= 30 THEN '中等风险'
+                WHEN (stress_score + depression_score + anxiety_score) / 3 >= 50 THEN '高风险'
                 ELSE '低风险'
             END
             WHERE overall_risk_level IS NULL OR overall_risk_level = ''

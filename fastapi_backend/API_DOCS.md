@@ -856,7 +856,6 @@ curl -X GET "http://localhost:8000/health" \
 | stress_score | number | 是 |  |
 | depression_score | number | 是 |  |
 | anxiety_score | number | 是 |  |
-| social_isolation_score | number | 是 |  |
 | user_id | string | 是 |  |
 | data_id | string | 否 |  |
 | report_path | string | 否 |  |

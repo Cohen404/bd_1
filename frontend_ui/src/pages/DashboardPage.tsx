@@ -32,7 +32,6 @@ interface DashboardStats {
     stress: number;
     depression: number;
     anxiety: number;
-    social: number;
   };
 }
 
@@ -74,8 +73,7 @@ const DashboardPage: React.FC = () => {
       const highRiskCount = resultsList.filter((result: any) => 
         result.stress_score >= 50 || 
         result.depression_score >= 50 || 
-        result.anxiety_score >= 50 || 
-        result.social_isolation_score >= 50
+        result.anxiety_score >= 50
       ).length;
 
       // 计算平均分数（只使用前50条数据）
@@ -84,12 +82,10 @@ const DashboardPage: React.FC = () => {
         stress: recentResults.reduce((sum: number, r: any) => sum + r.stress_score, 0) / recentResults.length,
         depression: recentResults.reduce((sum: number, r: any) => sum + r.depression_score, 0) / recentResults.length,
         anxiety: recentResults.reduce((sum: number, r: any) => sum + r.anxiety_score, 0) / recentResults.length,
-        social: recentResults.reduce((sum: number, r: any) => sum + r.social_isolation_score, 0) / recentResults.length,
       } : {
         stress: 0,
         depression: 0,
-        anxiety: 0,
-        social: 0
+        anxiety: 0
       };
 
       setStats({
@@ -129,7 +125,6 @@ const DashboardPage: React.FC = () => {
   // 获取风险等级样式
   const getRiskStyle = (score: number) => {
     if (score >= 50) return { color: 'text-red-600', bg: 'bg-red-50' };
-    if (score >= 30) return { color: 'text-yellow-600', bg: 'bg-yellow-50' };
     return { color: 'text-green-600', bg: 'bg-green-50' };
   };
 

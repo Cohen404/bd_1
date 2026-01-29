@@ -27,7 +27,7 @@ class EegModel:
         """
         静态方法，用于加载模型
         Args:
-            model_type: 模型类型 (0=应激, 1=抑郁, 2=焦虑, 3=社交孤立)
+            model_type: 模型类型 (0=应激, 1=抑郁, 2=焦虑)
             db: 数据库会话
         Returns:
             bool: 加载是否成功
@@ -175,7 +175,7 @@ class EegModel:
         """
         使用预加载的模型进行预测
         Args:
-            model_type: 模型类型 (0=应激, 1=抑郁, 2=焦虑, 3=社交孤立)
+            model_type: 模型类型 (0=应激, 1=抑郁, 2=焦虑)
         Returns:
             float: 预测结果
         """
@@ -221,7 +221,7 @@ class BatchInferenceModel:
         """
         try:
             # 获取所有模型
-            model_types = [0, 1, 2, 3]  # 应激、抑郁、焦虑、社交孤立
+            model_types = [0, 1, 2]  # 应激、抑郁、焦虑
             
             for model_type in model_types:
                 # 从数据库获取模型信息
@@ -247,7 +247,7 @@ class BatchInferenceModel:
             data_paths: 数据路径列表 [(data_id, data_path), ...]
             db: 数据库会话
         Returns:
-            list: 预测结果列表 [(data_id, stress_score, depression_score, anxiety_score, social_isolation_score), ...]
+            list: 预测结果列表 [(data_id, stress_score, depression_score, anxiety_score), ...]
         """
         results = []
         
@@ -262,7 +262,7 @@ class BatchInferenceModel:
                     
                     # 获取每个模型的结果
                     model_paths = {}
-                    for model_type in [0, 1, 2, 3]:  # 应激、抑郁、焦虑、社交孤立
+                    for model_type in [0, 1, 2]:  # 应激、抑郁、焦虑
                         model_info = db.query(db_models.Model).filter(db_models.Model.model_type == model_type).first()
                         if model_info:
                             model_paths[model_type] = model_info.model_path
@@ -271,8 +271,7 @@ class BatchInferenceModel:
                     scores = {
                         "stress": 0.0,
                         "depression": 0.0,
-                        "anxiety": 0.0,
-                        "social_isolation": 0.0
+                        "anxiety": 0.0
                     }
                     
                     # 并行运行所有模型预测
@@ -292,16 +291,13 @@ class BatchInferenceModel:
                             scores["depression"] = scores_list[i] * 100
                         elif model_type == 2:
                             scores["anxiety"] = scores_list[i] * 100
-                        elif model_type == 3:
-                            scores["social_isolation"] = scores_list[i] * 100
                     
                     # 将结果添加到列表中
                     results.append((
                         data_id,
                         scores["stress"],
                         scores["depression"],
-                        scores["anxiety"],
-                        scores["social_isolation"]
+                        scores["anxiety"]
                     ))
                     
                     # 将结果保存到数据库
@@ -312,7 +308,6 @@ class BatchInferenceModel:
                         stress_score=scores["stress"],
                         depression_score=scores["depression"],
                         anxiety_score=scores["anxiety"],
-                        social_isolation_score=scores["social_isolation"],
                         user_id=user_id,
                         data_id=data_id
                     )
@@ -464,7 +459,6 @@ class ResultProcessor:
             report_content = template_content.replace('{stress_score}', f"{self.result.stress_score:.1f}")
             report_content = report_content.replace('{depression_score}', f"{self.result.depression_score:.1f}")
             report_content = report_content.replace('{anxiety_score}', f"{self.result.anxiety_score:.1f}")
-            report_content = report_content.replace('{social_isolation_score}', f"{self.result.social_isolation_score:.1f}")
             
             # 用户信息
             if self.user:

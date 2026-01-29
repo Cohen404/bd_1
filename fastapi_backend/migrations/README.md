@@ -12,6 +12,8 @@
 | 4 | add_data_active_learned_field.py | 添加 `active_learned` 字段到 `tb_data` 表 |
 | 5 | add_result_overall_risk_level.py | 添加 `overall_risk_level` 字段到 `tb_result` 表 |
 | 6 | update_result_overall_risk_level.py | 更新已有结果记录的总体风险等级 |
+| 7 | add_blood_oxygen_pressure.py | 添加 `blood_oxygen`, `blood_pressure` 字段到 `tb_result` 表 |
+| 8 | remove_social_isolation_score.py | 删除 `social_isolation_score` 字段 |
 
 ## 一键执行所有迁移
 
@@ -111,15 +113,25 @@ python -m migrations.update_result_overall_risk_level
 ### 5. add_result_overall_risk_level.py
 - **表**: `tb_result`
 - **新增字段**: `overall_risk_level` (VARCHAR(20), 默认 '低风险')
-- **说明**: 存储总体风险等级（低风险/中等风险/高风险）
+- **说明**: 存储总体风险等级（低风险/高风险）
 
 ### 6. update_result_overall_risk_level.py
 - **表**: `tb_result`
 - **操作**: 更新已有记录的总体风险等级
-- **说明**: 根据四个评估分数的平均值计算总体风险等级
+- **说明**: 根据三个评估分数的平均值计算总体风险等级
   - 平均分 ≥ 50: 高风险
-  - 平均分 ≥ 30: 中等风险
-  - 平均分 < 30: 低风险
+  - 平均分 < 50: 低风险
+
+### 7. add_blood_oxygen_pressure.py
+- **表**: `tb_result`
+- **新增字段**:
+  - `blood_oxygen` (FLOAT)
+  - `blood_pressure` (VARCHAR(20))
+- **说明**: 添加血氧和血压字段
+
+### 8. remove_social_isolation_score.py
+- **表**: `tb_result`
+- **操作**: 删除 `social_isolation_score` 字段
 
 ## 故障排除
 

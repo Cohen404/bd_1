@@ -542,7 +542,7 @@
                 "properties": {
                   "model_type": {
                     "type": "integer",
-                    "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+                  "description": "模型类型：0=应激, 1=抑郁, 2=焦虑"
                   },
                   "file": {
                     "type": "string",
@@ -1846,7 +1846,7 @@
           },
           "model_type": {
             "type": "integer",
-            "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+          "description": "模型类型：0=应激, 1=抑郁, 2=焦虑"
           },
           "model_path": {
             "type": "string"
@@ -1868,7 +1868,7 @@
         "properties": {
           "model_type": {
             "type": "integer",
-            "description": "模型类型：0=应激, 1=抑郁, 2=焦虑, 3=社交孤立"
+          "description": "模型类型：0=应激, 1=抑郁, 2=焦虑"
           },
           "file": {
             "type": "string",

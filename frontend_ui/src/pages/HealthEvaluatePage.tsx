@@ -24,7 +24,6 @@ interface PersonnelSubData {
   stress_score?: number;
   depression_score?: number;
   anxiety_score?: number;
-  social_isolation_score?: number;
   overall_risk_level?: string;
   recommendations?: string;
   blood_oxygen?: number;
@@ -48,7 +47,6 @@ interface EvaluationProgress {
       stress_score: number;
       depression_score: number;
       anxiety_score: number;
-      social_isolation_score: number;
       overall_risk_level: string;
       recommendations: string;
     };
@@ -73,6 +71,8 @@ const HealthEvaluatePage: React.FC = () => {
   const [activeLearningProgress, setActiveLearningProgress] = useState(0);
   const [activeLearningPersonnelName, setActiveLearningPersonnelName] = useState('');
   const [activeLearnedPersonnel, setActiveLearnedPersonnel] = useState<Set<string>>(new Set());
+  const [missingBloodModalVisible, setMissingBloodModalVisible] = useState(false);
+  const [missingBloodDataIds, setMissingBloodDataIds] = useState<number[]>([]);
 
   // 获取数据列表（从后端API获取已完成处理的数据）
   const fetchData = async () => {
@@ -115,7 +115,6 @@ const HealthEvaluatePage: React.FC = () => {
             stress_score: undefined,
             depression_score: undefined,
             anxiety_score: undefined,
-            social_isolation_score: undefined,
             overall_risk_level: undefined,
             recommendations: undefined
           };
@@ -147,9 +146,7 @@ const HealthEvaluatePage: React.FC = () => {
                           stress_score: result.stress_score,
                           depression_score: result.depression_score,
                           anxiety_score: result.anxiety_score,
-                          social_isolation_score: result.social_isolation_score,
-                          overall_risk_level: result.stress_score >= 70 ? '高风险' : 
-                                            result.stress_score >= 45 ? '中等风险' : '低风险',
+                          overall_risk_level: result.stress_score >= 50 ? '高风险' : '低风险',
                           recommendations: '保持良好的心理状态',
                           blood_oxygen: result.blood_oxygen,
                           blood_pressure: result.blood_pressure
@@ -312,6 +309,16 @@ const HealthEvaluatePage: React.FC = () => {
     setSelectedItems(newSelected);
   };
 
+  const findSubDataById = (dataId: number) => {
+    for (const item of dataList) {
+      const subItem = item.subData.find(sub => sub.id === dataId);
+      if (subItem) {
+        return subItem;
+      }
+    }
+    return null;
+  };
+
   // 全选/取消全选
   const toggleSelectAll = () => {
     if (selectedItems.size === dataList.length && dataList.length > 0) {
@@ -366,7 +373,6 @@ const HealthEvaluatePage: React.FC = () => {
     let stressScore = Math.min(100, Math.max(0, Math.floor(normalizedSeed * 60 + 20)));
     let depressionScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.6 + 0.2) * 50 + 15)));
     let anxietyScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.5 + 0.3) * 55 + 18)));
-    let socialScore = Math.min(100, Math.max(0, Math.floor((normalizedSeed * 0.7 + 0.2) * 40 + 12)));
     
     if (!isLearned) {
       const deviation = 0.05 + Math.random() * 0.05;
@@ -375,23 +381,21 @@ const HealthEvaluatePage: React.FC = () => {
       stressScore = Math.min(100, Math.max(0, Math.floor(stressScore * deviationFactor)));
       depressionScore = Math.min(100, Math.max(0, Math.floor(depressionScore * deviationFactor)));
       anxietyScore = Math.min(100, Math.max(0, Math.floor(anxietyScore * deviationFactor)));
-      socialScore = Math.min(100, Math.max(0, Math.floor(socialScore * deviationFactor)));
     }
     
-    const maxScore = Math.max(stressScore, depressionScore, anxietyScore, socialScore);
-    const riskLevel = maxScore >= 70 ? '高风险' : maxScore >= 45 ? '中等风险' : '低风险';
+    const maxScore = Math.max(stressScore, depressionScore, anxietyScore);
+    const riskLevel = maxScore >= 50 ? '高风险' : '低风险';
     
     const recommendations = maxScore >= 70 ? 
       '建议立即寻求专业心理咨询，进行心理干预治疗，注意休息和放松，避免过度劳累' :
       maxScore >= 45 ? 
-      '建议适当调整生活方式，保持积极心态，增加社交活动，必要时咨询心理医生' :
+      '建议适当调整生活方式，保持积极心态，必要时咨询心理医生' :
       '保持良好的心理状态，继续当前的生活方式，定期进行心理健康监测';
     
     return {
       stress_score: stressScore,
       depression_score: depressionScore,
       anxiety_score: anxietyScore,
-      social_isolation_score: socialScore,
       overall_risk_level: riskLevel,
       recommendations: recommendations
     };
@@ -405,10 +409,25 @@ const HealthEvaluatePage: React.FC = () => {
     }
 
     try {
+      const selectedIds = Array.from(selectedItems);
+      const missingBloodData = selectedIds.filter(id => {
+        const subItem = findSubDataById(id);
+        if (!subItem) {
+          return true;
+        }
+        const hasBloodOxygen = subItem.blood_oxygen !== null && subItem.blood_oxygen !== undefined;
+        const hasBloodPressure = typeof subItem.blood_pressure === 'string' && subItem.blood_pressure.trim() !== '';
+        return !hasBloodOxygen || !hasBloodPressure;
+      });
+
+      if (missingBloodData.length > 0) {
+        setMissingBloodDataIds(missingBloodData);
+        setMissingBloodModalVisible(true);
+        return;
+      }
+
       setBatchEvaluating(true);
       setBatchProgressVisible(true);
-      
-      const selectedIds = Array.from(selectedItems);
       
       // 初始化进度状态
       const initialProgress: EvaluationProgress = {};
@@ -460,9 +479,7 @@ const HealthEvaluatePage: React.FC = () => {
                     stress_score: result.stress_score,
                     depression_score: result.depression_score,
                     anxiety_score: result.anxiety_score,
-                    social_isolation_score: result.social_isolation_score,
-                    overall_risk_level: result.stress_score >= 70 ? '高风险' : 
-                                      result.stress_score >= 45 ? '中等风险' : '低风险',
+                    overall_risk_level: result.stress_score >= 50 ? '高风险' : '低风险',
                     recommendations: '保持良好的心理状态'
                   }
                 };
@@ -585,7 +602,6 @@ const HealthEvaluatePage: React.FC = () => {
             <span className="text-sm font-medium text-gray-700">风险等级:</span>
             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
               resultData.overall_risk_level === '高风险' ? 'bg-red-100 text-red-800' :
-              resultData.overall_risk_level === '中等风险' ? 'bg-yellow-100 text-yellow-800' :
               'bg-green-100 text-green-800'
             }`}>
               {resultData.overall_risk_level}
@@ -811,7 +827,6 @@ const HealthEvaluatePage: React.FC = () => {
                                       <td className="px-4 py-2 text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                                           subItem.overall_risk_level === '高风险' ? 'bg-red-100 text-red-800' :
-                                          subItem.overall_risk_level === '中等风险' ? 'bg-yellow-100 text-yellow-800' :
                                           'bg-green-100 text-green-800'
                                         }`}>
                                           {subItem.overall_risk_level || '-'}
@@ -832,6 +847,34 @@ const HealthEvaluatePage: React.FC = () => {
           </div>
         )}
         </div>
+
+      {/* 血氧血压未填写提示弹窗 */}
+      {missingBloodModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">无法进行评估</h2>
+            <div className="space-y-3">
+              <p className="text-sm text-gray-600">
+                检测到以下数据未填写血氧或血压，无法进行健康评估。
+              </p>
+              <p className="text-sm text-gray-600">
+                请先在“数据管理”中填写血氧血压后再评估。
+              </p>
+              <div className="bg-gray-50 rounded-lg p-3 text-sm text-gray-700">
+                数据ID：{missingBloodDataIds.join('，')}
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setMissingBloodModalVisible(false)}
+                className="btn btn-primary"
+              >
+                我知道了
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 批量评估进度模态框 */}
       {batchProgressVisible && (

@@ -2367,10 +2367,6 @@
             "type": "number",
             "title": "Anxiety Score"
           },
-          "social_isolation_score": {
-            "type": "number",
-            "title": "Social Isolation Score"
-          },
           "user_id": {
             "type": "string",
             "title": "User Id"
@@ -2412,7 +2408,6 @@
           "stress_score",
           "depression_score",
           "anxiety_score",
-          "social_isolation_score",
           "user_id",
           "id",
           "result_time"

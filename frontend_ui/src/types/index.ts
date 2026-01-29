@@ -98,7 +98,6 @@ export interface Result {
   stress_score: number;
   depression_score: number;
   anxiety_score: number;
-  social_isolation_score: number;
   user_id: string;
   username: string;
   data_id?: number;
@@ -184,7 +183,6 @@ export interface HealthScore {
   stress_score: number;
   depression_score: number;
   anxiety_score: number;
-  social_isolation_score: number;
 }
 
 // 图表数据类型

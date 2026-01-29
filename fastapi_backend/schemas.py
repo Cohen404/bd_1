@@ -131,7 +131,6 @@ class ResultBase(BaseModel):
     stress_score: float
     depression_score: float
     anxiety_score: float
-    social_isolation_score: float
     user_id: str
     data_id: Optional[int] = None
     report_path: Optional[str] = None
@@ -148,7 +147,6 @@ class ResultUpdate(BaseModel):
     stress_score: Optional[float] = None
     depression_score: Optional[float] = None
     anxiety_score: Optional[float] = None
-    social_isolation_score: Optional[float] = None
     report_path: Optional[str] = None
     blood_oxygen: Optional[float] = None
     blood_pressure: Optional[str] = None
@@ -290,11 +288,9 @@ class LEDStatus(BaseModel):
     stress_led: str  # "red", "gray"
     depression_led: str
     anxiety_led: str
-    social_led: str
     stress_score: float
     depression_score: float
     anxiety_score: float
-    social_isolation_score: float
 
 # 评估状态模型
 class EvaluationStatus(BaseModel):

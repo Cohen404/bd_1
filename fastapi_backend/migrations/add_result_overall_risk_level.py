@@ -37,7 +37,7 @@ def add_result_overall_risk_level_field():
         
         # 添加注释
         add_comment_sql = text("""
-            COMMENT ON COLUMN tb_result.overall_risk_level IS '总体风险等级：低风险/中等风险/高风险'
+            COMMENT ON COLUMN tb_result.overall_risk_level IS '总体风险等级：低风险/高风险'
         """)
         
         db.execute(add_comment_sql)

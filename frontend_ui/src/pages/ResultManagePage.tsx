@@ -315,8 +315,7 @@ const ResultManagePage: React.FC = () => {
   // 获取状态颜色和标签
   const getStatusInfo = (score: number) => {
     if (score >= 50) return { level: '高风险', color: 'text-red-600', bgColor: 'bg-red-50' };
-    if (score >= 30) return { level: '中等风险', color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
-    return { level: '正常', color: 'text-green-600', bgColor: 'bg-green-50' };
+    return { level: '低风险', color: 'text-green-600', bgColor: 'bg-green-50' };
   };
 
   const toResultItem = (result: Result): ResultItem => ({
@@ -548,12 +547,6 @@ const ResultManagePage: React.FC = () => {
                             {result.anxiety_score.toFixed(1)}
                           </span>
                         </div>
-                        <div className="flex justify-between">
-                          <span>社交:</span>
-                          <span className={getStatusInfo(result.social_isolation_score).color}>
-                            {result.social_isolation_score.toFixed(1)}
-                          </span>
-                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -561,8 +554,7 @@ const ResultManagePage: React.FC = () => {
                         const maxScore = Math.max(
                           result.stress_score,
                           result.depression_score,
-                          result.anxiety_score,
-                          result.social_isolation_score
+                          result.anxiety_score
                         );
                         const status = getStatusInfo(maxScore);
                         return (

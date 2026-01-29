@@ -15,16 +15,13 @@ export class ExcelExporter {
       const maxScore = Math.max(
         result.stress_score,
         result.depression_score,
-        result.anxiety_score,
-        result.social_isolation_score
+        result.anxiety_score
       );
       
       // 确定状态
-      let status = '正常';
+      let status = '低风险';
       if (maxScore >= 50) {
         status = '高风险';
-      } else if (maxScore >= 30) {
-        status = '中等风险';
       }
       
       return {
@@ -34,7 +31,6 @@ export class ExcelExporter {
         '应激': result.stress_score.toFixed(1),
         '抑郁': result.depression_score.toFixed(1),
         '焦虑': result.anxiety_score.toFixed(1),
-        '社交': result.social_isolation_score.toFixed(1),
         '状态': status,
         '评估时间': new Date(result.result_time).toLocaleString('zh-CN', {
           year: 'numeric',
@@ -58,7 +54,6 @@ export class ExcelExporter {
       { wch: 10 }, // 应激
       { wch: 10 }, // 抑郁
       { wch: 10 }, // 焦虑
-      { wch: 10 }, // 社交
       { wch: 12 }, // 状态
       { wch: 20 }  // 评估时间
     ];

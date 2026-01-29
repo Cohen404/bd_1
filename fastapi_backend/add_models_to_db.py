@@ -83,8 +83,7 @@ def add_models_to_database():
             model_type_name = {
                 0: '普通应激模型',
                 1: '抑郁评估模型',
-                2: '焦虑评估模型',
-                3: '社交孤立评估模型'
+                2: '焦虑评估模型'
             }.get(model.model_type, f'未知类型({model.model_type})')
             logger.info(f"  - {model_type_name}: {model.model_path}")
         

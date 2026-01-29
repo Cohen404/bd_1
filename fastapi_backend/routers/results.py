@@ -214,7 +214,6 @@ async def export_results(
             "应激评分": result.stress_score,
             "抑郁评分": result.depression_score,
             "焦虑评分": result.anxiety_score,
-            "社交孤立评分": result.social_isolation_score,
             "评估时间": result.result_time.strftime("%Y-%m-%d %H:%M:%S"),
             "报告路径": result.report_path or "",
             "主动学习": "是" if result.active_learned else "否"
@@ -358,7 +357,6 @@ async def get_result_statistics(
             "avg_stress_score": 0,
             "avg_depression_score": 0,
             "avg_anxiety_score": 0,
-            "avg_social_isolation_score": 0,
             "high_risk_count": 0,
             "recent_count": 0
         }
@@ -368,14 +366,12 @@ async def get_result_statistics(
     avg_stress = sum(r.stress_score for r in results) / total_count
     avg_depression = sum(r.depression_score for r in results) / total_count
     avg_anxiety = sum(r.anxiety_score for r in results) / total_count
-    avg_social = sum(r.social_isolation_score for r in results) / total_count
     
     # 高风险计数（任一分数>=50）
     high_risk_count = sum(1 for r in results if any([
         r.stress_score >= 50,
         r.depression_score >= 50,
-        r.anxiety_score >= 50,
-        r.social_isolation_score >= 50
+        r.anxiety_score >= 50
     ]))
     
     # 最近7天的评估数量
@@ -387,7 +383,6 @@ async def get_result_statistics(
         "avg_stress_score": round(avg_stress, 2),
         "avg_depression_score": round(avg_depression, 2),
         "avg_anxiety_score": round(avg_anxiety, 2),
-        "avg_social_isolation_score": round(avg_social, 2),
         "high_risk_count": high_risk_count,
         "high_risk_percentage": round((high_risk_count / total_count) * 100, 2),
         "recent_count": recent_count
@@ -446,8 +441,7 @@ async def regenerate_report(
         scores = {
             'stress_score': result.stress_score,
             'depression_score': result.depression_score,
-            'anxiety_score': result.anxiety_score,
-            'social_isolation_score': result.social_isolation_score
+            'anxiety_score': result.anxiety_score
         }
         
         result_processor = ResultProcessor(data.data_path, scores)

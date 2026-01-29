@@ -52,7 +52,6 @@ export interface ResultItem {
   stress_score: number;
   depression_score: number;
   anxiety_score: number;
-  social_isolation_score: number;
   overall_risk_level: string;
   recommendations: string;
   personnel_id?: string;
@@ -261,9 +260,8 @@ export const initializeDemoData = () => {
         stress_score: 35,
         depression_score: 28,
         anxiety_score: 42,
-        social_isolation_score: 25,
-        overall_risk_level: '中等',
-        recommendations: '建议进行放松训练，适当增加社交活动',
+        overall_risk_level: '低风险',
+        recommendations: '建议进行放松训练，保持规律作息',
         personnel_id: 'P001',
         personnel_name: '张三'
       },
@@ -275,8 +273,7 @@ export const initializeDemoData = () => {
         stress_score: 45,
         depression_score: 38,
         anxiety_score: 35,
-        social_isolation_score: 30,
-        overall_risk_level: '中等',
+        overall_risk_level: '低风险',
         recommendations: '建议寻求专业心理咨询，注意工作生活平衡',
         personnel_id: 'P002',
         personnel_name: '李四'
@@ -289,7 +286,6 @@ export const initializeDemoData = () => {
         stress_score: 28,
         depression_score: 22,
         anxiety_score: 30,
-        social_isolation_score: 20,
         overall_risk_level: '低',
         recommendations: '保持良好的心理状态，继续当前的生活方式',
         personnel_id: 'P003',
@@ -376,9 +372,9 @@ export const initializeDemoData = () => {
       },
       {
         id: 2,
-        name: '评估阈值_中等风险',
-        value: '30',
-        description: '中等风险评估阈值，超过此分数将被标记为中等风险',
+        name: '评估阈值_高风险',
+        value: '50',
+        description: '高风险评估阈值，达到或超过此分数将被标记为高风险',
         category: '评估参数',
         updated_at: '2024-01-01T00:00:00Z'
       },

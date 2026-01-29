@@ -565,7 +565,6 @@ const ParameterManagePage: React.FC = () => {
           </div>
           <div className="space-y-2 text-sm text-gray-600">
             <p>• 高风险评估阈值</p>
-            <p>• 中等风险评估阈值</p>
             <p>• 各维度评估权重</p>
             <p>• 综合评估算法参数</p>
           </div>
