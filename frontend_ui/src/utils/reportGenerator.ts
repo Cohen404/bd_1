@@ -548,13 +548,13 @@ export class ReportGenerator {
   }
   
   private static calculateOverallRiskLevel(result: ResultItem): string {
-    const averageScore = (
-      result.stress_score + 
-      result.depression_score + 
+    const maxScore = Math.max(
+      result.stress_score,
+      result.depression_score,
       result.anxiety_score
-    ) / 3;
+    );
     
-    if (averageScore >= 50) return '高风险';
+    if (maxScore > 50) return '高风险';
     return '低风险';
   }
 }

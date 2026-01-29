@@ -134,6 +134,16 @@ const ResultManagePage: React.FC = () => {
     }
   };
 
+  const fetchLatestResult = async (resultId: number) => {
+    try {
+      const latest = await apiClient.getResultById(resultId);
+      return latest as Result;
+    } catch (error) {
+      console.error('获取最新结果失败:', error);
+      return null;
+    }
+  };
+
   // 导出结果（使用后端API）
   const handleExport = async (format: 'excel' | 'pdf') => {
     if (selectedResults.size === 0) {
@@ -149,7 +159,7 @@ const ResultManagePage: React.FC = () => {
         toast('正在批量生成报告...');
         
         for (const resultId of selectedResults) {
-          const result = filteredResults.find(r => r.id === resultId);
+          const result = (await fetchLatestResult(resultId)) || filteredResults.find(r => r.id === resultId);
           if (!result) continue;
           
           // 生成图表
@@ -217,7 +227,7 @@ const ResultManagePage: React.FC = () => {
       setGeneratingReport(true);
       
       // 获取结果数据
-      const result = filteredResults.find(r => r.id === resultId);
+      const result = (await fetchLatestResult(resultId)) || filteredResults.find(r => r.id === resultId);
       
       if (!result) {
         toast.error('未找到评估结果');

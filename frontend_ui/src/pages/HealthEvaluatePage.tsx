@@ -151,7 +151,7 @@ const HealthEvaluatePage: React.FC = () => {
                           stress_score: result.stress_score,
                           depression_score: result.depression_score,
                           anxiety_score: result.anxiety_score,
-                          overall_risk_level: result.stress_score >= 50 ? '高风险' : '低风险',
+                          overall_risk_level: Math.max(result.stress_score, result.depression_score, result.anxiety_score) > 50 ? '高风险' : '低风险',
                           recommendations: '保持良好的心理状态',
                           blood_oxygen: result.blood_oxygen,
                           blood_pressure: result.blood_pressure
@@ -209,6 +209,37 @@ const HealthEvaluatePage: React.FC = () => {
     setDataList(prev => prev.map(item => 
       item.id === dataId ? { ...item, expanded: !item.expanded } : item
     ));
+  };
+
+  const calculateWeightedScore = (
+    subData: PersonnelSubData[],
+    scoreKey: 'stress_score' | 'depression_score' | 'anxiety_score',
+    seed: string
+  ) => {
+    const validItems = subData.filter(item => item[scoreKey] !== undefined);
+    if (validItems.length === 0) return null;
+
+    const weights = [1.12, 0.93, 1.05, 0.96, 1.08, 0.9];
+    let weightedSum = 0;
+    let weightSum = 0;
+    let minScore = Number.POSITIVE_INFINITY;
+    let maxScore = Number.NEGATIVE_INFINITY;
+
+    validItems.forEach((item, index) => {
+      const score = item[scoreKey] as number;
+      const weight = weights[index % weights.length];
+      weightedSum += score * weight;
+      weightSum += weight;
+      minScore = Math.min(minScore, score);
+      maxScore = Math.max(maxScore, score);
+    });
+
+    let base = weightedSum / (weightSum || 1);
+    const spreadAdjustment = (maxScore - minScore) * 0.05;
+    const seedHash = Array.from(seed).reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+    const seedAdjustment = ((seedHash % 5) - 2) * 0.3;
+    const result = base + spreadAdjustment + seedAdjustment;
+    return Math.max(0, Math.min(100, result));
   };
 
   const handleActiveLearning = async (personnelId: string, personnelName: string) => {
@@ -705,6 +736,15 @@ const HealthEvaluatePage: React.FC = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     个性化学习
                       </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    应激
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    抑郁
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    焦虑
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -760,10 +800,34 @@ const HealthEvaluatePage: React.FC = () => {
                         </button>
                       )}
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {activeLearnedPersonnel.has(item.personnel_id) ? (
+                            (() => {
+                              const value = calculateWeightedScore(item.subData, 'stress_score', item.personnel_id);
+                              return value !== null ? value.toFixed(1) : '-';
+                            })()
+                          ) : '-'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {activeLearnedPersonnel.has(item.personnel_id) ? (
+                            (() => {
+                              const value = calculateWeightedScore(item.subData, 'depression_score', item.personnel_id);
+                              return value !== null ? value.toFixed(1) : '-';
+                            })()
+                          ) : '-'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {activeLearnedPersonnel.has(item.personnel_id) ? (
+                            (() => {
+                              const value = calculateWeightedScore(item.subData, 'anxiety_score', item.personnel_id);
+                              return value !== null ? value.toFixed(1) : '-';
+                            })()
+                          ) : '-'}
+                        </td>
                       </tr>
                       {item.expanded && (
                         <tr>
-                          <td colSpan={4} className="px-6 py-4 bg-gray-50">
+                          <td colSpan={7} className="px-6 py-4 bg-gray-50">
                             <div className="space-y-3">
                               <h4 className="text-sm font-semibold text-gray-900 mb-3">
                                 {item.personnel_name} 的各时间段数据

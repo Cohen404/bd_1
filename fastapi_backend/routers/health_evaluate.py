@@ -249,8 +249,8 @@ def resolve_scores_for_md5(md5_value: str) -> tuple:
     return scores
 
 def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
-    average_score = (stress + depression + anxiety) / 3
-    return "高风险" if average_score >= 50 else "低风险"
+    max_score = max(stress, depression, anxiety)
+    return "高风险" if max_score > 50 else "低风险"
 
 # 图像类型映射
 IMAGE_TYPES = {
