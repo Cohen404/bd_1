@@ -331,6 +331,26 @@ const DataManagePage: React.FC = () => {
       setPreprocessing(true);
       
       const selectedIds = Array.from(selectedItems);
+
+      // 检查血氧血压是否已填写
+      const missingIds: number[] = [];
+      for (const dataId of selectedIds) {
+        try {
+          const result = await apiClient.getDataResult(dataId, true);
+          const hasBloodOxygen = result.blood_oxygen !== null && result.blood_oxygen !== undefined;
+          const hasBloodPressure = typeof result.blood_pressure === 'string' && result.blood_pressure.trim() !== '';
+          if (!hasBloodOxygen || !hasBloodPressure) {
+            missingIds.push(dataId);
+          }
+        } catch (error) {
+          missingIds.push(dataId);
+        }
+      }
+
+      if (missingIds.length > 0) {
+        toast.error(`以下数据未填写血氧血压，无法预处理：${missingIds.join('，')}`);
+        return;
+      }
       
       // 调用后端API批量预处理
       await apiClient.batchPreprocessData({ data_ids: selectedIds });
@@ -380,6 +400,14 @@ const DataManagePage: React.FC = () => {
   // 单个数据预处理（调用后端API）
   const handlePreprocessSingle = async (dataId: number, fileName: string) => {
     try {
+      const result = await apiClient.getDataResult(dataId, true);
+      const hasBloodOxygen = result.blood_oxygen !== null && result.blood_oxygen !== undefined;
+      const hasBloodPressure = typeof result.blood_pressure === 'string' && result.blood_pressure.trim() !== '';
+      if (!hasBloodOxygen || !hasBloodPressure) {
+        toast.error('请先填写血氧血压后再进行预处理');
+        return;
+      }
+
       // 调用后端API预处理
       await apiClient.preprocessData(dataId);
       
@@ -423,7 +451,7 @@ const DataManagePage: React.FC = () => {
   const handleOpenBloodModal = async (dataId: number) => {
     try {
       // 获取该数据对应的评估结果
-      const result = await apiClient.getDataResult(dataId);
+      const result = await apiClient.getDataResult(dataId, true);
       
       setEditingDataId(dataId);
       setBloodOxygen(result.blood_oxygen ? result.blood_oxygen.toString() : '');
@@ -443,7 +471,7 @@ const DataManagePage: React.FC = () => {
       console.log('开始保存血氧血压，dataId:', editingDataId);
       
       // 获取该数据对应的评估结果
-      const result = await apiClient.getDataResult(editingDataId);
+      const result = await apiClient.getDataResult(editingDataId, true);
       console.log('获取到的结果:', result);
       
       // 调用后端API更新结果

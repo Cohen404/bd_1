@@ -64,7 +64,7 @@ def append_md5_mapping(md5_value: str, scores: Tuple[float, float, float]) -> No
         f.write(line + "\n")
 
 def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
-    average_score = (stress + depression + anxiety) / 3
+    average_score = max(stress, depression, anxiety)
     return "高风险" if average_score >= 50 else "低风险"
 
 def resolve_scores_for_md5(md5_value: str) -> Tuple[float, float, float]:
@@ -193,7 +193,6 @@ async def create_data(
         )
         
         db.add(db_result)
-        db_data.has_result = True
         db.commit()
         
         logging.info(f"管理员上传了ZIP数据: {personnel_id}")  # 认证已移除
@@ -673,7 +672,6 @@ async def batch_upload_data(
                 )
                 
                 db.add(db_result)
-                db_data.has_result = True
                 db.commit()
                 
                 logging.info(f"数据库记录创建成功，ID: {db_data.id}")
@@ -835,6 +833,13 @@ async def preprocess_single_data(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"数据路径{data_path}不存在"
         )
+
+    result = db.query(db_models.Result).filter(db_models.Result.data_id == data_id).first()
+    if not result or result.blood_oxygen is None or not result.blood_pressure:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先填写血氧血压后再进行预处理"
+        )
     
     try:
         # 先设置为正在处理状态
@@ -886,6 +891,17 @@ async def batch_preprocess_data(
             detail=f"以下数据ID不存在: {missing_ids}"
         )
     
+    missing_ids = []
+    for data in data_list:
+        result = db.query(db_models.Result).filter(db_models.Result.data_id == data.id).first()
+        if not result or result.blood_oxygen is None or not result.blood_pressure:
+            missing_ids.append(data.id)
+    if missing_ids:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"以下数据未填写血氧血压，无法预处理: {missing_ids}"
+        )
+
     # 先将所有数据设置为正在处理状态
     for data in data_list:
         data.processing_status = "processing"

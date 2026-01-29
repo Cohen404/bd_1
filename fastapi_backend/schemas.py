@@ -108,6 +108,7 @@ class DataBase(BaseModel):
     personnel_name: str
     user_id: str
     md5: Optional[str] = None
+    has_result: Optional[bool] = None
 
 class DataCreate(DataBase):
     pass

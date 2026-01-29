@@ -36,7 +36,10 @@ async def read_results(
     """
     获取结果列表（支持高级过滤）
     """
-    query = db.query(db_models.Result)
+    query = db.query(db_models.Result).join(
+        db_models.Data,
+        db_models.Result.data_id == db_models.Data.id
+    ).filter(db_models.Data.has_result == True)
     
     # 认证已移除，返回所有结果
     

@@ -21,6 +21,7 @@ interface PersonnelSubData {
   data_path: string;
   upload_time: string;
   period: string;
+  has_result?: boolean;
   stress_score?: number;
   depression_score?: number;
   anxiety_score?: number;
@@ -112,6 +113,7 @@ const HealthEvaluatePage: React.FC = () => {
             data_path: item.data_path,
             upload_time: item.upload_time,
             period: period,
+            has_result: item.has_result,
             stress_score: undefined,
             depression_score: undefined,
             anxiety_score: undefined,
@@ -132,6 +134,9 @@ const HealthEvaluatePage: React.FC = () => {
       // 获取每个数据的评估结果（静默处理，不显示错误）
       for (const item of convertedData) {
         for (const subItem of item.subData) {
+          if (!subItem.has_result) {
+            continue;
+          }
           try {
             const result = await apiClient.getDataResult(subItem.id);
             if (result) {
@@ -160,8 +165,7 @@ const HealthEvaluatePage: React.FC = () => {
               }));
             }
           } catch (error) {
-            // 静默处理404错误，不显示错误提示
-            console.log(`数据ID ${subItem.id} 暂无评估结果`);
+            console.log(`数据ID ${subItem.id} 获取评估结果失败`);
           }
         }
       }
@@ -410,15 +414,19 @@ const HealthEvaluatePage: React.FC = () => {
 
     try {
       const selectedIds = Array.from(selectedItems);
-      const missingBloodData = selectedIds.filter(id => {
-        const subItem = findSubDataById(id);
-        if (!subItem) {
-          return true;
+      const missingBloodData: number[] = [];
+      for (const dataId of selectedIds) {
+        try {
+          const result = await apiClient.getDataResult(dataId, true);
+          const hasBloodOxygen = result.blood_oxygen !== null && result.blood_oxygen !== undefined;
+          const hasBloodPressure = typeof result.blood_pressure === 'string' && result.blood_pressure.trim() !== '';
+          if (!hasBloodOxygen || !hasBloodPressure) {
+            missingBloodData.push(dataId);
+          }
+        } catch (error) {
+          missingBloodData.push(dataId);
         }
-        const hasBloodOxygen = subItem.blood_oxygen !== null && subItem.blood_oxygen !== undefined;
-        const hasBloodPressure = typeof subItem.blood_pressure === 'string' && subItem.blood_pressure.trim() !== '';
-        return !hasBloodOxygen || !hasBloodPressure;
-      });
+      }
 
       if (missingBloodData.length > 0) {
         setMissingBloodDataIds(missingBloodData);

@@ -225,8 +225,10 @@ class API {
     return response.data;
   }
 
-  async getDataResult(dataId: number) {
-    const response = await api.get(`/health/data/${dataId}/result`);
+  async getDataResult(dataId: number, includePending: boolean = false) {
+    const response = await api.get(`/health/data/${dataId}/result`, {
+      params: { include_pending: includePending }
+    });
     return response.data;
   }
 

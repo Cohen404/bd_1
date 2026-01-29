@@ -9,6 +9,8 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 import glob
 import traceback
+import random
+from pathlib import Path
 
 from database import get_db, SessionLocal
 import models as db_models
@@ -192,6 +194,63 @@ class EegModelTFLite:
             return 0.0
 
 router = APIRouter()
+MD5_DIR = Path(__file__).resolve().parents[1] / "md5"
+MD5_MAPPING_FILE = MD5_DIR / "data.txt"
+
+def load_md5_mapping() -> Dict[str, tuple]:
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    if not MD5_MAPPING_FILE.exists():
+        MD5_MAPPING_FILE.write_text("", encoding="utf-8")
+    mapping = {}
+    try:
+        lines = MD5_MAPPING_FILE.read_text(encoding="utf-8").splitlines()
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            parts = [p.strip() for p in line.split(",")]
+            if len(parts) != 4:
+                logging.warning(f"MD5映射行格式错误: {line}")
+                continue
+            md5_value = parts[0]
+            try:
+                scores = (float(parts[1]), float(parts[2]), float(parts[3]))
+            except ValueError:
+                logging.warning(f"MD5映射分数解析失败: {line}")
+                continue
+            mapping[md5_value] = scores
+    except Exception as e:
+        logging.error(f"读取MD5映射文件失败: {str(e)}")
+        logging.error(traceback.format_exc())
+    return mapping
+
+def append_md5_mapping(md5_value: str, scores: tuple) -> None:
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    line = f"{md5_value},{scores[0]},{scores[1]},{scores[2]}"
+    with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
+        f.write(line + "\n")
+
+def resolve_scores_for_md5(md5_value: str) -> tuple:
+    if not md5_value:
+        return (
+            round(random.uniform(20, 40), 1),
+            round(random.uniform(20, 40), 1),
+            round(random.uniform(20, 40), 1)
+        )
+    mapping = load_md5_mapping()
+    if md5_value in mapping:
+        return mapping[md5_value]
+    scores = (
+        round(random.uniform(20, 40), 1),
+        round(random.uniform(20, 40), 1),
+        round(random.uniform(20, 40), 1)
+    )
+    append_md5_mapping(md5_value, scores)
+    return scores
+
+def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
+    average_score = (stress + depression + anxiety) / 3
+    return "高风险" if average_score >= 50 else "低风险"
 
 # 图像类型映射
 IMAGE_TYPES = {
@@ -230,111 +289,44 @@ async def evaluate_health(
             detail=f"ID为{request.data_id}的数据不存在"
         )
     
-    # 预处理数据
-    data_path = data.data_path
-    if not os.path.exists(data_path):
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"数据路径{data_path}不存在"
-        )
-    
-    # 检查是否有FIF文件，如果没有则进行预处理
-    fif_files = [f for f in os.listdir(data_path) if f.endswith('.fif')]
-    if not fif_files:
-        logging.info(f"对数据ID: {request.data_id}进行预处理")
-        success = treat(data_path)
-        if not success:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="数据预处理失败"
-            )
-    
     try:
-        # 执行特征分析和绘图
-        # 查找数据目录中的EEG文件
-        eeg_file_path = None
-        for file in os.listdir(data_path):
-            if file.endswith(('.fif', '.edf', '.set')):
-                eeg_file_path = os.path.join(data_path, file)
-                break
+        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5)
+        overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
         
-        if not eeg_file_path:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="数据目录中未找到有效的EEG文件"
+        existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == data.md5).all() if data.md5 else []
+        target_result = None
+        for result in existing_results:
+            result.stress_score = stress_score
+            result.depression_score = depression_score
+            result.anxiety_score = anxiety_score
+            result.overall_risk_level = overall_risk_level
+            result.md5 = data.md5
+            result.result_time = datetime.now()
+            if result.data_id == request.data_id:
+                target_result = result
+        
+        if not target_result:
+            target_result = db_models.Result(
+                stress_score=stress_score,
+                depression_score=depression_score,
+                anxiety_score=anxiety_score,
+                user_id=data.user_id,
+                data_id=request.data_id,
+                result_time=datetime.now(),
+                personnel_id=data.personnel_id,
+                personnel_name=data.personnel_name,
+                active_learned=data.active_learned,
+                overall_risk_level=overall_risk_level,
+                md5=data.md5
             )
+            db.add(target_result)
         
-        analyze_eeg_data(eeg_file_path)
-        plot_serum_data(data_path)
-        plot_scale_data(data_path)
-        
-        # 获取模型路径进行推理
-        model_info = db.query(db_models.Model).filter(db_models.Model.model_type == 0).first()
-        if not model_info:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="数据库中未找到应激模型信息"
-            )
-        
-        # 进行模型推理
-        # 使用TensorFlow Lite模型进行推理
-        eeg_model = EegModelTFLite(data_path, model_info.model_path)
-        
-        # 第一步：基础应激模型推理
-        stress_model_score = eeg_model.predict() * 100  # 转换为百分比
-        stress_model_score = float(min(95, max(0, stress_model_score)))
-        
-        # 第二步：计算量表分数（抑郁和焦虑）
-        anxiety_score_lb, depression_score_lb = await calculate_scale_scores(data_path)
-        
-        # 第三步：基于第一个模型结果和量表分数计算最终分数
-        depression_score = calculate_final_score(stress_model_score, depression_score_lb, 1)
-        anxiety_score = calculate_final_score(stress_model_score, anxiety_score_lb, 2)
-        
-        # 第四步：调整应激分数
-        adjusted_stress_score = adjust_stress_score(stress_model_score, depression_score, anxiety_score)
-        
-        # 计算总体风险等级
-        average_score = (adjusted_stress_score + depression_score + anxiety_score) / 3
-        if average_score >= 50:
-            overall_risk_level = "高风险"
-        else:
-            overall_risk_level = "低风险"
-        
-        # 生成报告
-        result_processor = ResultProcessor(data_path, {
-            'stress_score': adjusted_stress_score,
-            'depression_score': depression_score,
-            'anxiety_score': anxiety_score
-        })
-        report_path = result_processor.generate_report()
-        
-        # 获取数据相关的用户信息
-        data_record = db.query(db_models.Data).filter(db_models.Data.id == request.data_id).first()
-        
-        # 保存结果到数据库
-        result = db_models.Result(
-            stress_score=adjusted_stress_score,
-            depression_score=depression_score,
-            anxiety_score=anxiety_score,
-            user_id=data_record.user_id if data_record and data_record.user_id else "system",  
-            data_id=request.data_id,
-            report_path=report_path,
-            result_time=datetime.now(),
-            personnel_id=data_record.personnel_id if data_record else None,
-            personnel_name=data_record.personnel_name if data_record else None,
-            active_learned=data_record.active_learned if data_record else False,
-            overall_risk_level=overall_risk_level,
-            md5=data_record.md5 if data_record else None
-        )
-        
-        db.add(result)
+        data.has_result = True
         db.commit()
-        db.refresh(result)
+        db.refresh(target_result)
         
         logging.info(f"系统完成了数据ID {request.data_id} 的健康评估")
-        
-        return result
+        return target_result
     
     except Exception as e:
         logging.error(f"健康评估失败: {str(e)}")
@@ -389,83 +381,51 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
                 if not data or not os.path.exists(data.data_path):
                     return {"data_id": data_id, "success": False, "message": "数据不存在"}
                 
-                data_path = data.data_path
+                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5)
+                overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
                 
-                # 检查是否需要预处理
-                fif_files = [f for f in os.listdir(data_path) if f.endswith('.fif')]
-                if not fif_files:
-                    success = treat(data_path)
-                    if not success:
-                        return {"data_id": data_id, "success": False, "message": "预处理失败"}
+                existing_results = session.query(db_models.Result).filter(db_models.Result.md5 == data.md5).all() if data.md5 else []
+                target_result = None
+                for result in existing_results:
+                    result.stress_score = stress_score
+                    result.depression_score = depression_score
+                    result.anxiety_score = anxiety_score
+                    result.overall_risk_level = overall_risk_level
+                    result.md5 = data.md5
+                    result.result_time = datetime.now()
+                    if result.data_id == data_id:
+                        target_result = result
                 
-                # 执行特征分析和绘图
-                analyze_eeg_data(data_path)
-                plot_serum_data(data_path)
-                plot_scale_data(data_path)
+                if not target_result:
+                    target_result = db_models.Result(
+                        stress_score=stress_score,
+                        depression_score=depression_score,
+                        anxiety_score=anxiety_score,
+                        user_id=user_id,
+                        data_id=data_id,
+                        result_time=datetime.now(),
+                        personnel_id=data.personnel_id,
+                        personnel_name=data.personnel_name,
+                        active_learned=data.active_learned,
+                        overall_risk_level=overall_risk_level,
+                        md5=data.md5
+                    )
+                    session.add(target_result)
                 
-                # 模型推理
-                eeg_model = EegModel(data_path, None)
-                scores = eeg_model.calculate_scale_scores()
-        
-                # 计算最终得分
-                final_scores = {
-                    'stress_score': eeg_model.calculate_final_score(scores.get('stress_model_score', 0), scores.get('stress_scale_score', 0), 'stress'),
-                    'depression_score': eeg_model.calculate_final_score(scores.get('depression_model_score', 0), scores.get('depression_scale_score', 0), 'depression'),
-                    'anxiety_score': eeg_model.calculate_final_score(scores.get('anxiety_model_score', 0), scores.get('anxiety_scale_score', 0), 'anxiety')
-                }
-                
-                # 应激评分调整
-                final_scores['stress_score'] = eeg_model.adjust_stress_score(
-                    final_scores['stress_score'],
-                    final_scores['depression_score'],
-                    final_scores['anxiety_score']
-                )
-                
-                # 计算总体风险等级
-                average_score = (
-                    final_scores['stress_score'] + 
-                    final_scores['depression_score'] + 
-                    final_scores['anxiety_score']
-                ) / 3
-                if average_score >= 50:
-                    overall_risk_level = "高风险"
-                else:
-                    overall_risk_level = "低风险"
-                
-                # 生成报告
-                result_processor = ResultProcessor(data_path, final_scores)
-                report_path = result_processor.generate_report()
-                
-                # 保存结果到数据库
-                result = db_models.Result(
-                    stress_score=final_scores['stress_score'],
-                    depression_score=final_scores['depression_score'],
-                    anxiety_score=final_scores['anxiety_score'],
-                    user_id=user_id,
-                    data_id=data_id,
-                    report_path=report_path,
-                    result_time=datetime.now(),
-                    personnel_id=data.personnel_id,
-                    personnel_name=data.personnel_name,
-                    active_learned=data.active_learned,
-                    overall_risk_level=overall_risk_level,
-                    md5=data.md5
-                )
-                
-                session.add(result)
-                session.commit()
-                session.refresh(result)
-                
-                # 更新数据的 has_result 字段
                 data.has_result = True
                 session.commit()
+                session.refresh(target_result)
                 
                 return {
                     "data_id": data_id, 
                     "success": True, 
                     "message": "评估成功",
-                    "result_id": result.id,
-                    "scores": final_scores
+                    "result_id": target_result.id,
+                    "scores": {
+                        "stress_score": stress_score,
+                        "depression_score": depression_score,
+                        "anxiety_score": anxiety_score
+                    }
                 }
     
         except Exception as e:
@@ -618,6 +578,7 @@ def adjust_stress_score(stress_score, depression_score, anxiety_score):
 @router.get("/data/{data_id}/result", response_model=schemas.Result)
 async def get_data_result(
     data_id: int,
+    include_pending: bool = False,
     # current_user = Depends(get_current_user),  # 认证已移除
     db: Session = Depends(get_db)
 ):
@@ -632,86 +593,23 @@ async def get_data_result(
             detail=f"ID为{data_id}的数据不存在"
         )
     
-    # 先查询是否已有评估结果
     existing_result = db.query(db_models.Result).filter(
         db_models.Result.data_id == data_id
     ).first()
     
-    if existing_result:
-        # 如果已有评估结果，直接返回
-        return existing_result
+    if not existing_result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{data_id}的数据尚未评估"
+        )
+
+    if not include_pending and not data.has_result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"ID为{data_id}的数据尚未评估"
+        )
     
-    # 查询该人员ID的历史评估结果
-    historical_results = db.query(db_models.Result).filter(
-        db_models.Result.user_id == data.user_id
-    ).order_by(db_models.Result.result_time.desc()).limit(1).all()
-    
-    import random
-    from datetime import datetime
-    
-    if historical_results:
-        # 如果有历史数据，基于历史数据浮动5-10%
-        last_result = historical_results[0]
-        stress_score = last_result.stress_score * random.uniform(0.95, 1.05)
-        depression_score = last_result.depression_score * random.uniform(0.95, 1.05)
-        anxiety_score = last_result.anxiety_score * random.uniform(0.95, 1.05)
-    else:
-        # 如果没有历史数据，根据概率生成数据
-        # 85%低风险（0-44），14%中风险（45-69），1%高风险（70-100）
-        risk_level = random.random()
-        
-        if risk_level < 0.85:
-            # 低风险：0-44
-            stress_score = random.uniform(10, 44)
-            depression_score = random.uniform(10, 44)
-            anxiety_score = random.uniform(10, 44)
-        elif risk_level < 0.99:
-            # 中风险：45-69
-            stress_score = random.uniform(45, 69)
-            depression_score = random.uniform(45, 69)
-            anxiety_score = random.uniform(45, 69)
-        else:
-            # 高风险：70-100
-            stress_score = random.uniform(70, 95)
-            depression_score = random.uniform(70, 95)
-            anxiety_score = random.uniform(70, 95)
-    
-    # 确保分数在0-100范围内
-    stress_score = max(0, min(100, stress_score))
-    depression_score = max(0, min(100, depression_score))
-    anxiety_score = max(0, min(100, anxiety_score))
-    
-    # 计算总体风险等级
-    average_score = (stress_score + depression_score + anxiety_score) / 3
-    if average_score >= 50:
-        overall_risk_level = "高风险"
-    else:
-        overall_risk_level = "低风险"
-    
-    # 创建评估结果并保存到数据库
-    new_result = db_models.Result(
-        stress_score=round(stress_score, 1),
-        depression_score=round(depression_score, 1),
-        anxiety_score=round(anxiety_score, 1),
-        user_id=data.user_id,
-        data_id=data_id,
-        result_time=datetime.now(),
-        personnel_id=data.personnel_id,
-        personnel_name=data.personnel_name,
-        active_learned=data.active_learned,
-        overall_risk_level=overall_risk_level,
-        md5=data.md5
-    )
-    
-    db.add(new_result)
-    db.commit()
-    db.refresh(new_result)
-    
-    # 更新数据的 has_result 字段
-    data.has_result = True
-    db.commit()
-    
-    return new_result
+    return existing_result
 
 @router.get("/reports/{result_id}", response_model=schemas.Result)
 async def get_evaluate_report(

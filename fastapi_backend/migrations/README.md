@@ -149,3 +149,35 @@ python -m migrations.update_result_overall_risk_level
 
 ### 问题：权限不足
 **解决方案**: 确保数据库用户有足够的权限执行 ALTER TABLE 和 UPDATE 操作
+
+
+tb_data columns:
+- id (integer)
+- personnel_id (character varying)
+- data_path (character varying)
+- upload_user (integer)
+- personnel_name (character varying)
+- user_id (character varying)
+- upload_time (timestamp without time zone)
+- processing_status (character varying)
+- feature_status (character varying)
+- has_result (boolean)
+- active_learned (boolean)
+- md5 (character varying)
+
+tb_result columns:
+- id (integer)
+- result_time (timestamp without time zone)
+- stress_score (double precision)
+- depression_score (double precision)
+- anxiety_score (double precision)
+- report_path (character varying)
+- user_id (character varying)
+- data_id (integer)
+- personnel_id (character varying)
+- personnel_name (character varying)
+- active_learned (boolean)
+- overall_risk_level (character varying)
+- blood_oxygen (double precision)
+- blood_pressure (character varying)
+- md5 (character varying)

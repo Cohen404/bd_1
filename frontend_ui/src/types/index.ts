@@ -69,6 +69,8 @@ export interface Data {
   upload_time: string;
   processing_status: 'pending' | 'processing' | 'completed' | 'failed';
   feature_status: 'pending' | 'processing' | 'completed' | 'failed';
+  has_result?: boolean;
+  md5?: string;
 }
 
 export interface DataCreate {
