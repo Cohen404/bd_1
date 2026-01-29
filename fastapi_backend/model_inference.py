@@ -301,7 +301,8 @@ class BatchInferenceModel:
                     ))
                     
                     # 将结果保存到数据库
-                    user_id = db.query(db_models.Data).filter(db_models.Data.id == data_id).first().user_id
+                    data_record = db.query(db_models.Data).filter(db_models.Data.id == data_id).first()
+                    user_id = data_record.user_id if data_record else None
                     
                     result = db_models.Result(
                         result_time=datetime.now(),
@@ -309,7 +310,8 @@ class BatchInferenceModel:
                         depression_score=scores["depression"],
                         anxiety_score=scores["anxiety"],
                         user_id=user_id,
-                        data_id=data_id
+                        data_id=data_id,
+                        md5=data_record.md5 if data_record else None
                     )
                     
                     db.add(result)

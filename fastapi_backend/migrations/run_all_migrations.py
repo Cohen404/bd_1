@@ -9,7 +9,8 @@
 6. update_result_overall_risk_level.py - 更新已有结果记录的总体风险等级
 7. add_blood_oxygen_pressure.py - 添加 blood_oxygen, blood_pressure 字段到 tb_result 表
 8. remove_social_isolation_score.py - 删除 social_isolation_score 字段
-9. init_parameters_defaults.py - 初始化系统参数的默认值
+9. add_md5_fields.py - 添加 md5 字段到 tb_data/tb_result 表
+10. init_parameters_defaults.py - 初始化系统参数的默认值
 
 运行方式: python -m migrations.run_all_migrations
 """
@@ -28,6 +29,7 @@ MIGRATIONS = [
     ("更新已有结果记录的总体风险等级", "update_result_overall_risk_level"),
     ("添加 blood_oxygen, blood_pressure 字段到 tb_result 表", "add_blood_oxygen_pressure"),
     ("删除 social_isolation_score 字段", "remove_social_isolation_score"),
+    ("添加 md5 字段到 tb_data/tb_result 表", "add_md5_fields"),
     ("初始化系统参数的默认值", "init_parameters_defaults"),
 ]
 

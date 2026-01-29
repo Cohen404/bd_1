@@ -14,6 +14,7 @@
 | 6 | update_result_overall_risk_level.py | 更新已有结果记录的总体风险等级 |
 | 7 | add_blood_oxygen_pressure.py | 添加 `blood_oxygen`, `blood_pressure` 字段到 `tb_result` 表 |
 | 8 | remove_social_isolation_score.py | 删除 `social_isolation_score` 字段 |
+| 9 | add_md5_fields.py | 添加 `md5` 字段到 `tb_data`/`tb_result` 表 |
 
 ## 一键执行所有迁移
 
@@ -132,6 +133,11 @@ python -m migrations.update_result_overall_risk_level
 ### 8. remove_social_isolation_score.py
 - **表**: `tb_result`
 - **操作**: 删除 `social_isolation_score` 字段
+
+### 9. add_md5_fields.py
+- **表**: `tb_data`, `tb_result`
+- **新增字段**: `md5` (VARCHAR(32))
+- **说明**: 存储上传文件的MD5
 
 ## 故障排除
 

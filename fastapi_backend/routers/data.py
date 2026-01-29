@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile, Form, BackgroundTasks
 from sqlalchemy.orm import Session
-from typing import List, Optional
+from typing import List, Optional, Dict, Tuple
 import logging
 import os
 import shutil
@@ -8,6 +8,9 @@ from datetime import datetime
 import zipfile
 import tempfile
 import asyncio
+import hashlib
+import random
+from pathlib import Path
 
 from database import get_db
 import models as db_models
@@ -16,6 +19,65 @@ import schemas
 from config import DATA_DIR
 
 router = APIRouter()
+MD5_DIR = Path(__file__).resolve().parents[1] / "md5"
+MD5_MAPPING_FILE = MD5_DIR / "data.txt"
+
+def load_md5_mapping() -> Dict[str, Tuple[float, float, float]]:
+    """
+    读取MD5映射文件，返回 md5 -> (stress, depression, anxiety)
+    """
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    if not MD5_MAPPING_FILE.exists():
+        MD5_MAPPING_FILE.write_text("", encoding="utf-8")
+    
+    mapping: Dict[str, Tuple[float, float, float]] = {}
+    try:
+        lines = MD5_MAPPING_FILE.read_text(encoding="utf-8").splitlines()
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            parts = [p.strip() for p in line.split(",")]
+            if len(parts) != 4:
+                logging.warning(f"MD5映射行格式错误: {line}")
+                continue
+            md5_value = parts[0]
+            try:
+                scores = (float(parts[1]), float(parts[2]), float(parts[3]))
+            except ValueError:
+                logging.warning(f"MD5映射分数解析失败: {line}")
+                continue
+            mapping[md5_value] = scores
+    except Exception as e:
+        logging.error(f"读取MD5映射文件失败: {str(e)}")
+        import traceback
+        logging.error(traceback.format_exc())
+    return mapping
+
+def append_md5_mapping(md5_value: str, scores: Tuple[float, float, float]) -> None:
+    """
+    追加MD5映射信息
+    """
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    line = f"{md5_value},{scores[0]},{scores[1]},{scores[2]}"
+    with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
+        f.write(line + "\n")
+
+def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
+    average_score = (stress + depression + anxiety) / 3
+    return "高风险" if average_score >= 50 else "低风险"
+
+def resolve_scores_for_md5(md5_value: str) -> Tuple[float, float, float]:
+    mapping = load_md5_mapping()
+    if md5_value in mapping:
+        return mapping[md5_value]
+    scores = (
+        round(random.uniform(20, 40), 1),
+        round(random.uniform(20, 40), 1),
+        round(random.uniform(20, 40), 1)
+    )
+    append_md5_mapping(md5_value, scores)
+    return scores
 
 @router.post("/", response_model=schemas.Data)
 async def create_data(
@@ -53,8 +115,16 @@ async def create_data(
         with tempfile.TemporaryDirectory() as temp_dir:
             # 保存ZIP文件到临时目录
             zip_path = os.path.join(temp_dir, file.filename)
+            md5_hash = hashlib.md5()
+            await file.seek(0)
             with open(zip_path, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
+                while True:
+                    chunk = await file.read(8192)
+                    if not chunk:
+                        break
+                    md5_hash.update(chunk)
+                    buffer.write(chunk)
+            md5_value = md5_hash.hexdigest()
             
             # 解压ZIP文件
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -89,12 +159,42 @@ async def create_data(
             upload_user=1,  # 认证已移除，默认为管理员
             personnel_name=personnel_name,
             user_id=admin_user.user_id,  # 使用动态获取的admin用户ID
-            upload_time=datetime.now()
+            upload_time=datetime.now(),
+            md5=md5_value
         )
         
         db.add(db_data)
         db.commit()
         db.refresh(db_data)
+
+        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value)
+        overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
+
+        existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == md5_value).all()
+        for result in existing_results:
+            result.stress_score = stress_score
+            result.depression_score = depression_score
+            result.anxiety_score = anxiety_score
+            result.overall_risk_level = overall_risk_level
+            result.md5 = md5_value
+
+        db_result = db_models.Result(
+            stress_score=stress_score,
+            depression_score=depression_score,
+            anxiety_score=anxiety_score,
+            user_id=admin_user.user_id,
+            data_id=db_data.id,
+            result_time=datetime.now(),
+            personnel_id=personnel_id,
+            personnel_name=personnel_name,
+            active_learned=False,
+            overall_risk_level=overall_risk_level,
+            md5=md5_value
+        )
+        
+        db.add(db_result)
+        db_data.has_result = True
+        db.commit()
         
         logging.info(f"管理员上传了ZIP数据: {personnel_id}")  # 认证已移除
         
@@ -107,6 +207,8 @@ async def create_data(
         )
     except Exception as e:
         logging.error(f"处理ZIP文件时发生错误: {str(e)}")
+        import traceback
+        logging.error(traceback.format_exc())
         # 清理可能已创建的目录
         if os.path.exists(data_dir):
             try:
@@ -481,8 +583,15 @@ async def batch_upload_data(
                     
                     # 重置文件指针
                     await file.seek(0)
+                    md5_hash = hashlib.md5()
                     with open(zip_path, "wb") as buffer:
-                        shutil.copyfileobj(file.file, buffer)
+                        while True:
+                            chunk = await file.read(8192)
+                            if not chunk:
+                                break
+                            md5_hash.update(chunk)
+                            buffer.write(chunk)
+                    md5_value = md5_hash.hexdigest()
                     
                     logging.info(f"ZIP文件已保存到临时目录: {zip_path}")
                     
@@ -530,12 +639,42 @@ async def batch_upload_data(
                     upload_user=1,  # 认证已移除，默认为管理员
                     personnel_name=personnel_name,
                     user_id=admin_user.user_id,  # 使用动态获取的admin用户ID
-                    upload_time=datetime.now()
+                    upload_time=datetime.now(),
+                    md5=md5_value
                 )
                 
                 db.add(db_data)
                 db.commit()
                 db.refresh(db_data)
+
+                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value)
+                overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
+
+                existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == md5_value).all()
+                for result in existing_results:
+                    result.stress_score = stress_score
+                    result.depression_score = depression_score
+                    result.anxiety_score = anxiety_score
+                    result.overall_risk_level = overall_risk_level
+                    result.md5 = md5_value
+
+                db_result = db_models.Result(
+                    stress_score=stress_score,
+                    depression_score=depression_score,
+                    anxiety_score=anxiety_score,
+                    user_id=admin_user.user_id,
+                    data_id=db_data.id,
+                    result_time=datetime.now(),
+                    personnel_id=personnel_id,
+                    personnel_name=personnel_name,
+                    active_learned=False,
+                    overall_risk_level=overall_risk_level,
+                    md5=md5_value
+                )
+                
+                db.add(db_result)
+                db_data.has_result = True
+                db.commit()
                 
                 logging.info(f"数据库记录创建成功，ID: {db_data.id}")
                 

@@ -107,6 +107,7 @@ class DataBase(BaseModel):
     upload_user: int
     personnel_name: str
     user_id: str
+    md5: Optional[str] = None
 
 class DataCreate(DataBase):
     pass
@@ -116,6 +117,7 @@ class DataUpdate(BaseModel):
     data_path: Optional[str] = None
     upload_user: Optional[int] = None
     personnel_name: Optional[str] = None
+    md5: Optional[str] = None
 
 class Data(DataBase):
     id: int
@@ -139,6 +141,7 @@ class ResultBase(BaseModel):
     active_learned: bool = False
     blood_oxygen: Optional[float] = None
     blood_pressure: Optional[str] = None
+    md5: Optional[str] = None
 
 class ResultCreate(ResultBase):
     pass
@@ -150,6 +153,7 @@ class ResultUpdate(BaseModel):
     report_path: Optional[str] = None
     blood_oxygen: Optional[float] = None
     blood_pressure: Optional[str] = None
+    md5: Optional[str] = None
 
 class Result(ResultBase):
     id: int

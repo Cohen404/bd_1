@@ -85,6 +85,7 @@ class Data(Base):
     upload_time = Column(DateTime, default=datetime.now, comment='上传时间')
     processing_status = Column(String(20), nullable=False, default='pending', comment='预处理状态: pending/processing/completed/failed')
     feature_status = Column(String(20), nullable=False, default='pending', comment='特征提取状态: pending/processing/completed/failed')
+    md5 = Column(String(32), nullable=True, comment='文件MD5')
     has_result = Column(Boolean, default=False, comment='是否有评估结果')
     active_learned = Column(Boolean, default=False, comment='是否进行过主动学习')
     
@@ -110,6 +111,7 @@ class Result(Base):
     overall_risk_level = Column(String(20), nullable=True, default='低风险', comment='总体风险等级：低风险/高风险')
     blood_oxygen = Column(Float, nullable=True, comment='血氧饱和度(%)')
     blood_pressure = Column(String(20), nullable=True, comment='血压(mmHg)，格式：收缩压/舒张压')
+    md5 = Column(String(32), nullable=True, comment='文件MD5')
     
     # 关系
     user = relationship("User", back_populates="results")

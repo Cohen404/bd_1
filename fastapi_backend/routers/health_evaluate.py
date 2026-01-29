@@ -324,7 +324,8 @@ async def evaluate_health(
             personnel_id=data_record.personnel_id if data_record else None,
             personnel_name=data_record.personnel_name if data_record else None,
             active_learned=data_record.active_learned if data_record else False,
-            overall_risk_level=overall_risk_level
+            overall_risk_level=overall_risk_level,
+            md5=data_record.md5 if data_record else None
         )
         
         db.add(result)
@@ -447,7 +448,8 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
                     personnel_id=data.personnel_id,
                     personnel_name=data.personnel_name,
                     active_learned=data.active_learned,
-                    overall_risk_level=overall_risk_level
+                    overall_risk_level=overall_risk_level,
+                    md5=data.md5
                 )
                 
                 session.add(result)
@@ -697,7 +699,8 @@ async def get_data_result(
         personnel_id=data.personnel_id,
         personnel_name=data.personnel_name,
         active_learned=data.active_learned,
-        overall_risk_level=overall_risk_level
+        overall_risk_level=overall_risk_level,
+        md5=data.md5
     )
     
     db.add(new_result)
