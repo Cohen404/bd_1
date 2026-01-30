@@ -101,3 +101,5 @@ output.txt
 tmp/
 node_modules/
 fastapi_backend/postgresql-14.9-1-windows-x64.exe
+
+eegs/
