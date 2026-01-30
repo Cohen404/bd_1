@@ -174,12 +174,13 @@ const ResultManagePage: React.FC = () => {
           
           // 生成图表
           const resultItem = toResultItem(result);
-          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
+          const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, eegWaveform] = await Promise.all([
             ChartGenerator.generateEEGChart(resultItem),
             ChartGenerator.generateTimeDomainChart(resultItem),
             ChartGenerator.generateFrequencyBandChart(resultItem),
             ChartGenerator.generateDiffEntropyChart(resultItem),
-            ChartGenerator.generateTimeFreqChart(resultItem)
+            ChartGenerator.generateTimeFreqChart(resultItem),
+            ReportGenerator.generateEEGWaveform(resultId)
           ]);
           
           // 准备报告数据
@@ -190,6 +191,7 @@ const ResultManagePage: React.FC = () => {
               user_type: 'user'
             },
             userImages: userImages,
+            eegWaveform: eegWaveform,
             charts: {
               eeg: eegChart,
               timeDomain: timeDomainChart,
@@ -261,12 +263,13 @@ const ResultManagePage: React.FC = () => {
       console.log('开始生成图表...');
       // 生成图表
       const resultItem = toResultItem(result);
-      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart] = await Promise.all([
+      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, eegWaveform] = await Promise.all([
         ChartGenerator.generateEEGChart(resultItem),
         ChartGenerator.generateTimeDomainChart(resultItem),
         ChartGenerator.generateFrequencyBandChart(resultItem),
         ChartGenerator.generateDiffEntropyChart(resultItem),
-        ChartGenerator.generateTimeFreqChart(resultItem)
+        ChartGenerator.generateTimeFreqChart(resultItem),
+        ReportGenerator.generateEEGWaveform(resultId)
       ]);
       console.log('图表生成完成');
       
@@ -280,6 +283,7 @@ const ResultManagePage: React.FC = () => {
           user_type: 'user'
         },
         userImages: userImages,
+        eegWaveform: eegWaveform,
         charts: {
           eeg: eegChart,
           timeDomain: timeDomainChart,

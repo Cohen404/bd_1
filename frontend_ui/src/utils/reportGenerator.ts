@@ -10,6 +10,7 @@ export interface ReportData {
     user_type: string;
   };
   userImages?: string[];    // 用户心率图片base64数组（支持多张图片）
+  eegWaveform?: string;    // 脑电波形图base64
   charts: {
     eeg: string;             // 脑电功率图base64
     timeDomain: string;      // 时域特征图base64
@@ -20,9 +21,125 @@ export interface ReportData {
 }
 
 export class ReportGenerator {
+  // 生成脑电波形图
+  static async generateEEGWaveform(dataId: number): Promise<string> {
+    try {
+      const excelResponse = await fetch('/api/eegs/excel');
+      const excelData = await excelResponse.json();
+      
+      const matchedRecord = excelData.find((record: any) => record.序号 === dataId);
+      
+      if (!matchedRecord) {
+        console.warn(`未找到序号为${dataId}的采集记录`);
+        return '';
+      }
+
+      const filename = matchedRecord.文件名;
+
+      const txtResponse = await fetch(`/api/eegs/txt?filename=${encodeURIComponent(filename)}`);
+      const txtContent = await txtResponse.text();
+      
+      const lines = txtContent.replace(/\\n/g, '\n').split('\n');
+      const exgData: number[] = [];
+      
+      let sampleCount = 0;
+      for (let i = 29; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line || line.startsWith('%')) continue;
+        
+        const parts = line.split(',').map(p => p.trim());
+        if (parts.length < 17) continue;
+        
+        for (let channel = 0; channel < 16; channel++) {
+          const value = parseFloat(parts[channel + 1]);
+          if (!isNaN(value)) {
+            exgData.push(value);
+          }
+        }
+        
+        sampleCount++;
+        if (sampleCount >= 1) break;
+      }
+
+      if (exgData.length === 0) {
+        console.warn('未找到有效的脑电数据');
+        return '';
+      }
+
+      const minValue = Math.min(...exgData);
+      const maxValue = Math.max(...exgData);
+      const normalizedData = exgData.map(value => 
+        (value - minValue) / (maxValue - minValue)
+      );
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 800;
+      canvas.height = 500;
+      const ctx = canvas.getContext('2d');
+      
+      if (!ctx) {
+        console.warn('无法获取canvas上下文');
+        return '';
+      }
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const padding = 60;
+      const graphWidth = canvas.width - padding * 2;
+      const graphHeight = canvas.height - padding * 2;
+      const pointSpacing = graphWidth / (normalizedData.length - 1);
+
+      ctx.strokeStyle = '#3b82f6';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      
+      normalizedData.forEach((value, index) => {
+        const x = padding + index * pointSpacing;
+        const y = padding + (1 - value) * graphHeight;
+        
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      
+      ctx.stroke();
+
+      ctx.fillStyle = '#3b82f6';
+      normalizedData.forEach((value, index) => {
+        const x = padding + index * pointSpacing;
+        const y = padding + (1 - value) * graphHeight;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.fillStyle = '#333';
+      ctx.font = '14px Arial';
+      ctx.fillText('通道', padding / 2, padding / 2);
+      ctx.fillText('归一化值', canvas.width / 2 - 30, canvas.height - 15);
+      
+      ctx.strokeStyle = '#ddd';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padding, padding);
+      ctx.lineTo(padding, canvas.height - padding);
+      ctx.lineTo(canvas.width - padding, canvas.height - padding);
+      ctx.stroke();
+
+      return canvas.toDataURL('image/png');
+    } catch (error) {
+      console.error('生成脑电波形图失败:', error);
+      return '';
+    }
+  }
+
   // 生成报告HTML模板
   static createReportHTML(data: ReportData): string {
-    const { result, user, userImages, charts } = data;
+    const { result, user, userImages, eegWaveform, charts } = data;
     
     return `
       <!DOCTYPE html>
@@ -380,7 +497,25 @@ export class ReportGenerator {
               </div>
             </div>
             
-            <!-- 第3页：综合评估与建议 -->
+            <!-- 第3页：脑电波形分析 -->
+            <div class="section">
+              <div class="section-content">
+                <h2 class="section-title">🧠 脑电波形分析</h2>
+                <div class="charts-grid">
+                  ${eegWaveform ? `
+                    <div class="chart-container">
+                      <div class="chart-title">脑电波形图</div>
+                      <img src="${eegWaveform}" alt="脑电波形图" style="max-height: 600px; object-fit: contain; width: 100%;" />
+                      <p style="color: #666; font-size: 13px; margin-top: 10px; text-align: center;">
+                        包含16通道脑电数据（EXG Channel 0-15）的归一化波形
+                      </p>
+                    </div>
+                  ` : '<p style="color: #999; text-align: center; padding: 40px;">暂无脑电波形图</p>'}
+                </div>
+              </div>
+            </div>
+            
+            <!-- 第4页：综合评估与建议 -->
             <div class="section">
               <div class="section-content">
                 <h2 class="section-title">💡 综合评估与建议</h2>

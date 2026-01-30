@@ -30,7 +30,7 @@ app.add_middleware(
 
 # 导入路由模块
 try:
-    from routers import auth, users, data, models, results, health_evaluate, parameters, roles, logs, active_learning
+    from routers import auth, users, data, models, results, health_evaluate, parameters, roles, logs, active_learning, eegs
     
     # 注册路由
     app.include_router(auth.router, prefix="/api", tags=["认证"])
@@ -43,6 +43,7 @@ try:
     app.include_router(roles.router, prefix="/api/roles", tags=["角色管理"])
     app.include_router(logs.router, prefix="/api/logs", tags=["日志管理"])
     app.include_router(active_learning.router, prefix="/api/active-learning", tags=["主动学习"])
+    app.include_router(eegs.router, tags=["EEG数据"])
     
     logger.info("所有路由模块加载成功")
 except ImportError as e:

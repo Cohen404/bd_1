@@ -37,7 +37,6 @@ const DataManagePage: React.FC = () => {
   const [batchUploadModalVisible, setBatchUploadModalVisible] = useState(false);
   const [imageViewerVisible, setImageViewerVisible] = useState(false);
   const [preprocessingModalVisible, setPreprocessingModalVisible] = useState(false);
-  const [visualizationType, setVisualizationType] = useState('differential_entropy');
   const [showVisualization, setShowVisualization] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [batchUploading, setBatchUploading] = useState(false);
@@ -64,25 +63,6 @@ const DataManagePage: React.FC = () => {
   const [editingDataId, setEditingDataId] = useState<number | null>(null);
   const [bloodOxygen, setBloodOxygen] = useState('');
   const [bloodPressure, setBloodPressure] = useState('');
-
-  // 可视化指标选项（使用具体的图片类型）
-  const visualizationOptions = [
-    { value: 'differential_entropy', label: '微分熵特征图' },
-    { value: 'theta', label: 'Theta功率特征图' },
-    { value: 'alpha', label: 'Alpha功率特征图' },
-    { value: 'beta', label: 'Beta功率特征图' },
-    { value: 'gamma', label: 'Gamma功率特征图' },
-    { value: 'frequency_band_1', label: '均分频带1特征图' },
-    { value: 'frequency_band_2', label: '均分频带2特征图' },
-    { value: 'frequency_band_3', label: '均分频带3特征图' },
-    { value: 'frequency_band_4', label: '均分频带4特征图' },
-    { value: 'frequency_band_5', label: '均分频带5特征图' },
-    { value: 'time_zero_crossing', label: '时域特征-过零率' },
-    { value: 'time_variance', label: '时域特征-方差' },
-    { value: 'time_energy', label: '时域特征-能量' },
-    { value: 'time_difference', label: '时域特征-差分' },
-    { value: 'frequency_wavelet', label: '时频域特征图' }
-  ];
 
   // 图像类型选项
   const imageTypes = [
@@ -533,13 +513,8 @@ const DataManagePage: React.FC = () => {
       return;
     }
     
-    if (!visualizationType) {
-      toast.error('请选择可视化类型');
-      return;
-    }
-    
     setShowVisualization(true);
-    toast.success('正在显示EEG特征图表...');
+    toast.success('正在显示脑电波形图...');
   };
   // ============================================
 
@@ -843,22 +818,6 @@ const DataManagePage: React.FC = () => {
                   ))}
                 </select>
               </div>
-              
-              {/* 可视化指标选择 */}
-              <div>
-                <label className="label">可视化指标选择：</label>
-                <select
-                  className="input"
-                  value={visualizationType}
-                  onChange={(e) => setVisualizationType(e.target.value)}
-                >
-                  {visualizationOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               <button 
                 className="btn btn-primary w-full flex items-center justify-center space-x-2"
@@ -866,17 +825,16 @@ const DataManagePage: React.FC = () => {
                 disabled={!selectedDataId}
               >
                 <Eye className="h-4 w-4" />
-                <span>显示图表</span>
+                <span>显示脑电波形图</span>
               </button>
             </div>
 
             {/* 可视化图表区域 */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg p-4 min-h-[400px] border-2 border-dashed border-gray-300">
+              <div className="bg-white rounded-lg p-4 min-h-[500px] border-2 border-dashed border-gray-300">
                 {showVisualization && selectedDataId ? (
                   <div className="w-full h-full">
                     <EEGVisualization 
-                      visualizationType={visualizationType} 
                       dataId={selectedDataId}
                     />
                   </div>
@@ -885,7 +843,7 @@ const DataManagePage: React.FC = () => {
                     <div className="text-center">
                       <Database className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                       <p className="text-sm text-gray-500">
-                        {selectedDataId ? '点击下方按钮查看可视化图表' : '请先选择数据和指标'}
+                        {selectedDataId ? '点击下方按钮查看脑电波形图' : '请先选择数据'}
                       </p>
                     </div>
                   </div>
