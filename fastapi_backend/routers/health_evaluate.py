@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, status
 from sqlalchemy.orm import Session
 import os
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 import asyncio
 import json
 from datetime import datetime
@@ -209,14 +209,26 @@ def load_md5_mapping() -> Dict[str, tuple]:
             if not line:
                 continue
             parts = [p.strip() for p in line.split(",")]
-            if len(parts) != 4:
+            # 支持两种格式：
+            # 旧格式：md5,score1,score2,score3 (4个部分)
+            # 新格式：md5,file_id,score1,score2,score3 (5个部分)
+            if len(parts) == 4:
+                md5_value = parts[0]
+                try:
+                    scores = (float(parts[1]), float(parts[2]), float(parts[3]))
+                except ValueError:
+                    logging.warning(f"MD5映射分数解析失败: {line}")
+                    continue
+            elif len(parts) == 5:
+                md5_value = parts[0]
+                file_id = parts[1]
+                try:
+                    scores = (float(parts[2]), float(parts[3]), float(parts[4]))
+                except ValueError:
+                    logging.warning(f"MD5映射分数解析失败: {line}")
+                    continue
+            else:
                 logging.warning(f"MD5映射行格式错误: {line}")
-                continue
-            md5_value = parts[0]
-            try:
-                scores = (float(parts[1]), float(parts[2]), float(parts[3]))
-            except ValueError:
-                logging.warning(f"MD5映射分数解析失败: {line}")
                 continue
             mapping[md5_value] = scores
     except Exception as e:
@@ -230,7 +242,7 @@ def append_md5_mapping(md5_value: str, scores: tuple) -> None:
     with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
-def resolve_scores_for_md5(md5_value: str) -> tuple:
+def resolve_scores_for_md5(md5_value: str, file_id: str = None) -> tuple:
     if not md5_value:
         return (
             round(random.uniform(20, 40), 1),
@@ -245,8 +257,19 @@ def resolve_scores_for_md5(md5_value: str) -> tuple:
         round(random.uniform(20, 40), 1),
         round(random.uniform(20, 40), 1)
     )
-    append_md5_mapping(md5_value, scores)
+    # 如果提供了file_id，使用file_id；否则使用空字符串
+    append_md5_mapping(md5_value, file_id if file_id else "", scores)
     return scores
+
+def append_md5_mapping(md5_value: str, file_id: str, scores: Tuple[float, float, float]) -> None:
+    """
+    追加MD5映射信息
+    file_id是文件名第一个_前的id（如"2_yky.zip"中的"2"）
+    """
+    MD5_DIR.mkdir(parents=True, exist_ok=True)
+    line = f"{md5_value},{file_id},{scores[0]},{scores[1]},{scores[2]}"
+    with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
+        f.write(line + "\n")
 
 def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
     max_score = max(stress, depression, anxiety)
@@ -290,7 +313,7 @@ async def evaluate_health(
         )
     
     try:
-        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5)
+        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5, data.personnel_id)
         overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
         
         existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == data.md5).all() if data.md5 else []
@@ -381,7 +404,7 @@ async def perform_batch_evaluation(data_ids: List[int], user_id: str, username: 
                 if not data or not os.path.exists(data.data_path):
                     return {"data_id": data_id, "success": False, "message": "数据不存在"}
                 
-                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5)
+                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(data.md5, data.personnel_id)
                 overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
                 
                 existing_results = session.query(db_models.Result).filter(db_models.Result.md5 == data.md5).all() if data.md5 else []

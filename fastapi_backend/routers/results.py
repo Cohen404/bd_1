@@ -566,6 +566,7 @@ async def get_user_image(
 ):
     """
     根据结果ID获取用户对应的图片
+    使用personnel_id来查找图片，支持多张图片，如2-1.png, 2-2.png
     """
     result = db.query(db_models.Result).filter(db_models.Result.id == result_id).first()
     
@@ -575,13 +576,41 @@ async def get_user_image(
             detail=f"ID为{result_id}的结果不存在"
         )
     
-    # 直接使用result_id匹配图片
-    image_base64 = get_image_for_file_id(str(result_id))
+    # 使用personnel_id查找所有匹配的图片（支持多张图片，如2-1.png, 2-2.png）
+    personnel_id = result.personnel_id
+    images = []
+    for ext in ['png', 'jpg', 'jpeg']:
+        # 查找第一张图片
+        image_path = IMAGES_DIR / f"{personnel_id}-1.{ext}"
+        if image_path.exists():
+            images.append(get_image_base64(image_path))
+            break
     
-    if not image_base64:
+    # 查找第二张图片
+    for ext in ['png', 'jpg', 'jpeg']:
+        image_path = IMAGES_DIR / f"{personnel_id}-2.{ext}"
+        if image_path.exists():
+            images.append(get_image_base64(image_path))
+            break
+    
+    if not images:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="未找到对应的图片"
         )
     
-    return {"image": f"data:image/jpeg;base64,{image_base64}"} 
+    return {"images": [f"data:image/{get_mime_type(ext)};base64,{img}" for img, ext in zip(images, ['png', 'jpg'][:len(images)])]}
+
+def get_image_base64(image_path: Path) -> str:
+    """读取图片并返回base64编码"""
+    with open(image_path, "rb") as f:
+        image_data = f.read()
+        return base64.b64encode(image_data).decode('utf-8')
+
+def get_mime_type(ext: str) -> str:
+    """根据扩展名获取MIME类型"""
+    return {
+        'png': 'png',
+        'jpg': 'jpeg',
+        'jpeg': 'jpeg'
+    }.get(ext, 'jpeg') 

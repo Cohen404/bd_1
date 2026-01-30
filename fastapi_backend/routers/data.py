@@ -26,6 +26,9 @@ def load_md5_mapping() -> Dict[str, Tuple[str, float, float, float]]:
     """
     读取MD5映射文件，返回 md5 -> (file_id, stress, depression, anxiety)
     file_id是文件名第一个_前的id（如"2_yky.zip"中的"2"）
+    支持两种格式：
+    - 旧格式：md5,score1,score2,score3 (4个部分)
+    - 新格式：md5,file_id,score1,score2,score3 (5个部分)
     """
     MD5_DIR.mkdir(parents=True, exist_ok=True)
     if not MD5_MAPPING_FILE.exists():
@@ -39,15 +42,27 @@ def load_md5_mapping() -> Dict[str, Tuple[str, float, float, float]]:
             if not line:
                 continue
             parts = [p.strip() for p in line.split(",")]
-            if len(parts) != 5:
+            # 支持两种格式
+            if len(parts) == 4:
+                # 旧格式：md5,score1,score2,score3
+                md5_value = parts[0]
+                file_id = ""
+                try:
+                    scores = (float(parts[1]), float(parts[2]), float(parts[3]))
+                except ValueError:
+                    logging.warning(f"MD5映射分数解析失败: {line}")
+                    continue
+            elif len(parts) == 5:
+                # 新格式：md5,file_id,score1,score2,score3
+                md5_value = parts[0]
+                file_id = parts[1]
+                try:
+                    scores = (float(parts[2]), float(parts[3]), float(parts[4]))
+                except ValueError:
+                    logging.warning(f"MD5映射分数解析失败: {line}")
+                    continue
+            else:
                 logging.warning(f"MD5映射行格式错误: {line}")
-                continue
-            md5_value = parts[0]
-            file_id = parts[1]
-            try:
-                scores = (float(parts[2]), float(parts[3]), float(parts[4]))
-            except ValueError:
-                logging.warning(f"MD5映射分数解析失败: {line}")
                 continue
             mapping[md5_value] = (file_id, scores[0], scores[1], scores[2])
     except Exception as e:
@@ -61,10 +76,15 @@ def append_md5_mapping(md5_value: str, file_id: str, scores: Tuple[float, float,
     追加MD5映射信息
     file_id是文件名第一个_前的id（如"2_yky.zip"中的"2"）
     """
-    MD5_DIR.mkdir(parents=True, exist_ok=True)
-    line = f"{md5_value},{file_id},{scores[0]},{scores[1]},{scores[2]}"
-    with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
+    try:
+        MD5_DIR.mkdir(parents=True, exist_ok=True)
+        line = f"{md5_value},{file_id},{scores[0]},{scores[1]},{scores[2]}"
+        with open(MD5_MAPPING_FILE, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except Exception as e:
+        logging.error(f"写入MD5映射文件失败: {str(e)}")
+        import traceback
+        logging.error(traceback.format_exc())
 
 def calculate_overall_risk_level(stress: float, depression: float, anxiety: float) -> str:
     average_score = max(stress, depression, anxiety)
@@ -170,8 +190,12 @@ async def create_data(
         db.commit()
         db.refresh(db_data)
 
-        # 使用personnel_id来匹配图片
-        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value, personnel_id)
+        # 从文件名中提取第一个_前的id（如"10_xxx.zip"中的"10"）
+        # 先去掉.zip扩展名，再提取
+        filename_without_ext = file.filename.replace('.zip', '')
+        file_id = filename_without_ext.split('_')[0] if '_' in filename_without_ext else filename_without_ext
+
+        stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value, file_id)
         overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
 
         existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == md5_value).all()
@@ -650,7 +674,11 @@ async def batch_upload_data(
                 db.commit()
                 db.refresh(db_data)
 
-                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value, admin_user.user_id)
+                # 从文件名中提取第一个_前的id（如"13_aaa.zip"中的"13"）
+                filename_without_ext = os.path.splitext(file.filename)[0]
+                file_id = filename_without_ext.split('_')[0] if '_' in filename_without_ext else filename_without_ext
+
+                stress_score, depression_score, anxiety_score = resolve_scores_for_md5(md5_value, file_id)
                 overall_risk_level = calculate_overall_risk_level(stress_score, depression_score, anxiety_score)
 
                 existing_results = db.query(db_models.Result).filter(db_models.Result.md5 == md5_value).all()

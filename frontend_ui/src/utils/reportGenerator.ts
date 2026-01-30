@@ -9,7 +9,7 @@ export interface ReportData {
     username: string;
     user_type: string;
   };
-  userImage?: string;       // 用户心率图片base64
+  userImages?: string[];    // 用户心率图片base64数组（支持多张图片）
   charts: {
     eeg: string;             // 脑电功率图base64
     timeDomain: string;      // 时域特征图base64
@@ -22,7 +22,7 @@ export interface ReportData {
 export class ReportGenerator {
   // 生成报告HTML模板
   static createReportHTML(data: ReportData): string {
-    const { result, user, userImage, charts } = data;
+    const { result, user, userImages, charts } = data;
     
     return `
       <!DOCTYPE html>
@@ -242,7 +242,7 @@ export class ReportGenerator {
           
           .charts-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
           }
           
@@ -367,13 +367,15 @@ export class ReportGenerator {
               <div class="section-content">
                 <h2 class="section-title">❤️ 心率监测分析</h2>
                 <div class="charts-grid">
-                  <div class="chart-container">
-                    <div class="chart-title">心率与导联信息</div>
-                    ${userImage ? `<img src="${userImage}" alt="心率监测图片" style="max-height: 600px; object-fit: contain; width: 100%;" />` : '<p style="color: #999; text-align: center; padding: 40px;">暂无心率监测图片</p>'}
-                    <p style="color: #666; font-size: 13px; margin-top: 10px; text-align: center;">
-                      包含心率数值、导联信息及心率波形图
-                    </p>
-                  </div>
+                  ${userImages && userImages.length > 0 ? userImages.map((img, index) => `
+                    <div class="chart-container">
+                      <div class="chart-title">心率与导联信息 ${index + 1}</div>
+                      <img src="${img}" alt="心率监测图片${index + 1}" style="max-height: 600px; object-fit: contain; width: 100%;" />
+                      <p style="color: #666; font-size: 13px; margin-top: 10px; text-align: center;">
+                        包含心率数值、导联信息及心率波形图
+                      </p>
+                    </div>
+                  `).join('') : '<p style="color: #999; text-align: center; padding: 40px;">暂无心率监测图片</p>'}
                 </div>
               </div>
             </div>
