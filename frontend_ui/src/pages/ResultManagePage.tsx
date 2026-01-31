@@ -16,6 +16,7 @@ import { ReportGenerator, ReportData } from '@/utils/reportGenerator';
 import { ChartGenerator } from '@/utils/chartGenerator';
 import { ExcelExporter } from '@/utils/excelExporter';
 import { ResultItem } from '@/utils/localStorage';
+import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 
 
@@ -32,6 +33,7 @@ interface FilterState {
 
 
 const ResultManagePage: React.FC = () => {
+  const { user: currentUser } = useAuth();
   const [filteredResults, setFilteredResults] = useState<Result[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [selectedResults, setSelectedResults] = useState<Set<number>>(new Set());
@@ -187,8 +189,8 @@ const ResultManagePage: React.FC = () => {
           const reportData: ReportData = {
             result: resultItem,
             user: {
-              username: result.username || '未知',
-              user_type: 'user'
+              username: currentUser?.username || '未知',
+              user_type: currentUser?.user_type || 'user'
             },
             userImages: userImages,
             eegWaveform: eegWaveform,
@@ -279,8 +281,8 @@ const ResultManagePage: React.FC = () => {
       const reportData: ReportData = {
         result: resultItem,
         user: {
-          username: result.username || '未知',
-          user_type: 'user'
+          username: currentUser?.username || '未知',
+          user_type: currentUser?.user_type || 'user'
         },
         userImages: userImages,
         eegWaveform: eegWaveform,
