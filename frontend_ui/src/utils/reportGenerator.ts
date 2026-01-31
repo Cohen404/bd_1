@@ -41,7 +41,8 @@ export class ReportGenerator {
       const txtContent = await txtResponse.text();
       
       const lines = txtContent.replace(/\\n/g, '\n').split('\n');
-      const exgData: number[] = [];
+      const exgData: number[][] = Array.from({ length: 16 }, () => []);
+      const timeData: number[] = [];
       
       let sampleCount = 0;
       for (let i = 29; i < lines.length; i++) {
@@ -51,27 +52,36 @@ export class ReportGenerator {
         const parts = line.split(',').map(p => p.trim());
         if (parts.length < 17) continue;
         
+        const sampleIndex = parseFloat(parts[0]);
+        timeData.push(sampleIndex);
+        
         for (let channel = 0; channel < 16; channel++) {
           const value = parseFloat(parts[channel + 1]);
           if (!isNaN(value)) {
-            exgData.push(value);
+            exgData[channel].push(value);
           }
         }
         
         sampleCount++;
-        if (sampleCount >= 1) break;
+        if (sampleCount >= 300) break;
       }
 
-      if (exgData.length === 0) {
+      if (sampleCount === 0) {
         console.warn('未找到有效的脑电数据');
         return '';
       }
 
-      const minValue = Math.min(...exgData);
-      const maxValue = Math.max(...exgData);
-      const normalizedData = exgData.map(value => 
-        (value - minValue) / (maxValue - minValue)
-      );
+      const normalizedData = exgData.map(channelData => {
+        const minValue = Math.min(...channelData);
+        const maxValue = Math.max(...channelData);
+        const range = maxValue - minValue;
+        
+        if (range === 0) {
+          return channelData.map(() => 0);
+        }
+        
+        return channelData.map(value => (value - minValue) / range);
+      });
 
       const canvas = document.createElement('canvas');
       canvas.width = 800;
@@ -89,38 +99,36 @@ export class ReportGenerator {
       const padding = 60;
       const graphWidth = canvas.width - padding * 2;
       const graphHeight = canvas.height - padding * 2;
-      const pointSpacing = graphWidth / (normalizedData.length - 1);
+      const pointSpacing = graphWidth / (timeData.length - 1);
 
-      ctx.strokeStyle = '#3b82f6';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      
-      normalizedData.forEach((value, index) => {
-        const x = padding + index * pointSpacing;
-        const y = padding + (1 - value) * graphHeight;
-        
-        if (index === 0) {
-          ctx.moveTo(x, y);
-        } else {
-          ctx.lineTo(x, y);
-        }
-      });
-      
-      ctx.stroke();
+      const colors = [
+        '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', 
+        '#ec4899', '#06b6d4', '#84cc16', '#6366f1', '#f97316',
+        '#14b8a6', '#a855f7', '#eab308', '#22c55e', '#64748b'
+      ];
 
-      ctx.fillStyle = '#3b82f6';
-      normalizedData.forEach((value, index) => {
-        const x = padding + index * pointSpacing;
-        const y = padding + (1 - value) * graphHeight;
-        
+      normalizedData.forEach((channelData, channelIndex) => {
+        ctx.strokeStyle = colors[channelIndex % colors.length];
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fill();
+        
+        channelData.forEach((value, index) => {
+          const x = padding + index * pointSpacing;
+          const y = padding + (1 - value) * graphHeight;
+          
+          if (index === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+        
+        ctx.stroke();
       });
 
       ctx.fillStyle = '#333';
       ctx.font = '14px Arial';
-      ctx.fillText('通道', padding / 2, padding / 2);
+      ctx.fillText('采样点', padding / 2, padding / 2);
       ctx.fillText('归一化值', canvas.width / 2 - 30, canvas.height - 15);
       
       ctx.strokeStyle = '#ddd';

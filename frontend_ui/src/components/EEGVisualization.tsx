@@ -22,6 +22,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
   const [eegData, setEEGData] = useState<EEGData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedChannel, setSelectedChannel] = useState<number>(0);
 
   useEffect(() => {
     const loadEEGData = async () => {
@@ -59,7 +60,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
         const lines = txtContent.replace(/\\n/g, '\n').split('\n');
         const channels = Array.from({ length: 16 }, (_, i) => `EXG Channel ${i}`);
         
-        const exgData: number[] = [];
+        const exgData: number[][] = Array.from({ length: 16 }, () => []);
         const timeData: number[] = [];
         
         console.log('TXT总行数:', lines.length);
@@ -68,18 +69,14 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
         let sampleCount = 0;
         for (let i = 29; i < lines.length; i++) {
           const line = lines[i].trim();
-          console.log(`第${i}行原始内容:`, line);
           
           if (!line || line.startsWith('%')) {
-            console.log('跳过空行或注释行');
             continue;
           }
           
           const parts = line.split(',').map(p => p.trim());
-          console.log(`第${i}行分割后数量:`, parts.length);
           
           if (parts.length < 17) {
-            console.log('分割后数量不足17，跳过');
             continue;
           }
           
@@ -88,38 +85,43 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
           
           for (let channel = 0; channel < 16; channel++) {
             const value = parseFloat(parts[channel + 1]);
-            console.log(`通道${channel}值:`, value, '是否NaN:', isNaN(value));
             if (!isNaN(value)) {
-              exgData.push(value);
+              exgData[channel].push(value);
             }
           }
           
           sampleCount++;
           
-          if (sampleCount >= 1) break;
+          if (sampleCount >= 3000) break;
         }
 
-        console.log('提取的数据:', exgData);
-        console.log('数据长度:', exgData.length);
+        console.log('提取的采样点数:', sampleCount);
+        console.log('每个通道的数据长度:', exgData.map(d => d.length));
 
-        if (exgData.length === 0) {
+        if (sampleCount === 0) {
           setError('未找到有效的数据');
           setLoading(false);
           return;
         }
 
-        const minValue = Math.min(...exgData);
-        const maxValue = Math.max(...exgData);
-        const normalizedData = exgData.map(value => 
-          (value - minValue) / (maxValue - minValue)
-        );
+        const normalizedData = exgData.map(channelData => {
+          const minValue = Math.min(...channelData);
+          const maxValue = Math.max(...channelData);
+          const range = maxValue - minValue;
+          
+          if (range === 0) {
+            return channelData.map(() => 0);
+          }
+          
+          return channelData.map(value => (value - minValue) / range);
+        });
 
         console.log('归一化后的数据:', normalizedData);
 
         setEEGData({
           channels,
           time: timeData,
-          exgData: [normalizedData]
+          exgData: normalizedData
         });
       } catch (err) {
         console.error('加载EEG数据失败:', err);
@@ -157,26 +159,25 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
   }
 
   const traces = [{
-    x: eegData.channels,
-    y: eegData.exgData[0],
-    name: '脑电数据',
-    mode: 'markers+lines',
+    x: eegData.time,
+    y: eegData.exgData[selectedChannel],
+    name: eegData.channels[selectedChannel],
+    mode: 'lines',
     line: { width: 2, color: '#3b82f6' },
-    marker: { size: 8, color: '#3b82f6' },
   }];
 
   const layout = {
-    title: '脑电波形图',
+    title: `脑电波形图 - ${eegData.channels[selectedChannel]}`,
     xaxis: { 
-      title: '通道',
-      tickmode: 'array',
-      tickvals: eegData.channels,
-      ticktext: eegData.channels
+      title: '采样点',
+      range: [eegData.time[0], eegData.time[eegData.time.length - 1]]
     },
     yaxis: { title: '归一化值', range: [0, 1] },
     hovermode: 'closest',
     showlegend: false,
-    autosize: true,
+    autosize: false,
+    width: undefined,
+    height: undefined,
     margin: { l: 60, r: 30, t: 50, b: 60 },
   };
 
@@ -187,13 +188,30 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
   };
 
   return (
-    <div className="w-full h-full">
-      <Plot
-        data={traces}
-        layout={layout}
-        config={config}
-        style={{ width: '100%', height: '100%' }}
-      />
+    <div className="w-full h-full flex flex-col overflow-hidden">
+      <div className="mb-4 flex-shrink-0">
+        <label className="label">选择通道</label>
+        <select
+          className="input"
+          value={selectedChannel}
+          onChange={(e) => setSelectedChannel(parseInt(e.target.value))}
+        >
+          {eegData.channels.map((channel, index) => (
+            <option key={index} value={index}>
+              {channel}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex-1 min-h-0">
+        <Plot
+          data={traces}
+          layout={layout}
+          config={config}
+          style={{ width: '100%', height: '100%' }}
+          useResizeHandler={true}
+        />
+      </div>
     </div>
   );
 };

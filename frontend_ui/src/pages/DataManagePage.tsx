@@ -831,9 +831,9 @@ const DataManagePage: React.FC = () => {
 
             {/* 可视化图表区域 */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg p-4 min-h-[500px] border-2 border-dashed border-gray-300">
+              <div className="bg-white rounded-lg p-4 h-[600px] border-2 border-dashed border-gray-300 flex flex-col">
                 {showVisualization && selectedDataId ? (
-                  <div className="w-full h-full">
+                  <div className="w-full h-full flex flex-col overflow-hidden">
                     <EEGVisualization 
                       dataId={selectedDataId}
                       personnelId={dataList.find(item => item.id === selectedDataId)?.personnel_id}
