@@ -836,6 +836,7 @@ const DataManagePage: React.FC = () => {
                   <div className="w-full h-full">
                     <EEGVisualization 
                       dataId={selectedDataId}
+                      personnelId={dataList.find(item => item.id === selectedDataId)?.personnel_id}
                     />
                   </div>
                 ) : (

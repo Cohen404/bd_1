@@ -180,7 +180,7 @@ const ResultManagePage: React.FC = () => {
             ChartGenerator.generateFrequencyBandChart(resultItem),
             ChartGenerator.generateDiffEntropyChart(resultItem),
             ChartGenerator.generateTimeFreqChart(resultItem),
-            ReportGenerator.generateEEGWaveform(resultId)
+            ReportGenerator.generateEEGWaveform(resultId, result.personnel_id)
           ]);
           
           // 准备报告数据
@@ -269,7 +269,7 @@ const ResultManagePage: React.FC = () => {
         ChartGenerator.generateFrequencyBandChart(resultItem),
         ChartGenerator.generateDiffEntropyChart(resultItem),
         ChartGenerator.generateTimeFreqChart(resultItem),
-        ReportGenerator.generateEEGWaveform(resultId)
+        ReportGenerator.generateEEGWaveform(resultId, result.personnel_id)
       ]);
       console.log('图表生成完成');
       

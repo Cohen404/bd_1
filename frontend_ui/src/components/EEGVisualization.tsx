@@ -3,6 +3,7 @@ import Plot from 'react-plotly.js';
 
 interface EEGVisualizationProps {
   dataId?: number;
+  personnelId?: string;
 }
 
 interface ExcelRecord {
@@ -17,14 +18,14 @@ interface EEGData {
   exgData: number[][];
 }
 
-const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId }) => {
+const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId }) => {
   const [eegData, setEEGData] = useState<EEGData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadEEGData = async () => {
-      if (!dataId) {
+      if (!personnelId) {
         setEEGData(null);
         return;
       }
@@ -39,10 +40,10 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId }) => {
         const excelResponse = await fetch('/api/eegs/excel');
         const excelData = await excelResponse.json();
         
-        const matchedRecord = excelData.find((record: ExcelRecord) => record.序号 === dataId);
+        const matchedRecord = excelData.find((record: ExcelRecord) => record.序号 === parseInt(personnelId));
         
         if (!matchedRecord) {
-          setError(`未找到序号为${dataId}的采集记录`);
+          setError(`未找到人员编号为${personnelId}的采集记录`);
           setLoading(false);
           return;
         }
@@ -129,7 +130,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId }) => {
     };
 
     loadEEGData();
-  }, [dataId]);
+  }, [personnelId]);
 
   if (loading) {
     return (

@@ -22,15 +22,16 @@ export interface ReportData {
 
 export class ReportGenerator {
   // 生成脑电波形图
-  static async generateEEGWaveform(dataId: number): Promise<string> {
+  static async generateEEGWaveform(dataId: number, personnelId?: string): Promise<string> {
     try {
       const excelResponse = await fetch('/api/eegs/excel');
       const excelData = await excelResponse.json();
       
-      const matchedRecord = excelData.find((record: any) => record.序号 === dataId);
+      const searchId = personnelId ? parseInt(personnelId) : dataId;
+      const matchedRecord = excelData.find((record: any) => record.序号 === searchId);
       
       if (!matchedRecord) {
-        console.warn(`未找到序号为${dataId}的采集记录`);
+        console.warn(`未找到人员编号为${searchId}的采集记录`);
         return '';
       }
 
