@@ -82,7 +82,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
         const channelData: number[][] = Array.from({ length: 16 }, () => []);
         
         let sampleCount = 0;
-        for (let i = 5; i < lines.length; i++) {
+        for (let i = 0; i < lines.length && sampleCount < 10000; i++) {
           const line = lines[i].trim();
           if (!line || line.startsWith('%')) continue;
           
@@ -97,10 +97,19 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
           }
           
           sampleCount++;
-          if (sampleCount >= 10000) break;
         }
 
         console.log('每个通道的数据量:', channelData.map(d => d.length));
+
+        const normalizedChannelData = channelData.map(data => {
+          const min = Math.min(...data);
+          const max = Math.max(...data);
+          const range = max - min;
+          if (range === 0) {
+            return data.map(() => 0);
+          }
+          return data.map(value => (value - min) / range);
+        });
 
         const fftSize = 1024;
         const sampleRate = 1000;
@@ -109,7 +118,7 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
         const magnitudes: number[][] = Array.from({ length: 16 }, () => []);
         
         for (let channel = 0; channel < 16; channel++) {
-          const data = channelData[channel];
+          const data = normalizedChannelData[channel];
           
           const mean = data.reduce((sum, val) => sum + val, 0) / data.length;
           const detrendedData = data.map(val => val - mean);
