@@ -182,7 +182,8 @@ const ResultManagePage: React.FC = () => {
             ChartGenerator.generateFrequencyBandChart(resultItem),
             ChartGenerator.generateDiffEntropyChart(resultItem),
             ChartGenerator.generateTimeFreqChart(resultItem),
-            ReportGenerator.generateEEGWaveform(resultId, result.personnel_id)
+            ReportGenerator.generateEEGWaveform(resultId, result.personnel_id),
+            ReportGenerator.generateEEGFFT(resultId, result.personnel_id)
           ]);
           
           // 准备报告数据
@@ -194,6 +195,7 @@ const ResultManagePage: React.FC = () => {
             },
             userImages: userImages,
             eegWaveform: eegWaveform,
+            eegFFT: eegFFT,
             charts: {
               eeg: eegChart,
               timeDomain: timeDomainChart,
@@ -265,13 +267,14 @@ const ResultManagePage: React.FC = () => {
       console.log('开始生成图表...');
       // 生成图表
       const resultItem = toResultItem(result);
-      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, eegWaveform] = await Promise.all([
+      const [eegChart, timeDomainChart, frequencyBandChart, diffEntropyChart, timeFreqChart, eegWaveform, eegFFT] = await Promise.all([
         ChartGenerator.generateEEGChart(resultItem),
         ChartGenerator.generateTimeDomainChart(resultItem),
         ChartGenerator.generateFrequencyBandChart(resultItem),
         ChartGenerator.generateDiffEntropyChart(resultItem),
         ChartGenerator.generateTimeFreqChart(resultItem),
-        ReportGenerator.generateEEGWaveform(resultId, result.personnel_id)
+        ReportGenerator.generateEEGWaveform(resultId, result.personnel_id),
+        ReportGenerator.generateEEGFFT(resultId, result.personnel_id)
       ]);
       console.log('图表生成完成');
       
@@ -286,6 +289,7 @@ const ResultManagePage: React.FC = () => {
         },
         userImages: userImages,
         eegWaveform: eegWaveform,
+        eegFFT: eegFFT,
         charts: {
           eeg: eegChart,
           timeDomain: timeDomainChart,

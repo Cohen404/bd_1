@@ -14,15 +14,40 @@ interface ExcelRecord {
 
 interface EEGData {
   channels: string[];
-  time: number[];
-  exgData: number[][];
+  fftData: {
+    frequencies: number[];
+    magnitudes: number[][];
+  };
 }
 
 const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId }) => {
   const [eegData, setEEGData] = useState<EEGData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedChannel, setSelectedChannel] = useState<number>(0);
+
+  const computeFFT = (data: number[]): number[] => {
+    const N = data.length;
+    const result: number[] = new Array(N * 2).fill(0);
+    
+    for (let k = 0; k < N; k++) {
+      let realSum = 0;
+      let imagSum = 0;
+      
+      for (let n = 0; n < N; n++) {
+        const angle = (2 * Math.PI * k * n) / N;
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        
+        realSum += data[n] * cos;
+        imagSum -= data[n] * sin;
+      }
+      
+      result[k * 2] = realSum;
+      result[k * 2 + 1] = imagSum;
+    }
+    
+    return result;
+  };
 
   useEffect(() => {
     const loadEEGData = async () => {
@@ -34,9 +59,6 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
       try {
         setLoading(true);
         setError(null);
-
-        const md5Response = await fetch(`/api/data/${dataId}`);
-        const dataInfo = await md5Response.json();
 
         const excelResponse = await fetch('/api/eegs/excel');
         const excelData = await excelResponse.json();
@@ -54,74 +76,74 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
         const txtResponse = await fetch(`/api/eegs/txt?filename=${encodeURIComponent(filename)}`);
         const txtContent = await txtResponse.text();
         
-        console.log('原始TXT内容长度:', txtContent.length);
-        console.log('原始TXT内容前200字符:', txtContent.substring(0, 200));
-        
         const lines = txtContent.replace(/\\n/g, '\n').split('\n');
         const channels = Array.from({ length: 16 }, (_, i) => `EXG Channel ${i}`);
         
-        const exgData: number[][] = Array.from({ length: 16 }, () => []);
-        const timeData: number[] = [];
-        
-        console.log('TXT总行数:', lines.length);
-        console.log('前6行:', lines.slice(0, 6));
+        const channelData: number[][] = Array.from({ length: 16 }, () => []);
         
         let sampleCount = 0;
-        for (let i = 29; i < lines.length; i++) {
+        for (let i = 5; i < lines.length; i++) {
           const line = lines[i].trim();
-          
-          if (!line || line.startsWith('%')) {
-            continue;
-          }
+          if (!line || line.startsWith('%')) continue;
           
           const parts = line.split(',').map(p => p.trim());
-          
-          if (parts.length < 17) {
-            continue;
-          }
-          
-          const sampleIndex = parseFloat(parts[0]);
-          timeData.push(sampleIndex);
+          if (parts.length < 17) continue;
           
           for (let channel = 0; channel < 16; channel++) {
             const value = parseFloat(parts[channel + 1]);
             if (!isNaN(value)) {
-              exgData[channel].push(value);
+              channelData[channel].push(value);
             }
           }
           
           sampleCount++;
-          
-          if (sampleCount >= 3000) break;
+          if (sampleCount >= 10000) break;
         }
 
-        console.log('提取的采样点数:', sampleCount);
-        console.log('每个通道的数据长度:', exgData.map(d => d.length));
+        console.log('每个通道的数据量:', channelData.map(d => d.length));
 
-        if (sampleCount === 0) {
-          setError('未找到有效的数据');
-          setLoading(false);
-          return;
-        }
-
-        const normalizedData = exgData.map(channelData => {
-          const minValue = Math.min(...channelData);
-          const maxValue = Math.max(...channelData);
-          const range = maxValue - minValue;
+        const fftSize = 1024;
+        const sampleRate = 1000;
+        
+        const frequencies: number[] = [];
+        const magnitudes: number[][] = Array.from({ length: 16 }, () => []);
+        
+        for (let channel = 0; channel < 16; channel++) {
+          const data = channelData[channel];
           
-          if (range === 0) {
-            return channelData.map(() => 0);
+          const mean = data.reduce((sum, val) => sum + val, 0) / data.length;
+          const detrendedData = data.map(val => val - mean);
+          
+          const paddedData = new Array(fftSize).fill(0);
+          for (let i = 0; i < Math.min(detrendedData.length, fftSize); i++) {
+            const window = 0.5 * (1 - Math.cos(2 * Math.PI * i / fftSize));
+            paddedData[i] = detrendedData[i] * window;
           }
           
-          return channelData.map(value => (value - minValue) / range);
-        });
+          const fftResult = computeFFT(paddedData);
+          const channelMagnitudes: number[] = [];
+          
+          for (let i = 0; i < fftSize / 2; i++) {
+            const freq = (i * sampleRate) / fftSize;
+            frequencies.push(freq);
+            
+            const magnitude = Math.sqrt(fftResult[i * 2] ** 2 + fftResult[i * 2 + 1] ** 2);
+            const normalizedMagnitude = magnitude / (fftSize / 2);
+            const dbMagnitude = 20 * Math.log10(normalizedMagnitude + 1e-10);
+            channelMagnitudes.push(dbMagnitude);
+          }
+          
+          magnitudes[channel] = channelMagnitudes;
+        }
 
-        console.log('归一化后的数据:', normalizedData);
+        const uniqueFrequencies = [...new Set(frequencies)].sort((a, b) => a - b).slice(0, fftSize / 2);
 
         setEEGData({
           channels,
-          time: timeData,
-          exgData: normalizedData
+          fftData: {
+            frequencies: uniqueFrequencies,
+            magnitudes: magnitudes
+          }
         });
       } catch (err) {
         console.error('加载EEG数据失败:', err);
@@ -158,27 +180,36 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
     );
   }
 
-  const traces = [{
-    x: eegData.time,
-    y: eegData.exgData[selectedChannel],
-    name: eegData.channels[selectedChannel],
+  const traces = eegData.channels.map((channel, index) => ({
+    x: eegData.fftData.frequencies,
+    y: eegData.fftData.magnitudes[index],
+    name: channel,
     mode: 'lines',
-    line: { width: 2, color: '#3b82f6' },
-  }];
+    line: { width: 1 },
+  }));
 
   const layout = {
-    title: `脑电波形图 - ${eegData.channels[selectedChannel]}`,
+    title: 'FFT频谱图 (0-15通道)',
     xaxis: { 
-      title: '采样点',
-      range: [eegData.time[0], eegData.time[eegData.time.length - 1]]
+      title: '频率 (Hz)',
+      type: 'log',
+      autorange: true
     },
-    yaxis: { title: '归一化值', range: [0, 1] },
+    yaxis: { 
+      title: '幅度 (dB)',
+      autorange: true
+    },
     hovermode: 'closest',
-    showlegend: false,
-    autosize: false,
-    width: undefined,
-    height: undefined,
-    margin: { l: 60, r: 30, t: 50, b: 60 },
+    showlegend: true,
+    legend: { 
+      x: 0.02, 
+      y: 1,
+      bgcolor: 'rgba(255, 255, 255, 0.8)',
+      bordercolor: '#444',
+      borderwidth: 1
+    },
+    autosize: true,
+    margin: { l: 80, r: 30, t: 50, b: 60 },
   };
 
   const config = {
@@ -188,30 +219,13 @@ const EEGVisualization: React.FC<EEGVisualizationProps> = ({ dataId, personnelId
   };
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="mb-4 flex-shrink-0">
-        <label className="label">选择通道</label>
-        <select
-          className="input"
-          value={selectedChannel}
-          onChange={(e) => setSelectedChannel(parseInt(e.target.value))}
-        >
-          {eegData.channels.map((channel, index) => (
-            <option key={index} value={index}>
-              {channel}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="flex-1 min-h-0">
-        <Plot
-          data={traces}
-          layout={layout}
-          config={config}
-          style={{ width: '100%', height: '100%' }}
-          useResizeHandler={true}
-        />
-      </div>
+    <div className="w-full h-full">
+      <Plot
+        data={traces}
+        layout={layout}
+        config={config}
+        style={{ width: '100%', height: '100%' }}
+      />
     </div>
   );
 };

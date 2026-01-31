@@ -11,6 +11,7 @@ export interface ReportData {
   };
   userImages?: string[];    // 用户心率图片base64数组（支持多张图片）
   eegWaveform?: string;    // 脑电波形图base64
+  eegFFT?: string;         // 脑电FFT频谱图base64
   charts: {
     eeg: string;             // 脑电功率图base64
     timeDomain: string;      // 时域特征图base64
@@ -146,9 +147,194 @@ export class ReportGenerator {
     }
   }
 
+  static async generateEEGFFT(dataId: number, personnelId?: string): Promise<string> {
+    try {
+      const excelResponse = await fetch('/api/eegs/excel');
+      const excelData = await excelResponse.json();
+      
+      const searchId = personnelId ? parseInt(personnelId) : dataId;
+      const matchedRecord = excelData.find((record: any) => record.序号 === searchId);
+      
+      if (!matchedRecord) {
+        console.warn(`未找到人员编号为${searchId}的采集记录`);
+        return '';
+      }
+
+      const filename = matchedRecord.文件名;
+
+      const txtResponse = await fetch(`/api/eegs/txt?filename=${encodeURIComponent(filename)}`);
+      const txtContent = await txtResponse.text();
+      
+      const lines = txtContent.replace(/\\n/g, '\n').split('\n');
+      const channelData: number[][] = Array.from({ length: 16 }, () => []);
+      
+      let sampleCount = 0;
+      for (let i = 5; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line || line.startsWith('%')) continue;
+        
+        const parts = line.split(',').map(p => p.trim());
+        if (parts.length < 17) continue;
+        
+        for (let channel = 0; channel < 16; channel++) {
+          const value = parseFloat(parts[channel + 1]);
+          if (!isNaN(value)) {
+            channelData[channel].push(value);
+          }
+        }
+        
+        sampleCount++;
+        if (sampleCount >= 10000) break;
+      }
+
+      const computeFFT = (data: number[]): number[] => {
+        const N = data.length;
+        const result: number[] = new Array(N * 2).fill(0);
+        
+        for (let k = 0; k < N; k++) {
+          let realSum = 0;
+          let imagSum = 0;
+          
+          for (let n = 0; n < N; n++) {
+            const angle = (2 * Math.PI * k * n) / N;
+            const cos = Math.cos(angle);
+            const sin = Math.sin(angle);
+            
+            realSum += data[n] * cos;
+            imagSum -= data[n] * sin;
+          }
+          
+          result[k * 2] = realSum;
+          result[k * 2 + 1] = imagSum;
+        }
+        
+        return result;
+      };
+
+      const fftSize = 1024;
+      const sampleRate = 1000;
+      
+      const frequencies: number[] = [];
+      const magnitudes: number[][] = Array.from({ length: 16 }, () => []);
+      
+      for (let channel = 0; channel < 16; channel++) {
+        const data = channelData[channel];
+        
+        const mean = data.reduce((sum, val) => sum + val, 0) / data.length;
+        const detrendedData = data.map(val => val - mean);
+        
+        const paddedData = new Array(fftSize).fill(0);
+        for (let i = 0; i < Math.min(detrendedData.length, fftSize); i++) {
+          const window = 0.5 * (1 - Math.cos(2 * Math.PI * i / fftSize));
+          paddedData[i] = detrendedData[i] * window;
+        }
+        
+        const fftResult = computeFFT(paddedData);
+        const channelMagnitudes: number[] = [];
+        
+        for (let i = 0; i < fftSize / 2; i++) {
+          const freq = (i * sampleRate) / fftSize;
+          frequencies.push(freq);
+          
+          const magnitude = Math.sqrt(fftResult[i * 2] ** 2 + fftResult[i * 2 + 1] ** 2);
+          const normalizedMagnitude = magnitude / (fftSize / 2);
+          const dbMagnitude = 20 * Math.log10(normalizedMagnitude + 1e-10);
+          channelMagnitudes.push(dbMagnitude);
+        }
+        
+        magnitudes[channel] = channelMagnitudes;
+      }
+
+      const uniqueFrequencies = [...new Set(frequencies)].sort((a, b) => a - b).slice(0, fftSize / 2);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1000;
+      canvas.height = 600;
+      const ctx = canvas.getContext('2d');
+      
+      if (!ctx) {
+        console.warn('无法获取canvas上下文');
+        return '';
+      }
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const padding = 80;
+      const graphWidth = canvas.width - padding * 2;
+      const graphHeight = canvas.height - padding * 2;
+
+      const colors = [
+        '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', 
+        '#ec4899', '#06b6d4', '#84cc16', '#6366f1', '#f97316',
+        '#14b8a6', '#a855f7', '#eab308', '#22c55e', '#64748b', '#f43f5e'
+      ];
+
+      const minFreq = Math.min(...uniqueFrequencies.filter(f => f > 0));
+      const maxFreq = 500;
+      const minMag = Math.min(...magnitudes.flat());
+      const maxMag = Math.max(...magnitudes.flat());
+
+      magnitudes.forEach((channelMagnitudes, channelIndex) => {
+        ctx.strokeStyle = colors[channelIndex % colors.length];
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        
+        channelMagnitudes.forEach((magnitude, index) => {
+          const freq = uniqueFrequencies[index];
+          if (freq > maxFreq) return;
+          
+          const x = padding + (Math.log10(freq) - Math.log10(minFreq)) / (Math.log10(maxFreq) - Math.log10(minFreq)) * graphWidth;
+          const y = padding + (1 - (magnitude - minMag) / (maxMag - minMag)) * graphHeight;
+          
+          if (index === 0 || freq <= minFreq) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+        
+        ctx.stroke();
+      });
+
+      ctx.fillStyle = '#333';
+      ctx.font = '14px Arial';
+      ctx.fillText('频率 (Hz)', canvas.width / 2 - 40, canvas.height - 20);
+      ctx.save();
+      ctx.translate(20, canvas.height / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('幅度', 0, 0);
+      ctx.restore();
+      
+      ctx.strokeStyle = '#ddd';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padding, padding);
+      ctx.lineTo(padding, canvas.height - padding);
+      ctx.lineTo(canvas.width - padding, canvas.height - padding);
+      ctx.stroke();
+
+      ctx.font = '12px Arial';
+      ctx.fillStyle = '#666';
+      colors.forEach((color, index) => {
+        const legendX = padding + (index % 4) * 200 + 10;
+        const legendY = padding + Math.floor(index / 4) * 20;
+        ctx.fillStyle = color;
+        ctx.fillRect(legendX, legendY, 12, 12);
+        ctx.fillStyle = '#333';
+        ctx.fillText(`通道 ${index}`, legendX + 18, legendY + 10);
+      });
+
+      return canvas.toDataURL('image/png');
+    } catch (error) {
+      console.error('生成FFT频谱图失败:', error);
+      return '';
+    }
+  }
+
   // 生成报告HTML模板
   static createReportHTML(data: ReportData): string {
-    const { result, user, userImages, eegWaveform, charts } = data;
+    const { result, user, userImages, eegWaveform, eegFFT, charts } = data;
     
     return `
       <!DOCTYPE html>
@@ -511,15 +697,15 @@ export class ReportGenerator {
               <div class="section-content">
                 <h2 class="section-title">🧠 脑电波形分析</h2>
                 <div class="charts-grid">
-                  ${eegWaveform ? `
+                  ${eegFFT ? `
                     <div class="chart-container">
-                      <div class="chart-title">脑电波形图</div>
-                      <img src="${eegWaveform}" alt="脑电波形图" style="max-height: 600px; object-fit: contain; width: 100%;" />
+                      <div class="chart-title">FFT频谱图</div>
+                      <img src="${eegFFT}" alt="FFT频谱图" style="max-height: 600px; object-fit: contain; width: 100%;" />
                       <p style="color: #666; font-size: 13px; margin-top: 10px; text-align: center;">
-                        包含16通道脑电数据（EXG Channel 0-15）的归一化波形
+                        16通道脑电数据的FFT频谱分析（0-500Hz），使用10000个采样点
                       </p>
                     </div>
-                  ` : '<p style="color: #999; text-align: center; padding: 40px;">暂无脑电波形图</p>'}
+                  ` : '<p style="color: #999; text-align: center; padding: 40px;">暂无脑电数据</p>'}
                 </div>
               </div>
             </div>
